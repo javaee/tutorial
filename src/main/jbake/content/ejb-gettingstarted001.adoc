@@ -1,0 +1,37 @@
+type=page
+status=published
+title=Starting With Enterprise Beans
+next=ejb-gettingstarted002.html
+prev=ejb-gettingstarted.html
+~~~~~~
+Starting With Enterprise Beans
+==============================
+
+[[A1249349]]
+
+[[starting-with-enterprise-beans]]
+Starting With Enterprise Beans
+------------------------------
+
+Here's an overview of the steps you'll follow:
+
+1.  Create the enterprise bean: `ConverterBean`.
+2.  Create the web client.
+3.  Deploy `converter` onto the server.
+4.  Using a browser, run the web client.
+
+Before proceeding, make sure that you've done the following:
+
+* Read link:overview.html#BNAAW[Chapter 1, "Overview"]
+* Become familiar with enterprise beans (see
+link:ejb-intro.html#GIJSZ[Chapter 33, "Enterprise Beans"])
+* Started the server (see link:usingexamples002.html#BNADI[Starting and
+Stopping GlassFish Server])
+
+The following topics are addressed here:
+
+* link:ejb-gettingstarted002.html#GIPSS[Creating the Enterprise Bean]
+* link:ejb-gettingstarted003.html#GIPTI[Modifying the Java EE
+Application]
+
+

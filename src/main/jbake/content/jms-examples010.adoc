@@ -1,0 +1,89 @@
+type=page
+status=published
+title=Using NetBeans IDE to Create JMS Resources
+next=partsecurity.html
+prev=jms-examples009.html
+~~~~~~
+Using NetBeans IDE to Create JMS Resources
+==========================================
+
+[[BABDFDJC]]
+
+[[using-netbeans-ide-to-create-jms-resources]]
+Using NetBeans IDE to Create JMS Resources
+------------------------------------------
+
+When you write your own JMS applications, you will need to create
+resources for them. This section explains how to use NetBeans IDE to
+create `src/main/setup/glassfish-resources.xml` files similar to those
+used in the examples in this chapter. It also explains how to use
+NetBeans IDE to delete the resources.
+
+You can also create, list, and delete JMS resources using the
+Administration Console or the `asadmin create-jms-resource`,
+`asadmin list-jms-resources`, and `asadmin delete-jms-resources`
+commands. For information, consult the GlassFish Server documentation or
+enter `asadmin help` command-name.
+
+The following topics are addressed here:
+
+* link:#CHDFIJBJ[To Create JMS Resources Using NetBeans IDE]
+* link:#CHDCFADI[To Delete JMS Resources Using NetBeans IDE]
+
+[[CHDFIJBJ]]
+
+[[to-create-jms-resources-using-netbeans-ide]]
+To Create JMS Resources Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Follow these steps to create a JMS resource in GlassFish Server using
+NetBeans IDE. Repeat these steps for each resource you need.
+
+1.  Right-click the project for which you want to create resources and
+select New, then select Other.
+2.  In the New File wizard, under Categories, select GlassFish.
+3.  Under File Types, select JMS Resource.
+4.  On the General Attributes - JMS Resource page, in the JNDI Name
+field, enter the name of the resource.
++
+By convention, JMS resource names begin with `jms/`.
+5.  Select the option for the resource type.
++
+Normally, this is either `javax.jms.Queue`, `javax.jms.Topic`, or
+`javax.jms.ConnectionFactory`.
+6.  Click Next.
+7.  On the JMS Properties page, for a queue or topic, enter a name for a
+physical queue in the Value field for the Name property.
++
+You can enter any value for this required field.
++
+Connection factories have no required properties. In a few situations,
+you may need to specify a property.
+8.  Click Finish.
++
+A file named `glassfish-resources.xml` is created in your Maven project,
+in a directory named `src/main/setup/`. In the Projects tab, you can
+find it under the Other Sources node. You will need to run the
+`asadmin add-resources` command to create the resources in GlassFish
+Server.
+
+[[CHDCFADI]]
+
+[[to-delete-jms-resources-using-netbeans-ide]]
+To Delete JMS Resources Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In the Services tab, expand the Servers node, then expand the
+GlassFish Server node.
+2.  Expand the Resources node, then expand the Connector Resources node.
+3.  Expand the Admin Object Resources node.
+4.  Right-click any destination you want to remove and select
+Unregister.
+5.  Expand the Connector Connection Pools node.
+6.  Right-click the connection pool that corresponds to the connection
+factory you removed and select Unregister.
++
+When you remove a connector connection pool, the associated connector
+resource is also deleted. This action removes the connection factory.
+
+

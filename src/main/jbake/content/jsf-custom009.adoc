@@ -1,0 +1,74 @@
+type=page
+status=published
+title=Defining the Custom Component Tag in a Tag Library Descriptor
+next=jsf-custom010.html
+prev=jsf-custom008.html
+~~~~~~
+Defining the Custom Component Tag in a Tag Library Descriptor
+=============================================================
+
+[[BNAWN]]
+
+[[defining-the-custom-component-tag-in-a-tag-library-descriptor]]
+Defining the Custom Component Tag in a Tag Library Descriptor
+-------------------------------------------------------------
+
+To use a custom tag, you declare it in a Tag Library Descriptor (TLD).
+The TLD file defines how the custom tag is used in a JavaServer Faces
+page. The web container uses the TLD to validate the tag. The set of
+tags that are part of the HTML render kit are defined in the HTML_BASIC
+TLD, available in the olink:JSFRK[JavaServer Faces standard HTML tag
+library].
+
+The TLD file name must end with `taglib.xml`. In the Duke's Bookstore
+case study, the custom tags `area` and `map` are defined in the file
+`web/WEB-INF/bookstore.taglib.xml`.
+
+All tag definitions must be nested inside the `facelet-taglib` element
+in the TLD. Each tag is defined by a `tag` element. Here are the tag
+definitions for the `area` and `map` components:
+
+[source,oac_no_warn]
+----
+<facelet-taglib xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+...>
+    <namespace>http://dukesbookstore</namespace>
+    <tag>
+        <tag-name>area</tag-name>
+        <component>
+            <component-type>DemoArea</component-type>
+            <renderer-type>DemoArea</renderer-type>
+        </component>
+    </tag>
+    <tag>
+        <tag-name>map</tag-name>
+        <component>
+            <component-type>DemoMap</component-type>
+            <renderer-type>DemoMap</renderer-type>
+        </component>
+    </tag>
+</facelet-taglib>
+----
+
+The `component-type` element specifies the name defined in the
+`@FacesComponent` annotation, and the `renderer-type` element specifies
+the `rendererType` defined in the `@FacesRenderer` annotation.
+
+The `facelet-taglib` element must also include a `namespace` element,
+which defines the namespace to be specified in pages that use the custom
+component. See link:jsf-custom010.html#BNATT[Using a Custom Component]
+for information on specifying the namespace in pages.
+
+The TLD file is located in the `WEB-INF` directory. In addition, an
+entry is included in the web deployment descriptor (`web.xml`) to
+identify the custom tag library descriptor file, as follows:
+
+[source,oac_no_warn]
+----
+    <context-param>
+        <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+        <param-value>/WEB-INF/bookstore.taglib.xml</param-value>
+    </context-param>
+----
+
+

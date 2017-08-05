@@ -1,0 +1,40 @@
+type=page
+status=published
+title=Transaction Timeouts
+next=transactions007.html
+prev=transactions005.html
+~~~~~~
+Transaction Timeouts
+====================
+
+[[BNCJC]]
+
+[[transaction-timeouts]]
+Transaction Timeouts
+--------------------
+
+For container-managed transactions, you can use the Administration
+Console to configure the transaction timeout interval. See
+link:usingexamples003.html#BNADJ[Starting the Administration Console].
+
+For enterprise beans with bean-managed JTA transactions, you invoke the
+`setTransactionTimeout` method of the `UserTransaction` interface.
+
+[[sthref237]]
+
+[[to-set-a-transaction-timeout]]
+To Set a Transaction Timeout
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In the Administration Console, expand the Configurations node, then
+expand the server-config node and select Transaction Service.
+2.  On the Transaction Service page, set the value of the Transaction
+Timeout field to the value of your choice (for example, 5).
++
+With this setting, if the transaction has not completed within 5
+seconds, the EJB container rolls it back.
++
+The default value is 0, meaning that the transaction will not time out.
+3.  Click Save.
+
+

@@ -1,0 +1,48 @@
+type=page
+status=published
+title=The Web Tier
+next=webapp.html
+prev=packaging004.html
+~~~~~~
+The Web Tier
+============
+
+[[BNADP]][[JEETT00128]]
+
+[[part-iii]]
+Part III +
+----------
+
+[[the-web-tier]]
+The Web Tier
+------------
+
+Part III explores the technologies in the web tier. This part contains
+the following chapters:
+
+* link:webapp.html#BNADR[Chapter 6, "Getting Started with Web
+Applications"]
+* link:jsf-intro.html#BNAPH[Chapter 7, "JavaServer Faces Technology"]
+* link:jsf-facelets.html#GIEPX[Chapter 8, "Introduction to Facelets"]
+* link:jsf-el.html#GJDDD[Chapter 9, "Expression Language"]
+* link:jsf-page.html#BNAQZ[Chapter 10, "Using JavaServer Faces Technology
+in Web Pages"]
+* link:jsf-page-core.html#GJCUT[Chapter 11, "Using Converters, Listeners,
+and Validators"]
+* link:jsf-develop.html#BNATX[Chapter 12, "Developing with JavaServer
+Faces Technology"]
+* link:jsf-ajax.html#GKIOW[Chapter 13, "Using Ajax with JavaServer Faces
+Technology"]
+* link:jsf-advanced-cc.html#GKHXA[Chapter 14, "Composite Components:
+Advanced Topics and an Example"]
+* link:jsf-custom.html#BNAVG[Chapter 15, "Creating Custom UI Components
+and Other Custom Objects"]
+* link:jsf-configure.html#BNAWO[Chapter 16, "Configuring JavaServer Faces
+Applications"]
+* link:servlets.html#BNAFD[Chapter 17, "Java Servlet Technology"]
+* link:websocket.html#GKJIQ5[Chapter 18, "Java API for WebSocket"]
+* link:jsonp.html#GLRBB[Chapter 19, "JSON Processing"]
+* link:webi18n.html#BNAXU[Chapter 21, "Internationalizing and Localizing
+Web Applications"]
+
+

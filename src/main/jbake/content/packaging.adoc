@@ -1,0 +1,30 @@
+type=page
+status=published
+title=Packaging
+next=packaging001.html
+prev=injection003.html
+~~~~~~
+Packaging
+=========
+
+[[GKJIQ4]]
+
+[[packaging]]
+5 Packaging
+-----------
+
+
+This chapter describes packaging. A Java EE application is packaged into
+one or more standard units for deployment to any Java EE
+platform–compliant system. Each unit contains a functional component or
+components, such as an enterprise bean, web page, servlet, or applet,
+and an optional deployment descriptor that describes its content.
+
+The following topics are addressed here:
+
+* link:packaging001.html#BCGDJDFB[Packaging Applications]
+* link:packaging002.html#BCGECBIJ[Packaging Enterprise Beans]
+* link:packaging003.html#BCGHAHGD[Packaging Web Archives]
+* link:packaging004.html#BCGDHBHJ[Packaging Resource Adapter Archives]
+
+

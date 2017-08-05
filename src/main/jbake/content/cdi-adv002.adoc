@@ -1,0 +1,174 @@
+type=page
+status=published
+title=Using Alternatives in CDI Applications
+next=cdi-adv003.html
+prev=cdi-adv001.html
+~~~~~~
+Using Alternatives in CDI Applications
+======================================
+
+[[GJSDF]]
+
+[[using-alternatives-in-cdi-applications]]
+Using Alternatives in CDI Applications
+--------------------------------------
+
+When you have more than one version of a bean that you use for different
+purposes, you can choose between them during the development phase by
+injecting one qualifier or another, as shown in
+link:cdi-basicexamples002.html#GJBJU[The simplegreeting CDI Example].
+
+Instead of having to change the source code of your application,
+however, you can make the choice at deployment time by using
+alternatives.
+
+Alternatives are commonly used for purposes such as the following:
+
+* To handle client-specific business logic that is determined at runtime
+* To specify beans that are valid for a particular deployment scenario
+(for example, when country-specific sales tax laws require
+country-specific sales tax business logic)
+* To create dummy (mock) versions of beans to be used for testing
+
+To make a bean available for lookup, injection, or EL resolution using
+this mechanism, give it a `javax.enterprise.inject.Alternative`
+annotation and then use the `alternatives` element to specify it in the
+`beans.xml` file.
+
+For example, you might want to create a full version of a bean and also
+a simpler version that you use only for certain kinds of testing. The
+example described in link:cdi-adv-examples002.html#GKHPU[The encoder
+Example: Using Alternatives] contains two such beans, `CoderImpl` and
+`TestCoderImpl`. The test bean is annotated as follows:
+
+[source,oac_no_warn]
+----
+@Alternative
+public class TestCoderImpl implements Coder { ... }
+----
+
+The full version is not annotated:
+
+[source,oac_no_warn]
+----
+public class CoderImpl implements Coder { ... }
+----
+
+The managed bean injects an instance of the `Coder` interface:
+
+[source,oac_no_warn]
+----
+@Inject
+Coder coder;
+----
+
+The alternative version of the bean is used by the application only if
+that version is declared as follows in the `beans.xml` file:
+
+[source,oac_no_warn]
+----
+<beans ...>
+    <alternatives>
+        <class>javaeetutorial.encoder.TestCoderImpl</class>
+    </alternatives>
+</beans>
+----
+
+If the `alternatives` element is commented out in the `beans.xml` file,
+the `CoderImpl` class is used.
+
+You can also have several beans that implement the same interface, all
+annotated `@Alternative`. In this case, you must specify in the
+`beans.xml` file which of these alternative beans you want to use. If
+`CoderImpl` were also annotated `@Alternative`, one of the two beans
+would always have to be specified in the `beans.xml` file.
+
+The alternatives that you specify in the `beans.xml` file apply only to
+classes in the same archive. Use the `@Priority` annotation to specify
+alternatives globally for an application that consists of multiple
+modules, as in the following example:
+
+[source,oac_no_warn]
+----
+@Alternative
+@Priority(Interceptor.Priority.APPLICATION+10)
+public class TestCoderImpl implements Coder { ... }
+----
+
+The alternative with higher priority value is selected if several
+alternative beans that implement the same interface are annotated with
+`@Priority`. You do not need to specify the alternative in the
+`beans.xml` file when you use the `@Priority` annotation.
+
+[[GKHPO]]
+
+[[using-specialization]]
+Using Specialization
+~~~~~~~~~~~~~~~~~~~~
+
+Specialization has a function similar to that of alternatives in that it
+allows you to substitute one bean for another. However, you might want
+to make one bean override the other in all cases. Suppose you defined
+the following two beans:
+
+[source,oac_no_warn]
+----
+@Default @Asynchronous
+public class AsynchronousService implements Service { ... }
+
+@Alternative
+public class MockAsynchronousService extends AsynchronousService { ... }
+----
+
+If you then declared `MockAsynchronousService` as an alternative in your
+`beans.xml` file, the following injection point would resolve to
+`MockAsynchronousService`:
+
+[source,oac_no_warn]
+----
+@Inject Service service;
+----
+
+The following, however, would resolve to `AsynchronousService` rather
+than `MockAsynchronousService`, because `MockAsynchronousService` does
+not have the `@Asynchronous` qualifier:
+
+[source,oac_no_warn]
+----
+@Inject @Asynchronous Service service;
+----
+
+To make sure that `MockAsynchronousService` was always injected, you
+would have to implement all bean types and bean qualifiers of
+`AsynchronousService`. However, if `AsynchronousService` declared a
+producer method or observer method, even this cumbersome mechanism would
+not ensure that the other bean was never invoked. Specialization
+provides a simpler mechanism.
+
+Specialization happens at development time as well as at runtime. If you
+declare that one bean specializes another, it extends the other bean
+class, and at runtime the specialized bean completely replaces the other
+bean. If the first bean is produced by means of a producer method, you
+must also override the producer method.
+
+You specialize a bean by giving it the
+`javax.enterprise.inject.Specializes` annotation. For example, you might
+declare a bean as follows:
+
+[source,oac_no_warn]
+----
+@Specializes
+public class MockAsynchronousService extends AsynchronousService { ... }
+----
+
+In this case, the `MockAsynchronousService` class will always be invoked
+instead of the `AsynchronousService` class.
+
+Usually, a bean marked with the `@Specializes` annotation is also an
+alternative and is declared as an alternative in the `beans.xml` file.
+Such a bean is meant to stand in as a replacement for the default
+implementation, and the alternative implementation automatically
+inherits all qualifiers of the default implementation as well as its EL
+name, if it has one.
+
+

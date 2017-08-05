@@ -1,0 +1,86 @@
+type=page
+status=published
+title=Creating WebSocket Applications in the Java EE Platform
+next=websocket003.html
+prev=websocket001.html
+~~~~~~
+Creating WebSocket Applications in the Java EE Platform
+=======================================================
+
+[[BABEAEFC]]
+
+[[creating-websocket-applications-in-the-java-ee-platform]]
+Creating WebSocket Applications in the Java EE Platform
+-------------------------------------------------------
+
+The Java EE platform includes the Java API for WebSocket (JSR 356),
+which enables you to create, configure, and deploy WebSocket endpoints
+in web applications. The WebSocket client API specified in JSR 356 also
+enables you to access remote WebSocket endpoints from any Java
+application.
+
+The Java API for WebSocket consists of the following packages.
+
+* The `javax.websocket.server` package contains annotations, classes,
+and interfaces to create and configure server endpoints.
+* The `javax.websocket` package contains annotations, classes,
+interfaces, and exceptions that are common to client and server
+endpoints.
+
+WebSocket endpoints are instances of the `javax.websocket.Endpoint`
+class. The Java API for WebSocket enables you to create two kinds of
+endpoints: programmatic endpoints and annotated endpoints. To create a
+programmatic endpoint, you extend the `Endpoint` class and override its
+lifecycle methods. To create an annotated endpoint, you decorate a Java
+class and some of its methods with the annotations provided by the
+packages mentioned previously. After you have created an endpoint, you
+deploy it to an specific URI in the application so that remote clients
+can connect to it.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+In most cases, it is easier to create and deploy an annotated endpoint
+than a programmatic endpoint. This chapter provides a simple example of
+a programmatic endpoint, but it focuses on annotated endpoints.
+
+|=======================================================================
+
+
+[[sthref114]]
+
+[[creating-and-deploying-a-websocket-endpoint]]
+Creating and Deploying a WebSocket Endpoint
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The process for creating and deploying a WebSocket endpoint:
+
+1.  Create an endpoint class.
+2.  Implement the lifecycle methods of the endpoint.
+3.  Add your business logic to the endpoint.
+4.  Deploy the endpoint inside a web application.
+
+The process is slightly different for programmatic endpoints and
+annotated endpoints, and it is covered in detail in the following
+sections.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+As opposed to servlets, WebSocket endpoints are instantiated multiple
+times. The container creates an instance of an endpoint per connection
+to its deployment URI. Each instance is associated with one and only one
+connection. This facilitates keeping user state for each connection and
+makes development easier, because there is only one thread executing the
+code of an endpoint instance at any given time.
+
+|=======================================================================
+
+
+

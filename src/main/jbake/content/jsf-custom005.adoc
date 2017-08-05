@@ -1,0 +1,519 @@
+type=page
+status=published
+title=Creating Custom Component Classes
+next=jsf-custom006.html
+prev=jsf-custom004.html
+~~~~~~
+Creating Custom Component Classes
+=================================
+
+[[BNAVU]]
+
+[[creating-custom-component-classes]]
+Creating Custom Component Classes
+---------------------------------
+
+As explained in link:jsf-custom002.html#BNAVI[When to Use a Custom
+Component], a component class defines the state and behavior of a UI
+component. The state information includes the component's type,
+identifier, and local value. The behavior defined by the component class
+includes the following:
+
+* Decoding (converting the request parameter to the component's local
+value)
+* Encoding (converting the local value into the corresponding markup)
+* Saving the state of the component
+* Updating the bean value with the local value
+* Processing validation on the local value
+* Queueing events
+
+The `javax.faces.component.UIComponentBase` class defines the default
+behavior of a component class. All the classes representing the standard
+components extend from `UIComponentBase`. These classes add their own
+behavior definitions, as your custom component class will do.
+
+Your custom component class must either extend `UIComponentBase`
+directly or extend a class representing one of the standard components.
+These classes are located in the `javax.faces.component` package, and
+their names begin with `UI`.
+
+If your custom component serves the same purpose as a standard
+component, you should extend that standard component rather than
+directly extend `UIComponentBase`. For example, suppose you want to
+create an editable menu component. It makes sense to have this component
+extend `UISelectOne` rather than `UIComponentBase` because you can reuse
+the behavior already defined in `UISelectOne`. The only new
+functionality you need to define is to make the menu editable.
+
+Whether you decide to have your component extend `UIComponentBase` or a
+standard component, you might also want your component to implement one
+or more of these behavioral interfaces defined in the
+`javax.faces.component` package:
+
+* `ActionSource`: Indicates that the component can fire a
+`javax.faces.event.ActionEvent`
+* `ActionSource2`: Extends `ActionSource` and allows component
+properties referencing methods that handle action events to use method
+expressions as defined by the EL
+* `EditableValueHolder`: Extends `ValueHolder` and specifies additional
+features for editable components, such as validation and emitting
+value-change events
+* `NamingContainer`: Mandates that each component rooted at this
+component has a unique ID
+* `StateHolder`: Denotes that a component has state that must be saved
+between requests
+* `ValueHolder`: Indicates that the component maintains a local value as
+well as the option of accessing data in the model tier
+
+If your component extends `UIComponentBase`, it automatically implements
+only `StateHolder`. Because all components directly or indirectly extend
+`UIComponentBase`, they all implement `StateHolder`. Any component that
+implements `StateHolder` also implements the `StateHelper` interface,
+which extends `StateHolder` and defines a `Map`-like contract that makes
+it easy for components to save and restore a partial view state.
+
+If your component extends one of the other standard components, it might
+also implement other behavioral interfaces in addition to `StateHolder`.
+If your component extends `UICommand`, it automatically implements
+`ActionSource2`. If your component extends `UIOutput` or one of the
+component classes that extend `UIOutput`, it automatically implements
+`ValueHolder`. If your component extends `UIInput`, it automatically
+implements `EditableValueHolder` and `ValueHolder`. See the JavaServer
+Faces API documentation to find out what the other component classes
+implement.
+
+You can also make your component explicitly implement a behavioral
+interface that it doesn't already by virtue of extending a particular
+standard component. For example, if you have a component that extends
+`UIInput` and you want it to fire action events, you must make it
+explicitly implement `ActionSource2` because a `UIInput` component
+doesn't automatically implement this interface.
+
+The Duke's Bookstore image map example has two component classes:
+`AreaComponent` and `MapComponent`. The `MapComponent` class extends
+`UICommand` and therefore implements `ActionSource2`, which means it can
+fire action events when a user clicks on the map. The `AreaComponent`
+class extends the standard component `UIOutput`. The `@FacesComponent`
+annotation registers the components with the JavaServer Faces
+implementation:
+
+[source,oac_no_warn]
+----
+@FacesComponent("DemoMap")
+public class MapComponent extends UICommand {...}
+
+@FacesComponent("DemoArea")
+public class AreaComponent extends UIOutput {...}
+----
+
+The `MapComponent` class represents the component corresponding to the
+`bookstore:map` tag:
+
+[source,oac_no_warn]
+----
+<bookstore:map id="bookMap" 
+               current="map1" 
+               immediate="true"
+               action="bookstore">
+    ...
+</bookstore:map>
+----
+
+The `AreaComponent` class represents the component corresponding to the
+`bookstore:area` tag:
+
+[source,oac_no_warn]
+----
+<bookstore:area id="map1" value="#{Book201}" 
+                onmouseover="resources/images/book_201.jpg" 
+                onmouseout="resources/images/book_all.jpg" 
+                targetImage="mapImage"/>
+----
+
+`MapComponent` has one or more `AreaComponent` instances as children.
+Its behavior consists of the following actions:
+
+* Retrieving the value of the currently selected area
+* Defining the properties corresponding to the component's values
+* Generating an event when the user clicks on the image map
+* Queuing the event
+* Saving its state
+* Rendering the HTML `map` tag and the HTML `input` tag
+
+`MapComponent` delegates the rendering of the HTML `map` and `input`
+tags to the `MapRenderer` class.
+
+`AreaComponent` is bound to a bean that stores the shape and coordinates
+of the region of the image map. You will see how all this data is
+accessed through the value expression in
+link:jsf-custom006.html#BNAWB[Creating the Renderer Class]. The behavior
+of `AreaComponent` consists of the following:
+
+* Retrieving the shape and coordinate data from the bean
+* Setting the value of the hidden tag to the `id` of this component
+* Rendering the `area` tag, including the JavaScript for the
+`onmouseover`, `onmouseout`, and `onclick` functions
+
+Although these tasks are actually performed by `AreaRenderer`,
+`AreaComponent` must delegate the tasks to `AreaRenderer`. See
+link:jsf-custom006.html#BNAWA[Delegating Rendering to a Renderer] for
+more information.
+
+The rest of this section describes the tasks that `MapComponent`
+performs as well as the encoding and decoding that it delegates to
+`MapRenderer`. link:jsf-custom008.html#BNAWD[Handling Events for Custom
+Components] details how `MapComponent` handles events.
+
+[[BNAVV]]
+
+[[specifying-the-component-family]]
+Specifying the Component Family
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If your custom component class delegates rendering, it needs to override
+the `getFamily` method of `UIComponent` to return the identifier of a
+component family, which is used to refer to a component or set of
+components that can be rendered by a renderer or set of renderers. The
+component family is used along with the renderer type to look up
+renderers that can render the component:
+
+[source,oac_no_warn]
+----
+public String getFamily() {
+    return ("Map");
+}
+----
+
+The component family identifier, `Map`, must match that defined by the
+`component-family` elements included in the component and renderer
+configurations in the application configuration resource file.
+link:jsf-configure011.html#BNAXH[Registering a Custom Renderer with a
+Render Kit] explains how to define the component family in the renderer
+configuration. link:jsf-configure012.html#BNAXI[Registering a Custom
+Component] explains how to define the component family in the component
+configuration.
+
+[[BNAVW]]
+
+[[performing-encoding]]
+Performing Encoding
+~~~~~~~~~~~~~~~~~~~
+
+During the Render Response phase, the JavaServer Faces implementation
+processes the encoding methods of all components and their associated
+renderers in the view. The encoding methods convert the current local
+value of the component into the corresponding markup that represents it
+in the response.
+
+The `UIComponentBase` class defines a set of methods for rendering
+markup: `encodeBegin`, `encodeChildren`, and `encodeEnd`. If the
+component has child components, you might need to use more than one of
+these methods to render the component; otherwise, all rendering should
+be done in `encodeEnd`. Alternatively, you can use the `encodeALL`
+method, which encompasses all the methods.
+
+Because `MapComponent` is a parent component of `AreaComponent`, the
+`area` tags must be rendered after the beginning `map` tag and before
+the ending `map` tag. To accomplish this, the `MapRenderer` class
+renders the beginning `map` tag in `encodeBegin` and the rest of the
+`map` tag in `encodeEnd`.
+
+The JavaServer Faces implementation automatically invokes the
+`encodeEnd` method of `AreaComponent`'s renderer after it invokes
+`MapRenderer`'s `encodeBegin` method and before it invokes
+`MapRenderer`'s `encodeEnd` method. If a component needs to perform the
+rendering for its children, it does this in the `encodeChildren` method.
+
+Here are the `encodeBegin` and `encodeEnd` methods of `MapRenderer`:
+
+[source,oac_no_warn]
+----
+@Override
+public void encodeBegin(FacesContext context, UIComponent component) 
+        throws IOException {
+    if ((context == null)|| (component == null)) {
+        throw new NullPointerException();
+    }
+    MapComponent map = (MapComponent) component;
+    ResponseWriter writer = context.getResponseWriter();
+    writer.startElement("map", map);
+    writer.writeAttribute("name", map.getId(), "id");
+}
+
+@Override
+public void encodeEnd(FacesContext context, UIComponent component) 
+        throws IOException {
+    if ((context == null) || (component == null)){
+        throw new NullPointerException();
+    }
+    MapComponent map = (MapComponent) component;
+    ResponseWriter writer = context.getResponseWriter();
+    writer.startElement("input", map);
+    writer.writeAttribute("type", "hidden", null);
+    writer.writeAttribute("name", getName(context,map), "clientId");
+    writer.endElement("input");
+    writer.endElement("map");
+}
+----
+
+Notice that `encodeBegin` renders only the beginning `map` tag. The
+`encodeEnd` method renders the `input` tag and the ending `map` tag.
+
+The encoding methods accept a `UIComponent` argument and a
+`javax.faces.context.FacesContext` argument. The `FacesContext` instance
+contains all the information associated with the current request. The
+`UIComponent` argument is the component that needs to be rendered.
+
+The rest of the method renders the markup to the
+`javax.faces.context.ResponseWriter` instance, which writes out the
+markup to the current response. This basically involves passing the HTML
+tag names and attribute names to the `ResponseWriter` instance as
+strings, retrieving the values of the component attributes, and passing
+these values to the `ResponseWriter` instance.
+
+The `startElement` method takes a `String` (the name of the tag) and the
+component to which the tag corresponds (in this case, `map`). (Passing
+this information to the `ResponseWriter` instance helps design-time
+tools know which portions of the generated markup are related to which
+components.)
+
+After calling `startElement`, you can call `writeAttribute` to render
+the tag's attributes. The `writeAttribute` method takes the name of the
+attribute, its value, and the name of a property or attribute of the
+containing component corresponding to the attribute. The last parameter
+can be null, and it won't be rendered.
+
+The `name` attribute value of the `map` tag is retrieved using the
+`getId` method of `UIComponent`, which returns the component's unique
+identifier. The `name` attribute value of the `input` tag is retrieved
+using the `getName(FacesContext, UIComponent)` method of `MapRenderer`.
+
+If you want your component to perform its own rendering but delegate to
+a renderer if there is one, include the following lines in the encoding
+method to check whether there is a renderer associated with this
+component:
+
+[source,oac_no_warn]
+----
+if (getRendererType() != null) {
+    super.encodeEnd(context);
+    return;
+}
+----
+
+If there is a renderer available, this method invokes the superclass's
+`encodeEnd` method, which does the work of finding the renderer. The
+`MapComponent` class delegates all rendering to `MapRenderer`, so it
+does not need to check for available renderers.
+
+In some custom component classes that extend standard components, you
+might need to implement other methods in addition to `encodeEnd`. For
+example, if you need to retrieve the component's value from the request
+parameters, you must also implement the `decode` method.
+
+[[BNAVX]]
+
+[[performing-decoding]]
+Performing Decoding
+~~~~~~~~~~~~~~~~~~~
+
+During the Apply Request Values phase, the JavaServer Faces
+implementation processes the `decode` methods of all components in the
+tree. The `decode` method extracts a component's local value from
+incoming request parameters and uses a `javax.faces.convert.Converter`
+implementation to convert the value to a type that is acceptable to the
+component class.
+
+A custom component class or its renderer must implement the `decode`
+method only if it must retrieve the local value or if it needs to queue
+events. The component queues the event by calling `queueEvent`.
+
+Here is the `decode` method of `MapRenderer`:
+
+[source,oac_no_warn]
+----
+@Override
+public void decode(FacesContext context, UIComponent component) {
+    if ((context == null) || (component == null)) {
+        throw new NullPointerException();
+    }
+    MapComponent map = (MapComponent) component;
+    String key = getName(context, map);
+    String value = (String) context.getExternalContext().
+            getRequestParameterMap().get(key);
+    if (value != null)
+        map.setCurrent(value);
+    }
+}
+----
+
+The `decode` method first gets the name of the hidden `input` field by
+calling `getName(FacesContext, UIComponent)`. It then uses that name as
+the key to the request parameter map to retrieve the current value of
+the `input` field. This value represents the currently selected area.
+Finally, it sets the value of the `MapComponent` class's `current`
+attribute to the value of the `input` field.
+
+[[BNAVY]]
+
+[[enabling-component-properties-to-accept-expressions]]
+Enabling Component Properties to Accept Expressions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Nearly all the attributes of the standard JavaServer Faces tags can
+accept expressions, whether they are value expressions or method
+expressions. It is recommended that you also enable your component
+attributes to accept expressions because it gives you much more
+flexibility when you write Facelets pages.
+
+To enable the attributes to accept expressions, the component class must
+implement getter and setter methods for the component properties. These
+methods can use the facilities offered by the `StateHelper` interface to
+store and retrieve not only the values for these properties but also the
+state of the components across multiple requests.
+
+Because `MapComponent` extends `UICommand`, the `UICommand` class
+already does the work of getting the `ValueExpression` and
+`MethodExpression` instances associated with each of the attributes that
+it supports. Similarly, the `UIOutput` class that `AreaComponent`
+extends already obtains the `ValueExpression` instances for its
+supported attributes. For both components, the simple getter and setter
+methods store and retrieve the key values and state for the attributes,
+as shown in this code fragment from `AreaComponent`:
+
+[source,oac_no_warn]
+----
+enum PropertyKeys {
+    alt, coords, shape, targetImage;
+}
+public String getAlt() {
+    return (String) getStateHelper().eval(PropertyKeys.alt, null);
+}
+public void setAlt(String alt) {
+    getStateHelper().put(PropertyKeys.alt, alt);
+}
+...
+----
+
+However, if you have a custom component class that extends
+`UIComponentBase`, you will need to implement the methods that get the
+`ValueExpression` and `MethodExpression` instances associated with those
+attributes that are enabled to accept expressions. For example, you
+could include a method that gets the `ValueExpression` instance for the
+`immediate` attribute:
+
+[source,oac_no_warn]
+----
+public boolean isImmediate() {
+    if (this.immediateSet) {
+        return (this.immediate);
+    }
+    ValueExpression ve = getValueExpression("immediate");
+    if (ve != null) {
+        Boolean value = (Boolean) ve.getValue(
+            getFacesContext().getELContext());
+        return (value.booleanValue());
+    } else {
+        return (this.immediate);
+    }
+}
+----
+
+The properties corresponding to the component attributes that accept
+method expressions must accept and return a `MethodExpression` object.
+For example, if `MapComponent` extended `UIComponentBase` instead of
+`UICommand`, it would need to provide an `action` property that returns
+and accepts a `MethodExpression` object:
+
+[source,oac_no_warn]
+----
+public MethodExpression getAction() {
+    return (this.action);
+}
+public void setAction(MethodExpression action) {
+    this.action = action;
+}
+----
+
+[[BNAVZ]]
+
+[[saving-and-restoring-state]]
+Saving and Restoring State
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As described in link:#BNAVY[Enabling Component Properties to Accept
+Expressions], use of the `StateHelper` interface facilities allows you
+to save the component's state at the same time you set and retrieve
+property values. The `StateHelper` implementation allows partial state
+saving; it saves only the changes in the state since the initial
+request, not the entire state, because the full state can be restored
+during the Restore View phase.
+
+Component classes that implement `StateHolder` may prefer to implement
+the `saveState(FacesContext)` and `restoreState(FacesContext, Object)`
+methods to help the JavaServer Faces implementation save and restore the
+state of components across multiple requests.
+
+To save a set of values, you can implement the `saveState(FacesContext)`
+method. This method is called during the Render Response phase, during
+which the state of the response is saved for processing on subsequent
+requests. Here is a hypothetical method from `MapComponent`, which has
+only one attribute, `current`:
+
+[source,oac_no_warn]
+----
+@Override
+public Object saveState(FacesContext context) {
+    Object values[] = new Object[2];
+    values[0] = super.saveState(context);
+    values[1] = current;
+    return (values);
+}
+----
+
+This method initializes an array, which will hold the saved state. It
+next saves all of the state associated with the component.
+
+A component that implements `StateHolder` may also provide an
+implementation for `restoreState(FacesContext, Object)`, which restores
+the state of the component to that saved with the
+`saveState(FacesContext)` method. The
+`restoreState(FacesContext, Object)` method is called during the Restore
+View phase, during which the JavaServer Faces implementation checks
+whether there is any state that was saved during the last Render
+Response phase and needs to be restored in preparation for the next
+postback.
+
+Here is a hypothetical `restoreState(FacesContext, Object)` method from
+`MapComponent`:
+
+[source,oac_no_warn]
+----
+public void restoreState(FacesContext context, Object state) {
+    Object values[] = (Object[]) state;
+    super.restoreState(context, values[0]);
+    current = (String) values[1];
+}
+----
+
+This method takes a `FacesContext` and an `Object` instance,
+representing the array that is holding the state for the component. This
+method sets the component's properties to the values saved in the
+`Object` array.
+
+Whether or not you implement these methods in your component class, you
+can use the `javax.faces.STATE_SAVING_METHOD` context parameter to
+specify in the deployment descriptor where you want the state to be
+saved: either `client` or `server`. If state is saved on the client, the
+state of the entire view is rendered to a hidden field on the page. By
+default, the state is saved on the server.
+
+The web applications in the Duke's Forest case study save their view
+state on the client.
+
+Saving state on the client uses more bandwidth as well as more client
+resources, whereas saving it on the server uses more server resources.
+You may also want to save state on the client if you expect your users
+to disable cookies.
+
+

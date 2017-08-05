@@ -1,0 +1,34 @@
+type=page
+status=published
+title=Partial Processing and Partial Rendering
+next=jsf-intro009.html
+prev=jsf-intro007.html
+~~~~~~
+Partial Processing and Partial Rendering
+========================================
+
+[[GKNOJ]]
+
+[[partial-processing-and-partial-rendering]]
+Partial Processing and Partial Rendering
+----------------------------------------
+
+The JavaServer Faces lifecycle spans all of the execute and render
+processes of an application. It is also possible to process and render
+only parts of an application, such as a single component. For example,
+the JavaServer Faces Ajax framework can generate requests containing
+information on which particular component may be processed and which
+particular component may be rendered back to the client.
+
+Once such a partial request enters the JavaServer Faces lifecycle, the
+information is identified and processed by a
+`javax.faces.context.PartialViewContext` object. The JavaServer Faces
+lifecycle is still aware of such Ajax requests and modifies the
+component tree accordingly.
+
+The `execute` and `render` attributes of the `f:ajax` tag are used to
+identify which components may be executed and rendered. For more
+information on these attributes, see link:jsf-ajax.html#GKIOW[Chapter 13,
+"Using Ajax with JavaServer Faces Technology"].
+
+

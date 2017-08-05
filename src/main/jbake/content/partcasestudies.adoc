@@ -1,0 +1,30 @@
+type=page
+status=published
+title=Case Studies
+next=dukes-bookstore.html
+prev=concurrency-utilities007.html
+~~~~~~
+Case Studies
+============
+
+[[GKGJW]][[JEETT00135]]
+
+[[part-xii]]
+Part XII +
+----------
+
+[[case-studies]]
+Case Studies
+------------
+
+Part XII presents case studies that use a variety of Java EE
+technologies. This part contains the following chapters:
+
+* link:dukes-bookstore.html#GLNVI[Chapter 58, "Duke's Bookstore Case
+Study Example"]
+* link:dukes-tutoring.html#GKAEE[Chapter 59, "Duke's Tutoring Case Study
+Example"]
+* link:dukes-forest.html#GLNPW[Chapter 60, "Duke's Forest Case Study
+Example"]
+
+

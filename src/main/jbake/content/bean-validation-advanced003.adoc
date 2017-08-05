@@ -1,0 +1,89 @@
+type=page
+status=published
+title=Grouping Constraints
+next=bean-validation-advanced004.html
+prev=bean-validation-advanced002.html
+~~~~~~
+Grouping Constraints
+====================
+
+[[GKAGV]]
+
+[[grouping-constraints]]
+Grouping Constraints
+--------------------
+
+Constraints may be added to one or more groups. Constraint groups are
+used to create subsets of constraints so that only certain constraints
+will be validated for a particular object. By default, all constraints
+are included in the `Default` constraint group.
+
+Constraint groups are represented by interfaces.
+
+[source,oac_no_warn]
+----
+public interface Employee {}
+
+public interface Contractor {}
+----
+
+Constraint groups can inherit from other groups.
+
+[source,oac_no_warn]
+----
+public interface Manager extends Employee {}
+----
+
+When a constraint is added to an element, the constraint declares the
+groups to which that constraint belongs by specifying the class name of
+the group interface name in the `groups` element of the constraint.
+
+[source,oac_no_warn]
+----
+@NotNull(groups=Employee.class)
+Phone workPhone;
+----
+
+Multiple groups can be declared by surrounding the groups with braces
+(`{` and `}`) and separating the groups' class names with commas.
+
+[source,oac_no_warn]
+----
+@NotNull(groups={ Employee.class, Contractor.class })
+Phone workPhone;
+----
+
+If a group inherits from another group, validating that group results in
+validating all constraints declared as part of the supergroup. For
+example, validating the `Manager` group results in the `workPhone` field
+being validated, because `Employee` is a superinterface of `Manager`.
+
+[[GKAGU]]
+
+[[customizing-group-validation-order]]
+Customizing Group Validation Order
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, constraint groups are validated in no particular order.
+There are cases in which some groups should be validated before others.
+For example, in a particular class, basic data should be validated
+before more advanced data.
+
+To set the validation order for a group, add a
+`javax.validation.GroupSequence` annotation to the interface definition,
+listing the order in which the validation should occur.
+
+[source,oac_no_warn]
+----
+@GroupSequence({Default.class, ExpensiveValidationGroup.class})
+public interface FullValidationGroup {}
+----
+
+When validating `FullValidationGroup`, first the `Default` group is
+validated. If all the data passes validation, then the
+`ExpensiveValidationGroup` group is validated. If a constraint is part
+of both the `Default` and the `ExpensiveValidationGroup` groups, the
+constraint is validated as part of the `Default` group and will not be
+validated on the subsequent `ExpensiveValidationGroup` pass.
+
+

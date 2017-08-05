@@ -1,0 +1,114 @@
+type=page
+status=published
+title=Establishing a Secure Connection Using SSL
+next=security-intro007.html
+prev=security-intro005.html
+~~~~~~
+Establishing a Secure Connection Using SSL
+==========================================
+
+[[BNBXW]]
+
+[[establishing-a-secure-connection-using-ssl]]
+Establishing a Secure Connection Using SSL
+------------------------------------------
+
+Secure Sockets Layer (SSL) technology is security that is implemented at
+the transport layer (see
+link:security-intro002.html#BNBXC[Transport-Layer Security] for more
+information about transport-layer security). SSL allows web browsers and
+web servers to communicate over a secure connection. In this secure
+connection, the data is encrypted before being sent and then is
+decrypted upon receipt and before processing. Both the browser and the
+server encrypt all traffic before sending any data.
+
+SSL addresses the following important security considerations.
+
+* Authentication: During your initial attempt to communicate with a web
+server over a secure connection, that server will present your web
+browser with a set of credentials in the form of a server certificate
+(also called a public key certificate). The purpose of the certificate
+is to verify that the site is who and what it claims to be. In some
+cases, the server may request a certificate proving that the client is
+who and what it claims to be; this mechanism is known as client
+authentication.
+* Confidentiality: When data is being passed between the client and the
+server on a network, third parties can view and intercept this data. SSL
+responses are encrypted so that the data cannot be deciphered by the
+third party and the data remains confidential.
+* Integrity: When data is being passed between the client and the server
+on a network, third parties can view and intercept this data. SSL helps
+guarantee that the data will not be modified in transit by that third
+party.
+
+The SSL protocol is designed to be as efficient as securely possible.
+However, encryption and decryption are computationally expensive
+processes from a performance standpoint. It is not strictly necessary to
+run an entire web application over SSL, and it is customary for a
+developer to decide which pages require a secure connection and which do
+not. Pages that might require a secure connection include those for
+login, personal information, shopping cart checkouts, or credit card
+information transmittal. Any page within an application can be requested
+over a secure socket by simply prefixing the address with `https:`
+instead of `http:`. Any pages that absolutely require a secure
+connection should check the protocol type associated with the page
+request and take the appropriate action if `https:` is not specified.
+
+Using name-based virtual hosts on a secured connection can be
+problematic. This is a design limitation of the SSL protocol itself. The
+SSL handshake, whereby the client browser accepts the server
+certificate, must occur before the HTTP request is accessed. As a
+result, the request information containing the virtual host name cannot
+be determined before authentication, and it is therefore not possible to
+assign multiple certificates to a single IP address. If all virtual
+hosts on a single IP address need to authenticate against the same
+certificate, the addition of multiple virtual hosts should not interfere
+with normal SSL operations on the server. Be aware, however, that most
+client browsers will compare the server's domain name against the domain
+name listed in the certificate, if any; this is applicable primarily to
+official certificates signed by a certificate authority (CA). If the
+domain names do not match, these browsers will display a warning to the
+client. In general, only address-based virtual hosts are commonly used
+with SSL in a production environment.
+
+[[BNBXX]]
+
+[[verifying-and-configuring-ssl-support]]
+Verifying and Configuring SSL Support
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As a general rule, you must address the following issues to enable SSL
+for a server.
+
+* There must be a `Connector` element for an SSL connector in the server
+deployment descriptor.
+* There must be valid keystore and certificate files.
+* The location of the keystore file and its password must be specified
+in the server deployment descriptor.
+
+An SSL HTTPS connector is already enabled in GlassFish Server.
+
+For testing purposes and to verify that SSL support has been correctly
+installed, load the default introduction page with a URL that connects
+to the port defined in the server deployment descriptor:
+
+[source,oac_no_warn]
+----
+https://localhost:8181/
+----
+
+The `https` in this URL indicates that the browser should be using the
+SSL protocol. The `localhost` in this example assumes that you are
+running the example on your local machine as part of the development
+process. The `8181` in this example is the secure port that was
+specified where the SSL connector was created. If you are using a
+different server or port, modify this value accordingly.
+
+The first time that you load this application, the New Site Certificate
+or Security Alert dialog box appears. Click Next to move through the
+series of dialog boxes, and click Finish when you reach the last dialog
+box. The certificates will appear only the first time. When you accept
+the certificates, subsequent hits to this site assume that you still
+trust the content.
+
+

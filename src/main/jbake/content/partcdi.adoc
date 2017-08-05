@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Contexts and Dependency Injection for Java EE
+next=cdi-basic.html
+prev=bean-validation-advanced004.html
+~~~~~~
+Contexts and Dependency Injection for Java EE
+=============================================
+
+[[GJBNR]][[JEETT00131]]
+
+[[part-v]]
+Part V +
+--------
+
+[[contexts-and-dependency-injection-for-java-ee]]
+Contexts and Dependency Injection for Java EE
+---------------------------------------------
+
+Part V explores Contexts and Dependency Injection for Java EE (CDI).
+This part contains the following chapters:
+
+* link:cdi-basic.html#GIWHB[Chapter 24, "Introduction to Contexts and
+Dependency Injection for Java EE"]
+* link:cdi-basicexamples.html#GJBLS[Chapter 25, "Running the Basic
+Contexts and Dependency Injection Examples"]
+* link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+for Java EE: Advanced Topics"]
+* link:cdi-adv-examples.html#GKHRE[Chapter 27, "Running the Advanced
+Contexts and Dependency Injection Examples"]
+
+

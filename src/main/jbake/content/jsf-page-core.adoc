@@ -1,0 +1,40 @@
+type=page
+status=published
+title=Using Converters, Listeners, and Validators
+next=jsf-page-core001.html
+prev=jsf-page003.html
+~~~~~~
+Using Converters, Listeners, and Validators
+===========================================
+
+[[GJCUT]]
+
+[[using-converters-listeners-and-validators]]
+11 Using Converters, Listeners, and Validators
+----------------------------------------------
+
+
+The previous chapter described components and explained how to add them
+to a web page. This chapter provides information on adding more
+functionality to the components through converters, listeners, and
+validators.
+
+* Converters are used to convert data that is received from the input
+components. Converters allow an application to bring the strongly typed
+features of the Java programming language into the String-based world of
+HTTP servlet programming.
+* Listeners are used to listen to the events happening in the page and
+perform actions as defined.
+* Validators are used to validate the data that is received from the
+input components. Validators allow an application to express constraints
+on form input data to ensure that the necessary requirements are met
+before the input data is processed.
+
+The following topics are addressed here:
+
+* link:jsf-page-core001.html#BNAST[Using the Standard Converters]
+* link:jsf-page-core002.html#BNASZ[Registering Listeners on Components]
+* link:jsf-page-core003.html#BNATC[Using the Standard Validators]
+* link:jsf-page-core004.html#BNATN[Referencing a Managed Bean Method]
+
+

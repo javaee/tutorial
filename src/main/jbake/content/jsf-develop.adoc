@@ -1,0 +1,29 @@
+type=page
+status=published
+title=Developing with JavaServer Faces Technology
+next=jsf-develop001.html
+prev=jsf-page-core004.html
+~~~~~~
+Developing with JavaServer Faces Technology
+===========================================
+
+[[BNATX]]
+
+[[developing-with-javaserver-faces-technology]]
+12 Developing with JavaServer Faces Technology
+----------------------------------------------
+
+
+This chapter provides an overview of managed beans and explains how to
+write methods and properties of managed beans that are used by a
+JavaServer Faces application. This chapter also introduces the Bean
+Validation feature.
+
+The following topics are addressed here:
+
+* link:jsf-develop001.html#BNAQM[Managed Beans in JavaServer Faces
+Technology]
+* link:jsf-develop002.html#BNATY[Writing Bean Properties]
+* link:jsf-develop003.html#BNAVB[Writing Managed Bean Methods]
+
+

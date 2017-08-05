@@ -1,0 +1,544 @@
+type=page
+status=published
+title=Examples: Securing Web Applications
+next=security-javaee.html
+prev=security-webtier003.html
+~~~~~~
+Examples: Securing Web Applications
+===================================
+
+[[BNCBX]]
+
+[[examples-securing-web-applications]]
+Examples: Securing Web Applications
+-----------------------------------
+
+Some basic setup is required before any of the example applications will
+run correctly.
+
+The following topics are addressed here:
+
+* link:#CHDEBCHG[Overview of Examples of Securing Web Applications]
+* link:#GJJLK[To Set Up Your System for Running the Security Examples]
+* link:#BNCCK[The hello2-basicauth Example: Basic Authentication with a
+Servlet]
+* link:#BNCBY[The hello1-formauth Example: Form-Based Authentication
+with a JavaServer Faces Application]
+
+[[CHDEBCHG]]
+
+[[overview-of-examples-of-securing-web-applications]]
+Overview of Examples of Securing Web Applications
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The examples use annotations, programmatic security, and/or declarative
+security to demonstrate adding security to existing web applications.
+
+Here are some other locations where you will find examples of securing
+various types of applications:
+
+* link:security-javaee003.html#BNBZK[The cart-secure Example: Securing an
+Enterprise Bean with Declarative Security]
+* link:security-javaee003.html#BNCAA[The converter-secure Example:
+Securing an Enterprise Bean with Programmatic Security]
+* GlassFish samples: `https://glassfish-samples.java.net/`
+
+[[GJJLK]]
+
+[[to-set-up-your-system-for-running-the-security-examples]]
+To Set Up Your System for Running the Security Examples
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To set up your system for running the security examples, you need to
+configure a user database that the application can use for
+authenticating users. Before continuing, follow these steps.
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  Add an authorized user to GlassFish Server. For the examples in this
+chapter and in link:security-javaee.html#BNBYK[Chapter 50, "Getting
+Started Securing Enterprise Applications"], add a user to the `file`
+realm of GlassFish Server, and assign the user to the group
+`TutorialUser`.
+1.  From the Administration Console, expand the Configurations node,
+then expand the server-config node.
+2.  Expand the Security node.
+3.  Expand the Realms node.
+4.  Select the File node.
+5.  On the Edit Realm page, click Manage Users.
+6.  On the File Users page, click New.
+7.  In the User ID field, enter a user ID.
+8.  In the Group List field, enter `TutorialUser`.
+9.  In the New Password and Confirm New Password fields, enter a
+password.
+10. Click OK.
++
+Be sure to write down the user name and password for the user you create
+so that you can use it for testing the example applications.
+Authentication is case sensitive for both the user name and password, so
+write down the user name and password exactly. This topic is discussed
+more in link:security-intro005.html#BNBXR[Managing Users and Groups in
+GlassFish Server].
+3.  Set up Default Principal to Role Mapping in GlassFish Server.
+1.  From the Administration Console, expand the Configurations node,
+then expand the server-config node.
+2.  Select the Security node.
+3.  Select the Default Principal to Role Mapping Enabled check box.
+4.  Click Save.
+
+[[BNCCK]]
+
+[[the-hello2-basicauth-example-basic-authentication-with-a-servlet]]
+The hello2-basicauth Example: Basic Authentication with a Servlet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This example explains how to use basic authentication with a servlet.
+With basic authentication of a servlet, the web browser presents a
+standard login dialog box that is not customizable. When a user submits
+his or her name and password, the server determines whether the user
+name and password are those of an authorized user and sends the
+requested web resource if the user is authorized to view it.
+
+In general, the following steps are necessary for adding basic
+authentication to an unsecured servlet, such as the ones described in
+link:webapp.html#BNADR[Chapter 6, "Getting Started with Web
+Applications"]. In the example application included with this tutorial,
+many of these steps have been completed for you and are listed here
+simply to show what needs to be done should you wish to create a similar
+application. This application can be found in the
+tut-install`/examples/security/hello2-basicauth/` directory.
+
+1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
+the Security Examples].
+2.  Create a web module for the servlet example, `hello2`, as described
+in link:webapp.html#BNADR[Chapter 6, "Getting Started with Web
+Applications"].
+3.  Add the appropriate security annotations to the servlet. The
+security annotations are described in link:#GJRMH[Specifying Security
+for Basic Authentication Using Annotations].
+4.  Build, package, and deploy the web application by following the
+steps in link:#GJQYS[To Build, Package, and Deploy the hello2-basicauth
+Example Using NetBeans IDE] or link:#GJQZH[To Build, Package, and Deploy
+the hello2-basicauth Example Using Maven].
+5.  Run the web application by following the steps described in
+link:#GJQZF[To Run the hello2-basicauth Example].
+
+[[GJRMH]]
+
+[[specifying-security-for-basic-authentication-using-annotations]]
+Specifying Security for Basic Authentication Using Annotations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The default authentication mechanism used by GlassFish Server is basic
+authentication. With basic authentication, GlassFish Server spawns a
+standard login dialog box to collect user name and password data for a
+protected resource. Once the user is authenticated, access to the
+protected resource is permitted.
+
+To specify security for a servlet, use the `@ServletSecurity`
+annotation. This annotation allows you to specify both specific
+constraints on HTTP methods and more general constraints that apply to
+all HTTP methods for which no specific constraint is specified. Within
+the `@ServletSecurity` annotation, you can specify the following
+annotations:
+
+* The `@HttpMethodConstraint` annotation, which applies to a specific
+HTTP method
+* The more general `@HttpConstraint` annotation, which applies to all
+HTTP methods for which there is no corresponding `@HttpMethodConstraint`
+annotation
+
+Both the `@HttpMethodConstraint` and `@HttpConstraint` annotations
+within the `@ServletSecurity` annotation can specify the following:
+
+* A `transportGuarantee` element that specifies the data protection
+requirements (that is, whether or not SSL/TLS is required) that must be
+satisfied by the connections on which requests arrive. Valid values for
+this element are `NONE` and `CONFIDENTIAL`.
+* A `rolesAllowed` element that specifies the names of the authorized
+roles.
+
+For the `hello2-basicauth` application, the `GreetingServlet` has the
+following annotations:
+
+[source,oac_no_warn]
+----
+@WebServlet(name = "GreetingServlet", urlPatterns = {"/greeting"})
+@ServletSecurity(
+@HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL,
+    rolesAllowed = {"TutorialUser"}))
+----
+
+These annotations specify that the request URI `/greeting` can be
+accessed only by users who have been authorized to access this URL
+because they have been verified to be in the role `TutorialUser`. The
+data will be sent over a protected transport in order to keep the user
+name and password data from being read in transit.
+
+If you use the `@ServletSecurity` annotation, you do not need to specify
+security settings in the deployment descriptor. Use the deployment
+descriptor to specify settings for nondefault authentication mechanisms,
+for which you cannot use the `@ServletSecurity` annotation.
+
+[[GJQYS]]
+
+[[to-build-package-and-deploy-the-hello2-basicauth-example-using-netbeans-ide]]
+To Build, Package, and Deploy the hello2-basicauth Example Using
+NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
+the Security Examples].
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/security
+----
+4.  Select the `hello2-basicauth` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `hello2-basicauth` project and
+select Build.
++
+This command builds and deploys the example application to your
+GlassFish Server instance.
+
+[[GJQZH]]
+
+[[to-build-package-and-deploy-the-hello2-basicauth-example-using-maven]]
+To Build, Package, and Deploy the hello2-basicauth Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
+the Security Examples].
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/security/hello2-basicauth/
+----
+3.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command builds and packages the application into a WAR file,
+`hello2-basicauth.war`, that is located in the `target` directory, then
+deploys the WAR file.
+
+[[GJQZF]]
+
+[[to-run-the-hello2-basicauth-example]]
+To Run the hello2-basicauth Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  In a web browser, enter the following URL:
++
+[source,oac_no_warn]
+----
+https://localhost:8181/hello2-basicauth/greeting
+----
++
+You may be prompted to accept the security certificate for the server.
+If so, accept the security certificate. If the browser warns that the
+certificate is invalid because it is self-signed, add a security
+exception for the application.
++
+An Authentication Required dialog box appears. Its appearance varies,
+depending on the browser you use.
+2.  Enter a user name and password combination that corresponds to a
+user who has already been created in the `file` realm of GlassFish
+Server and has been assigned to the group `TutorialUser`; then click OK.
++
+Basic authentication is case sensitive for both the user name and
+password, so enter the user name and password exactly as defined for
+GlassFish Server.
++
+The server returns the requested resource if all the following
+conditions are met.
+* A user with the user name you entered is defined for GlassFish Server.
+* The user with the user name you entered has the password you entered.
+* The user name and password combination you entered is assigned to the
+group `TutorialUser` in GlassFish Server.
+* The role of `TutorialUser`, as defined for the application, is mapped
+to the group `TutorialUser`, as defined for GlassFish Server.
+3.  Enter a name in the field and click Submit.
++
+Because you have already been authorized, the name you enter in this
+step does not have any limitations. You have unlimited access to the
+application now.
++
+The application responds by saying "Hello" to the name you entered.
+
+[[BNCBY]]
+
+[[the-hello1-formauth-example-form-based-authentication-with-a-javaserver-faces-application]]
+The hello1-formauth Example: Form-Based Authentication with a JavaServer Faces Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This example explains how to use form-based authentication with a
+JavaServer Faces application. With form-based authentication, you can
+customize the login screen and error pages that are presented to the web
+client for authentication of the user name and password. When a user
+submits his or her name and password, the server determines whether the
+user name and password are those of an authorized user and, if
+authorized, sends the requested web resource.
+
+This example, `hello1-formauth`, adds security to the basic JavaServer
+Faces application shown in link:webapp003.html#BNADX[A Web Module That
+Uses JavaServer Faces Technology: The hello1 Example].
+
+In general, the steps necessary for adding form-based authentication to
+an unsecured JavaServer Faces application are similar to those described
+in link:#BNCCK[The hello2-basicauth Example: Basic Authentication with a
+Servlet]. The major difference is that you must use a deployment
+descriptor to specify the use of form-based authentication, as described
+in link:#BNCCB[Specifying Security for the Form-Based Authentication
+Example]. In addition, you must create a login form page and a login
+error page, as described in link:#BNCCA[Creating the Login Form and the
+Error Page].
+
+This application can be found in the
+tut-install`/examples/security/hello1-formauth/` directory.
+
+[[BNCCA]]
+
+[[creating-the-login-form-and-the-error-page]]
+Creating the Login Form and the Error Page
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When using form-based login mechanisms, you must specify a page that
+contains the form you want to use to obtain the user name and password,
+as well as a page to display if login authentication fails. This section
+discusses the login form and the error page used in this example.
+link:#BNCCB[Specifying Security for the Form-Based Authentication
+Example] shows how you specify these pages in the deployment descriptor.
+
+The login page can be an HTML page or a servlet, and it must return an
+HTML page containing a form that conforms to specific naming conventions
+(see the Java Servlet 4.0 specification for more information on these
+requirements). To do this, include the elements that accept user name
+and password information between `<form></form>` tags in your login
+page. The content of an HTML page or servlet for a login page should be
+coded as follows:
+
+[source,oac_no_warn]
+----
+<form method="post" action="j_security_check">
+    <input type="text" name="j_username">
+    <input type="password" name= "j_password">
+</form>
+----
+
+The full code for the login page used in this example can be found at
+tut-install`/examples/security/hello1-formauth/src/main/webapp/login.html`.
+Here is the code for this page:
+
+[source,oac_no_warn]
+----
+<html lang="en">
+    <head>
+        <title>Login Form</title>
+    </head>
+    <body>
+        <h2>Hello, please log in:</h2>
+        <form method="post" action="j_security_check">
+            <table role="presentation">
+                <tr>
+                    <td>Please type your user name: </td> 
+                    <td><input type="text" name="j_username" 
+                               size="20"/></td> 
+                </tr>
+                <tr>
+                    <td>Please type your password: </td>
+                    <td><input type="password" name="j_password"
+                               size="20"/></td> 
+                </tr>
+            </table>
+            <p></p>
+            <input type="submit" value="Submit"/>
+            &nbsp;
+            <input type="reset" value="Reset"/>
+        </form>
+    </body>
+</html>
+----
+
+The login error page is displayed if the user enters a user name and
+password combination that is not authorized to access the protected URI.
+For this example, the login error page can be found at
+tut-install`/examples/security/hello1-formauth/``src/main/webapp/error.html`.
+For this example, the login error page explains the reason for receiving
+the error page and provides a link that will allow the user to try
+again. Here is the code for this page:
+
+[source,oac_no_warn]
+----
+<html lang="en">
+    <head>
+        <title>Login Error</title>
+    </head>
+    <body>
+        <h2>Invalid user name or password.</h2>
+
+        <p>Please enter a user name or password that is authorized to access 
+           this application. For this application, this means a user that 
+           has been created in the <code>file</code> realm and has been 
+           assigned to the <em>group</em> of <code>TutorialUser</code>.</p>
+        <p><a href="login.html">Return to login page</a></p>
+    </body>
+</html>
+----
+
+[[BNCCB]]
+
+[[specifying-security-for-the-form-based-authentication-example]]
+Specifying Security for the Form-Based Authentication Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example takes a very simple servlet-based web application and adds
+form-based security. To specify form-based instead of basic
+authentication for a JavaServer Faces example, you must use the
+deployment descriptor.
+
+The following sample code shows the security elements added to the
+deployment descriptor for this example, which can be found in
+tut-install`/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml`:
+
+[source,oac_no_warn]
+----
+    <security-constraint>
+        <display-name>Constraint1</display-name>
+        <web-resource-collection>
+            <web-resource-name>wrcoll</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>TutorialUser</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-role>
+        <description/>
+        <role-name>TutorialUser</role-name>
+    </security-role>
+----
+
+[[GJRBA]]
+
+[[to-build-package-and-deploy-the-hello1-formauth-example-using-netbeans-ide]]
+To Build, Package, and Deploy the hello1-formauth Example Using NetBeans
+IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
+the Security Examples].
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/security
+----
+4.  Select the `hello1-formauth` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `hello1-formauth` project and
+select Run.
++
+This command builds and deploys the example application to your
+GlassFish Server instance, then opens it in a browser.
+
+[[GJRAZ]]
+
+[[to-build-package-and-deploy-the-hello1-formauth-example-using-maven-and-the-asadmin-command]]
+To Build, Package, and Deploy the hello1-formauth Example Using Maven
+and the asadmin Command
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
+the Security Examples].
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/security/hello1-formauth/
+----
+3.  Enter the following command at the terminal window or command
+prompt:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command builds and packages the application into a WAR file,
+`hello1-formauth.war`, that is located in the `target` directory, then
+deploys the WAR file to GlassFish Server.
+
+[[GJRAL]]
+
+[[to-run-the-hello1-formauth-example]]
+To Run the hello1-formauth Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To run the web client for `hello1-formauth`, follow these steps.
+
+1.  Open a web browser to the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/hello1-formauth/
+----
+2.  In the login form, enter a user name and password combination that
+corresponds to a user who has already been created in the `file` realm
+of GlassFish Server and has been assigned to the group `TutorialUser`.
++
+Form-based authentication is case sensitive for both the user name and
+password, so enter the user name and password exactly as defined for
+GlassFish Server.
+3.  Click Submit.
++
+If you entered `My_Name` as the name and `My_Pwd` for the password, the
+server returns the requested resource if all the following conditions
+are met.
+* A user with the user name `My_Name` is defined for GlassFish Server.
+* The user with the user name `My_Name` has a password `My_Pwd` defined
+for GlassFish Server.
+* The user `My_Name` with the password `My_Pwd` is assigned to the group
+`TutorialUser` on GlassFish Server.
+* The role `TutorialUser`, as defined for the application, is mapped to
+the group `TutorialUser`, as defined for GlassFish Server.
++
+When these conditions are met and the server has authenticated the user,
+the application appears.
+4.  Enter your name and click Submit.
++
+Because you have already been authorized, the name you enter in this
+step does not have any limitations. You have unlimited access to the
+application now.
++
+The application responds by saying "Hello" to you.
+
+
+Next Steps
+
+For additional testing and to see the login error page generated, close
+and reopen your browser, enter the application URL, and enter a user
+name and password that are not authorized.
+
+

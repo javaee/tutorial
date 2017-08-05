@@ -1,0 +1,162 @@
+type=page
+status=published
+title=Delegating Rendering to a Renderer
+next=jsf-custom007.html
+prev=jsf-custom005.html
+~~~~~~
+Delegating Rendering to a Renderer
+==================================
+
+[[BNAWA]]
+
+[[delegating-rendering-to-a-renderer]]
+Delegating Rendering to a Renderer
+----------------------------------
+
+Both `MapComponent` and `AreaComponent` delegate all of their rendering
+to a separate renderer. The section
+link:jsf-custom005.html#BNAVW[Performing Encoding] explains how
+`MapRenderer` performs the encoding for `MapComponent`. This section
+explains in detail the process of delegating rendering to a renderer
+using `AreaRenderer`, which performs the rendering for `AreaComponent`.
+
+To delegate rendering, you perform the tasks described in the following
+topics:
+
+* link:#BNAWB[Creating the Renderer Class]
+* link:#BNAWC[Identifying the Renderer Type]
+
+[[BNAWB]]
+
+[[creating-the-renderer-class]]
+Creating the Renderer Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When delegating rendering to a renderer, you can delegate all encoding
+and decoding to the renderer, or you can choose to do part of it in the
+component class. The `AreaComponent` class delegates encoding to the
+`AreaRenderer` class.
+
+The renderer class begins with a `@FacesRenderer` annotation:
+
+[source,oac_no_warn]
+----
+@FacesRenderer(componentFamily = "Area", rendererType = "DemoArea")
+public class AreaRenderer extends Renderer {
+----
+
+The `@FacesRenderer` annotation registers the renderer class with the
+JavaServer Faces implementation as a renderer class. The annotation
+identifies the component family as well as the renderer type.
+
+To perform the rendering for `AreaComponent`, `AreaRenderer` must
+implement an `encodeEnd` method. The `encodeEnd` method of
+`AreaRenderer` retrieves the shape, coordinates, and alternative text
+values stored in the `ImageArea` bean that is bound to `AreaComponent`.
+Suppose that the `area` tag currently being rendered has a `value`
+attribute value of `"book203"`. The following line from `encodeEnd` gets
+the value of the attribute `"book203"` from the `FacesContext` instance:
+
+[source,oac_no_warn]
+----
+ImageArea ia = (ImageArea)area.getValue();
+----
+
+The attribute value is the `ImageArea` bean instance, which contains the
+`shape`, `coords`, and `alt` values associated with the `book203`
+`AreaComponent` instance. link:jsf-custom003.html#GLPBO[Configuring Model
+Data] describes how the application stores these values.
+
+After retrieving the `ImageArea` object, the method renders the values
+for `shape`, `coords`, and `alt` by simply calling the associated
+accessor methods and passing the returned values to the `ResponseWriter`
+instance, as shown by these lines of code, which write out the shape and
+coordinates:
+
+[source,oac_no_warn]
+----
+writer.startElement("area", area);
+writer.writeAttribute("alt", iarea.getAlt(), "alt");
+writer.writeAttribute("coords", iarea.getCoords(), "coords");
+writer.writeAttribute("shape", iarea.getShape(), "shape");
+----
+
+The `encodeEnd` method also renders the JavaScript for the `onmouseout`,
+`onmouseover`, and `onclick` attributes. The Facelets page needs to
+provide only the path to the images that are to be loaded during an
+`onmouseover` or `onmouseout` action:
+
+[source,oac_no_warn]
+----
+<bookstore:area id="map3" value="#{Book203}" 
+                onmouseover="resources/images/book_203.jpg" 
+                onmouseout="resources/images/book_all.jpg" 
+                targetImage="mapImage"/>
+----
+
+The `AreaRenderer` class takes care of generating the JavaScript for
+these actions, as shown in the following code from `encodeEnd`. The
+JavaScript that `AreaRenderer` generates for the `onclick` action sets
+the value of the hidden field to the value of the current area's
+component ID and submits the page.
+
+[source,oac_no_warn]
+----
+sb = new StringBuffer("document.forms[0]['").append(targetImageId).
+        append("'].src='");
+sb.append(
+        getURI(context,
+        (String) area.getAttributes().get("onmouseout")));
+sb.append("'");
+writer.writeAttribute("onmouseout", sb.toString(), "onmouseout");
+sb = new StringBuffer("document.forms[0]['").append(targetImageId).
+        append("'].src='");
+sb.append(
+        getURI(context,
+        (String) area.getAttributes().get("onmouseover")));
+sb.append("'");
+writer.writeAttribute("onmouseover", sb.toString(), "onmouseover");
+sb = new StringBuffer("document.forms[0]['");
+sb.append(getName(context, area));
+sb.append("'].value='");
+sb.append(iarea.getAlt());
+sb.append("'; document.forms[0].submit()");
+writer.writeAttribute("onclick", sb.toString(), "value");
+writer.endElement("area");
+----
+
+By submitting the page, this code causes the JavaServer Faces lifecycle
+to return back to the Restore View phase. This phase saves any state
+information, including the value of the hidden field, so that a new
+request component tree is constructed. This value is retrieved by the
+`decode` method of the `MapComponent` class. This decode method is
+called by the JavaServer Faces implementation during the Apply Request
+Values phase, which follows the Restore View phase.
+
+In addition to the `encodeEnd` method, `AreaRenderer` contains an empty
+constructor. This is used to create an instance of `AreaRenderer` so
+that it can be added to the render kit.
+
+The `@FacesRenderer` annotation registers the renderer class with the
+JavaServer Faces implementation as a renderer class. The annotation
+identifies the component family as well as the renderer type.
+
+[[BNAWC]]
+
+[[identifying-the-renderer-type]]
+Identifying the Renderer Type
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Register the renderer with a render kit by using the `@FacesRenderer`
+annotation (or by using the application configuration resource file, as
+explained in link:jsf-configure011.html#BNAXH[Registering a Custom
+Renderer with a Render Kit]). During the Render Response phase, the
+JavaServer Faces implementation calls the `getRendererType` method of
+the component's tag handler to determine which renderer to invoke, if
+there is one.
+
+You identify the type associated with the renderer in the `rendererType`
+element of the `@FacesRenderer` annotation for `AreaRenderer` as well as
+in the `renderer-type` element of the tag library descriptor.
+
+

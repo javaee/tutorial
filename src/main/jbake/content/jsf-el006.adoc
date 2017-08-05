@@ -1,0 +1,36 @@
+type=page
+status=published
+title=Reserved Words
+next=jsf-el007.html
+prev=jsf-el005.html
+~~~~~~
+Reserved Words
+==============
+
+[[BNAIL]]
+
+[[reserved-words]]
+Reserved Words
+--------------
+
+The following words are reserved for the EL and should not be used as
+identifiers:
+
+`and` +
+`or` +
+`not` +
+`eq` +
+`ne` +
+`lt` +
+`gt` +
+`le` +
+`ge` +
+`true` +
+`false` +
+`null` +
+`instanceof` +
+`empty` +
+`div` +
+`mod`
+
+

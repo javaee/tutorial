@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Getting Started with Web Applications
+next=webapp001.html
+prev=partwebtier.html
+~~~~~~
+Getting Started with Web Applications
+=====================================
+
+[[BNADR]]
+
+[[getting-started-with-web-applications]]
+6 Getting Started with Web Applications
+---------------------------------------
+
+
+This chapter introduces web applications, which typically use JavaServer
+Faces technology and/or Java Servlet technology.
+
+The following topics are addressed here:
+
+* link:webapp001.html#GEYSJ[Web Applications]
+* link:webapp002.html#BNADU[Web Application Lifecycle]
+* link:webapp003.html#BNADX[A Web Module That Uses JavaServer Faces
+Technology: The hello1 Example]
+* link:webapp004.html#BNAEO[A Web Module That Uses Java Servlet
+Technology: The hello2 Example]
+* link:webapp005.html#CHDHGJIA[Configuring Web Applications]
+* link:webapp006.html#BNAFC[Further Information about Web Applications]
+
+

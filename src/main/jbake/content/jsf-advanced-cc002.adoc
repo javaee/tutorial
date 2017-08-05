@@ -1,0 +1,27 @@
+type=page
+status=published
+title=Invoking a Managed Bean
+next=jsf-advanced-cc003.html
+prev=jsf-advanced-cc001.html
+~~~~~~
+Invoking a Managed Bean
+=======================
+
+[[GKHUO]]
+
+[[invoking-a-managed-bean]]
+Invoking a Managed Bean
+-----------------------
+
+To enable a composite component to handle server-side data
+
+1.  Invoke a managed bean in one of the following ways:
+* Pass the reference of the managed bean to the composite component.
+* Directly use the properties of the managed bean.
++
+The example application described in
+link:jsf-advanced-cc004.html#GKHVN[The compositecomponentexample Example
+Application] shows how to use a managed bean with a composite component
+by passing the reference of the managed bean to the component.
+
+

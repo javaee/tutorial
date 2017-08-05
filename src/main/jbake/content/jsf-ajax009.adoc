@@ -1,0 +1,67 @@
+type=page
+status=published
+title=Grouping of Components
+next=jsf-ajax010.html
+prev=jsf-ajax008.html
+~~~~~~
+Grouping of Components
+======================
+
+[[GKHYH]]
+
+[[grouping-of-components]]
+Grouping of Components
+----------------------
+
+The previous sections describe how to associate a single UI component
+with Ajax functionality. You can also associate Ajax with more than one
+component at a time by grouping them together on a page. The following
+example shows how a number of components can be grouped by using the
+`f:ajax` tag:
+
+[source,oac_no_warn]
+----
+<f:ajax>
+    <h:form>
+        <h:inputText id="input1" value="#{user.name}"/> 
+        <h:commandButton id="Submit"/>
+    </h:form>
+</f:ajax>
+----
+
+In the example, neither component is associated with any Ajax `event` or
+`render` attributes yet. Therefore, no action will take place in case of
+user input. You can associate the above components with an `event` and a
+`render` attribute as follows:
+
+[source,oac_no_warn]
+----
+<f:ajax event="click" render="@all">
+    <h:form>
+        <h:inputText id="input1" value="#{user.name}"/> 
+        <h:commandButton id="Submit"/> 
+    </h:form>
+</f:ajax>
+----
+
+In the updated example, when the user clicks either component, the
+updated results will be displayed for all components. You can further
+fine-tune the Ajax action by adding specific events to each of the
+components, in which case Ajax functionality becomes cumulative.
+Consider the following example:
+
+[source,oac_no_warn]
+----
+<f:ajax event="click" render="@all">
+    ...
+    <h:commandButton id="Submit">
+        <f:ajax event="mouseover"/>
+    </h:commandButton>
+    ...
+</f:ajax>
+----
+
+Now the button component will fire an Ajax action in case of a
+`mouseover` event as well as a mouse-click event.
+
+

@@ -1,0 +1,197 @@
+type=page
+status=published
+title=Navigation Model
+next=jsf-intro007.html
+prev=jsf-intro005.html
+~~~~~~
+Navigation Model
+================
+
+[[BNAQL]]
+
+[[navigation-model]]
+Navigation Model
+----------------
+
+The JavaServer Faces navigation model makes it easy to define page
+navigation and to handle any additional processing that is needed to
+choose the sequence in which pages are loaded.
+
+In JavaServer Faces technology, navigation is a set of rules for
+choosing the next page or view to be displayed after an application
+action, such as when a button or link is clicked.
+
+Navigation can be implicit or user-defined. Implicit navigation comes
+into play when user-defined navigation rules are not configured in the
+application configuration resource files.
+
+When you add a component such as a `commandButton` to a Facelets page,
+and assign another page as the value for its `action` property, the
+default navigation handler will try to match a suitable page within the
+application implicitly. In the following example, the default navigation
+handler will try to locate a page named `response.xhtml` within the
+application and navigate to it:
+
+[source,oac_no_warn]
+----
+<h:commandButton value="submit" action="response">
+----
+
+User-defined navigation rules are declared in zero or more application
+configuration resource files, such as `faces-config.xml`, by using a set
+of XML elements. The default structure of a navigation rule is as
+follows:
+
+[source,oac_no_warn]
+----
+<navigation-rule>
+    <description></description
+    <from-view-id></from-view-id>
+    <navigation-case>
+        <from-action></from-action>
+        <from-outcome></from-outcome>
+        <if></if>
+        <to-view-id></to-view-id>
+    </navigation-case>
+</navigation-rule>
+----
+
+User-defined navigation is handled as follows.
+
+* Define the rules in the application configuration resource file.
+* Refer to an outcome `String` from the button or link component's
+`action` attribute. This outcome `String` is used by the JavaServer
+Faces implementation to select the navigation rule.
+
+Here is an example navigation rule:
+
+[source,oac_no_warn]
+----
+<navigation-rule>
+    <from-view-id>/greeting.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>success</from-outcome>
+        <to-view-id>/response.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+----
+
+This rule states that when a command component (such as an
+`h:commandButton` or an `h:commandLink`) on `greeting.xhtml` is
+activated, the application will navigate from the `greeting.xhtml` page
+to the `response.xhtml` page if the outcome referenced by the button
+component's tag is `success`. Here is an `h:commandButton` tag from
+`greeting.xhtml` that would specify a logical outcome of `success`:
+
+[source,oac_no_warn]
+----
+<h:commandButton id="submit" value="Submit" action="success"/>
+----
+
+As the example demonstrates, each `navigation-rule` element defines how
+to get from one page (specified in the `from-view-id` element) to the
+other pages of the application. The `navigation-rule` elements can
+contain any number of `navigation-case` elements, each of which defines
+the page to open next (defined by `to-view-id`) based on a logical
+outcome (defined by `from-outcome`).
+
+In more complicated applications, the logical outcome can also come from
+the return value of an action method in a managed bean. This method
+performs some processing to determine the outcome. For example, the
+method can check whether the password the user entered on the page
+matches the one on file. If it does, the method might return `success`;
+otherwise, it might return `failure`. An outcome of `failure` might
+result in the logon page being reloaded. An outcome of `success` might
+cause the page displaying the user's credit card activity to open. If
+you want the outcome to be returned by a method on a bean, you must
+refer to the method using a method expression with the `action`
+attribute, as shown by this example:
+
+[source,oac_no_warn]
+----
+<h:commandButton id="submit" value="Submit" 
+                 action="#{cashierBean.submit}" />
+----
+
+When the user clicks the button represented by this tag, the
+corresponding component generates an action event. This event is handled
+by the default `javax.faces.event.ActionListener` instance, which calls
+the action method referenced by the component that triggered the event.
+The action method returns a logical outcome to the action listener.
+
+The listener passes the logical outcome and a reference to the action
+method that produced the outcome to the default
+`javax.faces.application.NavigationHandler`. The `NavigationHandler`
+selects the page to display next by matching the outcome or the action
+method reference against the navigation rules in the application
+configuration resource file by the following process.
+
+1.  The `NavigationHandler` selects the navigation rule that matches the
+page currently displayed.
+2.  It matches the outcome or the action method reference that it
+received from the default `javax.faces.event.ActionListener` with those
+defined by the navigation cases.
+3.  It tries to match both the method reference and the outcome against
+the same navigation case.
+4.  If the previous step fails, the navigation handler attempts to match
+the outcome.
+5.  Finally, the navigation handler attempts to match the action method
+reference if the previous two attempts failed.
+6.  If no navigation case is matched, it displays the same view again.
+
+When the `NavigationHandler` achieves a match, the Render Response phase
+begins. During this phase, the page selected by the `NavigationHandler`
+will be rendered.
+
+The Duke's Tutoring case study example application uses navigation rules
+in the business methods that handle creating, editing, and deleting the
+users of the application. For example, the form for creating a student
+has the following `h:commandButton` tag:
+
+[source,oac_no_warn]
+----
+<h:commandButton id="submit"
+        action="#{adminBean.createStudent(studentManager.newStudent)}"
+        value="#{bundle['action.submit']}"/>
+----
+
+The action event calls the `dukestutoring.ejb.AdminBean.createStudent`
+method:
+
+[source,oac_no_warn]
+----
+public String createStudent(Student student) {
+    em.persist(student);
+    return "createdStudent";
+}
+----
+
+The return value of `createdStudent` has a corresponding navigation case
+in the `faces-config.xml` configuration file:
+
+[source,oac_no_warn]
+----
+<navigation-rule>
+    <from-view-id>/admin/student/createStudent.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>createdStudent</from-outcome>
+        <to-view-id>/admin/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+----
+
+After the student is created, the user is returned to the Administration
+index page.
+
+For more information on how to define navigation rules, see
+link:jsf-configure010.html#BNAXF[Configuring Navigation Rules].
+
+For more information on how to implement action methods to handle
+navigation, see link:jsf-develop003.html#BNAVD[Writing a Method to Handle
+an Action Event].
+
+For more information on how to reference outcomes or action methods from
+component tags, see link:jsf-page-core004.html#BNATP[Referencing a Method
+That Performs Navigation].
+
+

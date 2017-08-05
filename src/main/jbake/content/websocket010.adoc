@@ -1,0 +1,79 @@
+type=page
+status=published
+title=Specifying an Endpoint Configurator Class
+next=websocket011.html
+prev=websocket009.html
+~~~~~~
+Specifying an Endpoint Configurator Class
+=========================================
+
+[[BABJAIGH]]
+
+[[specifying-an-endpoint-configurator-class]]
+Specifying an Endpoint Configurator Class
+-----------------------------------------
+
+The Java API for WebSocket enables you to configure how the container
+creates server endpoint instances. You can provide custom endpoint
+configuration logic to:
+
+* Access the details of the initial HTTP request for a WebSocket
+connection
+* Perform custom checks on the `Origin` HTTP header
+* Modify the WebSocket handshake response
+* Choose a WebSocket subprotocol from those requested by the client
+* Control the instantiation and initialization of endpoint instances
+
+To provide custom endpoint configuration logic, you extend the
+`ServerEndpointConfig.Configurator` class and override some of its
+methods. In the endpoint class, you specify the configurator class using
+the `configurator` parameter of the `ServerEndpoint` annotation.
+
+For example, the following configurator class makes the handshake
+request object available to endpoint instances:
+
+[source,oac_no_warn]
+----
+public class CustomConfigurator extends ServerEndpointConfig.Configurator {
+
+    @Override
+    public void modifyHandshake(ServerEndpointConfig conf,
+                                HandshakeRequest req,
+                                HandshakeResponse resp) {
+
+        conf.getUserProperties().put("handshakereq", req);
+    }
+
+}
+----
+
+The following endpoint class configures endpoint instances with the
+custom configurator, which enables them to access the handshake request
+object:
+
+[source,oac_no_warn]
+----
+@ServerEndpoint(
+    value = "/myendpoint",
+    configurator = CustomConfigurator.class
+)
+public class MyEndpoint {
+
+    @OnOpen
+    public void open(Session s, EndpointConfig conf) {
+        HandshakeRequest req = (HandshakeRequest) conf.getUserProperties()
+                                                      .get("handshakereq");
+        Map<String,List<String>> headers = req.getHeaders();
+        ...
+    }
+}
+----
+
+The endpoint class can use the handshake request object to access the
+details of the initial HTTP request, such as its headers or the
+`HttpSession` object.
+
+For more information on endpoint configuration, see the API reference
+for the `ServerEndpointConfig.Configurator` class.
+
+

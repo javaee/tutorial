@@ -1,0 +1,46 @@
+type=page
+status=published
+title=Using Entity Graphs in Query Operations
+next=persistence-cache.html
+prev=persistence-entitygraphs003.html
+~~~~~~
+Using Entity Graphs in Query Operations
+=======================================
+
+[[BABGJDAJ]]
+
+[[using-entity-graphs-in-query-operations]]
+Using Entity Graphs in Query Operations
+---------------------------------------
+
+To specify entity graphs for both typed and untyped queries, call the
+`setHint` method on the query object and specify either
+`javax.persistence.loadgraph` or `javax.persistence.fetchgraph` as the
+property name and an `EntityGraph` instance as the value:
+
+[source,oac_no_warn]
+----
+EntityGraph<EmailMessage> eg = em.getEntityGraph("previewEmailEntityGraph");
+List<EmailMessage> messages = em.createNamedQuery("findAllEmailMessages")
+        .setParameter("mailbox", "inbox")
+        .setHint("javax.persistence.loadgraph", eg)
+        .getResultList();
+----
+
+In this example, the `previewEmailEntityGraph` is used for the
+`findAllEmailMessages` named query.
+
+Typed queries use the same technique:
+
+[source,oac_no_warn]
+----
+EntityGraph<EmailMessage> eg = em.getEntityGraph("previewEmailEntityGraph");
+
+CriteriaQuery<EmailMessage> cq = cb.createQuery(EmailMessage.class);
+Root<EmailMessage> message = cq.from(EmailMessage.class);
+TypedQuery<EmailMessage> q = em.createQuery(cq);
+q.setHint("javax.persistence.loadgraph", eg);
+List<EmailMessage> messages = q.getResultList();
+----
+
+

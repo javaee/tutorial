@@ -1,0 +1,297 @@
+type=page
+status=published
+title=Specifying the Cache Mode Settings to Improve Performance
+next=partmessaging.html
+prev=persistence-cache001.html
+~~~~~~
+Specifying the Cache Mode Settings to Improve Performance
+=========================================================
+
+[[GKJJJ]]
+
+[[specifying-the-cache-mode-settings-to-improve-performance]]
+Specifying the Cache Mode Settings to Improve Performance
+---------------------------------------------------------
+
+To adjust the cache mode settings for a persistence unit, specify one of
+the cache modes as the value of the `shared-cache-mode` element in the
+`persistence.xml` deployment descriptor (shown in bold):
+
+[source,oac_no_warn]
+----
+<persistence-unit name="examplePU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
+    <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
+</persistence-unit>
+----
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+Because support for a second-level cache is not required by the Java
+Persistence API specification, setting the second-level cache mode in
+`persistence.xml` will have no effect when you use a persistence
+provider that does not implement a second-level cache.
+
+|=======================================================================
+
+
+Alternatively, you can specify the shared cache mode by setting the
+`javax.persistence.sharedCache.mode` property to one of the shared cache
+mode settings:
+
+[source,oac_no_warn]
+----
+EntityManagerFactory emf = 
+    Persistence.createEntityManagerFactory(
+        "myExamplePU", new Properties().add(
+            "javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE"));
+----
+
+[[GKJDK]]
+
+[[setting-the-cache-retrieval-and-store-modes]]
+Setting the Cache Retrieval and Store Modes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you have enabled the second-level cache for a persistence unit by
+setting the shared cache mode, you can further modify the behavior of
+the second-level cache by setting the
+`javax.persistence.cache.retrieveMode` and
+`javax.persistence.cache.storeMode` properties. You can set these
+properties at the persistence context level by passing the property name
+and value to the `EntityManager.setProperty` method, or you can set them
+on a per-`EntityManager` operation (`EntityManager.find` or
+`EntityManager.refresh`) or on a per-query level.
+
+[[GKJDR]]
+
+[[cache-retrieval-mode]]
+Cache Retrieval Mode
+^^^^^^^^^^^^^^^^^^^^
+
+The cache retrieval mode, set by the `javax.persistence.retrieveMode`
+property, controls how data is read from the cache for calls to the
+`EntityManager.find` method and from queries.
+
+You can set the `retrieveMode` property to one of the constants defined
+by the `javax.persistence.CacheRetrieveMode` enumerated type, either
+`USE` (the default) or `BYPASS`.
+
+When the property is set to `USE`, data is retrieved from the
+second-level cache, if available. If the data is not in the cache, the
+persistence provider will read it from the database.
+
+When the property is set to `BYPASS`, the second-level cache is bypassed
+and a call to the database is made to retrieve the data.
+
+[[GKJDD]]
+
+[[cache-store-mode]]
+Cache Store Mode
+^^^^^^^^^^^^^^^^
+
+The cache store mode, set by the `javax.persistence.storeMode` property,
+controls how data is stored in the cache.
+
+The `storeMode` property can be set to one of the constants defined by
+the `javax.persistence.CacheStoreMode` enumerated type: either `USE`
+(the default), `BYPASS`, or `REFRESH`.
+
+When the property is set to `USE`, the cache data is created or updated
+when data is read from or committed to the database. If data is already
+in the cache, setting the store mode to `USE` will not force a refresh
+when data is read from the database.
+
+When the property is set to `BYPASS`, data read from or committed to the
+database is not inserted or updated in the cache. That is, the cache is
+unchanged.
+
+When the property is set to `REFRESH`, the cache data is created or
+updated when data is read from or committed to the database, and a
+refresh is forced on data in the cache upon database reads.
+
+[[GKJDS]]
+
+[[setting-the-cache-retrieval-or-store-mode]]
+Setting the Cache Retrieval or Store Mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To set the cache retrieval or store mode for the persistence context,
+call the `EntityManager.setProperty` method with the property name and
+value pair:
+
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+em.setProperty("javax.persistence.cache.storeMode", "BYPASS");
+----
+
+To set the cache retrieval or store mode when calling the
+`EntityManager.find` or `EntityManager.refresh` methods, first create a
+`Map<String, Object>` instance and add a name/value pair as follows:
+
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Map<String, Object> props = new HashMap<String, Object>();
+props.put("javax.persistence.cache.retrieveMode", "BYPASS");
+String personPK = ...;
+Person person = em.find(Person.class, personPK, props);
+----
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+The cache retrieval mode is ignored when calling the
+`EntityManager.refresh` method, as calls to `refresh` always result in
+data being read from the database, not the cache.
+
+|=======================================================================
+
+
+To set the retrieval or store mode when using queries, call the
+`Query.setHint` or `TypedQuery.setHint` methods, depending on the type
+of query:
+
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+CriteriaQuery<Person> cq = ...;
+TypedQuery<Person> q = em.createQuery(cq);
+q.setHint("javax.persistence.cache.storeMode", "REFRESH");
+...
+----
+
+Setting the store or retrieve mode in a query or when calling the
+`EntityManager.find` or `EntityManager.refresh` method overrides the
+setting of the entity manager.
+
+[[GKJEB]]
+
+[[controlling-the-second-level-cache-programmatically]]
+Controlling the Second-Level Cache Programmatically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `javax.persistence.Cache` interface defines methods for interacting
+with the second-level cache programmatically.
+
+The following topics are addressed here:
+
+* link:#CHDEECCF[Overview of the javax.persistence.Cache Interface]
+* link:#GKJDZ[Checking whether an Entity's Data Is Cached]
+* link:#GKJDQ[Removing an Entity from the Cache]
+* link:#GKJDA[Removing All Data from the Cache]
+
+[[CHDEECCF]]
+
+[[overview-of-the-javax.persistence.cache-interface]]
+Overview of the javax.persistence.Cache Interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `Cache` interface defines methods to do the following:
+
+* Check whether a particular entity has cached data
+* Remove a particular entity from the cache
+* Remove all instances (and instances of subclasses) of an entity class
+from the cache
+* Clear the cache of all entity data
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+If the second-level cache has been disabled, calls to the `Cache`
+interface's methods have no effect, except for `contains`, which will
+always return `false`.
+
+|=======================================================================
+
+
+[[GKJDZ]]
+
+[[checking-whether-an-entitys-data-is-cached]]
+Checking whether an Entity's Data Is Cached
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To find out whether a given entity is currently in the second-level
+cache:
+
+1.  Call the `Cache.contains` method . The `contains` method returns
+`true` if the entity's data is cached, and `false` if the data is not in
+the cache:
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+String personPK = ...;
+if (cache.contains(Person.class, personPK)) {
+  // the data is cached
+} else {
+  // the data is NOT cached
+}
+----
+
+[[GKJDQ]]
+
+[[removing-an-entity-from-the-cache]]
+Removing an Entity from the Cache
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To remove a particular entity or all entities of a given type from the
+second-level cache:
+
+1.  Call one of the `Cache.evict` methods .
+1.  To remove a particular entity from the cache, call the `evict`
+method and pass in the entity class and the primary key of the entity:
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+String personPK = ...;
+cache.evict(Person.class, personPK);
+----
+2.  To remove all instances of a particular entity class, including
+subclasses, call the `evict` method and specify the entity class:
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+cache.evict(Person.class);
+----
+
+All instances of the `Person` entity class will be removed from the
+cache. If the `Person` entity has a subclass, `Student`, calls to the
+above method will remove all instances of `Student` from the cache as
+well.
+
+[[GKJDA]]
+
+[[removing-all-data-from-the-cache]]
+Removing All Data from the Cache
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To completely clear the second-level cache:
+
+1.  Call the `Cache.evictAll` method.
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+cache.evictAll();
+----
+
+

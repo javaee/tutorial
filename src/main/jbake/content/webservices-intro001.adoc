@@ -1,0 +1,27 @@
+type=page
+status=published
+title=What Are Web Services?
+next=webservices-intro002.html
+prev=webservices-intro.html
+~~~~~~
+What Are Web Services?
+======================
+
+[[GIJVH]]
+
+[[what-are-web-services]]
+What Are Web Services?
+----------------------
+
+Web services are client and server applications that communicate over
+the World Wide Web's (WWW) HyperText Transfer Protocol (HTTP). As
+described by the World Wide Web Consortium (W3C), web services provide a
+standard means of interoperating between software applications running
+on a variety of platforms and frameworks. Web services are characterized
+by their great interoperability and extensibility as well as their
+machine-processable descriptions, thanks to the use of XML. Web services
+can be combined in a loosely coupled way to achieve complex operations.
+Programs providing simple services can interact with each other to
+deliver sophisticated added-value services.
+
+

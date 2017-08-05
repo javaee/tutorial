@@ -1,0 +1,25 @@
+type=page
+status=published
+title=Further Information about Bean Validation
+next=bean-validation-advanced.html
+prev=bean-validation004.html
+~~~~~~
+Further Information about Bean Validation
+=========================================
+
+[[CACDECFE]]
+
+[[further-information-about-bean-validation]]
+Further Information about Bean Validation
+-----------------------------------------
+
+For more information on Bean Validation, see
+
+* Bean Validation 1.1 Specification:
++
+`http://www.jcp.org/en/jsr/detail?id=349`
+* Bean Validation Specification website:
++
+`http://beanvalidation.org/`
+
+

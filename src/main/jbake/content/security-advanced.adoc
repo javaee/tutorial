@@ -1,0 +1,35 @@
+type=page
+status=published
+title=Java EE Security: Advanced Topics
+next=security-advanced001.html
+prev=security-javaee003.html
+~~~~~~
+Java EE Security: Advanced Topics
+=================================
+
+[[GJJWX]]
+
+[[java-ee-security-advanced-topics]]
+51 Java EE Security: Advanced Topics
+------------------------------------
+
+
+This chapter provides advanced information on securing Java EE
+applications.
+
+The following topics are addressed here:
+
+* link:security-advanced001.html#BNBYB[Working with Digital Certificates]
+* link:security-advanced002.html#GLIEN[Authentication Mechanisms]
+* link:security-advanced003.html#BABEJJDE[Using the JDBC Realm for User
+Authentication]
+* link:security-advanced004.html#BABGEJJJ[Securing HTTP Resources]
+* link:security-advanced005.html#GLIGC[Securing Application Clients]
+* link:security-advanced006.html#GLIFD[Securing Enterprise Information
+Systems Applications]
+* link:security-advanced007.html#GKHRL[Configuring Security Using
+Deployment Descriptors]
+* link:security-advanced008.html#BABBGBBF[Further Information about
+Advanced Security Topics]
+
+

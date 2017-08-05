@@ -1,0 +1,208 @@
+type=page
+status=published
+title=The decorators Example: Decorating a Bean
+next=partwebsvcs.html
+prev=cdi-adv-examples005.html
+~~~~~~
+The decorators Example: Decorating a Bean
+=========================================
+
+[[GKPAX]]
+
+[[the-decorators-example-decorating-a-bean]]
+The decorators Example: Decorating a Bean
+-----------------------------------------
+
+The `decorators` example, which is yet another variation on the
+`encoder` example, shows how to use a decorator to implement additional
+business logic for a bean.
+
+The source files are located in the
+tut-install`/examples/cdi/decorators/src/main/java/javaeetutorial/decorators/`
+directory.
+
+The following topics are addressed here:
+
+* link:#CHDDDFCI[Overview of the decorators Example]
+* link:#GKPAQ[Components of the decorators Example]
+* link:#GKPBK[Running the decorators Example]
+
+[[CHDDDFCI]]
+
+[[overview-of-the-decorators-example]]
+Overview of the decorators Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Instead of having the user choose between two alternative
+implementations of an interface at deployment time or runtime, a
+decorator adds some additional logic to a single implementation of the
+interface.
+
+The example includes an interface, an implementation of it, a decorator,
+an interceptor, a managed bean, a Facelets page, and configuration
+files.
+
+[[GKPAQ]]
+
+[[components-of-the-decorators-example]]
+Components of the decorators Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `decorators` example is very similar to the `encoder` example
+described in link:cdi-adv-examples002.html#GKHPU[The encoder Example:
+Using Alternatives]. Instead of providing two implementations of the
+`Coder` interface, however, this example provides only the `CoderImpl`
+class. The decorator class, `CoderDecorator`, rather than simply return
+the coded string, displays the input and output strings' values and
+length.
+
+The `CoderDecorator` class, like `CoderImpl`, implements the business
+method of the `Coder` interface, `codeString`:
+
+[source,oac_no_warn]
+----
+@Decorator
+public abstract class CoderDecorator implements Coder {
+
+    @Inject
+    @Delegate
+    @Any
+    Coder coder;
+
+    public String codeString(String s, int tval) {
+        int len = s.length();
+
+        return "\"" + s + "\" becomes " + "\"" + coder.codeString(s, tval) 
+                + "\", " + len + " characters in length";
+    }
+}
+----
+
+The decorator's `codeString` method calls the delegate object's
+`codeString` method to perform the actual encoding.
+
+The `decorators` example includes the `Logged` interceptor binding and
+`LoggedInterceptor` class from the `billpayment` example. For this
+example, the interceptor is set on the `CoderBean.encodeString` method
+and the `CoderImpl.codeString` method. The interceptor code is
+unchanged; interceptors are usually reusable for different applications.
+
+Except for the interceptor annotations, the `CoderBean` and `CoderImpl`
+classes are identical to the versions in the `encoder` example.
+
+The `beans.xml` file specifies both the decorator and the interceptor:
+
+[source,oac_no_warn]
+----
+    <decorators>
+        <class>javaeetutorial.decorators.CoderDecorator</class>
+    </decorators>
+    <interceptors>
+        <class>javaeetutorial.decorators.LoggedInterceptor</class>
+    </interceptors>
+----
+
+[[GKPBK]]
+
+[[running-the-decorators-example]]
+Running the decorators Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `decorators` application.
+
+The following topics are addressed here:
+
+* link:#GKPAG[To Build, Package, and Deploy the decorators Example Using
+NetBeans IDE]
+* link:#GKPAJ[To Build, Package, and Deploy the decorators Example Using
+Maven]
+* link:#GKPAN[To Run the decorators Example]
+
+[[GKPAG]]
+
+[[to-build-package-and-deploy-the-decorators-example-using-netbeans-ide]]
+To Build, Package, and Deploy the decorators Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/cdi
+----
+4.  Select the `decorators` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `decorators` project and select
+Build.
++
+This command builds and packages the application into a WAR file,
+`decorators.war`, located in the `target` directory, and then deploys it
+to GlassFish Server.
+
+[[GKPAJ]]
+
+[[to-build-package-and-deploy-the-decorators-example-using-maven]]
+To Build, Package, and Deploy the decorators Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/cdi/decorators/
+----
+3.  Enter the following command to deploy the application:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command builds and packages the application into a WAR file,
+`decorators.war`, located in the `target` directory, and then deploys it
+to GlassFish Server.
+
+[[GKPAN]]
+
+[[to-run-the-decorators-example]]
+To Run the decorators Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  In a web browser, enter the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/decorators
+----
+2.  On the Decorated String Encoder page, enter a string and the number
+of letters to shift by, and then click Encode.
++
+The output from the decorator method appears in blue on the Result line.
+For example, if you entered `Java` and `4`, you would see the following:
++
+[source,oac_no_warn]
+----
+"Java" becomes "Neze", 4 characters in length
+----
+3.  Examine the server log output.
++
+In NetBeans IDE, the output is visible in the GlassFish Server Output
+tab. Otherwise, view domain-dir`/logs/server.log`.
++
+The output from the interceptors appears:
++
+[source,oac_no_warn]
+----
+INFO: Entering method: encodeString in class javaeetutorial.decorators.CoderBean
+INFO: Entering method: codeString in class javaeetutorial.decorators.CoderImpl
+----
+
+

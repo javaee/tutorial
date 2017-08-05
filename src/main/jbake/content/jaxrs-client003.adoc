@@ -1,0 +1,436 @@
+type=page
+status=published
+title=Advanced Features of the Client API
+next=jaxrs-advanced.html
+prev=jaxrs-client002.html
+~~~~~~
+Advanced Features of the Client API
+===================================
+
+[[BABCDDGH]]
+
+[[advanced-features-of-the-client-api]]
+Advanced Features of the Client API
+-----------------------------------
+
+This section describes some of the advanced features of the JAX-RS
+Client API.
+
+The following topics are addressed here:
+
+* link:#CHDGBBCC[Configuring the Client Request]
+* link:#CHDEBIGG[Asynchronous Invocations in the Client API]
+
+[[CHDGBBCC]]
+
+[[configuring-the-client-request]]
+Configuring the Client Request
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Additional configuration options may be added to the client request
+after it is created but before it is invoked.
+
+The following topics are addressed here:
+
+* link:#CHDHAFBG[Setting Message Headers in the Client Request]
+* link:#CHDHFFDJ[Setting Cookies in the Client Request]
+* link:#CHDJEFID[Adding Filters to the Client]
+
+[[CHDHAFBG]]
+
+[[setting-message-headers-in-the-client-request]]
+Setting Message Headers in the Client Request
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can set HTTP headers on the request by calling the
+`Invocation.Builder.header` method.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .header("myHeader", "The header value")
+        .get(String.class);
+----
+
+If you need to set multiple headers on the request, call the
+`Invocation.Builder.headers` method and pass in a
+`javax.ws.rs.core.MultivaluedMap` instance with the name-value pairs of
+the HTTP headers. Calling the `headers` method replaces all the existing
+headers with the headers supplied in the `MultivaluedMap` instance.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+MultivaluedMap<String, Object> myHeaders = 
+    new MultivaluedMap<>("myHeader", "The header value");
+myHeaders.add(...);
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .headers(myHeaders)
+        .get(String.class);
+----
+
+The `MultivaluedMap` interface allows you to specify multiple values for
+a given key.
+
+[source,oac_no_warn]
+----
+MultivaluedMap<String, Object> myHeaders = 
+    new MultivaluedMap<String, Object>();
+List<String> values = new ArrayList<>();
+values.add(...)
+myHeaders.add("myHeader", values
+----
+
+[[CHDHFFDJ]]
+
+[[setting-cookies-in-the-client-request]]
+Setting Cookies in the Client Request
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can add HTTP cookies to the request by calling the
+`Invocation.Builder.cookie` method, which takes a name-value pair as
+parameters.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .cookie("myCookie", "The cookie value")
+        .get(String.class);
+----
+
+The `javax.ws.rs.core.Cookie` class encapsulates the attributes of an
+HTTP cookie, including the name, value, path, domain, and RFC
+specification version of the cookie. In the following example, the
+`Cookie` object is configured with a name-value pair, a path, and a
+domain.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Cookie myCookie = new Cookie("myCookie", "The cookie value", 
+    "/webapi/read", "example.com"); 
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .cookie(myCookie)
+        .get(String.class);
+----
+
+[[CHDJEFID]]
+
+[[adding-filters-to-the-client]]
+Adding Filters to the Client
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can register custom filters with the client request or the response
+received from the target resource. To register filter classes when the
+`Client` instance is created, call the `Client.register` method.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient().register(MyLoggingFilter.class);
+----
+
+In the preceding example, all invocations that use this `Client`
+instance have the `MyLoggingFilter` filter registered with them.
+
+You can also register the filter classes on the target by calling
+`WebTarget.register`.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient().register(MyLoggingFilter.class);
+WebTarget target = client.target("http://example.com/webapi/secure")
+        .register(MyAuthenticationFilter.class);
+----
+
+In the preceding example, both the `MyLoggingFilter` and
+`MyAuthenticationFilter` filters are attached to the invocation.
+
+Request and response filter classes implement the
+`javax.ws.rs.client.ClientRequestFilter` and
+`javax.ws.rs.client.ClientResponseFilter` interfaces, respectively. Both
+of these interfaces define a single method, `filter`. All filters must
+be annotated with `javax.ws.rs.ext.Provider`.
+
+The following class is a logging filter for both client requests and
+client responses.
+
+[source,oac_no_warn]
+----
+@Provider
+public class MyLoggingFilter implements ClientRequestFilter, 
+        ClientResponseFilter {
+    static final Logger logger = Logger.getLogger(...);
+
+    // implement the ClientRequestFilter.filter method
+    @Override
+    public void filter(ClientRequestContext requestContext) 
+            throws IOException {
+        logger.log(...);
+        ...
+    }
+
+    // implement the ClientResponseFilter.filter method
+    @Override
+    public void filter(ClientRequestContext requestContext, 
+           ClientResponseContext responseContext) throws IOException {
+        logger.log(...);
+        ...
+    }
+}
+----
+
+If the invocation must be stopped while the filter is active, call the
+context object's `abortWith` method, and pass in a
+`javax.ws.rs.core.Response` instance from within the filter.
+
+[source,oac_no_warn]
+----
+@Override
+public void filter(ClientRequestContext requestContext) throws IOException {
+    ...
+    Response response = new Response();
+    response.status(500);
+    requestContext.abortWith(response);
+}
+----
+
+[[CHDEBIGG]]
+
+[[asynchronous-invocations-in-the-client-api]]
+Asynchronous Invocations in the Client API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In networked applications, network issues can affect the perceived
+performance of the application, particularly in long-running or
+complicated network calls. Asynchronous processing helps prevent
+blocking and makes better use of an application's resources.
+
+In the JAX-RS Client API, the `Invocation.Builder.async` method is used
+when constructing a client request to indicate that the call to the
+service should be performed asynchronously. An asynchronous invocation
+returns control to the caller immediately, with a return type of
+http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html?is-external=true[`java.util.concurrent.Future<T>`]
+(part of the Java SE concurrency API) and with the type set to the
+return type of the service call. `Future<T>` objects have methods to
+check if the asynchronous call has been completed, to retrieve the final
+result, to cancel the invocation, and to check if the invocation has
+been cancelled.
+
+The following example shows how to invoke an asynchronous request on a
+resource.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Future<String> response = myResource.request(MediaType.TEXT_PLAIN)
+        .async()
+        .get(String.class);
+----
+
+[[sthref140]]
+
+[[using-custom-callbacks-in-asynchronous-invocations]]
+Using Custom Callbacks in Asynchronous Invocations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `InvocationCallback` interface defines two methods, `completed` and
+`failed`, that are called when an asynchronous invocation either
+completes successfully or fails, respectively. You may register an
+`InvocationCallback` instance on your request by creating a new instance
+when specifying the request method.
+
+The following example shows how to register a callback object on an
+asynchronous invocation.
+
+[source,oac_no_warn]
+----
+Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Future<Customer> fCustomer = myResource.request(MediaType.TEXT_PLAIN)
+        .async()
+        .get(new InvocationCallback<Customer>() {
+            @Override
+            public void completed(Customer customer) {
+            // Do something with the customer object
+            }
+            @Override
+             public void failed(Throwable throwable) {
+            // handle the error
+            }
+    });
+----
+
+[[sthref141]]
+
+[[using-reactive-approach-in-asynchronous-invocations]]
+Using Reactive Approach in Asynchronous Invocations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using custom callbacks in asynchronous invocations is easy in simple
+cases and when there are many independent calls to make. In nested
+calls, using custom callbacks becomes very difficult to implement,
+debug, and maintain.
+
+JAX-RS defines a new type of invoker called as RxInvoker and a default
+implementation of this type is CompletionStageRxInvoker. The new rx
+method is used as in the following example:
+
+[source,oac_no_warn]
+----
+CompletionStage<String> csf = client.target("forecast/{destination}")
+resolveTemplate("destination", "mars")
+request()
+rx()
+get(String.class);
+csf.thenAccept(System.out::println);
+----
+
+In the example, an asynchronous processing of the interface
+CompletionStage<String> is created and waits till it is completed and
+the result is displayed. The result of CompletionStage is important when
+there are parallel, multiple asynchronous computations are necessary to
+complete a task.
+
+[[sthref142]]
+
+[[using-server-sent-events]]
+Using Server-Sent Events
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Server-sent Events technology is used to asynchronously push
+notifications to the client over standard HTTP or HTTPS protocol.
+Clients can subscribe to event notifications that originate on a server.
+Server generates the events and sends these events back to the clients
+that are subscribed to receive the notifications. The one-way
+communication channel connection is established by the client. Once the
+connection is established, the server sends events to the client
+whenever new data is available.
+
+The communication channel established by the client lasts till the
+client closes the connection and it is also re-used by the server to
+send multiple events from the server.
+
+[[sthref143]]
+
+[[overview-of-the-sse-api]]
+Overview of the SSE API
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The SSE API is defined in the `javax.ws.rs.sse` package that includes
+the interfaces `SseEventSink`, `SseEvent`, `Sse`, and `SseEventSource`.
+To accept connections and send events to one or more clients, inject an
+`SseEventSink` in the resource method that produces the media type
+`text/event-stream`.
+
+The following example shows how to accept the SSE connections and to
+send events to the clients:
+
+[source,oac_no_warn]
+----
+@GET
+@Path("eventStream")
+@Produces(MediaType.SERVER_SENT_EVENTS)
+public void eventStream(@Context SseEventSink eventSink,
+@Context Sse sse) {
+executor.execute(() -> {
+try (SseEventSink sink = eventSink) {
+eventSink.send(sse.newEvent("event1"));
+eventSink.send(sse.newEvent("event2"));
+eventSink.send(sse.newEvent("event3"));
+}
+});
+}
+----
+
+The `SseEventsink` is injected into the resource method and the
+underlying client connection is kept open and used to send events. The
+connection persists until the client disconnects from the server. The
+method `send` returns an instance of `CompletionStage<T>` which
+indicates the action of asynchronously sending a message to a client is
+enabled.
+
+The events that are streamed to the clients can be defined with the
+details such as `event`, `data`, `id`, `retry`, and `comment`.
+
+[[sthref144]]
+
+[[broadcasting-using-sse]]
+Broadcasting Using SSE
+~~~~~~~~~~~~~~~~~~~~~~
+
+Broadcasting is the action of sending events to multiple clients
+simultaneously. JAX-RS SSE API provides `SseBroadcaster` to register all
+`SseEventSink` instances and send events to all registered event
+outputs. The life-cycle and scope of an `SseBroadcaster` is fully
+controlled by applications and not the JAX-RS runtime. The following
+example show the use of broadcasters:
+
+[source,oac_no_warn]
+----
+@Path("/")
+@Singleton
+public class SseResource {
+@Context
+private Sse sse;
+private volatile SseBroadcaster sseBroadcaster;
+@PostConstruct
+public init() {
+this.sseBroadcaster = sse.newBroadcaster();
+}
+
+@GET
+@Path("register")
+@Produces(MediaType.SERVER_SENT_EVENTS)
+public void register(@Context SseEventSink eventSink) {
+eventSink.send(sse.newEvent("welcome!"));
+sseBroadcaster.register(eventSink);
+}
+
+@POST
+@Path("broadcast")
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public void broadcast(@FormParam("event") String event) {
+sseBroadcaster.broadcast(sse.newEvent(event));
+}
+}
+----
+
+`@Singleton` annotation is defined for the resource class restricting
+the creation of multiple instances of the class. The `register` method
+on a broadcaster is used to add a new `SseEventSink`; the `broadcast`
+method is used to send an SSE event to all registered clients.
+
+[[sthref145]]
+
+[[listening-and-receiving-events]]
+Listening and Receiving Events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+JAX-RS SSE provides the `SseEventSource` interface for the client to
+subscribe to notifications. The client can get asynchronously notified
+about incoming events by invoking one of the `subscribe` methods in
+`javax.ws.rs.sse.SseEventSource`.
+
+The following example shows how to use the `SseEventSource` API to open
+an SSE connection and read some of the messages for a period:
+
+[source,oac_no_warn]
+----
+WebTarget target = client.target("http://...");
+try (SseEventSource source = SseEventSource.target(target).build()) {
+source.register(System.out::println);
+source.open();
+Thread.sleep(500); // Consume events for just 500 ms
+} catch (InterruptedException e) {
+// falls through
+}
+----
+
+

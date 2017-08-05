@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Further Information about Resource Adapters
+next=connectorexample.html
+prev=resources004.html
+~~~~~~
+Further Information about Resource Adapters
+===========================================
+
+[[BNCJW]]
+
+[[further-information-about-resource-adapters]]
+Further Information about Resource Adapters
+-------------------------------------------
+
+For more information about resource adapters and annotations, see
+
+* Java EE 7 Platform Specification (JSR 342):
++
+`http://jcp.org/en/jsr/detail?id=342`
+* Java EE Connector Architecture 1.7 specification:
++
+`http://jcp.org/en/jsr/detail?id=322`
+* EJB 3.2 specification:
++
+`http://jcp.org/en/jsr/detail?id=345`
+* Common Annotations for the Java Platform:
++
+`http://www.jcp.org/en/jsr/detail?id=250`
+
+

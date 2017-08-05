@@ -1,0 +1,92 @@
+type=page
+status=published
+title=Submitting Jobs to the Batch Runtime
+next=batch-processing007.html
+prev=batch-processing005.html
+~~~~~~
+Submitting Jobs to the Batch Runtime
+====================================
+
+[[BCGCAHCB]]
+
+[[submitting-jobs-to-the-batch-runtime]]
+Submitting Jobs to the Batch Runtime
+------------------------------------
+
+The `JobOperator` interface in the `javax.batch.operations` package
+enables you to submit jobs to the batch runtime and obtain information
+about existing jobs. This interface provides the following
+functionality.
+
+* Obtain the names of all known jobs.
+* Start, stop, restart, and abandon jobs.
+* Obtain job instances and job executions.
+
+The `BatchRuntime` class in the `javax.batch.runtime` package provides
+the `getJobOperator` factory method to obtain `JobOperator` objects.
+
+[[sthref282]]
+
+[[starting-a-job]]
+Starting a Job
+~~~~~~~~~~~~~~
+
+The following example code demonstrates how to obtain a `JobOperator`
+object and submit a batch job:
+
+[source,oac_no_warn]
+----
+JobOperator jobOperator = BatchRuntime.getJobOperator();
+Properties props = new Properties();
+props.setProperty("parameter1", "value1");
+...
+long execID = jobOperator.start("simplejob", props);
+----
+
+The first argument of the `JobOperator.start` method is the name of the
+job as specified in its job definition file. The second parameter is a
+`Properties` object that represents the parameters for this job
+execution. You can use job parameters to pass to a job information that
+is only known at runtime.
+
+[[BCGIBGFC]]
+
+[[checking-the-status-of-a-job]]
+Checking the Status of a Job
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `JobExecution` interface in the `javax.batch.runtime` package
+provides methods to obtain information about submitted jobs. This
+interface provides the following functionality.
+
+* Obtain the batch and exit status of a job execution.
+* Obtain the time the execution was started, updated, or ended.
+* Obtain the job name.
+* Obtain the execution ID.
+
+The following example code demonstrates how to obtain the batch status
+of a job using its execution ID:
+
+[source,oac_no_warn]
+----
+JobExecution jobExec = jobOperator.getJobExecution(execID);
+String status = jobExec.getBatchStatus().toString();
+----
+
+[[sthref283]]
+
+[[invoking-the-batch-runtime-in-your-application]]
+Invoking the Batch Runtime in Your Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The component from which you invoke the batch runtime depends on the
+architecture of your particular application. For example, you can invoke
+the batch runtime from an enterprise bean, a servlet, a managed bean,
+and so on.
+
+See link:batch-processing008.html#BCGJHEHJ[The webserverlog Example
+Application] and link:batch-processing009.html#BCGFCACD[The phonebilling
+Example Application] for details on how to invoke the batch runtime from
+a managed bean driven by a JavaServer Faces user interface.
+
+

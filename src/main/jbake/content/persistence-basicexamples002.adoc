@@ -1,0 +1,858 @@
+type=page
+status=published
+title=The order Application
+next=persistence-basicexamples003.html
+prev=persistence-basicexamples001.html
+~~~~~~
+The order Application
+=====================
+
+[[GIQST]]
+
+[[the-order-application]]
+The order Application
+---------------------
+
+The `order` application is a simple inventory and ordering application
+for maintaining a catalog of parts and placing an itemized order of
+those parts. The application has entities that represent parts, vendors,
+orders, and line items. These entities are accessed using a stateful
+session bean that holds the business logic of the application. A simple
+singleton session bean creates the initial entities on application
+deployment. A Facelets web application manipulates the data and displays
+data from the catalog.
+
+The information contained in an order can be divided into elements. What
+is the order number? What parts are included in the order? What parts
+make up that part? Who makes the part? What are the specifications for
+the part? Are there any schematics for the part? The `order` application
+is a simplified version of an ordering system that has all these
+elements.
+
+The `order` application consists of a single WAR module that includes
+the enterprise bean classes, the entities, the support classes, and the
+Facelets XHTML and class files.
+
+The database schema in the Java DB database for `order` is shown in
+link:#CHDGGDIA[Figure 39-1].
+
+[[CHDGGDIA]]
+
+.*Figure 39-1 Database Schema for the order Application*
+image:img/javaeett_dt_024.png[
+"Diagram showing the database schema for the order application"]
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+In this diagram, for simplicity, the `PERSISTENCE_ORDER_` prefix is
+omitted from the table names.
+
+|=======================================================================
+
+
+[[GIQRH]]
+
+[[entity-relationships-in-the-order-application]]
+Entity Relationships in the order Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `order` application demonstrates several types of entity
+relationships: self-referential, one-to-one, one-to-many, many-to-one,
+and unidirectional relationships.
+
+The following topics are addressed here:
+
+* link:#GIQQR[Self-Referential Relationships]
+* link:#GIQSR[One-to-One Relationships]
+* link:#GIQTJ[One-to-Many Relationship Mapped to Overlapping Primary and
+Foreign Keys]
+* link:#GIQUD[Unidirectional Relationships]
+
+[[GIQQR]]
+
+[[self-referential-relationships]]
+Self-Referential Relationships
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A self-referential relationship occurs between relationship fields in
+the same entity. `Part` has a field, `bomPart`, which has a one-to-many
+relationship with the field `parts`, which is also in `Part`. That is, a
+part can be made up of many parts, and each of those parts has exactly
+one bill-of-material part.
+
+The primary key for `Part` is a compound primary key, a combination of
+the `partNumber` and `revision` fields. This key is mapped to the
+`PARTNUMBER` and `REVISION` columns in the `PERSISTENCE_ORDER_PART`
+table:
+
+[source,oac_no_warn]
+----
+...
+@ManyToOne
+@JoinColumns({
+    @JoinColumn(name="BOMPARTNUMBER", referencedColumnName="PARTNUMBER"),
+    @JoinColumn(name="BOMREVISION", referencedColumnName="REVISION")
+})
+public Part getBomPart() {
+    return bomPart;
+}
+...
+@OneToMany(mappedBy="bomPart")
+public Collection<Part> getParts() {
+    return parts;
+}
+...
+----
+
+[[GIQSR]]
+
+[[one-to-one-relationships]]
+One-to-One Relationships
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+`Part` has a field, `vendorPart`, that has a one-to-one relationship
+with `VendorPart`'s `part` field. That is, each part has exactly one
+vendor part, and vice versa.
+
+Here is the relationship mapping in `Part`:
+
+[source,oac_no_warn]
+----
+@OneToOne(mappedBy="part")
+public VendorPart getVendorPart() {
+    return vendorPart;
+}
+----
+
+Here is the relationship mapping in `VendorPart`:
+
+[source,oac_no_warn]
+----
+@OneToOne
+@JoinColumns({
+    @JoinColumn(name="PARTNUMBER", referencedColumnName="PARTNUMBER"),
+    @JoinColumn(name="PARTREVISION", referencedColumnName="REVISION")
+})
+public Part getPart() {
+    return part;
+}
+----
+
+Note that, because `Part` uses a compound primary key, the
+`@JoinColumns` annotation is used to map the columns in the
+`PERSISTENCE_ORDER_VENDOR_PART` table to the columns in
+`PERSISTENCE_ORDER_PART`. The `PERSISTENCE_ORDER_VENDOR_PART` table's
+`PARTREVISION` column refers to `PERSISTENCE_ORDER_PART`'s `REVISION`
+column.
+
+[[GIQTJ]]
+
+[[one-to-many-relationship-mapped-to-overlapping-primary-and-foreign-keys]]
+One-to-Many Relationship Mapped to Overlapping Primary and Foreign Keys
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`CustomerOrder` has a field, `lineItems`, that has a one-to-many
+relationship with `LineItem`'s field `customerOrder`. That is, each
+order has one or more line item.
+
+`LineItem` uses a compound primary key that is made up of the `orderId`
+and `itemId` fields. This compound primary key maps to the `ORDERID` and
+`ITEMID` columns in the `PERSISTENCE_ORDER_LINEITEM` table. `ORDERID` is
+a foreign key to the `ORDERID` column in the
+`PERSISTENCE_ORDER_CUSTOMERORDER` table. This means that the `ORDERID`
+column is mapped twice: once as a primary key field, `orderId`; and
+again as a relationship field, `order`.
+
+Here is the relationship mapping in `CustomerOrder`:
+
+[source,oac_no_warn]
+----
+@OneToMany(cascade=ALL, mappedBy="customerOrder")
+public Collection<LineItem> getLineItems() {
+    return lineItems;
+}
+----
+
+Here is the relationship mapping in `LineItem`:
+
+[source,oac_no_warn]
+----
+@Id
+@ManyToOne
+@JoinColumn(name="ORDERID")
+public CustomerOrder getCustomerOrder() {
+    return customerOrder;
+}
+----
+
+[[GIQUD]]
+
+[[unidirectional-relationships]]
+Unidirectional Relationships
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`LineItem` has a field, `vendorPart`, that has a unidirectional
+many-to-one relationship with `VendorPart`. That is, there is no field
+in the target entity in this relationship:
+
+[source,oac_no_warn]
+----
+@JoinColumn(name="VENDORPARTNUMBER")
+@ManyToOne
+public VendorPart getVendorPart() {
+    return vendorPart;
+}
+----
+
+[[GIQQY]]
+
+[[primary-keys-in-the-order-application]]
+Primary Keys in the order Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `order` application uses several types of primary keys:
+single-valued primary keys, generated primary keys, and compound primary
+keys.
+
+The following topics are addressed here:
+
+* link:#GIQUV[Generated Primary Keys]
+* link:#GIQUF[Compound Primary Keys]
+
+[[GIQUV]]
+
+[[generated-primary-keys]]
+Generated Primary Keys
+^^^^^^^^^^^^^^^^^^^^^^
+
+`VendorPart` uses a generated primary key value. That is, the
+application does not assign primary key values for the entities but
+instead relies on the persistence provider to generate the primary key
+values. The `@GeneratedValue` annotation is used to specify that an
+entity will use a generated primary key.
+
+In `VendorPart`, the following code specifies the settings for
+generating primary key values:
+
+[source,oac_no_warn]
+----
+@TableGenerator(
+    name="vendorPartGen",
+    table="PERSISTENCE_ORDER_SEQUENCE_GENERATOR",
+    pkColumnName="GEN_KEY",
+    valueColumnName="GEN_VALUE",
+    pkColumnValue="VENDOR_PART_ID",
+    allocationSize=10)
+@Id
+@GeneratedValue(strategy=GenerationType.TABLE, generator="vendorPartGen")
+public Long getVendorPartNumber() {
+    return vendorPartNumber;
+}
+----
+
+The `@TableGenerator` annotation is used in conjunction with
+`@GeneratedValue`'s `strategy=TABLE` element. That is, the strategy used
+to generate the primary keys is to use a table in the database. The
+`@TableGenerator` annotation is used to configure the settings for the
+generator table. The name element sets the name of the generator, which
+is `vendorPartGen` in `VendorPart`.
+
+The `PERSISTENCE_ORDER_SEQUENCE_GENERATOR` table, whose two columns are
+`GEN_KEY` and `GEN_VALUE`, will store the generated primary key values.
+This table could be used to generate other entities' primary keys, so
+the `pkColumnValue` element is set to `VENDOR_PART_ID` to distinguish
+this entity's generated primary keys from other entities' generated
+primary keys. The `allocationSize` element specifies the amount to
+increment when allocating primary key values. In this case, each
+`VendorPart`'s primary key will increment by 10.
+
+The primary key field `vendorPartNumber` is of type `Long`, as the
+generated primary key's field must be an integral type.
+
+[[GIQUF]]
+
+[[compound-primary-keys]]
+Compound Primary Keys
+^^^^^^^^^^^^^^^^^^^^^
+
+A compound primary key is made up of multiple fields and follows the
+requirements described in link:persistence-intro002.html#BNBQF[Primary
+Keys in Entities]. To use a compound primary key, you must create a
+wrapper class.
+
+In `order`, two entities use compound primary keys: `Part` and
+`LineItem`.
+
+* `Part` uses the `PartKey` wrapper class. `Part`'s primary key is a
+combination of the part number and the revision number. `PartKey`
+encapsulates this primary key.
+* `LineItem` uses the `LineItemKey` class. `LineItem`'s primary key is a
+combination of the order number and the item number. `LineItemKey`
+encapsulates this primary key.
+
+This is the `LineItemKey` compound primary key wrapper class:
+
+[source,oac_no_warn]
+----
+package javaeetutorial.order.entity;
+
+import java.io.Serializable;
+
+public final class LineItemKey implements Serializable {
+
+    private Integer customerOrder;
+    private int itemId;
+
+    public LineItemKey() {}
+
+    public LineItemKey(Integer order, int itemId) {
+        this.setCustomerOrder(order);
+        this.setItemId(itemId);
+    } 
+
+    @Override
+    public int hashCode() {
+        return ((this.getCustomerOrder() == null
+                ? 0 : this.getCustomerOrder().hashCode())
+                ^ ((int) this.getItemId()));
+    }
+
+    @Override
+    public boolean equals(Object otherOb) {
+        if (this == otherOb) {
+            return true;
+        }
+        if (!(otherOb instanceof LineItemKey)) {
+            return false;
+        }
+        LineItemKey other = (LineItemKey) otherOb;
+        return ((this.getCustomerOrder() == null
+                ? other.getCustomerOrder == null : this.getOrderId()
+                .equals(other.getCustomerOrder())) 
+                && (this.getItemId == oother.getItemId()));
+    }
+
+    @Override
+    public String toString() {
+        return "" + getCustomerOrder() + "-" + getItemId();
+    }
+
+    public Integer getCustomerOrder() {
+        return customerOrder;
+    }
+
+    public void setCustomerOrder(Integer order) {
+        this.customerOrder = order;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+}
+----
+
+The `@IdClass` annotation is used to specify the primary key class in
+the entity class. In `LineItem`, `@IdClass` is used as follows:
+
+[source,oac_no_warn]
+----
+@IdClass(LineItemKey.class)
+@Entity
+...
+public class LineItem implements Serializable {
+    ...
+}
+----
+
+The two fields in `LineItem` are tagged with the `@Id` annotation to
+mark those fields as part of the compound primary key:
+
+[source,oac_no_warn]
+----
+@Id
+public int getItemId() {
+    return itemId;
+}
+...
+@Id
+@ManyToOne
+@JoinColumn(name="ORDERID")
+public CustomerOrder getCustomerOrder() {
+    return customerOrder;
+}
+----
+
+For `customerOrder`, you also use the `@JoinColumn` annotation to
+specify the column name in the table and that this column is an
+overlapping foreign key pointing at the
+`PERSISTENCE_ORDER_CUSTOMERORDER` table's `ORDERID` column (see
+link:#GIQTJ[One-to-Many Relationship Mapped to Overlapping Primary and
+Foreign Keys]). That is, `customerOrder` will be set by the
+`CustomerOrder` entity.
+
+In `LineItem`'s constructor, the line item number (`LineItem.itemId`) is
+set using the `CustomerOrder.getNextId` method:
+
+[source,oac_no_warn]
+----
+public LineItem(CustomerOrder order, int quantity, VendorPart vendorPart) {
+    this.customerOrder = order;
+    this.itemId = order.getNextId();
+    this.quantity = quantity;
+    this.vendorPart = vendorPart;
+}
+----
+
+`CustomerOrder.getNextId` counts the number of current line items, adds
+1, and returns that number:
+
+[source,oac_no_warn]
+----
+@Transient
+public int getNextId() {
+    return this.lineItems.size() + 1;
+}
+----
+
+`Part` requires the `@Column` annotation on the two fields that comprise
+`Part`'s compound primary key, because `Part`'s compound primary key is
+an overlapping primary key/foreign key:
+
+[source,oac_no_warn]
+----
+@IdClass(PartKey.class)
+@Entity
+...
+public class Part implements Serializable {
+    ...
+    @Id
+    @Column(nullable=false)
+    public String getPartNumber() {
+        return partNumber;
+    }
+    ...
+    @Id
+    @Column(nullable=false)
+    public int getRevision() {
+        return revision;
+    }
+    ...
+}
+----
+
+[[GIQTL]]
+
+[[entity-mapped-to-more-than-one-database-table]]
+Entity Mapped to More Than One Database Table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`Part`'s fields map to more than one database table:
+`PERSISTENCE_ORDER_PART` and `PERSISTENCE_ORDER_PART_DETAIL`. The
+`PERSISTENCE_ORDER_PART_DETAIL` table holds the specification and
+schematics for the part. The `@SecondaryTable` annotation is used to
+specify the secondary table:
+
+[source,oac_no_warn]
+----
+...
+@Entity
+@Table(name="PERSISTENCE_ORDER_PART")
+@SecondaryTable(name="PERSISTENCE_ORDER_PART_DETAIL", pkJoinColumns={
+    @PrimaryKeyJoinColumn(name="PARTNUMBER",
+        referencedColumnName="PARTNUMBER"),
+    @PrimaryKeyJoinColumn(name="REVISION",
+        referencedColumnName="REVISION")
+})
+public class Part implements Serializable {
+    ...
+}
+----
+
+`PERSISTENCE_ORDER_PART_DETAIL` and `PERSISTENCE_ORDER_PART` share the
+same primary key values. The `pkJoinColumns` element of
+`@SecondaryTable` is used to specify that
+`PERSISTENCE_ORDER_PART_DETAIL`'s primary key columns are foreign keys
+to `PERSISTENCE_ORDER_PART`. The `@PrimaryKeyJoinColumn` annotation sets
+the primary key column names and specifies which column in the primary
+table the column refers to. In this case, the primary key column names
+for both `PERSISTENCE_ORDER_PART_DETAIL` and `PERSISTENCE_ORDER_PART`
+are the same: `PARTNUMBER` and `REVISION`, respectively.
+
+[[GIQUE]]
+
+[[cascade-operations-in-the-order-application]]
+Cascade Operations in the order Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Entities that have relationships to other entities often have
+dependencies on the existence of the other entity in the relationship.
+For example, a line item is part of an order; if the order is deleted,
+then the line item also should be deleted. This is called a cascade
+delete relationship.
+
+In `order`, there are two cascade delete dependencies in the entity
+relationships. If the `CustomerOrder` to which a `LineItem` is related
+is deleted, the `LineItem` also should be deleted. If the `Vendor` to
+which a `VendorPart` is related is deleted, the `VendorPart` also should
+be deleted.
+
+You specify the cascade operations for entity relationships by setting
+the `cascade` element in the inverse (nonowning) side of the
+relationship. The cascade element is set to `ALL` in the case of
+`CustomerOrder.lineItems`. This means that all persistence operations
+(deletes, updates, and so on) are cascaded from orders to line items.
+
+Here is the relationship mapping in `CustomerOrder`:
+
+[source,oac_no_warn]
+----
+@OneToMany(cascade=ALL, mappedBy="customerOrder")
+public Collection<LineItem> getLineItems() {
+    return lineItems;
+}
+----
+
+Here is the relationship mapping in `LineItem`:
+
+[source,oac_no_warn]
+----
+@Id
+@ManyToOne
+@JoinColumn(name="ORDERID")
+public CustomerOrder getCustomerOrder() {
+    return customerOrder;
+}
+----
+
+[[GIQSC]]
+
+[[blob-and-clob-database-types-in-the-order-application]]
+BLOB and CLOB Database Types in the order Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `PARTDETAIL` table in the database has a column, `DRAWING`, of type
+`BLOB`. `BLOB` stands for binary large objects, which are used for
+storing binary data, such as an image. The `DRAWING` column is mapped to
+the field `Part.drawing` of type `java.io.Serializable`. The `@Lob`
+annotation is used to denote that the field is a large object:
+
+[source,oac_no_warn]
+----
+@Column(table="PERSISTENCE_ORDER_PART_DETAIL")
+@Lob
+public Serializable getDrawing() {
+    return drawing;
+}
+----
+
+`PERSISTENCE_ORDER_PART_DETAIL` also has a column, `SPECIFICATION`, of
+type `CLOB`. `CLOB` stands for character large objects, which are used
+to store string data too large to be stored in a `VARCHAR` column.
+`SPECIFICATION` is mapped to the field `Part.specification` of type
+`java.lang.String`. The `@Lob` annotation is also used here to denote
+that the field is a large object:
+
+[source,oac_no_warn]
+----
+@Column(table="PERSISTENCE_ORDER_PART_DETAIL")
+@Lob
+public String getSpecification() {
+    return specification;
+}
+----
+
+Both of these fields use the `@Column` annotation and set the `table`
+element to the secondary table.
+
+[[GIQUM]]
+
+[[temporal-types-in-the-order-application]]
+Temporal Types in the order Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `CustomerOrder.lastUpdate` persistent property, which is of type
+`java.util.Date`, is mapped to the
+`PERSISTENCE_ORDER_CUSTOMERORDER.LASTUPDATE` database field, which is of
+the SQL type `TIMESTAMP`. To ensure the proper mapping between these
+types, you must use the `@Temporal` annotation with the proper temporal
+type specified in `@Temporal`'s element. `@Temporal`'s elements are of
+type `javax.persistence.TemporalType`. The possible values are
+
+* `DATE`, which maps to `java.sql.Date`
+* `TIME`, which maps to `java.sql.Time`
+* `TIMESTAMP`, which maps to `java.sql.Timestamp`
+
+Here is the relevant section of `CustomerOrder`:
+
+[source,oac_no_warn]
+----
+@Temporal(TIMESTAMP)
+public Date getLastUpdate() {
+    return lastUpdate;
+}
+----
+
+[[GIQQV]]
+
+[[managing-the-order-applications-entities]]
+Managing the order Application's Entities
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `RequestBean` stateful session bean contains the business logic and
+manages the entities of `order`. `RequestBean` uses the
+`@PersistenceContext` annotation to retrieve an entity manager instance,
+which is used to manage `order`'s entities in `RequestBean`'s business
+methods:
+
+[source,oac_no_warn]
+----
+@PersistenceContext
+private EntityManager em;
+----
+
+This `EntityManager` instance is a container-managed entity manager, so
+the container takes care of all the transactions involved in managing
+`order`'s entities.
+
+[[GIQRR]]
+
+[[creating-entities]]
+Creating Entities
+^^^^^^^^^^^^^^^^^
+
+The `RequestBean.createPart` business method creates a new `Part`
+entity. The `EntityManager.persist` method is used to persist the newly
+created entity to the database:
+
+[source,oac_no_warn]
+----
+Part part = new Part(partNumber,
+        revision,
+        description,
+        revisionDate,
+        specification,
+        drawing);
+em.persist(part);
+----
+
+The `ConfigBean` singleton session bean is used to initialize the data
+in `order`. `ConfigBean` is annotated with `@Startup`, which indicates
+that the EJB container should create `ConfigBean` when `order` is
+deployed. The `createData` method is annotated with `@PostConstruct` and
+creates the initial entities used by `order` by calling `RequestBean`'s
+business methods.
+
+[[GIQQC]]
+
+[[finding-entities]]
+Finding Entities
+^^^^^^^^^^^^^^^^
+
+The `RequestBean.getOrderPrice` business method returns the price of a
+given order based on the `orderId`. The `EntityManager.find` method is
+used to retrieve the entity from the database:
+
+[source,oac_no_warn]
+----
+CustomerOrder order = em.find(CustomerOrder.class, orderId);
+----
+
+The first argument of `EntityManager.find` is the entity class, and the
+second is the primary key.
+
+[[GIQUK]]
+
+[[setting-entity-relationships]]
+Setting Entity Relationships
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `RequestBean.createVendorPart` business method creates a
+`VendorPart` associated with a particular `Vendor`. The
+`EntityManager.persist` method is used to persist the newly created
+`VendorPart` entity to the database, and the `VendorPart.setVendor` and
+`Vendor.setVendorPart` methods are used to associate the `VendorPart`
+with the `Vendor`:
+
+[source,oac_no_warn]
+----
+PartKey pkey = new PartKey();
+pkey.setPartNumber(partNumber);
+pkey.setRevision(revision);
+
+Part part = em.find(Part.class, pkey);
+
+VendorPart vendorPart = new VendorPart(description, price, part);
+em.persist(vendorPart);
+
+Vendor vendor = em.find(Vendor.class, vendorId);
+vendor.addVendorPart(vendorPart);
+vendorPart.setVendor(vendor);
+----
+
+[[GIQSV]]
+
+[[using-queries]]
+Using Queries
+^^^^^^^^^^^^^
+
+The `RequestBean.adjustOrderDiscount` business method updates the
+discount applied to all orders. This method uses the `findAllOrders`
+named query, defined in `CustomerOrder`:
+
+[source,oac_no_warn]
+----
+@NamedQuery(
+    name="findAllOrders",
+    query="SELECT co FROM CustomerOrder co " +
+          "ORDER BY co.orderId"
+)
+----
+
+The `EntityManager.createNamedQuery` method is used to run the query.
+Because the query returns a `List` of all the orders, the
+`Query.getResultList` method is used:
+
+[source,oac_no_warn]
+----
+List orders = em.createNamedQuery(
+        "findAllOrders")
+        .getResultList();
+----
+
+The `RequestBean.getTotalPricePerVendor` business method returns the
+total price of all the parts for a particular vendor. This method uses a
+named parameter, `id`, defined in the named query
+`findTotalVendorPartPricePerVendor` defined in `VendorPart`:
+
+[source,oac_no_warn]
+----
+@NamedQuery(
+    name="findTotalVendorPartPricePerVendor",
+    query="SELECT SUM(vp.price) " +
+    "FROM VendorPart vp " +
+    "WHERE vp.vendor.vendorId = :id"
+)
+----
+
+When running the query, the `Query.setParameter` method is used to set
+the named parameter `id` to the value of `vendorId`, the parameter to
+`RequestBean.getTotalPricePerVendor`:
+
+[source,oac_no_warn]
+----
+return (Double) em.createNamedQuery(
+    "findTotalVendorPartPricePerVendor")
+    .setParameter("id", vendorId)
+    .getSingleResult();
+----
+
+The `Query.getSingleResult` method is used for this query because the
+query returns a single value.
+
+[[GIQTW]]
+
+[[removing-entities]]
+Removing Entities
+^^^^^^^^^^^^^^^^^
+
+The `RequestBean.removeOrder` business method deletes a given order from
+the database. This method uses the `EntityManager.remove` method to
+delete the entity from the database:
+
+[source,oac_no_warn]
+----
+CustomerOrder order = em.find(CustomerOrder.class, orderId);
+em.remove(order);
+----
+
+[[GIQUP]]
+
+[[running-the-order-example]]
+Running the order Example
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `order` application. First, you will create the database tables
+in the Java DB server.
+
+The following topics are addressed here:
+
+* link:#GIQSG[To Run the order Example Using NetBeans IDE]
+* link:#GIQTY[To Run the order Example Using Maven]
+
+[[GIQSG]]
+
+[[to-run-the-order-example-using-netbeans-ide]]
+To Run the order Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  If the database server is not already running, start it by following
+the instructions in link:usingexamples004.html#BNADK[Starting and
+Stopping the Java DB Server].
+3.  From the File menu, choose Open Project.
+4.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/persistence
+----
+5.  Select the `order` folder.
+6.  Click Open Project.
+7.  In the Projects tab, right-click the `order` project and select Run.
++
+NetBeans IDE opens a web browser to the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/order/
+----
+
+[[GIQTY]]
+
+[[to-run-the-order-example-using-maven]]
+To Run the order Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  If the database server is not already running, start it by following
+the instructions in link:usingexamples004.html#BNADK[Starting and
+Stopping the Java DB Server].
+3.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/persistence/order/
+----
+4.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This compiles the source files and packages the application into a WAR
+file located at
+tut-install`/examples/persistence/order/target/order.war`. Then the WAR
+file is deployed to your GlassFish Server instance.
+5.  To create and update the order data, open a web browser to the
+following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/order/
+----
+
+

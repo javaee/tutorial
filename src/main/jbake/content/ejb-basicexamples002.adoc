@@ -1,0 +1,428 @@
+type=page
+status=published
+title=The cart Example
+next=ejb-basicexamples003.html
+prev=ejb-basicexamples001.html
+~~~~~~
+The cart Example
+================
+
+[[BNBOD]]
+
+[[the-cart-example]]
+The cart Example
+----------------
+
+The `cart` example represents a shopping cart in an online bookstore and
+uses a stateful session bean to manage the operations of the shopping
+cart. The bean's client can add a book to the cart, remove a book, or
+retrieve the cart's contents. To assemble `cart`, you need the following
+code:
+
+* Session bean class (`CartBean`)
+* Remote business interface (`Cart`)
+
+All session beans require a session bean class. All enterprise beans
+that permit remote access must have a remote business interface. To meet
+the needs of a specific application, an enterprise bean may also need
+some helper classes. The `CartBean` session bean uses two helper
+classes, `BookException` and `IdVerifier`, which are discussed in the
+section link:#BNBOJ[Helper Classes].
+
+The source code for this example is in the
+tut-install`/examples/ejb/cart/` directory.
+
+[[BNBOE]]
+
+[[the-business-interface]]
+The Business Interface
+~~~~~~~~~~~~~~~~~~~~~~
+
+The `Cart` business interface is a plain Java interface that defines all
+the business methods implemented in the bean class. If the bean class
+implements a single interface, that interface is assumed to the business
+interface. The business interface is a local interface unless it is
+annotated with the `javax.ejb.Remote` annotation; the `javax.ejb.Local`
+annotation is optional in this case.
+
+The bean class may implement more than one interface. In that case, the
+business interfaces must either be explicitly annotated `@Local` or
+`@Remote` or be specified by decorating the bean class with `@Local` or
+`@Remote`. However, the following interfaces are excluded when
+determining whether the bean class implements more than one interface:
+
+* `java.io.Serializable`
+* `java.io.Externalizable`
+* Any of the interfaces defined by the `javax.ejb` package
+
+The source code for the `Cart` business interface is as follows:
+
+[source,oac_no_warn]
+----
+package javaeetutorial.cart.ejb;
+
+import cart.util.BookException;
+import java.util.List;
+import javax.ejb.Remote;
+
+@Remote
+public interface Cart {
+    public void initialize(String person) throws BookException;
+    public void initialize(String person, String id) throws BookException;
+    public void addBook(String title);
+    public void removeBook(String title) throws BookException;
+    public List<String> getContents();
+    public void remove();
+}
+----
+
+[[BNBOF]]
+
+[[session-bean-class]]
+Session Bean Class
+~~~~~~~~~~~~~~~~~~
+
+The session bean class for this example is called `CartBean`. Like any
+stateful session bean, the `CartBean` class must meet the following
+requirements.
+
+* The class is annotated `@Stateful`.
+* The class implements the business methods defined in the business
+interface.
+
+Stateful session beans may also do the following.
+
+* Implement the business interface, a plain Java interface. It is good
+practice to implement the bean's business interface.
+* Implement any optional lifecycle callback methods, annotated
+`@PostConstruct`, `@PreDestroy`, `@PostActivate`, and `@PrePassivate`.
+* Implement any optional business methods annotated `@Remove`.
+
+The source code for the `CartBean` class is as follows:
+
+[source,oac_no_warn]
+----
+package javaeetutorial.cart.ejb;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javaeetutorial.cart.util.BookException;
+import javaeetutorial.cart.util.IdVerifier;
+import javax.ejb.Remove;
+import javax.ejb.Stateful;
+
+@Stateful
+public class CartBean implements Cart {
+    String customerId;
+    String customerName;
+    List<String> contents;
+
+    @Override
+    public void initialize(String person) throws BookException {
+        if (person == null) {
+            throw new BookException("Null person not allowed.");
+        } else {
+            customerName = person;
+        }
+        customerId = "0";
+        contents = new ArrayList<>();
+    }
+
+    @Override
+    public void initialize(String person, String id)
+                 throws BookException {
+        if (person == null) {
+            throw new BookException("Null person not allowed.");
+        } else {
+            customerName = person;
+        }
+
+        IdVerifier idChecker = new IdVerifier();
+        if (idChecker.validate(id)) {
+            customerId = id;
+        } else {
+            throw new BookException("Invalid id: " + id);
+        }
+
+        contents = new ArrayList<>();
+    }
+
+    @Override
+    public void addBook(String title) {
+        contents.add(title);
+    }
+
+    @Override
+    public void removeBook(String title) throws BookException {
+        boolean result = contents.remove(title);
+        if (result == false) {
+            throw new BookException("\"" + title + " not in cart.");
+        }
+    }
+
+    @Override
+    public List<String> getContents() {
+        return contents;
+    }
+
+    @Remove
+    @Override
+    public void remove() {
+        contents = null;
+    }
+}
+----
+
+[[BNBOG]]
+
+[[lifecycle-callback-methods]]
+Lifecycle Callback Methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A method in the bean class may be declared as a lifecycle callback
+method by annotating the method with the following annotations.
+
+* `javax.annotation.PostConstruct`: Methods annotated with
+`@PostConstruct` are invoked by the container on newly constructed bean
+instances after all dependency injection has completed and before the
+first business method is invoked on the enterprise bean.
+* `javax.annotation.PreDestroy`: Methods annotated with `@PreDestroy`
+are invoked after any method annotated `@Remove` has completed and
+before the container removes the enterprise bean instance.
+* `javax.ejb.PostActivate`: Methods annotated with `@PostActivate` are
+invoked by the container after the container moves the bean from
+secondary storage to active status.
+* `javax.ejb.PrePassivate`: Methods annotated with `@PrePassivate` are
+invoked by the container before it passivates the enterprise bean,
+meaning that the container temporarily removes the bean from the
+environment and saves it to secondary storage.
+
+Lifecycle callback methods must return `void` and have no parameters.
+
+[[BNBOH]]
+
+[[business-methods]]
+Business Methods
+^^^^^^^^^^^^^^^^
+
+The primary purpose of a session bean is to run business tasks for the
+client. The client invokes business methods on the object reference it
+gets from dependency injection or JNDI lookup. From the client's
+perspective, the business methods appear to run locally, although they
+run remotely in the session bean. The following code snippet shows how
+the `CartClient` program invokes the business methods:
+
+[source,oac_no_warn]
+----
+cart.initialize("Duke DeEarl", "123");
+...
+cart.addBook("Bel Canto");
+ ...
+List<String> bookList = cart.getContents();
+...
+cart.removeBook("Gravity's Rainbow");
+----
+
+The `CartBean` class implements the business methods in the following
+code:
+
+[source,oac_no_warn]
+----
+@Override
+public void addBook(String title) {
+   contents.add(title);
+}
+
+@Override
+public void removeBook(String title) throws BookException {
+   boolean result = contents.remove(title);
+   if (result == false) {
+      throw new BookException("\"" + title + "not in cart.");
+   }
+}
+
+@Override
+public List<String> getContents() {
+   return contents;
+}
+----
+
+The signature of a business method must conform to these rules.
+
+* The method name must not begin with `ejb`, to avoid conflicts with
+callback methods defined by the EJB architecture. For example, you
+cannot call a business method `ejbCreate` or `ejbActivate`.
+* The access control modifier must be `public`.
+* If the bean allows remote access through a remote business interface,
+the arguments and return types must be legal types for the Java Remote
+Method Invocation (RMI) API.
+* If the bean is a JAX-WS web service endpoint, the arguments and return
+types for the methods annotated `@WebMethod` must be legal types for
+JAX-WS.
+* If the bean is a JAX-RS resource, the arguments and return types for
+the resource methods must be legal types for JAX-RS.
+* The modifier must not be `static` or `final`.
+
+The `throws` clause can include exceptions that you define for your
+application. The `removeBook` method, for example, throws a
+`BookException` if the book is not in the cart.
+
+To indicate a system-level problem, such as the inability to connect to
+a database, a business method should throw a `javax.ejb.EJBException`.
+The container will not wrap application exceptions, such as
+`BookException`. Because `EJBException` is a subclass of
+`RuntimeException`, you do not need to include it in the `throws` clause
+of the business method.
+
+[[BNBOI]]
+
+[[the-remove-method]]
+The @Remove Method
+~~~~~~~~~~~~~~~~~~
+
+Business methods annotated with `javax.ejb.Remove` in the stateful
+session bean class can be invoked by enterprise bean clients to remove
+the bean instance. The container will remove the enterprise bean after a
+`@Remove` method completes, either normally or abnormally.
+
+In `CartBean`, the `remove` method is a `@Remove` method:
+
+[source,oac_no_warn]
+----
+@Remove
+@Override
+public void remove() {
+    contents = null;
+}
+----
+
+[[BNBOJ]]
+
+[[helper-classes]]
+Helper Classes
+~~~~~~~~~~~~~~
+
+The `CartBean` session bean has two helper classes: `BookException` and
+`IdVerifier`. The `BookException` is thrown by the `removeBook` method,
+and the `IdVerifier` validates the `customerId` in one of the `create`
+methods. Helper classes may reside in an EJB JAR file that contains the
+enterprise bean class; a WAR file if the enterprise bean is packaged
+within a WAR; or an EAR file that contains an EJB JAR, a WAR file, or a
+separate library JAR file. In `cart`, the helper classes are included in
+a library JAR used by the application client and the EJB JAR.
+
+[[BNBOK]]
+
+[[running-the-cart-example]]
+Running the cart Example
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now you are ready to compile the remote interface (`Cart.java`), the
+enterprise bean class (`CartBean.java`), the client class
+(`CartClient.java`), and the helper classes (`BookException.java` and
+`IdVerifier.java`).
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `cart` application.
+
+The following topics are addressed here:
+
+* link:#BNBOL[To Run the cart Example Using NetBeans IDE]
+* link:#BNBON[To Run the cart Example Using Maven]
+
+[[BNBOL]]
+
+[[to-run-the-cart-example-using-netbeans-ide]]
+To Run the cart Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb
+----
+4.  Select the `cart` folder.
+5.  Select the Open Required Projects check box.
+6.  Click Open Project.
+7.  In the Projects tab, right-click the `cart` project and select
+Build.
++
+This builds and packages the application into `cart.ear`, located in
+tut-install`/examples/ejb/cart/cart-ear/target/`, and deploys this EAR
+file to your GlassFish Server instance.
++
+You will see the output of the `cart-app-client` application client in
+the Output tab:
++
+[source,oac_no_warn]
+----
+...
+Retrieving book title from cart: Infinite Jest
+Retrieving book title from cart: Bel Canto
+Retrieving book title from cart: Kafka on the Shore
+Removing "Gravity's Rainbow" from cart.
+Caught a BookException: "Gravity's Rainbow" not in cart.
+----
+
+[[BNBON]]
+
+[[to-run-the-cart-example-using-maven]]
+To Run the cart Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb/cart/
+----
+3.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command compiles and packages the application into an EAR file,
+`cart.ear`, located in the `target` directory, and deploys the EAR to
+your GlassFish Server instance.
++
+Then, the client stubs are retrieved and run. This is equivalent to
+running the following command:
++
+[source,oac_no_warn]
+----
+appclient -client cart-ear/target/cart-earClient.jar
+----
++
+The client JAR, `cart-earClient.jar`, contains the application client
+class, the helper class `BookException`, and the `Cart` business
+interface.
++
+When you run the client, the application client container injects any
+component references declared in the application client class, in this
+case the reference to the `Cart` enterprise bean.
++
+You will see the output of the `cart-app-client` application client in
+the terminal window:
++
+[source,oac_no_warn]
+----
+...
+Retrieving book title from cart: Infinite Jest
+Retrieving book title from cart: Bel Canto
+Retrieving book title from cart: Kafka on the Shore
+Removing "Gravity's Rainbow" from cart.
+Caught a BookException: "Gravity's Rainbow" not in cart.
+----
+
+

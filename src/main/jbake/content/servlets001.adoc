@@ -1,0 +1,31 @@
+type=page
+status=published
+title=What Is a Servlet?
+next=servlets002.html
+prev=servlets.html
+~~~~~~
+What Is a Servlet?
+==================
+
+[[BNAFE]]
+
+[[what-is-a-servlet]]
+What Is a Servlet?
+------------------
+
+A servlet is a Java programming language class used to extend the
+capabilities of servers that host applications accessed by means of a
+request-response programming model. Although servlets can respond to any
+type of request, they are commonly used to extend the applications
+hosted by web servers. For such applications, Java Servlet technology
+defines HTTP-specific servlet classes.
+
+The `javax.servlet` and `javax.servlet.http` packages provide interfaces
+and classes for writing servlets. All servlets must implement the
+`Servlet` interface, which defines lifecycle methods. When implementing
+a generic service, you can use or extend the `GenericServlet` class
+provided with the Java Servlet API. The `HttpServlet` class provides
+methods, such as `doGet` and `doPost`, for handling HTTP-specific
+services.
+
+

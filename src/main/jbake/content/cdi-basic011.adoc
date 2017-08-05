@@ -1,0 +1,36 @@
+type=page
+status=published
+title=Using a Managed Bean in a Facelets Page
+next=cdi-basic012.html
+prev=cdi-basic010.html
+~~~~~~
+Using a Managed Bean in a Facelets Page
+=======================================
+
+[[GJBBU]]
+
+[[using-a-managed-bean-in-a-facelets-page]]
+Using a Managed Bean in a Facelets Page
+---------------------------------------
+
+To use the managed bean in a Facelets page:
+
+1.  Create a form that uses user interface elements to call its methods
+and display their results.
++
+This example provides a button that asks the user to type a name,
+retrieves the salutation, and then displays the text in a paragraph
+below the button:
++
+[source,oac_no_warn]
+----
+<h:form id="greetme">
+   <p><h:outputLabel value="Enter your name: " for="name"/>
+      <h:inputText id="name" value="#{printer.name}"/></p>
+   <p><h:commandButton value="Say Hello" 
+                       action="#{printer.createSalutation}"/></p>
+   <p><h:outputText value="#{printer.salutation}"/></p>
+</h:form>
+----
+
+

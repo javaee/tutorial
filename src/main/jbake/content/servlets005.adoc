@@ -1,0 +1,138 @@
+type=page
+status=published
+title=Writing Service Methods
+next=servlets006.html
+prev=servlets004.html
+~~~~~~
+Writing Service Methods
+=======================
+
+[[BNAFV]]
+
+[[writing-service-methods]]
+Writing Service Methods
+-----------------------
+
+The service provided by a servlet is implemented in the `service` method
+of a `GenericServlet`, in the `do`Method methods (where Method can take
+the value `Get`, `Delete`, `Options`, `Post`, `Put`, or `Trace`) of an
+`HttpServlet` object, or in any other protocol-specific methods defined
+by a class that implements the `Servlet` interface. The term service
+method is used for any method in a servlet class that provides a service
+to a client.
+
+The general pattern for a service method is to extract information from
+the request, access external resources, and then populate the response,
+based on that information. For HTTP servlets, the correct procedure for
+populating the response is to do the following:
+
+1.  Retrieve an output stream from the response.
+2.  Fill in the response headers.
+3.  Write any body content to the output stream.
+
+Response headers must always be set before the response has been
+committed. The web container will ignore any attempt to set or add
+headers after the response has been committed. The next two sections
+describe how to get information from requests and generate responses.
+
+[[BNAFW]]
+
+[[getting-information-from-requests]]
+Getting Information from Requests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A request contains data passed between a client and the servlet. All
+requests implement the `ServletRequest` interface. This interface
+defines methods for accessing the following information:
+
+* Parameters, which are typically used to convey information between
+clients and servlets
+* Object-valued attributes, which are typically used to pass information
+between the web container and a servlet or between collaborating
+servlets
+* Information about the protocol used to communicate the request and
+about the client and server involved in the request
+* Information relevant to localization
+
+You can also retrieve an input stream from the request and manually
+parse the data. To read character data, use the `BufferedReader` object
+returned by the request's `getReader` method. To read binary data, use
+the `ServletInputStream` returned by `getInputStream`.
+
+HTTP servlets are passed an HTTP request object, `HttpServletRequest`,
+which contains the request URL, HTTP headers, query string, and so on.
+An HTTP request URL contains the following parts:
+
+[source,oac_no_warn]
+----
+http://[host]:[port][request-path]?[query-string]
+----
+
+The request path is further composed of the following elements.
+
+* Context path: A concatenation of a forward slash (`/`) with the
+context root of the servlet's web application.
+* Servlet path: The path section that corresponds to the component alias
+that activated this request. This path starts with a forward slash
+(`/`).
+* Path info: The part of the request path that is not part of the
+context path or the servlet path.
+
+You can use the `getContextPath`, `getServletPath`, and `getPathInfo`
+methods of the `HttpServletRequest` interface to access this
+information. Except for URL encoding differences between the request URI
+and the path parts, the request URI is always comprised of the context
+path plus the servlet path plus the path info.
+
+Query strings are composed of a set of parameters and values. Individual
+parameters are retrieved from a request by using the `getParameter`
+method. There are two ways to generate query strings.
+
+* A query string can explicitly appear in a web page.
+* A query string is appended to a URL when a form with a `GET` HTTP
+method is submitted.
+
+[[BNAFZ]]
+
+[[constructing-responses]]
+Constructing Responses
+~~~~~~~~~~~~~~~~~~~~~~
+
+A response contains data passed between a server and the client. All
+responses implement the `ServletResponse` interface. This interface
+defines methods that allow you to do the following.
+
+* Retrieve an output stream to use to send data to the client. To send
+character data, use the `PrintWriter` returned by the response's
+`getWriter` method. To send binary data in a Multipurpose Internet Mail
+Extensions (MIME) body response, use the `ServletOutputStream` returned
+by `getOutputStream`. To mix binary and text data, as in a multipart
+response, use a `ServletOutputStream` and manage the character sections
+manually.
+* Indicate the content type (for example, `text/html`) being returned by
+the response with the `setContentType(String)` method. This method must
+be called before the response is committed. A registry of content type
+names is kept by the Internet Assigned Numbers Authority (IANA) at
+`http://www.iana.org/assignments/media-types/`.
+* Indicate whether to buffer output with the `setBufferSize(int)`
+method. By default, any content written to the output stream is
+immediately sent to the client. Buffering allows content to be written
+before anything is sent back to the client, thus providing the servlet
+with more time to set appropriate status codes and headers or forward to
+another web resource. The method must be called before any content is
+written or before the response is committed.
+* Set localization information, such as locale and character encoding.
+See link:webi18n.html#BNAXU[Chapter 21, "Internationalizing and
+Localizing Web Applications"] for details.
+
+HTTP response objects, `javax.servlet.http.HttpServletResponse`, have
+fields representing HTTP headers, such as the following.
+
+* Status codes, which are used to indicate the reason a request is not
+satisfied or that a request has been redirected.
+* Cookies, which are used to store application-specific information at
+the client. Sometimes, cookies are used to maintain an identifier for
+tracking a user's session (see link:servlets009.html#BNAGR[Session
+Tracking]).
+
+

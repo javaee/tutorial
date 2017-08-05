@@ -1,0 +1,600 @@
+type=page
+status=published
+title=Writing More Advanced JMS Applications
+next=jms-examples005.html
+prev=jms-examples003.html
+~~~~~~
+Writing More Advanced JMS Applications
+======================================
+
+[[GIWFH]]
+
+[[writing-more-advanced-jms-applications]]
+Writing More Advanced JMS Applications
+--------------------------------------
+
+The following examples show how to use some of the more advanced
+features of the JMS API: durable subscriptions and transactions.
+
+The following topics are addressed here:
+
+* link:#BNCGG[Using Durable Subscriptions]
+* link:#BNCGJ[Using Local Transactions]
+
+[[BNCGG]]
+
+[[using-durable-subscriptions]]
+Using Durable Subscriptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `durablesubscriptionexample` example shows how unshared durable
+subscriptions work. It demonstrates that a durable subscription
+continues to exist and accumulate messages even when there is no active
+consumer on it.
+
+The example consists of two modules, a `durableconsumer` application
+that creates a durable subscription and consumes messages, and an
+`unsubscriber` application that enables you to unsubscribe from the
+durable subscription after you have finished running the
+`durableconsumer` application.
+
+For information on durable subscriptions, see
+link:jms-concepts003.html#BNCGD[Creating Durable Subscriptions].
+
+The main client, `DurableConsumer.java`, is under the
+tut-install`/examples/jms/durablesubscriptionexample/durableconsumer`/
+directory.
+
+The example uses a connection factory, j`ms/DurableConnectionFactory`,
+that has a client ID.
+
+The `DurableConsumer` client creates a `JMSContext` using the connection
+factory. It then stops the `JMSContext`, calls `createDurableConsumer`
+to create a durable subscription and a consumer on the topic by
+specifying a subscription name, registers a message listener, and starts
+the `JMSContext` again. The subscription is created only if it does not
+already exist, so the example can be run repeatedly:
+
+[source,oac_no_warn]
+----
+try (JMSContext context = durableConnectionFactory.createContext();) {
+    context.stop();
+    consumer = context.createDurableConsumer(topic, "MakeItLast");
+    listener = new TextListener();
+    consumer.setMessageListener(listener);
+    context.start();
+    ...
+----
+
+To send messages to the topic, you run the `producer` client.
+
+The `unsubscriber` example contains a very simple `Unsubscriber` client,
+which creates a `JMSContext` on the same connection factory and then
+calls the `unsubscribe` method, specifying the subscription name:
+
+[source,oac_no_warn]
+----
+try (JMSContext context = durableConnectionFactory.createContext();) {
+    System.out.println("Unsubscribing from durable subscription");
+    context.unsubscribe("MakeItLast");
+} ...
+----
+
+[[sthref206]]
+
+[[to-create-resources-for-the-durable-subscription-example]]
+To Create Resources for the Durable Subscription Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a command window, go to the `durableconsumer` example.
++
+[source,oac_no_warn]
+----
+cd tut-install/jms/durablesubscriptionexample/durableconsumer
+----
+3.  Create the resources using the `asadmin add-resources` command:
++
+[source,oac_no_warn]
+----
+asadmin add-resources src/main/setup/glassfish-resources.xml
+----
++
+The command output reports the creation of a connector connection pool
+and a connector resource.
+4.  Verify the creation of the resources:
++
+[source,oac_no_warn]
+----
+asadmin list-jms-resources
+----
++
+In addition to the resources you created for the simple examples, the
+command lists the new connection factory:
++
+[source,oac_no_warn]
+----
+jms/MyQueue
+jms/MyTopic
+jms/__defaultConnectionFactory
+jms/DurableConnectionFactory
+Command list-jms-resources executed successfully.
+----
+
+[[GJSCI]]
+
+[[to-run-the-durable-subscription-example]]
+To Run the Durable Subscription Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  In a terminal window, go to the following directory:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jms/durablesubscriptionexample/
+----
+2.  Build the `durableconsumer` and `unsubscriber` examples:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+3.  Go to the `durableconsumer` directory:
++
+[source,oac_no_warn]
+----
+cd durableconsumer
+----
+4.  To run the client, enter the following command:
++
+[source,oac_no_warn]
+----
+appclient -client target/durableconsumer.jar
+----
++
+The client creates the durable consumer and then waits for messages:
++
+[source,oac_no_warn]
+----
+Creating consumer for topic
+Starting consumer
+To end program, enter Q or q, then <return>
+----
+5.  In another terminal window, run the `Producer` client, sending some
+messages to the topic:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/simple/producer
+appclient -client target/producer.jar topic 3
+----
+6.  After the `DurableConsumer` client receives the messages, enter `q`
+or `Q` to exit the program. At this point, the client has behaved like
+any other asynchronous consumer.
+7.  Now, while the `DurableConsumer` client is not running, use the
+`Producer` client to send more messages:
++
+[source,oac_no_warn]
+----
+appclient -client target/producer.jar topic 2
+----
++
+If a durable subscription did not exist, these messages would be lost,
+because no consumer on the topic is currently running. However, the
+durable subscription is still active, and it retains the messages.
+8.  Run the `DurableConsumer` client again. It immediately receives the
+messages that were sent while it was inactive:
++
+[source,oac_no_warn]
+----
+Creating consumer for topic
+Starting consumer
+To end program, enter Q or q, then <return>
+Reading message: This is message 1 from producer
+Reading message: This is message 2 from producer
+Message is not a TextMessage
+----
+9.  Enter `q` or `Q` to exit the program.
+
+[[sthref207]]
+
+[[to-run-the-unsubscriber-example]]
+To Run the unsubscriber Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After you have finished running the `DurableConsumer` client, run the
+`unsubscriber` example to unsubscribe from the durable subscription.
+
+1.  In a terminal window, go to the following directory:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jms/durablesubscriptionexample/unsubscriber
+----
+2.  To run the `Unsubscriber` client, enter the following command:
++
+[source,oac_no_warn]
+----
+appclient -client target/unsubscriber.jar
+----
++
+The client reports that it is unsubscribing from the durable
+subscription.
+
+[[BNCGJ]]
+
+[[using-local-transactions]]
+Using Local Transactions
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `transactedexample` example demonstrates the use of local
+transactions in a JMS client application. It also demonstrates the use
+of the request/reply messaging pattern described in
+link:jms-concepts004.html#BNCGB[Creating Temporary Destinations],
+although it uses permanent rather than temporary destinations. The
+example consists of three modules, `genericsupplier`, `retailer`, and
+`vendor`, which can be found under the
+tut-install`/examples/jms/transactedexample/` directory. The source code
+can be found in the `src/main/java/javaeetutorial` trees for each
+module. The `genericsupplier` and `retailer` modules each contain a
+single class, `genericsupplier/GenericSupplier.java` and
+`retailer/Retailer.java`, respectively. The `vendor` module is more
+complex, containing four classes: `vendor/Vendor.java`,
+`vendor/VendorMessageListener.java`, `vendor/Order.java`, and
+`vendor/SampleUtilities.java`.
+
+The example shows how to use a queue and a topic in a single transaction
+as well as how to pass a `JMSContext` to a message listener's
+constructor function. The example represents a highly simplified
+e-commerce application in which the following actions occur.
+
+1.  A retailer
+(`retailer/src/main/java/javaeetutorial/retailer/Retailer.java`) sends a
+`MapMessage` to a vendor order queue, ordering a quantity of computers,
+and waits for the vendor's reply:
++
+[source,oac_no_warn]
+----
+outMessage = context.createMapMessage();
+outMessage.setString("Item", "Computer(s)");
+outMessage.setInt("Quantity", quantity);
+outMessage.setJMSReplyTo(retailerConfirmQueue);
+context.createProducer().send(vendorOrderQueue, outMessage);
+System.out.println("Retailer: ordered " + quantity + " computer(s)");
+orderConfirmReceiver = context.createConsumer(retailerConfirmQueue);
+----
+2.  The vendor
+(`vendor/src/main/java/javaeetutorial/retailer/Vendor.java`) receives
+the retailer's order message and sends an order message to the supplier
+order topic in one transaction. This JMS transaction uses a single
+session, so you can combine a receive from a queue with a send to a
+topic. Here is the code that uses the same session to create a consumer
+for a queue:
++
+[source,oac_no_warn]
+----
+vendorOrderReceiver = session.createConsumer(vendorOrderQueue);
+----
++
+The following code receives the incoming message, sends an outgoing
+message, and commits the `JMSContext`. The message processing has been
+removed to keep the sequence simple:
++
+[source,oac_no_warn]
+----
+inMessage = vendorOrderReceiver.receive();
+// Process the incoming message and format the outgoing 
+// message
+...
+context.createProducer().send(supplierOrderTopic, orderMessage);
+...
+context.commit();
+----
++
+For simplicity, there are only two suppliers, one for CPUs and one for
+hard drives.
+3.  Each supplier
+(`genericsupplier/src/main/java/javaeetutorial/retailer/GenericSupplier.java`)
+receives the order from the order topic, checks its inventory, and then
+sends the items ordered to the queue named in the order message's
+`JMSReplyTo` field. If it does not have enough of the item in stock, the
+supplier sends what it has. The synchronous receive from the topic and
+the send to the queue take place in one JMS transaction:
++
+[source,oac_no_warn]
+----
+receiver = context.createConsumer(SupplierOrderTopic);
+...
+inMessage = receiver.receive();
+if (inMessage instanceof MapMessage) {
+    orderMessage = (MapMessage) inMessage;
+} ...
+// Process message
+outMessage = context.createMapMessage();
+// Add content to message
+context.createProducer().send(
+         (Queue) orderMessage.getJMSReplyTo(),
+         outMessage);
+// Display message contents
+context.commit();
+----
+4.  The vendor receives the suppliers' replies from its confirmation
+queue and updates the state of the order. Messages are processed by an
+asynchronous message listener, `VendorMessageListener`; this step shows
+the use of JMS transactions with a message listener:
++
+[source,oac_no_warn]
+----
+MapMessage component = (MapMessage) message;
+...
+int orderNumber = component.getInt("VendorOrderNumber");
+Order order = Order.getOrder(orderNumber).processSubOrder(component);
+context.commit();
+----
+5.  When all outstanding replies are processed for a given order, the
+vendor message listener sends a message notifying the retailer whether
+it can fulfill the order:
++
+[source,oac_no_warn]
+----
+Queue replyQueue = (Queue) order.order.getJMSReplyTo();
+MapMessage retailerConfirmMessage = context.createMapMessage();
+// Format the message
+context.createProducer().send(replyQueue, retailerConfirmMessage);
+context.commit();
+----
+6.  The retailer receives the message from the vendor:
++
+[source,oac_no_warn]
+----
+inMessage = (MapMessage) orderConfirmReceiver.receive();
+----
++
+The retailer then places a second order for twice as many computers as
+in the first order, so these steps are executed twice.
+
+link:#BNCGK[Figure 47-1] illustrates these steps.
+
+[[BNCGK]]
+
+.*Figure 47-1 Transactions: JMS Client Example*
+image:img/javaeett_dt_034.png[
+"Diagram of steps in transaction example"]
+
+All the messages use the `MapMessage` message type. Synchronous receives
+are used for all message reception except when the vendor processes the
+replies of the suppliers. These replies are processed asynchronously and
+demonstrate how to use transactions within a message listener.
+
+At random intervals, the `Vendor` client throws an exception to simulate
+a database problem and cause a rollback.
+
+All clients except `Retailer` use transacted contexts.
+
+The example uses three queues named `jms/AQueue`, `jms/BQueue`, and
+`jms/CQueue`, and one topic named `jms/OTopic`.
+
+[[sthref209]]
+
+[[to-create-resources-for-the-transactedexample-example]]
+To Create Resources for the transactedexample Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a command window, go to the `genericsupplier` example:
++
+[source,oac_no_warn]
+----
+cd tut-install/jms/transactedexample/genericsupplier
+----
+3.  Create the resources using the `asadmin add-resources` command:
++
+[source,oac_no_warn]
+----
+asadmin add-resources src/main/setup/glassfish-resources.xml
+----
+4.  Verify the creation of the resources:
++
+[source,oac_no_warn]
+----
+asadmin list-jms-resources
+----
++
+In addition to the resources you created for the simple examples and the
+durable subscription example, the command lists the four new
+destinations:
++
+[source,oac_no_warn]
+----
+jms/MyQueue
+jms/MyTopic
+jms/AQueue
+jms/BQueue
+jms/CQueue
+jms/OTopic
+jms/__defaultConnectionFactory
+jms/DurableConnectionFactory
+Command list-jms-resources executed successfully.
+----
+
+[[GJSHA]]
+
+[[to-run-the-transactedexample-clients]]
+To Run the transactedexample Clients
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You will need four terminal windows to run the clients. Make sure that
+you start the clients in the correct order.
+
+1.  In a terminal window, go to the following directory:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jms/transactedexample/
+----
+2.  To build and package all the modules, enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+3.  Go to the `genericsupplier` directory:
++
+[source,oac_no_warn]
+----
+cd genericsupplier
+----
+4.  [[BABFCGBI]]
++
+Use the following command to start the CPU supplier client:
++
+[source,oac_no_warn]
+----
+appclient -client target\genericsupplier.jar CPU
+----
++
+After some initial output, the client reports the following:
++
+[source,oac_no_warn]
+----
+Starting CPU supplier
+----
+5.  In a second terminal window, go to the `genericsupplier` directory:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/transactedexample/genericsupplier
+----
+6.  Use the following command to start the hard drive supplier client:
++
+[source,oac_no_warn]
+----
+appclient -client target\genericsupplier.jar HD
+----
++
+After some initial output, the client reports the following:
++
+[source,oac_no_warn]
+----
+Starting Hard Drive supplier
+----
+7.  In a third terminal window, go to the `vendor` directory:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/transactedexample/vendor
+----
+8.  Use the following command to start the `Vendor` client:
++
+[source,oac_no_warn]
+----
+appclient -client target\vendor.jar
+----
++
+After some initial output, the client reports the following:
++
+[source,oac_no_warn]
+----
+Starting vendor
+----
+9.  In another terminal window, go to the `retailer` directory:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/transactedexample/retailer
+----
+10. [[BABBIHCE]]
++
+Use a command like the following to run the `Retailer` client. The
+argument specifies the number of computers to order:
++
+[source,oac_no_warn]
+----
+appclient -client target/retailer.jar 4
+----
++
+After some initial output, the `Retailer` client reports something like
+the following. In this case, the first order is filled, but the second
+is not:
++
+[source,oac_no_warn]
+----
+Retailer: Quantity to be ordered is 4
+Retailer: Ordered 4 computer(s)
+Retailer: Order filled
+Retailer: Placing another order
+Retailer: Ordered 8 computer(s)
+Retailer: Order not filled
+----
++
+The `Vendor` client reports something like the following, stating in
+this case that it is able to send all the computers in the first order,
+but not in the second:
++
+[source,oac_no_warn]
+----
+Vendor: Retailer ordered 4 Computer(s)
+Vendor: Ordered 4 CPU(s) and hard drive(s)
+  Vendor: Committed transaction 1
+Vendor: Completed processing for order 1
+Vendor: Sent 4 computer(s)
+  Vendor: committed transaction 2
+Vendor: Retailer ordered 8 Computer(s)
+Vendor: Ordered 8 CPU(s) and hard drive(s)
+  Vendor: Committed transaction 1
+Vendor: Completed processing for order 2
+Vendor: Unable to send 8 computer(s)
+  Vendor: Committed transaction 2
+----
++
+The CPU supplier reports something like the following. In this case, it
+is able to send all the CPUs for both orders:
++
+[source,oac_no_warn]
+----
+CPU Supplier: Vendor ordered 4 CPU(s)
+CPU Supplier: Sent 4 CPU(s)
+  CPU Supplier: Committed transaction
+CPU Supplier: Vendor ordered 8 CPU(s)
+CPU Supplier: Sent 8 CPU(s)
+  CPU Supplier: Committed transaction
+----
++
+The hard drive supplier reports something like the following. In this
+case, it has a shortage of hard drives for the second order:
++
+[source,oac_no_warn]
+----
+Hard Drive Supplier: Vendor ordered 4 Hard Drive(s)
+Hard Drive Supplier: Sent 4 Hard Drive(s)
+  Hard Drive Supplier: Committed transaction
+Hard Drive Supplier: Vendor ordered 8 Hard Drive(s)
+Hard Drive Supplier: Sent 1 Hard Drive(s)
+  Hard Drive Supplier: Committed transaction
+----
+11. Repeat steps link:#BABFCGBI[4] through link:#BABBIHCE[10] as many
+times as you wish. Occasionally, the vendor will report an exception
+that causes a rollback:
++
+[source,oac_no_warn]
+----
+Vendor: JMSException occurred: javax.jms.JMSException: Simulated 
+database concurrent access exception
+  Vendor: Rolled back transaction 1
+----
+12. After you finish running the clients, you can delete the destination
+resources by using the following commands:
++
+[source,oac_no_warn]
+----
+asadmin delete-jms-resource jms/AQueue
+asadmin delete-jms-resource jms/BQueue
+asadmin delete-jms-resource jms/CQueue
+asadmin delete-jms-resource jms/OTopic
+----
+
+

@@ -1,0 +1,41 @@
+type=page
+status=published
+title=Configuring JavaServer Faces Applications
+next=jsf-configure001.html
+prev=jsf-custom014.html
+~~~~~~
+Configuring JavaServer Faces Applications
+=========================================
+
+[[BNAWO]]
+
+[[configuring-javaserver-faces-applications]]
+16 Configuring JavaServer Faces Applications
+--------------------------------------------
+
+
+This chapter describes additional configuration tasks required when you
+create large and complex applications.
+
+The following topics are addressed here:
+
+* link:jsf-configure001.html#A1352824[Introduction to Configuring
+JavaServer Faces Applications]
+* link:jsf-configure002.html#GIRCH[Using Annotations to Configure Managed
+Beans]
+* link:jsf-configure003.html#BNAWP[Application Configuration Resource
+File]
+* link:jsf-configure004.html#CHDGFCJF[Using Faces Flows]
+* link:jsf-configure005.html#BNAWQ[Configuring Managed Beans]
+* link:jsf-configure006.html#BNAXB[Registering Application Messages]
+* link:jsf-configure007.html#GIREB[Using Default Validators]
+* link:jsf-configure008.html#BNAXD[Registering a Custom Validator]
+* link:jsf-configure009.html#BNAXE[Registering a Custom Converter]
+* link:jsf-configure010.html#BNAXF[Configuring Navigation Rules]
+* link:jsf-configure011.html#BNAXH[Registering a Custom Renderer with a
+Render Kit]
+* link:jsf-configure012.html#BNAXI[Registering a Custom Component]
+* link:jsf-configure013.html#BNAXJ[Basic Requirements of a JavaServer
+Faces Application]
+
+

@@ -1,0 +1,24 @@
+type=page
+status=published
+title=Overview of the Persistence Examples
+next=persistence-basicexamples002.html
+prev=persistence-basicexamples.html
+~~~~~~
+Overview of the Persistence Examples
+====================================
+
+[[A1023268]]
+
+[[overview-of-the-persistence-examples]]
+Overview of the Persistence Examples
+------------------------------------
+
+The first example, `order`, is an application that uses a stateful
+session bean to manage entities related to an ordering system. The
+second example, `roster`, is an application that manages a community
+sports system. The third example, `address-book`, is a web application
+that stores contact data. This chapter assumes that you are familiar
+with the concepts detailed in link:persistence-intro.html#BNBPZ[Chapter
+38, "Introduction to the Java Persistence API."]
+
+

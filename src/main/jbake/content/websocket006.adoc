@@ -1,0 +1,47 @@
+type=page
+status=published
+title=Maintaining Client State
+next=websocket007.html
+prev=websocket005.html
+~~~~~~
+Maintaining Client State
+========================
+
+[[BABGJCAD]]
+
+[[maintaining-client-state]]
+Maintaining Client State
+------------------------
+
+Because the container creates an instance of the endpoint class for
+every connection, you can define and use instance variables to store
+client state information. In addition, the `Session.getUserProperties`
+method provides a modifiable map to store user properties. For example,
+the following endpoint replies to incoming text messages with the
+contents of the previous message from each client:
+
+[source,oac_no_warn]
+----
+@ServerEndpoint("/delayedecho")
+public class DelayedEchoEndpoint {
+   @OnOpen
+   public void open(Session session) {
+      session.getUserProperties().put("previousMsg", " ");
+   }
+   @OnMessage
+   public void message(Session session, String msg) {
+      String prev = (String) session.getUserProperties()
+                                    .get("previousMsg");
+      session.getUserProperties().put("previousMsg", msg);
+      try {
+         session.getBasicRemote().sendText(prev);
+      } catch (IOException e) { ... }
+   }
+}
+----
+
+To store information common to all connected clients, you can use class
+(static) variables; however, you are responsible for ensuring
+thread-safe access to them.
+
+

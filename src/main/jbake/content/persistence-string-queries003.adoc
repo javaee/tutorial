@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Executing String-Based Queries
+next=persistence-locking.html
+prev=persistence-string-queries002.html
+~~~~~~
+Executing String-Based Queries
+==============================
+
+[[GKJDB]]
+
+[[executing-string-based-queries]]
+Executing String-Based Queries
+------------------------------
+
+String-based queries are executed similarly to strongly typed Criteria
+queries. First create a `javax.persistence.TypedQuery` object by passing
+the criteria query object to the `EntityManager.createQuery` method,
+then call either `getSingleResult` or `getResultList` on the query
+object to execute the query:
+
+[source,oac_no_warn]
+----
+CriteriaQuery<Pet> cq = cb.createQuery(Pet.class);
+Root<Pet> pet = cq.from(Pet.class);
+cq.where(cb.equal(pet.get("name"), "Fido"));
+TypedQuery<Pet> q = em.createQuery(cq);
+List<Pet> results = q.getResultList();
+----
+
+

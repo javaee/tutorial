@@ -1,0 +1,210 @@
+type=page
+status=published
+title=Using Bean Validation Constraints
+next=bean-validation003.html
+prev=bean-validation001.html
+~~~~~~
+Using Bean Validation Constraints
+=================================
+
+[[GIRCZ]]
+
+[[using-bean-validation-constraints]]
+Using Bean Validation Constraints
+---------------------------------
+
+The Bean Validation model is supported by constraints in the form of
+annotations placed on a field, method, or class of a JavaBeans
+component, such as a managed bean.
+
+Constraints can be built in or user defined. User-defined constraints
+are called custom constraints. Several built-in constraints are
+available in the `javax.validation.constraints` package.
+link:#GKAGK[Table 22-1] lists all the built-in constraints. See
+link:bean-validation-advanced001.html#GKFGX[Creating Custom Constraints]
+for information on creating custom constraints.
+
+[[sthref121]][[GKAGK]]
+
+Table 22-1 Built-In Bean Validation Constraints
+
+[width="44%",cols="36%,64%,",options="header",]
+|=======================================================================
+|Constraint |Description |Example
+|`@AssertFalse` |The value of the field or property must be `false`. a|
+[source,oac_no_warn]
+----
+@AssertFalse
+boolean isUnsupported;
+----
+
+|`@AssertTrue` |The value of the field or property must be `true`. a|
+[source,oac_no_warn]
+----
+@AssertTrue
+boolean isActive;
+----
+
+|`@DecimalMax` |The value of the field or property must be a decimal
+value lower than or equal to the number in the value element. a|
+[source,oac_no_warn]
+----
+@DecimalMax("30.00")
+BigDecimal discount;
+----
+
+|`@DecimalMin` |The value of the field or property must be a decimal
+value greater than or equal to the number in the value element. a|
+[source,oac_no_warn]
+----
+@DecimalMin("5.00")
+BigDecimal discount;
+----
+
+|`@Digits` |The value of the field or property must be a number within a
+specified range. The `integer` element specifies the maximum integral
+digits for the number, and the `fraction` element specifies the maximum
+fractional digits for the number. a|
+[source,oac_no_warn]
+----
+@Digits(integer=6, fraction=2)
+BigDecimal price;
+----
+
+|`@Future` |The value of the field or property must be a date in the
+future. a|
+[source,oac_no_warn]
+----
+@Future
+Date eventDate;
+----
+
+|`@Max` |The value of the field or property must be an integer value
+lower than or equal to the number in the value element. a|
+[source,oac_no_warn]
+----
+@Max(10)
+int quantity;
+----
+
+|`@Min` |The value of the field or property must be an integer value
+greater than or equal to the number in the value element. a|
+[source,oac_no_warn]
+----
+@Min(5)
+int quantity;
+----
+
+|`@NotNull` |The value of the field or property must not be null. a|
+[source,oac_no_warn]
+----
+@NotNull
+String username;
+----
+
+|`@Null` |The value of the field or property must be null. a|
+[source,oac_no_warn]
+----
+@Null
+String unusedString;
+----
+
+|`@Past` |The value of the field or property must be a date in the past.
+a|
+[source,oac_no_warn]
+----
+@Past
+Date birthday;
+----
+
+|`@Pattern` |The value of the field or property must match the regular
+expression defined in the `regexp` element. a|
+[source,oac_no_warn]
+----
+@Pattern(regexp="\\(\\d{3}\\)\\d{3}-\\d{4}")
+String phoneNumber;
+----
+
+|`@Size` |The size of the field or property is evaluated and must match
+the specified boundaries. If the field or property is a `String`, the
+size of the string is evaluated. If the field or property is a
+`Collection`, the size of the `Collection` is evaluated. If the field or
+property is a `Map`, the size of the `Map` is evaluated. If the field or
+property is an array, the size of the array is evaluated. Use one of the
+optional `max` or `min` elements to specify the boundaries. a|
+[source,oac_no_warn]
+----
+@Size(min=2, max=240)
+String briefMessage;
+----
+
+|=======================================================================
+
+
+In the following example, a constraint is placed on a field using the
+built-in `@NotNull` constraint:
+
+[source,oac_no_warn]
+----
+public class Name {
+    @NotNull 
+    private String firstname;
+
+    @NotNull 
+    private String lastname;
+    ...
+}
+----
+
+You can also place more than one constraint on a single JavaBeans
+component object. For example, you can place an additional constraint
+for size of field on the `firstname` and the `lastname` fields:
+
+[source,oac_no_warn]
+----
+public class Name {
+    @NotNull
+    @Size(min=1, max=16)
+    private String firstname;
+
+    @NotNull 
+    @Size(min=1, max=16)
+    private String lastname;
+    ...
+}
+----
+
+The following example shows a method with a user-defined constraint that
+checks for a predefined email address pattern, such as a corporate email
+account:
+
+[source,oac_no_warn]
+----
+@ValidEmail 
+public String getEmailAddress() {
+    return emailAddress;
+}
+----
+
+For a built-in constraint, a default implementation is available. A
+user-defined or custom constraint needs a validation implementation. In
+the preceding example, the `@ValidEmail` custom constraint needs an
+implementation class.
+
+Any validation failures are gracefully handled and can be displayed by
+the `h:messages` tag.
+
+Any managed bean that contains Bean Validation annotations automatically
+gets validation constraints placed on the fields on a JavaServer Faces
+application's web pages.
+
+For more information on using validation constraints, see the following:
+
+* link:bean-validation-advanced.html#GKAHP[Chapter 23, "Bean Validation:
+Advanced Topics"]
+* link:jaxrs-advanced002.html#BABCJEDF[Validating Resource Data with Bean
+Validation]
+* link:persistence-intro002.html#GKAHQ[Validating Persistent Fields and
+Properties]
+
+

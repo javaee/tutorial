@@ -1,0 +1,107 @@
+type=page
+status=published
+title=Using a Custom Component
+next=jsf-custom011.html
+prev=jsf-custom009.html
+~~~~~~
+Using a Custom Component
+========================
+
+[[BNATT]]
+
+[[using-a-custom-component]]
+Using a Custom Component
+------------------------
+
+To use a custom component in a page, you add the custom tag associated
+with the component to the page.
+
+As explained in link:jsf-custom009.html#BNAWN[Defining the Custom
+Component Tag in a Tag Library Descriptor], you must ensure that the TLD
+that defines any custom tags is packaged in the application if you
+intend to use the tags in your pages. TLD files are stored in the
+`WEB-INF/` directory or subdirectory of the WAR file or in the
+`META-INF/` directory or subdirectory of a tag library packaged in a JAR
+file.
+
+You also need to include a namespace declaration in the page so that the
+page has access to the tags. The custom tags for the Duke's Bookstore
+case study are defined in `bookstore.taglib.xml`. The `ui:composition`
+tag on the `index.xhtml` page declares the namespace defined in the tag
+library:
+
+[source,oac_no_warn]
+----
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:bookstore="http://dukesbookstore"
+                template="./bookstoreTemplate.xhtml">
+----
+
+Finally, to use a custom component in a page, you add the component's
+tag to the page.
+
+The Duke's Bookstore case study includes a custom image map component on
+the `index.xhtml` page. This component allows you to select a book by
+clicking on a region of the image map:
+
+[source,oac_no_warn]
+----
+...
+<h:graphicImage id="mapImage"
+                name="book_all.jpg"
+                library="images
+                alt="#{bundle.chooseLocale}"
+                usemap="#bookMap" />
+<bookstore:map id="bookMap"
+               current="map1"
+               immediate="true"
+               action="bookstore">
+    <f:actionListener
+        type="javaeetutorial.dukesbookstore.listeners.MapBookChangeListener" />
+    <bookstore:area id="map1" value="#{Book201}" 
+                    onmouseover="resources/images/book_201.jpg" 
+                    onmouseout="resources/images/book_all.jpg" 
+                    targetImage="mapImage" />
+    ...
+    <bookstore:area id="map6" value="#{Book207}" 
+                    onmouseover="resources/images/book_207.jpg" 
+                    onmouseout="resources/images//book_all.jpg" 
+                    targetImage="mapImage" />
+</bookstore:map>
+----
+
+The standard `h:graphicImage` tag associates an image (`book_all.jpg`)
+with an image map that is referenced in the `usemap` attribute value.
+
+The custom `bookstore:map` tag that represents the custom component,
+`MapComponent`, specifies the image map and contains a set of
+`bookstore:area` tags. Each custom `bookstore:area` tag represents a
+custom `AreaComponent` and specifies a region of the image map.
+
+On the page, the `onmouseover` and `onmouseout` attributes specify the
+image that is displayed when the user performs the actions described by
+the attributes. The custom renderer also renders an `onclick` attribute.
+
+In the rendered HTML page, the `onmouseover`, `onmouseout`, and
+`onclick` attributes define which JavaScript code is executed when these
+events occur. When the user moves the mouse over a region, the
+`onmouseover` function associated with the region displays the map with
+that region highlighted. When the user moves the mouse out of a region,
+the `onmouseout` function redisplays the original image. When the user
+clicks a region, the `onclick` function sets the value of a hidden
+`input` tag to the ID of the selected area and submits the page.
+
+When the custom renderer renders these attributes in HTML, it also
+renders the JavaScript code. The custom renderer also renders the entire
+`onclick` attribute rather than letting the page author set it.
+
+The custom renderer that renders the HTML `map` tag also renders a
+hidden `input` component that holds the current area. The server-side
+objects retrieve the value of the hidden `input` field and set the
+locale in the `FacesContext` instance according to which region was
+selected.
+
+

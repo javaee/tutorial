@@ -1,0 +1,36 @@
+type=page
+status=published
+title=The Java Persistence Query Language
+next=persistence-querylanguage001.html
+prev=persistence-basicexamples004.html
+~~~~~~
+The Java Persistence Query Language
+===================================
+
+[[BNBTG]]
+
+[[the-java-persistence-query-language]]
+40 The Java Persistence Query Language
+--------------------------------------
+
+
+This chapter describes the Java Persistence query language that defines
+queries for entities and their persistent state. The query language
+allows you to write portable queries that work regardless of the
+underlying data store.
+
+The following topics are addressed here:
+
+* link:persistence-querylanguage001.html#A1073303[Overview of the Java
+Persistence Query Language]
+* link:persistence-querylanguage002.html#BNBTH[Query Language
+Terminology]
+* link:persistence-querylanguage003.html#BNBRG[Creating Queries Using the
+Java Persistence Query Language]
+* link:persistence-querylanguage004.html#BNBTI[Simplified Query Language
+Syntax]
+* link:persistence-querylanguage005.html#BNBTL[Example Queries]
+* link:persistence-querylanguage006.html#BNBUF[Full Query Language
+Syntax]
+
+

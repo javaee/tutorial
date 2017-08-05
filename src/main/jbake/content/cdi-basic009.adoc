@@ -1,0 +1,50 @@
+type=page
+status=published
+title=Giving Beans EL Names
+next=cdi-basic010.html
+prev=cdi-basic008.html
+~~~~~~
+Giving Beans EL Names
+=====================
+
+[[GJBAK]]
+
+[[giving-beans-el-names]]
+Giving Beans EL Names
+---------------------
+
+To make a bean accessible through the EL:
+
+1.  Use the `@Named` built-in qualifier:
++
+[source,oac_no_warn]
+----
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
+@RequestScoped
+public class Printer {
+
+    @Inject @Informal Greeting greeting;
+    ...
+}
+----
++
+The `@Named` qualifier allows you to access the bean by using the bean
+name, with the first letter in lowercase. For example, a Facelets page
+would refer to the bean as `printer`.
++
+You can specify an argument to the `@Named` qualifier to use a
+nondefault name:
++
+[source,oac_no_warn]
+----
+@Named("MyPrinter")
+----
++
+With this annotation, the Facelets page would refer to the bean as
+`MyPrinter`.
+
+

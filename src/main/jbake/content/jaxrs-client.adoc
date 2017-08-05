@@ -1,0 +1,30 @@
+type=page
+status=published
+title=Accessing REST Resources with the JAX-RS Client API
+next=jaxrs-client001.html
+prev=jaxrs004.html
+~~~~~~
+Accessing REST Resources with the JAX-RS Client API
+===================================================
+
+[[BABEIGIH]]
+
+[[accessing-rest-resources-with-the-jax-rs-client-api]]
+31 Accessing REST Resources with the JAX-RS Client API
+------------------------------------------------------
+
+
+This chapter describes the JAX-RS Client API and includes examples of
+how to access REST resources using the Java programming language.
+
+JAX-RS provides a client API for accessing REST resources from other
+Java applications.
+
+The following topics are addressed here:
+
+* link:jaxrs-client001.html#BABBIHEJ[Overview of the Client API]
+* link:jaxrs-client002.html#BABJCIJC[Using the Client API in the JAX-RS
+Example Applications]
+* link:jaxrs-client003.html#BABCDDGH[Advanced Features of the Client API]
+
+

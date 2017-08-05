@@ -1,0 +1,285 @@
+type=page
+status=published
+title=Overview of Java EE Security
+next=security-intro002.html
+prev=security-intro.html
+~~~~~~
+Overview of Java EE Security
+============================
+
+[[BNBWK]]
+
+[[overview-of-java-ee-security]]
+Overview of Java EE Security
+----------------------------
+
+Every enterprise that has either sensitive resources that can be
+accessed by many users or resources that traverse unprotected, open
+networks, such as the Internet, needs to be protected.
+
+Enterprise tier and web tier applications are made up of components that
+are deployed into various containers. These components are combined to
+build a multitier enterprise application. Security for components is
+provided by their containers. A container provides two kinds of
+security: declarative and programmatic.
+
+* Declarative security expresses an application component's security
+requirements by using either deployment descriptors or annotations.
++
+A deployment descriptor is an XML file that is external to the
+application and that expresses an application's security structure,
+including security roles, access control, and authentication
+requirements. For more information about deployment descriptors, read
+link:security-intro003.html#BNBXF[Using Deployment Descriptors for
+Declarative Security].
++
+Annotations, also called metadata, are used to specify information about
+security within a class file. When the application is deployed, this
+information can be either used by or overridden by the application
+deployment descriptor. Annotations save you from having to write
+declarative information inside XML descriptors. Instead, you simply put
+annotations on the code, and the required information gets generated.
+For this tutorial, annotations are used for securing applications
+wherever possible. For more information about annotations, see
+link:security-intro003.html#BNBXG[Using Annotations to Specify Security
+Information].
+* Programmatic security is embedded in an application and is used to
+make security decisions. Programmatic security is useful when
+declarative security alone is not sufficient to express the security
+model of an application. For more information about programmatic
+security, read link:security-intro003.html#BNBXH[Using Programmatic
+Security].
+
+More information on these concepts and mechanisms can be found in the
+chapter on security in the Java EE 7 specification.
+
+Other chapters in this Part discuss security requirements in web tier
+and enterprise tier applications.
+
+* link:security-webtier.html#BNCAS[Chapter 49, "Getting Started Securing
+Web Applications"] explains how to add security to web components, such
+as servlets.
+* link:security-javaee.html#BNBYK[Chapter 50, "Getting Started Securing
+Enterprise Applications"] explains how to add security to Java EE
+components, such as enterprise beans and application clients.
+
+[[BNBWL]]
+
+[[a-simple-application-security-walkthrough]]
+A Simple Application Security Walkthrough
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The security behavior of a Java EE environment may be better understood
+by examining what happens in a simple application with a web client, a
+user interface, and enterprise bean business logic.
+
+In the following example, which is taken from the Java EE 7
+Specification, the web client relies on the web server to act as its
+authentication proxy by collecting user authentication data from the
+client and using it to establish an authenticated session.
+
+[[BNBWM]]
+
+[[step-1-initial-request]]
+Step 1: Initial Request
+^^^^^^^^^^^^^^^^^^^^^^^
+
+In the first step of this example, the web client requests the main
+application URL. This action is shown in link:#BNBWN[Figure 48-1].
+
+[[BNBWN]]
+
+.*Figure 48-1 Initial Request*
+image:img/javaeett_dt_039.png[
+"Diagram of initial request from web client to web server for access to a
+protected resource"]
+
+Since the client has not yet authenticated itself to the application
+environment, the server responsible for delivering the web portion of
+the application, hereafter referred to as the web server, detects this
+and invokes the appropriate authentication mechanism for this resource.
+For more information on these mechanisms, see
+link:security-intro002.html#BNBWY[Security Mechanisms].
+
+[[BNBWO]]
+
+[[step-2-initial-authentication]]
+Step 2: Initial Authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The web server returns a form that the web client uses to collect
+authentication data, such as user name and password, from the user. The
+web client forwards the authentication data to the web server, where it
+is validated by the web server, as shown in link:#BNBWP[Figure 48-2].
+The validation mechanism may be local to a server or may leverage the
+underlying security services. On the basis of the validation, the web
+server sets a credential for the user.
+
+[[BNBWP]]
+
+.*Figure 48-2 Initial Authentication*
+image:img/javaeett_dt_040.png[
+"Diagram of initial authentication: server sends form to client, which
+sends authentication data to server for validation"]
+
+[[BNBWQ]]
+
+[[step-3-url-authorization]]
+Step 3: URL Authorization
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The credential is used for future determinations of whether the user is
+authorized to access restricted resources it may request. The web server
+consults the security policy associated with the web resource to
+determine the security roles that are permitted access to the resource.
+The security policy is derived from annotations or from the deployment
+descriptor. The web container then tests the user's credential against
+each role to determine whether it can map the user to the role.
+link:#BNBWR[Figure 48-3] shows this process.
+
+[[BNBWR]]
+
+.*Figure 48-3 URL Authorization*
+image:img/javaeett_dt_041.png[
+"Diagram of URL authorization"]
+
+The web server's evaluation stops with an "is authorized" outcome when
+the web server is able to map the user to a role. A "not authorized"
+outcome is reached if the web server is unable to map the user to any of
+the permitted roles.
+
+[[BNBWS]]
+
+[[step-4-fulfilling-the-original-request]]
+Step 4: Fulfilling the Original Request
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the user is authorized, the web server returns the result of the
+original URL request, as shown in link:#BNBWT[Figure 48-4].
+
+[[BNBWT]]
+
+.*Figure 48-4 Fulfilling the Original Request*
+image:img/javaeett_dt_042.png[
+"Diagram of request fulfillment, showing server returning result to
+client"]
+
+In our example, the response URL of a web page is returned, enabling the
+user to post form data that needs to be handled by the business-logic
+component of the application. See
+link:security-webtier.html#BNCAS[Chapter 49, "Getting Started Securing
+Web Applications"] for more information on protecting web applications.
+
+[[BNBWU]]
+
+[[step-5-invoking-enterprise-bean-business-methods]]
+Step 5: Invoking Enterprise Bean Business Methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The web page performs the remote method call to the enterprise bean,
+using the user's credential to establish a secure association between
+the web page and the enterprise bean, as shown in link:#BNBWV[Figure
+48-5]. The association is implemented as two related security contexts:
+one in the web server and one in the EJB container.
+
+[[BNBWV]]
+
+.*Figure 48-5 Invoking an Enterprise Bean Business Method*
+image:img/javaeett_dt_043.png[
+"Diagram of authorization process between web component and enterprise
+bean"]
+
+The EJB container is responsible for enforcing access control on the
+enterprise bean method. The container consults the security policy
+associated with the enterprise bean to determine the security roles that
+are permitted access to the method. The security policy is derived from
+annotations or from the deployment descriptor. For each role, the EJB
+container determines whether it can map the caller to the role by using
+the security context associated with the call.
+
+The container's evaluation stops with an "is authorized" outcome when
+the container is able to map the caller's credential to a role. A "not
+authorized" outcome is reached if the container is unable to map the
+caller to any of the permitted roles. A "not authorized" result causes
+an exception to be thrown by the container and propagated back to the
+calling web page.
+
+If the call is authorized, the container dispatches control to the
+enterprise bean method. The result of the bean's execution of the call
+is returned to the web page and ultimately to the user by the web server
+and the web client.
+
+[[BNBWW]]
+
+[[features-of-a-security-mechanism]]
+Features of a Security Mechanism
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A properly implemented security mechanism will provide the following
+functionality:
+
+* Prevent unauthorized access to application functions and business or
+personal data (authentication)
+* Hold system users accountable for operations they perform
+(non-repudiation)
+* Protect a system from service interruptions and other breaches that
+affect quality of service
+
+Ideally, properly implemented security mechanisms will also be
+
+* Easy to administer
+* Transparent to system users
+* Interoperable across application and enterprise boundaries
+
+[[BNBWX]]
+
+[[characteristics-of-application-security]]
+Characteristics of Application Security
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Java EE applications consist of components that can contain both
+protected and unprotected resources. Often, you need to protect
+resources to ensure that only authorized users have access.
+Authorization provides controlled access to protected resources.
+Authorization is based on identification and authentication.
+Identification is a process that enables recognition of an entity by a
+system, and authentication is a process that verifies the identity of a
+user, device, or other entity in a computer system, usually as a
+prerequisite to allowing access to resources in a system.
+
+Authorization and authentication are not required for an entity to
+access unprotected resources. Accessing a resource without
+authentication is referred to as unauthenticated, or anonymous, access.
+
+The characteristics of application security that, when properly
+addressed, help to minimize the security threats faced by an enterprise
+include the following.
+
+* Authentication: The means by which communicating entities, such as
+client and server, prove to each other that they are acting on behalf of
+specific identities that are authorized for access. This ensures that
+users are who they say they are.
+* Authorization, or access control: The means by which interactions with
+resources are limited to collections of users or programs for the
+purpose of enforcing integrity, confidentiality, or availability
+constraints. This ensures that users have permission to perform
+operations or access data.
+* Data integrity: The means used to prove that information has not been
+modified by a third party, an entity other than the source of the
+information. For example, a recipient of data sent over an open network
+must be able to detect and discard messages that were modified after
+they were sent. This ensures that only authorized users can modify data.
+* Confidentiality, or data privacy: The means used to ensure that
+information is made available only to users who are authorized to access
+it. This ensures that only authorized users can view sensitive data.
+* Non-repudiation: The means used to prove that a user who performed
+some action cannot reasonably deny having done so. This ensures that
+transactions can be proved to have happened.
+* Quality of Service: The means used to provide better service to
+selected network traffic over various technologies.
+* Auditing: The means used to capture a tamper-resistant record of
+security-related events for the purpose of being able to evaluate the
+effectiveness of security policies and mechanisms. To enable this, the
+system maintains a record of transactions and security information.
+
+

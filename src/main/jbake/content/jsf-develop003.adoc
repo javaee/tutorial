@@ -1,0 +1,285 @@
+type=page
+status=published
+title=Writing Managed Bean Methods
+next=jsf-ajax.html
+prev=jsf-develop002.html
+~~~~~~
+Writing Managed Bean Methods
+============================
+
+[[BNAVB]]
+
+[[writing-managed-bean-methods]]
+Writing Managed Bean Methods
+----------------------------
+
+Methods of a managed bean can perform several application-specific
+functions for components on the page. These functions include
+
+* Performing processing associated with navigation
+* Handling action events
+* Performing validation on the component's value
+* Handling value-change events
+
+[[sthref68]]
+
+[[why-use-managed-beans]]
+Why Use Managed Beans
+~~~~~~~~~~~~~~~~~~~~~
+
+By using a managed bean to perform these functions, you eliminate the
+need to implement the `javax.faces.validator.Validator` interface to
+handle the validation or one of the listener interfaces to handle
+events. Also, by using a managed bean instead of a `Validator`
+implementation to perform validation, you eliminate the need to create a
+custom tag for the `Validator` implementation.
+
+In general, it is good practice to include these methods in the same
+managed bean that defines the properties for the components referencing
+these methods. The reason for doing so is that the methods might need to
+access the component's data to determine how to handle the event or to
+perform the validation associated with the component.
+
+The following sections explain how to write various types of managed
+bean methods.
+
+[[BNAVC]]
+
+[[writing-a-method-to-handle-navigation]]
+Writing a Method to Handle Navigation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+An action method, a managed bean method that handles navigation
+processing, must be a public method that takes no parameters and returns
+an `Object`, which is the logical outcome that the navigation system
+uses to determine the page to display next. This method is referenced
+using the component tag's `action` attribute.
+
+The following action method is from the managed bean `CashierBean`,
+which is invoked when a user clicks the Submit button on the page. If
+the user has ordered more than $100 worth of books, this method sets the
+`rendered` properties of the `fanClub` and `specialOffer` components to
+`true`, causing them to be displayed on the page the next time that page
+is rendered.
+
+After setting the components' `rendered` properties to `true`, this
+method returns the logical outcome `null`. This causes the JavaServer
+Faces implementation to re-render the page without creating a new view
+of the page, retaining the customer's input. If this method were to
+return `purchase`, which is the logical outcome to use to advance to a
+payment page, the page would re-render without retaining the customer's
+input. In this case, you want to re-render the page without clearing the
+data.
+
+If the user does not purchase more than $100 worth of books or if the
+`thankYou` component has already been rendered, the method returns
+`bookreceipt`. The JavaServer Faces implementation loads the
+`bookreceipt.xhtml` page after this method returns:
+
+[source,oac_no_warn]
+----
+public String submit() {
+    ...
+    if ((cart().getTotal()> 100.00) && !specialOffer.isRendered()) {
+        specialOfferText.setRendered(true);
+        specialOffer.setRendered(true);
+        return null;
+    } else if (specialOffer.isRendered() && !thankYou.isRendered()) {
+        thankYou.setRendered(true);
+        return null;
+    } else {
+        ...
+        cart.clear();
+        return ("bookreceipt");
+    }
+}
+----
+
+Typically, an action method will return a `String` outcome, as shown in
+the preceding example. Alternatively, you can define an `Enum` class
+that encapsulates all possible outcome strings and then make an action
+method return an `enum` constant, which represents a particular `String`
+outcome defined by the `Enum` class.
+
+The following example uses an `Enum` class to encapsulate all logical
+outcomes:
+
+[source,oac_no_warn]
+----
+public enum Navigation  {
+    main, accountHist, accountList, atm, atmAck, transferFunds,
+     transferAck, error
+}
+----
+
+When it returns an outcome, an action method uses the dot notation to
+reference the outcome from the `Enum` class:
+
+[source,oac_no_warn]
+----
+public Object submit(){
+    ...
+    return Navigation.accountHist;
+}
+----
+
+The section link:jsf-page-core004.html#BNATP[Referencing a Method That
+Performs Navigation] explains how a component tag references this
+method. The section link:jsf-develop002.html#BNAUK[Writing Properties
+Bound to Component Instances] explains how to write the bean properties
+to which the components are bound.
+
+[[BNAVD]]
+
+[[writing-a-method-to-handle-an-action-event]]
+Writing a Method to Handle an Action Event
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A managed bean method that handles an action event must be a public
+method that accepts an action event and returns `void`. This method is
+referenced using the component tag's `actionListener` attribute. Only
+components that implement `javax.faces.component.ActionSource` can refer
+to this method.
+
+In the following example, a method from a managed bean named
+`ActionBean` processes the event of a user clicking one of the links on
+the page:
+
+[source,oac_no_warn]
+----
+public void chooseBookFromLink(ActionEvent event) {
+    String current = event.getComponent().getId();
+    FacesContext context = FacesContext.getCurrentInstance();
+    String bookId = books.get(current);
+    context.getExternalContext().getSessionMap().put("bookId", bookId);
+}
+----
+
+This method gets the component that generated the event from the event
+object; then it gets the component's ID, which is a code for the book.
+The method matches the code against a `HashMap` object that contains the
+book codes and corresponding book ID values. Finally, the method sets
+the book ID by using the selected value from the `HashMap` object.
+
+link:jsf-page-core004.html#BNATQ[Referencing a Method That Handles an
+Action Event] explains how a component tag references this method.
+
+[[BNAVE]]
+
+[[writing-a-method-to-perform-validation]]
+Writing a Method to Perform Validation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Instead of implementing the `javax.faces.validator.Validator` interface
+to perform validation for a component, you can include a method in a
+managed bean to take care of validating input for the component. A
+managed bean method that performs validation must accept a
+`javax.faces.context.FacesContext`, the component whose data must be
+validated, and the data to be validated, just as the `validate` method
+of the `Validator` interface does. A component refers to the managed
+bean method by using its `validator` attribute. Only values of `UIInput`
+components or values of components that extend `UIInput` can be
+validated.
+
+Here is an example of a managed bean method that validates user input,
+from link:cdi-basicexamples003.html#GJCXV[The guessnumber-cdi CDI
+Example]:
+
+[source,oac_no_warn]
+----
+public void validateNumberRange(FacesContext context,
+                                UIComponent toValidate, 
+                                Object value) {
+    if (remainingGuesses <= 0) {
+        ((UIInput) toValidate).setValid(false);
+        FacesMessage message = new FacesMessage("No guesses left!");
+        context.addMessage(toValidate.getClientId(context), message);
+        return;
+    }
+
+    int input = (Integer) value;
+    if (input < minimum || input> maximum) {
+        ((UIInput) toValidate).setValid(false);
+
+        FacesMessage message = new FacesMessage("Invalid guess");
+        context.addMessage(toValidate.getClientId(context), message);
+    }
+}
+----
+
+The `validateNumberRange` method performs two different validations.
+
+* If the user has run out of guesses, the method sets the `valid`
+property of the `UIInput` component to `false`. Then it queues a message
+onto the `FacesContext` instance, associating the message with the
+component ID, and returns.
+* If the user has some remaining guesses, the method then retrieves the
+local value of the component. If the input value is outside the
+allowable range, the method again sets the `valid` property of the
+`UIInput` component to `false`, queues a different message on the
+`FacesContext` instance, and returns.
+
+See link:jsf-page-core004.html#BNATR[Referencing a Method That Performs
+Validation] for information on how a component tag references this
+method.
+
+[[BNAVF]]
+
+[[writing-a-method-to-handle-a-value-change-event]]
+Writing a Method to Handle a Value-Change Event
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A managed bean that handles a value-change event must use a public
+method that accepts a value-change event and returns `void`. This method
+is referenced using the component's `valueChangeListener` attribute.
+This section explains how to write a managed bean method to replace the
+`javax.faces.event.ValueChangeListener` implementation.
+
+The following example tag comes from
+link:jsf-page-core002.html#BNATA[Registering a Value-Change Listener on a
+Component], where the `h:inputText` tag with the `id` of `name` has a
+`ValueChangeListener` instance registered on it. This
+`ValueChangeListener` instance handles the event of entering a value in
+the field corresponding to the component. When the user enters a value,
+a value-change event is generated, and the
+`processValueChange(ValueChangeEvent)` method of the
+`ValueChangeListener` class is invoked:
+
+[source,oac_no_warn]
+----
+<h:inputText id="name"
+             size="30"
+             value="#{cashierBean.name}"
+             required="true"
+             requiredMessage="#{bundle.ReqCustomerName}">    
+     <f:valueChangeListener
+         type="javaeetutorial.dukesbookstore.listeners.NameChanged" />
+</h:inputText>
+----
+
+Instead of implementing `ValueChangeListener`, you can write a managed
+bean method to handle this event. To do this, you move the
+`processValueChange(ValueChangeEvent)` method from the
+`ValueChangeListener` class, called `NameChanged`, to your managed bean.
+
+Here is the managed bean method that processes the event of entering a
+value in the `name` field on the page:
+
+[source,oac_no_warn]
+----
+public void processValueChange(ValueChangeEvent event)
+        throws AbortProcessingException {
+    if (null != event.getNewValue()) {
+        FacesContext.getCurrentInstance().getExternalContext().
+                getSessionMap().put("name", event.getNewValue());
+    }
+}
+----
+
+To make this method handle the `ValueChangeEvent` generated by an input
+component, reference this method from the component tag's
+`valueChangeListener` attribute. See
+link:jsf-page-core004.html#BNATS[Referencing a Method That Handles a
+Value-Change Event] for more information.
+
+

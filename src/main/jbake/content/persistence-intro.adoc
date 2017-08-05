@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Introduction to the Java Persistence API
+next=persistence-intro001.html
+prev=partpersist.html
+~~~~~~
+Introduction to the Java Persistence API
+========================================
+
+[[BNBPZ]]
+
+[[introduction-to-the-java-persistence-api]]
+38 Introduction to the Java Persistence API
+-------------------------------------------
+
+
+This chapter provides a description of the Java Persistence API.
+
+The following topics are addressed here:
+
+* link:persistence-intro001.html#A1019685[Overview of the Java
+Persistence API]
+* link:persistence-intro002.html#BNBQA[Entities]
+* link:persistence-intro003.html#BNBQN[Entity Inheritance]
+* link:persistence-intro004.html#BNBQW[Managing Entities]
+* link:persistence-intro005.html#GJISE[Querying Entities]
+* link:persistence-intro006.html#CHDBEGIC[Database Schema Creation]
+* link:persistence-intro007.html#GKCLC[Further Information about
+Persistence]
+
+

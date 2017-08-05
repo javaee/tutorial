@@ -1,0 +1,119 @@
+type=page
+status=published
+title=Creating Custom Constraints
+next=bean-validation-advanced002.html
+prev=bean-validation-advanced.html
+~~~~~~
+Creating Custom Constraints
+===========================
+
+[[GKFGX]]
+
+[[creating-custom-constraints]]
+Creating Custom Constraints
+---------------------------
+
+Bean Validation defines annotations, interfaces, and classes to allow
+developers to create custom constraints.
+
+The following topics are addressed here:
+
+* link:#GKAIA[Using the Built-In Constraints to Make a New Constraint]
+* link:#CIHCICAI[Removing Ambiguity in Constraint Targets]
+
+[[GKAIA]]
+
+[[using-the-built-in-constraints-to-make-a-new-constraint]]
+Using the Built-In Constraints to Make a New Constraint
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Bean Validation includes several built-in constraints that can be
+combined to create new, reusable constraints. This can simplify
+constraint definition by allowing developers to define a custom
+constraint made up of several built-in constraints that may then be
+applied to component attributes with a single annotation.
+
+[[GKAJU]]
+
+[source,oac_no_warn]
+----
+@Pattern.List({
+  @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+    +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
+    +"@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+})
+@Constraint(validatedBy = {})
+@Documented
+@Target({ElementType.METHOD,
+    ElementType.FIELD,
+    ElementType.ANNOTATION_TYPE,
+    ElementType.CONSTRUCTOR,
+    ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Email {
+
+    String message() default "{invalid.email}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    @Target({ElementType.METHOD,
+        ElementType.FIELD,
+        ElementType.ANNOTATION_TYPE,
+        ElementType.CONSTRUCTOR,
+        ElementType.PARAMETER})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    @interface List {
+        Email[] value();
+    }
+}
+----
+
+This custom constraint can then be applied to an attribute.
+
+[source,oac_no_warn]
+----
+...
+@Email
+protected String email;
+...
+----
+
+[[CIHCICAI]]
+
+[[removing-ambiguity-in-constraint-targets]]
+Removing Ambiguity in Constraint Targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Custom constraints that can be applied to both return values and method
+parameters require a `validationAppliesTo` element to identify the
+target of the constraint.
+
+[source,oac_no_warn]
+----
+@Constraint(validatedBy=MyConstraintValidator.class)
+@Target({ METHOD, FIELD, TYPE, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Retention(RUNTIME)
+public @interface MyConstraint {
+  String message() default "{com.example.constraint.MyConstraint.message}";
+  Class<?>[] groups() default {};
+  ConstraintTarget validationAppliesTo() default ConstraintTarget.PARAMETERS;
+...
+}
+----
+
+This constraint sets the `validationAppliesTo` target by default to the
+method parameters.
+
+[source,oac_no_warn]
+----
+@MyConstraint(validationAppliesTo=ConstraintTarget.RETURN_TYPE)
+public String doSomething(String param1, String param2) { ... }
+----
+
+In the preceding example, the target is set to the return value of the
+method.
+
+

@@ -1,0 +1,172 @@
+type=page
+status=published
+title=Finalizing a Servlet
+next=servlets011.html
+prev=servlets009.html
+~~~~~~
+Finalizing a Servlet
+====================
+
+[[BNAGS]]
+
+[[finalizing-a-servlet]]
+Finalizing a Servlet
+--------------------
+
+The web container may determine that a servlet should be removed from
+service (for example, when a container wants to reclaim memory resources
+or when it is being shut down). In such a case, the container calls the
+`destroy` method of the `Servlet` interface. In this method, you release
+any resources the servlet is using and save any persistent state. The
+`destroy` method releases the database object created in the `init`
+method.
+
+A servlet's service methods should all be complete when a servlet is
+removed. The server tries to ensure this by calling the `destroy` method
+only after all service requests have returned or after a server-specific
+grace period, whichever comes first. If your servlet has operations that
+may run longer than the server's grace period, the operations could
+still be running when `destroy` is called. You must make sure that any
+threads still handling client requests complete.
+
+The remainder of this section explains how to do the following.
+
+* Keep track of how many threads are currently running the `service`
+method.
+* Provide a clean shutdown by having the `destroy` method notify
+long-running threads of the shutdown and wait for them to complete.
+* Have the long-running methods poll periodically to check for shutdown
+and, if necessary, stop working, clean up, and return.
+
+[[BNAGT]]
+
+[[tracking-service-requests]]
+Tracking Service Requests
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To track service requests:
+
+1.  Include a field in your servlet class that counts the number of
+service methods that are running.
++
+The field should have synchronized access methods to increment,
+decrement, and return its value:
++
+[source,oac_no_warn]
+----
+public class ShutdownExample extends HttpServlet {
+    private int serviceCounter = 0;
+    ...
+    // Access methods for serviceCounter
+    protected synchronized void enteringServiceMethod() {
+        serviceCounter++;
+    }
+    protected synchronized void leavingServiceMethod() {
+        serviceCounter--;
+    }
+    protected synchronized int numServices() {
+        return serviceCounter;
+    }
+}
+----
++
+The `service` method should increment the service counter each time the
+method is entered and should decrement the counter each time the method
+returns. This is one of the few times that your `HttpServlet` subclass
+should override the `service` method. The new method should call
+`super.service` to preserve the functionality of the original `service`
+method:
++
+[source,oac_no_warn]
+----
+protected void service(HttpServletRequest req,
+                       HttpServletResponse resp)
+                       throws ServletException,IOException {
+    enteringServiceMethod();
+    try {
+        super.service(req, resp);
+    } finally {
+        leavingServiceMethod();
+    }
+}
+----
+
+[[BNAGU]]
+
+[[notifying-methods-to-shut-down]]
+Notifying Methods to Shut Down
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To ensure a clean shutdown, your `destroy` method should not release any
+shared resources until all the service requests have completed:
+
+1.  Check the service counter.
+2.  Notify long-running methods that it is time to shut down.
++
+For this notification, another field is required. The field should have
+the usual access methods:
++
+[source,oac_no_warn]
+----
+public class ShutdownExample extends HttpServlet {
+    private boolean shuttingDown;
+    ...
+    //Access methods for shuttingDown
+    protected synchronized void setShuttingDown(boolean flag) {
+        shuttingDown = flag;
+    }
+    protected synchronized boolean isShuttingDown() {
+        return shuttingDown;
+    }
+}
+----
++
+Here is an example of the `destroy` method using these fields to provide
+a clean shutdown:
++
+[source,oac_no_warn]
+----
+public void destroy() {
+    /* Check to see whether there are still service methods /*
+    /* running, and if there are, tell them to stop. */
+    if (numServices()> 0) {
+        setShuttingDown(true);
+    }
+
+    /* Wait for the service methods to stop. */
+    while (numServices()> 0) {
+        try {
+            Thread.sleep(interval);
+        } catch (InterruptedException e) {
+        }
+    }
+}
+----
+
+[[BNAGV]]
+
+[[creating-polite-long-running-methods]]
+Creating Polite Long-Running Methods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The final step in providing a clean shutdown is to make any long-running
+methods behave politely. Methods that might run for a long time should
+check the value of the field that notifies them of shutdowns and should
+interrupt their work, if necessary:
+
+[source,oac_no_warn]
+----
+public void doPost(...) {
+    ...
+    for(i = 0; ((i < lotsOfStuffToDo) &&
+         !isShuttingDown()); i++) {
+        try {
+            partOfLongRunningOperation(i);
+        } catch (InterruptedException e) {
+            ...
+        }
+    }
+}
+----
+
+

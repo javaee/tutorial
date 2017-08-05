@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Bean Validation: Advanced Topics
+next=bean-validation-advanced001.html
+prev=bean-validation005.html
+~~~~~~
+Bean Validation: Advanced Topics
+================================
+
+[[GKAHP]]
+
+[[bean-validation-advanced-topics]]
+23 Bean Validation: Advanced Topics
+-----------------------------------
+
+
+This chapter describes how to create custom constraints, custom
+validator messages, and constraint groups using the Java API for
+JavaBeans Validation (Bean Validation).
+
+The following topics are addressed here:
+
+* link:bean-validation-advanced001.html#GKFGX[Creating Custom
+Constraints]
+* link:bean-validation-advanced002.html#GKAHI[Customizing Validator
+Messages]
+* link:bean-validation-advanced003.html#GKAGV[Grouping Constraints]
+* link:bean-validation-advanced004.html#CIHGJBGI[Using Method Constraints
+in Type Hierarchies]
+
+

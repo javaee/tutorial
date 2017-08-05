@@ -1,0 +1,19 @@
+type=page
+status=published
+title=Further Information about Transactions
+next=resources.html
+prev=transactions008.html
+~~~~~~
+Further Information about Transactions
+======================================
+
+[[GKCMI]]
+
+[[further-information-about-transactions]]
+Further Information about Transactions
+--------------------------------------
+
+For more information about transactions, see the Java Transaction API
+1.2 specification at `https://www.jcp.org/en/jsr/detail?id=907`.
+
+

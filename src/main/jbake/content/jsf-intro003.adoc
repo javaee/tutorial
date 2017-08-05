@@ -1,0 +1,71 @@
+type=page
+status=published
+title=JavaServer Faces Technology Benefits
+next=jsf-intro004.html
+prev=jsf-intro002.html
+~~~~~~
+JavaServer Faces Technology Benefits
+====================================
+
+[[BNAPJ]]
+
+[[javaserver-faces-technology-benefits]]
+JavaServer Faces Technology Benefits
+------------------------------------
+
+One of the greatest advantages of JavaServer Faces technology is that it
+offers a clean separation between behavior and presentation for web
+applications. A JavaServer Faces application can map HTTP requests to
+component-specific event handling and manage components as stateful
+objects on the server. JavaServer Faces technology allows you to build
+web applications that implement the finer-grained separation of behavior
+and presentation that is traditionally offered by client-side UI
+architectures.
+
+The separation of logic from presentation also allows each member of a
+web application development team to focus on a single piece of the
+development process and provides a simple programming model to link the
+pieces. For example, page authors with no programming expertise can use
+JavaServer Faces technology tags in a web page to link to server-side
+objects without writing any scripts.
+
+Another important goal of JavaServer Faces technology is to leverage
+familiar component and web-tier concepts without limiting you to a
+particular scripting technology or markup language. JavaServer Faces
+technology APIs are layered directly on top of the Servlet API, as shown
+in link:#GJEPW[Figure 7-2].
+
+[[GJEPW]]
+
+.*Figure 7-2 Java Web Application Technologies*
+image:img/javaeett_dt_015.png[
+"Diagram of web application technologies. JavaServer Pages, the JSP
+Standard Tag Library, and JavaServer Faces rest on Java Servlet
+technology."]
+
+This layering of APIs enables several important application use cases,
+such as using different presentation technologies, creating your own
+custom components directly from the component classes, and generating
+output for various client devices.
+
+Facelets technology, available as part of JavaServer Faces technology,
+is the preferred presentation technology for building JavaServer Faces
+technology–based web applications. For more information on Facelets
+technology features, see link:jsf-facelets.html#GIEPX[Chapter 8,
+"Introduction to Facelets"].
+
+Facelets technology offers several advantages.
+
+* Code can be reused and extended for components through the templating
+and composite component features.
+* You can use annotations to automatically register the managed bean as
+a resource available for JavaServer Faces applications. In addition,
+implicit navigation rules allow developers to quickly configure page
+navigation (see link:jsf-intro006.html#BNAQL[Navigation Model] for
+details). These features reduce the manual configuration process for
+applications.
+* Most important, JavaServer Faces technology provides a rich
+architecture for managing component state, processing component data,
+validating user input, and handling events.
+
+

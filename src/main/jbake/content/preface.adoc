@@ -1,0 +1,196 @@
+type=page
+status=published
+title=Preface
+next=partintro.html
+prev=title.html
+~~~~~~
+Preface
+=======
+
+[[GEXAF]]
+
+[[preface]]
+Preface
+-------
+
+This tutorial is a guide to developing enterprise applications for the
+Java Platform, Enterprise Edition 7 (Java EE 7), using GlassFish Server
+Open Source Edition.
+
+GlassFish Server Open Source Edition is the leading open-source and
+open-community platform for building and deploying next-generation
+applications and services. GlassFish Server Open Source Edition,
+developed by the GlassFish project open-source community at
+`https://glassfish.java.net/`, is the first compatible implementation of
+the Java EE 7 platform specification. This lightweight, flexible, and
+open-source application server enables organizations not only to
+leverage the new capabilities introduced within the Java EE 7
+specification, but also to add to their existing capabilities through a
+faster and more streamlined development and deployment cycle. GlassFish
+Server Open Source Edition is hereafter referred to as GlassFish Server.
+
+The following topics are addressed here:
+
+* link:#CIACGIBD[Audience]
+* link:#CIAHFICG[Documentation Accessibility]
+* link:#BNAAC[Before You Read This Book]
+* link:#GIPRL[Related Documentation]
+* link:#GKVTF[Conventions]
+* link:#GFIRK[Default Paths and File Names]
+
+[[CIACGIBD]]
+
+[[audience]]
+Audience
+~~~~~~~~
+
+This tutorial is intended for programmers interested in developing and
+deploying Java EE 7 applications. It covers the technologies comprising
+the Java EE platform and describes how to develop Java EE components and
+deploy them on the Java EE Software Development Kit (SDK).
+
+[[CIAHFICG]]
+
+[[documentation-accessibility]]
+Documentation Accessibility
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For information about Oracle's commitment to accessibility, visit the
+Oracle Accessibility Program website at
+`http://www.oracle.com/pls/topic/lookup?ctx=acc&id=docacc`.
+
+[[sthref2]]
+
+Access to Oracle Support
+
+Oracle customers that have purchased support have access to electronic
+support through My Oracle Support. For information, visit
+`http://www.oracle.com/pls/topic/lookup?ctx=acc&id=info` or visit
+`http://www.oracle.com/pls/topic/lookup?ctx=acc&id=trs` if you are
+hearing impaired.
+
+[[BNAAC]]
+
+[[before-you-read-this-book]]
+Before You Read This Book
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before proceeding with this tutorial, you should have a good knowledge
+of the Java programming language. A good way to get to that point is to
+work through the Java Tutorials
+(`http://docs.oracle.com/javase/tutorial/index.html`).
+
+[[GIPRL]]
+
+[[related-documentation]]
+Related Documentation
+~~~~~~~~~~~~~~~~~~~~~
+
+The GlassFish Server documentation set describes deployment planning and
+system installation. To obtain documentation for GlassFish Server Open
+Source Edition, go to `https://glassfish.java.net/docs/`.
+
+The Java EE 7 API specification can be viewed at
+`http://docs.oracle.com/javaee/7/api/` and is also provided in the Java
+EE 7 SDK.
+
+Additionally, the Java EE Specifications at
+`http://www.oracle.com/technetwork/java/javaee/tech/index.html` might be
+useful.
+
+For information about creating enterprise applications in the NetBeans
+Integrated Development Environment (IDE), see
+`https://netbeans.org/kb/`.
+
+For information about the Java DB database for use with GlassFish
+Server, see
+`http://www.oracle.com/technetwork/java/javadb/overview/index.html`.
+
+The GlassFish Samples project is a collection of sample applications
+that demonstrate a broad range of Java EE technologies. The GlassFish
+Samples are bundled with the Java EE Software Development Kit (SDK) and
+are also available from the GlassFish Samples project page at
+`https://glassfish-samples.java.net/`.
+
+[[GKVTF]]
+
+[[conventions]]
+Conventions
+~~~~~~~~~~~
+
+The following table describes the typographic conventions that are used
+in this book.
+
+[width="55%",cols="28%,72%,",options="header",]
+|=======================================================================
+|Convention |Meaning |Example
+|Boldface |Boldface type indicates graphical user interface elements
+associated with an action or terms defined in text. a|
+From the File menu, choose Open Project.
+
+A cache is a copy that is stored locally.
+
+|`Monospace` |Monospace type indicates the names of files and
+directories, commands within a paragraph, URLs, code in examples, text
+that appears on the screen, or text that you enter. a|
+Edit your `.login` file.
+
+Use `ls` `-a` to list all files.
+
+`machine_name% you have mail.`
+
+|Italic |Italic type indicates book titles, emphasis, or placeholder
+variables for which you supply particular values. a|
+Read Chapter 6 in the User's Guide.
+
+Do not save the file.
+
+The command to remove a file is `rm` filename.
+
+|=======================================================================
+
+
+[[GFIRK]]
+
+[[default-paths-and-file-names]]
+Default Paths and File Names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following table describes the default paths and file names that are
+used in this book.
+
+[width="51%",cols="38%,62%,",options="header",]
+|=======================================================================
+|Placeholder |Description |Default Value
+|as-install |Represents the base installation directory for GlassFish
+Server or the SDK of which GlassFish Server is a part. a|
+Installations on the Solaris operating system, Linux operating system,
+and Mac operating system:
+
+user's-home-directory`/glassfish4/glassfish`
+
+Windows, all installations:
+
+SystemDrive`:\glassfish4\glassfish`
+
+|as-install-parent |Represents the parent of the base installation
+directory for GlassFish Server. a|
+Installations on the Solaris operating system, Linux operating system,
+and Mac operating system:
+
+user's-home-directory`/glassfish4`
+
+Windows, all installations:
+
+SystemDrive`:\glassfish4`
+
+|tut-install |Represents the base installation directory for the Java EE
+Tutorial after you install GlassFish Server or the SDK and run the
+Update Tool. |as-install-parent`/docs/javaee-tutorial`
+
+|domain-dir |Represents the directory in which a domain's configuration
+is stored. |as-install`/domains/domain1`
+|=======================================================================
+
+
+

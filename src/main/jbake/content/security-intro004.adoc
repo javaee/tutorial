@@ -1,0 +1,42 @@
+type=page
+status=published
+title=Securing GlassFish Server
+next=security-intro005.html
+prev=security-intro003.html
+~~~~~~
+Securing GlassFish Server
+=========================
+
+[[BNBXI]]
+
+[[securing-glassfish-server]]
+Securing GlassFish Server
+-------------------------
+
+This tutorial describes deployment to GlassFish Server, which provides
+highly secure, interoperable, and distributed component computing based
+on the Java EE security model. GlassFish Server supports the Java EE 7
+security model. You can configure GlassFish Server for the following
+purposes.
+
+* Adding, deleting, or modifying authorized users. For more information
+on this topic, see link:security-intro005.html#BNBXJ[Working with Realms,
+Users, Groups, and Roles].
+* Configuring secure HTTP and Internet Inter-Orb Protocol (IIOP)
+listeners.
+* Configuring secure Java Management Extensions (JMX) connectors.
+* Adding, deleting, or modifying existing or custom realms.
+* Defining an interface for pluggable authorization providers using Java
+Authorization Contract for Containers (JACC). JACC defines security
+contracts between GlassFish Server and authorization policy modules.
+These contracts specify how the authorization providers are installed,
+configured, and used in access decisions.
+* Using pluggable audit modules.
+* Customizing authentication mechanisms. All implementations of Java EE
+7 compatible web containers are required to support the Servlet Profile
+of JSR 196, which offers an avenue for customizing the authentication
+mechanism applied by the web container on behalf of one or more
+applications.
+* Setting and changing policy permissions for an application.
+
+

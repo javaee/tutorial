@@ -1,0 +1,40 @@
+type=page
+status=published
+title=Java API for WebSocket
+next=websocket001.html
+prev=servlets018.html
+~~~~~~
+Java API for WebSocket
+======================
+
+[[GKJIQ5]]
+
+[[java-api-for-websocket]]
+18 Java API for WebSocket
+-------------------------
+
+
+This chapter describes the Java API for WebSocket (JSR 356), which
+provides support for creating WebSocket applications. WebSocket is an
+application protocol that provides full-duplex communications between
+two peers over the TCP protocol.
+
+The following topics are addressed here:
+
+* link:websocket001.html#BABDABHF[Introduction to WebSocket]
+* link:websocket002.html#BABEAEFC[Creating WebSocket Applications in the
+Java EE Platform]
+* link:websocket003.html#BABGJEIG[Programmatic Endpoints]
+* link:websocket004.html#BABFEBGA[Annotated Endpoints]
+* link:websocket005.html#BABFCGBJ[Sending and Receiving Messages]
+* link:websocket006.html#BABGJCAD[Maintaining Client State]
+* link:websocket007.html#BABGADFG[Using Encoders and Decoders]
+* link:websocket008.html#BABEJIJI[Path Parameters]
+* link:websocket009.html#BABDEJHB[Handling Errors]
+* link:websocket010.html#BABJAIGH[Specifying an Endpoint Configurator
+Class]
+* link:websocket011.html#BABGCEHE[The dukeetf2 Example Application]
+* link:websocket012.html#BABCDBBC[The websocketbot Example Application]
+* link:websocket013.html#BABDFIFD[Further Information about WebSocket]
+
+

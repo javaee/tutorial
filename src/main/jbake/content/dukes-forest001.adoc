@@ -1,0 +1,48 @@
+type=page
+status=published
+title=Overview of the Duke's Forest Case Study Example
+next=dukes-forest002.html
+prev=dukes-forest.html
+~~~~~~
+Overview of the Duke's Forest Case Study Example
+================================================
+
+[[A1256074]]
+
+[[overview-of-the-dukes-forest-case-study-example]]
+Overview of the Duke's Forest Case Study Example
+------------------------------------------------
+
+Duke's Forest is a simple e-commerce application that contains several
+web applications and illustrates the use of the following Java EE 7
+APIs:
+
+* JavaServer Faces technology, including Ajax
+* Contexts and Dependency Injection for Java EE (CDI)
+* Java API for RESTful Web Services (JAX-RS)
+* Java Persistence API (JPA)
+* Java API for JavaBeans Validation (Bean Validation)
+* Enterprise JavaBeans (EJB) technology
+* Java Message Service (JMS)
+
+The application consists of the following projects.
+
+* Duke's Store: A web application that has a product catalog, customer
+self-registration, and a shopping cart. It also has an administration
+interface for product, category, and user management. The project name
+is `dukes-store`.
+* Duke's Shipment: A web application that provides an interface for
+order shipment management. The project name is `dukes-shipment`.
+* Duke's Payment: A web service application that has a RESTful web
+service for order payment. The project name is `dukes-payment`.
+* Duke's Resources: A simple Java archive project that contains all
+resources used by the web projects. It includes messages, CSS style
+sheets, images, JavaScript files, and JavaServer Faces composite
+components. The project name is `dukes-resources`.
+* Entities: A simple Java archive project that contains all JPA
+entities. This project is shared among other projects that use the
+entities. The project name is `entities`.
+* Events: A simple Java archive project that contains a POJO class that
+is used as a CDI event. The project name is `events`.
+
+

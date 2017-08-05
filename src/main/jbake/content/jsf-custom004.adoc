@@ -1,0 +1,45 @@
+type=page
+status=published
+title=Steps for Creating a Custom Component
+next=jsf-custom005.html
+prev=jsf-custom003.html
+~~~~~~
+Steps for Creating a Custom Component
+=====================================
+
+[[BNAVT]]
+
+[[steps-for-creating-a-custom-component]]
+Steps for Creating a Custom Component
+-------------------------------------
+
+You can apply the following steps while developing your own custom
+component.
+
+1.  Create a custom component class that does the following:
+1.  Overrides the `getFamily` method to return the component family,
+which is used to look up renderers that can render the component
+2.  Includes the rendering code or delegates it to a renderer (explained
+in Step link:#CDECBJAE[2])
+3.  Enables component attributes to accept expressions
+4.  Queues an event on the component if the component generates events
+5.  Saves and restores the component state
+2.  [[CDECBJAE]]
++
+Delegate rendering to a renderer if your component does not handle the
+rendering. To do this:
+1.  Create a custom renderer class by extending
+`javax.faces.render.Renderer`.
+2.  Register the renderer to a render kit.
+3.  Register the component.
+4.  Create an event handler if your component generates events.
+5.  Create a tag library descriptor (TLD) that defines the custom tag.
+
+See link:jsf-configure012.html#BNAXI[Registering a Custom Component] and
+link:jsf-configure011.html#BNAXH[Registering a Custom Renderer with a
+Render Kit] for information on registering the custom component and the
+renderer. The section link:jsf-custom010.html#BNATT[Using a Custom
+Component] discusses how to use the custom component in a JavaServer
+Faces page.
+
+

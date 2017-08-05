@@ -1,0 +1,280 @@
+type=page
+status=published
+title=Working with Digital Certificates
+next=security-advanced002.html
+prev=security-advanced.html
+~~~~~~
+Working with Digital Certificates
+=================================
+
+[[BNBYB]]
+
+[[working-with-digital-certificates]]
+Working with Digital Certificates
+---------------------------------
+
+Digital certificates for GlassFish Server have already been generated
+and can be found in the directory domain-dir`/config/`. These digital
+certificates are self-signed and are intended for use in a development
+environment; they are not intended for production purposes. For
+production purposes, generate your own certificates and have them signed
+by a Certificate Authority (CA).
+
+To use the Secure Sockets Layer (SSL), an application or web server must
+have an associated certificate for each external interface, or IP
+address, that accepts secure connections. The theory behind this design
+is that a server should provide some kind of reasonable assurance that
+its owner is who you think it is, particularly before receiving any
+sensitive information. It may be useful to think of a certificate as a
+"digital driver's license" for an Internet address. The certificate
+states with which company the site is associated, along with some basic
+contact information about the site owner or administrator.
+
+The digital certificate is cryptographically signed by its owner and is
+difficult for anyone else to forge. For sites involved in e-commerce or
+in any other business transaction in which authentication of identity is
+important, a certificate can be purchased from a well-known CA such as
+VeriSign or Thawte. If your server certificate is self-signed, you must
+install it in the GlassFish Server keystore file (`keystore.jks`). If
+your client certificate is self-signed, you should install it in the
+GlassFish Server truststore file (`cacerts.jks`).
+
+Sometimes, authentication is not really a concern. For example, an
+administrator might simply want to ensure that data being transmitted
+and received by the server is private and cannot be snooped by anyone
+eavesdropping on the connection. In such cases, you can save the time
+and expense involved in obtaining a CA certificate and simply use a
+self-signed certificate.
+
+SSL uses public-key cryptography, which is based on key pairs. Key pairs
+contain one public key and one private key. Data encrypted with one key
+can be decrypted only with the other key of the pair. This property is
+fundamental to establishing trust and privacy in transactions. For
+example, using SSL, the server computes a value and encrypts it by using
+its private key. The encrypted value is called a digital signature. The
+client decrypts the encrypted value by using the server's public key and
+compares the value to its own computed value. If the two values match,
+the client can trust that the signature is authentic, because only the
+private key could have been used to produce such a signature.
+
+Digital certificates are used with HTTPS to authenticate web clients.
+The HTTPS service of most web servers will not run unless a digital
+certificate has been installed. Use the procedure outlined in the next
+section, link:#BNBYC[Creating a Server Certificate], to set up a digital
+certificate that can be used by your application or web server to enable
+SSL.
+
+One tool that can be used to set up a digital certificate is `keytool`,
+a key and certificate management utility that ships with the JDK. This
+tool enables users to administer their own public/private key pairs and
+associated certificates for use in self-authentication, whereby the user
+authenticates himself or herself to other users or services, or data
+integrity and authentication services, using digital signatures. The
+tool also allows users to cache the public keys, in the form of
+certificates, of their communicating peers.
+
+For a better understanding of `keytool` and public-key cryptography, see
+link:security-advanced008.html#BABBGBBF[Further Information about
+Advanced Security Topics] for a link to the `keytool` documentation.
+
+[[BNBYC]]
+
+[[creating-a-server-certificate]]
+Creating a Server Certificate
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A server certificate has already been created for GlassFish Server and
+can be found in the domain-dir`/config/` directory. The server
+certificate is in `keystore.jks`. The `cacerts.jks` file contains all
+the trusted certificates, including client certificates.
+
+If necessary, you can use `keytool` to generate certificates. The
+`keytool` utility stores the keys and certificates in a file termed a
+keystore, a repository of certificates used for identifying a client or
+a server. Typically, a keystore is a file that contains one client's or
+one server's identity. The keystore protects private keys by using a
+password.
+
+If you don't specify a directory when specifying the keystore file name,
+the keystores are created in the directory from which the `keytool`
+command is run. This can be the directory where the application resides,
+or it can be a directory common to many applications.
+
+The general steps for creating a server certificate are as follows.
+
+1.  Create the keystore.
+2.  Export the certificate from the keystore.
+3.  Sign the certificate.
+4.  Import the certificate into a truststore: a repository of
+certificates used for verifying the certificates. A truststore typically
+contains more than one certificate.
+
+The next section provides specific information on using the `keytool`
+utility to perform these steps.
+
+[[GJRGY]]
+
+[[to-use-keytool-to-create-a-server-certificate]]
+To Use keytool to Create a Server Certificate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Run `keytool` to generate a new key pair in the default development
+keystore file, `keystore.jks`. This example uses the alias
+`server-alias` to generate a new public/private key pair and wrap the
+public key into a self-signed certificate inside `keystore.jks`. The key
+pair is generated by using an algorithm of type RSA, with a default
+password of `changeit`. For more information and other examples of
+creating and managing keystore files, read the `keytool` documentation.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+RSA is public-key encryption technology developed by RSA Data Security,
+Inc.
+
+|=======================================================================
+
+
+From the directory in which you want to create the key pair, run
+`keytool` as shown in the following steps.
+
+1.  Generate the server certificate.
++
+Enter the `keytool` command all on one line:
++
+[source,oac_no_warn]
+----
+java-home/bin/keytool -genkey -alias server-alias -keyalg RSA 
+-keypass changeit -storepass changeit -keystore keystore.jks
+----
++
+When you press Enter, `keytool` prompts you to enter the server name,
+organizational unit, organization, locality, state, and country code.
++
+You must enter the server name in response to `keytool`'s first prompt,
+in which it asks for first and last names. For testing purposes, this
+can be `localhost`.
+2.  Export the generated server certificate in `keystore.jks` into the
+file `server.cer`.
++
+Enter the `keytool` command all on one line:
++
+[source,oac_no_warn]
+----
+java-home/bin/keytool -export -alias server-alias -storepass changeit 
+-file server.cer -keystore keystore.jks
+----
+3.  If you want to have the certificate signed by a CA, read the example
+in the `keytool` documentation.
+4.  To add the server certificate to the truststore file, `cacerts.jks`,
+run `keytool` from the directory where you created the keystore and
+server certificate.
++
+Use the following parameters:
++
+[source,oac_no_warn]
+----
+java-home/bin/keytool -import -v -trustcacerts -alias server-alias 
+-file server.cer -keystore cacerts.jks -keypass changeit 
+-storepass changeit 
+----
++
+Information on the certificate, such as that shown next, will appear:
++
+[source,oac_no_warn]
+----
+Owner: CN=localhost, OU=My Company, O=Software, L=Santa Clara, ST=CA, C=US
+Issuer: CN=localhost, OU=My Company, O=Software, L=Santa Clara, ST=CA, C=US
+Serial number: 3e932169 
+Valid from: Mon Nov 26 18:15:47 EST 2012 until: Sun Feb 24 18:15:47 EST 2013
+Certificate fingerprints:
+         MD5: 52:9F:49:68:ED:78:6F:39:87:F3:98:B3:6A:6B:0F:90
+         SHA1: EE:2E:2A:A6:9E:03:9A:3A:1C:17:4A:28:5E:97:20:78:3F:
+         SHA256: 80:05:EC:7E:50:50:5D:AA:A3:53:F1:11:9B:19:EB:0D:20:67:C1:12:
+AF:42:EC:CD:66:8C:BD:99:AD:D9:76:95
+         Signature algorithm name: SHA256withRSA         Version: 3
+         ...
+Trust this certificate? [no]:
+----
+5.  Enter `yes`, then press the Enter or Return key.
++
+The following information appears:
++
+[source,oac_no_warn]
+----
+Certificate was added to keystore
+[Storing cacerts.jks]
+----
+
+[[GLIFW]]
+
+[[adding-users-to-the-certificate-realm]]
+Adding Users to the Certificate Realm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the `certificate` realm, user identity is set up in the GlassFish
+Server security context and populated with user data obtained from
+cryptographically verified client certificates. For step-by-step
+instructions for creating this type of certificate, see
+link:#BNBYB[Working with Digital Certificates].
+
+[[BNBYF]]
+
+[[using-a-different-server-certificate-with-glassfish-server]]
+Using a Different Server Certificate with GlassFish Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Follow the steps in link:#BNBYC[Creating a Server Certificate] to create
+your own server certificate, have it signed by a CA, and import the
+certificate into `keystore.jks`.
+
+Make sure that when you create the certificate, you follow these rules.
+
+* When you create the server certificate, `keytool` prompts you to enter
+your first and last name. In response to this prompt, you must enter the
+name of your server. For testing purposes, this can be `localhost`.
+* If you want to replace the existing `keystore.jks`, you must either
+change your keystore's password to the default password (`changeit`) or
+change the default password to your keystore's password.
+
+[[sthref230]]
+
+[[to-specify-a-different-server-certificate]]
+To Specify a Different Server Certificate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To specify that GlassFish Server should use the new keystore for
+authentication and authorization decisions, you must set the JVM options
+for GlassFish Server so that they recognize the new keystore. To use a
+different keystore from the one provided for development purposes,
+follow these steps.
+
+1.  Start GlassFish Server if you haven't already done so. Information
+on starting the GlassFish Server can be found in
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish Server].
+2.  Open the GlassFish Server Administration Console in a web browser at
+`http://localhost:4848`.
+3.  Expand Configurations, then expand server-config, then click JVM
+Settings.
+4.  Click the JVM Options tab.
+5.  Change the following JVM options so that they point to the location
+and name of the new keystore. The current settings are shown below:
++
+[source,oac_no_warn]
+----
+-Djavax.net.ssl.keyStore=${com.sun.aas.instanceRoot}/config/keystore.jks
+-Djavax.net.ssl.trustStore=${com.sun.aas.instanceRoot}/config/cacerts.jks
+----
+6.  If you've changed the keystore password from its default value, you
+need to add the password option as well:
++
+[source,oac_no_warn]
+----
+-Djavax.net.ssl.keyStorePassword=your-new-password 
+----
+7.  Click Save, then restart GlassFish Server.
+
+

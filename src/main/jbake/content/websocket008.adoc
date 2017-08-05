@@ -1,0 +1,61 @@
+type=page
+status=published
+title=Path Parameters
+next=websocket009.html
+prev=websocket007.html
+~~~~~~
+Path Parameters
+===============
+
+[[BABEJIJI]]
+
+[[path-parameters]]
+Path Parameters
+---------------
+
+The `ServerEndpoint` annotation enables you to use URI templates to
+specify parts of an endpoint deployment URI as application parameters.
+For example, consider this endpoint:
+
+[source,oac_no_warn]
+----
+@ServerEndpoint("/chatrooms/{room-name}")
+public class ChatEndpoint {
+   ...
+}
+----
+
+If the endpoint is deployed inside a web application called `chatapp` at
+a local Java EE server in port 8080, clients can connect to the endpoint
+using any of the following URIs:
+
+[source,oac_no_warn]
+----
+http://localhost:8080/chatapp/chatrooms/currentnews
+http://localhost:8080/chatapp/chatrooms/music
+http://localhost:8080/chatapp/chatrooms/cars
+http://localhost:8080/chatapp/chatrooms/technology
+----
+
+Annotated endpoints can receive path parameters as arguments in methods
+annotated with `@OnOpen`, `@OnMessage`, and `@OnClose`. In this example,
+the endpoint uses the parameter in the `@OnOpen` method to determine
+which chat room the client wants to join:
+
+[source,oac_no_warn]
+----
+@ServerEndpoint("/chatrooms/{room-name}")
+public class ChatEndpoint {
+   @OnOpen
+   public void open(Session session, 
+                    EndpointConfig c, 
+                    @PathParam("room-name") String roomName) {
+      // Add the client to the chat room of their choice ...
+   }
+}
+----
+
+The path parameters used as arguments in these methods can be strings,
+primitive types, or the corresponding wrapper types.
+
+

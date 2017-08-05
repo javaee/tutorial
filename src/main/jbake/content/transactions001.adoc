@@ -1,0 +1,28 @@
+type=page
+status=published
+title=Overview of Transactions
+next=transactions002.html
+prev=transactions.html
+~~~~~~
+Overview of Transactions
+========================
+
+[[A1024277]]
+
+[[overview-of-transactions]]
+Overview of Transactions
+------------------------
+
+A typical enterprise application accesses and stores information in one
+or more databases. Because this information is critical for business
+operations, it must be accurate, current, and reliable. Data integrity
+would be lost if multiple programs were allowed to update the same
+information simultaneously or if a system that failed while processing a
+business transaction were to leave the affected data only partially
+updated. By preventing both of these scenarios, software transactions
+ensure data integrity. Transactions control the concurrent access of
+data by multiple programs. In the event of a system failure,
+transactions make sure that after recovery, the data will be in a
+consistent state.
+
+

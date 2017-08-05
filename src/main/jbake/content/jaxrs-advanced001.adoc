@@ -1,0 +1,215 @@
+type=page
+status=published
+title=Annotations for Field and Bean Properties of Resource Classes
+next=jaxrs-advanced002.html
+prev=jaxrs-advanced.html
+~~~~~~
+Annotations for Field and Bean Properties of Resource Classes
+=============================================================
+
+[[GKKRB]]
+
+[[annotations-for-field-and-bean-properties-of-resource-classes]]
+Annotations for Field and Bean Properties of Resource Classes
+-------------------------------------------------------------
+
+JAX-RS annotations for resource classes let you extract specific parts
+or values from a Uniform Resource Identifier (URI) or request header.
+
+JAX-RS provides the annotations listed in link:#GKOBO[Table 32-1].
+
+[[sthref146]][[GKOBO]]
+
+Table 32-1 Advanced JAX-RS Annotations
+
+[width="22%",cols="100%,",options="header",]
+|=======================================================================
+|Annotation |Description
+|`@Context` |Injects information into a class field, bean property, or
+method parameter
+
+|`@CookieParam` |Extracts information from cookies declared in the
+cookie request header
+
+|`@FormParam` |Extracts information from a request representation whose
+content type is `application/x-www-form-urlencoded`
+
+|`@HeaderParam` |Extracts the value of a header
+
+|`@MatrixParam` |Extracts the value of a URI matrix parameter
+
+|`@PathParam` |Extracts the value of a URI template parameter
+
+|`@QueryParam` |Extracts the value of a URI query parameter
+|=======================================================================
+
+
+[[GKKYA]]
+
+[[extracting-path-parameters]]
+Extracting Path Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+URI path templates are URIs with variables embedded within the URI
+syntax. The `@PathParam` annotation lets you use variable URI path
+fragments when you call a method.
+
+The following code snippet shows how to extract the last name of an
+employee when the employee's email address is provided:
+
+[source,oac_no_warn]
+----
+@Path("/employees/{firstname}.{lastname}@{domain}.com")
+public class EmpResource {
+
+    @GET
+    @Produces("text/xml")
+    public String getEmployeelastname(@PathParam("lastname") String lastName) {
+      ...
+    }
+}
+----
+
+In this example, the `@Path` annotation defines the URI variables (or
+path parameters) `{firstname}`, `{lastname}`, and `{domain}`. The
+`@PathParam` in the method parameter of the request method extracts the
+last name from the email address.
+
+If your HTTP request is `GET` `/employees/john.doe@example.com`, the
+value "`doe`" is injected into `{lastname}`.
+
+You can specify several path parameters in one URI.
+
+You can declare a regular expression with a URI variable. For example,
+if it is required that the last name must consist only of lowercase and
+uppercase characters, you can declare the following regular expression:
+
+[source,oac_no_warn]
+----
+@Path("/employees/{firstname}.{lastname[a-zA-Z]*}@{domain}.com")
+----
+
+If the last name does not match the regular expression, a 404 response
+is returned.
+
+[[GKKXJ]]
+
+[[extracting-query-parameters]]
+Extracting Query Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the `@QueryParam` annotation to extract query parameters from the
+query component of the request URI.
+
+For instance, to query all employees who have joined within a specific
+range of years, use a method signature like the following:
+
+[source,oac_no_warn]
+----
+@Path("/employees/")
+@GET
+public Response getEmployees(
+        @DefaultValue("2003") @QueryParam("minyear") int minyear,
+        @DefaultValue("2013") @QueryParam("maxyear") int maxyear)
+    {...}
+----
+
+This code snippet defines two query parameters, `minyear` and `maxyear`.
+The following HTTP request would query for all employees who have joined
+between 2003 and 2013:
+
+[source,oac_no_warn]
+----
+GET /employees?maxyear=2013&minyear=2003
+----
+
+The `@DefaultValue` annotation defines a default value, which is to be
+used if no values are provided for the query parameters. By default,
+JAX-RS assigns a null value for `Object` values and zero for primitive
+data types. You can use the `@DefaultValue` annotation to eliminate null
+or zero values and define your own default values for a parameter.
+
+[[GKKYC]]
+
+[[extracting-form-data]]
+Extracting Form Data
+~~~~~~~~~~~~~~~~~~~~
+
+Use the `@FormParam` annotation to extract form parameters from HTML
+forms. For example, the following form accepts the name, address, and
+manager's name of an employee:
+
+[source,oac_no_warn]
+----
+<FORM action="http://example.com/employees/" method="post">
+  <p>
+    <fieldset>
+      Employee name: <INPUT type="text" name="empname" tabindex="1">  
+      Employee address: <INPUT type="text" name="empaddress" tabindex="2"> 
+      Manager name: <INPUT type="text" name="managername" tabindex="3"> 
+    </fieldset>
+  </p>
+</FORM>
+----
+
+Use the following code snippet to extract the manager name from this
+HTML form:
+
+[source,oac_no_warn]
+----
+@POST
+@Consumes("application/x-www-form-urlencoded")
+public void post(@FormParam("managername") String managername) {
+    // Store the value
+    ...
+}
+----
+
+To obtain a map of form parameter names to values, use a code snippet
+like the following:
+
+[source,oac_no_warn]
+----
+@POST
+@Consumes("application/x-www-form-urlencoded")
+public void post(MultivaluedMap<String, String> formParams) {
+    // Store the message
+}
+----
+
+[[GKLCQ]]
+
+[[extracting-the-java-type-of-a-request-or-response]]
+Extracting the Java Type of a Request or Response
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `javax.ws.rs.core.Context` annotation retrieves the Java types
+related to a request or response.
+
+The `javax.ws.rs.core.UriInfo` interface provides information about the
+components of a request URI. The following code snippet shows how to
+obtain a map of query and path parameter names to values:
+
+[source,oac_no_warn]
+----
+@GET
+public String getParams(@Context UriInfo ui) {
+    MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    MultivaluedMap<String, String> pathParams = ui.getPathParameters();
+}
+----
+
+The `javax.ws.rs.core.HttpHeaders` interface provides information about
+request headers and cookies. The following code snippet shows how to
+obtain a map of header and cookie parameter names to values:
+
+[source,oac_no_warn]
+----
+@GET
+public String getHeaders(@Context HttpHeaders hh) {
+    MultivaluedMap<String, String> headerParams = hh.getRequestHeaders();
+    MultivaluedMap<String, Cookie> pathParams = hh.getCookies();
+}
+----
+
+

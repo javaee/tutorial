@@ -1,0 +1,36 @@
+type=page
+status=published
+title=Deciding Which Type of Web Service to Use
+next=jaxws.html
+prev=webservices-intro002.html
+~~~~~~
+Deciding Which Type of Web Service to Use
+=========================================
+
+[[GJBJI]]
+
+[[deciding-which-type-of-web-service-to-use]]
+Deciding Which Type of Web Service to Use
+-----------------------------------------
+
+Basically, you want to use RESTful web services for integration over the
+web and big web services in enterprise application–integration scenarios
+that have advanced quality-of-service (QoS) requirements.
+
+* JAX-WS: Addresses advanced QoS requirements that commonly occur in
+enterprise computing. When compared to JAX-RS, JAX-WS makes it easier to
+support the WS-* set of protocols, which provide standards for security
+and reliability, among other things, and interoperate with other WS-*
+conforming clients and servers.
+* JAX-RS: Makes it easier to write web applications that apply some or
+all of the constraints of the REST style to induce desirable properties
+in the application, such as loose coupling (evolving the server is
+easier without breaking existing clients), scalability (start small and
+grow), and architectural simplicity (use off-the-shelf components, such
+as proxies or HTTP routers). You would choose to use JAX-RS for your web
+application because it is easier for many types of clients to consume
+RESTful web services while enabling the server side to evolve and scale.
+Clients can choose to consume some or all aspects of the service and
+mash it up with other web-based services.
+
+

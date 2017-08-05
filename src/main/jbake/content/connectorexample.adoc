@@ -1,0 +1,28 @@
+type=page
+status=published
+title=The Resource Adapter Examples
+next=connectorexample001.html
+prev=resources005.html
+~~~~~~
+The Resource Adapter Examples
+=============================
+
+[[GLODB]]
+
+[[the-resource-adapter-examples]]
+54 The Resource Adapter Examples
+--------------------------------
+
+
+This chapter describes two examples that demonstrate how to use resource
+adapters in Java EE applications and how to implement simple resource
+adapters.
+
+The following topics are addressed here:
+
+* link:connectorexample001.html#A1253757[Overview of the Resource Adapter
+Examples]
+* link:connectorexample002.html#CHDFHAID[The trading Example]
+* link:connectorexample003.html#CHDJEADB[The traffic Example]
+
+

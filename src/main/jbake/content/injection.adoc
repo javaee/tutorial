@@ -1,0 +1,36 @@
+type=page
+status=published
+title=Injection
+next=injection001.html
+prev=resource-creation003.html
+~~~~~~
+Injection
+=========
+
+[[GKJIQ3]]
+
+[[injection]]
+4 Injection
+-----------
+
+
+This chapter provides an overview of injection in Java EE and describes
+the two injection mechanisms provided by the platform: resource
+injection and dependency injection.
+
+Java EE provides injection mechanisms that enable your objects to obtain
+references to resources and other dependencies without having to
+instantiate them directly. You declare the required resources and other
+dependencies in your classes by decorating fields or methods with one of
+the annotations that mark the field as an injection point. The container
+then provides the required instances at runtime. Injection simplifies
+your code and decouples it from the implementations of its dependencies.
+
+The following topics are addressed here:
+
+* link:injection001.html#BABHDCAI[Resource Injection]
+* link:injection002.html#BABDJGIE[Dependency Injection]
+* link:injection003.html#BABHFECJ[The Main Differences between Resource
+Injection and Dependency Injection]
+
+

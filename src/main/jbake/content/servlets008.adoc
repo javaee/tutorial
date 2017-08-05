@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Accessing the Web Context
+next=servlets009.html
+prev=servlets007.html
+~~~~~~
+Accessing the Web Context
+=========================
+
+[[BNAGL]]
+
+[[accessing-the-web-context]]
+Accessing the Web Context
+-------------------------
+
+The context in which web components execute is an object that implements
+the `ServletContext` interface. You retrieve the web context by using
+the `getServletContext` method. The web context provides methods for
+accessing
+
+* Initialization parameters
+* Resources associated with the web context
+* Object-valued attributes
+* Logging capabilities
+
+The counter's access methods are synchronized to prevent incompatible
+operations by servlets that are running concurrently. A filter retrieves
+the counter object by using the context's `getAttribute` method. The
+incremented value of the counter is recorded in the log.
+
+

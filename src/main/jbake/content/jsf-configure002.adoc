@@ -1,0 +1,104 @@
+type=page
+status=published
+title=Using Annotations to Configure Managed Beans
+next=jsf-configure003.html
+prev=jsf-configure001.html
+~~~~~~
+Using Annotations to Configure Managed Beans
+============================================
+
+[[GIRCH]]
+
+[[using-annotations-to-configure-managed-beans]]
+Using Annotations to Configure Managed Beans
+--------------------------------------------
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+In JSF 2.3, managed bean annotations are deprecated; CDI is nowthe
+preferred approach.
+
+|=======================================================================
+
+
+JavaServer Faces support for bean annotations is introduced in
+link:jsf-intro.html#BNAPH[Chapter 7, "JavaServer Faces Technology"]. Bean
+annotations can be used for configuring JavaServer Faces applications.
+
+The `@Named` (`javax.inject.Named`) annotation in a class, along with a
+scope annotation, automatically registers that class as a resource with
+the JavaServer Faces implementation. A bean that uses these annotations
+is a CDI managed bean.
+
+The following shows the use of the `@Named` and `@SessionScoped`
+annotations in a class:
+
+[source,oac_no_warn]
+----
+@Named("cart")
+@SessionScoped
+public class ShoppingCart ... { ... }
+----
+
+The above code snippet shows a bean that is managed by the JavaServer
+Faces implementation and is available for the length of the session.
+
+You can annotate beans with any of the scopes listed in the next
+section, link:#GIRCR[Using Managed Bean Scopes].
+
+All classes will be scanned for annotations at startup unless the
+`faces-config` element in the `faces-config.xml` file has the
+`metadata-complete` attribute set to `true`.
+
+Annotations are also available for other artifacts, such as components,
+converters, validators, and renderers, to be used in place of
+application configuration resource file entries. These are discussed,
+along with registration of custom listeners, custom validators, and
+custom converters, in link:jsf-custom.html#BNAVG[Chapter 15, "Creating
+Custom UI Components and Other Custom Objects"].
+
+[[GIRCR]]
+
+[[using-managed-bean-scopes]]
+Using Managed Bean Scopes
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use annotations to define the scope in which the bean will be
+stored. You can specify one of the following scopes for a bean class.
+
+* Application (`javax.enterprise.context.ApplicationScoped`):
+Application scope persists across all users' interactions with a web
+application.
+* Session (`javax.enterprise.context.SessionScoped`): Session scope
+persists across multiple HTTP requests in a web application.
+* Flow (`javax.faces.flows.FlowScoped`): Flow scope persists during a
+user's interaction with a specific flow of a web application. See
+link:jsf-configure004.html#CHDGFCJF[Using Faces Flows] for more
+information.
+* Request (`javax.enterprise.context.RequestScoped`): Request scope
+persists during a single HTTP request in a web application.
+* Dependent (`javax.enterprise.context.Dependent`): Indicates that the
+bean depends on some other bean.
+
+You may want to use `@Dependent` when a managed bean references another
+managed bean. The second bean should not be in a scope (`@Dependent`) if
+it is supposed to be created only when it is referenced. If you define a
+bean as `@Dependent`, the bean is instantiated anew each time it is
+referenced, so it does not get saved in any scope.
+
+If your managed bean is referenced by the `binding` attribute of a
+component tag, you should define the bean with a request scope. If you
+placed the bean in session or application scope instead, the bean would
+need to take precautions to ensure thread safety, because
+`javax.faces.component.UIComponent` instances each depend on running
+inside of a single thread.
+
+If you are configuring a bean that allows attributes to be associated
+with the view, you can use the view scope. The attributes persist until
+the user has navigated to the next view.
+
+

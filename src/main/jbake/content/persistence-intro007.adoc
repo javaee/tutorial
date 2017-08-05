@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Further Information about Persistence
+next=persistence-basicexamples.html
+prev=persistence-intro006.html
+~~~~~~
+Further Information about Persistence
+=====================================
+
+[[GKCLC]]
+
+[[further-information-about-persistence]]
+Further Information about Persistence
+-------------------------------------
+
+For more information about the Java Persistence API, see
+
+* Java Persistence 2.1 API specification:
++
+`http://jcp.org/en/jsr/detail?id=338`
+* EclipseLink, the Java Persistence API implementation in GlassFish
+Server:
++
+`http://www.eclipse.org/eclipselink/jpa.php`
+* EclipseLink team blog:
++
+`http://eclipselink.blogspot.com/`
+* EclipseLink wiki documentation:
++
+`http://wiki.eclipse.org/EclipseLink`
+
+

@@ -1,0 +1,152 @@
+type=page
+status=published
+title=The interceptor Example Application
+next=batch-processing.html
+prev=interceptors002.html
+~~~~~~
+The interceptor Example Application
+===================================
+
+[[GKECI]]
+
+[[the-interceptor-example-application]]
+The interceptor Example Application
+-----------------------------------
+
+The `interceptor` example demonstrates how to use an interceptor class,
+containing an `@AroundInvoke` interceptor method, with a stateless
+session bean.
+
+The `HelloBean` stateless session bean is a simple enterprise bean with
+two business methods, `getName` and `setName`, to retrieve and modify a
+string. The `setName` business method has an `@Interceptors` annotation
+that specifies an interceptor class, `HelloInterceptor`, for that
+method:
+
+[source,oac_no_warn]
+----
+@Interceptors(HelloInterceptor.class)
+public void setName(String name) {
+    this.name = name;
+}
+----
+
+The `HelloInterceptor` class defines an `@AroundInvoke` interceptor
+method, `modifyGreeting`, that converts the string passed to
+`HelloBean.setName` to lowercase:
+
+[source,oac_no_warn]
+----
+@AroundInvoke
+public Object modifyGreeting(InvocationContext ctx) throws Exception {
+    Object[] parameters = ctx.getParameters();
+    String param = (String) parameters[0];
+    param = param.toLowerCase();
+    parameters[0] = param;
+    ctx.setParameters(parameters);
+    try {
+        return ctx.proceed();
+    } catch (Exception e) {
+        logger.warning("Error calling ctx.proceed in modifyGreeting()");
+        return null;
+    }
+}
+----
+
+The parameters to `HelloBean.setName` are retrieved and stored in an
+`Object` array by calling the `InvocationContext.getParameters` method.
+Because `setName` only has one parameter, it is the first and only
+element in the array. The string is set to lowercase and stored in the
+`parameters` array, then passed to `InvocationContext.setParameters`. To
+return control to the session bean, `InvocationContext.proceed` is
+called.
+
+The user interface of `interceptor` is a JavaServer Faces web
+application that consists of two Facelets views: `index.xhtml`, which
+contains a form for entering the name, and `response.xhtml`, which
+displays the final name.
+
+[[sthref260]]
+
+[[running-the-interceptor-example]]
+Running the interceptor Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `interceptor` example.
+
+The following topics are addressed here:
+
+* link:#GKEDF[To Run the interceptor Example Using NetBeans IDE]
+* link:#GKECT[To Run the interceptor Example Using Maven]
+
+[[GKEDF]]
+
+[[to-run-the-interceptor-example-using-netbeans-ide]]
+To Run the interceptor Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb
+----
+4.  Select the `interceptor` folder and click Open Project.
+5.  In the Projects tab, right-click the `interceptor` project and
+select Run.
++
+This will compile, deploy, and run the `interceptor` example, opening a
+web browser to the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/interceptor/
+----
+6.  Enter a name into the form and click Submit.
++
+The name will be converted to lowercase by the method interceptor
+defined in the `HelloInterceptor` class.
+
+[[GKECT]]
+
+[[to-run-the-interceptor-example-using-maven]]
+To Run the interceptor Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  Go to the following directory:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb/interceptor/
+----
+3.  To compile the source files and package the application, use the
+following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command builds and packages the application into a WAR file,
+`interceptor.war`, located in the `target` directory. The WAR file is
+then deployed to GlassFish Server.
+4.  Open the following URL in a web browser:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/interceptor/
+----
+5.  Enter a name into the form and click Submit.
++
+The name will be converted to lowercase by the method interceptor
+defined in the `HelloInterceptor` class.
+
+

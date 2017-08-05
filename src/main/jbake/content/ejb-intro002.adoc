@@ -1,0 +1,161 @@
+type=page
+status=published
+title=What Is a Session Bean?
+next=ejb-intro003.html
+prev=ejb-intro001.html
+~~~~~~
+What Is a Session Bean?
+=======================
+
+[[GIPJG]]
+
+[[what-is-a-session-bean]]
+What Is a Session Bean?
+-----------------------
+
+A session bean encapsulates business logic that can be invoked
+programmatically by a client over local, remote, or web service client
+views. To access an application that is deployed on the server, the
+client invokes the session bean's methods. The session bean performs
+work for its client, shielding it from complexity by executing business
+tasks inside the server.
+
+A session bean is not persistent. (That is, its data is not saved to a
+database.)
+
+For code samples, see link:ejb-basicexamples.html#GIJRB[Chapter 35,
+"Running the Enterprise Bean Examples"].
+
+The following topics are addressed here:
+
+* link:#GIPKR[Types of Session Beans]
+* link:#GIPMT[When to Use Session Beans]
+
+[[GIPKR]]
+
+[[types-of-session-beans]]
+Types of Session Beans
+~~~~~~~~~~~~~~~~~~~~~~
+
+Session beans are of three types: stateful, stateless, and singleton.
+
+The following topics are addressed here:
+
+* link:#GIPNL[Stateful Session Beans]
+* link:#GIPIN[Stateless Session Beans]
+* link:#GIPIM[Singleton Session Beans]
+
+[[GIPNL]]
+
+[[stateful-session-beans]]
+Stateful Session Beans
+^^^^^^^^^^^^^^^^^^^^^^
+
+The state of an object consists of the values of its instance variables.
+In a stateful session bean, the instance variables represent the state
+of a unique client/bean session. Because the client interacts ("talks")
+with its bean, this state is often called the conversational state.
+
+As its name suggests, a session bean is similar to an interactive
+session. A session bean is not shared; it can have only one client, in
+the same way that an interactive session can have only one user. When
+the client terminates, its session bean appears to terminate and is no
+longer associated with the client.
+
+The state is retained for the duration of the client/bean session. If
+the client removes the bean, the session ends and the state disappears.
+This transient nature of the state is not a problem, however, because
+when the conversation between the client and the bean ends, there is no
+need to retain the state.
+
+[[GIPIN]]
+
+[[stateless-session-beans]]
+Stateless Session Beans
+^^^^^^^^^^^^^^^^^^^^^^^
+
+A stateless session bean does not maintain a conversational state with
+the client. When a client invokes the methods of a stateless bean, the
+bean's instance variables may contain a state specific to that client
+but only for the duration of the invocation. When the method is
+finished, the client-specific state should not be retained. Clients may,
+however, change the state of instance variables in pooled stateless
+beans, and this state is held over to the next invocation of the pooled
+stateless bean. Except during method invocation, all instances of a
+stateless bean are equivalent, allowing the EJB container to assign an
+instance to any client. That is, the state of a stateless session bean
+should apply across all clients.
+
+Because they can support multiple clients, stateless session beans can
+offer better scalability for applications that require large numbers of
+clients. Typically, an application requires fewer stateless session
+beans than stateful session beans to support the same number of clients.
+
+A stateless session bean can implement a web service, but a stateful
+session bean cannot.
+
+[[GIPIM]]
+
+[[singleton-session-beans]]
+Singleton Session Beans
+^^^^^^^^^^^^^^^^^^^^^^^
+
+A singleton session bean is instantiated once per application and exists
+for the lifecycle of the application. Singleton session beans are
+designed for circumstances in which a single enterprise bean instance is
+shared across and concurrently accessed by clients.
+
+Singleton session beans offer similar functionality to stateless session
+beans but differ from them in that there is only one singleton session
+bean per application, as opposed to a pool of stateless session beans,
+any of which may respond to a client request. Like stateless session
+beans, singleton session beans can implement web service endpoints.
+
+Singleton session beans maintain their state between client invocations
+but are not required to maintain their state across server crashes or
+shutdowns.
+
+Applications that use a singleton session bean may specify that the
+singleton should be instantiated upon application startup, which allows
+the singleton to perform initialization tasks for the application. The
+singleton may perform cleanup tasks on application shutdown as well,
+because the singleton will operate throughout the lifecycle of the
+application.
+
+[[GIPMT]]
+
+[[when-to-use-session-beans]]
+When to Use Session Beans
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Stateful session beans are appropriate if any of the following
+conditions are true.
+
+* The bean's state represents the interaction between the bean and a
+specific client.
+* The bean needs to hold information about the client across method
+invocations.
+* The bean mediates between the client and the other components of the
+application, presenting a simplified view to the client.
+* Behind the scenes, the bean manages the work flow of several
+enterprise beans.
+
+To improve performance, you might choose a stateless session bean if it
+has any of these traits.
+
+* The bean's state has no data for a specific client.
+* In a single method invocation, the bean performs a generic task for
+all clients. For example, you might use a stateless session bean to send
+an email that confirms an online order.
+* The bean implements a web service.
+
+Singleton session beans are appropriate in the following circumstances.
+
+* State needs to be shared across the application.
+* A single enterprise bean needs to be accessed by multiple threads
+concurrently.
+* The application needs an enterprise bean to perform tasks upon
+application startup and shutdown.
+* The bean implements a web service.
+
+

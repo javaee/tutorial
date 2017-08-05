@@ -1,0 +1,396 @@
+type=page
+status=published
+title=Using JAX-RS with JAXB
+next=jaxrs-advanced008.html
+prev=jaxrs-advanced006.html
+~~~~~~
+Using JAX-RS with JAXB
+======================
+
+[[GKKNJ]]
+
+[[using-jax-rs-with-jaxb]]
+Using JAX-RS with JAXB
+----------------------
+
+Java Architecture for XML Binding (JAXB) is an XML-to-Java binding
+technology that simplifies the development of web services by enabling
+transformations between schema and Java objects and between XML instance
+documents and Java object instances. An XML schema defines the data
+elements and structure of an XML document. You can use JAXB APIs and
+tools to establish mappings between Java classes and XML schema. JAXB
+technology provides the tools that enable you to convert your XML
+documents to and from Java objects.
+
+By using JAXB, you can manipulate data objects in the following ways.
+
+* You can start with an XML schema definition (XSD) and use `xjc`, the
+JAXB schema compiler tool, to create a set of JAXB-annotated Java
+classes that map to the elements and types defined in the XSD schema.
+* You can start with a set of Java classes and use `schemagen`, the JAXB
+schema generator tool, to generate an XML schema.
+* Once a mapping between the XML schema and the Java classes exists, you
+can use the JAXB binding runtime to marshal and unmarshal your XML
+documents to and from Java objects and use the resulting Java classes to
+assemble a web services application.
+
+XML is a common media format that RESTful services consume and produce.
+To deserialize and serialize XML, you can represent requests and
+responses by JAXB annotated objects. Your JAX-RS application can use the
+JAXB objects to manipulate XML data. JAXB objects can be used as request
+entity parameters and response entities. The JAX-RS runtime environment
+includes standard `MessageBodyReader` and `MessageBodyWriter` provider
+interfaces for reading and writing JAXB objects as entities.
+
+With JAX-RS, you enable access to your services by publishing resources.
+Resources are just simple Java classes with some additional JAX-RS
+annotations. These annotations express the following:
+
+* The path of the resource (the URL you use to access it)
+* The HTTP method you use to call a certain method (for example, the
+`GET` or `POST` method)
+* The MIME type with which a method accepts or responds
+
+As you define the resources for your application, consider the type of
+data you want to expose. You may already have a relational database that
+contains information you want to expose to users, or you may have static
+content that does not reside in a database but does need to be
+distributed as resources. Using JAX-RS, you can distribute content from
+multiple sources. RESTful web services can use various types of
+input/output formats for request and response. The `customer` example,
+described in link:jaxrs-advanced008.html#GKOIB[The customer Example
+Application], uses XML.
+
+Resources have representations. A resource representation is the content
+in the HTTP message that is sent to, or returned from, the resource
+using the URI. Each representation a resource supports has a
+corresponding media type. For example, if a resource is going to return
+content formatted as XML, you can use `application/xml` as the
+associated media type in the HTTP message.Depending on the requirements
+of your application, resources can return representations in a preferred
+single format or in multiple formats. JAX-RS provides `@Consumes` and
+`@Produces` annotations to declare the media types that are acceptable
+for a resource method to read and write.
+
+JAX-RS also maps Java types to and from resource representations using
+entity providers. A `MessageBodyReader` entity provider reads a request
+entity and deserializes the request entity into a Java type. A
+`MessageBodyWriter` entity provider serializes from a Java type into a
+response entity. For example, if a `String` value is used as the request
+entity parameter, the `MessageBodyReader` entity provider deserializes
+the request body into a new `String`. If a JAXB type is used as the
+return type on a resource method, the `MessageBodyWriter` serializes the
+JAXB object into a response body.
+
+By default, the JAX-RS runtime environment attempts to create and use a
+default `JAXBContext` class for JAXB classes.However, if the default
+`JAXBContext` class is not suitable, then you can supply a `JAXBContext`
+class for the application using a JAX-RS `ContextResolver` provider
+interface.
+
+The following sections explain how to use JAXB with JAX-RS resource
+methods.
+
+[[sthref147]]
+
+[[using-java-objects-to-model-your-data]]
+Using Java Objects to Model Your Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you do not have an XML schema definition for the data you want to
+expose, you can model your data as Java classes, add JAXB annotations to
+these classes, and use JAXB to generate an XML schema for your data. For
+example, if the data you want to expose is a collection of products and
+each product has an ID, a name, a description, and a price, you can
+model it as a Java class as follows:
+
+[source,oac_no_warn]
+----
+@XmlRootElement(name="product")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Product {
+
+    @XmlElement(required=true)
+    protected int id;
+    @XmlElement(required=true)
+    protected String name;
+    @XmlElement(required=true)
+    protected String description;
+    @XmlElement(required=true)
+    protected int price;
+
+    public Product() {}
+
+    // Getter and setter methods
+    // ...
+}
+----
+
+Run the JAXB schema generator on the command line to generate the
+corresponding XML schema definition:
+
+[source,oac_no_warn]
+----
+schemagen Product.java
+----
+
+This command produces the XML schema as an `.xsd` file:
+
+[source,oac_no_warn]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="product" type="product"/>
+
+    <xs:complexType name="product">
+      <xs:sequence>
+        <xs:element name="id" type="xs:int"/>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="description" type="xs:string"/>
+        <xs:element name="price" type="xs:int"/>
+      </xs:sequence>
+    <xs:complexType>
+</xs:schema>
+----
+
+Once you have this mapping, you can create `Product` objects in your
+application, return them, and use them as parameters in JAX-RS resource
+methods. The JAX-RS runtime uses JAXB to convert the XML data from the
+request into a `Product` object and to convert a `Product` object into
+XML data for the response. The following resource class provides a
+simple example:
+
+[source,oac_no_warn]
+----
+@Path("/product")
+public class ProductService {
+    @GET
+    @Path("/get")
+    @Produces("application/xml")
+    public Product getProduct() {
+        Product prod = new Product();
+        prod.setId(1);
+        prod.setName("Mattress");
+        prod.setDescription("Queen size mattress");
+        prod.setPrice(500);
+        return prod;
+    }
+
+    @POST
+    @Path("/create")
+    @Consumes("application/xml")
+    public Response createProduct(Product prod) {
+        // Process or store the product and return a response
+        // ...
+    }
+}
+----
+
+Some IDEs, such as NetBeans IDE, will run the schema generator tool
+automatically during the build process if you add Java classes that have
+JAXB annotations to your project. For a detailed example, see
+link:jaxrs-advanced008.html#GKOIB[The customer Example Application]. The
+`customer` example contains a more complex relationship between the Java
+classes that model the data, which results in a more hierarchical XML
+representation.
+
+[[sthref148]]
+
+[[starting-from-an-existing-xml-schema-definition]]
+Starting from an Existing XML Schema Definition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you already have an XML schema definition in an `.xsd` file for the
+data you want to expose, use the JAXB schema compiler tool. Consider
+this simple example of an `.xsd` file:
+
+[source,oac_no_warn]
+----
+<xs:schema targetNamespace="http://xml.product"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           xmlns:myco="http://xml.product">
+  <xs:element name="product" type="myco:Product"/>
+  <xs:complexType name="Product">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="price" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+----
+
+Run the schema compiler tool on the command line as follows:
+
+[source,oac_no_warn]
+----
+xjc Product.xsd
+----
+
+This command generates the source code for Java classes that correspond
+to the types defined in the `.xsd` file. The schema compiler tool
+generates a Java class for each `complexType` defined in the `.xsd`
+file. The fields of each generated Java class are the same as the
+elements inside the corresponding `complexType`, and the class contains
+getter and setter methods for these fields.
+
+In this case, the schema compiler tool generates the classes
+`product.xml.Product` and `product.xml.ObjectFactory`. The `Product`
+class contains JAXB annotations, and its fields correspond to those in
+the `.xsd` definition:
+
+[source,oac_no_warn]
+----
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Product", propOrder = {
+    "id",
+    "name",
+    "description",
+    "price"
+})
+public class Product {
+    protected int id;
+    @XmlElement(required = true)
+    protected String name;
+    @XmlElement(required = true)
+    protected String description;
+    protected int price;
+
+    // Setter and getter methods
+    // ...
+}
+----
+
+You can create instances of the `Product` class from your application
+(for example, from a database). The generated class
+`product.xml.ObjectFactory` contains a method that allows you to convert
+these objects to JAXB elements that can be returned as XML inside JAX-RS
+resource methods:
+
+[source,oac_no_warn]
+----
+@XmlElementDecl(namespace = "http://xml.product", name = "product")
+public JAXBElement<Product> createProduct(Product value) {
+    return new JAXBElement<Product>(_Product_QNAME, Product.class, null, value);
+}
+----
+
+The following code shows how to use the generated classes to return a
+JAXB element as XML in a JAX-RS resource method:
+
+[source,oac_no_warn]
+----
+@Path("/product")
+public class ProductService {
+    @GET
+    @Path("/get")
+    @Produces("application/xml")
+    public JAXBElement<Product> getProduct() {
+        Product prod = new Product();
+        prod.setId(1);
+        prod.setName("Mattress");
+        prod.setDescription("Queen size mattress");
+        prod.setPrice(500);
+        return new ObjectFactory().createProduct(prod);
+    }
+}
+----
+
+For `@POST` and `@PUT` resource methods, you can use a `Product` object
+directly as a parameter. JAX-RS maps the XML data from the request into
+a `Product` object.
+
+[source,oac_no_warn]
+----
+@Path("/product")
+public class ProductService {
+    @GET
+    // ...
+
+    @POST
+    @Path("/create")
+    @Consumes("application/xml")
+    public Response createProduct(Product prod) {
+        // Process or store the product and return a response
+        // ...
+    }
+}
+----
+
+[[sthref149]]
+
+[[using-json-with-jax-rs-and-jaxb]]
+Using JSON with JAX-RS and JAXB
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+JAX-RS can automatically read and write XML using JAXB, but it can also
+work with JSON data. JSON is a simple text-based format for data
+exchange derived from JavaScript. For the preceding examples, the XML
+representation of a product is
+
+[source,oac_no_warn]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<product>
+  <id>1</id>
+  <name>Mattress</name>
+  <description>Queen size mattress</description>
+  <price>500</price>
+</product>
+----
+
+The equivalent JSON representation is
+
+[source,oac_no_warn]
+----
+{
+    "id":"1",
+    "name":"Mattress",
+    "description":"Queen size mattress",
+    "price":500
+}
+----
+
+You can add the format `application/json` or
+`MediaType.APPLICATION_JSON` to the `@Produces` annotation in resource
+methods to produce responses with JSON data:
+
+[source,oac_no_warn]
+----
+@GET
+@Path("/get")
+@Produces({"application/xml","application/json"})
+public Product getProduct() { ... }
+----
+
+In this example, the default response is XML, but the response is a JSON
+object if the client makes a `GET` request that includes this header:
+
+[source,oac_no_warn]
+----
+Accept: application/json
+----
+
+The resource methods can also accept JSON data for JAXB annotated
+classes:
+
+[source,oac_no_warn]
+----
+@POST
+@Path("/create")
+@Consumes({"application/xml","application/json"})
+public Response createProduct(Product prod) { ... }
+----
+
+The client should include the following header when submitting JSON data
+with a `POST` request:
+
+[source,oac_no_warn]
+----
+Content-Type: application/json
+----
+
+

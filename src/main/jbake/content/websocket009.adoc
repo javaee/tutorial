@@ -1,0 +1,38 @@
+type=page
+status=published
+title=Handling Errors
+next=websocket010.html
+prev=websocket008.html
+~~~~~~
+Handling Errors
+===============
+
+[[BABDEJHB]]
+
+[[handling-errors]]
+Handling Errors
+---------------
+
+To designate a method that handles errors in an annotated WebSocket
+endpoint:
+
+1.  Decorate it with `@OnError`:
++
+[source,oac_no_warn]
+----
+@ServerEndpoint("/testendpoint")
+public class TestEndpoint {
+   ...
+   @OnError
+   public void error(Session session, Throwable t) {
+      t.printStackTrace();
+      ...
+   }
+}
+----
++
+This method is invoked when there are connection problems, runtime
+errors from message handlers, or conversion errors when decoding
+messages.
+
+

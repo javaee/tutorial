@@ -1,0 +1,389 @@
+type=page
+status=published
+title=Using the Standard Converters
+next=jsf-page-core002.html
+prev=jsf-page-core.html
+~~~~~~
+Using the Standard Converters
+=============================
+
+[[BNAST]]
+
+[[using-the-standard-converters]]
+Using the Standard Converters
+-----------------------------
+
+The JavaServer Faces implementation provides a set of `Converter`
+implementations that you can use to convert component data. The purpose
+of conversion is to take the String-based data coming in from the
+Servlet API and convert it to strongly typed Java objects suitable for
+the business domain. For more information on the conceptual details of
+the conversion model, see link:jsf-intro005.html#BNAQI[Conversion Model].
+
+The standard `Converter` implementations are located in the
+`javax.faces.convert` package. Normally, converters are implicitly
+assigned based on the type of the EL expression pointed to by the value
+of the component. However, these converters can also be accessed by a
+converter ID. link:#CHDIHIIC[Table 11-1] shows the converter classes and
+their associated converter IDs.
+
+[[sthref60]][[CHDIHIIC]]
+
+Table 11-1 Converter Classes and Converter IDs
+
+[width="48%",cols="100%,",options="header",]
+|======================================================
+|Class in the javax.faces.convert Package |Converter ID
+|`BigDecimalConverter` |`javax.faces.BigDecimal`
+|`BigIntegerConverter` |`javax.faces.BigInteger`
+|`BooleanConverter` |`javax.faces.Boolean`
+|`ByteConverter` |`javax.faces.Byte`
+|`CharacterConverter` |`javax.faces.Character`
+|`DateTimeConverter` |`javax.faces.DateTime`
+|`DoubleConverter` |`javax.faces.Double`
+|`EnumConverter` |`javax.faces.Enum`
+|`FloatConverter` |`javax.faces.Float`
+|`IntegerConverter` |`javax.faces.Integer`
+|`LongConverter` |`javax.faces.Long`
+|`NumberConverter` |`javax.faces.Number`
+|`ShortConverter` |`javax.faces.Short`
+|======================================================
+
+
+A standard error message is associated with each of these converters. If
+you have registered one of these converters onto a component on your
+page and the converter is not able to convert the component's value, the
+converter's error message will display on the page. For example, the
+following error message appears if `BigIntegerConverter` fails to
+convert a value:
+
+[source,oac_no_warn]
+----
+{0} must be a number consisting of one or more digits
+----
+
+In this case, the `{0}` substitution parameter will be replaced with the
+name of the input component on which the converter is registered.
+
+Two of the standard converters (`DateTimeConverter` and
+`NumberConverter`) have their own tags, which allow you to configure the
+format of the component data using the tag attributes. For more
+information about using `DateTimeConverter`, see link:#BNASV[Using
+DateTimeConverter]. For more information about using `NumberConverter`,
+see link:#BNASX[Using NumberConverter]. The following section explains
+how to convert a component's value, including how to register other
+standard converters with a component.
+
+[[BNASU]]
+
+[[converting-a-components-value]]
+Converting a Component's Value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To use a particular converter to convert a component's value, you need
+to register the converter onto the component. You can register any of
+the standard converters in one of the following ways.
+
+* Nest one of the standard converter tags inside the component's tag.
+These tags are `f:convertDateTime` and `f:convertNumber`, which are
+described in link:#BNASV[Using DateTimeConverter] and link:#BNASX[Using
+NumberConverter], respectively.
+* Bind the value of the component to a managed bean property of the same
+type as the converter. This is the most common technique.
+* Refer to the converter from the component tag's `converter` attribute,
+specifying the ID of the converter class.
+* Nest an `f:converter` tag inside of the component tag, and use either
+the `f:converter` tag's `converterId` attribute or its `binding`
+attribute to refer to the converter.
+
+As an example of the second technique, if you want a component's data to
+be converted to an `Integer`, you can simply bind the component's value
+to a managed bean property. Here is an example:
+
+[source,oac_no_warn]
+----
+Integer age = 0;
+public Integer getAge(){ return age;}
+public void setAge(Integer age) {this.age = age;}
+----
+
+The data from the `h:inputText` tag in the this example will be
+converted to a `java.lang.Integer` value. The `Integer` type is a
+supported type of `NumberConverter`. If you don't need to specify any
+formatting instructions using the `f:convertNumber` tag attributes, and
+if one of the standard converters will suffice, you can simply reference
+that converter by using the component tag's `converter` attribute.
+
+You can also nest an `f:converter` tag within the component tag and use
+either the converter tag's `converterId` attribute or its `binding`
+attribute to reference the converter.
+
+The `converterId` attribute must reference the converter's ID. Here is
+an example that uses one of the converter IDs listed in
+link:#CHDIHIIC[Table 11-1]:
+
+[source,oac_no_warn]
+----
+<h:inputText value="#{loginBean.age}">
+    <f:converter converterId="javax.faces.Integer" />
+</h:inputText>
+----
+
+Instead of using the `converterId` attribute, the `f:converter` tag can
+use the `binding` attribute. The `binding` attribute must resolve to a
+bean property that accepts and returns an appropriate `Converter`
+instance.
+
+You can also create custom converters and register them on components
+using the `f:converter` tag. For details, see
+link:jsf-custom011.html#BNAUS[Creating and Using a Custom Converter].
+
+[[BNASV]]
+
+[[using-datetimeconverter]]
+Using DateTimeConverter
+~~~~~~~~~~~~~~~~~~~~~~~
+
+You can convert a component's data to a `java.util.Date` by nesting the
+`convertDateTime` tag inside the component tag. The `convertDateTime`
+tag has several attributes that allow you to specify the format and type
+of the data. link:#BNASW[Table 11-2] lists the attributes.
+
+Here is a simple example of a `convertDateTime` tag:
+
+[source,oac_no_warn]
+----
+<h:outputText value="#{cashierBean.shipDate}">
+    <f:convertDateTime type="date" dateStyle="full" />
+</h:outputText>
+----
+
+When binding the `DateTimeConverter` to a component, ensure that the
+managed bean property to which the component is bound is of type
+`java.util.Date`. In the preceding example, `cashierBean.shipDate` must
+be of type `java.util.Date`.
+
+The example tag can display the following output:
+
+[source,oac_no_warn]
+----
+Saturday, September 21, 2013
+----
+
+You can also display the same date and time by using the following tag
+in which the date format is specified:
+
+[source,oac_no_warn]
+----
+<h:outputText value="#{cashierBean.shipDate}">
+    <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy" />
+</h:outputText>
+----
+
+If you want to display the example date in Spanish, you can use the
+`locale` attribute:
+
+[source,oac_no_warn]
+----
+<h:outputText value="#{cashierBean.shipDate}">
+    <f:convertDateTime dateStyle="full"
+                       locale="es"
+                       timeStyle="long" type="both" />
+</h:outputText>
+----
+
+This tag would display the following output:
+
+[source,oac_no_warn]
+----
+jueves 24 de octubre de 2013 15:07:04 GMT
+----
+
+Refer to the "Customizing Formats" lesson of the Java Tutorial at
+`http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html`
+for more information on how to format the output using the `pattern`
+attribute of the `convertDateTime` tag.
+
+[[sthref61]][[BNASW]]
+
+Table 11-2 Attributes for the f:convertDateTime Tag
+
+[width="36%",cols="37%,63%,",options="header",]
+|=======================================================================
+|Attribute |Type |Description
+|`binding` |`DateTimeConverter` |Used to bind a converter to a managed
+bean property.
+
+|`dateStyle` |`String` |Defines the format, as specified by
+`java.text.DateFormat`, of a date or the date part of a `date` string.
+Applied only if `type` is `date` or `both` and if `pattern` is not
+defined. Valid values: `default`, `short`, `medium`, `long`, and `full`.
+If no value is specified, `default` is used.
+
+|`for` |`String` |Used with composite components. Refers to one of the
+objects within the composite component inside which this tag is nested.
+
+|`locale` |`String` or `Locale` |`Locale` whose predefined styles for
+dates and times are used during formatting or parsing. If not specified,
+the `Locale` returned by `FacesContext.getLocale` will be used.
+
+|`pattern` |`String` a|
+Custom formatting pattern that determines how the date/time string
+should be formatted and parsed. If this attribute is specified,
+`dateStyle` and `timeStyle` attributes are ignored.
+
+See link:#CFHEABEI[Table 11-3] for the default values when `pattern` is
+not specified.
+
+|`timeStyle` |`String` |Defines the format, as specified by
+`java.text.DateFormat`, of a `time` or the time part of a `date` string.
+Applied only if `type` is time and `pattern` is not defined. Valid
+values: `default`, `short`, `medium`, `long`, and `full`. If no value is
+specified, `default` is used.
+
+|`timeZone` |`String` or `TimeZone` |Time zone in which to interpret any
+time information in the `date` string.
+
+|`type` |`String` a|
+Specifies whether the string value will contain a date, a time, or both.
+Valid values are: `date`, `time`, `both`, `LocalDate`, `LocalTime`,
+`LocalDateTime`, `OffsetTime`, `OffsetDateTime`, or `ZonedDateTime`. If
+no value is specified, `date` is used.
+
+See link:#CFHEABEI[Table 11-3] for additional information.
+
+|=======================================================================
+
+
+[[sthref62]][[CFHEABEI]]
+
+Table 11-3 Type Attribute and Default Pattern Values
+
+[width="40%",cols="48%,52%,",options="header",]
+|=======================================================================
+|Type Attribute |Class |Default When Pattern Is Not Specified
+|`both` |`java.util.Date`
+|`DateFormat.getDateTimeInstance(dateStyle, timeStyle)`
+
+|`date` |`java.util.Date` |`DateFormat.getDateTimeInstance(dateStyle)`
+
+|`time` |`java.util.Date` |`DateFormat.getDateTimeInstance(timeStyle)`
+
+|`localDate` |`java.time.LocalDate`
+|`DateTimeFormatter.ofLocalizedDate(dateStyle)`
+
+|`localTime` |`java.time.LocalTime`
+|`DateTimeFormatter.ofLocalizedTime(dateStyle)`
+
+|`localDateTime` |`java.time.LocalDateTime`
+|`DateTimeFormatter.ofLocalizedDateTime(dateStyle)`
+
+|`offsetTime` |`java.time.OffsetTime`
+|`DateTimeFormatter.ISO_OFFSET_TIME`
+
+|`offsetDateTime` |`java.time.OffsetDateTime`
+|`DateTimeFormatter.ISO_OFFSET_DATE_TIME`
+
+|`zonedDateTime` |`java.time.ZonedDateTime`
+|`DateTimeFormatter.ISO_ZONED_DATE_TIME`
+|=======================================================================
+
+
+[[BNASX]]
+
+[[using-numberconverter]]
+Using NumberConverter
+~~~~~~~~~~~~~~~~~~~~~
+
+You can convert a component's data to a `java.lang.Number` by nesting
+the `convertNumber` tag inside the component tag. The `convertNumber`
+tag has several attributes that allow you to specify the format and type
+of the data. link:#BNASY[Table 11-4] lists the attributes.
+
+The following example uses a `convertNumber` tag to display the total
+prices of the contents of a shopping cart:
+
+[source,oac_no_warn]
+----
+<h:outputText value="#{cart.total}">
+    <f:convertNumber currencySymbol="$" type="currency"/>
+</h:outputText>
+----
+
+When binding the `NumberConverter` to a component, ensure that the
+managed bean property to which the component is bound is of a primitive
+type or has a type of `java.lang.Number`. In the preceding example,
+`cart.total` is of type `double`.
+
+Here is an example of a number that this tag can display:
+
+[source,oac_no_warn]
+----
+$934
+----
+
+This result can also be displayed by using the following tag in which
+the currency pattern is specified:
+
+[source,oac_no_warn]
+----
+<h:outputText id="cartTotal" value="#{cart.total}">
+    <f:convertNumber pattern="$####" />
+</h:outputText>
+----
+
+See the "Customizing Formats" lesson of the Java Tutorial at
+`http://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html`
+for more information on how to format the output by using the `pattern`
+attribute of the `convertNumber` tag.
+
+[[sthref63]][[BNASY]]
+
+Table 11-4 Attributes for the f:convertNumber Tag
+
+[width="46%",cols="55%,45%,",options="header",]
+|=======================================================================
+|Attribute |Type |Description
+|`binding` |`NumberConverter` |Used to bind a converter to a managed
+bean property.
+
+|`currencyCode` |`String` |ISO 4217 currency code, used only when
+formatting currencies.
+
+|`currencySymbol` |`String` |Currency symbol, applied only when
+formatting currencies.
+
+|`for` |`String` |Used with composite components. Refers to one of the
+objects within the composite component inside which this tag is nested.
+
+|`groupingUsed` |`Boolean` |Specifies whether formatted output contains
+grouping separators.
+
+|`integerOnly` |`Boolean` |Specifies whether only the integer part of
+the value will be parsed.
+
+|`locale` |`String` or `Locale` |`Locale` whose number styles are used
+to format or parse data.
+
+|`maxFractionDigits` |`int` |Maximum number of digits formatted in the
+fractional part of the output.
+
+|`maxIntegerDigits` |`int` |Maximum number of digits formatted in the
+integer part of the output.
+
+|`minFractionDigits` |`int` |Minimum number of digits formatted in the
+fractional part of the output.
+
+|`minIntegerDigits` |`int` |Minimum number of digits formatted in the
+integer part of the output.
+
+|`pattern` |`String` |Custom formatting pattern that determines how the
+number string is formatted and parsed.
+
+|`type` |`String` |Specifies whether the string value is parsed and
+formatted as a `number`, `currency`, or `percentage`. If not specified,
+`number` is used.
+|=======================================================================
+
+
+

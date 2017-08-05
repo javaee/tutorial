@@ -1,0 +1,28 @@
+type=page
+status=published
+title=Overview of the EJB Examples
+next=ejb-basicexamples002.html
+prev=ejb-basicexamples.html
+~~~~~~
+Overview of the EJB Examples
+============================
+
+[[A1250776]]
+
+[[overview-of-the-ejb-examples]]
+Overview of the EJB Examples
+----------------------------
+
+In link:ejb-gettingstarted.html#GIJRE[Chapter 34, "Getting Started with
+Enterprise Beans"], you built a stateless session bean named
+`ConverterBean`. This chapter examines the source code of four more
+session beans:
+
+* `CartBean`: a stateful session bean that is accessed by a remote
+client
+* `CounterBean`: a singleton session bean
+* `HelloServiceBean`: a stateless session bean that implements a web
+service
+* `TimerSessionBean`: a stateless session bean that sets a timer
+
+

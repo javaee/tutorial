@@ -1,0 +1,186 @@
+type=page
+status=published
+title=Managed Beans in JavaServer Faces Technology
+next=jsf-develop002.html
+prev=jsf-develop.html
+~~~~~~
+Managed Beans in JavaServer Faces Technology
+============================================
+
+[[BNAQM]]
+
+[[managed-beans-in-javaserver-faces-technology]]
+Managed Beans in JavaServer Faces Technology
+--------------------------------------------
+
+A typical JavaServer Faces application includes one or more managed
+beans, each of which can be associated with the components used in a
+particular page. This section introduces the basic concepts of creating,
+configuring, and using managed beans in an application.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+link:jsf-page.html#BNAQZ[Chapter 10, "Using JavaServer Faces Technology
+in Web Pages"] and link:jsf-page-core.html#GJCUT[Chapter 11, "Using
+Converters, Listeners, and Validators"] show how to add components to a
+page and connect them to server-side objects by using component tags and
+core tags. These chapters also show how to provide additional
+functionality to the components through converters, listeners, and
+validators. Developing a JavaServer Faces application also involves the
+task of programming the server-side objects: managed beans, converters,
+event handlers, and validators.
+
+|=======================================================================
+
+
+The following topics are addressed here:
+
+* link:#BNAQN[Creating a Managed Bean]
+* link:#BNAQP[Using the EL to Reference Managed Beans]
+
+[[BNAQN]]
+
+[[creating-a-managed-bean]]
+Creating a Managed Bean
+~~~~~~~~~~~~~~~~~~~~~~~
+
+A managed bean is created with a constructor with no arguments, a set of
+properties, and a set of methods that perform functions for a component.
+Each of the managed bean properties can be bound to one of the
+following:
+
+* A component value
+* A component instance
+* A converter instance
+* A listener instance
+* A validator instance
+
+The most common functions that managed bean methods perform include the
+following:
+
+* Validating a component's data
+* Handling an event fired by a component
+* Performing processing to determine the next page to which the
+application must navigate
+
+As with all JavaBeans components, a property consists of a private data
+field and a set of accessor methods, as shown by this code:
+
+[source,oac_no_warn]
+----
+private Integer userNumber = null;
+...
+public void setUserNumber(Integer user_number) {
+    userNumber = user_number;
+}
+public Integer getUserNumber() {
+    return userNumber;
+}
+----
+
+When bound to a component's value, a bean property can be any of the
+basic primitive and numeric types or any Java object type for which the
+application has access to an appropriate converter. For example, a
+property can be of type `java.util.Date` if the application has access
+to a converter that can convert the `Date` type to a `String` and back
+again. See link:jsf-develop002.html#BNATY[Writing Bean Properties] for
+information on which types are accepted by which component tags.
+
+When a bean property is bound to a component instance, the property's
+type must be the same as the component object. For example, if a
+`javax.faces.component.UISelectBoolean` component is bound to the
+property, the property must accept and return a `UISelectBoolean`
+object. Likewise, if the property is bound to a converter, validator, or
+listener instance, the property must be of the appropriate converter,
+validator, or listener type.
+
+For more information on writing beans and their properties, see
+link:jsf-develop002.html#BNATY[Writing Bean Properties].
+
+[[BNAQP]]
+
+[[using-the-el-to-reference-managed-beans]]
+Using the EL to Reference Managed Beans
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To bind component values and objects to managed bean properties or to
+reference managed bean methods from component tags, page authors use the
+Expression Language syntax. As explained in
+link:jsf-el001.html#BNAHQ[Overview of the EL], the following are some of
+the features that the EL offers:
+
+* Deferred evaluation of expressions
+* The ability to use a value expression to both read and write data
+* Method expressions
+
+Deferred evaluation of expressions is important because the JavaServer
+Faces lifecycle is split into several phases in which component event
+handling, data conversion and validation, and data propagation to
+external objects are all performed in an orderly fashion. The
+implementation must be able to delay the evaluation of expressions until
+the proper phase of the lifecycle has been reached. Therefore, the
+implementation's tag attributes always use deferred-evaluation syntax,
+which is distinguished by the `#{}` delimiter.
+
+To store data in external objects, almost all JavaServer Faces tag
+attributes use lvalue expressions, which are expressions that allow both
+getting and setting data on external objects.
+
+Finally, some component tag attributes accept method expressions that
+reference methods that handle component events or validate or convert
+component data.
+
+To illustrate a JavaServer Faces tag using the EL, the following tag
+references a method that validates user input:
+
+[source,oac_no_warn]
+----
+<h:inputText id="inputGuess" 
+    value="#{userNumberBean.userNumber}" 
+    required="true" size="3" 
+    disabled="#{userNumberBean.number eq userNumberBean.userNumber ...}"
+    validator="#{userNumberBean.validateNumberRange}">
+</h:inputText>
+----
+
+This tag binds the `inputGuess` component's value to the
+`UserNumberBean.userNumber` managed bean property by using an lvalue
+expression. The tag uses a method expression to refer to the
+`UserNumberBean.validateNumberRange` method, which performs validation
+of the component's local value. The local value is whatever the user
+types into the field corresponding to this tag. This method is invoked
+when the expression is evaluated.
+
+Nearly all JavaServer Faces tag attributes accept value expressions. In
+addition to referencing bean properties, value expressions can reference
+lists, maps, arrays, implicit objects, and resource bundles.
+
+Another use of value expressions is to bind a component instance to a
+managed bean property. A page author does this by referencing the
+property from the `binding` attribute:
+
+[source,oac_no_warn]
+----
+<h:outputLabel for="fanClub"
+               rendered="false"
+               binding="#{cashierBean.specialOfferText}">
+               value="#{bundle.DukeFanClub}"/>
+</h:outputLabel>
+----
+
+In addition to using expressions with the standard component tags, you
+can configure your custom component properties to accept expressions by
+creating `javax.el.ValueExpression` or `javax.el.MethodExpression`
+instances for them.
+
+For information on the EL, see link:jsf-el.html#GJDDD[Chapter 9,
+"Expression Language"].
+
+For information on referencing managed bean methods from component tags,
+see link:jsf-page-core004.html#BNATN[Referencing a Managed Bean Method].
+
+

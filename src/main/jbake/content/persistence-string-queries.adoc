@@ -1,0 +1,29 @@
+type=page
+status=published
+title=Creating and Using String-Based Criteria Queries
+next=persistence-string-queries001.html
+prev=persistence-criteria003.html
+~~~~~~
+Creating and Using String-Based Criteria Queries
+================================================
+
+[[GKJIQ]]
+
+[[creating-and-using-string-based-criteria-queries]]
+42 Creating and Using String-Based Criteria Queries
+---------------------------------------------------
+
+
+This chapter describes how to create weakly typed string-based Criteria
+API queries.
+
+The following topics are addressed here:
+
+* link:persistence-string-queries001.html#GKJIV[Overview of String-Based
+Criteria API Queries]
+* link:persistence-string-queries002.html#GKJBQ[Creating String-Based
+Queries]
+* link:persistence-string-queries003.html#GKJDB[Executing String-Based
+Queries]
+
+

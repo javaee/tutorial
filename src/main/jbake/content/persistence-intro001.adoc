@@ -1,0 +1,25 @@
+type=page
+status=published
+title=Overview of the Java Persistence API
+next=persistence-intro002.html
+prev=persistence-intro.html
+~~~~~~
+Overview of the Java Persistence API
+====================================
+
+[[A1019685]]
+
+[[overview-of-the-java-persistence-api]]
+Overview of the Java Persistence API
+------------------------------------
+
+The Java Persistence API provides Java developers with an
+object/relational mapping facility for managing relational data in Java
+applications. Java Persistence consists of four areas:
+
+* The Java Persistence API
+* The query language
+* The Java Persistence Criteria API
+* Object/relational mapping metadata
+
+

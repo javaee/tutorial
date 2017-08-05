@@ -1,0 +1,62 @@
+type=page
+status=published
+title=Concurrency and Transactions
+next=concurrency-utilities004.html
+prev=concurrency-utilities002.html
+~~~~~~
+Concurrency and Transactions
+============================
+
+[[CIHIDBDG]]
+
+[[concurrency-and-transactions]]
+Concurrency and Transactions
+----------------------------
+
+The most basic operations for transactions are commit and rollback, but,
+in a distributed environment with concurrent processing, it can be
+difficult to guarantee that commit or rollback operations will be
+successfully processed, and the transaction can be spread among
+different threads, CPU cores, physical machines, and networks.
+
+Ensuring that a rollback operation will successfully execute in such a
+scenario is crucial. Concurrency Utilities relies on the Java
+Transaction API (JTA) to implement and support transactions on its
+components through `javax.transaction.UserTransaction`, allowing
+application developers to explicitly manage transaction boundaries. More
+information is available in the JTA specification.
+
+Optionally, context objects can begin, commit, or roll back
+transactions, but these objects cannot enlist in parent component
+transactions.
+
+The following code snippet illustrates a `Runnable` task that obtains a
+`UserTransaction` and then starts and commits a transaction while
+interacting with other transactional components, such as an enterprise
+bean and a database:
+
+[source,oac_no_warn]
+----
+public class MyTransactionalTask implements Runnable {
+ 
+   UserTransaction ut = ... // obtained through JNDI or injection
+ 
+   public void run() {
+ 
+       // Start a transaction
+       ut.begin();
+ 
+       // Invoke a Service or an EJB
+       myEJB.businessMethod();
+ 
+       // Update a database entity using an XA JDBC driver
+       myEJB.updateCustomer(customer);
+ 
+       // Commit the transaction
+       ut.commit();
+ 
+   }
+} 
+----
+
+

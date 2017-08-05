@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Using the Criteria API to Create Queries
+next=persistence-criteria001.html
+prev=persistence-querylanguage006.html
+~~~~~~
+Using the Criteria API to Create Queries
+========================================
+
+[[GJITV]]
+
+[[using-the-criteria-api-to-create-queries]]
+41 Using the Criteria API to Create Queries
+-------------------------------------------
+
+
+The Criteria API is used to define queries for entities and their
+persistent state by creating query-defining objects. Criteria queries
+are written using Java programming language APIs, are typesafe, and are
+portable. Such queries work regardless of the underlying data store.
+
+The following topics are addressed here:
+
+* link:persistence-criteria001.html#GJRIJ[Overview of the Criteria and
+Metamodel APIs]
+* link:persistence-criteria002.html#GJIUP[Using the Metamodel API to
+Model Entity Classes]
+* link:persistence-criteria003.html#GJIVM[Using the Criteria API and
+Metamodel API to Create Basic Typesafe Queries]
+
+

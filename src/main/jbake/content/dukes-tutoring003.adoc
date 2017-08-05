@@ -1,0 +1,116 @@
+type=page
+status=published
+title=Administration Interface
+next=dukes-tutoring004.html
+prev=dukes-tutoring002.html
+~~~~~~
+Administration Interface
+========================
+
+[[GKAFW]]
+
+[[administration-interface]]
+Administration Interface
+------------------------
+
+The administration interface of Duke's Tutoring is used by the tutoring
+center staff to manage the data employed by the main interface: the
+students, the students' guardians, and the addresses. The administration
+interface uses many of the same components as the main interface.
+Additional components that are only used in the administration interface
+are described here.
+
+The following topics are addressed here:
+
+* link:#GKAEN[Enterprise Beans Used in the Administration Interface]
+* link:#GKACB[Facelets Files Used in the Administration Interface]
+* link:#BCGHIDEG[CDI Managed Beans Used in the Administration Interface]
+* link:#BCGFFFCA[Helper Classes Used in the Administration Interface]
+
+[[GKAEN]]
+
+[[enterprise-beans-used-in-the-administration-interface]]
+Enterprise Beans Used in the Administration Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following enterprise bean, in the `dukestutoring.ejb` package of the
+`dukes-tutoring-war` project, is used in the administration interface.
+
+* `AdminBean`: A stateless session bean for all the business logic used
+in the administration interface. Calls security methods to allow
+invocation of the business methods only by authorized users.
+
+[[GKACB]]
+
+[[facelets-files-used-in-the-administration-interface]]
+Facelets Files Used in the Administration Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following Facelets files, under `src/main/webapp/`, are used in the
+administration interface:
+
+* `admin/adminTemplate.xhtml`: Template for the administration interface
+* `admin/index.xhtml`: Landing page for the administration interface
+* `login.xhtml`: Login page for the security-constrained administration
+interface
+* `loginError.xhtml`: Page displayed if there are errors authenticating
+the administration user
+* `admin/address` directory: Pages that allow you to create, edit, and
+delete `Address` entities
+* `admin/guardian` directory: Pages that allow you to create, edit, and
+delete `Guardian` entities
+* `admin/student` directory: Pages that allow you to create, edit, and
+delete `Student` entities
+* `resources/components/formLogin.xhtml`: Composite component for a
+login form using Java EE security
+* `WEB-INF/includes/adminNav.xhtml`: XHTML fragment for the
+administration interface's navigation bar
+
+[[BCGHIDEG]]
+
+[[cdi-managed-beans-used-in-the-administration-interface]]
+CDI Managed Beans Used in the Administration Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CDI managed beans used in the administration interface are located
+in the `dukestutoring.web` package in the `dukes-tutoring-war` project.
+
+* `StudentBean.java`: A managed bean for the Facelets pages used to
+create and edit students. The first and last names have Bean Validation
+annotations that require the fields to be filled in. The phone numbers
+have Bean Validation annotations to ensure that the submitted data is
+well-formed.
+* `GuardianBean.java`: A managed bean for the Facelets pages used to
+create guardians for and assign guardians to students. The first and
+last names have Bean Validation annotations that require the fields to
+be filled in. The phone numbers have Bean Validation annotations to
+ensure that the submitted data is well-formed.
+* `AddressBean.java`: A managed bean for the Facelets pages used to
+create addresses for students. The street, city, province, and postal
+code attributes have Bean Validation annotations that require the fields
+to be filled in, and the postal code attribute has an additional
+annotation to ensure that the data is properly formed.
+
+[[BCGFFFCA]]
+
+[[helper-classes-used-in-the-administration-interface]]
+Helper Classes Used in the Administration Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following helper classes, found in the `dukes-tutoring-war`
+project's `dukestutoring.web.util` package, are used in the
+administration interface.
+
+* `EntityConverter`: A parent class to `StudentConverter` and
+`GuardianConverter` that defines a cache to store the entity classes
+when converting the entities for use in JavaServer Faces user interface
+components. The cache helps increase performance. The cache is stored in
+the JavaServer Faces context.
+* `StudentConverter`: A JavaServer Faces converter for the `Student`
+entity class. This class contains methods to convert `Student` instances
+to strings and back again, so they can be used in the user interface
+components of the application.
+* `GuardianConverter`: Similar to `StudentConverter`, this class is a
+converter for the `Guardian` entity class.
+
+

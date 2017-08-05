@@ -1,0 +1,38 @@
+type=page
+status=published
+title=Introduction to Configuring JavaServer Faces Applications
+next=jsf-configure002.html
+prev=jsf-configure.html
+~~~~~~
+Introduction to Configuring JavaServer Faces Applications
+=========================================================
+
+[[A1352824]]
+
+[[introduction-to-configuring-javaserver-faces-applications]]
+Introduction to Configuring JavaServer Faces Applications
+---------------------------------------------------------
+
+The process of building and deploying simple JavaServer Faces
+applications is described in earlier chapters of this tutorial,
+including link:webapp.html#BNADR[Chapter 6, "Getting Started with Web
+Applications,"] link:jsf-facelets.html#GIEPX[Chapter 8, "Introduction to
+Facelets,"] link:jsf-ajax.html#GKIOW[Chapter 13, "Using Ajax with
+JavaServer Faces Technology,"] and
+link:jsf-advanced-cc.html#GKHXA[Chapter 14, "Composite Components:
+Advanced Topics and an Example."] When you create large and complex
+applications, however, various additional configuration tasks are
+required. These tasks include the following:
+
+* Registering managed beans with the application so that all parts of
+the application have access to them
+* Configuring managed beans and model beans so that they are
+instantiated with the proper values when a page makes reference to them
+* Defining navigation rules for each of the pages in the application so
+that the application has a smooth page flow, if nondefault navigation is
+needed
+* Packaging the application to include all the pages, resources, and
+other files so that the application can be deployed on any compliant
+container
+
+

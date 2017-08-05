@@ -1,0 +1,40 @@
+type=page
+status=published
+title=Overview of String-Based Criteria API Queries
+next=persistence-string-queries002.html
+prev=persistence-string-queries.html
+~~~~~~
+Overview of String-Based Criteria API Queries
+=============================================
+
+[[GKJIV]]
+
+[[overview-of-string-based-criteria-api-queries]]
+Overview of String-Based Criteria API Queries
+---------------------------------------------
+
+String-based Criteria API queries ("string-based queries") are Java
+programming language queries that use strings rather than strongly typed
+metamodel objects to specify entity attributes when traversing a data
+hierarchy. String-based queries are constructed similarly to metamodel
+queries, can be static or dynamic, and can express the same kind of
+queries and operations as strongly typed metamodel queries.
+
+Strongly typed metamodel queries are the preferred method of
+constructing Criteria API queries.
+
+The main advantage of string-based queries over metamodel queries is the
+ability to construct Criteria queries at development time without the
+need to generate static metamodel classes or otherwise access
+dynamically generated metamodel classes.
+
+The main disadvantage to string-based queries is their lack of type
+safety; this problem may lead to runtime errors due to type mismatches
+that would be caught at development time if you used strongly typed
+metamodel queries.
+
+For information on constructing criteria queries, see
+link:persistence-criteria.html#GJITV[Chapter 41, "Using the Criteria API
+to Create Queries"].
+
+

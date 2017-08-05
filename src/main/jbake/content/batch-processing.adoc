@@ -1,0 +1,42 @@
+type=page
+status=published
+title=Batch Processing
+next=batch-processing001.html
+prev=interceptors003.html
+~~~~~~
+Batch Processing
+================
+
+[[GKJIQ6]]
+
+[[batch-processing]]
+56 Batch Processing
+-------------------
+
+
+This chapter describes Batch Applications for the Java Platform (JSR
+352), which provides support for defining, implementing, and running
+batch jobs. Batch jobs are tasks that can be executed without user
+interaction. The batch framework is composed of a job specification
+language based on XML, a Java API, and a batch runtime.
+
+The following topics are addressed here:
+
+* link:batch-processing001.html#BCGJDEEH[Introduction to Batch
+Processing]
+* link:batch-processing002.html#BCGGIBHA[Batch Processing in Java EE]
+* link:batch-processing003.html#BCGHBJIG[Simple Use Case]
+* link:batch-processing004.html#BCGDDBBG[Using the Job Specification
+Language]
+* link:batch-processing005.html#BCGHDHGH[Creating Batch Artifacts]
+* link:batch-processing006.html#BCGCAHCB[Submitting Jobs to the Batch
+Runtime]
+* link:batch-processing007.html#BCGBBGJI[Packaging Batch Applications]
+* link:batch-processing008.html#BCGJHEHJ[The webserverlog Example
+Application]
+* link:batch-processing009.html#BCGFCACD[The phonebilling Example
+Application]
+* link:batch-processing010.html#BCGHCHAJ[Further Information about Batch
+Processing]
+
+

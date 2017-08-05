@@ -1,0 +1,45 @@
+type=page
+status=published
+title=Tutorial Example Directory Structure
+next=usingexamples007.html
+prev=usingexamples005.html
+~~~~~~
+Tutorial Example Directory Structure
+====================================
+
+[[GEXAP]]
+
+[[tutorial-example-directory-structure]]
+Tutorial Example Directory Structure
+------------------------------------
+
+To facilitate iterative development and keep application source files
+separate from compiled files, the tutorial examples use the Maven
+application directory structure.
+
+Each application module has the following structure:
+
+* `pom.xml`: Maven build file
+* `src/main/java`: Java source files for the module
+* `src/main/resources`: configuration files for the module, with the
+exception of web applications
+* `src/main/webapp`: web pages, style sheets, tag files, and images (web
+applications only)
+* `src/main/webapp/WEB-INF`: configuration files for web applications
+(web applications only)
+
+When an example has multiple application modules packaged into an EAR
+file, its submodule directories use the following naming conventions:
+
+* example-name`-app-client`: application clients
+* example-name`-ejb`: enterprise bean JAR files
+* example-name`-war`: web applications
+* example-name`-ear`: enterprise applications
+* example-name`-common`: library JAR containing components, classes, and
+files used by other modules
+
+The Maven build files (`pom.xml`) distributed with the examples contain
+goals to compile and assemble the application into the `target`
+directory and deploy the archive to GlassFish Server.
+
+

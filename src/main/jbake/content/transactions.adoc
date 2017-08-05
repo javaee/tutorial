@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Transactions
+next=transactions001.html
+prev=partsupporttechs.html
+~~~~~~
+Transactions
+============
+
+[[BNCIH]]
+
+[[transactions]]
+52 Transactions
+---------------
+
+
+This chapter describes types of transactions and how they are managed in
+different applications.
+
+The following topics are addressed here:
+
+* link:transactions001.html#A1024277[Overview of Transactions]
+* link:transactions002.html#GIJRG[Transactions in Java EE Applications]
+* link:transactions003.html#BNCII[What Is a Transaction?]
+* link:transactions004.html#BNCIJ[Container-Managed Transactions]
+* link:transactions005.html#BNCIY[Bean-Managed Transactions]
+* link:transactions006.html#BNCJC[Transaction Timeouts]
+* link:transactions007.html#BNCJD[Updating Multiple Databases]
+* link:transactions008.html#BNCJG[Transactions in Web Components]
+* link:transactions009.html#GKCMI[Further Information about Transactions]
+
+

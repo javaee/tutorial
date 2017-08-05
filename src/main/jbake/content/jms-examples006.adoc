@@ -1,0 +1,256 @@
+type=page
+status=published
+title=Sending and Receiving Messages Using a Simple Web Application
+next=jms-examples007.html
+prev=jms-examples005.html
+~~~~~~
+Sending and Receiving Messages Using a Simple Web Application
+=============================================================
+
+[[BABBABFC]]
+
+[[sending-and-receiving-messages-using-a-simple-web-application]]
+Sending and Receiving Messages Using a Simple Web Application
+-------------------------------------------------------------
+
+Web applications can use the JMS API to send and receive messages, as
+noted in link:jms-concepts005.html#BNCGN[Using Java EE Components to
+Produce and to Synchronously Receive Messages]. This section describes
+the components of a very simple web application that uses the JMS API.
+
+This section assumes that you are familiar with the basics of JavaServer
+Faces technology, described in link:partwebtier.html#BNADP[Part IX, "The
+Web Tier."]
+
+The example, `websimplemessage`, is under the
+tut-install`/jms/examples/` directory. It uses sending and receiving
+Facelets pages as well as corresponding backing beans. When a user
+enters a message in the text field of the sending page and clicks a
+button, the backing bean for the page sends the message to a queue and
+displays it on the page. When the user goes to the receiving page and
+clicks another button, the backing bean for that page receives the
+message synchronously and displays it.
+
+[[sthref213]]
+
+.*Figure 47-2 The websimplemessage Application*
+image:img/javaeett_dt_035.png[
+"Diagram showing a web application in which a managed bean sends a
+message to a queue, and another managed bean receives the message from
+the queue."]
+
+[[sthref215]]
+
+[[the-websimplemessage-facelets-pages]]
+The websimplemessage Facelets Pages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Facelets pages for the example are as follows.
+
+* `sender.xhtml`, which provides a labeled `h:InputText` tag where the
+user enters the message, along with two command buttons. When the user
+clicks the Send Message button, the `senderBean.sendMessage` method is
+called to send the message to the queue and display its contents. When
+the user clicks the Go to Receive Page button, the `receiver.xhtml` page
+appears.
+* `receiver.xhtml`, which also provides two command buttons. When the
+user clicks the Receive Message button, the `receiverBean.getMessage`
+method is called to fetch the message from the queue and display its
+contents. When the user clicks the Send Another Message button, the
+sender.xhtml page appears again.
+
+[[sthref216]]
+
+[[the-websimplemessage-managed-beans]]
+The websimplemessage Managed Beans
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The two managed beans for the example are as follows.
+
+* `SenderBean.java`, a CDI managed bean with one property,
+`messageText`, and one business method, `sendMessage`. The class is
+annotated with `@JMSDestinationDefinition` to create a component-private
+queue:
++
+[source,oac_no_warn]
+----
+@JMSDestinationDefinition(
+        name = "java:comp/jms/webappQueue",
+        interfaceName = "javax.jms.Queue",
+        destinationName = "PhysicalWebappQueue")
+@Named
+@RequestScoped
+public class SenderBean {
+----
++
+The `sendMessage` method injects a `JMSContext` (using the default
+connection factory) and the queue, creates a producer, sends the message
+the user typed on the Facelets page, and creates a `FacesMessage` to
+display on the Facelets page:
++
+[source,oac_no_warn]
+----
+@Inject
+private JMSContext context;
+@Resource(lookup = "java:comp/jms/webappQueue")
+private Queue queue;
+private String messageText;
+...
+public void sendMessage() {
+    try {
+        String text = "Message from producer: " + messageText;
+        context.createProducer().send(queue, text);
+
+        FacesMessage facesMessage = 
+                new FacesMessage("Sent message: " + text);
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+    } catch (Throwable t) {
+        logger.log(Level.SEVERE,
+                "SenderBean.sendMessage: Exception: {0}",
+                t.toString());
+    }
+}
+----
+* `ReceiverBean.java`, a CDI managed bean with one business method,
+`getMessage`. The method injects a `JMSContext` (using the default
+connection factory) and the queue that was defined in `SenderBean`,
+creates a consumer, receives the message, and creates a `FacesMessage`
+to display on the Facelets page:
++
+[source,oac_no_warn]
+----
+@Inject
+private JMSContext context;
+@Resource(lookup = "java:comp/jms/webappQueue")
+private Queue queue;
+...
+public void getMessage() {
+    try {
+        JMSConsumer receiver = context.createConsumer(queue);
+        String text = receiver.receiveBody(String.class);
+
+        if (text != null) {
+            FacesMessage facesMessage = 
+                    new FacesMessage("Reading message: " + text);
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        } else {
+            FacesMessage facesMessage =
+                    new FacesMessage("No message received after 1 second");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        }
+    } catch (Throwable t) {
+        logger.log(Level.SEVERE,
+                "ReceiverBean.getMessage: Exception: {0}",
+                t.toString());
+    }
+}
+----
+
+[[sthref217]]
+
+[[running-the-websimplemessage-example]]
+Running the websimplemessage Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `websimplemessage` application.
+
+The following topics are addressed here:
+
+* link:#CHDHEHAB[Creating Resources for the websimplemessage Example]
+* link:#CHDBADGA[To Package and Deploy websimplemessage Using NetBeans
+IDE]
+* link:#CHDBBBEI[To Package and Deploy websimplemessage Using Maven]
+* link:#CHDIFEHC[To Run the websimplemessage Example]
+
+[[CHDHEHAB]]
+
+[[creating-resources-for-the-websimplemessage-example]]
+Creating Resources for the websimplemessage Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example uses an annotation-defined queue and the preconfigured
+default connection factory `java:comp/DefaultJMSConnectionFactory`.
+
+[[CHDBADGA]]
+
+[[to-package-and-deploy-websimplemessage-using-netbeans-ide]]
+To Package and Deploy websimplemessage Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jms
+----
+4.  Select the `websimplemessage` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `websimplemessage` project and
+select Build.
++
+This command builds and deploys the project.
+
+[[CHDBBBEI]]
+
+[[to-package-and-deploy-websimplemessage-using-maven]]
+To Package and Deploy websimplemessage Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jms/websimplemessage/
+----
+3.  To compile the source files and package and deploy the application,
+use the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+
+[[CHDIFEHC]]
+
+[[to-run-the-websimplemessage-example]]
+To Run the websimplemessage Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  In a web browser, enter the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/websimplemessage
+----
+2.  Enter a message in the text field and click Send Message.
++
+If, for example, you enter "Hello, Duke", the following appears below
+the buttons:
++
+[source,oac_no_warn]
+----
+Sent message: Message from producer: Hello, Duke
+----
+3.  Click Go to Receive Page.
+4.  Click Receive Message.
++
+The following appears below the buttons:
++
+[source,oac_no_warn]
+----
+Reading message: Message from producer: Hello, Duke
+----
+5.  Click Send Another Message to return to the sending page.
+6.  After you have finished running the application, undeploy it using
+either the Services tab of NetBeans IDE or the `mvn cargo:undeploy`
+command.
+
+

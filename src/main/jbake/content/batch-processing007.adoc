@@ -1,0 +1,39 @@
+type=page
+status=published
+title=Packaging Batch Applications
+next=batch-processing008.html
+prev=batch-processing006.html
+~~~~~~
+Packaging Batch Applications
+============================
+
+[[BCGBBGJI]]
+
+[[packaging-batch-applications]]
+Packaging Batch Applications
+----------------------------
+
+Job definition files and batch artifacts do not require separate
+packaging and can be included in any Java EE application.
+
+Package the batch artifact classes with the rest of the classes of your
+application, and include the job definition files in one of the
+following directories:
+
+* `META-INF/batch-jobs/` for `jar` packages
+* `WEB-INF/classes/META-INF/batch-jobs/` for `war` packages
+
+The name of each job definition file must match its job ID. For example,
+if you define a job as follows, and you are packaging your application
+as a WAR file, include the job definition file in
+`WEB-INF/classes/META-INF/batch-jobs/simplejob.xml`:
+
+[source,oac_no_warn]
+----
+<job id="simplejob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+                    version="1.0">
+  ...
+</job>
+----
+
+

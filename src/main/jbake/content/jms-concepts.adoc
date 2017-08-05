@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Java Message Service Concepts
+next=jms-concepts001.html
+prev=partmessaging.html
+~~~~~~
+Java Message Service Concepts
+=============================
+
+[[BNCDQ]]
+
+[[java-message-service-concepts]]
+46 Java Message Service Concepts
+--------------------------------
+
+
+This chapter provides an introduction to the Java Message Service (JMS)
+API, a Java API that allows applications to create, send, receive, and
+read messages using reliable, asynchronous, loosely coupled
+communication.
+
+The following topics are addressed here:
+
+* link:jms-concepts001.html#BNCDR[Overview of the JMS API]
+* link:jms-concepts002.html#BNCDX[Basic JMS API Concepts]
+* link:jms-concepts003.html#BNCEH[The JMS API Programming Model]
+* link:jms-concepts004.html#BNCFU[Using Advanced JMS Features]
+* link:jms-concepts005.html#BNCGL[Using the JMS API in Java EE
+Applications]
+* link:jms-concepts006.html#BNCGU[Further Information about JMS]
+
+

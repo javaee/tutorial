@@ -1,0 +1,56 @@
+type=page
+status=published
+title=Registering a Custom Converter
+next=jsf-configure010.html
+prev=jsf-configure008.html
+~~~~~~
+Registering a Custom Converter
+==============================
+
+[[BNAXE]]
+
+[[registering-a-custom-converter]]
+Registering a Custom Converter
+------------------------------
+
+As is the case with a custom validator, if the application developer
+creates a custom converter, you must register it with the application
+either by using the `@FacesConverter` annotation, as described in
+link:jsf-custom011.html#GLPHB[Creating a Custom Converter], or by using
+the `converter` XML element in the application configuration resource
+file. Here is a hypothetical `converter` configuration for
+`CreditCardConverter` from the Duke's Bookstore case study:
+
+[source,oac_no_warn]
+----
+<converter>
+    <description>
+        Converter for credit card numbers that normalizes
+        the input to a standard format
+    </description>
+    <converter-id>CreditCardConverter</converter-id>
+    <converter-class>
+        dukesbookstore.converters.CreditCardConverter
+    </converter-class>
+</converter>
+----
+
+Attributes specified in a `converter` tag override any settings in the
+`@FacesConverter` annotation.
+
+The `converter` element represents a `javax.faces.convert.Converter`
+implementation and contains required `converter-id` and
+`converter-class` elements.
+
+The `converter-id` element identifies an ID that is used by the
+`converter` attribute of a UI component tag to apply the converter to
+the component's data. link:jsf-custom011.html#BNATU[Using a Custom
+Converter] includes an example of referencing the custom converter from
+a component tag.
+
+The `converter-class` element identifies the `Converter` implementation.
+
+link:jsf-custom011.html#BNAUS[Creating and Using a Custom Converter]
+explains how to create a custom converter.
+
+

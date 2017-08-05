@@ -1,0 +1,57 @@
+type=page
+status=published
+title=Monitoring Events on the Client
+next=jsf-ajax006.html
+prev=jsf-ajax004.html
+~~~~~~
+Monitoring Events on the Client
+===============================
+
+[[GKDDF]]
+
+[[monitoring-events-on-the-client]]
+Monitoring Events on the Client
+-------------------------------
+
+To monitor ongoing Ajax requests, use the `onevent` attribute of the
+`f:ajax` tag. The value of this attribute is the name of a JavaScript
+function. JavaServer Faces calls the `onevent` function at each stage of
+the processing of an Ajax request: begin, complete, and success.
+
+When calling the JavaScript function assigned to the `onevent` property,
+JavaServer Faces passes a data object to it. The data object contains
+the properties listed in link:#GKGOE[Table 13-3].
+
+[[sthref71]][[GKGOE]]
+
+Table 13-3 Properties of the onevent Data Object
+
+[width="20%",cols="100%,",options="header",]
+|=======================================================================
+|Property |Description
+|`responseXML` |The response to the Ajax call in XML format
+
+|`responseText` |The response to the Ajax call in text format
+
+|`responseCode` |The response to the Ajax call in numeric code
+
+|`source` |The source of the current Ajax event: the DOM element
+
+|`status` |The status of the current Ajax call: `begin`, `complete`, or
+`success`
+
+|`type` |The type of the Ajax call: `event`
+|=======================================================================
+
+
+By using the `status` property of the data object, you can identify the
+current status of the Ajax request and monitor its progress. In the
+following example, `monitormyajaxevent` is a JavaScript function that
+monitors the Ajax request sent by the event:
+
+[source,oac_no_warn]
+----
+<f:ajax event="click" render="statusmessage" onevent="monitormyajaxevent"/>
+----
+
+

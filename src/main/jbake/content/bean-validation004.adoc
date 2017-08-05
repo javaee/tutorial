@@ -1,0 +1,142 @@
+type=page
+status=published
+title=Validating Constructors and Methods
+next=bean-validation005.html
+prev=bean-validation003.html
+~~~~~~
+Validating Constructors and Methods
+===================================
+
+[[CACJIBEJ]]
+
+[[validating-constructors-and-methods]]
+Validating Constructors and Methods
+-----------------------------------
+
+Bean Validation constraints may be placed on the parameters of nonstatic
+methods and constructors and on the return values of nonstatic methods.
+Static methods and constructors will not be validated.
+
+[source,oac_no_warn]
+----
+public class Employee {
+...
+  public Employee (@NotNull String name) { ... }
+
+  public void setSalary(
+      @NotNull 
+      @Digits(integer=6, fraction=2) BigDecimal salary,
+      @NotNull
+      @ValidCurrency
+      String currencyType) {
+    ...
+  }
+...
+}
+----
+
+In this example, the `Employee` class has a constructor constraint
+requiring a name and has two sets of method parameter constraints. The
+amount of the salary for the employee must not be null, cannot be
+greater than six digits to the left of the decimal point, and cannot
+have more than two digits to the right of the decimal place. The
+currency type must not be null and is validated using a custom
+constraint.
+
+If you add method constraints to classes in an object hierarchy, special
+care must be taken to avoid unintended behavior by subtypes. See
+link:bean-validation-advanced004.html#CIHGJBGI[Using Method Constraints
+in Type Hierarchies] for more information.
+
+[[sthref122]]
+
+[[cross-parameter-constraints]]
+Cross-Parameter Constraints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Constraints that apply to multiple parameters are called cross-parameter
+constraints, and may be applied at the method or constructor level.
+
+[source,oac_no_warn]
+----
+@ConsistentPhoneParameters
+@NotNull
+public Employee (String name, String officePhone, String mobilePhone) {
+  ...
+}
+----
+
+In this example, a custom cross-parameter constraint,
+`@ConsistentPhoneParameters`, validates that the format of the phone
+numbers passed into the constructor match. The `@NotNull` constraint
+applies to all the parameters in the constructor.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Tip:
+
+Cross-parameter constraint annotations are applied directly to the
+method or constructor. Return value constraints are also applied
+directly to the method or constructor. To avoid confusion as to where
+the constraint applies, parameter or return value, choose a name for any
+custom constraints that identifies where the constraint applies. For
+instance, the preceding example applies a custom constraint,
+`@ConsistentPhoneParameters`, that indicates that it applies to the
+parameters of the method or constructor.
+
+When you create a custom constraint that applies to both method
+parameters and return values, the `validationAppliesTo` element of the
+constraint annotation may be set to `ConstraintTarget.RETURN_VALUE` or
+`ConstraintTarget.PARAMETERS` to explicitly set the target of the
+validation constraint.
+
+|=======================================================================
+
+
+[[sthref123]]
+
+[[identifying-parameter-constraint-violations]]
+Identifying Parameter Constraint Violations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If a `ConstraintViolationException` occurs during a method call, the
+Bean Validation runtime returns a parameter index to identify which
+parameter caused the constraint violation. The parameter index is in the
+form `arg`PARAMETER_INDEX, where PARAMETER_INDEX is an integer that
+starts at 0 for the first parameter of the method or constructor.
+
+[[sthref124]]
+
+[[adding-constraints-to-method-return-values]]
+Adding Constraints to Method Return Values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To validate the return value for a method, you can apply constraints
+directly to the method or constructor declaration.
+
+[source,oac_no_warn]
+----
+@NotNull
+public Employee getEmployee() { ... }
+----
+
+Cross-parameter constraints are also applied at the method level. Custom
+constraints that could be applied to both the return value and the
+method parameters have an ambiguous constraint target. To avoid this
+ambiguity, add a `validationAppliesTo` element to the constraint
+annotation definition with the default set to either
+`ConstraintTarget.RETURN_VALUE` or `ConstraintTarget.PARAMETERS` to
+explicitly set the target of the validation constraint.
+
+[source,oac_no_warn]
+----
+@Manager(validationAppliesTo=ConstraintTarget.RETURN_VALUE)
+public Employee getManager(Employee employee) { ... }
+----
+
+See link:bean-validation-advanced001.html#CIHCICAI[Removing Ambiguity in
+Constraint Targets] for more information.
+
+

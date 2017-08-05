@@ -1,0 +1,50 @@
+type=page
+status=published
+title=Injecting Beans
+next=cdi-basic008.html
+prev=cdi-basic006.html
+~~~~~~
+Injecting Beans
+===============
+
+[[GJBAN]]
+
+[[injecting-beans]]
+Injecting Beans
+---------------
+
+In order to use the beans you create, you inject them into yet another
+bean that can then be used by an application, such as a JavaServer Faces
+application. For example, you might create a bean called `Printer` into
+which you would inject one of the `Greeting` beans:
+
+[source,oac_no_warn]
+----
+import javax.inject.Inject;
+
+public class Printer {
+
+    @Inject Greeting greeting;
+    ...
+}
+----
+
+This code injects the `@Default` `Greeting` implementation into the
+bean. The following code injects the `@Informal` implementation:
+
+[source,oac_no_warn]
+----
+import javax.inject.Inject;
+
+public class Printer {
+
+    @Inject @Informal Greeting greeting;
+    ...
+}
+----
+
+More is needed for the complete picture of this bean. Its use of scope
+needs to be understood. In addition, for a JavaServer Faces application,
+the bean needs to be accessible through the EL.
+
+

@@ -1,0 +1,27 @@
+type=page
+status=published
+title=Getting Started Securing Enterprise Applications
+next=security-javaee001.html
+prev=security-webtier004.html
+~~~~~~
+Getting Started Securing Enterprise Applications
+================================================
+
+[[BNBYK]]
+
+[[getting-started-securing-enterprise-applications]]
+50 Getting Started Securing Enterprise Applications
+---------------------------------------------------
+
+
+This chapter describes how to administer security for enterprise
+applications.
+
+The following topics are addressed here:
+
+* link:security-javaee001.html#CACGIFHJ[Basic Security Tasks for
+Enterprise Applications]
+* link:security-javaee002.html#BNBYL[Securing Enterprise Beans]
+* link:security-javaee003.html#GKBSZ[Examples: Securing Enterprise Beans]
+
+

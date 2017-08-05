@@ -1,0 +1,470 @@
+type=page
+status=published
+title=The billpayment Example: Using Events and Interceptors
+next=cdi-adv-examples006.html
+prev=cdi-adv-examples004.html
+~~~~~~
+The billpayment Example: Using Events and Interceptors
+======================================================
+
+[[GKHPA]]
+
+[[the-billpayment-example-using-events-and-interceptors]]
+The billpayment Example: Using Events and Interceptors
+------------------------------------------------------
+
+The `billpayment` example shows how to use both events and interceptors.
+
+The source files are located in the
+tut-install`/examples/cdi/billpayment/src/main/java/javaeetutorial/billpayment/`
+directory.
+
+The following topics are addressed here:
+
+* link:#CHDIBGDF[Overview of the billpayment Example]
+* link:#GKHOK[The PaymentEvent Event Class]
+* link:#GKHRB[The PaymentHandler Event Listener]
+* link:#GKHRJ[The billpayment Facelets Pages and Managed Bean]
+* link:#GKHRQ[The LoggedInterceptor Interceptor Class]
+* link:#GKHPK[Running the billpayment Example]
+
+[[CHDIBGDF]]
+
+[[overview-of-the-billpayment-example]]
+Overview of the billpayment Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The example simulates paying an amount using a debit card or credit
+card. When the user chooses a payment method, the managed bean creates
+an appropriate event, supplies its payload, and fires it. A simple event
+listener handles the event using observer methods.
+
+The example also defines an interceptor that is set on a class and on
+two methods of another class.
+
+[[GKHOK]]
+
+[[the-paymentevent-event-class]]
+The PaymentEvent Event Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The event class, `event.PaymentEvent`, is a simple bean class that
+contains a no-argument constructor. It also has a `toString` method and
+getter and setter methods for the payload components: a `String` for the
+payment type, a `BigDecimal` for the payment amount, and a `Date` for
+the timestamp.
+
+[source,oac_no_warn]
+----
+public class PaymentEvent implements Serializable {
+
+    ...
+    public String paymentType;
+    public BigDecimal value;
+    public Date datetime;
+
+    public PaymentEvent() {
+    }
+
+    @Override
+    public String toString() {
+        return this.paymentType
+                + " = $" + this.value.toString()
+                + " at " + this.datetime.toString();
+    }
+    ...
+----
+
+The event class is a simple bean that is instantiated by the managed
+bean using `new` and then populated. For this reason, the CDI container
+cannot intercept the creation of the bean, and hence it cannot allow
+interception of its getter and setter methods.
+
+[[GKHRB]]
+
+[[the-paymenthandler-event-listener]]
+The PaymentHandler Event Listener
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The event listener, `listener.PaymentHandler`, contains two observer
+methods, one for each of the two event types:
+
+[source,oac_no_warn]
+----
+@Logged
+@SessionScoped
+public class PaymentHandler implements Serializable {
+
+    ...
+    public void creditPayment(@Observes @Credit PaymentEvent event) {
+        logger.log(Level.INFO, "PaymentHandler - Credit Handler: {0}",
+                event.toString());
+
+        // call a specific Credit handler class...
+    }
+
+    public void debitPayment(@Observes @Debit PaymentEvent event) {
+        logger.log(Level.INFO, "PaymentHandler - Debit Handler: {0}",
+                event.toString());
+ 
+        // call a specific Debit handler class...
+    }
+}
+----
+
+Each observer method takes as an argument the event, annotated with
+`@Observes` and with the qualifier for the type of payment. In a real
+application, the observer methods would pass the event information on to
+another component that would perform business logic on the payment.
+
+The qualifiers are defined in the `payment` package, described in
+link:#GKHRJ[The billpayment Facelets Pages and Managed Bean].
+
+The `PaymentHandler` bean is annotated `@Logged` so that all its methods
+can be intercepted.
+
+[[GKHRJ]]
+
+[[the-billpayment-facelets-pages-and-managed-bean]]
+The billpayment Facelets Pages and Managed Bean
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `billpayment` example contains two Facelets pages, `index.xhtml` and
+the very simple `response.xhtml`. The body of `index.xhtml` looks like
+this:
+
+[source,oac_no_warn]
+----
+    <h:body>
+        <h3>Bill Payment Options</h3>
+        <p>Enter an amount, select Debit Card or Credit Card, 
+            then click Pay.</p>
+        <h:form>
+            <p>
+            <h:outputLabel value="Amount: $" for="amt"/>
+            <h:inputText id="amt" value="#{paymentBean.value}"
+                         required="true"
+                         requiredMessage="An amount is required."
+                         maxlength="15" />
+            </p>
+            <h:outputLabel value="Options:" for="opt"/>
+            <h:selectOneRadio id="opt" value="#{paymentBean.paymentOption}">
+                <f:selectItem id="debit" itemLabel="Debit Card"
+                              itemValue="1"/>
+                <f:selectItem id="credit" itemLabel="Credit Card"
+                              itemValue="2" />
+            </h:selectOneRadio>
+            <p><h:commandButton id="submit" value="Pay"
+                                action="#{paymentBean.pay}" /></p>
+            <p><h:commandButton value="Reset" 
+                                action="#{paymentBean.reset}" /></p>
+        </h:form>
+        ...
+    </h:body>
+----
+
+The input field takes a payment amount, passed to `paymentBean.value`.
+Two options ask the user to select a Debit Card or Credit Card payment,
+passing the integer value to `paymentBean.paymentOption`. Finally, the
+Pay command button's action is set to the method `paymentBean.pay`, and
+the Reset button's action is set to the `paymentBean.reset` method.
+
+The `payment.PaymentBean` managed bean uses qualifiers to differentiate
+between the two kinds of payment event:
+
+[source,oac_no_warn]
+----
+@Named
+@SessionScoped
+public class PaymentBean implements Serializable {
+
+   ...
+    @Inject
+    @Credit
+    Event<PaymentEvent> creditEvent;
+
+    @Inject
+    @Debit
+    Event<PaymentEvent> debitEvent;
+----
+
+The qualifiers, `@Credit` and `@Debit`, are defined in the `payment`
+package along with `PaymentBean`.
+
+Next, the `PaymentBean` defines the properties it obtains from the
+Facelets page and will pass on to the event:
+
+[source,oac_no_warn]
+----
+    public static final int DEBIT = 1;
+    public static final int CREDIT = 2;
+    private int paymentOption = DEBIT;
+    
+    @Digits(integer = 10, fraction = 2, message = "Invalid value")
+    private BigDecimal value;
+
+    private Date datetime;
+----
+
+The `paymentOption` value is an integer passed in from the option
+component; the default value is `DEBIT`. The `value` is a `BigDecimal`
+with a Bean Validation constraint that enforces a currency value with a
+maximum number of digits. The timestamp for the event, `datetime`, is a
+`Date` object initialized when the `pay` method is called.
+
+The `pay` method of the bean first sets the timestamp for this payment
+event. It then creates and populates the event payload, using the
+constructor for the `PaymentEvent` and calling the event's setter
+methods, using the bean properties as arguments. It then fires the
+event.
+
+[source,oac_no_warn]
+----
+    @Logged
+    public String pay() {
+        this.setDatetime(Calendar.getInstance().getTime());
+        switch (paymentOption) {
+            case DEBIT:
+                PaymentEvent debitPayload = new PaymentEvent();
+                debitPayload.setPaymentType("Debit");
+                debitPayload.setValue(value);
+                debitPayload.setDatetime(datetime);
+                debitEvent.fire(debitPayload);
+                break;
+            case CREDIT:
+                PaymentEvent creditPayload = new PaymentEvent();
+                creditPayload.setPaymentType("Credit");
+                creditPayload.setValue(value);
+                creditPayload.setDatetime(datetime);
+                creditEvent.fire(creditPayload);
+                break;
+            default:
+                logger.severe("Invalid payment option!");
+        }
+        return "response";
+    }
+----
+
+The `pay` method returns the page to which the action is redirected,
+`response.xhtml`.
+
+The `PaymentBean` class also contains a `reset` method that empties the
+value field on the `index.xhtml` page and sets the payment option to the
+default:
+
+[source,oac_no_warn]
+----
+    @Logged
+    public void reset() {
+        setPaymentOption(DEBIT);
+        setValue(BigDecimal.ZERO);
+    }
+----
+
+In this bean, only the `pay` and `reset` methods are intercepted.
+
+The `response.xhtml` page displays the amount paid. It uses a `rendered`
+expression to display the payment method:
+
+[source,oac_no_warn]
+----
+    <h:body>
+        <h:form>
+            <h2>Bill Payment: Result</h2>
+            <h3>Amount Paid with
+                <h:outputText id="debit" value="Debit Card: "
+                              rendered="#{paymentBean.paymentOption eq 1}" />
+                <h:outputText id="credit" value="Credit Card: "
+                              rendered="#{paymentBean.paymentOption eq 2}" />
+                <h:outputText id="result" value="#{paymentBean.value}">
+                    <f:convertNumber type="currency"/>
+                </h:outputText>
+            </h3>
+            <p><h:commandButton id="back" value="Back" action="index" /></p>
+        </h:form>
+    </h:body>
+----
+
+[[GKHRQ]]
+
+[[the-loggedinterceptor-interceptor-class]]
+The LoggedInterceptor Interceptor Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The interceptor class, `LoggedInterceptor`, and its interceptor binding,
+`Logged`, are both defined in the `interceptor` package. The `Logged`
+interceptor binding is defined as follows:
+
+[source,oac_no_warn]
+----
+@Inherited
+@InterceptorBinding
+@Retention(RUNTIME)
+@Target({METHOD, TYPE})
+public @interface Logged {
+}
+----
+
+The `LoggedInterceptor` class looks like this:
+
+[source,oac_no_warn]
+----
+@Logged
+@Interceptor
+public class LoggedInterceptor implements Serializable {
+
+    ...
+
+    public LoggedInterceptor() {
+    }
+
+    @AroundInvoke
+    public Object logMethodEntry(InvocationContext invocationContext)
+            throws Exception {
+        System.out.println("Entering method: "
+                + invocationContext.getMethod().getName() + " in class "
+                + invocationContext.getMethod().getDeclaringClass().getName());
+
+        return invocationContext.proceed();
+    }
+}
+----
+
+The class is annotated with both the `@Logged` and the `@Interceptor`
+annotations. The `@AroundInvoke` method, `logMethodEntry`, takes the
+required `InvocationContext` argument and calls the required `proceed`
+method. When a method is intercepted, `logMethodEntry` displays the name
+of the method being invoked as well as its class.
+
+To enable the interceptor, the `beans.xml` file defines it as follows:
+
+[source,oac_no_warn]
+----
+<interceptors>
+    <class>javaeetutorial.billpayment.interceptor.LoggedInterceptor</class>
+</interceptors>
+----
+
+In this application, the `PaymentEvent` and `PaymentHandler` classes are
+annotated `@Logged`, so all their methods are intercepted. In
+`PaymentBean`, only the `pay` and `reset` methods are annotated
+`@Logged`, so only those methods are intercepted.
+
+[[GKHPK]]
+
+[[running-the-billpayment-example]]
+Running the billpayment Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `billpayment` application.
+
+The following topics are addressed here:
+
+* link:#GKHQS[To Build, Package, and Deploy the billpayment Example
+Using NetBeans IDE]
+* link:#GKHPX[To Build, Package, and Deploy the billpayment Example
+Using Maven]
+* link:#GKHPT[To Run the billpayment Example]
+
+[[GKHQS]]
+
+[[to-build-package-and-deploy-the-billpayment-example-using-netbeans-ide]]
+To Build, Package, and Deploy the billpayment Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/cdi
+----
+4.  Select the `billpayment` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `billpayment` project and
+select Build.
++
+This command builds and packages the application into a WAR file,
+`billpayment.war`, located in the `target` directory, and then deploys
+it to GlassFish Server.
+
+[[GKHPX]]
+
+[[to-build-package-and-deploy-the-billpayment-example-using-maven]]
+To Build, Package, and Deploy the billpayment Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/cdi/billpayment/
+----
+3.  Enter the following command to deploy the application:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command builds and packages the application into a WAR file,
+`billpayment.war`, located in the `target` directory, and then deploys
+it to GlassFish Server.
+
+[[GKHPT]]
+
+[[to-run-the-billpayment-example]]
+To Run the billpayment Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  In a web browser, enter the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/billpayment
+----
+2.  On the Bill Payment Options page, enter a value in the Amount field.
++
+The amount can contain up to 10 digits and include up to two decimal
+places. For example:
++
+[source,oac_no_warn]
+----
+9876.54
+----
+3.  Select Debit Card or Credit Card and click Pay.
++
+The Bill Payment: Result page opens, displaying the amount paid and the
+method of payment:
++
+[source,oac_no_warn]
+----
+Amount Paid with Credit Card: $9,876.34
+----
+4.  Click Back to return to the Bill Payment Options page.
++
+You can also click Reset to return to the initial page values.
+5.  Examine the server log output.
++
+In NetBeans IDE, the output is visible in the GlassFish Server Output
+tab. Otherwise, view domain-dir`/logs/server.log`.
++
+The output from each interceptor appears in the log, followed by the
+additional logger output defined by the constructor and methods:
++
+[source,oac_no_warn]
+----
+INFO: Entering method: pay in class billpayment.payment.PaymentBean
+INFO: PaymentHandler created.
+INFO: Entering method: debitPayment in class billpayment.listener.PaymentHandler
+INFO: PaymentHandler - Debit Handler: Debit = $1234.56 at Tue Dec 14 14:50:28 EST 2010
+----
+
+

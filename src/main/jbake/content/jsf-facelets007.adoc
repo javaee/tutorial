@@ -1,0 +1,43 @@
+type=page
+status=published
+title=Relocatable Resources
+next=jsf-facelets008.html
+prev=jsf-facelets006.html
+~~~~~~
+Relocatable Resources
+=====================
+
+[[BABHGBJI]]
+
+[[relocatable-resources]]
+Relocatable Resources
+---------------------
+
+You can place a resource tag in one part of a page and specify that it
+be rendered in another part of the page. To do this, you use the
+`target` attribute of a tag that specifies a resource. Acceptable values
+for this attribute are as follows.
+
+* `"head"` renders the resource in the `head` element.
+* `"body"` renders the resource in the `body` element.
+* `"form"` renders the resource in the `form` element.
+
+For example, the following `h:outputScript` tag is placed within an
+`h:form` element, but it renders the JavaScript in the `head` element:
+
+[source,oac_no_warn]
+----
+<h:form>
+    <h:outputScript name="myscript.js" library="mylibrary" target="head"/>
+</h:form>
+----
+
+The `h:outputStylesheet` tag also supports resource relocation, in a
+similar way.
+
+Relocatable resources are essential for composite components that use
+stylesheets and can also be useful for composite components that use
+JavaScript. See link:jsf-advanced-cc004.html#GKHVN[The
+compositecomponentexample Example Application] for an example.
+
+

@@ -1,0 +1,30 @@
+type=page
+status=published
+title=Resource Adapters and Contracts
+next=resources001.html
+prev=transactions009.html
+~~~~~~
+Resource Adapters and Contracts
+===============================
+
+[[BNCJH]]
+
+[[resource-adapters-and-contracts]]
+53 Resource Adapters and Contracts
+----------------------------------
+
+
+This chapter examines resource adapters and explains how communications
+between Java EE servers and EIS systems are mediated by them.
+
+The following topics are addressed here:
+
+* link:resources001.html#GIPGL[What Is a Resource Adapter?]
+* link:resources002.html#GIRDD[Metadata Annotations]
+* link:resources003.html#GIPJU[Common Client Interface]
+* link:resources004.html#CHDJFIGB[Using Resource Adapters with Contexts
+and Dependency Injection for Java EE (CDI)]
+* link:resources005.html#BNCJW[Further Information about Resource
+Adapters]
+
+

@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Overview of Bean Validation
+next=bean-validation002.html
+prev=bean-validation.html
+~~~~~~
+Overview of Bean Validation
+===========================
+
+[[A1101988]]
+
+[[overview-of-bean-validation]]
+Overview of Bean Validation
+---------------------------
+
+Validating input received from the user to maintain data integrity is an
+important part of application logic. Validation of data can take place
+at different layers in even the simplest of applications, as shown in
+link:jsf-facelets003.html#GIPOB[Developing a Simple Facelets Application:
+The guessnumber-jsf Example Application]. The `guessnumber-jsf` example
+application validates the user input (in the `h:inputText` tag) for
+numerical data at the presentation layer and for a valid range of
+numbers at the business layer.
+
+The Java API for JavaBean Validation ("Bean Validation") provides a
+facility for validating objects, object members, methods, and
+constructors. In Java EE environments, Bean Validation integrates with
+Java EE containers and services to allow developers to easily define and
+enforce validation constraints. Bean Validation is available as part of
+the Java EE 7 platform.
+
+

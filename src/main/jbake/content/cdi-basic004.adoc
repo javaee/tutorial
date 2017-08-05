@@ -1,0 +1,36 @@
+type=page
+status=published
+title=About CDI Managed Beans
+next=cdi-basic005.html
+prev=cdi-basic003.html
+~~~~~~
+About CDI Managed Beans
+=======================
+
+[[GJFZI]]
+
+[[about-cdi-managed-beans]]
+About CDI Managed Beans
+-----------------------
+
+A managed bean is implemented by a Java class, which is called its bean
+class. A top-level Java class is a managed bean if it is defined to be a
+managed bean by any other Java EE technology specification, such as the
+JavaServer Faces technology specification, or if it meets all the
+following conditions.
+
+* It is not a nonstatic inner class.
+* It is a concrete class or is annotated `@Decorator`.
+* It is not annotated with an EJB component-defining annotation or
+declared as an EJB bean class in `ejb-jar.xml`.
+* It has an appropriate constructor. That is, one of the following is
+the case.
+
+** The class has a constructor with no parameters.
+
+** The class declares a constructor annotated `@Inject`.
+
+No special declaration, such as an annotation, is required to define a
+managed bean.
+
+

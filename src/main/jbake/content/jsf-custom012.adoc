@@ -1,0 +1,309 @@
+type=page
+status=published
+title=Creating and Using a Custom Validator
+next=jsf-custom013.html
+prev=jsf-custom011.html
+~~~~~~
+Creating and Using a Custom Validator
+=====================================
+
+[[BNAUW]]
+
+[[creating-and-using-a-custom-validator]]
+Creating and Using a Custom Validator
+-------------------------------------
+
+If the standard validators or Bean Validation don't perform the
+validation checking you need, you can create a custom validator to
+validate user input. As explained in
+link:jsf-intro005.html#BNAQK[Validation Model], there are two ways to
+implement validation code.
+
+* Implement a managed bean method that performs the validation.
+* Provide an implementation of the `javax.faces.validator.Validator`
+interface to perform the validation.
+
+link:jsf-develop003.html#BNAVE[Writing a Method to Perform Validation]
+explains how to implement a managed bean method to perform validation.
+The rest of this section explains how to implement the `Validator`
+interface.
+
+If you choose to implement the `Validator` interface and you want to
+allow the page author to configure the validator's attributes from the
+page, you also must specify a custom tag for registering the validator
+on a component.
+
+If you prefer to configure the attributes in the `Validator`
+implementation, you can forgo specifying a custom tag and instead let
+the page author register the validator on a component using the
+`f:validator` tag, as described in link:#BNATV[Using a Custom
+Validator].
+
+You can also create a managed bean property that accepts and returns the
+`Validator` implementation you create, as described in
+link:jsf-develop002.html#BNAUL[Writing Properties Bound to Converters,
+Listeners, or Validators]. You can use the `f:validator` tag's binding
+attribute to bind the `Validator` implementation to the managed bean
+property.
+
+Usually, you will want to display an error message when data fails
+validation. You need to store these error messages in a resource bundle.
+
+After creating the resource bundle, you have two ways to make the
+messages available to the application. You can queue the error messages
+onto the `FacesContext` programmatically, or you can register the error
+messages in the application configuration resource file, as explained in
+link:jsf-configure006.html#BNAXB[Registering Application Messages].
+
+For example, an e-commerce application might use a general-purpose
+custom validator called `FormatValidator.java` to validate input data
+against a format pattern that is specified in the custom validator tag.
+This validator would be used with a Credit Card Number field on a
+Facelets page. Here is the custom validator tag:
+
+[source,oac_no_warn]
+----
+<mystore:formatValidator
+ formatPatterns="9999999999999999|9999 9999 9999 9999|9999-9999-9999-9999"/>
+----
+
+According to this validator, the data entered in the field must be one
+of the following:
+
+* A 16-digit number with no spaces
+* A 16-digit number with a space between every four digits
+* A 16-digit number with hyphens between every four digits
+
+The `f:validateRegex` tag makes a custom validator unnecessary in this
+situation. However, the rest of this section describes how this
+validator would be implemented and how to specify a custom tag so that
+the page author could register the validator on a component.
+
+[[BNAUX]]
+
+[[implementing-the-validator-interface]]
+Implementing the Validator Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A `Validator` implementation must contain a constructor, a set of
+accessor methods for any attributes on the tag, and a `validate` method,
+which overrides the `validate` method of the `Validator` interface.
+
+The hypothetical `FormatValidator` class also defines accessor methods
+for setting the `formatPatterns` attribute, which specifies the
+acceptable format patterns for input into the fields. The setter method
+calls the `parseFormatPatterns` method, which separates the components
+of the pattern string into a string array, `formatPatternsList`.
+
+[source,oac_no_warn]
+----
+public String getFormatPatterns() {
+    return (this.formatPatterns);
+}
+public void setFormatPatterns(String formatPatterns) {
+    this.formatPatterns = formatPatterns;
+    parseFormatPatterns();
+}
+----
+
+In addition to defining accessor methods for the attributes, the class
+overrides the `validate` method of the `Validator` interface. This
+method validates the input and also accesses the custom error messages
+to be displayed when the `String` is invalid.
+
+The `validate` method performs the actual validation of the data. It
+takes the `FacesContext` instance, the component whose data needs to be
+validated, and the value that needs to be validated. A validator can
+validate only data of a component that implements
+`javax.faces.component.EditableValueHolder`.
+
+Here is an implementation of the `validate` method:
+
+[source,oac_no_warn]
+----
+@FacesValidator
+public class FormatValidator implements Validator, StateHolder {
+    ...
+    public void validate(FacesContext context, UIComponent component, 
+                         Object toValidate) {
+
+        boolean valid = false;
+        String value = null;
+        if ((context == null) || (component == null)) {
+            throw new NullPointerException();
+        }
+        if (!(component instanceof UIInput)) {
+            return;
+        }
+        if ( null == formatPatternsList || null == toValidate) {
+            return;
+        }
+        value = toValidate.toString();
+        // validate the value against the list of valid patterns.
+        Iterator patternIt = formatPatternsList.iterator();
+        while (patternIt.hasNext()) {
+            valid = isFormatValid(
+                ((String)patternIt.next()), value);
+            if (valid) {
+                break;
+            }
+        }
+        if ( !valid ) {
+            FacesMessage errMsg =
+                new FacesMessage(FORMAT_INVALID_MESSAGE_ID);
+            FacesContext.getCurrentInstance().addMessage(null, errMsg);
+            throw new ValidatorException(errMsg);
+        }
+    }
+}
+----
+
+The `@FacesValidator` annotation registers the `FormatValidator` class
+as a validator with the JavaServer Faces implementation. The `validate`
+method gets the local value of the component and converts it to a
+`String`. It then iterates over the `formatPatternsList` list, which is
+the list of acceptable patterns that was parsed from the
+`formatPatterns` attribute of the custom validator tag.
+
+While iterating over the list, this method checks the pattern of the
+component's local value against the patterns in the list. If the pattern
+of the local value does not match any pattern in the list, this method
+generates an error message. It then creates a
+`javax.faces.application.FacesMessage` and queues it on the
+`FacesContext` for display, using a `String` that represents the key in
+the `Properties` file:
+
+[source,oac_no_warn]
+----
+public static final String FORMAT_INVALID_MESSAGE_ID =
+     "FormatInvalid";
+}
+----
+
+Finally, the method passes the message to the constructor of
+`javax.faces.validator.ValidatorException`.
+
+When the error message is displayed, the format pattern will be
+substituted for the `{0}` in the error message, which, in English, is as
+follows:
+
+[source,oac_no_warn]
+----
+Input must match one of the following patterns: {0}
+----
+
+You may wish to save and restore state for your validator, although
+state saving is not usually necessary. To do so, you will need to
+implement the `StateHolder` interface as well as the `Validator`
+interface. To implement `StateHolder`, you would need to implement its
+four methods: `saveState(FacesContext)`,
+`restoreState(FacesContext, Object)`, `isTransient`, and
+`setTransient(boolean)`. See link:jsf-custom005.html#BNAVZ[Saving and
+Restoring State] for more information.
+
+[[BNAUY]]
+
+[[specifying-a-custom-tag]]
+Specifying a Custom Tag
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If you implemented a `Validator` interface rather than implementing a
+managed bean method that performs the validation, you need to do one of
+the following.
+
+* Allow the page author to specify the `Validator` implementation to use
+with the `f:validator` tag. In this case, the `Validator` implementation
+must define its own properties. link:#BNATV[Using a Custom Validator]
+explains how to use the `f:validator` tag.
+* Specify a custom tag that provides attributes for configuring the
+properties of the validator from the page.
+
+To create a custom tag, you need to add the tag to the tag library
+descriptor for the application, `bookstore.taglib.xml`:
+
+[source,oac_no_warn]
+----
+<tag>
+    <tag-name>validator</tag-name>
+    <validator>
+        <validator-id>formatValidator</validator-id>
+        <validator-class>
+            dukesbookstore.validators.FormatValidator
+        </validator-class>
+    </validator>
+</tag>
+----
+
+The `tag-name` element defines the name of the tag as it must be used in
+a Facelets page. The `validator-id` element identifies the custom
+validator. The `validator-class` element wires the custom tag to its
+implementation class.
+
+link:#BNATV[Using a Custom Validator] explains how to use the custom
+validator tag on the page.
+
+[[BNATV]]
+
+[[using-a-custom-validator]]
+Using a Custom Validator
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+To register a custom validator on a component, you must do one of the
+following.
+
+* Nest the validator's custom tag inside the tag of the component whose
+value you want to be validated.
+* Nest the standard `f:validator` tag within the tag of the component
+and reference the custom `Validator` implementation from the
+`f:validator` tag.
+
+Here is a hypothetical custom `formatValidator` tag for the Credit Card
+Number field, nested within the `h:inputText` tag:
+
+[source,oac_no_warn]
+----
+<h:inputText id="ccno" size="19"
+  ...
+  required="true">
+  <mystore:formatValidator
+  formatPatterns="9999999999999999|9999 9999 9999 9999|9999-9999-9999-9999"/>
+</h:inputText>
+<h:message styleClass="validationMessage" for="ccno"/>
+----
+
+This tag validates the input of the `ccno` field against the patterns
+defined by the page author in the `formatPatterns` attribute.
+
+You can use the same custom validator for any similar component by
+simply nesting the custom validator tag within the component tag.
+
+If the application developer who created the custom validator prefers to
+configure the attributes in the `Validator` implementation rather than
+allow the page author to configure the attributes from the page, the
+developer will not create a custom tag for use with the validator.
+
+In this case, the page author must nest the `f:validator` tag inside the
+tag of the component whose data needs to be validated. Then the page
+author needs to do one of the following.
+
+* Set the `f:validator` tag's `validatorId` attribute to the ID of the
+validator that is defined in the application configuration resource
+file.
+* Bind the custom `Validator` implementation to a managed bean property
+using the `f:validator` tag's `binding` attribute, as described in
+link:jsf-custom014.html#BNATM[Binding Converters, Listeners, and
+Validators to Managed Bean Properties].
+
+The following tag registers a hypothetical validator on a component
+using an `f:validator` tag and references the ID of the validator:
+
+[source,oac_no_warn]
+----
+<h:inputText id="name" value="#{CustomerBean.name}"
+            size="10" ...>
+    <f:validator validatorId="customValidator" />
+    ...
+</h:inputText>
+----
+
+

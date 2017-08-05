@@ -1,0 +1,26 @@
+type=page
+status=published
+title=Introduction
+next=overview.html
+prev=preface.html
+~~~~~~
+Introduction
+============
+
+[[GFIRP]][[JEETT00127]]
+
+[[part-i]]
+Part I +
+--------
+
+[[introduction]]
+Introduction
+------------
+
+Part I introduces the platform, the tutorial, and the examples. This
+part contains the following chapters:
+
+* link:overview.html#BNAAW[Chapter 1, "Overview"]
+* link:usingexamples.html#GFIUD[Chapter 2, "Using the Tutorial Examples"]
+
+

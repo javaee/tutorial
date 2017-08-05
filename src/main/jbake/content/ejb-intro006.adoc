@@ -1,0 +1,33 @@
+type=page
+status=published
+title=Naming Conventions for Enterprise Beans
+next=ejb-intro007.html
+prev=ejb-intro005.html
+~~~~~~
+Naming Conventions for Enterprise Beans
+=======================================
+
+[[GIPKS]]
+
+[[naming-conventions-for-enterprise-beans]]
+Naming Conventions for Enterprise Beans
+---------------------------------------
+
+Because enterprise beans are composed of multiple parts, it's useful to
+follow a naming convention for your applications. link:#GIPLL[Table
+33-2] summarizes the conventions for the example beans in this tutorial.
+
+[[sthref152]][[GIPLL]]
+
+Table 33-2 Naming Conventions for Enterprise Beans
+
+[width="63%",cols="1%,47%,52%",options="header",]
+|================================================
+|Item |Syntax |Example
+|Enterprise bean name |name`Bean` |`AccountBean`
+|Enterprise bean class |name`Bean` |`AccountBean`
+|Business interface |name |`Account`
+|================================================
+
+
+

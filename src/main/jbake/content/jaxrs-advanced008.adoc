@@ -1,0 +1,469 @@
+type=page
+status=published
+title=The customer Example Application
+next=partentbeans.html
+prev=jaxrs-advanced007.html
+~~~~~~
+The customer Example Application
+================================
+
+[[GKOIB]]
+
+[[the-customer-example-application]]
+The customer Example Application
+--------------------------------
+
+This section describes how to build and run the `customer` example
+application. This application is a RESTful web service that uses JAXB to
+perform the create, read, update, delete (CRUD) operations for a
+specific entity.
+
+The `customer` sample application is in the
+tut-install`/examples/jaxrs/customer/` directory. See
+link:usingexamples.html#GFIUD[Chapter 2, "Using the Tutorial Examples,"]
+for basic information on building and running sample applications.
+
+The following topics are addressed here:
+
+* link:#GKOFO[Overview of the customer Example Application]
+* link:#CIHJFEJI[The Customer and Address Entity Classes]
+* link:#GKLGT[The CustomerService Class]
+* link:#GKQJQ[Using the JAX-RS Client in the CustomerBean Classes]
+* link:#GKQKV[Running the customer Example]
+
+[[GKOFO]]
+
+[[overview-of-the-customer-example-application]]
+Overview of the customer Example Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The source files of this application are at
+tut-install`/examples/jaxrs/customer/src/main/java/`. The application
+has three parts.
+
+* The `Customer` and `Address` entity classes. These classes model the
+data of the application and contain JAXB annotations.
+* The `CustomerService` resource class. This class contains JAX-RS
+resource methods that perform operations on `Customer` instances
+represented as XML or JSON data using JAXB. See link:#GKLGT[The
+CustomerService Class] for details.
+* The `CustomerBean` session bean that acts as a backing bean for the
+web client. `CustomerBean` uses the JAX-RS client API to call the
+methods of `CustomerService`.
+
+The `customer` example application shows you how to model your data
+entities as Java classes with JAXB annotations.
+
+[[CIHJFEJI]]
+
+[[the-customer-and-address-entity-classes]]
+The Customer and Address Entity Classes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following class represents a customer's address:
+
+[source,oac_no_warn]
+----
+@Entity
+@Table(name="CUSTOMER_ADDRESS")
+@XmlRootElement(name="address")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    @XmlElement(required=true) 
+    protected int number;
+    
+    @XmlElement(required=true)  
+    protected String street;
+    
+    @XmlElement(required=true)  
+    protected String city;
+    
+    @XmlElement(required=true) 
+    protected String province;
+    
+    @XmlElement(required=true)  
+    protected String zip;
+    
+    @XmlElement(required=true)
+    protected String country;
+    
+    public Address() { }
+    
+    // Getter and setter methods
+    // ...
+}
+----
+
+The `@XmlRootElement(name="address")` annotation maps this class to the
+`address` XML element. The `@XmlAccessorType(XmlAccessType.FIELD)`
+annotation specifies that all the fields of this class are bound to XML
+by default. The `@XmlElement(required=true)` annotation specifies that
+an element must be present in the XML representation.
+
+The following class represents a customer:
+
+[source,oac_no_warn]
+----
+@Entity
+@Table(name="CUSTOMER_CUSTOMER")
+@NamedQuery(
+    name="findAllCustomers",
+    query="SELECT c FROM Customer c " +
+          "ORDER BY c.id"
+)
+@XmlRootElement(name="customer")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlAttribute(required=true) 
+    protected int id;
+    
+    @XmlElement(required=true) 
+    protected String firstname;
+    
+    @XmlElement(required=true) 
+    protected String lastname;
+    
+    @XmlElement(required=true)
+    @OneToOne
+    protected Address address;
+    
+    @XmlElement(required=true)
+    protected String email;
+    
+    @XmlElement (required=true)
+    protected String phone;
+    
+    public Customer() {...}
+    
+    // Getter and setter methods
+    // ...
+}
+----
+
+The `Customer` class contains the same JAXB annotations as the previous
+class, except for the `@XmlAttribute(required=true)` annotation, which
+maps a property to an attribute of the XML element representing the
+class.
+
+The `Customer` class contains a property whose type is another entity,
+the `Address` class. This mechanism allows you to define in Java code
+the hierarchical relationships between entities without having to write
+an `.xsd` file yourself.
+
+JAXB generates the following XML schema definition for the two preceding
+classes:
+
+[source,oac_no_warn]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="address" type="address"/>
+  <xs:element name="customer" type="customer"/>
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="number" type="xs:int"/>
+      <xs:element name="street" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="province" type="xs:string"/>
+      <xs:element name="zip" type="xs:string"/>
+      <xs:element name="country" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="customer">
+    <xs:sequence>
+      <xs:element name="firstname" type="xs:string"/>
+      <xs:element name="lastname" type="xs:string"/>
+      <xs:element ref="address"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="phone" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:int" use="required"/>
+  </xs:complexType>
+</xs:schema>
+----
+
+[[GKLGT]]
+
+[[the-customerservice-class]]
+The CustomerService Class
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `CustomerService` class has a `createCustomer` method that creates a
+customer resource based on the `Customer` class and returns a URI for
+the new resource.
+
+[source,oac_no_warn]
+----
+@Stateless
+@Path("/Customer")
+public class CustomerService {
+    public static final Logger logger =
+            Logger.getLogger(CustomerService.class.getCanonicalName());
+    @PersistenceContext
+    private EntityManager em;
+    private CriteriaBuilder cb;
+
+    @PostConstruct
+    private void init() {
+        cb = em.getCriteriaBuilder();
+    }
+    ...
+    @POST
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response createCustomer(Customer customer) {
+ 
+        try {
+            long customerId = persist(customer);
+            return Response.created(URI.create("/" + customerId)).build();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE,
+                    "Error creating customer for customerId {0}. {1}",
+                    new Object[]{customer.getId(), e.getMessage()});
+            throw new WebApplicationException(e,
+                    Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    ...
+    private long persist(Customer customer) {
+        try {
+            Address address = customer.getAddress();
+            em.persist(address);
+            em.persist(customer);
+        } catch (Exception ex) {
+            logger.warning("Something went wrong when persisting the customer");
+        }
+        return customer.getId();
+    }
+----
+
+The response returned to the client has a URI to the newly created
+resource. The return type is an entity body mapped from the property of
+the response with the status code specified by the status property of
+the response. The `WebApplicationException` is a `RuntimeException` that
+is used to wrap the appropriate HTTP error status code, such as 404,
+406, 415, or 500.
+
+The `@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})`
+and `@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})`
+annotations set the request and response media types to use the
+appropriate MIME client. These annotations can be applied to a resource
+method, a resource class, or even an entity provider. If you do not use
+these annotations, JAX-RS allows the use of any media type (`"*/*"`).
+
+The following code snippet shows the implementation of the `getCustomer`
+and `findbyId` methods. The `getCustomer` method uses the `@Produces`
+annotation and returns a `Customer` object, which is converted to an XML
+or JSON representation depending on the `Accept:` header specified by
+the client.
+
+[source,oac_no_warn]
+----
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Customer getCustomer(@PathParam("id") String customerId) {
+        Customer customer = null;
+ 
+        try {
+            customer = findById(customerId);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE,
+                    "Error calling findCustomer() for customerId {0}. {1}",
+                    new Object[]{customerId, ex.getMessage()});
+        }
+        return customer;
+    }
+    ...
+    private Customer findById(String customerId) {
+        Customer customer = null;
+        try {
+            customer = em.find(Customer.class, customerId);
+            return customer;
+        } catch (Exception ex) {
+            logger.log(Level.WARNING,
+                    "Couldn't find customer with ID of {0}", customerId);
+        }
+        return customer;
+    }
+----
+
+[[GKQJQ]]
+
+[[using-the-jax-rs-client-in-the-customerbean-classes]]
+Using the JAX-RS Client in the CustomerBean Classes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the JAX-RS Client API to write a client for the `customer` example
+application.
+
+The `CustomerBean` enterprise bean class calls the JAX-RS Client API to
+test the `CustomerService` web service:
+
+[source,oac_no_warn]
+----
+@Named
+@Stateless
+public class CustomerBean {
+    protected Client client;
+    private static final Logger logger = 
+            Logger.getLogger(CustomerBean.class.getName());
+    
+    @PostConstruct
+    private void init() {
+        client = ClientBuilder.newClient();
+    }
+ 
+    @PreDestroy
+    private void clean() {
+        client.close();
+    }
+
+    public String createCustomer(Customer customer) {
+        if (customer == null) {
+            logger.log(Level.WARNING, "customer is null.");
+            return "customerError";
+        }
+        String navigation;
+        Response response =
+                client.target("http://localhost:8080/customer/webapi/Customer")
+                .request(MediaType.APPLICATION_XML)
+                .post(Entity.entity(customer, MediaType.APPLICATION_XML),
+                        Response.class);
+        if (response.getStatus() == Status.CREATED.getStatusCode()) {
+            navigation = "customerCreated";
+        } else {
+            logger.log(Level.WARNING, "couldn''t create customer with " +
+                    "id {0}. Status returned was {1}", 
+                    new Object[]{customer.getId(), response.getStatus()});
+            navigation = "customerError";
+        }
+        return navigation;
+    }
+ 
+    public String retrieveCustomer(String id) {
+        String navigation;
+        Customer customer =
+                client.target("http://localhost:8080/customer/webapi/Customer")
+                .path(id)
+                .request(MediaType.APPLICATION_XML)
+                .get(Customer.class);
+        if (customer == null) {
+            navigation = "customerError";
+        } else {
+            navigation = "customerRetrieved";
+        }
+        return navigation;
+    }
+    
+    public List<Customer> retrieveAllCustomers() {
+        List<Customer> customers =
+                client.target("http://localhost:8080/customer/webapi/Customer")
+                .path("all")
+                .request(MediaType.APPLICATION_XML)
+                .get(new GenericType<List<Customer>>() {});
+        return customers;
+    }
+}
+----
+
+This client uses the `POST` and `GET` methods.
+
+All of these HTTP status codes indicate success: 201 for `POST`, 200 for
+`GET`, and 204 for `DELETE`. For details about the meanings of HTTP
+status codes, see
+`http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html`.
+
+[[GKQKV]]
+
+[[running-the-customer-example]]
+Running the customer Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `customer` application.
+
+The following topics are addressed here:
+
+* link:#GKQLY[To Build, Package, and Deploy the customer Example Using
+NetBeans IDE]
+* link:#GKQJV[To Build, Package, and Deploy the customer Example Using
+Maven]
+
+[[GKQLY]]
+
+[[to-build-package-and-deploy-the-customer-example-using-netbeans-ide]]
+To Build, Package, and Deploy the customer Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jaxrs
+----
+4.  Select the `customer` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `customer` project and select
+Build.
++
+This command builds and packages the application into a WAR file,
+`customer.war`, located in the `target` directory. Then, the WAR file is
+deployed to GlassFish Server.
+7.  Open the web client in a browser at the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/customer/
+----
++
+The web client allows you to create and view customers.
+
+[[GKQJV]]
+
+[[to-build-package-and-deploy-the-customer-example-using-maven]]
+To Build, Package, and Deploy the customer Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jaxrs/customer/
+----
+3.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command builds and packages the application into a WAR file,
+`customer.war`, located in the `target` directory. Then, the WAR file is
+deployed to GlassFish Server.
+4.  Open the web client in a browser at the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/customer/
+----
++
+The web client allows you to create and view customers.
+
+

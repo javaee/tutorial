@@ -1,0 +1,182 @@
+type=page
+status=published
+title=Securing HTTP Resources
+next=security-advanced005.html
+prev=security-advanced003.html
+~~~~~~
+Securing HTTP Resources
+=======================
+
+[[BABGEJJJ]]
+
+[[securing-http-resources]]
+Securing HTTP Resources
+-----------------------
+
+When a request URI is matched by multiple constrained URL patterns, the
+constraints that apply to the request are those that are associated with
+the best matching URL pattern. The servlet matching rules defined in
+Chapter 12, "Mapping Requests To Servlets," in the Java Servlet 4.0
+Specification, are used to determine the best matching URL pattern to
+the request URI. No protection requirements apply to a request URI that
+is not matched by a constrained URL pattern. The HTTP method of the
+request plays no role in selecting the best matching URL pattern for a
+request.
+
+When HTTP methods are listed within a constraint definition, the
+protections defined by the constraint are applied to the listed methods
+only.
+
+When HTTP methods are not listed within a constraint definition, the
+protections defined by the constraint apply to the complete set of HTTP
+methods, including HTTP extension methods.
+
+When constraints with different protection requirements apply to the
+same combination of URL patterns and HTTP methods, the rules for
+combining the protection requirements are as defined in Section 13.8.1,
+"Combining Constraints," in the Java Servlet 4.0 Specification.
+
+Follow these guidelines to properly secure a web application.
+
+* Do not list HTTP methods within constraint definitions. This is the
+simplest way to ensure that you are not leaving HTTP methods
+unprotected. For example:
++
+[source,oac_no_warn]
+----
+<!-- SECURITY CONSTRAINT #1 -->
+<security-constraint>
+    <display-name>Do not enumerate Http Methods</display-name>
+    <web-resource-collection>
+        <url-pattern>/company/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>sales</role-name>
+    </auth-constraint>
+</security-constraint>
+----
++
+If you list methods in a constraint, all non-listed methods of the
+effectively infinite set of possible HTTP methods, including extension
+methods, will be unprotected. Use such a constraint only if you are
+certain that this is the protection scheme you intend to define. The
+following example shows a constraint that lists the GET method and thus
+defines no protection on any of the other possible HTTP methods:
++
+[source,oac_no_warn]
+----
+<!-- SECURITY CONSTRAINT #2 -->
+<security-constraint>
+    <display-name>
+        Protect GET only, leave all other methods unprotected
+    </display-name>
+    <web-resource-collection>
+        <url-pattern>/company/*</url-pattern>
+        <http-method>GET</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>sales</role-name>
+    </auth-constraint>
+</security-constraint>
+----
+* If you need to apply specific types of protection to specific HTTP
+methods, make sure that you define constraints to cover every method
+that you want to permit, with or without constraint, at the
+corresponding URL patterns. If there are any methods that you do not
+want to permit, you must also create a constraint that denies access to
+those methods at the same patterns; for an example, see security
+constraint #5 in the next bullet.
++
+For example, to permit GET and POST, where POST requires authentication
+and GET is permitted without constraint, you could define the following
+constraints:
++
+[source,oac_no_warn]
+----
+<!-- SECURITY CONSTRAINT #3 -->
+<security-constraint>
+    <display-name>Allow unprotected GET</display-name>
+    <web-resource-collection>
+        <url-pattern>/company/*</url-pattern>
+        <http-method>GET</http-method>
+    </web-resource-collection>
+</security-constraint>
+
+<!-- SECURITY CONSTRAINT #4 -->
+<security-constraint>
+    <display-name>Require authentication for POST</display-name>
+    <web-resource-collection>
+        <url-pattern>/company/*</url-pattern>
+        <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>sales</role-name>
+    </auth-constraint>
+</security-constraint>
+----
+* The simplest way to ensure that you deny all HTTP methods except those
+that you want to be permitted is to use `http-method-omission` elements
+to omit those HTTP methods from the security constraint, and also to
+define an `auth-constraint` that names no roles. The security constraint
+will apply to all methods except those that were named in the omissions,
+and the constraint will apply only to the resources matched by the
+patterns in the constraint.
++
+For example, the following constraint excludes access to all methods
+except GET and POST at the resources matched by the pattern
+`/company/*`:
++
+[source,oac_no_warn]
+----
+<!-- SECURITY CONSTRAINT #5 -->
+<security-constraint>
+    <display-name>Deny all HTTP methods except GET and POST</display-name>
+    <web-resource-collection>
+        <url-pattern>/company/*</url-pattern>
+        <http-method-omission>GET</http-method-omission>
+        <http-method-omission>POST</http-method-omission>
+    </web-resource-collection>
+    <auth-constraint/>
+</security-constraint>
+----
++
+If you want to extend these exclusions to the unconstrained parts of
+your application, also include the URL pattern `/` (forward slash):
++
+[source,oac_no_warn]
+----
+<!-- SECURITY CONSTRAINT #6 -->
+<security-constraint>
+    <display-name>Deny all HTTP methods except GET and POST</display-name>
+    <web-resource-collection>
+        <url-pattern>/company/*</url-pattern>
+        <url-pattern>/</url-pattern>
+        <http-method-omission>GET</http-method-omission>
+        <http-method-omission>POST</http-method-omission>
+    </web-resource-collection>
+    <auth-constraint/>
+</security-constraint>
+----
+* If, for your web application, you do not want any resource to be
+accessible unless you explicitly define a constraint that permits access
+to it, you can define an `auth-constraint` that names no roles and
+associate it with the URL pattern `/`. The URL pattern `/` is the
+weakest matching pattern. Do not list any HTTP methods in this
+constraint:
++
+[source,oac_no_warn]
+----
+<!-- SECURITY CONSTRAINT #7 -->
+<security-constraint>
+    <display-name>
+        Switch from Constraint to Permission model
+        (where everything is denied by default)
+    </display-name>
+    <web-resource-collection>
+        <url-pattern>/</url-pattern>
+    </web-resource-collection>
+    <auth-constraint/>
+</security-constraint>
+----
+
+

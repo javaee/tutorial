@@ -1,0 +1,127 @@
+type=page
+status=published
+title=Using the Metamodel API to Model Entity Classes
+next=persistence-criteria003.html
+prev=persistence-criteria001.html
+~~~~~~
+Using the Metamodel API to Model Entity Classes
+===============================================
+
+[[GJIUP]]
+
+[[using-the-metamodel-api-to-model-entity-classes]]
+Using the Metamodel API to Model Entity Classes
+-----------------------------------------------
+
+Use the Metamodel API to create a metamodel of the managed entities in a
+particular persistence unit. For each entity class in a particular
+package, a metamodel class is created with a trailing underscore and
+with attributes that correspond to the persistent fields or properties
+of the entity class.
+
+The following entity class, `com.example.Pet`, has four persistent
+fields: `id`, `name`, `color`, and `owners`:
+
+[source,oac_no_warn]
+----
+package com.example;
+...
+@Entity
+public class Pet {
+    @Id
+    protected Long id;
+    protected String name;
+    protected String color;
+    @ManyToOne
+    protected Set<Person> owners;
+    ...
+}
+----
+
+The corresponding Metamodel class is as follows:
+
+[source,oac_no_warn]
+----
+package com.example;
+...
+@Static Metamodel(Pet.class)
+public class Pet_ {
+
+    public static volatile SingularAttribute<Pet, Long> id;
+    public static volatile SingularAttribute<Pet, String> name;
+    public static volatile SingularAttribute<Pet, String> color;
+    public static volatile SetAttribute<Pet, Person> owners;
+}
+----
+
+Criteria queries use the metamodel class and its attributes to refer to
+the managed entity classes and their persistent state and relationships.
+
+[[GJIVL]]
+
+[[using-metamodel-classes]]
+Using Metamodel Classes
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Metamodel classes that correspond to entity classes are of the following
+type:
+
+[source,oac_no_warn]
+----
+javax.persistence.metamodel.EntityType<T>
+----
+
+Annotation processors typically generate metamodel classes either at
+development time or at runtime. Developers of applications that use
+Criteria queries may do either of the following:
+
+* Generate static metamodel classes by using the persistence provider's
+annotation processor
+* Obtain the metamodel class by doing one of the following:
+
+** Call the `getModel` method on the query root object
+
+** Obtain an instance of the `Metamodel` interface and then pass the
+entity type to the instance's `entity` method
+
+The following code snippet shows how to obtain the `Pet` entity's
+metamodel class by calling `Root<T>.getModel`:
+
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery cq = cb.createQuery(Pet.class);
+Root<Pet> pet = cq.from(Pet.class);
+EntityType<Pet> Pet_ = pet.getModel();
+----
+
+The following code snippet shows how to obtain the `Pet` entity's
+metamodel class by first obtaining a metamodel instance by using
+`EntityManager.getMetamodel` and then calling `entity` on the metamodel
+instance:
+
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Metamodel m = em.getMetamodel();
+EntityType<Pet> Pet_ = m.entity(Pet.class);
+----
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+The most common use case is to generate typesafe static metamodel
+classes at development time. Obtaining the metamodel classes
+dynamically, by calling `Root<T>.getModel` or
+`EntityManager.getMetamodel` and then the `entity` method, doesn't allow
+for type safety and doesn't allow the application to call persistent
+field or property names on the metamodel class.
+
+|=======================================================================
+
+
+

@@ -1,0 +1,211 @@
+type=page
+status=published
+title=Providing Localized Messages and Labels
+next=webi18n003.html
+prev=webi18n001.html
+~~~~~~
+Providing Localized Messages and Labels
+=======================================
+
+[[BNAXW]]
+
+[[providing-localized-messages-and-labels]]
+Providing Localized Messages and Labels
+---------------------------------------
+
+Messages and labels should be tailored according to the conventions of a
+user's language and region. There are two approaches to providing
+localized messages and labels in a web application.
+
+* Provide a version of the web page in each of the target locales and
+have a controller servlet dispatch the request to the appropriate page
+depending on the requested locale. This approach is useful if large
+amounts of data on a page or an entire web application need to be
+internationalized.
+* Isolate any locale-sensitive data on a page into resource bundles, and
+access the data so that the corresponding translated message is fetched
+automatically and inserted into the page. Thus, instead of creating
+strings directly in your code, you create a resource bundle that
+contains translations and read the translations from that bundle using
+the corresponding key.
+
+The Duke's Bookstore application follows the second approach. Here are a
+few lines from the default resource bundle `messages`.`properties`:
+
+[source,oac_no_warn]
+----
+TitleShoppingCart=Shopping Cart
+TitleReceipt=Receipt
+TitleBookCatalog=Book Catalog
+TitleCashier=Cashier
+TitleBookDescription=Book Description
+Visitor=You are visitor number 
+What=What We\'re Reading
+----
+
+[[GKUIA]]
+
+[[establishing-the-locale]]
+Establishing the Locale
+~~~~~~~~~~~~~~~~~~~~~~~
+
+To get the correct strings for a given user, a web application either
+retrieves the locale (set by a browser language preference) from the
+request using the `getLocale` method, or allows the user to explicitly
+select the locale.
+
+A component can explicitly set the locale by using the `fmt:setLocale`
+tag.
+
+The `locale-config` element in the configuration file registers the
+default locale and also registers other supported locales. This element
+in Duke's Bookstore registers English as the default locale and
+indicates that German, French, and Spanish are supported locales.
+
+[source,oac_no_warn]
+----
+<locale-config>
+    <default-locale>en</default-locale>
+    <supported-locale>es</supported-locale>
+    <supported-locale>de</supported-locale>
+    <supported-locale>fr</supported-locale>
+</locale-config>
+----
+
+The `LocaleBean` in the Duke's Bookstore application uses the
+`getLocale` method to retrieve the locale.
+
+[source,oac_no_warn]
+----
+public class LocaleBean {
+    
+    ...
+    private FacesContext ctx = FacesContext.getCurrentInstance();
+    private Locale locale = ctx.getViewRoot().getLocale();;
+
+    ...
+}
+----
+
+[[BNAXY]]
+
+[[setting-the-resource-bundle]]
+Setting the Resource Bundle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The resource bundle is set with the `resource-bundle` element in the
+configuration file. The setting for Duke's Bookstore looks like this:
+
+[source,oac_no_warn]
+----
+<resource-bundle>
+    <base-name>
+        javaeetutorial.dukesbookstore.web.messages.Messages
+    </base-name>
+    <var>bundle</var>
+</resource-bundle>
+----
+
+After the locale is set, the controller of a web application could
+retrieve the resource bundle for that locale and save it as a session
+attribute (see link:servlets009.html#BNAGO[Associating Objects with a
+Session]) for use by other components or simply be used to return a text
+string appropriate for the selected locale:
+
+[source,oac_no_warn]
+----
+public String toString(Locale locale) {
+    ResourceBundle res = 
+        ResourceBundle.getBundle(
+            "javaeetutorial.dukesbookstore.web.messages.Messages", locale);
+    return res.getString(name() + ".string");
+}
+----
+
+Alternatively, an application could use the `f:loadBundle` tag to set
+the resource bundle. This tag loads the correct resource bundle
+according to the locale stored in `FacesContext`.
+
+[source,oac_no_warn]
+----
+<f:loadBundle basename="javaeetutorial.dukesbookstore.web.messages.Messages"
+    var="bundle"/>
+----
+
+Resource bundles containing messages that are explicitly referenced from
+a JavaServer Faces tag attribute using a value expression must be
+registered using the `resource-bundle` element of the configuration
+file.
+
+For more information on using this element, see
+link:jsf-configure006.html#BNAXB[Registering Application Messages].
+
+[[GKUFC]]
+
+[[retrieving-localized-messages]]
+Retrieving Localized Messages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A web component written in the Java programming language retrieves the
+resource bundle from the session:
+
+[source,oac_no_warn]
+----
+ResourceBundle messages = (ResourceBundle)session.getAttribute("messages");
+----
+
+Then it looks up the string associated with the key `person.lastName` as
+follows:
+
+[source,oac_no_warn]
+----
+messages.getString("person.lastName");
+----
+
+You can only use a `message` or `messages` tag to display messages that
+are queued onto a component as a result of a converter or validator
+being registered on the component. The following example shows a
+`message` tag that displays the error message queued on the `userNo`
+input component if the validator registered on the component fails to
+validate the value the user enters into the component.
+
+[source,oac_no_warn]
+----
+<h:inputText id="userNo" value="#{UserNumberBean.userNumber}">
+    <f:validateLongRange minimum="0" maximum="10" />
+</h:inputText>
+...
+<h:message style="color: red; text-decoration: overline" 
+           id="errors1" for="userNo"/>
+----
+
+For more information on using the `message` or `messages` tags, see
+link:jsf-page002.html#BNASO[Displaying Error Messages with the h:message
+and h:messages Tags].
+
+Messages that are not queued on a component and are therefore not loaded
+automatically are referenced using a value expression. You can reference
+a localized message from almost any JavaServer Faces tag attribute.
+
+The value expression that references a message has the same notation
+whether you loaded the resource bundle with the `loadBundle` tag or
+registered it with the `resource-bundle` element in the configuration
+file.
+
+The value expression notation is `var.message`, in which `var` matches
+the `var` attribute of the `loadBundle` tag or the `var` element defined
+in the `resource-bundle` element of the configuration file, and
+`message` matches the key of the message contained in the resource
+bundle, referred to by the `var` attribute.
+
+Here is an example from `bookcashier.xhtml` in Duke's Bookstore:
+
+[source,oac_no_warn]
+----
+<h:outputLabel for="name" value="#{bundle.Name}" />
+----
+
+Notice that `bundle` matches the `var` element from the configuration
+file and that `Name` matches the key in the resource bundle.
+
+

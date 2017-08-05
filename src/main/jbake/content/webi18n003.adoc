@@ -1,0 +1,36 @@
+type=page
+status=published
+title=Date and Number Formatting
+next=webi18n004.html
+prev=webi18n002.html
+~~~~~~
+Date and Number Formatting
+==========================
+
+[[BNAYA]]
+
+[[date-and-number-formatting]]
+Date and Number Formatting
+--------------------------
+
+Java programs use the `DateFormat.getDateInstance(int,` `locale)` method
+to parse and format dates in a locale-sensitive manner. Java programs
+use the `NumberFormat.get`XXX`Instance(locale)` method, where XXX can be
+`Currency`, `Number`, or `Percent`, to parse and format numerical values
+in a locale-sensitive manner.
+
+An application can use date/time and number converters to format dates
+and numbers in a locale-sensitive manner. For example, a shipping date
+could be converted as follows:
+
+[source,oac_no_warn]
+----
+<h:outputText value="#{cashier.shipDate}">
+    <f:convertDateTime dateStyle="full"/>
+</h:outputText>
+----
+
+For information on JavaServer Faces converters, see
+link:jsf-page-core001.html#BNAST[Using the Standard Converters].
+
+

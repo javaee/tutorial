@@ -1,0 +1,35 @@
+type=page
+status=published
+title=JavaServer Faces Technology
+next=jsf-intro001.html
+prev=webapp006.html
+~~~~~~
+JavaServer Faces Technology
+===========================
+
+[[BNAPH]]
+
+[[javaserver-faces-technology]]
+7 JavaServer Faces Technology
+-----------------------------
+
+
+JavaServer Faces technology is a server-side component framework for
+building Java technology–based web applications.
+
+The following topics are addressed here:
+
+* link:jsf-intro001.html#A1073698[Introduction to JavaServer Faces
+Technology]
+* link:jsf-intro002.html#BNAPK[What Is a JavaServer Faces Application?]
+* link:jsf-intro003.html#BNAPJ[JavaServer Faces Technology Benefits]
+* link:jsf-intro004.html#GJAAM[A Simple JavaServer Faces Application]
+* link:jsf-intro005.html#BNAQD[User Interface Component Model]
+* link:jsf-intro006.html#BNAQL[Navigation Model]
+* link:jsf-intro007.html#BNAQQ[The Lifecycle of a JavaServer Faces
+Application]
+* link:jsf-intro008.html#GKNOJ[Partial Processing and Partial Rendering]
+* link:jsf-intro009.html#BNAQY[Further Information about JavaServer Faces
+Technology]
+
+

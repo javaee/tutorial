@@ -1,0 +1,129 @@
+type=page
+status=published
+title=Overview of Interceptors
+next=interceptors002.html
+prev=interceptors.html
+~~~~~~
+Overview of Interceptors
+========================
+
+[[GKIGQ]]
+
+[[overview-of-interceptors]]
+Overview of Interceptors
+------------------------
+
+Interceptors are used in conjunction with Java EE managed classes to
+allow developers to invoke interceptor methods on an associated target
+class, in conjunction with method invocations or lifecycle events.
+Common uses of interceptors are logging, auditing, and profiling.
+
+Although interceptors are part of Enterprise JavaBeans 3.2 and Contexts
+and Dependency Injection for Java EE 1.1, the Interceptors 1.2
+specification is downloadable as part of a maintenance release of JSR
+318, Enterprise JavaBeans 3.1, available from
+`http://jcp.org/en/jsr/detail?id=318`. You can use interceptors with
+session beans, message-driven beans, and CDI managed beans. In all of
+these cases, the interceptor target class is the bean class.
+
+An interceptor can be defined within a target class as an interceptor
+method, or in an associated class called an interceptor class.
+Interceptor classes contain methods that are invoked in conjunction with
+the methods or lifecycle events of the target class.
+
+Interceptor classes and methods are defined using metadata annotations,
+or in the deployment descriptor of the application that contains the
+interceptors and target classes.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+Applications that use the deployment descriptor to define interceptors
+are not portable across Java EE servers.
+
+|=======================================================================
+
+
+Interceptor methods within the target class or in an interceptor class
+are annotated with one of the metadata annotations defined in
+link:#GKECC[Table 55-1].
+
+[[sthref253]][[GKECC]]
+
+Table 55-1 Interceptor Metadata Annotations
+
+[width="44%",cols="100%,",options="header",]
+|=======================================================================
+|Interceptor Metadata Annotation |Description
+|`javax.interceptor.AroundConstruct` |Designates the method as an
+interceptor method that receives a callback after the target class is
+constructed
+
+|`javax.interceptor.AroundInvoke` |Designates the method as an
+interceptor method
+
+|`javax.interceptor.AroundTimeout` |Designates the method as a timeout
+interceptor for interposing on timeout methods for enterprise bean
+timers
+
+|`javax.annotation.PostConstruct` |Designates the method as an
+interceptor method for post-construct lifecycle events
+
+|`javax.annotation.PreDestroy` |Designates the method as an interceptor
+method for pre-destroy lifecycle events
+|=======================================================================
+
+
+[[GKECK]]
+
+[[interceptor-classes]]
+Interceptor Classes
+~~~~~~~~~~~~~~~~~~~
+
+Interceptor classes may be designated with the optional
+`javax.interceptor.Interceptor` annotation, but interceptor classes are
+not required to be so annotated. An interceptor class must have a
+public, no-argument constructor.
+
+The target class can have any number of interceptor classes associated
+with it. The order in which the interceptor classes are invoked is
+determined by the order in which the interceptor classes are defined in
+the `javax.interceptor.Interceptors` annotation. However, this order can
+be overridden in the deployment descriptor.
+
+Interceptor classes may be targets of dependency injection. Dependency
+injection occurs when the interceptor class instance is created, using
+the naming context of the associated target class, and before any
+`@PostConstruct` callbacks are invoked.
+
+[[GKEDY]]
+
+[[interceptor-lifecycle]]
+Interceptor Lifecycle
+~~~~~~~~~~~~~~~~~~~~~
+
+Interceptor classes have the same lifecycle as their associated target
+class. When a target class instance is created, an interceptor class
+instance is also created for each declared interceptor class in the
+target class. That is, if the target class declares multiple interceptor
+classes, an instance of each class is created when the target class
+instance is created. The target class instance and all interceptor class
+instances are fully instantiated before any `@PostConstruct` callbacks
+are invoked, and any `@PreDestroy` callbacks are invoked before the
+target class and interceptor class instances are destroyed.
+
+[[GKHSN]]
+
+[[interceptors-and-cdi]]
+Interceptors and CDI
+~~~~~~~~~~~~~~~~~~~~
+
+Contexts and Dependency Injection for Java EE (CDI) builds on the basic
+functionality of Java EE interceptors. For information on CDI
+interceptors, including a discussion of interceptor binding types, see
+link:cdi-adv006.html#GKHJX[Using Interceptors in CDI Applications].
+
+

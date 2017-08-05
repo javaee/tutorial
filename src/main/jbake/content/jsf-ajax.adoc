@@ -1,0 +1,42 @@
+type=page
+status=published
+title=Using Ajax with JavaServer Faces Technology
+next=jsf-ajax001.html
+prev=jsf-develop003.html
+~~~~~~
+Using Ajax with JavaServer Faces Technology
+===========================================
+
+[[GKIOW]]
+
+[[using-ajax-with-javaserver-faces-technology]]
+13 Using Ajax with JavaServer Faces Technology
+----------------------------------------------
+
+
+This chapter describes using Ajax functionality in JavaServer Faces web
+applications. Ajax is an acronym for Asynchronous JavaScript and XML, a
+group of web technologies that enable creation of dynamic and highly
+responsive web applications. Using Ajax, web applications can retrieve
+content from the server without interfering with the display on the
+client. In the Java EE 7 platform, JavaServer Faces technology provides
+built-in support for Ajax.
+
+The following topics are addressed here:
+
+* link:jsf-ajax001.html#GKIGR[Overview of Ajax]
+* link:jsf-ajax002.html#GKINL[Using Ajax Functionality with JavaServer
+Faces Technology]
+* link:jsf-ajax003.html#GKABR[Using Ajax with Facelets]
+* link:jsf-ajax004.html#GKACE[Sending an Ajax Request]
+* link:jsf-ajax005.html#GKDDF[Monitoring Events on the Client]
+* link:jsf-ajax006.html#GKDCB[Handling Errors]
+* link:jsf-ajax007.html#GKDBR[Receiving an Ajax Response]
+* link:jsf-ajax008.html#GKUAR[Ajax Request Lifecycle]
+* link:jsf-ajax009.html#GKHYH[Grouping of Components]
+* link:jsf-ajax010.html#GKAAM[Loading JavaScript as a Resource]
+* link:jsf-ajax011.html#GKOKB[The ajaxguessnumber Example Application]
+* link:jsf-ajax012.html#GKSDK[Further Information about Ajax in
+JavaServer Faces Technology]
+
+

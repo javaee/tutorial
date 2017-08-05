@@ -1,0 +1,213 @@
+type=page
+status=published
+title=Asynchronous Processing
+next=servlets013.html
+prev=servlets011.html
+~~~~~~
+Asynchronous Processing
+=======================
+
+[[BEIGCFDF]]
+
+[[asynchronous-processing]]
+Asynchronous Processing
+-----------------------
+
+Web containers in application servers normally use a server thread per
+client request. Under heavy load conditions, containers need a large
+amount of threads to serve all the client requests. Scalability
+limitations include running out of memory or exhausting the pool of
+container threads. To create scalable web applications, you must ensure
+that no threads associated with a request are sitting idle, so the
+container can use them to process new requests.
+
+There are two common scenarios in which a thread associated with a
+request can be sitting idle.
+
+* The thread needs to wait for a resource to become available or process
+data before building the response. For example, an application may need
+to query a database or access data from a remote web service before
+generating the response.
+* The thread needs to wait for an event before generating the response.
+For example, an application may have to wait for a JMS message, new
+information from another client, or new data available in a queue before
+generating the response.
+
+These scenarios represent blocking operations that limit the scalability
+of web applications. Asynchronous processing refers to assigning these
+blocking operations to a new thread and retuning the thread associated
+with the request immediately to the container.
+
+[[sthref103]]
+
+[[asynchronous-processing-in-servlets]]
+Asynchronous Processing in Servlets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Java EE provides asynchronous processing support for servlets and
+filters. If a servlet or a filter reaches a potentially blocking
+operation when processing a request, it can assign the operation to an
+asynchronous execution context and return the thread associated with the
+request immediately to the container without generating a response. The
+blocking operation completes in the asynchronous execution context in a
+different thread, which can generate a response or dispatch the request
+to another servlet.
+
+To enable asynchronous processing on a servlet, set the parameter
+`asyncSupported` to `true` on the `@WebServlet` annotation as follows:
+
+[source,oac_no_warn]
+----
+@WebServlet(urlPatterns={"/asyncservlet"}, asyncSupported=true)
+public class AsyncServlet extends HttpServlet { ... }
+----
+
+The `javax.servlet.AsyncContext` class provides the functionality that
+you need to perform asynchronous processing inside service methods. To
+obtain an instance of `AsyncContext`, call the `startAsync()` method on
+the request object of your service method; for example:
+
+[source,oac_no_warn]
+----
+public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+   ...
+   AsyncContext acontext = req.startAsync();
+   ...
+}
+----
+
+This call puts the request into asynchronous mode and ensures that the
+response is not committed after exiting the service method. You have to
+generate the response in the asynchronous context after the blocking
+operation completes or dispatch the request to another servlet.
+
+link:#BEICFIEC[Table 17-3] describes the basic functionality provided by
+the `AsyncContext` class.
+
+[[sthref104]][[BEICFIEC]]
+
+Table 17-3 Functionality Provided by the AsyncContext Class
+
+[width="38%",cols="100%,",options="header",]
+|=======================================================================
+|Method Signature |Description
+|`void start(Runnable run)` a|
+The container provides a different thread in which the blocking
+operation can be processed.
+
+You provide code for the blocking operation as a class that implements
+the `Runnable` interface. You can provide this class as an inner class
+when calling the `start` method or use another mechanism to pass the
+`AsyncContext` instance to your class.
+
+|`ServletRequest getRequest()` a|
+Returns the request used to initialize this asynchronous context. In the
+example above, the request is the same as in the service method.
+
+You can use this method inside the asynchronous context to obtain
+parameters from the request.
+
+|`ServletResponse getResponse()` a|
+Returns the response used to initialize this asynchronous context. In
+the example above, the response is the same as in the service method.
+
+You can use this method inside the asynchronous context to write to the
+response with the results of the blocking operation.
+
+|`void complete()` a|
+Completes the asynchronous operation and closes the response associated
+with this asynchronous context.
+
+You call this method after writing to the response object inside the
+asynchronous context.
+
+|`void dispatch(String path)` a|
+Dispatches the request and response objects to the given path.
+
+You use this method to have another servlet write to the response after
+the blocking operation completes.
+
+|=======================================================================
+
+
+[[sthref105]]
+
+[[waiting-for-a-resource]]
+Waiting for a Resource
+~~~~~~~~~~~~~~~~~~~~~~
+
+This section demonstrates how to use the functionality provided by the
+`AsyncContext` class for the following use case:
+
+1.  A servlet receives a parameter from a GET request.
+2.  The servlet uses a resource, such as a database or a web service, to
+retrieve information based on the value of the parameter. The resource
+can be slow at times, so this may be a blocking operation.
+3.  The servlet generates a response using the result from the resource.
+
+The following code shows a basic servlet that does not use asynchronous
+processing:
+
+[source,oac_no_warn]
+----
+@WebServlet(urlPatterns={"/syncservlet"})
+public class SyncServlet extends HttpServlet {
+   private MyRemoteResource resource;
+   @Override
+   public void init(ServletConfig config) {
+      resource = MyRemoteResource.create("config1=x,config2=y");
+   }
+
+   @Override
+   public void doGet(HttpServletRequest request, 
+                     HttpServletResponse response) {
+      response.setContentType("text/html;charset=UTF-8");
+      String param = request.getParameter("param");
+      String result = resource.process(param);
+      /* ... print to the response ... */
+   }
+}
+----
+
+The following code shows the same servlet using asynchronous processing:
+
+[source,oac_no_warn]
+----
+@WebServlet(urlPatterns={"/asyncservlet"}, asyncSupported=true)
+public class AsyncServlet extends HttpServlet {
+   /* ... Same variables and init method as in SyncServlet ... */
+
+   @Override
+   public void doGet(HttpServletRequest request, 
+                     HttpServletResponse response) {
+      response.setContentType("text/html;charset=UTF-8");
+      final AsyncContext acontext = request.startAsync();
+      acontext.start(new Runnable() {
+         public void run() {
+            String param = acontext.getRequest().getParameter("param");
+            String result = resource.process(param);
+            HttpServletResponse response = acontext.getResponse();
+            /* ... print to the response ... */
+            acontext.complete();
+   }
+}
+----
+
+`AsyncServlet` adds `asyncSupported=true` to the `@WebServlet`
+annotation. The rest of the differences are inside the service method.
+
+* `request.startAsync()` causes the request to be processed
+asynchronously; the response is not sent to the client at the end of the
+service method.
+* `acontext.start(new Runnable() {...})` gets a new thread from the
+container.
+* The code inside the `run()` method of the inner class executes in the
+new thread. The inner class has access to the asynchronous context to
+read parameters from the request and write to the response. Calling the
+`complete()` method of the asynchronous context commits the response and
+sends it to the client.
+
+The service method of `AsyncServlet` returns immediately, and the
+request is processed in the asynchronous context.
+
+

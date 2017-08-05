@@ -1,0 +1,80 @@
+type=page
+status=published
+title=Integrating JAX-RS with EJB Technology and CDI
+next=jaxrs-advanced005.html
+prev=jaxrs-advanced003.html
+~~~~~~
+Integrating JAX-RS with EJB Technology and CDI
+==============================================
+
+[[GKNCY]]
+
+[[integrating-jax-rs-with-ejb-technology-and-cdi]]
+Integrating JAX-RS with EJB Technology and CDI
+----------------------------------------------
+
+JAX-RS works with Enterprise JavaBeans technology (enterprise beans) and
+Contexts and Dependency Injection for Java EE (CDI).
+
+In general, for JAX-RS to work with enterprise beans, you need to
+annotate the class of a bean with `@Path` to convert it to a root
+resource class. You can use the `@Path` annotation with stateless
+session beans and singleton POJO beans.
+
+The following code snippet shows a stateless session bean and a
+singleton bean that have been converted to JAX-RS root resource classes.
+
+[source,oac_no_warn]
+----
+@Stateless
+@Path("stateless-bean")
+public class StatelessResource {...}
+
+@Singleton
+@Path("singleton-bean")
+public class SingletonResource {...}
+----
+
+Session beans can also be used for subresources.
+
+JAX-RS and CDI have slightly different component models. By default,
+JAX-RS root resource classes are managed in the request scope, and no
+annotations are required for specifying the scope. CDI managed beans
+annotated with `@RequestScoped` or `@ApplicationScoped` can be converted
+to JAX-RS resource classes.
+
+The following code snippet shows a JAX-RS resource class.
+
+[source,oac_no_warn]
+----
+@Path("/employee/{id}")
+public class Employee {
+    public Employee(@PathParam("id") String id) {...}
+}
+
+@Path("{lastname}")
+public final class EmpDetails {...}
+----
+
+The following code snippet shows this JAX-RS resource class converted to
+a CDI bean. The beans must be proxyable, so the `Employee` class
+requires a nonprivate constructor with no parameters, and the
+`EmpDetails` class must not be `final`.
+
+[source,oac_no_warn]
+----
+@Path("/employee/{id}")
+@RequestScoped
+public class Employee {
+    public Employee() {...}
+
+    @Inject
+    public Employee(@PathParam("id") String id) {...}
+}
+
+@Path("{lastname}")
+@RequestScoped
+public class EmpDetails {...}
+----
+
+

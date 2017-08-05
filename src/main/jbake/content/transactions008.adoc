@@ -1,0 +1,23 @@
+type=page
+status=published
+title=Transactions in Web Components
+next=transactions009.html
+prev=transactions007.html
+~~~~~~
+Transactions in Web Components
+==============================
+
+[[BNCJG]]
+
+[[transactions-in-web-components]]
+Transactions in Web Components
+------------------------------
+
+You can demarcate a transaction in a web component by using either the
+`java.sql.Connection` or the `javax.transaction.UserTransaction`
+interface. These are the same interfaces that a session bean with
+bean-managed transactions can use. Transactions demarcated with the
+`UserTransaction` interface are discussed in
+link:transactions005.html#BNCIZ[JTA Transactions].
+
+

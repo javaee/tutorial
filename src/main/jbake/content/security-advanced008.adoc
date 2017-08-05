@@ -1,0 +1,33 @@
+type=page
+status=published
+title=Further Information about Advanced Security Topics
+next=partsupporttechs.html
+prev=security-advanced007.html
+~~~~~~
+Further Information about Advanced Security Topics
+==================================================
+
+[[BABBGBBF]]
+
+[[further-information-about-advanced-security-topics]]
+Further Information about Advanced Security Topics
+--------------------------------------------------
+
+For more information about the security topics covered in this chapter,
+see
+
+* Documentation on the `keytool` command:
++
+`http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/keytool.html`
+* Java Authentication and Authorization Service (JAAS) Reference Guide:
++
+`http://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html`
+* Java Authentication and Authorization Service (JAAS): LoginModule
+Developer's Guide:
++
+`http://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASLMDevGuide.html`
+* Documentation on security policy file syntax:
++
+`http://docs.oracle.com/javase/7/docs/technotes/guides/security/PolicyFiles.html#FileSyntax`
+
+

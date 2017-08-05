@@ -1,0 +1,46 @@
+type=page
+status=published
+title=The Lifecycle of a Facelets Application
+next=jsf-facelets003.html
+prev=jsf-facelets001.html
+~~~~~~
+The Lifecycle of a Facelets Application
+=======================================
+
+[[GIPRR]]
+
+[[the-lifecycle-of-a-facelets-application]]
+The Lifecycle of a Facelets Application
+---------------------------------------
+
+The JavaServer Faces specification defines the lifecycle of a JavaServer
+Faces application. For more information on this lifecycle, see
+link:jsf-intro007.html#BNAQQ[The Lifecycle of a JavaServer Faces
+Application]. The following steps describe that process as applied to a
+Facelets-based application.
+
+1.  When a client, such as a browser, makes a new request to a page that
+is created using Facelets, a new component tree or
+`javax.faces.component.UIViewRoot` is created and placed in the
+`FacesContext`.
+2.  [[BABGCBAJ]]
++
+The `UIViewRoot` is applied to the Facelets, and the view is populated
+with components for rendering.
+3.  The newly built view is rendered back as a response to the client.
+4.  On rendering, the state of this view is stored for the next request.
+The state of input components and form data is stored.
+5.  The client may interact with the view and request another view or
+change from the JavaServer Faces application. At this time, the saved
+view is restored from the stored state.
+6.  The restored view is once again passed through the JavaServer Faces
+lifecycle, which eventually will either generate a new view or re-render
+the current view if there were no validation problems and no action was
+triggered.
+7.  If the same view is requested, the stored view is rendered once
+again.
+8.  If a new view is requested, then the process described in Step
+link:#BABGCBAJ[2] is continued.
+9.  The new view is then rendered back as a response to the client.
+
+

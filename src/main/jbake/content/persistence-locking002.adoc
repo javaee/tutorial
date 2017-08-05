@@ -1,0 +1,204 @@
+type=page
+status=published
+title=Lock Modes
+next=persistence-entitygraphs.html
+prev=persistence-locking001.html
+~~~~~~
+Lock Modes
+==========
+
+[[GKJIU]]
+
+[[lock-modes]]
+Lock Modes
+----------
+
+The application may increase the level of locking for an entity by
+specifying the use of lock modes. Lock modes may be specified to
+increase the level of optimistic locking or to request the use of
+pessimistic locks.
+
+The use of optimistic lock modes causes the persistence provider to
+check the version attributes for entities that were read (but not
+modified) during a transaction as well as for entities that were
+updated.
+
+The use of pessimistic lock modes specifies that the persistence
+provider is to immediately acquire long-term read or write locks for the
+database data corresponding to entity state.
+
+You can set the lock mode for an entity operation by specifying one of
+the lock modes defined in the `javax.persistence.LockModeType`
+enumerated type, listed in link:#GKJIE[Table 43-1].
+
+[[sthref183]][[GKJIE]]
+
+Table 43-1 Lock Modes for Concurrent Entity Access
+
+[width="38%",cols="100%,",options="header",]
+|=======================================================================
+|Lock Mode |Description
+|`OPTIMISTIC` |Obtain an optimistic read lock for all entities with
+version attributes.
+
+|`OPTIMISTIC_FORCE_INCREMENT` |Obtain an optimistic read lock for all
+entities with version attributes, and increment the version attribute
+value.
+
+|`PESSIMISTIC_READ` a|
+Immediately obtain a long-term read lock on the data to prevent the data
+from being modified or deleted. Other transactions may read the data
+while the lock is maintained, but may not modify or delete the data.
+
+The persistence provider is permitted to obtain a database write lock
+when a read lock was requested, but not vice versa.
+
+|`PESSIMISTIC_WRITE` |Immediately obtain a long-term write lock on the
+data to prevent the data from being read, modified, or deleted.
+
+|`PESSIMISTIC_FORCE_INCREMENT` |Immediately obtain a long-term lock on
+the data to prevent the data from being modified or deleted, and
+increment the version attribute of versioned entities.
+
+|`READ` |A synonym for `OPTIMISTIC`. Use of `LockModeType.OPTIMISTIC` is
+to be preferred for new applications.
+
+|`WRITE` |A synonym for `OPTIMISTIC_FORCE_INCREMENT`. Use of
+`LockModeType.OPTIMISTIC_FORCE_INCREMENT` is to be preferred for new
+applications.
+
+|`NONE` |No additional locking will occur on the data in the database.
+|=======================================================================
+
+
+[[GKJIK]]
+
+[[setting-the-lock-mode]]
+Setting the Lock Mode
+~~~~~~~~~~~~~~~~~~~~~
+
+To specify the lock mode, use one of the following techniques:
+
+1.  Call the `EntityManager.lock` method, passing in one of the lock
+modes:
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+Person person = ...;
+em.lock(person, LockModeType.OPTIMISTIC);
+----
+2.  Call one of the `EntityManager.find` methods that take the lock mode
+as a parameter:
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+String personPK = ...;
+Person person = em.find(Person.class, personPK, 
+    LockModeType.PESSIMISTIC_WRITE);
+----
+3.  Call one of the `EntityManager.refresh` methods that take the lock
+mode as a parameter:
++
+[source,oac_no_warn]
+----
+EntityManager em = ...;
+String personPK = ...;
+Person person = em.find(Person.class, personPK);
+...
+em.refresh(person, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+----
+4.  Call the `Query.setLockMode` or `TypedQuery.setLockMode` method,
+passing the lock mode as the parameter:
++
+[source,oac_no_warn]
+----
+Query q = em.createQuery(...);
+q.setLockMode(LockModeType.PESSIMISTIC_FORCE_INCREMENT);
+----
+5.  Add a `lockMode` element to the `@NamedQuery` annotation:
++
+[source,oac_no_warn]
+----
+@NamedQuery(name="lockPersonQuery",
+  query="SELECT p FROM Person p WHERE p.name LIKE :name",
+  lockMode=PESSIMISTIC_READ)
+----
+
+[[GKJIL]]
+
+[[using-pessimistic-locking]]
+Using Pessimistic Locking
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Versioned entities, as well as entities that do not have version
+attributes, can be locked pessimistically.
+
+To lock entities pessimistically, set the lock mode to
+`PESSIMISTIC_READ`, `PESSIMISTIC_WRITE`, or
+`PESSIMISTIC_FORCE_INCREMENT`.
+
+If a pessimistic lock cannot be obtained on the database rows, and the
+failure to lock the data results in a transaction rollback, a
+`PessimisticLockException` is thrown. If a pessimistic lock cannot be
+obtained, but the locking failure doesn't result in a transaction
+rollback, a `LockTimeoutException` is thrown.
+
+Pessimistically locking a versioned entity with
+`PESSIMISTIC_FORCE_INCREMENT` results in the version attribute being
+incremented even if the entity data is unmodified. When pessimistically
+locking a versioned entity, the persistence provider will perform the
+version checks that occur during optimistic locking, and if the version
+check fails, an `OptimisticLockException` will be thrown. An attempt to
+lock a non-versioned entity with `PESSIMISTIC_FORCE_INCREMENT` is not
+portable and may result in a `PersistenceException` if the persistence
+provider does not support optimistic locks for non-versioned entities.
+Locking a versioned entity with `PESSIMISTIC_WRITE` results in the
+version attribute being incremented if the transaction was successfully
+committed.
+
+[[GKJLQ]]
+
+[[pessimistic-locking-timeouts]]
+Pessimistic Locking Timeouts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use the `javax.persistence.lock.timeout` property to specify the length
+of time in milliseconds the persistence provider should wait to obtain a
+lock on the database tables. If the time it takes to obtain a lock
+exceeds the value of this property, a `LockTimeoutException` will be
+thrown, but the current transaction will not be marked for rollback. If
+you set this property to `0`, the persistence provider should throw a
+`LockTimeoutException` if it cannot immediately obtain a lock.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+Portable applications should not rely on the setting of
+`javax.persistence.lock.timeout`, because the locking strategy and
+underlying database may mean that the timeout value cannot be used. The
+value of `javax.persistence.lock.timeout` is a hint, not a contract.
+
+|=======================================================================
+
+
+This property may be set programmatically by passing it to the
+`EntityManager` methods that allow lock modes to be specified, the
+`Query.setLockMode` and `TypedQuery.setLockMode` methods, the
+`@NamedQuery` annotation, and the
+`Persistence.createEntityManagerFactory` method. It may also be set as a
+property in the `persistence.xml` deployment descriptor.
+
+If `javax.persistence.lock.timeout` is set in multiple places, the value
+will be determined in the following order:
+
+1.  The argument to one of the `EntityManager` or `Query` methods
+2.  The setting in the `@NamedQuery` annotation
+3.  The argument to the `Persistence.createEntityManagerFactory` method
+4.  The value in the `persistence.xml` deployment descriptor
+
+

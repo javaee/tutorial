@@ -1,0 +1,540 @@
+type=page
+status=published
+title=Using Advanced JMS Features
+next=jms-concepts005.html
+prev=jms-concepts003.html
+~~~~~~
+Using Advanced JMS Features
+===========================
+
+[[BNCFU]]
+
+[[using-advanced-jms-features]]
+Using Advanced JMS Features
+---------------------------
+
+This section explains how to use features of the JMS API to achieve the
+level of reliability and performance your application requires. Many
+people use JMS in their applications because they cannot tolerate
+dropped or duplicate messages and because they require that every
+message be received once and only once. The JMS API provides this
+functionality.
+
+The most reliable way to produce a message is to send a `PERSISTENT`
+message, and to do so within a transaction.
+
+JMS messages are `PERSISTENT` by default; `PERSISTENT` messages will not
+be lost in the event of JMS provider failure. For details, see
+link:#BNCFY[Specifying Message Persistence].
+
+Transactions allow multiple messages to be sent or received in an atomic
+operation. In the Java EE platform they also allow message sends and
+receives to be combined with database reads and writes in an atomic
+transaction. A transaction is a unit of work into which you can group a
+series of operations, such as message sends and receives, so that the
+operations either all succeed or all fail. For details, see
+link:#BNCGH[Using JMS Local Transactions].
+
+The most reliable way to consume a message is to do so within a
+transaction, either from a queue or from a durable subscription to a
+topic. For details, see link:jms-concepts003.html#BNCGD[Creating Durable
+Subscriptions], link:#BNCGB[Creating Temporary Destinations], and
+link:#BNCGH[Using JMS Local Transactions].
+
+Some features primarily allow an application to improve performance. For
+example, you can set messages to expire after a certain length of time
+(see link:#BNCGA[Allowing Messages to Expire]), so that consumers do not
+receive unnecessary outdated information. You can send messages
+asynchronously; see link:#BABFIFAJ[Sending Messages Asynchronously].
+
+You can also specify various levels of control over message
+acknowledgment; see link:#BNCFW[Controlling Message Acknowledgment].
+
+Other features can provide useful capabilities unrelated to reliability.
+For example, you can create temporary destinations that last only for
+the duration of the connection in which they are created. See
+link:#BNCGB[Creating Temporary Destinations] for details.
+
+The following sections describe these features as they apply to
+application clients or Java SE clients. Some of the features work
+differently in the Java EE web or EJB container; in these cases, the
+differences are noted here and are explained in detail in
+link:jms-concepts005.html#BNCGL[Using the JMS API in Java EE
+Applications].
+
+[[BNCFW]]
+
+[[controlling-message-acknowledgment]]
+Controlling Message Acknowledgment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Until a JMS message has been acknowledged, it is not considered to be
+successfully consumed. The successful consumption of a message
+ordinarily takes place in three stages.
+
+1.  The client receives the message.
+2.  The client processes the message.
+3.  The message is acknowledged. Acknowledgment is initiated either by
+the JMS provider or by the client, depending on the session
+acknowledgment mode.
+
+In locally transacted sessions (see link:#BNCGH[Using JMS Local
+Transactions]), a message is acknowledged when the session is committed.
+If a transaction is rolled back, all consumed messages are redelivered.
+
+In a JTA transaction (in the Java EE web or EJB container) a message is
+acknowledged when the transaction is committed.
+
+In nontransacted sessions, when and how a message is acknowledged depend
+on a value that may be specified as an argument of the `createContext`
+method. The possible argument values are as follows.
+
+* `JMSContext.AUTO_ACKNOWLEDGE`: This setting is the default for
+application clients and Java SE clients. The `JMSContext` automatically
+acknowledges a client's receipt of a message either when the client has
+successfully returned from a call to `receive` or when the
+`MessageListener` it has called to process the message returns
+successfully.
++
+A synchronous receive in a `JMSContext` that is configured to use
+auto-acknowledgment is the one exception to the rule that message
+consumption is a three-stage process as described earlier. In this case,
+the receipt and acknowledgment take place in one step, followed by the
+processing of the message.
+* `JMSContext.CLIENT_ACKNOWLEDGE`: A client acknowledges a message by
+calling the message's `acknowledge` method. In this mode, acknowledgment
+takes place on the session level: Acknowledging a consumed message
+automatically acknowledges the receipt of all messages that have been
+consumed by its session. For example, if a message consumer consumes ten
+messages and then acknowledges the fifth message delivered, all ten
+messages are acknowledged.
++
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+In the Java EE platform, the `JMSContext.CLIENT_ACKNOWLEDGE` setting can
+be used only in an application client, not in a web component or
+enterprise bean.
+
+|=======================================================================
+
+* `JMSContext.DUPS_OK_ACKNOWLEDGE`: This option instructs the
+`JMSContext` to lazily acknowledge the delivery of messages. This is
+likely to result in the delivery of some duplicate messages if the JMS
+provider fails, so it should be used only by consumers that can tolerate
+duplicate messages. (If the JMS provider redelivers a message, it must
+set the value of the `JMSRedelivered` message header to `true`.) This
+option can reduce session overhead by minimizing the work the session
+does to prevent duplicates.
+
+If messages have been received from a queue but not acknowledged when a
+`JMSContext` is closed, the JMS provider retains them and redelivers
+them when a consumer next accesses the queue. The provider also retains
+unacknowledged messages if an application closes a `JMSContext` that has
+been consuming messages from a durable subscription. (See
+link:jms-concepts003.html#BNCGD[Creating Durable Subscriptions].)
+Unacknowledged messages that have been received from a nondurable
+subscription will be dropped when the `JMSContext` is closed.
+
+If you use a queue or a durable subscription, you can use the
+`JMSContext.recover` method to stop a nontransacted `JMSContext` and
+restart it with its first unacknowledged message. In effect, the
+`JMSContext`'s series of delivered messages is reset to the point after
+its last acknowledged message. The messages it now delivers may be
+different from those that were originally delivered, if messages have
+expired or if higher-priority messages have arrived. For a consumer on a
+nondurable subscription, the provider may drop unacknowledged messages
+when the `JMSContext.recover` method is called.
+
+The sample program in link:jms-examples003.html#BNCFX[Acknowledging
+Messages] demonstrates two ways to ensure that a message will not be
+acknowledged until processing of the message is complete.
+
+[[BNCFV]]
+
+[[specifying-options-for-sending-messages]]
+Specifying Options for Sending Messages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can set a number of options when you send a message. These options
+enable you to perform the tasks described in the following topics:
+
+* link:#BNCFY[Specifying Message Persistence] – Specify that messages
+are persistent, meaning they must not be lost in the event of a provider
+failure.
+* link:#BNCFZ[Setting Message Priority Levels] – Set priority levels for
+messages, which can affect the order in which the messages are
+delivered.
+* link:#BNCGA[Allowing Messages to Expire] – Specify an expiration time
+for messages so they will not be delivered if they are obsolete.
+* link:#BABGEADH[Specifying a Delivery Delay]– Specify a delivery delay
+for messages so that they will not be delivered until a specified amount
+of time has expired.
+* link:#BABJFIAD[Using JMSProducer Method Chaining] – Method chaining
+allows you to specify more than one of these options when you create a
+producer and call the `send` method.
+
+[[BNCFY]]
+
+[[specifying-message-persistence]]
+Specifying Message Persistence
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The JMS API supports two delivery modes specifying whether messages are
+lost if the JMS provider fails. These delivery modes are fields of the
+`DeliveryMode` interface.
+
+* The default delivery mode, `PERSISTENT`, instructs the JMS provider to
+take extra care to ensure that a message is not lost in transit in case
+of a JMS provider failure. A message sent with this delivery mode is
+logged to stable storage when it is sent.
+* The `NON_PERSISTENT` delivery mode does not require the JMS provider
+to store the message or otherwise guarantee that it is not lost if the
+provider fails.
+
+To specify the delivery mode, use the `setDeliveryMode` method of the
+`JMSProducer` interface to set the delivery mode for all messages sent
+by that producer.
+
+You can use method chaining to set the delivery mode when you create a
+producer and send a message. The following call creates a producer with
+a `NON_PERSISTENT` delivery mode and uses it to send a message:
+
+[source,oac_no_warn]
+----
+context.createProducer()
+       .setDeliveryMode(DeliveryMode.NON_PERSISTENT).send(dest, msg);
+----
+
+If you do not specify a delivery mode, the default is `PERSISTENT`.
+Using the `NON_PERSISTENT` delivery mode may improve performance and
+reduce storage overhead, but you should use it only if your application
+can afford to miss messages.
+
+[[BNCFZ]]
+
+[[setting-message-priority-levels]]
+Setting Message Priority Levels
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use message priority levels to instruct the JMS provider to
+deliver urgent messages first. Use the `setPriority` method of the
+`JMSProducer` interface to set the priority level for all messages sent
+by that producer.
+
+You can use method chaining to set the priority level when you create a
+producer and send a message. For example, the following call sets a
+priority level of 7 for a producer and then sends a message:
+
+[source,oac_no_warn]
+----
+context.createProducer().setPriority(7).send(dest, msg);
+----
+
+The ten levels of priority range from 0 (lowest) to 9 (highest). If you
+do not specify a priority level, the default level is 4. A JMS provider
+tries to deliver higher-priority messages before lower-priority ones,
+but does not have to deliver messages in exact order of priority.
+
+[[BNCGA]]
+
+[[allowing-messages-to-expire]]
+Allowing Messages to Expire
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, a message never expires. If a message will become obsolete
+after a certain period, however, you may want to set an expiration time.
+Use the `setTimeToLive` method of the `JMSProducer` interface to set a
+default expiration time for all messages sent by that producer.
+
+For example, a message that contains rapidly changing data such as a
+stock price will become obsolete after a few minutes, so you might
+configure messages to expire after that time.
+
+You can use method chaining to set the time to live when you create a
+producer and send a message. For example, the following call sets a time
+to live of five minutes for a producer and then sends a message:
+
+[source,oac_no_warn]
+----
+context.createProducer().setTimeToLive(300000).send(dest, msg);
+----
+
+If the specified `timeToLive` value is `0`, the message never expires.
+
+When the message is sent, the specified `timeToLive` is added to the
+current time to give the expiration time. Any message not delivered
+before the specified expiration time is destroyed. The destruction of
+obsolete messages conserves storage and computing resources.
+
+[[BABGEADH]]
+
+[[specifying-a-delivery-delay]]
+Specifying a Delivery Delay
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can specify a length of time that must elapse after a message is
+sent before the JMS provider delivers the message. Use the
+`setDeliveryDelay` method of the `JMSProducer` interface to set a
+delivery delay for all messages sent by that producer.
+
+You can use method chaining to set the delivery delay when you create a
+producer and send a message. For example, the following call sets a
+delivery delay of 3 seconds for a producer and then sends a message:
+
+[source,oac_no_warn]
+----
+context.createProducer().setDeliveryDelay(3000).send(dest, msg);
+----
+
+[[BABJFIAD]]
+
+[[using-jmsproducer-method-chaining]]
+Using JMSProducer Method Chaining
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The setter methods on the `JMSProducer` interface return `JMSProducer`
+objects, so you can use method chaining to create a producer, set
+multiple properties, and send a message. For example, the following
+chained method calls create a producer, set a user-defined property, set
+the expiration, delivery mode, and priority for the message, and then
+send a message to a queue:
+
+[source,oac_no_warn]
+----
+context.createProducer()
+        .setProperty("MyProperty", "MyValue")
+        .setTimeToLive(10000)
+        .setDeliveryMode(NON_PERSISTENT)
+        .setPriority(2)
+        .send(queue, body);
+----
+
+You can also call the `JMSProducer` methods to set properties on a
+message and then send the message in a separate `send` method call. You
+can also set message properties directly on a message.
+
+[[BNCGB]]
+
+[[creating-temporary-destinations]]
+Creating Temporary Destinations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Normally, you create JMS destinations (queues and topics)
+administratively rather than programmatically. Your JMS provider
+includes a tool to create and remove destinations, and it is common for
+destinations to be long-lasting.
+
+The JMS API also enables you to create destinations (`TemporaryQueue`
+and `TemporaryTopic` objects) that last only for the duration of the
+connection in which they are created. You create these destinations
+dynamically using the `JMSContext.createTemporaryQueue` and the
+`JMSContext.createTemporaryTopic` methods, as in the following example:
+
+[source,oac_no_warn]
+----
+TemporaryTopic replyTopic = context.createTemporaryTopic();
+----
+
+The only message consumers that can consume from a temporary destination
+are those created by the same connection that created the destination.
+Any message producer can send to the temporary destination. If you close
+the connection to which a temporary destination belongs, the destination
+is closed and its contents are lost.
+
+You can use temporary destinations to implement a simple request/reply
+mechanism. If you create a temporary destination and specify it as the
+value of the `JMSReplyTo` message header field when you send a message,
+then the consumer of the message can use the value of the `JMSReplyTo`
+field as the destination to which it sends a reply. The consumer can
+also reference the original request by setting the `JMSCorrelationID`
+header field of the reply message to the value of the `JMSMessageID`
+header field of the request. For example, an `onMessage` method can
+create a `JMSContext` so that it can send a reply to the message it
+receives. It can use code such as the following:
+
+[source,oac_no_warn]
+----
+replyMsg = context.createTextMessage("Consumer processed message: " 
+        + msg.getText());
+replyMsg.setJMSCorrelationID(msg.getJMSMessageID());
+context.createProducer().send((Topic) msg.getJMSReplyTo(), replyMsg);
+----
+
+For an example, see link:jms-examples009.html#BNCHF[Using an Entity to
+Join Messages from Two MDBs].
+
+[[BNCGH]]
+
+[[using-jms-local-transactions]]
+Using JMS Local Transactions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A transaction groups a series of operations into an atomic unit of work.
+If any one of the operations fails, the transaction can be rolled back,
+and the operations can be attempted again from the beginning. If all the
+operations succeed, the transaction can be committed.
+
+In an application client or a Java SE client, you can use local
+transactions to group message sends and receives. You use the
+`JMSContext.commit` method to commit a transaction. You can send
+multiple messages in a transaction, and the messages will not be added
+to the queue or topic until the transaction is committed. If you receive
+multiple messages in a transaction, they will not be acknowledged until
+the transaction is committed.
+
+You can use the `JMSContext.rollback` method to roll back a transaction.
+A transaction rollback means that all produced messages are destroyed
+and all consumed messages are recovered and redelivered unless they have
+expired (see link:#BNCGA[Allowing Messages to Expire]).
+
+A transacted session is always involved in a transaction. To create a
+transacted session, call the `createContext` method as follows:
+
+[source,oac_no_warn]
+----
+JMSContext context = 
+        connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);
+----
+
+As soon as the `commit` or the `rollback` method is called, one
+transaction ends and another transaction begins. Closing a transacted
+session rolls back its transaction in progress, including any pending
+sends and receives.
+
+In an application running in the Java EE web or EJB container, you
+cannot use local transactions. Instead, you use JTA transactions,
+described in link:jms-concepts005.html#BNCGL[Using the JMS API in Java EE
+Applications].
+
+You can combine several sends and receives in a single JMS local
+transaction, so long as they are all performed using the same
+`JMSContext`.
+
+Do not use a single transaction if you use a request/reply mechanism, in
+which you send a message and then receive a reply to that message. If
+you try to use a single transaction, the program will hang, because the
+send cannot take place until the transaction is committed. The following
+code fragment illustrates the problem:
+
+[source,oac_no_warn]
+----
+// Don't do this!
+outMsg.setJMSReplyTo(replyQueue);
+context.createProducer().send(outQueue, outMsg);
+consumer = context.createConsumer(replyQueue);
+inMsg = consumer.receive();
+context.commit();
+----
+
+Because a message sent during a transaction is not actually sent until
+the transaction is committed, the transaction cannot contain any
+receives that depend on that message's having been sent.
+
+The production and the consumption of a message cannot both be part of
+the same transaction. The reason is that the transactions take place
+between the clients and the JMS provider, which intervenes between the
+production and the consumption of the message. link:#BNCGI[Figure 46-8]
+illustrates this interaction.
+
+[[BNCGI]]
+
+.*Figure 46-8 Using JMS Local Transactions*
+image:img/javaeett_dt_033.png[
+"Diagram of local transactions, showing separate transactions for sending
+and consuming a message"]
+
+The sending of one or more messages to one or more destinations by
+Client 1 can form a single transaction, because it forms a single set of
+interactions with the JMS provider using a single `JMSContext`.
+Similarly, the receiving of one or more messages from one or more
+destinations by Client 2 also forms a single transaction using a single
+`JMSContext`. But because the two clients have no direct interaction and
+are using two different `JMSContext` objects, no transactions can take
+place between them.
+
+Another way of putting this is that a transaction is a contract between
+a client and a JMS provider that defines whether a message is sent to a
+destination or whether a message is received from the destination. It is
+not a contract between the sending client and the receiving client.
+
+This is the fundamental difference between messaging and synchronized
+processing. Instead of tightly coupling the sender and the receiver of a
+message, JMS couples the sender of a message with the destination, and
+it separately couples the destination with the receiver of the message.
+Therefore, while the sends and receives each have a tight coupling with
+the JMS provider, they do not have any coupling with each other.
+
+When you create a `JMSContext`, you can specify whether it is transacted
+by using the `JMSContext.SESSION_TRANSACTED` argument to the
+`createContext` method. For example:
+
+[source,oac_no_warn]
+----
+try (JMSContext context = connectionFactory.createContext(
+        JMSContext.SESSION_TRANSACTED);) {
+    ...
+----
+
+The `commit` and the `rollback` methods for local transactions are
+associated with the session that underlies the `JMSContext`. You can
+combine operations on more than one queue or topic, or on a combination
+of queues and topics, in a single transaction if you use the same
+session to perform the operations. For example, you can use the same
+`JMSContext` to receive a message from a queue and send a message to a
+topic in the same transaction.
+
+The example in link:jms-examples004.html#BNCGJ[Using Local Transactions]
+shows how to use JMS local transactions.
+
+[[BABFIFAJ]]
+
+[[sending-messages-asynchronously]]
+Sending Messages Asynchronously
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Normally, when you send a persistent message, the `send` method blocks
+until the JMS provider confirms that the message was sent successfully.
+The asynchronous send mechanism allows your application to send a
+message and continue work while waiting to learn whether the send
+completed.
+
+This feature is currently available only in application clients and Java
+SE clients.
+
+Sending a message asynchronously involves supplying a callback object.
+You specify a `CompletionListener` with an `onCompletion` method. For
+example, the following code instantiates a `CompletionListener` named
+`SendListener`. It then calls the `setAsync` method to specify that
+sends from this producer should be asynchronous and should use the
+specified listener:
+
+[source,oac_no_warn]
+----
+CompletionListener listener = new SendListener();
+context.createProducer().setAsync(listener).send(dest, message);
+----
+
+The `CompletionListener` class must implement two methods,
+`onCompletion` and `onException`. The `onCompletion` method is called if
+the send succeeds, and the `onException` method is called if it fails. A
+simple implementation of these methods might look like this:
+
+[source,oac_no_warn]
+----
+@Override
+public void onCompletion(Message message) {
+    System.out.println("onCompletion method: Send has completed.");
+}
+
+@Override
+public void onException(Message message, Exception e) {
+    System.out.println("onException method: send failed: " + e.toString());
+    System.out.println("Unsent message is: \n" + message);
+}
+----
+
+

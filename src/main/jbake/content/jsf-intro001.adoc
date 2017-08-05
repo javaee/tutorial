@@ -1,0 +1,47 @@
+type=page
+status=published
+title=Introduction to JavaServer Faces Technology
+next=jsf-intro002.html
+prev=jsf-intro.html
+~~~~~~
+Introduction to JavaServer Faces Technology
+===========================================
+
+[[A1073698]]
+
+[[introduction-to-javaserver-faces-technology]]
+Introduction to JavaServer Faces Technology
+-------------------------------------------
+
+JavaServer Faces technology consists of the following:
+
+* An API for representing components and managing their state; handling
+events, server-side validation, and data conversion; defining page
+navigation; supporting internationalization and accessibility; and
+providing extensibility for all these features
+* Tag libraries for adding components to web pages and for connecting
+components to server-side objects
+
+JavaServer Faces technology provides a well-defined programming model
+and various tag libraries. The tag libraries contain tag handlers that
+implement the component tags. These features significantly ease the
+burden of building and maintaining web applications with server-side
+user interfaces (UIs). With minimal effort, you can complete the
+following tasks.
+
+* Create a web page.
+* Drop components onto a web page by adding component tags.
+* Bind components on a page to server-side data.
+* Wire component-generated events to server-side application code.
+* Save and restore application state beyond the life of server requests.
+* Reuse and extend components through customization.
+
+This chapter provides an overview of JavaServer Faces technology. After
+explaining what a JavaServer Faces application is and reviewing some of
+the primary benefits of using JavaServer Faces technology, this chapter
+describes the process of creating a simple JavaServer Faces application.
+This chapter also introduces the JavaServer Faces lifecycle by
+describing the example JavaServer Faces application and its progression
+through the lifecycle stages.
+
+

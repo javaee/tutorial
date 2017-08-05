@@ -1,0 +1,25 @@
+type=page
+status=published
+title=Further Information about JMS
+next=jms-examples.html
+prev=jms-concepts005.html
+~~~~~~
+Further Information about JMS
+=============================
+
+[[BNCGU]]
+
+[[further-information-about-jms]]
+Further Information about JMS
+-----------------------------
+
+For more information about JMS, see
+
+* Java Message Service website:
++
+`http://www.oracle.com/technetwork/java/index-jsp-142945.html`
+* Java Message Service specification, version 2.0, available from:
++
+`http://jcp.org/en/jsr/detail?id=343`
+
+

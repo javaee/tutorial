@@ -1,0 +1,29 @@
+type=page
+status=published
+title=Overview of the Embedded Enterprise Bean Container
+next=ejb-embedded002.html
+prev=ejb-embedded.html
+~~~~~~
+Overview of the Embedded Enterprise Bean Container
+==================================================
+
+[[GKFAE]]
+
+[[overview-of-the-embedded-enterprise-bean-container]]
+Overview of the Embedded Enterprise Bean Container
+--------------------------------------------------
+
+The embedded enterprise bean container is used to access enterprise bean
+components from client code executed in a Java SE environment. The
+container and the client code are executed within the same virtual
+machine. The embedded enterprise bean container is typically used for
+testing enterprise beans without having to deploy them to a server.
+
+Most of the services present in the enterprise bean container in a Java
+EE server are available in the embedded enterprise bean container,
+including injection, container-managed transactions, and security.
+Enterprise bean components execute similarly in both embedded and Java
+EE environments, and therefore the same enterprise bean can be easily
+reused in both standalone and networked applications.
+
+

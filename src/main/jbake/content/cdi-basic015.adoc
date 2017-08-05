@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Further Information about CDI
+next=cdi-basicexamples.html
+prev=cdi-basic014.html
+~~~~~~
+Further Information about CDI
+=============================
+
+[[GIWEL]]
+
+[[further-information-about-cdi]]
+Further Information about CDI
+-----------------------------
+
+For more information about CDI, see
+
+* Contexts and Dependency Injection for Java EE specification:
++
+`http://jcp.org/en/jsr/detail?id=346`
+* An introduction to Contexts and Dependency Injection for Java EE:
++
+`http://docs.jboss.org/weld/reference/latest/en-US/html/`
+* Dependency Injection for Java specification:
++
+`http://jcp.org/en/jsr/detail?id=330`
+* Managed Beans specification, which is part of the Java Platform,
+Enterprise Edition 7 (Java EE 7) Specification:
++
+`http://jcp.org/en/jsr/detail?id=342`
+
+

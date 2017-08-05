@@ -1,0 +1,96 @@
+type=page
+status=published
+title=Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
+next=cdi-basic015.html
+prev=cdi-basic013.html
+~~~~~~
+Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
+==================================================================================
+
+[[BABJFEAI]]
+
+[[using-the-postconstruct-and-predestroy-annotations-with-cdi-managed-bean-classes]]
+Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
+----------------------------------------------------------------------------------
+
+CDI managed bean classes and their superclasses support the annotations
+for initializing and for preparing for the destruction of a bean. These
+annotations are defined in JSR 250: Common Annotations for the Java
+platform (`http://jcp.org/en/jsr/detail?id=250`).
+
+The following topics are addressed here:
+
+* link:#CIHEHHCH[To Initialize a Managed Bean Using the @PostConstruct
+Annotation]
+* link:#CIHBAFAC[To Prepare for the Destruction of a Managed Bean Using
+the @PreDestroy Annotation]
+
+[[CIHEHHCH]]
+
+[[to-initialize-a-managed-bean-using-the-postconstruct-annotation]]
+To Initialize a Managed Bean Using the @PostConstruct Annotation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initializing a managed bean specifies the lifecycle callback method that
+the CDI framework should call after dependency injection but before the
+class is put into service.
+
+1.  In the managed bean class or any of its superclasses, define a
+method that performs the initialization that you require.
+2.  Annotate the declaration of the method with the
+`javax.annotation.PostConstruct` annotation.
+
+When the managed bean is injected into a component, CDI calls the method
+after all injection has occurred and after all initializers have been
+called.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+As mandated in JSR 250, if the annotated method is declared in a
+superclass, the method is called unless a subclass of the declaring
+class overrides the method.
+
+|=======================================================================
+
+
+The `UserNumberBean` managed bean in
+link:cdi-basicexamples003.html#GJCXV[The guessnumber-cdi CDI Example]
+uses `@PostConstruct` to annotate a method that resets all bean fields:
+
+[source,oac_no_warn]
+----
+@PostConstruct
+public void reset () {
+    this.minimum = 0;
+    this.userNumber = 0;
+    this.remainingGuesses = 0;
+    this.maximum = maxNumber;
+    this.number = randomInt.get();
+}
+----
+
+[[CIHBAFAC]]
+
+[[to-prepare-for-the-destruction-of-a-managed-bean-using-the-predestroy-annotation]]
+To Prepare for the Destruction of a Managed Bean Using the @PreDestroy Annotation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Preparing for the destruction of a managed bean specifies the lifecycle
+call back method that signals that an application component is about to
+be destroyed by the container.
+
+1.  In the managed bean class or any of its superclasses, prepare for
+the destruction of the managed bean.
++
+In this method, perform any cleanup that is required before the bean is
+destroyed, such as releasing a resource that the bean has been holding.
+2.  Annotate the declaration of the method with the
+`javax.annotation.PreDestroy` annotation.
+
+CDI calls this method before starting to destroy the bean.
+
+

@@ -1,0 +1,96 @@
+type=page
+status=published
+title=A Simple JavaServer Faces Application
+next=jsf-intro005.html
+prev=jsf-intro003.html
+~~~~~~
+A Simple JavaServer Faces Application
+=====================================
+
+[[GJAAM]]
+
+[[a-simple-javaserver-faces-application]]
+A Simple JavaServer Faces Application
+-------------------------------------
+
+JavaServer Faces technology provides an easy and user-friendly process
+for creating web applications. Developing a simple JavaServer Faces
+application typically requires the following tasks, which have already
+been described in link:webapp003.html#BNADX[A Web Module That Uses
+JavaServer Faces Technology: The hello1 Example]:
+
+* Creating web pages using component tags
+* Developing managed beans
+* Mapping the `FacesServlet` instance
+
+The `hello1` example includes a managed bean and two Facelets web pages.
+When accessed by a client, the first web page asks the user for his or
+her name, and the second page responds by providing a greeting.
+
+For details on Facelets technology, see
+link:jsf-facelets.html#GIEPX[Chapter 8, "Introduction to Facelets"]. For
+details on using EL expressions, see link:jsf-el.html#GJDDD[Chapter 9,
+"Expression Language"]. For details on the JavaServer Faces programming
+model and building web pages using JavaServer Faces technology, see
+link:jsf-page.html#BNAQZ[Chapter 10, "Using JavaServer Faces Technology
+in Web Pages"].
+
+Every web application has a lifecycle. Common tasks, such as handling
+incoming requests, decoding parameters, modifying and saving state, and
+rendering web pages to the browser, are all performed during a web
+application lifecycle. Some web application frameworks hide the details
+of the lifecycle from you, whereas others require you to manage them
+manually.
+
+By default, JavaServer Faces automatically handles most of the lifecycle
+actions for you. However, it also exposes the various stages of the
+request lifecycle so that you can modify or perform different actions if
+your application requirements warrant it.
+
+The lifecycle of a JavaServer Faces application starts and ends with the
+following activity: The client makes a request for the web page, and the
+server responds with the page. The lifecycle consists of two main
+phases: Execute and Render.
+
+During the Execute phase, several actions can take place.
+
+* The application view is built or restored.
+* The request parameter values are applied.
+* Conversions and validations are performed for component values.
+* Managed beans are updated with component values.
+* Application logic is invoked.
+
+For a first (initial) request, only the view is built. For subsequent
+(postback) requests, some or all of the other actions can take place.
+
+In the Render phase, the requested view is rendered as a response to the
+client. Rendering is typically the process of generating output, such as
+HTML or XHTML, that can be read by the client, usually a browser.
+
+The following short description of the example JavaServer Faces
+application passing through its lifecycle summarizes the activity that
+takes place behind the scenes.
+
+The `hello1` example application goes through the following stages when
+it is deployed on GlassFish Server.
+
+1.  When the `hello1` application is built and deployed on GlassFish
+Server, the application is in an uninitiated state.
+2.  When a client makes an initial request for the `index.xhtml` web
+page, the `hello1` Facelets application is compiled.
+3.  The compiled Facelets application is executed, and a new component
+tree is constructed for the `hello1` application and placed in a
+`FacesContext`.
+4.  The component tree is populated with the component and the managed
+bean property associated with it, represented by the EL expression
+`hello.name`.
+5.  A new view is built, based on the component tree.
+6.  The view is rendered to the requesting client as a response.
+7.  The component tree is destroyed automatically.
+8.  On subsequent (postback) requests, the component tree is rebuilt,
+and the saved state is applied.
+
+For full details on the lifecycle, see link:jsf-intro007.html#BNAQQ[The
+Lifecycle of a JavaServer Faces Application].
+
+

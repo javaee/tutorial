@@ -1,0 +1,217 @@
+type=page
+status=published
+title=Developing Embeddable Enterprise Bean Applications
+next=ejb-embedded003.html
+prev=ejb-embedded001.html
+~~~~~~
+Developing Embeddable Enterprise Bean Applications
+==================================================
+
+[[GKCRR]]
+
+[[developing-embeddable-enterprise-bean-applications]]
+Developing Embeddable Enterprise Bean Applications
+--------------------------------------------------
+
+All embeddable enterprise bean containers support the features listed in
+link:#GKCQC[Table 36-1].
+
+[[sthref157]][[GKCQC]]
+
+Table 36-1 Required Enterprise Bean Features in the Embeddable Container
+
+[width="32%",cols="100%,",options="header",]
+|=======================================================================
+|Enterprise Bean Feature |Description
+|Local session beans |Local and no-interface view stateless, stateful,
+and singleton session beans. All method access is synchronous. Session
+beans must not be web service endpoints.
+
+|Transactions |Container-managed and bean-managed transactions.
+
+|Security |Declarative and programmatic security.
+
+|Interceptors |Class-level and method-level interceptors for session
+beans.
+
+|Deployment descriptor |The optional `ejb-jar.xml` deployment
+descriptor, with the same overriding rules for the enterprise bean
+container in Java EE servers.
+|=======================================================================
+
+
+Container providers are allowed to support the full set of features in
+enterprise beans, but applications that use the embedded container will
+not be portable if they use enterprise bean features not listed in
+link:#GKCQC[Table 36-1], such as the timer service, session beans as web
+service endpoints, or remote business interfaces.
+
+[[GKCQI]]
+
+[[running-embedded-applications]]
+Running Embedded Applications
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The embedded container, the enterprise bean components, and the client
+all are executed in the same virtual machine using the same classpath.
+As a result, developers can run an application that uses the embedded
+container just like a typical Java SE application, as follows:
+
+[source,oac_no_warn]
+----
+java -classpath mySessionBean.jar:containerProviderRuntime.jar:myClient.jar \                                                                                            
+com.example.ejb.client.Main
+----
+
+In the above example, `mySessionBean.jar` is an EJB JAR containing a
+local stateless session bean, `containerProviderRuntime.jar` is a JAR
+file supplied by the enterprise bean provider that contains the needed
+runtime classes for the embedded container, and `myClient.jar` is a JAR
+file containing a Java SE application that calls the business methods in
+the session bean through the embedded container.
+
+In GlassFish Server, the runtime JAR that includes the classes for the
+embedded container is `glassfish-embedded-all.jar`.
+
+[[GKCOV]]
+
+[[creating-the-enterprise-bean-container]]
+Creating the Enterprise Bean Container
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `javax.ejb.embedded.EJBContainer` abstract class represents an
+instance of the enterprise bean container and includes factory methods
+for creating a container instance. The `EJBContainer.createEJBContainer`
+method is used to create and initialize an embedded container instance.
+
+The following code snippet shows how to create an embedded container
+that is initialized with the container provider's default settings:
+
+[source,oac_no_warn]
+----
+EJBContainer ec = EJBContainer.createEJBContainer();
+----
+
+By default, the embedded container will search the virtual machine
+classpath for enterprise bean modules: directories containing a
+`META-INF/ejb-jar.xml` deployment descriptor, directories containing a
+class file with one of the enterprise bean component annotations (such
+as `@Stateless`), or JAR files containing an `ejb-jar.xml` deployment
+descriptor or class file with an enterprise bean annotation. Any
+matching entries are considered enterprise bean modules within the same
+application. Once all the valid enterprise bean modules have been found
+in the classpath, the container will begin initializing the modules.
+When the `createEJBContainer` method successfully returns, the client
+application can obtain references to the client view of any enterprise
+bean module found by the embedded container.
+
+An alternate version of the `EJBContainer.createEJBContainer` method
+takes a `Map` of properties and settings for customizing the embeddable
+container instance:
+
+[source,oac_no_warn]
+----
+Properties props = new Properties();
+props.setProperty(...);
+...
+EJBContainer ec = EJBContainer.createEJBContainer(props);
+----
+
+[[GKCRP]]
+
+[[explicitly-specifying-enterprise-bean-modules-to-be-initialized]]
+Explicitly Specifying Enterprise Bean Modules to Be Initialized
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Developers can specify exactly which enterprise bean modules the
+embedded container will initialize. To explicitly specify the enterprise
+bean modules initialized by the embedded container, set the
+`EJBContainer.MODULES` property.
+
+The modules may be located either in the virtual machine classpath in
+which the embedded container and client code run, or alternately outside
+the virtual machine classpath.
+
+To specify modules in the virtual machine classpath, set
+`EJBContainer.MODULES` to a `String` to specify a single module name, or
+a `String` array containing the module names. The embedded container
+searches the virtual machine classpath for enterprise bean modules
+matching the specified names:
+
+[source,oac_no_warn]
+----
+Properties props = new Properties();
+props.setProperty(EJBContainer.MODULES, "mySessionBean");
+EJBContainer ec = EJBContainer.createEJBContainer(props);
+----
+
+To specify enterprise bean modules outside the virtual machine
+classpath, set `EJBContainer.MODULES` to a `java.io.File` object or an
+array of `File` objects. Each `File` object refers to an EJB JAR file,
+or a directory containing an expanded EJB JAR file:
+
+[source,oac_no_warn]
+----
+Properties props = new Properties();
+File ejbJarFile = new File(...);
+props.setProperty(EJBContainer.MODULES, ejbJarFile);
+EJBContainer ec = EJBContainer.createEJBContainer(props);
+----
+
+[[GLHUR]]
+
+[[looking-up-session-bean-references]]
+Looking Up Session Bean References
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To look up session bean references in an application using the embedded
+container:
+
+1.  Use an instance of `EJBContainer` to retrieve a
+`javax.naming.Context` object.
++
+Call the `EJBContainer.getContext` method to retrieve the `Context`
+object:
++
+[source,oac_no_warn]
+----
+EJBContainer ec = EJBContainer.createEJBContainer();
+Context ctx = ec.getContext();
+----
++
+References to session beans can then be obtained using the portable JNDI
+syntax detailed in link:ejb-intro004.html#GIRGN[Portable JNDI Syntax].
+For example, to obtain a reference to `MySessionBean`, a local session
+bean with a no-interface view, use the following code:
++
+[source,oac_no_warn]
+----
+MySessionBean msb = (MySessionBean) 
+            ctx.lookup("java:global/mySessionBean/MySessionBean");
+----
+
+[[GKCRE]]
+
+[[shutting-down-the-enterprise-bean-container]]
+Shutting Down the Enterprise Bean Container
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To shut down the embedded container:
+
+1.  From the client, call the `close` method of the instance of
+`EJBContainer`.
++
+[source,oac_no_warn]
+----
+EJBContainer ec = EJBContainer.createEJBContainer();
+...
+ec.close();
+----
++
+While clients are not required to shut down `EJBContainer` instances,
+doing so frees resources consumed by the embedded container. This is
+particularly important when the virtual machine under which the client
+application is running has a longer lifetime than the client
+application.
+
+

@@ -1,0 +1,21 @@
+type=page
+status=published
+title=Further Information about Batch Processing
+next=concurrency-utilities.html
+prev=batch-processing009.html
+~~~~~~
+Further Information about Batch Processing
+==========================================
+
+[[BCGHCHAJ]]
+
+[[further-information-about-batch-processing]]
+Further Information about Batch Processing
+------------------------------------------
+
+For more information on batch processing in Java EE, see the Batch
+Applications for the Java Platform specification:
+
+`http://www.jcp.org/en/jsr/detail?id=352`
+
+

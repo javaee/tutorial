@@ -1,0 +1,38 @@
+type=page
+status=published
+title=Expression Language
+next=jsf-el001.html
+prev=jsf-facelets009.html
+~~~~~~
+Expression Language
+===================
+
+[[GJDDD]]
+
+[[expression-language]]
+9 Expression Language
+---------------------
+
+
+This chapter introduces the Expression Language (also referred to as the
+EL), which provides an important mechanism for enabling the presentation
+layer (web pages) to communicate with the application logic (managed
+beans). The EL is used by several JavaEE technologies, such as
+JavaServer Faces technology, JavaServer Pages (JSP) technology, and
+Contexts and Dependency Injection for Java EE (CDI). The EL can also be
+used in stand-alone environments. This chapter only covers the use of
+the EL in Java EE containers.
+
+The following topics are addressed here:
+
+* link:jsf-el001.html#BNAHQ[Overview of the EL]
+* link:jsf-el002.html#BNAHR[Immediate and Deferred Evaluation Syntax]
+* link:jsf-el003.html#BNAHU[Value and Method Expressions]
+* link:jsf-el004.html#CIHGABHD[Operations on Collection Objects]
+* link:jsf-el005.html#BNAIK[Operators]
+* link:jsf-el006.html#BNAIL[Reserved Words]
+* link:jsf-el007.html#BNAIM[Examples of EL Expressions]
+* link:jsf-el008.html#CIHGBBHA[Further Information about the Expression
+Language]
+
+

@@ -1,0 +1,68 @@
+type=page
+status=published
+title=Registering a Custom Component
+next=jsf-configure013.html
+prev=jsf-configure011.html
+~~~~~~
+Registering a Custom Component
+==============================
+
+[[BNAXI]]
+
+[[registering-a-custom-component]]
+Registering a Custom Component
+------------------------------
+
+In addition to registering custom renderers (as explained in the
+preceding section), you also must register the custom components that
+are usually associated with the custom renderers. You use either a
+`@FacesComponent` annotation, as described in
+link:jsf-custom005.html#BNAVU[Creating Custom Component Classes], or the
+`component` element of the application configuration resource file.
+
+Here is a hypothetical `component` element from the application
+configuration resource file that registers `AreaComponent`:
+
+[source,oac_no_warn]
+----
+<component>
+    <component-type>DemoArea</component-type>
+    <component-class>
+        dukesbookstore.components.AreaComponent
+    </component-class>
+    <property>
+        <property-name>alt</property-name>
+        <property-class>java.lang.String</property-class>
+    </property>
+    <property>
+        <property-name>coords</property-name>
+        <property-class>java.lang.String</property-class>
+    </property>
+    <property>
+        <property-name>shape</property-name>
+        <property-class>java.lang.String</property-class>
+    </property>
+</component>
+----
+
+Attributes specified in a `component` tag override any settings in the
+`@FacesComponent` annotation.
+
+The `component-type` element indicates the name under which the
+component should be registered. Other objects referring to this
+component use this name. For example, the `component-type` element in
+the configuration for `AreaComponent` defines a value of `DemoArea`,
+which matches the value returned by the `AreaTag` class's
+`getComponentType` method.
+
+The `component-class` element indicates the fully qualified class name
+of the component. The `property` elements specify the component
+properties and their types.
+
+If the custom component can include facets, you can configure the facets
+in the component configuration using `facet` elements, which are allowed
+after the `component-class` elements. See
+link:jsf-configure011.html#BNAXH[Registering a Custom Renderer with a
+Render Kit] for further details on configuring facets.
+
+

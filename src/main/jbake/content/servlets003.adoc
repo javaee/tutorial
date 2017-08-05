@@ -1,0 +1,93 @@
+type=page
+status=published
+title=Sharing Information
+next=servlets004.html
+prev=servlets002.html
+~~~~~~
+Sharing Information
+===================
+
+[[BNAFO]]
+
+[[sharing-information]]
+Sharing Information
+-------------------
+
+Web components, like most objects, usually work with other objects to
+accomplish their tasks. Web components can do so by doing the following.
+
+* Using private helper objects (for example, JavaBeans components).
+* Sharing objects that are attributes of a public scope.
+* Using a database.
+* Invoking other web resources. The Java Servlet technology mechanisms
+that allow a web component to invoke other web resources are described
+in link:servlets007.html#BNAGI[Invoking Other Web Resources].
+
+[[BNAFP]]
+
+[[using-scope-objects]]
+Using Scope Objects
+~~~~~~~~~~~~~~~~~~~
+
+Collaborating web components share information by means of objects that
+are maintained as attributes of four scope objects. You access these
+attributes by using the `getAttribute` and `setAttribute` methods of the
+class representing the scope. link:#BNAFQ[Table 17-2] lists the scope
+objects.
+
+[[sthref98]][[BNAFQ]]
+
+Table 17-2 Scope Objects
+
+[width="54%",cols="30%,70%,",options="header",]
+|=======================================================================
+|Scope Object |Class |Accessible From
+|Web context |`javax.servlet.ServletContext` |Web components within a
+web context. See link:servlets008.html#BNAGL[Accessing the Web Context].
+
+|Session |`javax.servlet.http.HttpSession` |Web components handling a
+request that belongs to the session. See
+link:servlets009.html#BNAGM[Maintaining Client State].
+
+|Request |Subtype of `javax.servlet.ServletRequest` |Web components
+handling the request.
+
+|Page |`javax.servlet.jsp.JspContext` |The JSP page that creates the
+object.
+|=======================================================================
+
+
+[[BNAFS]]
+
+[[controlling-concurrent-access-to-shared-resources]]
+Controlling Concurrent Access to Shared Resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In a multithreaded server, shared resources can be accessed
+concurrently. In addition to scope object attributes, shared resources
+include in-memory data, such as instance or class variables, and
+external objects, such as files, database connections, and network
+connections.
+
+Concurrent access can arise in several situations.
+
+* Multiple web components accessing objects stored in the web context.
+* Multiple web components accessing objects stored in a session.
+* Multiple threads within a web component accessing instance variables.
+A web container will typically create a thread to handle each request.
+To ensure that a servlet instance handles only one request at a time, a
+servlet can implement the `SingleThreadModel` interface. If a servlet
+implements this interface, no two threads will execute concurrently in
+the servlet's service method. A web container can implement this
+guarantee by synchronizing access to a single instance of the servlet or
+by maintaining a pool of web component instances and dispatching each
+new request to a free instance. This interface does not prevent
+synchronization problems that result from web components' accessing
+shared resources, such as static class variables or external objects.
+
+When resources can be accessed concurrently, they can be used in an
+inconsistent fashion. You prevent this by controlling the access using
+the synchronization techniques described in the Threads lesson at
+`http://docs.oracle.com/javase/tutorial/essential/concurrency/`.
+
+

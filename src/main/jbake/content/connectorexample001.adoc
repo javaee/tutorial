@@ -1,0 +1,24 @@
+type=page
+status=published
+title=Overview of the Resource Adapter Examples
+next=connectorexample002.html
+prev=connectorexample.html
+~~~~~~
+Overview of the Resource Adapter Examples
+=========================================
+
+[[A1253757]]
+
+[[overview-of-the-resource-adapter-examples]]
+Overview of the Resource Adapter Examples
+-----------------------------------------
+
+The `trading` example shows how to use a simple custom client interface
+to connect to an EIS from a web application. The resource adapter in
+this example implements the outbound contract and the custom client
+interface. The `traffic` example shows how to use a message-driven bean
+(MDB) to process traffic information updates from an EIS. The resource
+adapter in this example implements the inbound and work management
+contracts.
+
+

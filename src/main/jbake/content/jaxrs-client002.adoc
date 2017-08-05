@@ -1,0 +1,205 @@
+type=page
+status=published
+title=Using the Client API in the JAX-RS Example Applications
+next=jaxrs-client003.html
+prev=jaxrs-client001.html
+~~~~~~
+Using the Client API in the JAX-RS Example Applications
+=======================================================
+
+[[BABJCIJC]]
+
+[[using-the-client-api-in-the-jax-rs-example-applications]]
+Using the Client API in the JAX-RS Example Applications
+-------------------------------------------------------
+
+The `rsvp` and `customer` examples use the Client API to call JAX-RS
+services. This section describes how each example application uses the
+Client API.
+
+The following topics are addressed here:
+
+* link:#BABEDFIG[The Client API in the rsvp Example Application]
+* link:#CHDGBGID[The Client API in the customer Example Application]
+
+[[BABEDFIG]]
+
+[[the-client-api-in-the-rsvp-example-application]]
+The Client API in the rsvp Example Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `rsvp` application allows users to respond to event invitations
+using JAX-RS resources, as explained in link:jaxrs003.html#GJVBC[Chapter
+30, "The rsvp Example Application"]. The web application uses the Client
+API in CDI backing beans to interact with the service resources, and the
+Facelets web interface displays the results.
+
+The `StatusManager` CDI backing bean retrieves all the current events in
+the system. The client instance used in the backing bean is obtained in
+the constructor:
+
+[source,oac_no_warn]
+----
+public StatusManager() {
+    this.client = ClientBuilder.newClient();
+}
+----
+
+The `StatusManager.getEvents` method returns a collection of all the
+current events in the system by calling the resource at
+`http://localhost:8080/rsvp/webapi/status/all`, which returns an XML
+document with entries for each event. The Client API automatically
+unmarshals the XML and creates a `List<Event>` instance.
+
+[source,oac_no_warn]
+----
+    public List<Event> getEvents() {
+        List<Event> returnedEvents = null;
+        try {
+            returnedEvents = client.target(baseUri)
+                    .path("all")
+                    .request(MediaType.APPLICATION_XML)
+                    .get(new GenericType<List<Event>>() {
+            });
+            if (returnedEvents == null) {
+                logger.log(Level.SEVERE, "Returned events null.");
+            } else {
+                logger.log(Level.INFO, "Events have been returned.");
+            }
+        } catch (WebApplicationException ex) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        ...
+        return returnedEvents;
+    }
+----
+
+The `StatusManager.changeStatus` method is used to update the attendee's
+response. It creates an HTTP `POST` request to the service with the new
+response. The body of the request is an XML document.
+
+[source,oac_no_warn]
+----
+    public String changeStatus(ResponseEnum userResponse, 
+            Person person, Event event) {
+        String navigation;
+        try {
+            logger.log(Level.INFO, 
+                    "changing status to {0} for {1} {2} for event ID {3}.",
+                    new Object[]{userResponse,
+                        person.getFirstName(),
+                        person.getLastName(),
+                        event.getId().toString()});
+             client.target(baseUri)
+                     .path(event.getId().toString())
+                     .path(person.getId().toString())
+                     .request(MediaType.APPLICATION_XML)
+                     .post(Entity.xml(userResponse.getLabel()));
+            navigation = "changedStatus";
+        } catch (ResponseProcessingException ex) {
+            logger.log(Level.WARNING, "couldn''t change status for {0} {1}",
+                    new Object[]{person.getFirstName(),
+                        person.getLastName()});
+            logger.log(Level.WARNING, ex.getMessage());
+            navigation = "error";
+        }
+        return navigation;
+    }
+----
+
+[[CHDGBGID]]
+
+[[the-client-api-in-the-customer-example-application]]
+The Client API in the customer Example Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `customer` example application stores customer data in a database
+and exposes the resource as XML, as explained in
+link:jaxrs-advanced008.html#GKOIB[Chapter 32, "The customer Example
+Application"]. The service resource exposes methods that create
+customers and retrieve all the customers. A Facelets web application
+acts as a client for the service resource, with a form for creating
+customers and displaying the list of customers in a table.
+
+The `CustomerBean` stateless session bean uses the JAX-RS Client API to
+interface with the service resource. The `CustomerBean.createCustomer`
+method takes the `Customer` entity instance created by the Facelets form
+and makes a POST call to the service URI.
+
+[source,oac_no_warn]
+----
+public String createCustomer(Customer customer) {
+    if (customer == null) {
+        logger.log(Level.WARNING, "customer is null.");
+        return "customerError";
+    }
+    String navigation;
+    Response response =
+            client.target("http://localhost:8080/customer/webapi/Customer")
+            .request(MediaType.APPLICATION_XML)
+            .post(Entity.entity(customer, MediaType.APPLICATION_XML),
+                    Response.class);
+    if (response.getStatus() == Status.CREATED.getStatusCode()) {
+        navigation = "customerCreated";
+    } else {
+        logger.log(Level.WARNING, 
+                "couldn''t create customer with id {0}. Status returned was {1}",
+                new Object[]{customer.getId(), response.getStatus()});
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, 
+                new FacesMessage("Could not create customer."));
+        navigation = "customerError";
+    }
+    return navigation;
+}
+----
+
+The XML request entity is created by calling the
+`Invocation.Builder.post` method, passing in a new `Entity` instance
+from the `Customer` instance, and specifying the media type as
+`MediaType.APPLICATION_XML`.
+
+The `CustomerBean.retrieveCustomer` method retrieves a `Customer` entity
+instance from the service by appending the customer's ID to the service
+URI.
+
+[source,oac_no_warn]
+----
+public String retrieveCustomer(String id) {
+    String navigation;
+    Customer customer =
+            client.target("http://localhost:8080/customer/webapi/Customer")
+            .path(id)
+            .request(MediaType.APPLICATION_XML)
+            .get(Customer.class);
+    if (customer == null) {
+        navigation = "customerError";
+    } else {
+        navigation = "customerRetrieved";
+    }
+    return navigation;
+}
+----
+
+The `CustomerBean.retrieveAllCustomers` method retrieves a collection of
+customers as a `List<Customer>` instance. This list is then displayed as
+a table in the Facelets web application.
+
+[source,oac_no_warn]
+----
+public List<Customer> retrieveAllCustomers() {
+    List<Customer> customers =
+            client.target("http://localhost:8080/customer/webapi/Customer")
+            .path("all")
+            .request(MediaType.APPLICATION_XML)
+            .get(new GenericType<List<Customer>>() {
+            });
+    return customers;
+}
+----
+
+Because the response type is a collection, the `Invocation.Builder.get`
+method is called by passing in a new instance of
+`GenericType<List<Customer>>`.
+
+

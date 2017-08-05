@@ -1,0 +1,157 @@
+type=page
+status=published
+title=The standalone Example Application
+next=ejb-async.html
+prev=ejb-embedded002.html
+~~~~~~
+The standalone Example Application
+==================================
+
+[[GKCPV]]
+
+[[the-standalone-example-application]]
+The standalone Example Application
+----------------------------------
+
+The `standalone` example application demonstrates how to create an
+instance of the embedded enterprise bean container in a JUnit test class
+and call a session bean business method.
+
+The following topics are addressed here:
+
+* link:#BEIDAJAC[Overview of the standalone Example Application]
+* link:#GKCQP[To Run the standalone Example Application Using NetBeans
+IDE]
+* link:#BEIGHEHJ[To Run the standalone Example Application Using Maven]
+
+[[BEIDAJAC]]
+
+[[overview-of-the-standalone-example-application]]
+Overview of the standalone Example Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Testing the business methods of an enterprise bean in a unit test allows
+developers to exercise the business logic of an application separately
+from the other application layers, such as the presentation layer, and
+without having to deploy the application to a Java EE server.
+
+The `standalone` example has two main components: `StandaloneBean`, a
+stateless session bean, and `StandaloneBeanTest`, a JUnit test class
+that acts as a client to `StandaloneBean` using the embedded container.
+
+`StandaloneBean` is a simple session bean exposing a local, no-interface
+view with a single business method, `returnMessage`, which returns
+"Greetings!" as a `String`:
+
+[source,oac_no_warn]
+----
+@Stateless
+public class StandaloneBean {
+
+    private static final String message = "Greetings!";
+
+    public String returnMessage() {
+        return message;
+    }
+    
+}
+----
+
+`StandaloneBeanTest` calls `StandaloneBean.returnMessage` and tests that
+the returned message is correct. First, an embedded container instance
+and initial context are created within the `setUp` method, which is
+annotated with `org.junit.Before` to indicate that the method should be
+executed before the test methods:
+
+[source,oac_no_warn]
+----
+@Before
+public void setUp() {
+    ec = EJBContainer.createEJBContainer();
+    ctx = ec.getContext();
+}
+----
+
+The `testReturnMessage` method, annotated with `org.junit.Test` to
+indicate that the method includes a unit test, obtains a reference to
+`StandaloneBean` through the `Context` instance, and calls
+`StandaloneBean.returnMessage`. The result is compared with the expected
+result using a JUnit assertion, `assertEquals`. If the string returned
+from `StandaloneBean.returnMessage` is equal to "Greetings!" the test
+passes:
+
+[source,oac_no_warn]
+----
+@Test
+public void testReturnMessage() throws Exception {
+    logger.info("Testing standalone.ejb.StandaloneBean.returnMessage()");
+    StandaloneBean instance = (StandaloneBean)
+            ctx.lookup("java:global/classes/StandaloneBean");
+    String expResult = "Greetings!";
+    String result = instance.returnMessage();
+    assertEquals(expResult, result);
+}
+----
+
+Finally, the `tearDown` method, annotated with `org.junit.After` to
+indicate that the method should be executed after all the unit tests
+have run, closes the embedded container instance:
+
+[source,oac_no_warn]
+----
+@After
+public void tearDown() {
+    if (ec != null) {
+        ec.close();
+    }
+}
+----
+
+[[GKCQP]]
+
+[[to-run-the-standalone-example-application-using-netbeans-ide]]
+To Run the standalone Example Application Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb
+----
+4.  Select the `standalone` folder and click Open Project.
+5.  In the Projects tab, right-click `standalone` and select Test.
++
+This will execute the JUnit test class `StandaloneBeanTest`. The Output
+tab shows the progress of the test and the output log.
+
+[[BEIGHEHJ]]
+
+[[to-run-the-standalone-example-application-using-maven]]
+To Run the standalone Example Application Using Maven
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb/standalone/
+----
+3.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command compiles and packages the application into an JAR file, and
+executes the JUnit test class `StandaloneBeanTest`.
+
+

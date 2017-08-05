@@ -1,0 +1,54 @@
+type=page
+status=published
+title=Creating and Initializing a Servlet
+next=servlets005.html
+prev=servlets003.html
+~~~~~~
+Creating and Initializing a Servlet
+===================================
+
+[[BNAFU]]
+
+[[creating-and-initializing-a-servlet]]
+Creating and Initializing a Servlet
+-----------------------------------
+
+Use the `@WebServlet` annotation to define a servlet component in a web
+application. This annotation is specified on a class and contains
+metadata about the servlet being declared. The annotated servlet must
+specify at least one URL pattern. This is done by using the
+`urlPatterns` or `value` attribute on the annotation. All other
+attributes are optional, with default settings. Use the `value`
+attribute when the only attribute on the annotation is the URL pattern;
+otherwise, use the `urlPatterns` attribute when other attributes are
+also used.
+
+Classes annotated with `@WebServlet` must extend the
+`javax.servlet.http.HttpServlet` class. For example, the following code
+snippet defines a servlet with the URL pattern `/report`:
+
+[source,oac_no_warn]
+----
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/report")
+public class MoodServlet extends HttpServlet {
+    ...
+----
+
+The web container initializes a servlet after loading and instantiating
+the servlet class and before delivering requests from clients. To
+customize this process to allow the servlet to read persistent
+configuration data, initialize resources, and perform any other one-time
+activities, you can either override the `init` method of the `Servlet`
+interface or specify the `initParams` attribute of the `@WebServlet`
+annotation. The `initParams` attribute contains a `@WebInitParam`
+annotation. If it cannot complete its initialization process, a servlet
+throws an `UnavailableException`.
+
+Use an initialization parameter to provide data needed by a particular
+servlet. By contrast, a context parameter provides data that is
+available to all components of a web application.
+
+

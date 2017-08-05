@@ -1,0 +1,52 @@
+type=page
+status=published
+title=Overview of the EL
+next=jsf-el002.html
+prev=jsf-el.html
+~~~~~~
+Overview of the EL
+==================
+
+[[BNAHQ]]
+
+[[overview-of-the-el]]
+Overview of the EL
+------------------
+
+The EL allows page authors to use simple expressions to dynamically
+access data from JavaBeans components. For example, the `test` attribute
+of the following conditional tag is supplied with an EL expression that
+compares 0 with the number of items in the session-scoped bean named
+`cart`.
+
+[source,oac_no_warn]
+----
+<c:if test="${sessionScope.cart.numberOfItems > 0}">
+  ...
+</c:if>
+----
+
+See link:jsf-develop001.html#BNAQP[Using the EL to Reference Managed
+Beans] for more information on how to use the EL in JavaServer Faces
+applications.
+
+To summarize, the EL provides a way to use simple expressions to perform
+the following tasks:
+
+* Dynamically read application data stored in JavaBeans components,
+various data structures, and implicit objects
+* Dynamically write data, such as user input into forms, to JavaBeans
+components
+* Invoke arbitrary static and public methods
+* Dynamically perform arithmetic, boolean, and string operations
+* Dynamically construct collection objects and perform operations on
+collections
+
+In a JavaServer Faces page, an EL expression can be used either in
+static text or in the attribute of a custom tag or standard action.
+
+Finally, the EL provides a pluggable API for resolving expressions so
+that custom resolvers that can handle expressions not already supported
+by the EL can be implemented.
+
+

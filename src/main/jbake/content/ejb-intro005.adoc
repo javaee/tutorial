@@ -1,0 +1,33 @@
+type=page
+status=published
+title=The Contents of an Enterprise Bean
+next=ejb-intro006.html
+prev=ejb-intro004.html
+~~~~~~
+The Contents of an Enterprise Bean
+==================================
+
+[[GIPIO]]
+
+[[the-contents-of-an-enterprise-bean]]
+The Contents of an Enterprise Bean
+----------------------------------
+
+To develop an enterprise bean, you must provide the following files.
+
+* Enterprise bean class: Implements the business methods of the
+enterprise bean and any lifecycle callback methods.
+* Business interfaces: Define the business methods implemented by the
+enterprise bean class. A business interface is not required if the
+enterprise bean exposes a local, no-interface view.
+* Helper classes: Other classes needed by the enterprise bean class,
+such as exception and utility classes.
+
+Package the programming artifacts in the preceding list either into an
+EJB JAR file (a stand-alone module that stores the enterprise bean) or
+within a web application archive (WAR) module. See
+link:packaging002.html#CHDFCDBG[Packaging Enterprise Beans in EJB JAR
+Modules] and link:packaging002.html#CHDJABEJ[Packaging Enterprise Beans
+in WAR Modules] for more information.
+
+

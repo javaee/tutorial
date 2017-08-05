@@ -1,0 +1,52 @@
+type=page
+status=published
+title=Modifying the Java EE Application
+next=ejb-basicexamples.html
+prev=ejb-gettingstarted002.html
+~~~~~~
+Modifying the Java EE Application
+=================================
+
+[[GIPTI]]
+
+[[modifying-the-java-ee-application]]
+Modifying the Java EE Application
+---------------------------------
+
+GlassFish Server supports iterative development. Whenever you make a
+change to a Java EE application, you must redeploy the application.
+
+[[GIPUK]]
+
+[[to-modify-a-class-file]]
+To Modify a Class File
+~~~~~~~~~~~~~~~~~~~~~~
+
+To modify a class file in an enterprise bean, you change the source
+code, recompile it, and redeploy the application. For example, to update
+the exchange rate in the `dollarToYen` business method of the
+`ConverterBean` class, you would follow these steps.
+
+To modify `ConverterServlet`, the procedure is the same.
+
+1.  Edit `ConverterBean.java` and save the file.
+2.  Recompile the source file.
+* To recompile `ConverterBean.java` in NetBeans IDE, right-click the
+`converter` project and select Run.
++
+This recompiles the `ConverterBean.java` file, replaces the old class
+file in the build directory, and redeploys the application to GlassFish
+Server.
+* Recompile `ConverterBean.java` using Maven.
+1.  In a terminal window, go to the
+tut-install`/examples/ejb/converter/` directory.
+2.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This command repackages and deploys the application.
+
+

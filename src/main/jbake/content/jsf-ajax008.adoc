@@ -1,0 +1,46 @@
+type=page
+status=published
+title=Ajax Request Lifecycle
+next=jsf-ajax009.html
+prev=jsf-ajax007.html
+~~~~~~
+Ajax Request Lifecycle
+======================
+
+[[GKUAR]]
+
+[[ajax-request-lifecycle]]
+Ajax Request Lifecycle
+----------------------
+
+An Ajax request varies from other typical JavaServer Faces requests, and
+its processing is also handled differently by the JavaServer Faces
+lifecycle.
+
+As described in link:jsf-intro008.html#GKNOJ[Partial Processing and
+Partial Rendering], when an Ajax request is received, the state
+associated with that request is captured by the
+`javax.faces.context.PartialViewContext`. This object provides access to
+information such as which components are targeted for
+processing/rendering. The `processPartial` method of
+`PartialViewContext` uses this information to perform partial component
+tree processing and rendering.
+
+The `execute` attribute of the `f:ajax` tag identifies which segments of
+the server-side component tree should be processed. Because components
+can be uniquely identified in the JavaServer Faces component tree, it is
+easy to identify and process a single component, a few components, or a
+whole tree. This is made possible by the `visitTree` method of the
+`UIComponent` class. The identified components then run through the
+JavaServer Faces request lifecycle phases.
+
+Similar to the `execute` attribute, the `render` attribute identifies
+which segments of the JavaServer Faces component tree need to be
+rendered during the render response phase.
+
+During the render response phase, the `render` attribute is examined.
+The identified components are found and asked to render themselves and
+their children. The components are then packaged up and sent back to the
+client as a response.
+
+

@@ -1,0 +1,91 @@
+type=page
+status=published
+title=Simplified Query Language Syntax
+next=persistence-querylanguage005.html
+prev=persistence-querylanguage003.html
+~~~~~~
+Simplified Query Language Syntax
+================================
+
+[[BNBTI]]
+
+[[simplified-query-language-syntax]]
+Simplified Query Language Syntax
+--------------------------------
+
+This section briefly describes the syntax of the query language so that
+you can quickly move on to
+link:persistence-querylanguage005.html#BNBTL[Example Queries]. When you
+are ready to learn about the syntax in more detail, see
+link:persistence-querylanguage006.html#BNBUF[Full Query Language Syntax].
+
+The following topics are addressed here:
+
+* link:#BNBTJ[Select Statements]
+* link:#BNBTK[Update and Delete Statements]
+
+[[BNBTJ]]
+
+[[select-statements]]
+Select Statements
+~~~~~~~~~~~~~~~~~
+
+A select query has six clauses: `SELECT`, `FROM`, `WHERE`, `GROUP BY`,
+`HAVING`, and `ORDER BY`. The `SELECT` and `FROM` clauses are required,
+but the `WHERE`, `GROUP BY`, `HAVING`, and `ORDER BY` clauses are
+optional. Here is the high-level BNF syntax of a query language select
+query:
+
+[source,oac_no_warn]
+----
+QL_statement ::= select_clause from_clause 
+  [where_clause][groupby_clause][having_clause][orderby_clause]
+----
+
+The BNF syntax defines the following clauses.
+
+* The `SELECT` clause defines the types of the objects or values
+returned by the query.
+* The `FROM` clause defines the scope of the query by declaring one or
+more identification variables, which can be referenced in the `SELECT`
+and `WHERE` clauses. An identification variable represents one of the
+following elements:
+
+** The abstract schema name of an entity
+
+** An element of a collection relationship
+
+** An element of a single-valued relationship
+
+** A member of a collection that is the multiple side of a one-to-many
+relationship
+* The `WHERE` clause is a conditional expression that restricts the
+objects or values retrieved by the query. Although the clause is
+optional, most queries have a `WHERE` clause.
+* The `GROUP BY` clause groups query results according to a set of
+properties.
+* The `HAVING` clause is used with the `GROUP BY` clause to further
+restrict the query results according to a conditional expression.
+* The `ORDER BY` clause sorts the objects or values returned by the
+query into a specified order.
+
+[[BNBTK]]
+
+[[update-and-delete-statements]]
+Update and Delete Statements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Update and delete statements provide bulk operations over sets of
+entities. These statements have the following syntax:
+
+[source,oac_no_warn]
+----
+update_statement :: = update_clause [where_clause] 
+delete_statement :: = delete_clause [where_clause]
+----
+
+The update and delete clauses determine the type of the entities to be
+updated or deleted. The `WHERE` clause may be used to restrict the scope
+of the update or delete operation.
+
+

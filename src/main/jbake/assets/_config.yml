@@ -1,0 +1,14 @@
+theme: jekyll-theme-architect
+
+title: [Java EE Tutorial]
+description: [Java EE Tutorial and Sample Source Code Project]
+
+# sidebar links url
+links:
+  source: https://github.com/bshannon/javaee-tutorial
+  download: https://github.com/bshannon/javaee-tutorial/releases
+  #mailinglist: https://javaee.groups.io/g/tutorial
+  #javadocs:
+  docs: https://javaee.github.io/tutorial
+  #faq:
+

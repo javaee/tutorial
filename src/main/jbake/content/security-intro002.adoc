@@ -1,0 +1,219 @@
+type=page
+status=published
+title=Security Mechanisms
+next=security-intro003.html
+prev=security-intro001.html
+~~~~~~
+Security Mechanisms
+===================
+
+[[BNBWY]]
+
+[[security-mechanisms]]
+Security Mechanisms
+-------------------
+
+The characteristics of an application should be considered when deciding
+the layer and type of security to be provided for applications. The
+following sections discuss the characteristics of the common mechanisms
+that can be used to secure Java EE applications. Each of these
+mechanisms can be used individually or with others to provide protection
+layers based on the specific needs of your implementation.
+
+The following topics are addressed here:
+
+* link:#BNBWZ[Java SE Security Mechanisms]
+* link:#BNBXA[Java EE Security Mechanisms]
+
+[[BNBWZ]]
+
+[[java-se-security-mechanisms]]
+Java SE Security Mechanisms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Java SE provides support for a variety of security features and
+mechanisms.
+
+* Java Authentication and Authorization Service (JAAS) is a set of APIs
+that enable services to authenticate and enforce access controls upon
+users. JAAS provides a pluggable and extensible framework for
+programmatic user authentication and authorization. JAAS is a core Java
+SE API and is an underlying technology for Java EE security mechanisms.
+* Java Generic Security Services (Java GSS-API) is a token-based API
+used to securely exchange messages between communicating applications.
+The GSS-API offers application programmers uniform access to security
+services atop a variety of underlying security mechanisms, including
+Kerberos.
+* Java Cryptography Extension (JCE) provides a framework and
+implementations for encryption, key generation and key agreement, and
+Message Authentication Code (MAC) algorithms. Support for encryption
+includes symmetric, asymmetric, block, and stream ciphers. Block ciphers
+operate on groups of bytes; stream ciphers operate on one byte at a
+time. The software also supports secure streams and sealed objects.
+* Java Secure Sockets Extension (JSSE) provides a framework and an
+implementation for a Java version of the Secure Sockets Layer (SSL) and
+Transport Layer Security (TLS) protocols and includes functionality for
+data encryption, server authentication, message integrity, and optional
+client authentication to enable secure Internet communications.
+* Simple Authentication and Security Layer (SASL) is an Internet
+standard (RFC 2222) that specifies a protocol for authentication and
+optional establishment of a security layer between client and server
+applications. SASL defines how authentication data is to be exchanged
+but does not itself specify the contents of that data. SASL is a
+framework into which specific authentication mechanisms that specify the
+contents and semantics of the authentication data can fit.
+
+Java SE also provides a set of tools for managing keystores,
+certificates, and policy files; generating and verifying JAR signatures;
+and obtaining, listing, and managing Kerberos tickets.
+
+For more information on Java SE security, visit
+`http://docs.oracle.com/javase/7/docs/technotes/guides/security/`.
+
+[[BNBXA]]
+
+[[java-ee-security-mechanisms]]
+Java EE Security Mechanisms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Java EE security services are provided by the component container and
+can be implemented by using declarative or programmatic techniques (see
+link:security-intro003.html#BNBXE[Securing Containers]). Java EE security
+services provide a robust and easily configured security mechanism for
+authenticating users and authorizing access to application functions and
+associated data at many different layers. Java EE security services are
+separate from the security mechanisms of the operating system.
+
+[[BNBXB]]
+
+[[application-layer-security]]
+Application-Layer Security
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In Java EE, component containers are responsible for providing
+application-layer security, security services for a specific application
+type tailored to the needs of the application. At the application layer,
+application firewalls can be used to enhance application protection by
+protecting the communication stream and all associated application
+resources from attacks.
+
+Java EE security is easy to implement and configure and can offer
+fine-grained access control to application functions and data. However,
+as is inherent to security applied at the application layer, security
+properties are not transferable to applications running in other
+environments and protect data only while it is residing in the
+application environment. In the context of a traditional enterprise
+application, this is not necessarily a problem, but when applied to a
+web services application, in which data often travels across several
+intermediaries, you would need to use the Java EE security mechanisms
+along with transport-layer security and message-layer security for a
+complete security solution.
+
+The advantages of using application-layer security include the
+following.
+
+* Security is uniquely suited to the needs of the application.
+* Security is fine grained, with application-specific settings.
+
+The disadvantages of using application-layer security include the
+following.
+
+* The application is dependent on security attributes that are not
+transferable between application types.
+* Support for multiple protocols makes this type of security vulnerable.
+* Data is close to or contained within the point of vulnerability.
+
+For more information on providing security at the application layer, see
+link:security-intro003.html#BNBXE[Securing Containers].
+
+[[BNBXC]]
+
+[[transport-layer-security]]
+Transport-Layer Security
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Transport-layer security is provided by the transport mechanisms used to
+transmit information over the wire between clients and providers; thus,
+transport-layer security relies on secure HTTP transport (HTTPS) using
+Secure Sockets Layer (SSL). Transport security is a point-to-point
+security mechanism that can be used for authentication, message
+integrity, and confidentiality. When running over an SSL-protected
+session, the server and client can authenticate each other and negotiate
+an encryption algorithm and cryptographic keys before the application
+protocol transmits or receives its first byte of data. Security is
+active from the time the data leaves the client until it arrives at its
+destination, or vice versa, even across intermediaries. The problem is
+that the data is not protected once it gets to the destination. One
+solution is to encrypt the message before sending.
+
+Transport-layer security is performed in a series of phases, as follows.
+
+* The client and server agree on an appropriate algorithm.
+* A key is exchanged using public-key encryption and certificate-based
+authentication.
+* A symmetric cipher is used during the information exchange.
+
+Digital certificates are necessary when running HTTPS using SSL. The
+HTTPS service of most web servers will not run unless a digital
+certificate has been installed. Digital certificates have already been
+created for GlassFish Server.
+
+The advantages of using transport-layer security include the following.
+
+* It is relatively simple, well-understood, standard technology.
+* It applies to both a message body and its attachments.
+
+The disadvantages of using transport-layer security include the
+following.
+
+* It is tightly coupled with the transport-layer protocol.
+* It represents an all-or-nothing approach to security. This implies
+that the security mechanism is unaware of message contents, so that you
+cannot selectively apply security to portions of the message as you can
+with message-layer security.
+* Protection is transient. The message is protected only while in
+transit. Protection is removed automatically by the endpoint when it
+receives the message.
+* It is not an end-to-end solution, simply point-to-point.
+
+For more information on transport-layer security, see
+link:security-intro006.html#BNBXW[Establishing a Secure Connection Using
+SSL].
+
+[[BNBXD]]
+
+[[message-layer-security]]
+Message-Layer Security
+^^^^^^^^^^^^^^^^^^^^^^
+
+In message-layer security, security information is contained within the
+SOAP message and/or SOAP message attachment, which allows security
+information to travel along with the message or attachment. For example,
+a portion of the message may be signed by a sender and encrypted for a
+particular receiver. When sent from the initial sender, the message may
+pass through intermediate nodes before reaching its intended receiver.
+In this scenario, the encrypted portions continue to be opaque to any
+intermediate nodes and can be decrypted only by the intended receiver.
+For this reason, message-layer security is also sometimes referred to as
+end-to-end security.
+
+The advantages of message-layer security include the following.
+
+* Security stays with the message over all hops and after the message
+arrives at its destination.
+* Security can be selectively applied to different portions of a message
+and, if using XML Web Services Security, to attachments.
+* Message security can be used with intermediaries over multiple hops.
+* Message security is independent of the application environment or
+transport protocol.
+
+The disadvantage of using message-layer security is that it is
+relatively complex and adds some overhead to processing.
+
+GlassFish Server supports message security using Metro, a web services
+stack that uses Web Services Security (WSS) to secure messages. Because
+this message security is specific to Metro and is not a part of the Java
+EE platform, this tutorial does not discuss using WSS to secure
+messages. See the Metro User's Guide at `https://metro.java.net/guide/`.
+
+

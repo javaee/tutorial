@@ -1,0 +1,88 @@
+type=page
+status=published
+title=Character Sets and Encodings
+next=partbeanvalidation.html
+prev=webi18n003.html
+~~~~~~
+Character Sets and Encodings
+============================
+
+[[BNAYB]]
+
+[[character-sets-and-encodings]]
+Character Sets and Encodings
+----------------------------
+
+The following sections describe character sets and character encodings.
+
+The following topics are addressed here:
+
+* link:#BNAYC[Character Sets]
+* link:#BNAYD[Character Encoding]
+
+[[BNAYC]]
+
+[[character-sets]]
+Character Sets
+~~~~~~~~~~~~~~
+
+A character set is a set of textual and graphic symbols, each of which
+is mapped to a set of nonnegative integers.
+
+The first character set used in computing was US-ASCII. It is limited in
+that it can represent only American English. US-ASCII contains uppercase
+and lowercase Latin alphabets, numerals, punctuation, a set of control
+codes, and a few miscellaneous symbols.
+
+Unicode defines a standardized, universal character set that can be
+extended to accommodate additions. When the Java program source file
+encoding doesn't support Unicode, you can represent Unicode characters
+as escape sequences by using the notation `\u`XXXX, where XXXX is the
+character's 16-bit representation in hexadecimal. For example, the
+Spanish version of a message file could use Unicode for non-ASCII
+characters, as follows:
+
+[source,oac_no_warn]
+----
+admin.nav.main=P\u00e1gina principal de administraci\u00f3n
+----
+
+[[BNAYD]]
+
+[[character-encoding]]
+Character Encoding
+~~~~~~~~~~~~~~~~~~
+
+A character encoding maps a character set to units of a specific width
+and defines byte serialization and ordering rules. Many character sets
+have more than one encoding. For example, Java programs can represent
+Japanese character sets using the `EUC-JP` or `Shift-JIS` encodings,
+among others. Each encoding has rules for representing and serializing a
+character set.
+
+The ISO 8859 series defines 13 character encodings that can represent
+texts in dozens of languages. Each ISO 8859 character encoding can have
+up to 256 characters. ISO-8859-1 (Latin-1) comprises the ASCII character
+set, characters with diacritics (accents, diaereses, cedillas,
+circumflexes, and so on), and additional symbols.
+
+UTF-8 (Unicode Transformation Format, 8-bit form) is a variable-width
+character encoding that encodes 16-bit Unicode characters as one to four
+bytes. A byte in UTF-8 is equivalent to 7-bit ASCII if its high-order
+bit is zero; otherwise, the character comprises a variable number of
+bytes.
+
+UTF-8 is compatible with the majority of existing web content and
+provides access to the Unicode character set. Current versions of
+browsers and email clients support UTF-8. In addition, many web
+standards specify UTF-8 as their character encoding. For example, UTF-8
+is one of the two required encodings for XML documents (the other is
+UTF-16).
+
+Web components usually use `PrintWriter` to produce responses;
+`PrintWriter` automatically encodes using ISO-8859-1. Servlets can also
+output binary data using `OutputStream` classes, which perform no
+encoding. An application that uses a character set that cannot use the
+default encoding must explicitly set a different encoding.
+
+

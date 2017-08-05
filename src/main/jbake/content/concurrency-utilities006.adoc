@@ -1,0 +1,209 @@
+type=page
+status=published
+title=The taskcreator Concurrency Example
+next=concurrency-utilities007.html
+prev=concurrency-utilities005.html
+~~~~~~
+The taskcreator Concurrency Example
+===================================
+
+[[CIHBFEAE]]
+
+[[the-taskcreator-concurrency-example]]
+The taskcreator Concurrency Example
+-----------------------------------
+
+The `taskcreator` example demonstrates how to use Concurrency Utilities
+for Java EE to run tasks immediately, periodically, or after a fixed
+delay. This example provides a JavaServer Faces interface that enables
+users to submit tasks to be executed and displays information messages
+for each task. The example uses the Managed Executor Service to run
+tasks immediately and the Managed Scheduled Executor Service to run
+tasks periodically or after a fixed delay. (See
+link:concurrency-utilities002.html#CIHFBCFH[Main Components of the
+Concurrency Utilities] for information about these services.)
+
+The `taskcreator` example consists of the following components.
+
+* A JavaServer Faces page (`index.xhtml`) that contains three elements:
+a form to submit tasks, a task execution log, and a form to cancel
+periodic tasks. This page submits Ajax requests to create and cancel
+tasks. This page also receives WebSocket messages, using JavaScript code
+to update the task execution log.
+* A CDI managed bean (`TaskCreatorBean`) that processes the requests
+from the JavaServer Faces page. This bean invokes the methods in
+`TaskEJB` to submit new tasks and to cancel periodic tasks.
+* An enterprise bean (`TaskEJB`) that obtains executor service instances
+using resource injection and submits tasks for execution. This bean is
+also a JAX-RS web service endpoint. The tasks send information messages
+to this endpoint.
+* A WebSocket endpoint (`InfoEndpoint`) that the enterprise bean uses to
+send information messages to the clients.
+* A task class (`Task`) that implements the `Runnable` interface. The
+`run` method in this class sends information messages to the web service
+endpoint in `TaskEJB` and sleeps for 1.5 seconds.
+
+link:#CIHHACFF[Figure 57-1] shows the architecture of the `taskcreator`
+example.
+
+[[CIHHACFF]]
+
+.*Figure 57-1 Architecture of the taskcreator Example*
+image:img/javaeett_dt_060.png[
+"The figure shows the architecture of the taskcreator example. The
+JavaServer Faces page invokes methods on a CDI-managed bean, which
+submits task initiation requests to an enterprise bean. The enterprise
+bean uses a WebSocket endpoint to indicate to clients that an updated
+task execution log is available."]
+
+The `TaskEJB` class obtains the default executor service objects from
+the application server as follows:
+
+[source,oac_no_warn]
+----
+@Resource(name="java:comp/DefaultManagedExecutorService")
+ManagedExecutorService mExecService;
+
+@Resource(name="java:comp/DefaultManagedScheduledExecutorService")
+ManagedScheduledExecutorService sExecService;
+----
+
+The `submitTask` method in `TaskEJB` uses these objects to submit tasks
+for execution as follows:
+
+[source,oac_no_warn]
+----
+public void submitTask(Task task, String type) {
+    /* Use the managed executor objects from the app server */
+    switch (type) {
+        case "IMMEDIATE":
+            mExecService.submit(task);
+            break;
+        case "DELAYED":
+            sExecService.schedule(task, 3, TimeUnit.SECONDS);
+            break;
+        case "PERIODIC":
+            ScheduledFuture<?> fut;
+            fut = sExecService.scheduleAtFixedRate(task, 0, 8, 
+                    TimeUnit.SECONDS);
+            periodicTasks.put(task.getName(), fut);
+            break;
+    }
+}
+----
+
+For periodic tasks, `TaskEJB` keeps a reference to the `ScheduledFuture`
+object, so that the user can cancel the task at any time.
+
+[[sthref296]]
+
+[[running-the-taskcreator-example]]
+Running the taskcreator Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section describes how to build, package, deploy, and run the
+`taskcreator` example using NetBeans IDE or Maven.
+
+The following topics are addressed here:
+
+* link:#CHDCCJHB[To Build, Package, and Deploy the taskcreator Example
+Using NetBeans IDE]
+* link:#CHDHJBDD[To Build, Package, and Deploy the taskcreator Example
+Using Maven]
+* link:#CHDBJGID[To Run the taskcreator Example]
+
+[[CHDCCJHB]]
+
+[[to-build-package-and-deploy-the-taskcreator-example-using-netbeans-ide]]
+To Build, Package, and Deploy the taskcreator Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/concurrency
+----
+4.  Select the `taskcreator` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `taskcreator` project and
+select Build.
++
+This command builds and deploys the application.
+
+[[CHDHJBDD]]
+
+[[to-build-package-and-deploy-the-taskcreator-example-using-maven]]
+To Build, Package, and Deploy the taskcreator Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/concurrency/taskcreator
+----
+3.  Enter the following command to build and deploy the application:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+
+[[CHDBJGID]]
+
+[[to-run-the-taskcreator-example]]
+To Run the taskcreator Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Open the following URL in a web browser:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/taskcreator/
+----
++
+The page contains a form to submit tasks, a task execution log, and a
+form to cancel periodic tasks.
+2.  Select the Immediate task type, enter a task name, and click the
+Submit button. Messages like the following appear in the task execution
+log:
++
+[source,oac_no_warn]
+----
+12:40:47 - IMMEDIATE Task TaskA finished
+12:40:45 - IMMEDIATE Task TaskA started
+----
+3.  Select the Delayed (3 sec) task type, enter a task name, and click
+the Submit button. Messages like the following appear in the task
+execution log:
++
+[source,oac_no_warn]
+----
+12:43:26 - DELAYED Task TaskB finished
+12:43:25 - DELAYED Task TaskB started
+12:43:22 - DELAYED Task TaskB submitted
+----
+4.  Select the Periodic (8 sec) task type, enter a task name, and click
+the Submit button. Messages like the following appear in the task
+execution log:
++
+[source,oac_no_warn]
+----
+12:45:25 - PERIODIC Task TaskC finished run #2
+12:45:23 - PERIODIC Task TaskC started run #2
+12:45:17 - PERIODIC Task TaskC finished run #1
+12:45:15 - PERIODIC Task TaskC started run #1
+----
++
+You can add more than one periodic task. To cancel a periodic task,
+select it from the form and click Cancel Task.
+
+

@@ -1,0 +1,104 @@
+type=page
+status=published
+title=Web Services Support
+next=overview007.html
+prev=overview005.html
+~~~~~~
+Web Services Support
+====================
+
+[[BNABS]]
+
+[[web-services-support]]
+Web Services Support
+--------------------
+
+Web services are web-based enterprise applications that use open,
+XML-based standards and transport protocols to exchange data with
+calling clients. The Java EE platform provides the XML APIs and tools
+you need to quickly design, develop, test, and deploy web services and
+clients that fully interoperate with other web services and clients
+running on Java-based or non-Java-based platforms.
+
+To write web services and clients with the Java EE XML APIs, all you
+need to do is pass parameter data to the method calls and process the
+data returned; for document-oriented web services, you send documents
+containing the service data back and forth. No low-level programming is
+needed because the XML API implementations do the work of translating
+the application data to and from an XML-based data stream that is sent
+over the standardized XML-based transport protocols. These XML-based
+standards and protocols are introduced in the following sections.
+
+The translation of data to a standardized XML-based data stream is what
+makes web services and clients written with the Java EE XML APIs fully
+interoperable. This does not necessarily mean that the data being
+transported includes XML tags, because the transported data can itself
+be plain text, XML data, or any kind of binary data, such as audio,
+video, maps, program files, computer-aided design (CAD) documents, and
+the like. The next section introduces XML and explains how parties doing
+business can use XML tags and schemas to exchange data in a meaningful
+way.
+
+[[BNABT]]
+
+[[xml]]
+XML
+~~~
+
+Extensible Markup Language (XML) is a cross-platform, extensible,
+text-based standard for representing data. Parties that exchange XML
+data can create their own tags to describe the data, set up schemas to
+specify which tags can be used in a particular kind of XML document, and
+use XML style sheets to manage the display and handling of the data.
+
+For example, a web service can use XML and a schema to produce price
+lists, and companies that receive the price lists and schema can have
+their own style sheets to handle the data in a way that best suits their
+needs. Here are examples.
+
+* One company might put XML pricing information through a program to
+translate the XML into HTML so that it can post the price lists to its
+intranet.
+* A partner company might put the XML pricing information through a tool
+to create a marketing presentation.
+* Another company might read the XML pricing information into an
+application for processing.
+
+[[BNABU]]
+
+[[soap-transport-protocol]]
+SOAP Transport Protocol
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Client requests and web service responses are transmitted as Simple
+Object Access Protocol (SOAP) messages over HTTP to enable a completely
+interoperable exchange between clients and web services, all running on
+different platforms and at various locations on the Internet. HTTP is a
+familiar request-and-response standard for sending messages over the
+Internet, and SOAP is an XML-based protocol that follows the HTTP
+request-and-response model.
+
+The SOAP portion of a transported message does the following:
+
+* Defines an XML-based envelope to describe what is in the message and
+explain how to process the message
+* Includes XML-based encoding rules to express instances of
+application-defined data types within the message
+* Defines an XML-based convention for representing the request to the
+remote service and the resulting response
+
+[[BNABV]]
+
+[[wsdl-standard-format]]
+WSDL Standard Format
+~~~~~~~~~~~~~~~~~~~~
+
+The Web Services Description Language (WSDL) is a standardized XML
+format for describing network services. The description includes the
+name of the service, the location of the service, and ways to
+communicate with the service. WSDL service descriptions can be published
+on the Web. GlassFish Server provides a tool for generating the WSDL
+specification of a web service that uses remote procedure calls to
+communicate with clients.
+
+

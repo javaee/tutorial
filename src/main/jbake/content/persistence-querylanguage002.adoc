@@ -1,0 +1,41 @@
+type=page
+status=published
+title=Query Language Terminology
+next=persistence-querylanguage003.html
+prev=persistence-querylanguage001.html
+~~~~~~
+Query Language Terminology
+==========================
+
+[[BNBTH]]
+
+[[query-language-terminology]]
+Query Language Terminology
+--------------------------
+
+The following list defines some of the terms referred to in this
+chapter.
+
+* Abstract schema: The persistent schema abstraction (persistent
+entities, their state, and their relationships) over which queries
+operate. The query language translates queries over this persistent
+schema abstraction into queries that are executed over the database
+schema to which entities are mapped.
+* Abstract schema type: The type to which the persistent property of an
+entity evaluates in the abstract schema. That is, each persistent field
+or property in an entity has a corresponding state field of the same
+type in the abstract schema. The abstract schema type of an entity is
+derived from the entity class and the metadata information provided by
+Java language annotations.
+* Backus-Naur Form (BNF): A notation that describes the syntax of
+high-level languages. The syntax diagrams in this chapter are in BNF
+notation.
+* Navigation: The traversal of relationships in a query language
+expression. The navigation operator is a period.
+* Path expression: An expression that navigates to an entity's state or
+relationship field.
+* State field: A persistent field of an entity.
+* Relationship field: A persistent field of an entity whose type is the
+abstract schema type of the related entity.
+
+

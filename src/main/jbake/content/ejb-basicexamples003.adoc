@@ -1,0 +1,529 @@
+type=page
+status=published
+title=A Singleton Session Bean Example: counter
+next=ejb-basicexamples004.html
+prev=ejb-basicexamples002.html
+~~~~~~
+A Singleton Session Bean Example: counter
+=========================================
+
+[[GIPVI]]
+
+[[a-singleton-session-bean-example-counter]]
+A Singleton Session Bean Example: counter
+-----------------------------------------
+
+The `counter` example demonstrates how to create a singleton session
+bean.
+
+The following topics are addressed here:
+
+* link:#GIPVC[Creating a Singleton Session Bean]
+* link:#GIPXL[The Architecture of the counter Example]
+* link:#GIPVL[Running the counter Example]
+
+[[GIPVC]]
+
+[[creating-a-singleton-session-bean]]
+Creating a Singleton Session Bean
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `javax.ejb.Singleton` annotation is used to specify that the
+enterprise bean implementation class is a singleton session bean:
+
+[source,oac_no_warn]
+----
+@Singleton
+public class SingletonBean { ... }
+----
+
+[[GIPPQ]]
+
+[[initializing-singleton-session-beans]]
+Initializing Singleton Session Beans
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The EJB container is responsible for determining when to initialize a
+singleton session bean instance unless the singleton session bean
+implementation class is annotated with the `javax.ejb.Startup`
+annotation. In this case, sometimes called eager initialization, the EJB
+container must initialize the singleton session bean upon application
+startup. The singleton session bean is initialized before the EJB
+container delivers client requests to any enterprise beans in the
+application. This allows the singleton session bean to perform, for
+example, application startup tasks.
+
+The following singleton session bean stores the status of an application
+and is eagerly initialized:
+
+[source,oac_no_warn]
+----
+@Startup
+@Singleton
+public class StatusBean {
+  private String status;
+
+  @PostConstruct
+  void init {
+    status = "Ready";
+  }
+  ...
+}
+----
+
+Sometimes multiple singleton session beans are used to initialize data
+for an application and therefore must be initialized in a specific
+order. In these cases, use the `javax.ejb.DependsOn` annotation to
+declare the startup dependencies of the singleton session bean. The
+`@DependsOn` annotation's `value` attribute is one or more strings that
+specify the name of the target singleton session bean. If more than one
+dependent singleton bean is specified in `@DependsOn`, the order in
+which they are listed is not necessarily the order in which the EJB
+container will initialize the target singleton session beans.
+
+The following singleton session bean, `PrimaryBean`, should be started
+up first:
+
+[source,oac_no_warn]
+----
+@Singleton
+public class PrimaryBean { ... }
+----
+
+`SecondaryBean` depends on `PrimaryBean`:
+
+[source,oac_no_warn]
+----
+@Singleton
+@DependsOn("PrimaryBean")
+public class SecondaryBean { ... }
+----
+
+This guarantees that the EJB container will initialize `PrimaryBean`
+before `SecondaryBean`.
+
+The following singleton session bean, `TertiaryBean`, depends on
+`PrimaryBean` and `SecondaryBean`:
+
+[source,oac_no_warn]
+----
+@Singleton
+@DependsOn({"PrimaryBean", "SecondaryBean"})
+public class TertiaryBean { ... }
+----
+
+`SecondaryBean` explicitly requires `PrimaryBean` to be initialized
+before it is initialized, through its own `@DependsOn` annotation. In
+this case, the EJB container will first initialize `PrimaryBean`, then
+`SecondaryBean`, and finally `TertiaryBean`.
+
+If, however, `SecondaryBean` did not explicitly depend on `PrimaryBean`,
+the EJB container may initialize either `PrimaryBean` or `SecondaryBean`
+first. That is, the EJB container could initialize the singletons in the
+following order: `SecondaryBean`, `PrimaryBean`, `TertiaryBean`.
+
+[[GIPSZ]]
+
+[[managing-concurrent-access-in-a-singleton-session-bean]]
+Managing Concurrent Access in a Singleton Session Bean
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Singleton session beans are designed for concurrent access, situations
+in which many clients need to access a single instance of a session bean
+at the same time. A singleton's client needs only a reference to a
+singleton in order to invoke any business methods exposed by the
+singleton and doesn't need to worry about any other clients that may be
+simultaneously invoking business methods on the same singleton.
+
+When creating a singleton session bean, concurrent access to the
+singleton's business methods can be controlled in two ways:
+container-managed concurrency and bean-managed concurrency.
+
+The `javax.ejb.ConcurrencyManagement` annotation is used to specify
+container-managed or bean-managed concurrency for the singleton. With
+`@ConcurrencyManagement`, a type attribute must be set to either
+`javax.ejb.ConcurrencyManagementType.CONTAINER` or
+`javax.ejb.ConcurrencyManagementType.BEAN`. If no
+`@ConcurrencyManagement` annotation is present on the singleton
+implementation class, the EJB container default of container-managed
+concurrency is used.
+
+Container-Managed Concurrency
+
+If a singleton uses container-managed concurrency, the EJB container
+controls client access to the business methods of the singleton. The
+`javax.ejb.Lock` annotation and a `javax.ejb.LockType` type are used to
+specify the access level of the singleton's business methods or
+`@Timeout` methods. The `LockType` enumerated types are `READ` and
+`WRITE`.
+
+Annotate a singleton's business or timeout method with
+`@Lock(LockType.READ)` if the method can be concurrently accessed, or
+shared, with many clients. Annotate the business or timeout method with
+`@Lock(LockType.WRITE)` if the singleton session bean should be locked
+to other clients while a client is calling that method. Typically, the
+`@Lock(LockType.WRITE)` annotation is used when clients are modifying
+the state of the singleton.
+
+Annotating a singleton class with `@Lock` specifies that all the
+business methods and any timeout methods of the singleton will use the
+specified lock type unless they explicitly set the lock type with a
+method-level `@Lock` annotation. If no `@Lock` annotation is present on
+the singleton class, the default lock type, `@Lock(LockType.WRITE)`, is
+applied to all business and timeout methods.
+
+The following example shows how to use the `@ConcurrencyManagement`,
+`@Lock(LockType.READ)`, and `@Lock(LockType.WRITE)` annotations for a
+singleton that uses container-managed concurrency.
+
+Although by default singletons use container-managed concurrency, the
+`@ConcurrencyManagement(CONTAINER)` annotation may be added at the class
+level of the singleton to explicitly set the concurrency management
+type:
+
+[source,oac_no_warn]
+----
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER) 
+@Singleton
+public class ExampleSingletonBean {
+  private String state;
+
+  @Lock(LockType.READ)
+  public String getState() {
+    return state;
+  }
+
+  @Lock(LockType.WRITE)
+  public void setState(String newState) {
+    state = newState;
+  }
+}
+----
+
+The `getState` method can be accessed by many clients at the same time
+because it is annotated with `@Lock(LockType.READ)`. When the `setState`
+method is called, however, all the methods in `ExampleSingletonBean`
+will be locked to other clients because `setState` is annotated with
+`@Lock(LockType.WRITE)`. This prevents two clients from attempting to
+simultaneously change the `state` variable of `ExampleSingletonBean`.
+
+The `getData` and `getStatus` methods in the following singleton are of
+type `READ`, and the `setStatus` method is of type `WRITE`:
+
+[source,oac_no_warn]
+----
+@Singleton
+@Lock(LockType.READ)
+public class SharedSingletonBean {
+  private String data;
+  private String status;
+
+  public String getData() {
+    return data;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  @Lock(LockType.WRITE)
+  public void setStatus(String newStatus) {
+    status = newStatus;
+  }
+}
+----
+
+If a method is of locking type `WRITE`, client access to all the
+singleton's methods is blocked until the current client finishes its
+method call or an access timeout occurs. When an access timeout occurs,
+the EJB container throws a `javax.ejb.ConcurrentAccessTimeoutException`.
+The `javax.ejb.AccessTimeout` annotation is used to specify the number
+of milliseconds before an access timeout occurs. If added at the class
+level of a singleton, `@AccessTimeout` specifies the access timeout
+value for all methods in the singleton unless a method explicitly
+overrides the default with its own `@AccessTimeout` annotation.
+
+The `@AccessTimeout` annotation can be applied to both
+`@Lock(LockType.READ)` and `@Lock(LockType.WRITE)` methods. The
+`@AccessTimeout` annotation has one required element, `value`, and one
+optional element, `unit`. By default, the `value` is specified in
+milliseconds. To change the `value` unit, set `unit` to one of the
+`java.util.concurrent.TimeUnit` constants: `NANOSECONDS`,
+`MICROSECONDS`, `MILLISECONDS`, or `SECONDS`.
+
+The following singleton has a default access timeout value of 120,000
+milliseconds, or 2 minutes. The `doTediousOperation` method overrides
+the default access timeout and sets the value to 360,000 milliseconds,
+or 6 minutes:
+
+[source,oac_no_warn]
+----
+@Singleton
+@AccessTimeout(value=120000)
+public class StatusSingletonBean {
+  private String status;
+
+  @Lock(LockType.WRITE)
+  public void setStatus(String new Status) {
+    status = newStatus;
+  }
+
+  @Lock(LockType.WRITE)
+  @AccessTimeout(value=360000)
+  public void doTediousOperation {
+    ...
+  }
+}
+----
+
+The following singleton has a default access timeout value of 60
+seconds, specified using the `TimeUnit.SECONDS` constant:
+
+[source,oac_no_warn]
+----
+@Singleton
+@AccessTimeout(value=60, unit=TimeUnit.SECONDS)
+public class StatusSingletonBean { ... }
+----
+
+Bean-Managed Concurrency
+
+Singletons that use bean-managed concurrency allow full concurrent
+access to all the business and timeout methods in the singleton. The
+developer of the singleton is responsible for ensuring that the state of
+the singleton is synchronized across all clients. Developers who create
+singletons with bean-managed concurrency are allowed to use the Java
+programming language synchronization primitives, such as
+`synchronization` and `volatile`, to prevent errors during concurrent
+access.
+
+Add a `@ConcurrencyManagement` annotation with the type set to
+`ConcurrencyManagementType.BEAN` at the class level of the singleton to
+specify bean-managed concurrency:
+
+[source,oac_no_warn]
+----
+@ConcurrencyManagement(ConcurrencyManagementType.BEAN) 
+@Singleton
+public class AnotherSingletonBean { ... }
+----
+
+[[GIPVD]]
+
+[[handling-errors-in-a-singleton-session-bean]]
+Handling Errors in a Singleton Session Bean
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If a singleton session bean encounters an error when initialized by the
+EJB container, that singleton instance will be destroyed.
+
+Unlike other enterprise beans, once a singleton session bean instance is
+initialized, it is not destroyed if the singleton's business or
+lifecycle methods cause system exceptions. This ensures that the same
+singleton instance is used throughout the application lifecycle.
+
+[[GIPXL]]
+
+[[the-architecture-of-the-counter-example]]
+The Architecture of the counter Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `counter` example consists of a singleton session bean,
+`CounterBean`, and a JavaServer Faces Facelets web front end.
+
+`CounterBean` is a simple singleton with one method, `getHits`, that
+returns an integer representing the number of times a web page has been
+accessed. Here is the code of `CounterBean`:
+
+[source,oac_no_warn]
+----
+package javaeetutorial.counter.ejb;
+
+import javax.ejb.Singleton;
+
+/**
+ * CounterBean is a simple singleton session bean that records the number
+ * of hits to a web page.
+ */
+@Singleton
+public class CounterBean {
+    private int hits = 1;
+
+    // Increment and return the number of hits
+    public int getHits() {
+        return hits++;
+    }
+}
+----
+
+The `@Singleton` annotation marks `CounterBean` as a singleton session
+bean. `CounterBean` uses a local, no-interface view.
+
+`CounterBean` uses the EJB container's default metadata values for
+singletons to simplify the coding of the singleton implementation class.
+There is no `@ConcurrencyManagement` annotation on the class, so the
+default of container-managed concurrency access is applied. There is no
+`@Lock` annotation on the class or business method, so the default of
+`@Lock(WRITE)` is applied to the only business method, `getHits`.
+
+The following version of `CounterBean` is functionally equivalent to the
+preceding version:
+
+[source,oac_no_warn]
+----
+package javaeetutorial.counter.ejb;
+
+import javax.ejb.Singleton;
+import javax.ejb.ConcurrencyManagement;
+import static javax.ejb.ConcurrencyManagementType.CONTAINER;
+import javax.ejb.Lock;
+import javax.ejb.LockType.WRITE;
+
+/**
+ * CounterBean is a simple singleton session bean that records the number
+ * of hits to a web page.
+ */
+@Singleton
+@ConcurrencyManagement(CONTAINER)
+public class CounterBean {
+    private int hits = 1;
+
+    // Increment and return the number of hits
+    @Lock(WRITE)
+    public int getHits() {
+        return hits++;
+    }
+}
+----
+
+The web front end of `counter` consists of a JavaServer Faces managed
+bean, `Count.java`, that is used by the Facelets XHTML files
+`template.xhtml` and `index.xhtml`. The `Count` JavaServer Faces managed
+bean obtains a reference to `CounterBean` through dependency injection.
+`Count` defines a `hitCount` JavaBeans property. When the `getHitCount`
+getter method is called from the XHTML files, `CounterBean`'s `getHits`
+method is called to return the current number of page hits.
+
+Here's the `Count` managed bean class:
+
+[source,oac_no_warn]
+----
+@Named
+@ConversationScoped
+public class Count implements Serializable {
+    @EJB
+    private CounterBean counterBean;
+
+    private int hitCount;
+
+    public Count() {
+        this.hitCount = 0;
+    }
+
+    public int getHitCount() {
+        hitCount = counterBean.getHits();
+        return hitCount;
+    }
+
+    public void setHitCount(int newHits) {
+        this.hitCount = newHits;
+    }
+}
+----
+
+The `template.xhtml` and `index.xhtml` files are used to render a
+Facelets view that displays the number of hits to that view. The
+`index.xhtml` file uses an expression language statement,
+`#{count.hitCount}`, to access the `hitCount` property of the `Count`
+managed bean. Here is the content of `index.xhtml`:
+
+[source,oac_no_warn]
+----
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            This page has been accessed #{count.hitCount} time(s).
+        </ui:define>
+        <ui:define name="body">
+            Hooray!
+        </ui:define>
+    </ui:composition>
+</html>
+----
+
+[[GIPVL]]
+
+[[running-the-counter-example]]
+Running the counter Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the `counter` example.
+
+The following topics are addressed here:
+
+The following topics are addressed here:
+
+* link:#GIPXT[To Run the counter Example Using NetBeans IDE]
+* link:#GIPZW[To Run the counter Example Using Maven]
+
+[[GIPXT]]
+
+[[to-run-the-counter-example-using-netbeans-ide]]
+To Run the counter Example Using NetBeans IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb
+----
+4.  Select the `counter` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `counter` project and select
+Run.
++
+A web browser will open the URL `http://localhost:8080/counter`, which
+displays the number of hits.
+7.  Reload the page to see the hit count increment.
+
+[[GIPZW]]
+
+[[to-run-the-counter-example-using-maven]]
+To Run the counter Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb/counter/
+----
+3.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This will build and deploy `counter` to your GlassFish Server instance.
+4.  In a web browser, enter the following URL:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/counter
+----
+5.  Reload the page to see the hit count increment.
+
+

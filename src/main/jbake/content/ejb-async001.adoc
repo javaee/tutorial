@@ -1,0 +1,185 @@
+type=page
+status=published
+title=Asynchronous Method Invocation
+next=ejb-async002.html
+prev=ejb-async.html
+~~~~~~
+Asynchronous Method Invocation
+==============================
+
+[[GKKQG]]
+
+[[asynchronous-method-invocation]]
+Asynchronous Method Invocation
+------------------------------
+
+Session beans can implement asynchronous methods, business methods where
+control is returned to the client by the enterprise bean container
+before the method is invoked on the session bean instance. Clients may
+then use the Java SE concurrency API to retrieve the result, cancel the
+invocation, and check for exceptions. Asynchronous methods are typically
+used for long-running operations, for processor-intensive tasks, for
+background tasks, to increase application throughput, or to improve
+application response time if the method invocation result isn't required
+immediately.
+
+When a session bean client invokes a typical non-asynchronous business
+method, control is not returned to the client until the method has
+completed. Clients calling asynchronous methods, however, immediately
+have control returned to them by the enterprise bean container. This
+allows the client to perform other tasks while the method invocation
+completes. If the method returns a result, the result is an
+implementation of the `java.util.concurrent.Future<V>` interface, where
+"V" is the result value type. The `Future<V>` interface defines methods
+the client may use to check whether the computation is completed, wait
+for the invocation to complete, retrieve the final result, and cancel
+the invocation.
+
+[[GKIFJ]]
+
+[[creating-an-asynchronous-business-method]]
+Creating an Asynchronous Business Method
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Annotate a business method with `javax.ejb.Asynchronous` to mark that
+method as an asynchronous method, or apply `@Asynchronous` at the class
+level to mark all the business methods of the session bean as
+asynchronous methods. Session bean methods that expose web services
+can't be asynchronous.
+
+Asynchronous methods must return either `void` or an implementation of
+the `Future<V>` interface. Asynchronous methods that return `void` can't
+declare application exceptions, but if they return `Future<V>`, they may
+declare application exceptions. For example:
+
+[source,oac_no_warn]
+----
+@Asynchronous
+public Future<String> processPayment(Order order) throws PaymentException { ... }
+----
+
+This method will attempt to process the payment of an order, and return
+the status as a `String`. Even if the payment processor takes a long
+time, the client can continue working, and display the result when the
+processing finally completes.
+
+The `javax.ejb.AsyncResult<V>` class is a concrete implementation of the
+`Future<V>` interface provided as a helper class for returning
+asynchronous results. `AsyncResult` has a constructor with the result as
+a parameter, making it easy to create `Future<V>` implementations. For
+example, the `processPayment` method would use `AsyncResult` to return
+the status as a `String`:
+
+[source,oac_no_warn]
+----
+@Asynchronous
+public Future<String> processPayment(Order order) throws PaymentException {
+    ...
+    String status = ...;
+    return new AsyncResult<String>(status);
+}
+----
+
+The result is returned to the enterprise bean container, not directly to
+the client, and the enterprise bean container makes the result available
+to the client. The session bean can check whether the client requested
+that the invocation be cancelled by calling the
+`javax.ejb.SessionContext.wasCancelled` method. For example:
+
+[source,oac_no_warn]
+----
+@Asynchronous
+public Future<String> processPayment(Order order) throws PaymentException {
+    ...
+    if (SessionContext.wasCancelled()) {
+        // clean up
+    } else {
+        // process the payment
+    }
+    ...
+}
+----
+
+[[GKIEM]]
+
+[[calling-asynchronous-methods-from-enterprise-bean-clients]]
+Calling Asynchronous Methods from Enterprise Bean Clients
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Session bean clients call asynchronous methods just like
+non-asynchronous business methods. If the asynchronous method returns a
+result, the client receives a `Future<V>` instance as soon as the method
+is invoked. This instance can be used to retrieve the final result,
+cancel the invocation, check whether the invocation has completed, check
+whether any exceptions were thrown during processing, and check whether
+the invocation was cancelled.
+
+[[GKICM]]
+
+[[retrieving-the-final-result-from-an-asynchronous-method-invocation]]
+Retrieving the Final Result from an Asynchronous Method Invocation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The client may retrieve the result using one of the `Future<V>.get`
+methods. If processing hasn't been completed by the session bean
+handling the invocation, calling one of the `get` methods will result in
+the client halting execution until the invocation completes. Use the
+`Future<V>.isDone` method to determine whether processing has completed
+before calling one of the `get` methods.
+
+The `get()` method returns the result as the type specified in the type
+value of the `Future<V>` instance. For example, calling
+`Future<String>.get()` will return a `String` object. If the method
+invocation was cancelled, calls to `get()` result in a
+`java.util.concurrent.CancellationException` being thrown. If the
+invocation resulted in an exception during processing by the session
+bean, calls to `get()` result in a
+`java.util.concurrent.ExecutionException` being thrown. The cause of the
+`ExecutionException` may be retrieved by calling the
+`ExecutionException.getCause` method.
+
+The `get(long timeout, java.util.concurrent.TimeUnit unit)` method is
+similar to the `get()` method, but allows the client to set a timeout
+value. If the timeout value is exceeded, a
+`java.util.concurrent.TimeoutException` is thrown. See the Javadoc for
+the `TimeUnit` class for the available units of time to specify the
+timeout value.
+
+[[GKIDB]]
+
+[[cancelling-an-asynchronous-method-invocation]]
+Cancelling an Asynchronous Method Invocation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Call the `cancel(boolean mayInterruptIfRunning)` method on the
+`Future<V>` instance to attempt to cancel the method invocation. The
+`cancel` method returns `true` if the cancellation was successful and
+`false` if the method invocation cannot be cancelled.
+
+When the invocation cannot be cancelled, the `mayInterruptIfRunning`
+parameter is used to alert the session bean instance on which the method
+invocation is running that the client attempted to cancel the
+invocation. If `mayInterruptIfRunning` is set to `true`, calls to
+`SessionContext.wasCancelled` by the session bean instance will return
+`true`. If `mayInterruptIfRunning` is to set `false`, calls to
+`SessionContext.wasCancelled` by the session bean instance will return
+`false`.
+
+The `Future<V>.isCancelled` method is used to check whether the method
+invocation was cancelled before the asynchronous method invocation
+completed by calling `Future<V>.cancel`. The `isCancelled` method
+returns `true` if the invocation was cancelled.
+
+[[GKIEV]]
+
+[[checking-the-status-of-an-asynchronous-method-invocation]]
+Checking the Status of an Asynchronous Method Invocation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `Future<V>.isDone` method returns `true` if the session bean
+instance completed processing the method invocation. The `isDone` method
+returns `true` if the asynchronous method invocation completed normally,
+was cancelled, or resulted in an exception. That is, `isDone` indicates
+only whether the session bean has completed processing the invocation.
+
+

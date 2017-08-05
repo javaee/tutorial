@@ -1,0 +1,27 @@
+type=page
+status=published
+title=Platform Basics
+next=resource-creation.html
+prev=usingexamples009.html
+~~~~~~
+Platform Basics
+===============
+
+[[GFIRP2]][[JEETT1358]]
+
+[[part-ii]]
+Part II +
+---------
+
+[[platform-basics]]
+Platform Basics
+---------------
+
+Part II introduces platform basics. This part contains the following
+chapters:
+
+* link:resource-creation.html#GKJIQ2[Chapter 3, "Resource Creation"]
+* link:injection.html#GKJIQ3[Chapter 4, "Injection"]
+* link:packaging.html#GKJIQ4[Chapter 5, "Packaging"]
+
+

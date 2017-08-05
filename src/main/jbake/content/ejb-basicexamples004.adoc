@@ -1,0 +1,209 @@
+type=page
+status=published
+title=A Web Service Example: helloservice
+next=ejb-basicexamples005.html
+prev=ejb-basicexamples003.html
+~~~~~~
+A Web Service Example: helloservice
+===================================
+
+[[BNBOR]]
+
+[[a-web-service-example-helloservice]]
+A Web Service Example: helloservice
+-----------------------------------
+
+This example demonstrates a simple web service that generates a response
+based on information received from the client. `HelloServiceBean` is a
+stateless session bean that implements a single method: `sayHello`. This
+method matches the `sayHello` method invoked by the client described in
+link:jaxws002.html#BNAYX[A Simple JAX-WS Application Client].
+
+The following topics are addressed here:
+
+* link:#BNBOS[The Web Service Endpoint Implementation Class]
+* link:#BNBOT[Stateless Session Bean Implementation Class]
+* link:#BNBOU[Running the helloservice Example]
+
+[[BNBOS]]
+
+[[the-web-service-endpoint-implementation-class]]
+The Web Service Endpoint Implementation Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`HelloServiceBean` is the endpoint implementation class, typically the
+primary programming artifact for enterprise bean web service endpoints.
+The web service endpoint implementation class has the following
+requirements.
+
+* The class must be annotated with either the `javax.jws.WebService` or
+the `javax.jws.WebServiceProvider` annotation.
+* The implementing class may explicitly reference an SEI through the
+`endpointInterface` element of the `@WebService` annotation but is not
+required to do so. If no `endpointInterface` is specified in
+`@WebService`, an SEI is implicitly defined for the implementing class.
+* The business methods of the implementing class must be public and must
+not be declared `static` or `final`.
+* Business methods that are exposed to web service clients must be
+annotated with `javax.jws.WebMethod`.
+* Business methods that are exposed to web service clients must have
+JAXB-compatible parameters and return types. See the list of JAXB
+default data type bindings at link:jaxws003.html#BNAZC[Types Supported by
+JAX-WS].
+* The implementing class must not be declared `final` and must not be
+`abstract`.
+* The implementing class must have a default public constructor.
+* The endpoint class must be annotated `@Stateless`.
+* The implementing class must not define the `finalize` method.
+* The implementing class may use the `javax.annotation.PostConstruct` or
+`javax.annotation.PreDestroy` annotations on its methods for lifecycle
+event callbacks.
++
+The `@PostConstruct` method is called by the container before the
+implementing class begins responding to web service clients.
++
+The `@PreDestroy` method is called by the container before the endpoint
+is removed from operation.
+
+[[BNBOT]]
+
+[[stateless-session-bean-implementation-class]]
+Stateless Session Bean Implementation Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `HelloServiceBean` class implements the `sayHello` method, which is
+annotated `@WebMethod`. The source code for the `HelloServiceBean` class
+is as follows:
+
+[source,oac_no_warn]
+----
+package javaeetutorial.helloservice.ejb;
+
+import javax.ejb.Stateless;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
+@Stateless
+@WebService
+public class HelloServiceBean {
+    private final String message = "Hello, ";
+
+    public void HelloServiceBean() {}
+
+    @WebMethod
+    public String sayHello(String name) {
+        return message + name + ".";
+    }
+}
+----
+
+[[BNBOU]]
+
+[[running-the-helloservice-example]]
+Running the helloservice Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use either NetBeans IDE or Maven to build, package, and deploy
+the `helloservice` example. You can then use the Administration Console
+to test the web service endpoint methods.
+
+The following topics are addressed here:
+
+* link:#BNBOV[To Build, Package, and Deploy the helloservice Example
+Using NetBeans IDE]
+* link:#BNBOW[To Build, Package, and Deploy the helloservice Example
+Using Maven]
+* link:#BNBOX[To Test the Service without a Client]
+
+[[BNBOV]]
+
+[[to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide]]
+To Build, Package, and Deploy the helloservice Example Using NetBeans
+IDE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  From the File menu, choose Open Project.
+3.  In the Open Project dialog box, navigate to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb
+----
+4.  Select the `helloservice` folder.
+5.  Click Open Project.
+6.  In the Projects tab, right-click the `helloservice` project and
+select Build.
++
+This builds and packages the application into `helloservice.ear`,
+located in tut-install`/examples/ejb/helloservice/target/`, and deploys
+this EAR file to GlassFish Server.
+
+[[BNBOW]]
+
+[[to-build-package-and-deploy-the-helloservice-example-using-maven]]
+To Build, Package, and Deploy the helloservice Example Using Maven
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/ejb/helloservice/
+----
+3.  Enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
++
+This compiles the source files and packages the application into an EJB
+JAR file located at
+tut-install`/examples/ejb/helloservice/target/helloservice.jar`. Then
+the EJB JAR file is deployed to GlassFish Server.
++
+Upon deployment, GlassFish Server generates additional artifacts
+required for web service invocation, including the WSDL file.
+
+[[BNBOX]]
+
+[[to-test-the-service-without-a-client]]
+To Test the Service without a Client
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The GlassFish Server Administration Console allows you to test the
+methods of a web service endpoint. To test the `sayHello` method of
+`HelloServiceBean`, follow these steps.
+
+1.  Open the Administration Console by opening the following URL in a
+web browser:
++
+[source,oac_no_warn]
+----
+http://localhost:4848/
+----
+2.  In the navigation tree, select the Applications node.
+3.  In the Applications table, click the `helloservice` link.
+4.  In the Modules and Components table, click the View Endpoint link.
+5.  On the Web Service Endpoint Information page, click the Tester link:
++
+[source,oac_no_warn]
+----
+/HelloServiceBeanService/HelloServiceBean?Tester
+----
+6.  On the Web Service Test Links page, click the non-secure link (the
+one that specifies port 8080).
+7.  On the HelloServiceBeanService Web Service Tester page, under
+Methods, enter a name as the parameter to the `sayHello` method.
+8.  Click sayHello.
++
+The sayHello Method invocation page opens. Under Method returned, you'll
+see the response from the endpoint.
+
+

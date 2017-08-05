@@ -1,0 +1,35 @@
+type=page
+status=published
+title=Using Default Validators
+next=jsf-configure008.html
+prev=jsf-configure006.html
+~~~~~~
+Using Default Validators
+========================
+
+[[GIREB]]
+
+[[using-default-validators]]
+Using Default Validators
+------------------------
+
+In addition to the validators you declare on the components, you can
+also specify zero or more default validators in the application
+configuration resource file. The default validator applies to all
+`javax.faces.component.UIInput` instances in a view or component tree
+and is appended after the local defined validators. Here is an example
+of a default validator registered in the application configuration
+resource file:
+
+[source,oac_no_warn]
+----
+<faces-config>
+    <application>
+        <default-validators>
+            <validator-id>javax.faces.Bean</validator-id>
+        </default-validators>
+    <application/>
+</faces-config>
+----
+
+

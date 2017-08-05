@@ -1,0 +1,43 @@
+type=page
+status=published
+title=Creating Custom UI Components and Other Custom Objects
+next=jsf-custom001.html
+prev=jsf-advanced-cc004.html
+~~~~~~
+Creating Custom UI Components and Other Custom Objects
+======================================================
+
+[[BNAVG]]
+
+[[creating-custom-ui-components-and-other-custom-objects]]
+15 Creating Custom UI Components and Other Custom Objects
+---------------------------------------------------------
+
+
+This chapter describes creating custom components for applications that
+have additional functionality not provided by standard JavaServer Faces
+components.
+
+The following topics are addressed here:
+
+* link:jsf-custom001.html#A1350198[Introduction to Creating Custom
+Components]
+* link:jsf-custom002.html#BNAVH[Determining Whether You Need a Custom
+Component or Renderer]
+* link:jsf-custom003.html#GLPCB[Understanding the Image Map Example]
+* link:jsf-custom004.html#BNAVT[Steps for Creating a Custom Component]
+* link:jsf-custom005.html#BNAVU[Creating Custom Component Classes]
+* link:jsf-custom006.html#BNAWA[Delegating Rendering to a Renderer]
+* link:jsf-custom007.html#BNAUT[Implementing an Event Listener]
+* link:jsf-custom008.html#BNAWD[Handling Events for Custom Components]
+* link:jsf-custom009.html#BNAWN[Defining the Custom Component Tag in a
+Tag Library Descriptor]
+* link:jsf-custom010.html#BNATT[Using a Custom Component]
+* link:jsf-custom011.html#BNAUS[Creating and Using a Custom Converter]
+* link:jsf-custom012.html#BNAUW[Creating and Using a Custom Validator]
+* link:jsf-custom013.html#BNATG[Binding Component Values and Instances to
+Managed Bean Properties]
+* link:jsf-custom014.html#BNATM[Binding Converters, Listeners, and
+Validators to Managed Bean Properties]
+
+

@@ -1,0 +1,140 @@
+type=page
+status=published
+title=Registering a Custom Renderer with a Render Kit
+next=jsf-configure012.html
+prev=jsf-configure010.html
+~~~~~~
+Registering a Custom Renderer with a Render Kit
+===============================================
+
+[[BNAXH]]
+
+[[registering-a-custom-renderer-with-a-render-kit]]
+Registering a Custom Renderer with a Render Kit
+-----------------------------------------------
+
+When the application developer creates a custom renderer, as described
+in link:jsf-custom006.html#BNAWA[Delegating Rendering to a Renderer], you
+must register it using the appropriate render kit. Because the image map
+application implements an HTML image map, the `AreaRenderer` and
+`MapRenderer` classes in the Duke's Bookstore case study should be
+registered using the HTML render kit.
+
+You register the renderer either by using the `@FacesRenderer`
+annotation, as described in link:jsf-custom006.html#BNAWB[Creating the
+Renderer Class], or by using the `render-kit` element of the application
+configuration resource file. Here is a hypothetical configuration of
+`AreaRenderer`:
+
+[source,oac_no_warn]
+----
+<render-kit>
+    <renderer>
+        <component-family>Area</component-family>
+        <renderer-type>DemoArea</renderer-type>
+        <renderer-class>
+            dukesbookstore.renderers.AreaRenderer
+        </renderer-class>
+        <attribute>
+            <attribute-name>onmouseout</attribute-name>
+            <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+            <attribute-name>onmouseover</attribute-name>
+            <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+            <attribute-name>styleClass</attribute-name>
+            <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+    </renderer>
+    ...
+----
+
+Attributes specified in a `renderer` tag override any settings in the
+`@FacesRenderer` annotation.
+
+The `render-kit` element represents a javax.faces.render.`RenderKit`
+implementation. If no `render-kit-id` is specified, the default HTML
+render kit is assumed. The `renderer` element represents a
+`javax.faces.render.Renderer` implementation. By nesting the `renderer`
+element inside the `render-kit` element, you are registering the
+renderer with the `RenderKit` implementation associated with the
+`render-kit` element.
+
+The `renderer-class` is the fully qualified class name of the
+`Renderer`.
+
+The `component-family` and `renderer-type` elements are used by a
+component to find renderers that can render it. The `component-family`
+identifier must match that returned by the component class's `getFamily`
+method. The component family represents a component or set of components
+that a particular renderer can render. The `renderer-type` must match
+that returned by the `getRendererType` method of the tag handler class.
+
+By using the component family and renderer type to look up renderers for
+components, the JavaServer Faces implementation allows a component to be
+rendered by multiple renderers and allows a renderer to render multiple
+components.
+
+Each of the `attribute` tags specifies a render-dependent attribute and
+its type. The `attribute` element doesn't affect the runtime execution
+of your application. Rather, it provides information to tools about the
+attributes the `Renderer` supports.
+
+The object responsible for rendering a component (be it the component
+itself or a renderer to which the component delegates the rendering) can
+use facets to aid in the rendering process. These facets allow the
+custom component developer to control some aspects of rendering the
+component. Consider this custom component tag example:
+
+[source,oac_no_warn]
+----
+<d:dataScroller>
+    <f:facet name="header">
+        <h:panelGroup>
+            <h:outputText value="Account Id"/>
+            <h:outputText value="Customer Name"/>
+            <h:outputText value="Total Sales"/>
+        </h:panelGroup>
+    </f:facet>
+    <f:facet name="next">
+        <h:panelGroup>
+            <h:outputText value="Next"/>
+            <h:graphicImage url="/images/arrow-right.gif" />
+        </h:panelGroup>
+    </f:facet>
+    ...
+</d:dataScroller>
+----
+
+The `dataScroller` component tag includes a component that will render
+the header and a component that will render the Next button. If the
+renderer associated with this component renders the facets, you can
+include the following `facet` elements in the `renderer` element:
+
+[source,oac_no_warn]
+----
+<facet>
+    <description>This facet renders as the header of the table. It should be
+         a panelGroup with the same number of columns as the data.
+    </description>
+    <display-name>header</display-name>
+    <facet-name>header</facet-name>
+</facet>
+<facet>
+    <description>This facet renders as the content of the "next" button in
+         the scroller. It should be a panelGroup that includes an outputText
+         tag that has the text "Next" and a right arrow icon.
+    </description>
+    <display-name>Next</display-name>
+    <facet-name>next</facet-name>
+</facet>
+----
+
+If a component that supports facets provides its own rendering and you
+want to include `facet` elements in the application configuration
+resource file, you need to put them in the component's configuration
+rather than the renderer's configuration.
+
+

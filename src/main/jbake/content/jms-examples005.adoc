@@ -1,0 +1,250 @@
+type=page
+status=published
+title=Writing High Performance and Scalable JMS Applications
+next=jms-examples006.html
+prev=jms-examples004.html
+~~~~~~
+Writing High Performance and Scalable JMS Applications
+======================================================
+
+[[BABGEFHC]]
+
+[[writing-high-performance-and-scalable-jms-applications]]
+Writing High Performance and Scalable JMS Applications
+------------------------------------------------------
+
+This section describes how to use the JMS API to write applications that
+can handle high volumes of messages robustly. These examples use both
+nondurable and durable shared consumers.
+
+The following topics are addressed here:
+
+* link:#BABIBEAC[Using Shared Nondurable Subscriptions]
+* link:#BABEJBHA[Using Shared Durable Subscriptions]
+
+[[BABIBEAC]]
+
+[[using-shared-nondurable-subscriptions]]
+Using Shared Nondurable Subscriptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section describes the receiving clients in an example that shows
+how to use a shared consumer to distribute messages sent to a topic
+among different consumers. This section then explains how to compile and
+run the clients using GlassFish Server.
+
+You may wish to compare this example to the results of
+link:jms-examples003.html#BABDDHHC[Running Multiple Consumers on the Same
+Destination] using an unshared consumer. In that example, messages are
+distributed among the consumers on a queue, but each consumer on the
+topic receives all the messages because each consumer on the topic is
+using a separate topic subscription.
+
+In this example, however, messages are distributed among multiple
+consumers on a topic, because all the consumers are sharing the same
+subscription. Each message added to the topic subscription is received
+by only one consumer, similarly to the way in which each message added
+to a queue is received by only one consumer.
+
+A topic may have multiple subscriptions. Each message sent to the topic
+will be added to each topic subscription. However, if there are multiple
+consumers on a particular subscription, each message added to that
+subscription will be delivered to only one of those consumers.
+
+[[sthref210]]
+
+[[writing-the-clients-for-the-shared-consumer-example]]
+Writing the Clients for the Shared Consumer Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The sending client is `Producer.java`, the same client used in previous
+examples.
+
+The receiving client is `SharedConsumer.java`. It is very similar to
+`AsynchConsumer.java`, except that it always uses a topic. It performs
+the following steps.
+
+1.  Injects resources for a connection factory and topic.
+2.  In a `try`-with-resources block, creates a `JMSContext`.
+3.  Creates a consumer on a shared nondurable subscription, specifying a
+subscription name:
++
+[source,oac_no_warn]
+----
+consumer = context.createSharedConsumer(topic, "SubName");
+----
+4.  Creates an instance of the `TextListener` class and registers it as
+the message listener for the shared consumer.
+5.  Listens for the messages published to the destination, stopping when
+the user types the character `q` or `Q`.
+6.  Catches and handles any exceptions. The end of the
+`try`-with-resources block automatically causes the `JMSContext` to be
+closed.
+
+The `TextListener.java` class is identical to the one for the
+`asynchconsumer` example.
+
+For this example, you will use the default connection factory and the
+topic you created in link:jms-examples003.html#BABHEFCB[To Create
+Resources for the Simple Examples].
+
+[[sthref211]]
+
+[[to-run-the-sharedconsumer-and-producer-clients]]
+To Run the SharedConsumer and Producer Clients
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  Open three command windows. In the first, go to the
+`simple/producer/` directory:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/simple/producer/
+----
+3.  In the second and third command windows, go to the
+`shared/sharedconsumer/` directory:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/shared/sharedconsumer/
+----
+4.  In one of the `sharedconsumer` windows, build the example:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+5.  In each of the two `sharedconsumer` windows, start running the
+client. You do not need to specify a `topic` argument:
++
+[source,oac_no_warn]
+----
+appclient -client target/sharedconsumer.jar
+----
++
+Wait until you see the following output in both windows:
++
+[source,oac_no_warn]
+----
+Waiting for messages on topic
+To end program, enter Q or q, then <return>
+----
+6.  In the `producer` window, run the client, specifying the topic and a
+number of messages:
++
+[source,oac_no_warn]
+----
+appclient -client target/producer.jar topic 20
+----
++
+Each consumer client receives some of the messages. Only one of the
+clients receives the non-text message that signals the end of the
+message stream.
+7.  Enter `Q` or `q` and press Return to stop each client and see a
+report of the number of text messages received.
+
+[[BABEJBHA]]
+
+[[using-shared-durable-subscriptions]]
+Using Shared Durable Subscriptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `shareddurableconsumer` client shows how to use shared durable
+subscriptions. It shows how shared durable subscriptions combine the
+advantages of durable subscriptions (the subscription remains active
+when the client is not) with those of shared consumers (the message load
+can be divided among multiple clients).
+
+The example is much more similar to the `sharedconsumer` example than to
+the `DurableConsumer.java` client. It uses two classes,
+`SharedDurableConsumer.java` and `TextListener.java`, which can be found
+under the tut-install`/examples/jms/shared/shareddurableconsumer/`
+directory.
+
+The client uses `java:comp/DefaultJMSConnectionFactory`, the connection
+factory that does not have a client identifier, as is recommended for
+shared durable subscriptions. It uses the `createSharedDurableConsumer`
+method with a subscription name to establish the subscription:
+
+[source,oac_no_warn]
+----
+consumer = context.createSharedDurableConsumer(topic, "MakeItLast");
+----
+
+You run the example in combination with the `Producer.java` client.
+
+[[sthref212]]
+
+[[to-run-the-shareddurableconsumer-and-producer-clients]]
+To Run the SharedDurableConsumer and Producer Clients
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  In a terminal window, go to the following directory:
++
+[source,oac_no_warn]
+----
+tut-install/examples/jms/shared/shareddurableconsumer
+----
+2.  To compile and package the client, enter the following command:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+3.  Run the client first to establish the durable subscription:
++
+[source,oac_no_warn]
+----
+appclient -client target/shareddurableconsumer.jar
+----
+4.  The client displays the following and pauses:
++
+[source,oac_no_warn]
+----
+Waiting for messages on topic
+To end program, enter Q or q, then <return>
+----
+5.  In the `shareddurableconsumer` window, enter `q` or `Q` to exit the
+program. The subscription remains active, although the client is not
+running.
+6.  Open another terminal window and go to the `producer` example
+directory:
++
+[source,oac_no_warn]
+----
+cd tut-install/examples/jms/simple/producer
+----
+7.  Run the `producer` example, sending a number of messages to the
+topic:
++
+[source,oac_no_warn]
+----
+appclient -client target/producer.jar topic 6
+----
+8.  After the producer has sent the messages, open a third terminal
+window and go to the `shareddurableconsumer` directory.
+9.  Run the client in both the first and third terminal windows.
+Whichever client starts first will receive all the messages that were
+sent when there was no active subscriber:
++
+[source,oac_no_warn]
+----
+appclient -client target/shareddurableconsumer.jar
+----
+10. With both `shareddurableconsumer` clients still running, go to the
+`producer` window and send a larger number of messages to the topic:
++
+[source,oac_no_warn]
+----
+appclient -client target/producer.jar topic 25
+----
++
+Now the messages will be shared by the two consumer clients. If you
+continue sending groups of messages to the topic, each client receives
+some of the messages. If you exit one of the clients and send more
+messages, the other client will receive all the messages.
+
+

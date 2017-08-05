@@ -1,0 +1,30 @@
+type=page
+status=published
+title=Basic Security Tasks for Enterprise Applications
+next=security-javaee002.html
+prev=security-javaee.html
+~~~~~~
+Basic Security Tasks for Enterprise Applications
+================================================
+
+[[CACGIFHJ]]
+
+[[basic-security-tasks-for-enterprise-applications]]
+Basic Security Tasks for Enterprise Applications
+------------------------------------------------
+
+System administrators, application developers, bean providers, and
+deployers are responsible for administering security for enterprise
+applications. The basic security tasks are as follows:
+
+* Setting up a database of users and assigning them to the proper group
+* Setting up identity propagation
+* Setting GlassFish Server properties that enable the applications to
+run properly, such as setting default principal-to-role mapping
+* Annotating the classes and methods of an enterprise application to
+provide information about which methods need to have restricted access
+
+The sections on the security examples in this chapter and the previous
+chapter explain how to perform these tasks.
+
+

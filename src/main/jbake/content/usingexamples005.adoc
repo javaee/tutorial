@@ -1,0 +1,21 @@
+type=page
+status=published
+title=Building the Examples
+next=usingexamples006.html
+prev=usingexamples004.html
+~~~~~~
+Building the Examples
+=====================
+
+[[BNAAN]]
+
+[[building-the-examples]]
+Building the Examples
+---------------------
+
+The tutorial examples are distributed with a configuration file for
+either NetBeans IDE or Maven. Either NetBeans IDE or Maven may be used
+to build, package, deploy, and run the examples. Directions for building
+the examples are provided in each chapter.
+
+

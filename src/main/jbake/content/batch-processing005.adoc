@@ -1,0 +1,325 @@
+type=page
+status=published
+title=Creating Batch Artifacts
+next=batch-processing006.html
+prev=batch-processing004.html
+~~~~~~
+Creating Batch Artifacts
+========================
+
+[[BCGHDHGH]]
+
+[[creating-batch-artifacts]]
+Creating Batch Artifacts
+------------------------
+
+After you define a job in terms of its batch artifacts using the Job
+Specification Language (JSL), you create these artifacts as Java classes
+that implement the interfaces in the `javax.batch.api` package and its
+subpackages.
+
+This section lists the main batch artifact interfaces, demonstrates how
+to access context objects from the batch runtime, and provides some
+examples.
+
+The following topics are addressed here:
+
+* link:#BABDAIBI[Batch Artifact Interfaces]
+* link:#BCGIFJBB[Dependency Injection in Batch Artifacts]
+* link:#BCGCJEEF[Using the Context Objects from the Batch Runtime]
+
+[[BABDAIBI]]
+
+[[batch-artifact-interfaces]]
+Batch Artifact Interfaces
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following tables list the interfaces that you implement to create
+batch artifacts. The interface implementations are referenced from the
+elements described in link:batch-processing004.html#BCGDDBBG[Using the
+Job Specification Language].
+
+link:#BCGGCIDC[Table 56-3] lists the interfaces to implement batch
+artifacts for chunk steps, task steps, and decision elements.
+
+link:#BCGEAAEA[Table 56-4] lists the interfaces to implement batch
+artifacts for partitioned steps.
+
+link:#BCGCAEDI[Table 56-5] lists the interfaces to implement batch
+artifacts for job and step listeners.
+
+[[sthref279]][[BCGGCIDC]]
+
+Table 56-3 Main Batch Artifact Interfaces
+
+[width="56%",cols="52%,48%,",options="header",]
+|=======================================================================
+|Package |Interface |Description
+|`javax.batch.api` |`Batchlet` |Implements the business logic of a
+task-oriented step. It is referenced from the `batchlet` element.
+
+|`javax.batch.api` |`Decider` |Decides the next step, flow, or split to
+execute based on information from the execution of the previous step,
+flow, or split. It is referenced from the `decision` element.
+
+|`javax.batch.api.chunk` |`CheckPointAlgorithm` |Implements a custom
+checkpoint policy for chunk steps. It is referenced from the
+`checkpoint-algorithm` element inside the `chunk` element.
+
+|`javax.batch.api.chunk` |`ItemReader` |Reads items from an input source
+in a chunk step. It is referenced from the `reader` element inside the
+`chunk` element.
+
+|`javax.batch.api.chunk` |`ItemProcessor` |Processes input items to
+obtain output items in chunk steps. It is referenced from the
+`processor` element inside the `chunk` element.
+
+|`javax.batch.api.chunk` |`ItemWriter` |Writes output items in chunk
+steps. It is referenced from the `writer` element inside the `chunk`
+element.
+|=======================================================================
+
+
+[[sthref280]][[BCGEAAEA]]
+
+Table 56-4 Partition Batch Artifact Interfaces
+
+[width="58%",cols="57%,43%,",options="header",]
+|=======================================================================
+|Package |Interface |Description
+|`javax.batch.api.partition` |`PartitionPlan` |Provides details on how
+to execute a partitioned step, such as the number of partitions, the
+number of threads, and the parameters for each partition. This artifact
+is not referenced directly from the job definition file.
+
+|`javax.batch.api.partition` |`PartitionMapper` |Provides a
+`PartitionPlan` object. It is referenced from the `mapper` element
+inside the `partition` element.
+
+|`javax.batch.api.partition` |`PartitionReducer` |Receives control when
+a partitioned step begins, ends, or rolls back. It is referenced from
+the `reducer` element inside the `partition` element.
+
+|`javax.batch.api.partition` |`PartitionCollector` |Sends intermediary
+results from each partition to a partition analyzer. It is referenced
+from the `collector` element inside the `partition` element.
+
+|`javax.batch.api.partition` |`PartitionAnalyzer` |Processes data and
+final results from each partition. It is referenced from the `analyzer`
+element inside the `partition` element.
+|=======================================================================
+
+
+[[sthref281]][[BCGCAEDI]]
+
+Table 56-5 Listener Batch Artifact Interfaces
+
+[width="61%",cols="1%,44%,55%",options="header",]
+|=======================================================================
+|Package |Interface |Description
+|`javax.batch.api.listener` |`JobListener` |Intercepts job execution
+before and after running a job. It is referenced from the `listener`
+element inside the `job` element.
+
+|`javax.batch.api.listener` |`StepListener` |Intercepts step execution
+before and after running a step. It is referenced from the `listener`
+element inside the `step` element
+
+|`javax.batch.api.chunk.listener` |`ChunkListener` |Intercepts chunk
+processing in chunk steps before and after processing each chunk, and on
+errors. It is referenced from the `listener` element inside the `step`
+element.
+
+|`javax.batch.api.chunk.listener` |`ItemReadListener` |Intercepts item
+reading in chunk steps before and after reading each item, and on
+errors. It is referenced from the `listener` element inside the `step`
+element.
+
+|`javax.batch.api.chunk.listener` |`ItemProcessListener` |Intercepts
+item processing in chunk steps before and after processing each item,
+and on errors. It is referenced from the `listener` element inside the
+`step` element.
+
+|`javax.batch.api.chunk.listener` |`ItemWriteListener` |Intercepts item
+writing in chunk steps before and after writing each item, and on
+errors. It is referenced from the `listener` element inside the `step`
+element.
+
+|`javax.batch.api.chunk.listener` |`RetryReadListener` |Intercepts retry
+item reading in chunk steps when an exception occurs. It is referenced
+from the `listener` element inside the `step` element.
+
+|`javax.batch.api.chunk.listener` |`RetryProcessListener` |Intercepts
+retry item processing in chunk steps when an exception occurs. It is
+referenced from the `listener` element inside the `step` element.
+
+|`javax.batch.api.chunk.listener` |`RetryWriteListener` |Intercepts
+retry item writing in chunk steps when an exception occurs. It is
+referenced from the `listener` element inside the `step` element.
+
+|`javax.batch.api.chunk.listener` |`SkipReadListener` |Intercepts
+skippable exception handling for item readers in chunk steps. It is
+referenced from the `listener` element inside the `step` element.
+
+|`javax.batch.api.chunk.listener` |`SkipProcessListener` |Intercepts
+skippable exception handling for item processors in chunk steps. It is
+referenced from the `listener` element inside the `step` element.
+
+|`javax.batch.api.chunk.listener` |`SkipWriteListener` |Intercepts
+skippable exception handling for item writers in chunk steps. It is
+referenced from the `listener` element inside the `step` element.
+|=======================================================================
+
+
+[[BCGIFJBB]]
+
+[[dependency-injection-in-batch-artifacts]]
+Dependency Injection in Batch Artifacts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To ensure that Contexts and Dependency Injection (CDI) works in your
+batch artifacts, follow these steps.
+
+1.  Define your batch artifact implementations as CDI named beans using
+the `Named` annotation.
++
+For example, define an item reader implementation in a chunk step as
+follows:
++
+[source,oac_no_warn]
+----
+@Named("MyItemReaderImpl")
+public class MyItemReaderImpl implements ItemReader {
+    /* ... Override the ItemReader interface methods ... */
+}
+----
+2.  Provide a public, empty, no-argument constructor for your batch
+artifacts.
++
+For example, provide the following constructor for the artifact above:
++
+[source,oac_no_warn]
+----
+public MyItemReaderImpl() {}
+----
+3.  Specify the CDI name for the batch artifacts in the job definition
+file, instead of using the fully qualified name of the class.
++
+For example, define the step for the artifact above as follows:
++
+[source,oac_no_warn]
+----
+<step id="stepA" next="stepB">
+  <chunk>
+    <reader ref="MyItemReaderImpl"></reader>
+    ...
+  </chunk>
+</step>
+----
++
+This example uses the CDI name (`MyItemReaderImpl`) instead of the fully
+qualified name of the class (`com.example.pkg.MyItemReaderImpl`) to
+specify a batch artifact.
+4.  Ensure that your module is a CDI bean archive by annotating your
+batch artifacts with the `javax.enterprise.context.Dependent` annotation
+or by including an empty `beans.xml` deployment description with your
+application. For example, the following batch artifact is annotated with
+`@Dependent`:
++
+[source,oac_no_warn]
+----
+@Dependent
+@Named("MyItemReaderImpl")
+public class MyItemReaderImpl implements ItemReader { ... }
+----
++
+For more information on bean archives, see
+link:cdi-adv001.html#CACDCFDE[Packaging CDI Applications] in
+link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+for Java EE: Advanced Topics"].
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+Contexts and Dependency Injection (CDI) is required in order to access
+context objects from the batch runtime in batch artifacts.
+
+|=======================================================================
+
+
+You may encounter the following errors if you do not follow this
+procedure.
+
+* The batch runtime cannot locate some batch artifacts.
+* The batch artifacts throw null pointer exceptions when accessing
+injected objects.
+
+[[BCGCJEEF]]
+
+[[using-the-context-objects-from-the-batch-runtime]]
+Using the Context Objects from the Batch Runtime
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The batch runtime provides context objects that implement the
+`JobContext` and `StepContext` interfaces in the
+`javax.batch.runtime.context` package. These objects are associated with
+the current job and step, respectively, and enable you to do the
+following:
+
+* Get information from the current job or step, such as its name,
+instance ID, execution ID, batch status, and exit status
+* Set the user-defined exit status
+* Store user data
+* Get property values from the job or step definition
+
+You can inject context objects from the batch runtime inside batch
+artifact implementations like item readers, item processors, item
+writers, batchlets, listeners, and so on. The following example
+demonstrates how to access property values from the job definition file
+in an item reader implementation:
+
+[source,oac_no_warn]
+----
+@Dependent
+@Named("MyItemReaderImpl")
+public class MyItemReaderImpl implements ItemReader {
+    @Inject
+    JobContext jobCtx;
+
+    public MyItemReaderImpl() {}
+
+    @Override
+    public void open(Serializable checkpoint) throws Exception {
+        String fileName = jobCtx.getProperties()
+                                .getProperty("log_file_name");
+        ...
+    }
+    ...
+}
+----
+
+See link:#BCGIFJBB[Dependency Injection in Batch Artifacts] for
+instructions on how to define your batch artifacts to use dependency
+injection.
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+Do not access batch context objects inside artifact constructors.
+
+Because the job does not run until you submit it to the batch runtime,
+the batch context objects are not available when CDI instantiates your
+artifacts upon loading your application. The instantiation of these
+beans fails and the batch runtime cannot find your batch artifacts when
+your application submits the job.
+
+|=======================================================================
+
+
+

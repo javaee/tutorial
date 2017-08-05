@@ -1,0 +1,32 @@
+type=page
+status=published
+title=Security
+next=security-intro.html
+prev=jms-examples010.html
+~~~~~~
+Security
+========
+
+[[GIJRP]][[JEETT00133]]
+
+[[part-x]]
+Part X +
+--------
+
+[[security]]
+Security
+--------
+
+Part X explores security concepts and examples. This part contains the
+following chapters:
+
+* link:security-intro.html#BNBWJ[Chapter 48, "Introduction to Security in
+the Java EE Platform"]
+* link:security-webtier.html#BNCAS[Chapter 49, "Getting Started Securing
+Web Applications"]
+* link:security-javaee.html#BNBYK[Chapter 50, "Getting Started Securing
+Enterprise Applications"]
+* link:security-advanced.html#GJJWX[Chapter 51, "Java EE Security:
+Advanced Topics"]
+
+

@@ -1,0 +1,122 @@
+type=page
+status=published
+title=Getting Started
+next=cdi-basic002.html
+prev=cdi-basic.html
+~~~~~~
+Getting Started
+===============
+
+[[BABJDJGA]]
+
+[[getting-started]]
+Getting Started
+---------------
+
+Contexts and Dependency Injection (CDI) enables your objects to have
+their dependencies provided to them automatically, instead of creating
+them or receiving them as parameters. CDI also manages the lifecycle of
+those dependencies for you.
+
+For example, consider the following servlet:
+
+[source,oac_no_warn]
+----
+@WebServlet("/cdiservlet")
+public class NewServlet extends HttpServlet {
+    private Message message;
+
+    @Override
+    public void init() {
+        message = new MessageB();
+    }
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+                  throws IOException {
+        response.getWriter().write(message.get());
+    }
+}
+----
+
+This servlet needs an instance of an object that implements the
+`Message` interface:
+
+[source,oac_no_warn]
+----
+public interface Message {
+    public String get();
+}
+----
+
+The servlet creates itself an instance of the following object:
+
+[source,oac_no_warn]
+----
+public class MessageB implements Message {
+    public MessageB() { }
+
+    @Override
+    public String get() {
+        return "message B";
+    }
+}
+----
+
+Using CDI, this servlet can declare its dependency on a `Message`
+instance and have it injected automatically by the CDI runtime. The new
+servlet code is the following:
+
+[source,oac_no_warn]
+----
+@WebServlet("/cdiservlet")
+public class NewServlet extends HttpServlet {
+    @Inject private Message message;
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+                  throws IOException {
+        response.getWriter().write(message.get());
+    }
+}
+----
+
+The CDI runtime looks for classes that implement the `Message`
+interface, finds the `MessageB` class, creates a new instance of it, and
+injects it into the servlet at runtime. To manage the lifecycle of the
+new instance, the CDI runtime needs to know what the scope of the
+instance should be. In this example, the servlet only needs the instance
+to process an HTTP request; the instance can then be garbage collected.
+This is specified using the `javax.enterprise.context.RequestScoped`
+annotation:
+
+[source,oac_no_warn]
+----
+@RequestScoped
+public class MessageB implements Message { ... }
+----
+
+For more information on scopes, see link:cdi-basic008.html#GJBBK[Using
+Scopes].
+
+The `MessageB` class is a CDI bean. CDI beans are classes that CDI can
+instantiate, manage, and inject automatically to satisfy the
+dependencies of other objects. Almost any Java class can be managed and
+injected by CDI. For more information on beans, see
+link:cdi-basic003.html#GJEBJ[About Beans]. A JAR or WAR file that
+contains a CDI bean is a bean archive. For more information on packaging
+bean archives, see link:cdi-basic013.html#GJBNZ[Configuring a CDI
+Application] in this chapter and link:cdi-adv001.html#CACDCFDE[Packaging
+CDI Applications] in link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and
+Dependency Injection for Java EE: Advanced Topics"].
+
+In this example, `MessageB` is the only class that implements the
+`Message` interface. If an application has more than one implementation
+of an interface, CDI provides mechanisms that you can use to select
+which implementation to inject. For more information, see
+link:cdi-basic006.html#GJBCK[Using Qualifiers] in this chapter and
+link:cdi-adv002.html#GJSDF[Using Alternatives in CDI Applications] in
+link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+for Java EE: Advanced Topics"].
+
+

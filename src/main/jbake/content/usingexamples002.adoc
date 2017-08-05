@@ -1,0 +1,85 @@
+type=page
+status=published
+title=Starting and Stopping GlassFish Server
+next=usingexamples003.html
+prev=usingexamples001.html
+~~~~~~
+Starting and Stopping GlassFish Server
+======================================
+
+[[BNADI]]
+
+[[starting-and-stopping-glassfish-server]]
+Starting and Stopping GlassFish Server
+--------------------------------------
+
+You can start and stop GlassFish Server using either NetBeans IDE or the
+command line.
+
+[[CHDCACDI]]
+
+[[to-start-glassfish-server-using-netbeans-ide]]
+To Start GlassFish Server Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  Click the Services tab.
+2.  Expand Servers.
+3.  Right-click the GlassFish Server instance and select Start.
+
+[[sthref14]]
+
+[[to-stop-glassfish-server-using-netbeans-ide]]
+To Stop GlassFish Server Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To stop GlassFish Server using NetBeans IDE, right-click the GlassFish
+Server instance and select Stop.
+
+[[CHDBDDAF]]
+
+[[to-start-glassfish-server-using-the-command-line]]
+To Start GlassFish Server Using the Command Line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To start GlassFish Server from the command line, open a terminal window
+or command prompt and execute the following:
+
+[source,oac_no_warn]
+----
+asadmin start-domain --verbose
+----
+
+A domain is a set of one or more GlassFish Server instances managed by
+one administration server. The following elements are associated with a
+domain:
+
+* The GlassFish Server port number: The default is 8080.
+* The administration server's port number: The default is 4848.
+* An administration user name and password: The default user name is
+`admin`, and by default no password is required.
+
+You specify these values when you install GlassFish Server. The examples
+in this tutorial assume that you chose the default ports as well as the
+default user name and lack of password.
+
+With no arguments, the `start-domain` command initiates the default
+domain, which is `domain1`. The `--verbose` flag causes all logging and
+debugging output to appear on the terminal window or command prompt. The
+output also goes into the server log, which is located in
+domain-dir`/logs/server.log`.
+
+[[sthref15]]
+
+[[to-stop-glassfish-server-using-the-command-line]]
+To Stop GlassFish Server Using the Command Line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To stop GlassFish Server, open a terminal window or command prompt and
+execute:
+
+[source,oac_no_warn]
+----
+asadmin stop-domain domain1
+----
+
+

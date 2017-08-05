@@ -1,0 +1,44 @@
+type=page
+status=published
+title=Starting the Administration Console
+next=usingexamples004.html
+prev=usingexamples002.html
+~~~~~~
+Starting the Administration Console
+===================================
+
+[[BNADJ]]
+
+[[starting-the-administration-console]]
+Starting the Administration Console
+-----------------------------------
+
+To administer GlassFish Server and manage users, resources, and Java EE
+applications, use the Administration Console tool. GlassFish Server must
+be running before you invoke the Administration Console. To start the
+Administration Console, open a browser at `http://localhost:4848/`.
+
+[[GJKST]]
+
+[[to-start-the-administration-console-using-netbeans-ide]]
+To Start the Administration Console Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  Click the Services tab.
+2.  Expand Servers.
+3.  Right-click the GlassFish Server instance and select View Domain
+Admin Console.
++
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+NetBeans IDE uses your default web browser to open the Administration
+Console.
+
+|=======================================================================
+
+
+

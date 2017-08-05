@@ -1,0 +1,89 @@
+type=page
+status=published
+title=Overview of Web Application Security
+next=security-webtier002.html
+prev=security-webtier.html
+~~~~~~
+Overview of Web Application Security
+====================================
+
+[[BNCAT]]
+
+[[overview-of-web-application-security]]
+Overview of Web Application Security
+------------------------------------
+
+A web application is accessed using a web browser over a network, such
+as the Internet or a company's intranet. As discussed in
+link:overview004.html#BNAAY[Distributed Multitiered Applications], the
+Java EE platform uses a distributed multitiered application model, and
+web applications run in the web tier.
+
+Web applications contain resources that can be accessed by many users.
+These resources often traverse unprotected, open networks, such as the
+Internet. In such an environment, a substantial number of web
+applications will require some type of security.
+
+Securing applications and their clients in the business tier and the EIS
+tier is discussed in link:security-javaee.html#BNBYK[Chapter 50, "Getting
+Started Securing Enterprise Applications"].
+
+In the Java EE platform, web components provide the dynamic extension
+capabilities for a web server. Web components can be Java servlets or
+JavaServer Faces pages.
+
+Certain aspects of web application security can be configured when the
+application is installed, or deployed, to the web container. Annotations
+and/or deployment descriptors are used to relay information to the
+deployer about security and other aspects of the application. Specifying
+this information in annotations or in the deployment descriptor helps
+the deployer set up the appropriate security policy for the web
+application. Any values explicitly specified in the deployment
+descriptor override any values specified in annotations.
+
+Security for Java EE web applications can be implemented in the
+following ways.
+
+* Declarative security can be implemented using either metadata
+annotations or an application's deployment descriptor. See
+link:security-intro001.html#BNBWK[Overview of Java EE Security] for more
+information.
++
+Declarative security for web applications is described in
+link:security-webtier002.html#GKBAA[Securing Web Applications].
+* Programmatic security is embedded in an application and can be used to
+make security decisions when declarative security alone is not
+sufficient to express the security model of an application. Declarative
+security alone may not be sufficient when conditional login in a
+particular work flow, instead of for all cases, is required in the
+middle of an application. See link:security-intro001.html#BNBWK[Overview
+of Java EE Security] for more information.
++
+Servlet 4.0 provides the `authenticate`, `login`, and `logout` methods
+of the `HttpServletRequest` interface. With the addition of the
+`authenticate`, `login`, and `logout` methods to the Servlet
+specification, an application deployment descriptor is no longer
+required for web applications but may still be used to further specify
+security requirements beyond the basic default values.
++
+Programmatic security is discussed in
+link:security-webtier003.html#GJIIE[Using Programmatic Security with Web
+Applications].
+* Message security works with web services and incorporates security
+features, such as digital signatures and encryption, into the header of
+a SOAP message, working in the application layer, ensuring end-to-end
+security. Message security is not a component of Java EE 7 and is
+mentioned here for informational purposes only.
+
+Some of the material in this chapter builds on material presented
+earlier in this tutorial. In particular, this chapter assumes that you
+are familiar with the information in the following chapters:
+
+* link:webapp.html#BNADR[Chapter 6, "Getting Started with Web
+Applications"]
+* link:jsf-intro.html#BNAPH[Chapter 7, "JavaServer Faces Technology"]
+* link:servlets.html#BNAFD[Chapter 17, "Java Servlet Technology"]
+* link:security-intro.html#BNBWJ[Chapter 48, "Introduction to Security in
+the Java EE Platform"]
+
+

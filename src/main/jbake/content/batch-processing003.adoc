@@ -1,0 +1,204 @@
+type=page
+status=published
+title=Simple Use Case
+next=batch-processing004.html
+prev=batch-processing002.html
+~~~~~~
+Simple Use Case
+===============
+
+[[BCGHBJIG]]
+
+[[simple-use-case]]
+Simple Use Case
+---------------
+
+This section demonstrates how to define a simple job using the Job
+Specification Language (JSL) and how to implement the corresponding
+batch artifacts. Refer to the rest of the sections in this chapter for
+detailed descriptions of the elements in the batch framework.
+
+The following job definition specifies a chunk step and a task step as
+follows:
+
+[source,oac_no_warn]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="simplejob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+                    version="1.0">
+  <properties>
+    <property name="input_file" value="input.txt"/>
+    <property name="output_file" value="output.txt"/>
+  </properties>
+  <step id="mychunk" next="mytask">
+    <chunk>
+      <reader ref="MyReader"></reader>
+      <processor ref="MyProcessor"></processor>
+      <writer ref="MyWriter"></writer>
+    </chunk>
+  </step>
+  <step id="mytask">
+    <batchlet ref="MyBatchlet"></batchlet>
+    <end on="COMPLETED"/>
+  </step>
+</job>
+----
+
+[[sthref268]]
+
+[[chunk-step]]
+Chunk Step
+~~~~~~~~~~
+
+In most cases, you have to implement a checkpoint class for
+chunk-oriented steps. The following class just keeps track of the line
+number in a text file:
+
+[source,oac_no_warn]
+----
+public class MyCheckpoint implements Serializable {
+    private long lineNum = 0;
+    public void increase() { lineNum++; }
+    public long getLineNum() { return lineNum; }
+}
+----
+
+The following item reader implementation continues reading the input
+file from the provided checkpoint if the job was restarted. The items
+consist of each line in the text file (in more complex scenarios, the
+items are custom Java types and the input source can be a database):
+
+[source,oac_no_warn]
+----
+@Dependent
+@Named("MyReader")
+public class MyReader implements javax.batch.api.chunk.ItemReader {
+    private MyCheckpoint checkpoint;
+    private BufferedReader breader;
+    @Inject
+    JobContext jobCtx;
+
+    public MyReader() {}
+
+    @Override
+    public void open(Serializable ckpt) throws Exception {
+        if (ckpt == null)
+            checkpoint = new MyCheckpoint();
+        else
+            checkpoint = (MyCheckpoint) ckpt;
+        String fileName = jobCtx.getProperties()
+                                .getProperty("input_file");
+        breader = new BufferedReader(new FileReader(fileName));
+        for (long i = 0; i < checkpoint.getLineNum(); i++)
+            breader.readLine();
+    }
+
+    @Override
+    public void close() throws Exception {
+        breader.close();
+    }
+
+    @Override
+    public Object readItem() throws Exception {
+        String line = breader.readLine();
+        return line;
+    }
+}
+----
+
+In the following case, the item processor only converts the line to
+uppercase. More complex examples can process items in different ways or
+transform them into custom output Java types:
+
+[source,oac_no_warn]
+----
+@Dependent
+@Named("MyProcessor")
+public class MyProcessor implements javax.batch.api.chunk.ItemProcessor {
+    public MyProcessor() {}
+
+    @Override
+    public Object processItem(Object obj) throws Exception {
+        String line = (String) obj;
+        return line.toUpperCase();
+    }
+}
+----
+
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+Note:
+
+The batch processing API does not support generics. In most cases, you
+need to cast items to their specific type before processing them.
+
+|=======================================================================
+
+
+The item writer writes the processed items to the output file. It
+overwrites the output file if no checkpoint is provided; otherwise, it
+resumes writing at the end of the file. Items are written in chunks:
+
+[source,oac_no_warn]
+----
+@Dependent
+@Named("MyWriter")
+public class MyWriter implements javax.batch.api.chunk.ItemWriter {
+    private BufferedWriter bwriter;
+    @Inject
+    private JobContext jobCtx;
+
+    @Override
+    public void open(Serializable ckpt) throws Exception {
+        String fileName = jobCtx.getProperties()
+                                .getProperty("output_file");
+        bwriter = new BufferedWriter(new FileWriter(fileName, 
+                                                    (ckpt != null)));
+    }
+
+    @Override
+    public void writeItems(List<Object> items) throws Exception {
+        for (int i = 0; i < items.size(); i++) {
+            String line = (String) items.get(i);
+            bwriter.write(line);
+            bwriter.newLine();
+        }
+    }
+
+    @Override
+    public Serializable checkpointInfo() throws Exception {
+        return new MyCheckpoint();
+}
+----
+
+[[sthref269]]
+
+[[task-step]]
+Task Step
+~~~~~~~~~
+
+The task step displays the length of the output file. In more complex
+scenarios, task steps perform any task that does not fit the chunk
+processing programming model:
+
+[source,oac_no_warn]
+----
+@Dependent
+@Named("MyBatchlet")
+public class MyBatchlet implements javax.batch.api.chunk.Batchlet {
+    @Inject
+    private JobContext jobCtx;
+    
+    @Override
+    public String process() throws Exception {
+        String fileName = jobCtx.getProperties()
+                                .getProperty("output_file");
+        System.out.println(""+(new File(fileName)).length());
+        return "COMPLETED";
+    }
+}
+----
+
+

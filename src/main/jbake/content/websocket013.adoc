@@ -1,0 +1,21 @@
+type=page
+status=published
+title=Further Information about WebSocket
+next=jsonp.html
+prev=websocket012.html
+~~~~~~
+Further Information about WebSocket
+===================================
+
+[[BABDFIFD]]
+
+[[further-information-about-websocket]]
+Further Information about WebSocket
+-----------------------------------
+
+For more information on WebSocket in Java EE, see the Java API for
+WebSocket specification:
+
+`http://www.jcp.org/en/jsr/detail?id=356`
+
+

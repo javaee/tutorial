@@ -1,0 +1,117 @@
+type=page
+status=published
+title=Configuring Security Using Deployment Descriptors
+next=security-advanced008.html
+prev=security-advanced006.html
+~~~~~~
+Configuring Security Using Deployment Descriptors
+=================================================
+
+[[GKHRL]]
+
+[[configuring-security-using-deployment-descriptors]]
+Configuring Security Using Deployment Descriptors
+-------------------------------------------------
+
+The recommended way to configure security in the Java EE 7 platform is
+with annotations. If you wish to override the security settings at
+deployment time, you can use security elements in the `web.xml`
+deployment descriptor to do so. This section describes how to use the
+deployment descriptor to specify basic authentication and to override
+default principal-to-role mapping.
+
+The following topics are addressed here:
+
+* link:#BNCCM[Specifying Security for Basic Authentication in the
+Deployment Descriptor]
+* link:#GKAFQ[Specifying Non-Default Principal-to-Role Mapping in the
+Deployment Descriptor]
+
+[[BNCCM]]
+
+[[specifying-security-for-basic-authentication-in-the-deployment-descriptor]]
+Specifying Security for Basic Authentication in the Deployment Descriptor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The elements of the deployment descriptor that add basic authentication
+to an example tell the server or browser to perform the following tasks.
+
+* Send a standard login dialog box to collect user name and password
+data.
+* Verify that the user is authorized to access the application.
+* If authorized, display the servlet to the user.
+
+The following sample code shows the security elements for a deployment
+descriptor that could be used in the example of basic authentication
+found in the tut-install`/examples/security/hello2_basicauth/`
+directory:
+
+[source,oac_no_warn]
+----
+    <security-constraint>
+        <display-name>SecurityConstraint</display-name>
+        <web-resource-collection>
+             <web-resource-name>WRCollection</web-resource-name>
+            <url-pattern>/greeting</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>TutorialUser</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>file</realm-name>
+    </login-config>
+    <security-role>
+        <role-name>TutorialUser</role-name>
+    </security-role>
+----
+
+This deployment descriptor specifies that the request URI `/greeting`
+can be accessed only by users who have entered their user names and
+passwords and have been authorized to access this URL because they have
+been verified to be in the role `TutorialUser`. The user name and
+password data will be sent over a protected transport in order to keep
+it from being read in transit.
+
+[[GKAFQ]]
+
+[[specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor]]
+Specifying Non-Default Principal-to-Role Mapping in the Deployment Descriptor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To map a role name permitted by the application or module to principals
+(users) and groups defined on the server, use the
+`security-role-mapping` element in the runtime deployment descriptor
+file (`glassfish-application.xml`, `glassfish-web.xml`, or
+`glassfish-ejb-jar.xml`). The entry needs to declare a mapping between a
+security role used in the application and one or more groups or
+principals defined for the applicable realm of GlassFish Server. An
+example for the `glassfish-web.xml` file is shown below:
+
+[source,oac_no_warn]
+----
+<glassfish-web-app>
+    <security-role-mapping>
+        <role-name>DIRECTOR</role-name>
+        <principal-name>schwartz</principal-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>DEPT-ADMIN</role-name>
+        <group-name>dept-admins</group-name>
+    </security-role-mapping>
+</glassfish-web-app>
+----
+
+The role name can be mapped to either a specific principal (user), a
+group, or both. The principal or group names referenced must be valid
+principals or groups in the current default realm of GlassFish Server.
+The `role-name` in this example must exactly match the `role-name` in
+the `security-role` element of the corresponding `web.xml` file or the
+role name defined in the `@DeclareRoles` and/or `@RolesAllowed`
+annotations.
+
+

@@ -1,0 +1,33 @@
+type=page
+status=published
+title=Packaging Resource Adapter Archives
+next=partwebtier.html
+prev=packaging003.html
+~~~~~~
+Packaging Resource Adapter Archives
+===================================
+
+[[BCGDHBHJ]]
+
+[[packaging-resource-adapter-archives]]
+Packaging Resource Adapter Archives
+-----------------------------------
+
+A Resource Adapter Archive (RAR) file stores XML files, Java classes,
+and other objects for Java EE Connector Architecture (JCA) applications.
+A resource adapter can be deployed on any Java EE server, much like a
+Java EE application. A RAR file can be contained in an Enterprise
+Archive (EAR) file, or it can exist as a separate file.
+
+The RAR file contains
+
+* A JAR file with the implementation classes of the resource adapter
+* An optional `META-INF/` directory that can store an `ra.xml` file
+and/or an application server–specific deployment descriptor used for
+configuration purposes
+
+A RAR file can be deployed on the application server as a standalone
+component or as part of a larger application. In both cases, the adapter
+is available to all applications using a lookup procedure.
+
+

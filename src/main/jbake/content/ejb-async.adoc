@@ -1,0 +1,25 @@
+type=page
+status=published
+title=Using Asynchronous Method Invocation in Session Beans
+next=ejb-async001.html
+prev=ejb-embedded003.html
+~~~~~~
+Using Asynchronous Method Invocation in Session Beans
+=====================================================
+
+[[GKIDZ]]
+
+[[using-asynchronous-method-invocation-in-session-beans]]
+37 Using Asynchronous Method Invocation in Session Beans
+--------------------------------------------------------
+
+
+This chapter discusses how to implement asynchronous business methods in
+session beans and call them from enterprise bean clients.
+
+The following topics are addressed here:
+
+* link:ejb-async001.html#GKKQG[Asynchronous Method Invocation]
+* link:ejb-async002.html#GKIEZ[The async Example Application]
+
+

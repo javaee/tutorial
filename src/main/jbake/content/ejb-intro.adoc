@@ -1,0 +1,38 @@
+type=page
+status=published
+title=Enterprise Beans
+next=ejb-intro001.html
+prev=partentbeans.html
+~~~~~~
+Enterprise Beans
+================
+
+[[GIJSZ]]
+
+[[enterprise-beans]]
+33 Enterprise Beans
+-------------------
+
+
+Enterprise beans are Java EE components that implement Enterprise
+JavaBeans (EJB) technology. Enterprise beans run in the EJB container, a
+runtime environment within GlassFish Server (see
+link:overview005.html#BNABQ[Container Types]). Although transparent to
+the application developer, the EJB container provides system-level
+services, such as transactions and security, to its enterprise beans.
+These services enable you to quickly build and deploy enterprise beans,
+which form the core of transactional Java EE applications.
+
+The following topics are addressed here:
+
+* link:ejb-intro001.html#GIPMB[What Is an Enterprise Bean?]
+* link:ejb-intro002.html#GIPJG[What Is a Session Bean?]
+* link:ejb-intro003.html#GIPKO[What Is a Message-Driven Bean?]
+* link:ejb-intro004.html#GIPJF[Accessing Enterprise Beans]
+* link:ejb-intro005.html#GIPIO[The Contents of an Enterprise Bean]
+* link:ejb-intro006.html#GIPKS[Naming Conventions for Enterprise Beans]
+* link:ejb-intro007.html#GIPLJ[The Lifecycles of Enterprise Beans]
+* link:ejb-intro008.html#GIPLG[Further Information about Enterprise
+Beans]
+
+
