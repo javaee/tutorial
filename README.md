@@ -11,7 +11,7 @@ page, and the body generated from asciidoc content.
 - Maven
 - JDK8+
 
-Deploying to Github will require password less authentication.
+Deploying to Github will require password-less authentication.
 
 This is done by exporting your SSH public key into your Github account.
 
