@@ -125,6 +125,6 @@ making a function call with one element at a time.
 There are many JSON generators and parsers available for different
 programming languages and environments. link:jsonp002.html#BABDFHHD[JSON
 Processing in the Java EE Platform] describes the functionality provided
-by the Java API for JSON Processing (JSR 353).
+by the Java API for JSON Processing (JSR 374).
 
 

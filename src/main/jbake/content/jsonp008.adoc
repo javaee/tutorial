@@ -16,6 +16,6 @@ Further Information about the Java API for JSON Processing
 For more information on JSON processing in Java EE, see the Java API for
 JSON Processing specification:
 
-`http://www.jcp.org/en/jsr/detail?id=353`
+`http://www.jcp.org/en/jsr/detail?id=374`
 
 

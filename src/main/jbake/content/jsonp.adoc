@@ -14,10 +14,11 @@ JSON Processing
 ------------------
 
 
-This chapter describes the Java API for JSON Processing (JSR 353). JSON
-is a data exchange format widely used in web services and other
-connected applications. JSR 353 provides an API to parse, transform, and
-query JSON data using the object model or the streaming model.
+This chapter describes the Java API for JSON Processing (JSR 374). JSR 374
+is an incremental release over JSR 353. JSON is a data exchange format widely
+used in web services and other connected applications. JSR 374 provides an
+API to parse, transform, and query JSON data using the object model or the
+streaming model.
 
 The following topics are addressed here:
 

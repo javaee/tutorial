@@ -33,6 +33,6 @@ JAXB for XML is under consideration for a future release of Java EE.
 
 You can still use the Java API for JSON Processing with JAX-RS resource
 methods. For more information, see the sample code for JSON Processing
-included with the Java EE 7 SDK.
+included with the Java EE 8 SDK.
 
 

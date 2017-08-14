@@ -13,83 +13,83 @@ JSON Processing in the Java EE Platform
 JSON Processing in the Java EE Platform
 ---------------------------------------
 
-Java EE includes support for JSR 353, which provides an API to parse,
+Java EE includes support for JSR 374, which provides an API to parse,
 transform, and query JSON data using the object model or the streaming
 model described in link:jsonp001.html#BABJJACI[Generating and Parsing
 JSON Data]. The Java API for JSON Processing contains the following
-packages.
+packages:
 
 * The `javax.json` package contains a reader interface, a writer
-interface, and a model builder interface for the object model. This
-package also contains other utility classes and Java types for JSON
-elements. link:#CHDJJCBE[Table 19-1] lists the main classes and
-interfaces in this package.
+interface, a model builder interface for the object model, and utility
+classes and Java types for JSON elements. This package also includes
+several classes that implement other JSON-related standards: link:http://tools.ietf.org/html/rfc6901[JSON Pointer],
+link:http://tools.ietf.org/html/rfc6902[JSON Patch], and link:http://tools.ietf.org/html/rfc7396[JSON Merge Patch].
+These standards are used to retrieve, transform or manipulate values
+in an object model. link:#CHDJJCBE[Table 19-1] lists the main classes
+and interfaces in this package.
 * The `javax.json.stream` package contains a parser interface and a
 generator interface for the streaming model. link:#CHDIHCEG[Table 19-2]
 lists the main classes and interfaces in this package.
+* The `javax.json.spi` package contains a Service Provider Interface (SPI)
+to plug in implementations for JSON processing objects. This package
+contains the `JsonProvider` class, which contains the methods that a service
+provider implements.
 
 [[sthref118]][[CHDJJCBE]]
 
-Table 19-1 Main Classes and Interfaces in javax.json
-
-[width="25%",cols="100%,",options="header",]
+*Table 19-1 Main Classes and Interfaces in javax.json*
+[width=99%,cols="25%,75%"]
 |=======================================================================
-|Class or Interface |Description
+|*Class or Interface* |*Description*
 |`Json` |Contains static methods to create instances of JSON parsers,
 builders, and generators. This class also contains methods to create
 parser, builder, and generator factory objects.
 
-|`JsonReader` |Reads JSON data from a stream and creates an object model
+|`JsonReader` | Reads JSON data from a stream and creates an object model
 in memory.
 
-a|
-`JsonObjectBuilder`
-
-`JsonArrayBuilder`
-
- |Create an object model or an array model in memory by adding elements
+|`JsonObjectBuilder`, `JsonArrayBuilder` | Create an object model or an array model in memory by adding elements
 from application code.
 
-|`JsonWriter` |Writes an object model from memory to a stream.
+|`JsonWriter` | Writes an object model from memory to a stream.
 
-|`JsonValue` |Represents an element (such as an object, an array, or a
+|`JsonValue` | Represents an element (such as an object, an array, or a
 value) in JSON data.
 
-|`JsonStructure` |Represents an object or an array in JSON data. This
+|`JsonStructure` | Represents an object or an array in JSON data. This
 interface is a subtype of `JsonValue`.
 
-a|
-`JsonObject`
-
-`JsonArray`
-
- |Represent an object or an array in JSON data. These two interfaces are
+|`JsonObject`, `JsonArray` | Represent an object or an array in JSON data. These two interfaces are
 subtypes of `JsonStructure`.
 
-a|
-`JsonString`
+|`JsonPointer` | Contains methods for operating on specific targets within JSON documents. The targets can be `JsonValue`,
+`JsonObject`, or `JsonArray` objects.
 
-`JsonNumber`
+|`JsonPatch` | An interface for supporting a sequence of operations to be applied to a target JSON resource. The
+operations are defined within a JSON patch document.
 
- |Represent data types for elements in JSON data. These two interfaces
+|`JsonMergePatch` | An interface for supporting updates to target JSON resources. A JSON patch document is compared with
+the target resource to determine the specific set of change operations to be applied.
+
+|`JsonString`, `JsonNumber` | Represent data types for elements in JSON data. These two interfaces
 are subtypes of `JsonValue`.
 
-|`JsonException` |Indicates that a problem occurred during JSON
+|`JsonException` | Indicates that a problem occurred during JSON
 processing.
 |=======================================================================
 
 
 [[sthref119]][[CHDIHCEG]]
 
-Table 19-2 Main Classes and Interfaces in javax.json.stream
+*Table 19-2 Main Classes and Interfaces in javax.json.stream*
 
-[width="25%",cols="100%,",options="header",]
+[width=99%,cols="25%,75%"]
 |=======================================================================
-|Class or Interface |Description
-|`JsonParser` |Represents an event-based parser that can read JSON data
+|*Class or Interface* |*Description*
+|`JsonParser` | Represents an event-based parser that can read JSON data
 from a stream or from an object model.
 
-|`JsonGenerator` |Writes JSON data to a stream one element at a time.
+|`JsonGenerator` | Writes JSON data to a stream one element at a time.
 |=======================================================================
 
 
