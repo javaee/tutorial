@@ -64,7 +64,7 @@ headers with the headers supplied in the `MultivaluedMap` instance.
 ----
 Client client = ClientBuilder.newClient();
 WebTarget myResource = client.target("http://example.com/webapi/read");
-MultivaluedMap<String, Object> myHeaders = 
+MultivaluedMap<String, Object> myHeaders =
     new MultivaluedMap<>("myHeader", "The header value");
 myHeaders.add(...);
 String response = myResource.request(MediaType.TEXT_PLAIN)
@@ -77,7 +77,7 @@ a given key.
 
 [source,oac_no_warn]
 ----
-MultivaluedMap<String, Object> myHeaders = 
+MultivaluedMap<String, Object> myHeaders =
     new MultivaluedMap<String, Object>();
 List<String> values = new ArrayList<>();
 values.add(...)
@@ -113,8 +113,8 @@ domain.
 ----
 Client client = ClientBuilder.newClient();
 WebTarget myResource = client.target("http://example.com/webapi/read");
-Cookie myCookie = new Cookie("myCookie", "The cookie value", 
-    "/webapi/read", "example.com"); 
+Cookie myCookie = new Cookie("myCookie", "The cookie value",
+    "/webapi/read", "example.com");
 String response = myResource.request(MediaType.TEXT_PLAIN)
         .cookie(myCookie)
         .get(String.class);
@@ -163,13 +163,13 @@ client responses.
 [source,oac_no_warn]
 ----
 @Provider
-public class MyLoggingFilter implements ClientRequestFilter, 
+public class MyLoggingFilter implements ClientRequestFilter,
         ClientResponseFilter {
     static final Logger logger = Logger.getLogger(...);
 
     // implement the ClientRequestFilter.filter method
     @Override
-    public void filter(ClientRequestContext requestContext) 
+    public void filter(ClientRequestContext requestContext)
             throws IOException {
         logger.log(...);
         ...
@@ -177,7 +177,7 @@ public class MyLoggingFilter implements ClientRequestFilter,
 
     // implement the ClientResponseFilter.filter method
     @Override
-    public void filter(ClientRequestContext requestContext, 
+    public void filter(ClientRequestContext requestContext,
            ClientResponseContext responseContext) throws IOException {
         logger.log(...);
         ...
@@ -284,11 +284,7 @@ method is used as in the following example:
 
 [source,oac_no_warn]
 ----
-CompletionStage<String> csf = client.target("forecast/{destination}")
-resolveTemplate("destination", "mars")
-request()
-rx()
-get(String.class);
+CompletionStage<String> csf = client.target("forecast/{destination}") resolveTemplate("destination", "mars").request().rx().get(String.class);
 csf.thenAccept(System.out::println);
 ----
 
@@ -432,5 +428,3 @@ Thread.sleep(500); // Consume events for just 500 ms
 // falls through
 }
 ----
-
-
