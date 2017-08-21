@@ -15,7 +15,7 @@ Building RESTful Web Services with JAX-RS
 
 
 This chapter describes the REST architecture, RESTful web services, and
-the Java API for RESTful Web Services (JAX-RS, defined in JSR 339).
+the Java API for RESTful Web Services (JAX-RS, defined in JSR 370).
 
 JAX-RS makes it easy for developers to build RESTful web services using
 the Java programming language.
@@ -26,5 +26,3 @@ The following topics are addressed here:
 * link:jaxrs002.html#GILIK[Creating a RESTful Root Resource Class]
 * link:jaxrs003.html#GIPZZ[Example Applications for JAX-RS]
 * link:jaxrs004.html#GILIZ[Further Information about JAX-RS]
-
-
