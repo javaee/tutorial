@@ -4,17 +4,17 @@ title=Java EE 7 APIs in the Java Platform, Standard Edition 7
 next=overview010.html
 prev=overview008.html
 ~~~~~~
-Java EE 7 APIs in the Java Platform, Standard Edition 7
-=======================================================
+= Java EE 7 APIs in the Java Platform, Standard Edition 7
+
 
 [[GIRDR]]
 
-[[java-ee-7-apis-in-the-java-platform-standard-edition-7]]
-Java EE 7 APIs in the Java Platform, Standard Edition 7
+[[java-ee-8-apis-in-the-java-platform-standard-edition-8]]
+Java EE 8 APIs in the Java Platform, Standard Edition 8
 -------------------------------------------------------
 
-Several APIs that are required by the Java EE 7 platform are included in
-the Java Platform, Standard Edition 7 (Java SE 7) and are thus available
+Several APIs that are required by the Java EE 8 platform are included in
+the Java Platform, Standard Edition 8 (Java SE 8) and are thus available
 to Java EE applications.
 
 [[BNADA]]
@@ -189,5 +189,3 @@ platform.
 
 The Java EE 7 platform requires Common Annotations for the Java Platform
 1.2.
-
-
