@@ -142,7 +142,7 @@ include the following:
 The Java EE 8 platform requires JavaServer Faces 2.3 and Expression
 Language 3.0.
 
-For more details, see what's New in JSF 2.3
+For more details, see What's New in JSF 2.3
 at `https://javaserverfaces.github.io/users.html`.
 
 [[BNACN]]
