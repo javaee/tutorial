@@ -4,8 +4,8 @@ title=Advanced Features of the Client API
 next=jaxrs-advanced.html
 prev=jaxrs-client002.html
 ~~~~~~
-Advanced Features of the Client API
-===================================
+= Advanced Features of the Client API
+
 
 [[BABCDDGH]]
 
@@ -278,8 +278,8 @@ cases and when there are many independent calls to make. In nested
 calls, using custom callbacks becomes very difficult to implement,
 debug, and maintain.
 
-JAX-RS defines a new type of invoker called as RxInvoker and a default
-implementation of this type is CompletionStageRxInvoker. The new rx
+JAX-RS defines a new type of invoker called as `RxInvoker` and a default
+implementation of this type is `CompletionStageRxInvoker`. The new `rx`
 method is used as in the following example:
 
 [source,oac_no_warn]
@@ -289,8 +289,8 @@ csf.thenAccept(System.out::println);
 ----
 
 In the example, an asynchronous processing of the interface
-CompletionStage<String> is created and waits till it is completed and
-the result is displayed. The result of CompletionStage is important when
+`CompletionStage<String>` is created and waits till it is completed and
+the result is displayed. The result of `CompletionStage` is important when
 there are parallel, multiple asynchronous computations are necessary to
 complete a task.
 
@@ -300,10 +300,10 @@ complete a task.
 Using Server-Sent Events
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Server-sent Events technology is used to asynchronously push
+Server-sent Events (SSE) technology is used to asynchronously push
 notifications to the client over standard HTTP or HTTPS protocol.
 Clients can subscribe to event notifications that originate on a server.
-Server generates the events and sends these events back to the clients
+Server generates events and sends these events back to the clients
 that are subscribed to receive the notifications. The one-way
 communication channel connection is established by the client. Once the
 connection is established, the server sends events to the client
