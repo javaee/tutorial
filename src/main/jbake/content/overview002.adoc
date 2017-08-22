@@ -1,16 +1,16 @@
 type=page
 status=published
-title=Java EE 7 Platform Highlights
+title=Java EE 8 Platform Highlights
 next=overview003.html
 prev=overview001.html
 ~~~~~~
-Java EE 7 Platform Highlights
-=============================
+= Java EE 8 Platform Highlights
+
 
 [[GIQVH]]
 
-[[java-ee-7-platform-highlights]]
-Java EE 7 Platform Highlights
+[[java-ee-8-platform-highlights]]
+Java EE 8 Platform Highlights
 -----------------------------
 
 The most important goal of the Java EE 8 platform is to simplify
