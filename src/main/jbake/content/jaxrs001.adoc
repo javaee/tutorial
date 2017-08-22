@@ -4,8 +4,8 @@ title=What Are RESTful Web Services?
 next=jaxrs002.html
 prev=jaxrs.html
 ~~~~~~
-What Are RESTful Web Services?
-==============================
+== What Are RESTful Web Services?
+
 
 [[GIJQY]]
 
@@ -66,7 +66,5 @@ Several techniques exist to exchange state, such as URI rewriting,
 cookies, and hidden form fields. State can be embedded in response
 messages to point to valid future states of the interaction. See
 link:jaxrs002.html#GIPZE[Using Entity Providers to Map HTTP Response and
-Request Entity Bodies] and "Building URIs" in the JAX-RS Overview
+Request Entity Bodies] and link:jaxrs002.html#GIPZE[Extracting Request Parameters] in the JAX-RS Overview
 document for more information.
-
-
