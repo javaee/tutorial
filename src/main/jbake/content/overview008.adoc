@@ -1,16 +1,16 @@
 type=page
 status=published
-title=Java EE 7 APIs
+title=Java EE 8 APIs
 next=overview009.html
 prev=overview007.html
 ~~~~~~
-Java EE 7 APIs
-==============
+= Java EE 8 APIs
+
 
 [[BNACJ]]
 
-[[java-ee-7-apis]]
-Java EE 7 APIs
+[[java-ee-8-apis]]
+Java EE 8 APIs
 --------------
 
 link:#BNACK[Figure 1-6] shows the relationships among the Java EE
@@ -22,7 +22,7 @@ containers.
 image:img/javaeett_dt_006.png[
 "Diagram of Java EE containers and their relationships"]
 
-link:#GJQMG[Figure 1-7] shows the availability of the Java EE 7 APIs in
+link:#GJQMG[Figure 1-7] shows the availability of the Java EE 8 APIs in
 the web container.
 
 [[GJQMG]]
@@ -31,7 +31,7 @@ the web container.
 image:img/javaeett_dt_007.png[
 "Diagram of Java EE APIs in the web container"]
 
-link:#GJQMN[Figure 1-8] shows the availability of the Java EE 7 APIs in
+link:#GJQMN[Figure 1-8] shows the availability of the Java EE 8 APIs in
 the EJB container.
 
 [[GJQMN]]
@@ -40,7 +40,7 @@ the EJB container.
 image:img/javaeett_dt_008.png[
 "Diagram of Java EE APIs in the EJB container"]
 
-link:#GJQNH[Figure 1-9] shows the availability of the Java EE 7 APIs in
+link:#GJQNH[Figure 1-9] shows the availability of the Java EE 8 APIs in
 the application client container.
 
 [[GJQNH]]
@@ -72,13 +72,7 @@ the client finishes executing, the session bean and its data are gone.
 message listener, allowing a business component to receive messages
 asynchronously. Commonly, these are Java Message Service (JMS) messages.
 
-In the Java EE 7 platform, new enterprise bean features include the
-following:
-
-* Asynchronous local session beans in EJB Lite
-* Nonpersistent timers in EJB Lite
-
-The Java EE 7 platform requires Enterprise JavaBeans 3.2 and
+The Java EE 8 platform requires Enterprise JavaBeans 3.2 and
 Interceptors 1.2. The Interceptors specification is part of the EJB
 specification.
 
@@ -162,7 +156,7 @@ HTML or XML
 For information about JSP technology, see the The Java EE 5 Tutorial at
 `http://docs.oracle.com/javaee/5/tutorial/doc/`.
 
-The Java EE 7 platform requires JavaServer Pages 2.3 for compatibility
+The Java EE 8 platform requires JavaServer Pages 2.3 for compatibility
 with earlier releases but recommends the use of Facelets as the display
 technology in new applications.
 
@@ -183,7 +177,7 @@ JSTL has iterator and conditional tags for handling flow control, tags
 for manipulating XML documents, internationalization tags, tags for
 accessing databases using SQL, and tags for commonly used functions.
 
-The Java EE 7 platform requires JSTL 1.2.
+The Java EE 8 platform requires JSTL 1.2.
 
 [[BNADB]]
 
@@ -202,7 +196,7 @@ consists of the following areas:
 * The query language
 * Object/relational mapping metadata
 
-The Java EE 7 platform requires Java Persistence API 2.1.
+The Java EE 8 platform requires Java Persistence API 2.1.
 
 [[BNACR]]
 
@@ -220,7 +214,7 @@ depend on each other, you will want to use the JTA API to demarcate
 where the entire transaction, including both operations, begins, rolls
 back, and commits.
 
-The Java EE 7 platform requires Java Transaction API 1.2.
+The Java EE 8 platform requires Java Transaction API 1.2.
 
 [[GIRBT]]
 
@@ -234,7 +228,17 @@ State Transfer (REST) architectural style. A JAX-RS application is a web
 application that consists of classes packaged as a servlet in a WAR file
 along with required libraries.
 
-The Java EE 7 platform requires JAX-RS 2.0.
+In the Java EE 8 platform, new RESTful web services features include the following:
+
+* Reactive Client API
++
+When the results of an invocation on a target resource are received, enhancements to the completion stage APIs in Java SE allow the sequence of those results to be specified, prioritized, combined, or concatenated, and how exceptions can be handled.
+* Enhancements in support for server-sent events
++
+Clients may subscribe to server-issued event notifications using a long-running connection. Support for a new media type, text/event-stream, has been added.
+* Support for  JSON-B objects, and improved integration with CDI, Servlet, and Bean Validation technologies
+
+The Java EE 8 platform requires JAX-RS 2.1.
 
 [[GJXSD]]
 
@@ -249,8 +253,8 @@ represent a generalization of the managed beans specified by JavaServer
 Faces technology and can be used anywhere in a Java EE application, not
 just in web modules.
 
-The Managed Beans specification is part of the Java EE 7 platform
-specification (JSR 342). The Java EE 7 platform requires Managed Beans
+The Managed Beans specification is part of the Java EE 8 platform
+specification (JSR 342). The Java EE 8 platform requires Managed Beans
 1.0.
 
 [[GJXVO]]
@@ -267,7 +271,14 @@ CDI also has many broader uses, allowing developers a great deal of
 flexibility to integrate different kinds of components in a loosely
 coupled but typesafe way.
 
-The Java EE 7 platform requires CDI 1.1.
+In the Java EE 8 platform, new CDI features include the following:
+
+* An API for bootstrapping a CDI container in Java SE 8
+* Support for observer ordering, which determines the order in which the observer methods for a particular event are invoked, and support for firing events asynchronously
+* Configurators interfaces, which are used for dynamically defining and modifying CDI objects
+* Built-in annotation literals, a convenience feature for creating instances of annotations, and more
+
+The Java EE 8 platform requires CDI 2.0.
 
 [[GJXVG]]
 
@@ -282,7 +293,7 @@ In the Java EE platform, CDI provides support for Dependency Injection.
 Specifically, you can use injection points only in a CDI-enabled
 application.
 
-The Java EE 7 platform requires Dependency Injection for Java 1.0.
+The Java EE 8 platform requires Dependency Injection for Java 1.0.
 
 [[GJXTY]]
 
@@ -296,7 +307,13 @@ validation of data over several layers, such as the browser and the
 server side, you can define the validation constraints in one place and
 share them across the different layers.
 
-The Java EE 7 platform requires Bean Validation 1.1.
+In the Java EE 8 platform, new Bean Validation features include the following:
+
+* Support for new features in Java SE 8, such as the Date-Time API
+* Addition of new built-in Bean Validation constraints
+
+
+The Java EE 8 platform requires Bean Validation 2.0.
 
 [[BNACQ]]
 
@@ -309,16 +326,7 @@ Java EE application components to create, send, receive, and read
 messages. It enables distributed communication that is loosely coupled,
 reliable, and asynchronous.
 
-In the platform, new features of JMS include the following.
-
-* A new, simplified API offers a simpler alternative to the previous
-API. This API includes a `JMSContext` object that combines the functions
-of a `Connection` and a `Session`.
-* All objects with a `close` method implement the
-`java.lang.Autocloseable` interface so that they can be used in a Java
-SE 7 `try`-with-resources statement.
-
-The Java EE 7 platform requires JMS 2.0.
+The Java EE 8 platform requires JMS 2.0.
 
 [[BNACZ]]
 
@@ -345,7 +353,7 @@ component models. Thus JAX-WS and the Java EE Connector Architecture are
 complementary technologies for enterprise application integration (EAI)
 and end-to-end business integration.
 
-The Java EE 7 platform requires Java EE Connector Architecture 1.7.
+The Java EE 8 platform requires Java EE Connector Architecture 1.7.
 
 [[BNACS]]
 
@@ -363,7 +371,7 @@ send mail
 The Java EE platform includes the JavaMail API with a service provider
 that allows application components to send Internet mail.
 
-The Java EE 7 platform requires JavaMail 1.5.
+The Java EE 8 platform requires JavaMail 1.5.
 
 [[GIRBE]]
 
@@ -384,7 +392,7 @@ that use the new permission classes to address the authorization
 requirements of the Java EE platform, including the definition and use
 of roles.
 
-The Java EE 7 platform requires JACC 1.5.
+The Java EE 8 platform requires JACC 1.5.
 
 [[GIRGP]]
 
@@ -405,7 +413,7 @@ message sender. Authentication providers authenticate each incoming
 message and return to their calling containers the identity established
 as a result of the message authentication.
 
-The Java EE 7 platform requires JASPIC 1.1.
+The Java EE 8 platform requires JASPIC 1.1.
 
 [[CJAHDJBJ]]
 
@@ -419,8 +427,7 @@ enables Java EE applications to create endpoints using annotations that
 specify the configuration parameters of the endpoint and designate its
 lifecycle callback methods.
 
-The WebSocket API is new to the Java EE 7 platform. The Java EE 7
-platform requires Java API for WebSocket 1.0.
+The Java EE 8 platform requires Java API for WebSocket 1.0.
 
 [[CJAGIEEI]]
 
@@ -434,8 +441,48 @@ for JSON Processing (JSON-P) enables Java EE applications to parse,
 transform, and query JSON data using the object model or the streaming
 model.
 
-JSON-P is new to the Java EE 7 platform. The Java EE 7 platform requires
-JSON-P 1.0.
+In the Java EE 8 platform, new features of JSON-P include support for the following:
+
+* JavaScript Object Notation (JSON) Pointer
++
+Defines a string syntax for referencing a specific value within a JSON document. JSON Pointer includes APIs for extracting values from a target document and transforming them to create a new JSON document.
+* JavaScript Object Notation (JSON) Patch
++
+Defines a format for expressing a sequence of operations to be applied to a JSON document.
+* JavaScript Object Notation (JSON) Merge Patch
++
+Defines a format and processing rules for applying operations to a JSON document that are based upon specific content of the target document.
+* The addition of editing and transformation functions to basic JSON document processing.
+* Helper classes and methods, called JSON Collectors, which leverage features of the Stream API that was introduced in Java SE 8.
+
+The Java EE 8 platform requires JSON-P 1.1.
+
+[[java-ee-security-api]]
+Java EE Security API
+~~~~~~~~~~~~~~~~~~~~
+
+The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
+Java EE Security introduces the following APIs:
+
+* `SecurityContext` interface
++
+Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.
+* `HttpAuthenticationMechanism` interface
++
+Authenticates callers of a web application, and is specified only for use in the servlet container.
+*`IdentityStore` interface
++
+Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.
+
+The Java EE 8 platform requires Java EE Security API 1.0.
+
+[[java-api-for-json-binding]]
+Java API for JSON Binding
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Java API for JSON Binding (JSON-B) provides a binding layer for converting Java objects to and from JSON messages. JSON-B also supports the ability to customize the default mapping process used in this binding layer through the use of Java annotations for a given field, JavaBean property, type or package, or by providing an implementation of a property naming strategy.
+
+JSON-B is new to the Java EE 8 platform. The Java EE 8 platform requires JSON-B 1.0.
 
 [[CJAFGFCJ]]
 
@@ -448,8 +495,7 @@ asynchronous capabilities to Java EE application components through the
 following types of objects: managed executor service, managed scheduled
 executor service, managed thread factory, and context service.
 
-Concurrency Utilities for Java EE is new to the Java EE 7 platform. The
-Java EE 7 platform requires Concurrency Utilities for Java EE 1.0.
+The Java EE 8 platform requires Concurrency Utilities for Java EE 1.0.
 
 [[CJAJHGIH]]
 
@@ -464,8 +510,5 @@ Java applications. The batch framework consists of a batch runtime, a
 job specification language based on XML, a Java API to interact with the
 batch runtime, and a Java API to implement batch artifacts.
 
-Batch Applications for the Java Platform is new to the Java EE 7
-platform. The Java EE 7 platform requires Batch Applications for the
+The Java EE 8 platform requires Batch Applications for the
 Java Platform 1.0.
-
-

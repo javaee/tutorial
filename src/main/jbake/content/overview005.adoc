@@ -66,7 +66,7 @@ in another production environment.
 The container also manages nonconfigurable services, such as enterprise
 bean and servlet lifecycles, database connection resource pooling, data
 persistence, and access to the Java EE platform APIs (see
-link:overview008.html#BNACJ[Java EE 7 APIs]).
+link:overview008.html#BNACJ[Java EE 8 APIs]).
 
 [[BNABQ]]
 
@@ -99,5 +99,3 @@ client components. Application clients and their container run on the
 client.
 * Applet container: Manages the execution of applets. Consists of a web
 browser and a Java Plug-in running on the client together.
-
-
