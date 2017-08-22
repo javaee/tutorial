@@ -4,8 +4,8 @@ title=Introduction to Bean Validation
 next=bean-validation001.html
 prev=partbeanvalidation.html
 ~~~~~~
-Introduction to Bean Validation
-===============================
+= Introduction to Bean Validation
+
 
 [[CHDGJIIA]]
 
@@ -14,8 +14,7 @@ Introduction to Bean Validation
 ----------------------------------
 
 
-This chapter describes Bean Validation available as part of the Java EE
-7 platform and the facility for validating objects, object members,
+This chapter describes Bean Validation available as part of the Java EE platform and the facility for validating objects, object members,
 methods, and constructors.
 
 The following topics are addressed here:
@@ -27,5 +26,3 @@ The following topics are addressed here:
 Methods]
 * link:bean-validation005.html#CACDECFE[Further Information about Bean
 Validation]
-
-
