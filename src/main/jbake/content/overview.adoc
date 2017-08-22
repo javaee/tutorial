@@ -23,16 +23,14 @@ programming, assembly, and deployment.
 The following topics are addressed here:
 
 * link:overview001.html#A1046550[Introduction to Java EE]
-* link:overview002.html#GIQVH[Java EE 7 Platform Highlights]
+* link:overview002.html#GIQVH[Java EE 8 Platform Highlights]
 * link:overview003.html#BNAAX[Java EE Application Model]
 * link:overview004.html#BNAAY[Distributed Multitiered Applications]
 * link:overview005.html#BNABO[Java EE Containers]
 * link:overview006.html#BNABS[Web Services Support]
 * link:overview007.html#BNABX[Java EE Application Assembly and
 Deployment]
-* link:overview008.html#BNACJ[Java EE 7 APIs]
-* link:overview009.html#GIRDR[Java EE 7 APIs in the Java Platform,
-Standard Edition 7]
+* link:overview008.html#BNACJ[Java EE 8 APIs]
+* link:overview009.html#GIRDR[Java EE 8 APIs in the Java Platform,
+Standard Edition 8]
 * link:overview010.html#BNADF[GlassFish Server Tools]
-
-

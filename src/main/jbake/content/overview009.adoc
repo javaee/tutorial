@@ -1,10 +1,12 @@
 type=page
 status=published
-title=Java EE 7 APIs in the Java Platform, Standard Edition 7
+title=Java EE 8 APIs in the Java Platform, Standard Edition 8
 next=overview010.html
 prev=overview008.html
 ~~~~~~
-= Java EE 7 APIs in the Java Platform, Standard Edition 7
+
+= Java EE 8 APIs in the Java Platform, Standard Edition 8
+
 
 
 [[GIRDR]]
@@ -36,7 +38,7 @@ access a database
 * A service provider interface to attach a JDBC driver to the Java EE
 platform
 
-The Java SE 7 platform requires JDBC 4.1.
+The Java EE 8 platform requires JDBC 4.1.
 
 [[BNADC]]
 
@@ -123,7 +125,7 @@ case it provides a standard data binding for web service messages. All
 Java EE application client containers, web containers, and EJB
 containers support the JAXB API.
 
-The Java EE 7 platform requires JAXB 2.2.
+The Java EE 8 platform requires JAXB 2.2.
 
 [[BNACV]]
 
@@ -150,7 +152,7 @@ namespace as their associated component. Custom serializers and
 deserializers, if supported, are treated in the same way as message
 handlers.
 
-The Java EE 7 platform requires JAX-WS 2.2.
+The Java EE 8 platform requires JAX-WS 2.2.
 
 [[BNACX]]
 

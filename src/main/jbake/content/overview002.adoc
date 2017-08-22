@@ -4,12 +4,15 @@ title=Java EE 8 Platform Highlights
 next=overview003.html
 prev=overview001.html
 ~~~~~~
+
 = Java EE 8 Platform Highlights
+
 
 
 [[GIQVH]]
 
 [[java-ee-8-platform-highlights]]
+
 Java EE 8 Platform Highlights
 -----------------------------
 
@@ -20,21 +23,28 @@ improvements with more annotations and less XML configuration, more
 Plain Old Java Objects (POJOs), and simplified packaging. The Java EE 8
 platform includes the following new features:
 
+
+The key goals of the Java EE 8 platform are to modernize the infrastructure for enterprise Java for the cloud and microservices environments, emphasize HTML5 and HTTP/2 support, enhance ease of development through new Contexts and Dependency Injection features, and further enhance security and reliability of the platform. The Java EE 8 platform includes the following new features:
+
 * New technologies, including the following:
 
-** link:overview008.html#CJAJHGIH[Batch Applications for the Java
-Platform]
+** link:overview008.html#java-api-for-json-binding[Java API for JSON Binding]
+** link:overview008.html#java-ee-security-api[Java EE Security API]
 
-** link:overview008.html#CJAFGFCJ[Concurrency Utilities for Java EE]
+* New object model improvements for JSON Processing (see
+link:overview008.html#java-api-for-json-processing[Java API for JSON Processing] for details), including support for the following:
+** JavaScript Object Notation (JSON) Pointer
+** JavaScript Object Notation (JSON) Patch
+** JavaScript Object Notation (JSON) Merge Patch
 
-** link:overview008.html#CJAGIEEI[Java API for JSON Processing] (JSON-P)
-
-** link:overview008.html#CJAHDJBJ[Java API for WebSocket]
-* New features for EJB components (see
-link:overview008.html#BNACL[Enterprise JavaBeans Technology] for details)
-* New features for servlets (see link:overview008.html#BNACM[Java Servlet
-Technology] for details)
-* New features for JavaServer Faces components (see
+* New features for RESTful web services (see link:overview008.html#java-api-for-restful-web-services[Java API for RESTful Web Services] for details)
+* New features for servlets (see
+link:overview008.html#java-servlet-technology[Java Servlet Technology] for details)
+* New features for JavaServer Faces components (see link:overview008.html#javaserver-faces-technology[JavaServer Faces Technology] for details)
+* New Contexts and Dependency Injection features (see link:overview008.html#contexts-and-dependency-injection-for-java-ee[Contexts and Dependency Injection for Java EE] for details)
+* New JavaBean validation features (see link:overview008.html#bean-validation[Bean Validation] for details)
+=======
 link:overview008.html#BNACP[JavaServer Faces Technology] for details)
 * New features for the Java Message Service (JMS) (see
 link:overview008.html#BNACQ[Java Message Service API] for details)
+
