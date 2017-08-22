@@ -22,11 +22,9 @@ For more information about RESTful web services and JAX-RS, see
 * RESTful Web Services, by Leonard Richardson and Sam Ruby, available
 from O'Reilly Media at
 `http://shop.oreilly.com/product/9780596529260.do`
-* JSR 339: JAX-RS 2.0: The Java API for RESTful Web Services:
+* JSR 370: JAX-RS 2.1: The Java API for RESTful Web Services:
 +
-`http://jcp.org/en/jsr/detail?id=339`
+`http://jcp.org/en/jsr/detail?id=370`
 * Jersey project:
 +
 `https://jersey.java.net/`
-
-

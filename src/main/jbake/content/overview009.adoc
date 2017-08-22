@@ -4,7 +4,9 @@ title=Java EE 8 APIs in the Java Platform, Standard Edition 8
 next=overview010.html
 prev=overview008.html
 ~~~~~~
+
 = Java EE 8 APIs in the Java Platform, Standard Edition 8
+
 
 
 [[GIRDR]]
