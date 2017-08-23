@@ -4,8 +4,8 @@ title=Validating Constructors and Methods
 next=bean-validation005.html
 prev=bean-validation003.html
 ~~~~~~
-Validating Constructors and Methods
-===================================
+# Validating Constructors and Methods
+
 
 [[CACJIBEJ]]
 
@@ -24,7 +24,7 @@ public class Employee {
   public Employee (@NotNull String name) { ... }
 
   public void setSalary(
-      @NotNull 
+      @NotNull
       @Digits(integer=6, fraction=2) BigDecimal salary,
       @NotNull
       @ValidCurrency
@@ -93,8 +93,20 @@ constraint annotation may be set to `ConstraintTarget.RETURN_VALUE` or
 validation constraint.
 
 |=======================================================================
+#### Validating Type Arguments of Parameterized Types
 
+[[validating_type_arguments_of_parameterized_types]]
+In Bean Validation 2.0, you can apply constraints to the type arguments of parameterized types. For example: `List<@NotNull Long> numbers;`
+Constraints can be applied to elements of container types such as `List`, `Map`, `Optional`, and others.
+[source,oac_no_warn]
+----
+List<@Email String> emails;
+public Map<@NotNull String, @USPhoneNumber String> getAddressesByType() { }
 
+----
+In this sample, `@Email` is an in-built constraint supported by Bean Validation, and `@USPhoneNumber` is a user-defined constraint. See link:bean-validation-advanced001.html#GKAIA[Using the Built-In Constraints to Make a New Constraint].
+
+`@USPhoneNumber` has `ElementType.TYPE_USE` as one of its `@Target`, and therefore it is possible to use `@USPhoneNumber` constraint for validating type arguments of parameterized types.
 [[sthref123]]
 
 [[identifying-parameter-constraint-violations]]
@@ -138,5 +150,3 @@ public Employee getManager(Employee employee) { ... }
 
 See link:bean-validation-advanced001.html#CIHCICAI[Removing Ambiguity in
 Constraint Targets] for more information.
-
-
