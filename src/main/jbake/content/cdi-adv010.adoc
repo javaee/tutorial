@@ -1,0 +1,20 @@
+type=page
+status=published
+title=Using the Configurators Interfaces
+next=cdi-adv-examples.html
+prev=cdi-adv009.html
+~~~~~~
+= Using the Configurators Interfaces
+
+[[using-the-configurators-interfaces]]
+Using the Configurators Interfaces
+--------------------------------------
+
+The CDI 2.0 specification defines the following Configurators interface, which is available to CDI applications in matching container lifecycle events:
+
+* `AnnotatedTypeConfigurator` SPI for `AnnotatedType` configuration
+* `InjectionPointConfigurator` interface for `InjectionPoint` configuration
+* `BeanAttributesConfigurator` interface for `BeanAttributes` configuration
+* `BeanConfigurator` interface for `Bean` configuration
+* `ObserverMethodConfigurator` interface for `ObserverMethod` configuration
+* `ProducerConfigurator` interface for `Producer` configuration

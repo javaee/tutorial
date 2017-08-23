@@ -1,0 +1,31 @@
+type=page
+status=published
+title=Using the Built-In Annotation Literals
+next=cdi-adv010.html
+prev=cdi-adv008.html
+~~~~~~
+= Using the Built-In Annotation Literals
+
+[[using-the-built-in-annotation-literals]]
+Using the Built-In Annotation Literals
+--------------------------------------
+
+The following built-in annotations define a `Literal` static nested class, which can be used as a convenience feature for creating instances of annotations:
+
+* `javax.enterprise.inject.Any`
+* `javax.enterprise.inject.Default`
+* `javax.enterprise.inject.New`
+* `javax.enterprise.inject.Specializes`
+* `javax.enterprise.inject.Vetoed`
+* `javax.enterprise.util.Nonbinding`
+* `javax.enterprise.context.Initialized`
+* `javax.enterprise.context.Destroyed`
+* `javax.enterprise.context.RequestScoped`
+* `javax.enterprise.context.SessionScoped`
+* `javax.enterprise.context.ApplicationScoped`
+* `javax.enterprise.context.Dependent`
+* `javax.enterprise.context.ConversationScoped`
+* `javax.enterprise.inject.Alternative`
+* `javax.enterprise.inject.Typed`
+
+For example:
