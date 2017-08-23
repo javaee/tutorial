@@ -4,8 +4,8 @@ title=Using Bean Validation Constraints
 next=bean-validation003.html
 prev=bean-validation001.html
 ~~~~~~
-Using Bean Validation Constraints
-=================================
+# Using Bean Validation Constraints
+
 
 [[GIRCZ]]
 
@@ -71,6 +71,13 @@ fractional digits for the number. a|
 BigDecimal price;
 ----
 
+|`@Email` |The value of the field or property must be a valid email address. a|
+[source,oac_no_warn]
+----
+@Email
+String emailaddress;
+----
+
 |`@Future` |The value of the field or property must be a date in the
 future. a|
 [source,oac_no_warn]
@@ -79,6 +86,13 @@ future. a|
 Date eventDate;
 ----
 
+|`@FutureOrPresent` |TThe value of the field or property must be a date or time in present or future. a|
+[source,oac_no_warn]
+----
+@FutureOrPresent
+Time travelTime;
+
+----
 |`@Max` |The value of the field or property must be an integer value
 lower than or equal to the number in the value element. a|
 [source,oac_no_warn]
@@ -94,14 +108,41 @@ greater than or equal to the number in the value element. a|
 @Min(5)
 int quantity;
 ----
+|`@Negative` |The value of the field or property must be a negative number. a|
+[source,oac_no_warn]
+----
+@Negative
+int basementFloor;
+----
 
-|`@NotNull` |The value of the field or property must not be null. a|
+|`@NegativeOrZero` |The value of the field or property must be negative or zero.
+ a|
+[source,oac_no_warn]
+----
+@NegativeOrZero
+int debtValue;
+----
+|`@NotBlank` |The value of the field or property must contain atleast one non-white space character.
+ a|
+[source,oac_no_warn]
+----
+@NotBlank
+String message;
+----
+|`@NotEmpty` |The value of the field or property must not be empty. The length of the characters or array, and the size of a collection or map are evaluated.
+ a|
+[source,oac_no_warn]
+----
+@NotEmpty
+String message;;
+----
+|`@NotNull` |The value of the field or property must not be null.
+ a|
 [source,oac_no_warn]
 ----
 @NotNull
 String username;
 ----
-
 |`@Null` |The value of the field or property must be null. a|
 [source,oac_no_warn]
 ----
@@ -116,13 +157,35 @@ a|
 @Past
 Date birthday;
 ----
-
+|`@PastOrPresent` |The value of the field or property must be a date or time in the past or present.
+a|
+[source,oac_no_warn]
+----
+@PastOrPresent
+Date travelDate;
+----
 |`@Pattern` |The value of the field or property must match the regular
 expression defined in the `regexp` element. a|
 [source,oac_no_warn]
 ----
 @Pattern(regexp="\\(\\d{3}\\)\\d{3}-\\d{4}")
 String phoneNumber;
+----
+
+|`@Positive` |The value of the field or property must be a positive number.
+a|
+[source,oac_no_warn]
+----
+@Positive
+BigDecimal area;
+----
+----
+|`@PositiveOrZero` |The value of the field or property must be a positive number or zero. .
+a|
+[source,oac_no_warn]
+----
+@PositiveOrZero
+int totalGoals;
 ----
 
 |`@Size` |The size of the field or property is evaluated and must match
@@ -147,10 +210,10 @@ built-in `@NotNull` constraint:
 [source,oac_no_warn]
 ----
 public class Name {
-    @NotNull 
+    @NotNull
     private String firstname;
 
-    @NotNull 
+    @NotNull
     private String lastname;
     ...
 }
@@ -167,7 +230,7 @@ public class Name {
     @Size(min=1, max=16)
     private String firstname;
 
-    @NotNull 
+    @NotNull
     @Size(min=1, max=16)
     private String lastname;
     ...
@@ -175,22 +238,79 @@ public class Name {
 ----
 
 The following example shows a method with a user-defined constraint that
-checks for a predefined email address pattern, such as a corporate email
-account:
+checks user-defined constraint that checks for a predefined phone number pattern, such as a country specific phone number:
 
 [source,oac_no_warn]
 ----
-@ValidEmail 
-public String getEmailAddress() {
-    return emailAddress;
+@USPhoneNumber
+public String getPhone() {
+    return phone;
 }
 ----
 
 For a built-in constraint, a default implementation is available. A
 user-defined or custom constraint needs a validation implementation. In
-the preceding example, the `@ValidEmail` custom constraint needs an
+the preceding example, the `@USPhoneNumber` custom constraint needs an
 implementation class.
 
+== Repeating Annotations
+
+[[repeating_annotations]]
+
+In Bean Validation 2.0, you can specify the same constraint several times on a validation target using repeating annotation:
+[source,oac_no_warn]
+----
+public class Account {
+
+    @Max (value = 2000, groups = Default.class, message = "max.value")
+    @Max (value = 5000, groups = GoldCustomer.class, message = "max.value")
+    private long withdrawalAmount;
+}
+
+----
+All in-built constraints from `javax .validation.constraints` package support repeatable annotations. Similarly, custom constraints can use `@Repeatable` annotation. In the following sample, depending on whether the group is `PeakHour` or `NonPeakHour`, the car instance is validated as either two passengers or three passengers based car, and then listed as eligible in the car pool lane:
+
+[source,oac_no_warn]
+----
+/**
+ * Validate whether a car is eligible for car pool lane
+ */
+@Documented
+@Constraint(validatedBy = CarPoolValidator.class)
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Retention(RUNTIME)
+@Repeatable(List.class)
+public @interface CarPool {
+
+    String message() default "{CarPool.message}";
+
+    Class<?>[] groups() default {};
+
+    int value();
+
+    Class<? extends Payload>[] payload() default {};
+
+    /**
+     * Defines several @CarPool annotations on the same element
+     * @see (@link CarPool}
+     */
+    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+    @Retention(RUNTIME)
+    @Documented
+    @interface List {
+        CarPool[] value();
+    }
+}
+public class Car{
+
+  private String registrationNumber;
+
+  @CarPool(value = 2, group = NonPeakHour.class)
+  @CarPool(value = 3, group = {Default.class, PeakHour.class})
+  private int totalPassengers;
+}
+
+----
 Any validation failures are gracefully handled and can be displayed by
 the `h:messages` tag.
 
@@ -206,5 +326,3 @@ Advanced Topics"]
 Validation]
 * link:persistence-intro002.html#GKAHQ[Validating Persistent Fields and
 Properties]
-
-
