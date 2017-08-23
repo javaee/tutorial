@@ -4,8 +4,8 @@ title=Validating Null and Empty Strings
 next=bean-validation004.html
 prev=bean-validation002.html
 ~~~~~~
-Validating Null and Empty Strings
-=================================
+# Validating Null and Empty Strings
+
 
 [[GKCRG]]
 
@@ -67,5 +67,3 @@ parameter `javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL`
 to `true`, the value of the managed bean attribute is passed to the Bean
 Validation runtime as a null value, causing the `@NotNull` constraint to
 fail.
-
-

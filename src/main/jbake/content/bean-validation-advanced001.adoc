@@ -4,8 +4,8 @@ title=Creating Custom Constraints
 next=bean-validation-advanced002.html
 prev=bean-validation-advanced.html
 ~~~~~~
-Creating Custom Constraints
-===========================
+# Creating Custom Constraints
+
 
 [[GKFGX]]
 
@@ -38,47 +38,51 @@ applied to component attributes with a single annotation.
 [source,oac_no_warn]
 ----
 @Pattern.List({
-  @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-    +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
-    +"@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-})
+  /* A number of format “+1-NNN-NNN-NNNN” */
+
+@Pattern(regexp = “\\+1-\\d{3}-\\d{3}-\\d{4})
+
 @Constraint(validatedBy = {})
 @Documented
 @Target({ElementType.METHOD,
     ElementType.FIELD,
     ElementType.ANNOTATION_TYPE,
     ElementType.CONSTRUCTOR,
-    ElementType.PARAMETER})
+    ElementType.PARAMETER
+    ElementType.Type_Use})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Email {
+@Repeatable(List.class)
+public @interface USPhoneNumber {
 
-    String message() default "{invalid.email}";
+String message() default "Not a valid US Phone Number";
 
-    Class<?>[] groups() default {};
+Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+Class<? extends Payload>[] payload() default {};
 
-    @Target({ElementType.METHOD,
-        ElementType.FIELD,
-        ElementType.ANNOTATION_TYPE,
-        ElementType.CONSTRUCTOR,
-        ElementType.PARAMETER})
-    @Retention(RetentionPolicy.RUNTIME)
-    @Documented
-    @interface List {
-        Email[] value();
-    }
+
+  @Target({ElementType.METHOD,
+     ElementType.FIELD,
+     ElementType.ANNOTATION_TYPE,
+     ElementType.CONSTRUCTOR,
+     ElementType.PARAMETER
+     ElementType.Type_Use })
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@interface List {
+USPhoneNumber[] value();
+
+}
+
 }
 ----
 
-This custom constraint can then be applied to an attribute.
+You can also implement a `Constraint Validator` to validate the constraint `@USPhoneNumber`. For more information about using `Constraint Validator`, see `javax.validation.ConstraintValidator`.
 
 [source,oac_no_warn]
 ----
-...
-@Email
-protected String email;
-...
+@USPhoneNumber
+protected String phone;
 ----
 
 [[CIHCICAI]]
@@ -115,5 +119,3 @@ public String doSomething(String param1, String param2) { ... }
 
 In the preceding example, the target is set to the return value of the
 method.
-
-
