@@ -32,19 +32,19 @@ constraints within a class hierarchy:
 ----
 public class Person {
 ...
-  public void setEmail(String email) { ... }
+  public void setPhone(String phone) { ... }
 }
 
 public class Employee extends Person {
 ...
   @Override
-  public void setEmail(@Verified String email) { ... }
+  public void setPhone(@Verified String phone) { ... }
 }
 ----
 
-By adding the `@Verified` constraint to `Employee.setEmail`, parameters
-that were valid with `Person.setEmail` will not be valid with
-`Employee.setEmail`. This is called strengthening the preconditions
+By adding the `@Verified` constraint to `Employee.setPhone`, parameters
+that were valid with `Person.setPhone` will not be valid with
+`Employee.setPhone`. This is called strengthening the preconditions
 (that is, the method parameters) of a subtype's method. You may not
 strengthen the preconditions of subtype method calls.
 
@@ -57,20 +57,20 @@ method return values in a class hierarchy:
 public class Person {
 ...
   @Verified
-  public Email getEmail() { ... }
+  public USPhoneNumber getPhone() { ... }
 }
 
 public class Employee extends Person {
 ...
   @Override
-  public Email getEmail() { ... }
+  public USPhoneNumber getPhone() { ... }
 }
 ----
 
-In this example, the `Employee.getEmail` method removes the `@Verified`
+In this example, the `Employee.getPhone` method removes the `@Verified`
 constraint on the return value. Return values that would be not pass
 validation when calling `Person.getEmail` are allowed when calling
-`Employee.getEmail`. This is called weakening the postconditions (that
+`Employee.getPhone`. This is called weakening the postconditions (that
 is, return values) of a subtype. You may not weaken the postconditions
 of a subtype method call.
 
@@ -127,5 +127,3 @@ methods in a subtype that was originally declared in several parallel
 types.
 * You may add return value constraints to an overridden or implemented
 method in a subtype.
-
-

@@ -15,7 +15,7 @@ Further Information about Bean Validation
 
 For more information on Bean Validation, see
 
-* Bean Validation 1.2 Specification:
+* Bean Validation 2.0 Specification:
 +
 `http://www.jcp.org/en/jsr/detail?id=380`
 * Bean Validation Specification website:
