@@ -1,17 +1,17 @@
 type=page
 status=published
-title=Java EE 8 APIs
+title=Java EE APIs
 next=overview009.html
 prev=overview007.html
 ~~~~~~
-= Java EE 8 APIs
+= Java EE APIs
 
 
 [[BNACJ]]
 
-[[java-ee-8-apis]]
-Java EE 8 APIs
---------------
+[[java-ee-apis]]
+Java EE APIs
+------------
 
 link:#BNACK[Figure 1-6] shows the relationships among the Java EE
 containers.
@@ -22,7 +22,7 @@ containers.
 image:img/javaeett_dt_006.png[
 "Diagram of Java EE containers and their relationships"]
 
-link:#GJQMG[Figure 1-7] shows the availability of the Java EE 8 APIs in
+link:#GJQMG[Figure 1-7] shows the availability of the Java EE APIs in
 the web container.
 
 [[GJQMG]]
@@ -31,7 +31,7 @@ the web container.
 image:img/javaeett_dt_007.png[
 "Diagram of Java EE APIs in the web container"]
 
-link:#GJQMN[Figure 1-8] shows the availability of the Java EE 8 APIs in
+link:#GJQMN[Figure 1-8] shows the availability of the Java EE APIs in
 the EJB container.
 
 [[GJQMN]]
@@ -40,7 +40,7 @@ the EJB container.
 image:img/javaeett_dt_008.png[
 "Diagram of Java EE APIs in the EJB container"]
 
-link:#GJQNH[Figure 1-9] shows the availability of the Java EE 8 APIs in
+link:#GJQNH[Figure 1-9] shows the availability of the Java EE APIs in
 the application client container.
 
 [[GJQNH]]
@@ -130,7 +130,7 @@ include the following:
 
 * Direct support for WebSockets via the new `<f:websocket>` tag
 * Class-level bean validation via the new `<f:validateWholeBean>` tag
-* A CDI compatible `@ManagedProperty` annotation
+* A CDI-compatible `@ManagedProperty` annotation
 * Enhanced component search expression framework
 
 The Java EE 8 platform requires JavaServer Faces 2.3 and Expression
@@ -153,7 +153,7 @@ that contains two types of text:
 HTML or XML
 * JSP elements, which determine how the page constructs dynamic content
 
-For information about JSP technology, see the The Java EE 5 Tutorial at
+For information about JSP technology, see _The Java EE 5 Tutorial_ at
 `http://docs.oracle.com/javaee/5/tutorial/doc/`.
 
 The Java EE 8 platform requires JavaServer Pages 2.3 for compatibility
@@ -435,7 +435,7 @@ The Java EE 8 platform requires Java API for WebSocket 1.0.
 Java API for JSON Processing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-JSON is a text-based data exchange format derived from JavaScript that
+JavaScript Object Notation (JSON) is a text-based data exchange format derived from JavaScript that
 is used in web services and other connected applications. The Java API
 for JSON Processing (JSON-P) enables Java EE applications to parse,
 transform, and query JSON data using the object model or the streaming
@@ -443,13 +443,13 @@ model.
 
 In the Java EE 8 platform, new features of JSON-P include support for the following:
 
-* JavaScript Object Notation (JSON) Pointer
+* JSON Pointer
 +
 Defines a string syntax for referencing a specific value within a JSON document. JSON Pointer includes APIs for extracting values from a target document and transforming them to create a new JSON document.
-* JavaScript Object Notation (JSON) Patch
+* JSON Patch
 +
 Defines a format for expressing a sequence of operations to be applied to a JSON document.
-* JavaScript Object Notation (JSON) Merge Patch
+* JSON Merge Patch
 +
 Defines a format and processing rules for applying operations to a JSON document that are based upon specific content of the target document.
 * The addition of editing and transformation functions to basic JSON document processing.
@@ -470,7 +470,7 @@ Provides a common, uniform access point that enables an application to test aspe
 * `HttpAuthenticationMechanism` interface
 +
 Authenticates callers of a web application, and is specified only for use in the servlet container.
-*`IdentityStore` interface
+* `IdentityStore` interface
 +
 Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.
 
