@@ -4,8 +4,8 @@ title=Using Events in CDI Applications
 next=cdi-adv006.html
 prev=cdi-adv004.html
 ~~~~~~
-Using Events in CDI Applications
-================================
+= Using Events in CDI Applications
+
 
 [[GKHIC]]
 
@@ -15,7 +15,7 @@ Using Events in CDI Applications
 
 Events allow beans to communicate without any compile-time dependency.
 One bean can define an event, another bean can fire the event, and yet
-another bean can handle the event. The beans can be in separate packages
+another bean can handle the event. In addition, events can be fired asynchronously. The beans can be in separate packages
 and even in separate tiers of the application.
 
 [[GKHHY]]
@@ -79,6 +79,10 @@ public void debitPayment(@Observes @Debit PaymentEvent event) {
 }
 ----
 
+[[conditional-and-transactional-observer-methods]]
+Conditional and Transactional Observer Methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Observer methods can also be conditional or transactional:
 
 * A conditional observer method is notified of an event only if an
@@ -124,13 +128,32 @@ the observer method is nontransactional, the exception terminates
 processing of the event, and no other observer methods for the event are
 called.
 
+[[observer-method-ordering]]
+Observer Method Ordering
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before a certain observer event notification is generated, the container determines the order in which observer methods for that event are invoked. Observer method order is established through the declaration of the `@Priority` annotation on an event parameter of an observer method, as in the following example:
+
+[source,oac_no_warn]
+----
+void afterLogin(@Observes @Priority(javax.interceptor.Interceptor.Priority.APPLICATION) LoggedInEvent event) { ... }
+----
+
+If the `@Priority` annotation is not specified, the default value is `javax.interceptor.Interceptor.Priority.APPLICATION + 500`.
+
 [[GKHIH]]
 
 [[firing-events]]
 Firing Events
 ~~~~~~~~~~~~~
 
-To activate an event, call the `javax.enterprise.event.Event.fire`
+Beans fire events by implementing an instance of the `javax.enterprise.event.Event` interface. Events can be fired synchronously or asynchronously.
+
+[[firing-events-synchronously]]
+Firing Events Synchronously
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To activate an event synchronously, call the `javax.enterprise.event.Event.fire`
 method. This method fires an event and notifies any observer methods.
 
 In the `billpayment` example, a managed bean called `PaymentBean` fires
@@ -161,12 +184,12 @@ fire, using `new` to create the payload.
         switch (paymentOption) {
             case DEBIT:
                 PaymentEvent debitPayload = new PaymentEvent();
-                // populate payload ... 
+                // populate payload ...
                 debitEvent.fire(debitPayload);
                 break;
             case CREDIT:
                 PaymentEvent creditPayload = new PaymentEvent();
-                // populate payload ... 
+                // populate payload ...
                 creditEvent.fire(creditPayload);
                 break;
             default:
@@ -179,4 +202,8 @@ fire, using `new` to create the payload.
 The argument to the `fire` method is a `PaymentEvent` that contains the
 payload. The fired event is then consumed by the observer methods.
 
+[[firing-events-asynchronously]]
+Firing Events Asynchronously
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+To activate an event asynchronously, call the `javax.enterprise.event.Event.fireAsync` method. When events are fired asynchronously, observer methods are notified asynchronously; consequently, observer method ordering cannot be guaranteed. Observer method invocation and the firing of asynchronous events occur on separate threads. 

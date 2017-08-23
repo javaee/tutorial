@@ -4,8 +4,8 @@ title=Building and Running the CDI Samples
 next=cdi-basicexamples002.html
 prev=cdi-basicexamples.html
 ~~~~~~
-Building and Running the CDI Samples
-====================================
+= Building and Running the CDI Samples
+
 
 [[A1250045]]
 
@@ -13,7 +13,7 @@ Building and Running the CDI Samples
 Building and Running the CDI Samples
 ------------------------------------
 
-The examples are in the tut-install`/examples/cdi/` directory.
+The examples are in the `_tut-install_/examples/cdi/` directory.
 
 To build and run the examples, you will do the following:
 
@@ -30,5 +30,3 @@ The following topics are addressed here:
 
 * link:cdi-basicexamples002.html#GJBJU[The simplegreeting CDI Example]
 * link:cdi-basicexamples003.html#GJCXV[The guessnumber-cdi CDI Example]
-
-

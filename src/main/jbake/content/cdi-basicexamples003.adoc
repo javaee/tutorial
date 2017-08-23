@@ -4,8 +4,7 @@ title=The guessnumber-cdi CDI Example
 next=cdi-adv.html
 prev=cdi-basicexamples002.html
 ~~~~~~
-The guessnumber-cdi CDI Example
-===============================
+= The guessnumber-cdi CDI Example
 
 [[GJCXV]]
 
@@ -38,7 +37,7 @@ The following topics are addressed here:
 The guessnumber-cdi Source Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The four source files for the `guessnumber-cdi` example are
+The four source files for the `guessnumber-cdi` example are:
 
 * The `@MaxNumber` qualifier interface
 * The `@Random` qualifier interface
@@ -46,7 +45,7 @@ The four source files for the `guessnumber-cdi` example are
 * The `UserNumberBean` managed bean
 
 The source files are located in the
-tut-install`/examples/cdi/guessnumber-cdi/src/main/java/javaeetutorial/guessnumber`
+`_tut-install_/examples/cdi/guessnumber-cdi/src/main/java/javaeetutorial/guessnumber`
 directory.
 
 [[GJDJP]]
@@ -127,7 +126,7 @@ public class Generator implements Serializable {
 
     private static final long serialVersionUID = -7213673465118041882L;
 
-    private final java.util.Random random = 
+    private final java.util.Random random =
         new java.util.Random( System.currentTimeMillis() );
 
     private final int maxNumber = 100;
@@ -247,7 +246,7 @@ public class UserNumberBean implements Serializable {
             minimum = userNumber + 1;
         }
         if (userNumber == number) {
-            FacesContext.getCurrentInstance().addMessage(null, 
+            FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("Correct!"));
         }
         remainingGuesses--;
@@ -263,8 +262,8 @@ public class UserNumberBean implements Serializable {
         this.number = randomInt.get();
     }
 
-    public void validateNumberRange(FacesContext context, 
-                                    UIComponent toValidate, 
+    public void validateNumberRange(FacesContext context,
+                                    UIComponent toValidate,
                                     Object value) {
         int input = (Integer) value;
 
@@ -290,7 +289,7 @@ uses. The `index.xhtml` file, however, is more complex.
 [source,oac_no_warn]
 ----
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
@@ -303,14 +302,14 @@ uses. The `index.xhtml` file, however, is more complex.
         <ui:define name="content">
             <h:form id="GuessMain">
                 <div style="color: black; font-size: 24px;">
-                    <p>I'm thinking of a number from 
-                    <span style="color: blue">#{userNumberBean.minimum}</span> 
-                    to 
-                    <span style="color: blue">#{userNumberBean.maximum}</span>. 
-                    You have 
+                    <p>I'm thinking of a number from
+                    <span style="color: blue">#{userNumberBean.minimum}</span>
+                    to
+                    <span style="color: blue">#{userNumberBean.maximum}</span>.
+                    You have
                     <span style="color: blue">
                         #{userNumberBean.remainingGuesses}
-                    </span> 
+                    </span>
                     guesses.</p>
                 </div>
                 <h:panelGrid border="0" columns="5" style="font-size: 18px;">
@@ -339,7 +338,7 @@ rendered="#{userNumberBean.number lt userNumberBean.userNumber and userNumberBea
                 </div>
             </h:form>
         </ui:define>
-        
+
     </ui:composition>
 </html>
 ----
@@ -347,9 +346,9 @@ rendered="#{userNumberBean.number lt userNumberBean.userNumber and userNumberBea
 The Facelets page presents the user with the minimum and maximum values
 and the number of guesses remaining. The user's interaction with the
 game takes place within the `panelGrid` table, which contains an input
-field, Guess and Reset buttons, and a field that appears if the guess is
-higher or lower than the correct number. Every time the user clicks the
-Guess button, the `userNumberBean.check` method is called to reset the
+field, *Guess* and *Reset* buttons, and a field that appears if the guess is
+higher or lower than the correct number. Every time the user clicks
+*Guess*, the `userNumberBean.check` method is called to reset the
 maximum or minimum value or, if the guess is correct, to generate a
 `FacesMessage` to that effect. The method that determines whether each
 guess is valid is `userNumberBean.validateNumberRange`.
@@ -374,24 +373,23 @@ Using Maven]
 [[GJDPS]]
 
 [[to-build-package-and-deploy-the-guessnumber-cdi-example-using-netbeans-ide]]
-To Build, Package, and Deploy the guessnumber-cdi Example Using NetBeans
-IDE
+To Build, Package, and Deploy the guessnumber-cdi Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
-2.  From the File menu, choose Open Project.
-3.  In the Open Project dialog box, navigate to:
+2.  From the *File* menu, choose *Open Project*.
+3.  In the *Open Project* dialog box, navigate to:
 +
 [source,oac_no_warn]
 ----
 tut-install/examples/cdi
 ----
 4.  Select the `guessnumber-cdi` folder.
-5.  Click Open Project.
-6.  In the Projects tab, right-click the `guessnumber-cdi` project and
-select Build.
+5.  Click *Open Project*.
+6.  In the *Projects* tab, right-click the `guessnumber-cdi` project and
+select *Build*.
 +
 This command builds and packages the application into a WAR file,
 `guessnumber-cdi.war`, located in the `target` directory, and then
@@ -406,7 +404,7 @@ To Build, Package, and Deploy the guessnumber-cdi Example Using Maven
 1.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
-2.  In a terminal window, go to:
+2.  In a terminal window, change to the following directory:
 +
 [source,oac_no_warn]
 ----
@@ -436,9 +434,9 @@ To Run the guessnumber Example
 http://localhost:8080/guessnumber-cdi
 ----
 +
-The Guess My Number page opens.
-2.  On the Guess My Number page, enter a number in the Number field and
-click Guess.
+The *Guess My Number* page opens.
+2.  On the *Guess My Number* page, enter a number in the *Number* field and
+click *Guess*.
 +
 The minimum and maximum values are modified, along with the remaining
 number of guesses.
@@ -446,7 +444,5 @@ number of guesses.
 guesses.
 +
 If you get the right answer or run out of guesses, the input field and
-Guess button are grayed out.
-4.  Click Reset to play the game again with a new random number.
-
-
+*Guess* button are grayed out.
+4.  Click *Reset* to play the game again with a new random number.
