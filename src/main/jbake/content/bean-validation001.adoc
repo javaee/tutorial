@@ -4,8 +4,8 @@ title=Overview of Bean Validation
 next=bean-validation002.html
 prev=bean-validation.html
 ~~~~~~
-Overview of Bean Validation
-===========================
+# Overview of Bean Validation
+
 
 [[A1101988]]
 
@@ -27,6 +27,4 @@ facility for validating objects, object members, methods, and
 constructors. In Java EE environments, Bean Validation integrates with
 Java EE containers and services to allow developers to easily define and
 enforce validation constraints. Bean Validation is available as part of
-the Java EE 7 platform.
-
-
+the Java EE platform.
