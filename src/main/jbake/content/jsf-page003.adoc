@@ -191,12 +191,9 @@ Tags]
 |Validator tags |link:jsf-page-core003.html#BNATC[Using the Standard
 Validators]
 
-|`f:ajax` and `f:websocket` a|
+|`f:ajax` a|
 link:jsf-ajax.html#GKIOW[Chapter 13, "Using Ajax with JavaServer Faces
 Technology"]
 
 
 |=======================================================================
-
-
-
