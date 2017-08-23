@@ -24,9 +24,10 @@ The Java EE 8 platform includes the following new features:
 
 * New object model improvements for JSON Processing (see
 link:overview008.html#java-api-for-json-processing[Java API for JSON Processing] for details), including support for the following:
-** JavaScript Object Notation (JSON) Pointer
-** JavaScript Object Notation (JSON) Patch
-** JavaScript Object Notation (JSON) Merge Patch
+
+** JSON Pointer
+** JSON Patch
+** JSON Merge Patch
 
 * New features for RESTful web services (see link:overview008.html#java-api-for-restful-web-services[Java API for RESTful Web Services] for details)
 * New features for servlets (see

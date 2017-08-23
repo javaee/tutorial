@@ -4,8 +4,8 @@ title=Injecting Objects by Using Producer Methods
 next=cdi-basic013.html
 prev=cdi-basic011.html
 ~~~~~~
-Injecting Objects by Using Producer Methods
-===========================================
+= Injecting Objects by Using Producer Methods
+
 
 [[GJDID]]
 
@@ -16,7 +16,7 @@ Injecting Objects by Using Producer Methods
 Producer methods provide a way to inject objects that are not beans,
 objects whose values may vary at runtime, and objects that require
 custom initialization. For example, if you want to initialize a numeric
-value defined by a qualifier named `@MaxNumber`, you can define the
+value defined by a qualifier named `@MaxNumber`, then you can define the
 value in a managed bean and then define a producer method,
 `getMaxNumber`, for it:
 
@@ -38,13 +38,13 @@ automatically invokes the producer method, initializing the value to
 @Inject @MaxNumber private int maxNumber;
 ----
 
-If the value can vary at runtime, the process is slightly different. For
+If the value can vary at runtime, then the process is slightly different. For
 example, the following code defines a producer method that generates a
 random number defined by a qualifier called `@Random`:
 
 [source,oac_no_warn]
 ----
-private java.util.Random random = 
+private java.util.Random random =
     new java.util.Random( System.currentTimeMillis() );
 
 java.util.Random getRandom() {
@@ -70,5 +70,3 @@ You then call the `get` method of the `Instance`:
 ----
 this.number = randomInt.get();
 ----
-
-

@@ -13,7 +13,7 @@ Injecting Beans
 Injecting Beans
 ---------------
 
-In order to use the beans you create, you inject them into yet another
+To use the beans you create, you inject them into yet another
 bean that can then be used by an application, such as a JavaServer Faces
 application. For example, you might create a bean called `Printer` into
 which you would inject one of the `Greeting` beans:
@@ -46,5 +46,3 @@ public class Printer {
 More is needed for the complete picture of this bean. Its use of scope
 needs to be understood. In addition, for a JavaServer Faces application,
 the bean needs to be accessible through the EL.
-
-

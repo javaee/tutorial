@@ -21,7 +21,7 @@ objects and to inject them into objects that are not container-managed.
 
 The following kinds of objects can be injected:
 
-* (Almost) any Java class
+* Almost any Java class
 * Session beans
 * Java EE resources: data sources, Java Message Service topics, queues,
 connection factories, and the like
@@ -49,5 +49,3 @@ This class becomes a bean that you can then inject into another class.
 This bean is not exposed to the EL in this form.
 link:cdi-basic009.html#GJBAK[Giving Beans EL Names] explains how you can
 make a bean accessible to the EL.
-
-

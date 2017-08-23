@@ -4,8 +4,7 @@ title=The simplegreeting CDI Example
 next=cdi-basicexamples003.html
 prev=cdi-basicexamples001.html
 ~~~~~~
-The simplegreeting CDI Example
-==============================
+= The simplegreeting CDI Example
 
 [[GJBJU]]
 
@@ -32,7 +31,7 @@ The following topics are addressed here:
 The simplegreeting Source Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The four source files for the `simplegreeting` example are
+The four source files for the `simplegreeting` example are:
 
 * The default `Greeting` class, shown in
 link:cdi-basic005.html#GIZKS[Beans as Injectable Objects]
@@ -44,7 +43,7 @@ interfaces, shown in full in link:cdi-basic010.html#GJBBP[Adding Setter
 and Getter Methods]
 
 The source files are located in the
-tut-install`/examples/cdi/simplegreeting/src/main/java/javaeetutorial/simplegreeting`
+`_tut-install_/examples/cdi/simplegreeting/src/main/java/javaeetutorial/simplegreeting`
 directory.
 
 [[GJDOJ]]
@@ -62,7 +61,7 @@ The template page, `template.xhtml`, looks like this:
 [source,oac_no_warn]
 ----
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
@@ -97,7 +96,7 @@ small form to the content:
 [source,oac_no_warn]
 ----
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
@@ -111,7 +110,7 @@ small form to the content:
             <h:form id="greetme">
                <p><h:outputLabel value="Enter your name: " for="name"/>
                   <h:inputText id="name" value="#{printer.name}"/></p>
-               <p><h:commandButton value="Say Hello" 
+               <p><h:commandButton value="Say Hello"
                                    action="#{printer.createSalutation}"/></p>
                <p><h:outputText value="#{printer.salutation}"/> </p>
             </h:form>
@@ -121,7 +120,7 @@ small form to the content:
 </html>
 ----
 +
-The form asks the user to enter a name. The button is labeled Say Hello,
+The form asks the user to enter a name. The button is labeled *Say Hello*,
 and the action defined for it is to call the `createSalutation` method
 of the `Printer` managed bean. This method in turn calls the `greet`
 method of the defined `Greeting` class.
@@ -129,7 +128,7 @@ method of the defined `Greeting` class.
 The output text for the form is the value of the greeting returned by
 the setter method. Depending on whether the default or the `@Informal`
 version of the greeting is injected, this is one of the following, where
-name is the name entered by the user:
+`name` is the name entered by the user:
 +
 [source,oac_no_warn]
 ----
@@ -139,7 +138,7 @@ Hi, name!
 ----
 +
 The Facelets page and template are located in the
-tut-install`/examples/cdi/simplegreeting/src/main/webapp/` directory.
+`_tut-install_/examples/cdi/simplegreeting/src/main/webapp/` directory.
 +
 The simple CSS file that is used by the Facelets page is in the
 following location:
@@ -175,17 +174,17 @@ To Build, Package, and Run the simplegreeting Example Using NetBeans IDE
 1.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
-2.  From the File menu, choose Open Project.
-3.  In the Open Project dialog box, navigate to:
+2.  From the *File* menu, choose *Open Project*.
+3.  In the *Open Project* dialog box, navigate to:
 +
 [source,oac_no_warn]
 ----
 tut-install/examples/cdi
 ----
 4.  Select the `simplegreeting` folder.
-5.  Click Open Project.
+5.  Click *Open Project*.
 6.  To modify the `Printer.java` file, perform these steps:
-1.  Expand the Source Packages node.
+1.  Expand the *Source Packages* node.
 2.  Expand the `greetings` node.
 3.  Double-click the `Printer.java` file.
 4.  In the editor, comment out the `@Informal` annotation:
@@ -197,8 +196,8 @@ tut-install/examples/cdi
 Greeting greeting;
 ----
 5.  Save the file.
-7.  In the Projects tab, right-click the `simplegreeting` project and
-select Build.
+7.  In the *Projects* tab, right-click the `simplegreeting` project and
+select *Build*.
 +
 This command builds and packages the application into a WAR file,
 `simplegreeting.war`, located in the `target` directory, and then
@@ -243,13 +242,13 @@ To Run the simplegreeting Example
 http://localhost:8080/simplegreeting
 ----
 +
-The Simple Greeting page opens.
+The *Simple Greeting* page opens.
 2.  Enter a name in the field.
 +
 For example, suppose that you enter `Duke`.
-3.  Click Say Hello.
+3.  Click *Say Hello*.
 +
-If you did not modify the `Printer.java` file, the following text string
+If you did not modify the `Printer.java` file, then the following text string
 appears below the button:
 +
 [source,oac_no_warn]
@@ -258,11 +257,9 @@ Hi, Duke!
 ----
 +
 If you commented out the `@Informal` annotation in the `Printer.java`
-file, the following text string appears below the button:
+file, then the following text string appears below the button:
 +
 [source,oac_no_warn]
 ----
 Hello, Duke.
 ----
-
-

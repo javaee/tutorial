@@ -4,8 +4,8 @@ title=Using Qualifiers
 next=cdi-basic007.html
 prev=cdi-basic005.html
 ~~~~~~
-Using Qualifiers
-================
+= Using Qualifiers
+
 
 [[GJBCK]]
 
@@ -20,7 +20,7 @@ bean. A qualifier type is a Java annotation defined as
 
 For example, you could declare an `@Informal` qualifier type and apply
 it to another class that extends the `Greeting` class. To declare this
-qualifier type, you would use the following code:
+qualifier type, use the following code:
 
 [source,oac_no_warn]
 ----
@@ -61,7 +61,7 @@ public class InformalGreeting extends Greeting {
 
 Both implementations of the bean can now be used in the application.
 
-If you define a bean with no qualifier, the bean automatically has the
+If you define a bean with no qualifier, then the bean automatically has the
 qualifier `@Default`. The unannotated `Greeting` class could be declared
 as follows:
 
@@ -78,5 +78,3 @@ public class Greeting {
     }
 }
 ----
-
-

@@ -4,8 +4,8 @@ title=Using Scopes
 next=cdi-basic009.html
 prev=cdi-basic007.html
 ~~~~~~
-Using Scopes
-============
+= Using Scopes
+
 
 [[GJBBK]]
 
@@ -83,7 +83,7 @@ do not contain client-visible state
 such as JavaBeans components and stateful session beans, whose state is
 shared by explicit reference passing between clients
 
-If, however, you create a Java EE component that is a managed bean, it
+However, if you create a Java EE component that is a managed bean, then it
 becomes a scoped object, which exists in a well-defined lifecycle
 context.
 
@@ -106,5 +106,3 @@ public class Printer {
 Beans that use session, application, or conversation scope must be
 serializable, but beans that use request scope do not have to be
 serializable.
-
-
