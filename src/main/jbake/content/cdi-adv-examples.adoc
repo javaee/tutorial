@@ -2,10 +2,10 @@ type=page
 status=published
 title=Running the Advanced Contexts and Dependency Injection Examples
 next=cdi-adv-examples001.html
-prev=cdi-adv008.html
+prev=cdi-adv010.html
 ~~~~~~
-Running the Advanced Contexts and Dependency Injection Examples
-===============================================================
+= Running the Advanced Contexts and Dependency Injection Examples
+
 
 [[GKHRE]]
 
@@ -31,5 +31,3 @@ Producer Fields to Generate Resources]
 Events and Interceptors]
 * link:cdi-adv-examples006.html#GKPAX[The decorators Example: Decorating
 a Bean]
-
-
