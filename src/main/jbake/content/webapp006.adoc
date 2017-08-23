@@ -17,9 +17,7 @@ For more information on web applications, see
 
 * JavaServer Faces 2.3 specification:
 +
-`http://jcp.org/en/jsr/detail?id=372`
+`https://jcp.org/en/jsr/detail?id=372`
 * Java Servlet 4.0 specification:
 +
-`http://jcp.org/en/jsr/detail?id=369`
-
-
+`https://jcp.org/en/jsr/detail?id=369`
