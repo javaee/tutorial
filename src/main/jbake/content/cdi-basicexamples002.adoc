@@ -184,10 +184,10 @@ tut-install/examples/cdi
 4.  Select the `simplegreeting` folder.
 5.  Click *Open Project*.
 6.  To modify the `Printer.java` file, perform these steps:
-1.  Expand the *Source Packages* node.
-2.  Expand the `greetings` node.
-3.  Double-click the `Printer.java` file.
-4.  In the editor, comment out the `@Informal` annotation:
+a.  Expand the *Source Packages* node.
+b.  Expand the `greetings` node.
+c.  Double-click the `Printer.java` file.
+d.  In the editor, comment out the `@Informal` annotation:
 +
 [source,oac_no_warn]
 ----
@@ -195,7 +195,7 @@ tut-install/examples/cdi
 //@Informal
 Greeting greeting;
 ----
-5.  Save the file.
+e.  Save the file.
 7.  In the *Projects* tab, right-click the `simplegreeting` project and
 select *Build*.
 +

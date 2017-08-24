@@ -4,8 +4,8 @@ title=The encoder Example: Using Alternatives
 next=cdi-adv-examples003.html
 prev=cdi-adv-examples001.html
 ~~~~~~
-The encoder Example: Using Alternatives
-=======================================
+= The encoder Example: Using Alternatives
+
 
 [[GKHPU]]
 
@@ -243,10 +243,10 @@ The encoded string appears in blue on the Result line. For example, if
 you enter `Java` and `4`, the result is `Neze`.
 3.  Now, edit the `beans.xml` file to enable the alternative
 implementation of `Coder`.
-1.  In the Projects tab, under the `encoder` project, expand the Web
+a.  In the Projects tab, under the `encoder` project, expand the Web
 Pages node, then expand the WEB-INF node.
-2.  Double-click the `beans.xml` file to open it.
-3.  Remove the comment characters that surround the `alternatives`
+b.  Double-click the `beans.xml` file to open it.
+c.  Remove the comment characters that surround the `alternatives`
 element, so that it looks like this:
 +
 [source,oac_no_warn]
@@ -255,7 +255,7 @@ element, so that it looks like this:
     <class>javaeetutorial.encoder.TestCoderImpl</class>
 </alternatives>
 ----
-4.  Save the file.
+d.  Save the file.
 4.  Right-click the `encoder` project and select Clean and Build.
 5.  In the web browser, reenter the URL to show the String Encoder page
 for the redeployed project:
@@ -322,13 +322,13 @@ The encoded string appears in blue on the Result line. For example, if
 you enter `Java` and `4`, the result is `Neze`.
 3.  Now, edit the `beans.xml` file to enable the alternative
 implementation of `Coder`.
-1.  In a text editor, open the following file:
+a.  In a text editor, open the following file:
 +
 [source,oac_no_warn]
 ----
 tut-install/examples/cdi/encoder/src/main/webapp/WEB-INF/beans.xml
 ----
-2.  Remove the comment characters that surround the `alternatives`
+b.  Remove the comment characters that surround the `alternatives`
 element, so that it looks like this:
 +
 [source,oac_no_warn]
@@ -337,7 +337,7 @@ element, so that it looks like this:
     <class>javaeetutorial.encoder.TestCoderImpl</class>
 </alternatives>
 ----
-3.  Save and close the file.
+c.  Save and close the file.
 4.  Enter the following command:
 +
 [source,oac_no_warn]
@@ -361,5 +361,3 @@ enter `Java` and `4`, the result is:
 ----
 Result: input string is Java, shift value is 4
 ----
-
-
