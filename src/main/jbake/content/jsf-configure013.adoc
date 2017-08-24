@@ -4,8 +4,8 @@ title=Basic Requirements of a JavaServer Faces Application
 next=servlets.html
 prev=jsf-configure012.html
 ~~~~~~
-Basic Requirements of a JavaServer Faces Application
-====================================================
+= Basic Requirements of a JavaServer Faces Application
+
 
 [[BNAXJ]]
 
@@ -300,5 +300,3 @@ XML files to fit your situation. However, you can continue to package
 your WAR files by using the directory structure described in this
 section, because this technique complies with the commonly accepted
 practice for packaging web applications.
-
-

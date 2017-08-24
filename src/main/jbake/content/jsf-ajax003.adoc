@@ -4,8 +4,8 @@ title=Using Ajax with Facelets
 next=jsf-ajax004.html
 prev=jsf-ajax002.html
 ~~~~~~
-Using Ajax with Facelets
-========================
+= Using Ajax with Facelets
+
 
 [[GKABR]]
 
@@ -132,5 +132,3 @@ Note that when you use the `f:ajax` tag in a Facelets page, the
 JavaScript resource library is loaded implicitly. This resource library
 can also be loaded explicitly as described in
 link:jsf-ajax010.html#GKAAM[Loading JavaScript as a Resource].
-
-

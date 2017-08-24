@@ -4,8 +4,8 @@ title=Using Annotations to Configure Managed Beans
 next=jsf-configure003.html
 prev=jsf-configure001.html
 ~~~~~~
-Using Annotations to Configure Managed Beans
-============================================
+= Using Annotations to Configure Managed Beans
+
 
 [[GIRCH]]
 
@@ -17,9 +17,10 @@ Using Annotations to Configure Managed Beans
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+[.lead]
+*Note*:
 
-In JSF 2.3, managed bean annotations are deprecated; CDI is nowthe
+In JSF 2.3, managed bean annotations are deprecated; CDI is now the
 preferred approach.
 
 |=======================================================================
@@ -100,5 +101,3 @@ inside of a single thread.
 If you are configuring a bean that allows attributes to be associated
 with the view, you can use the view scope. The attributes persist until
 the user has navigated to the next view.
-
-
