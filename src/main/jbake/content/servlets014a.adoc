@@ -1,0 +1,33 @@
+type=page
+status=published
+title=Server Push
+next=servlets014b.html
+prev=servlets014.html
+~~~~~~
+= Server Push
+
+
+[[server-push]]
+Server Push
+---------------------------
+
+Server push is the ability of the server to anticipate what will be
+needed by the client in advance of the client's request. It lets the server
+pre-populate the browser's cache in advance of the browser asking for the
+resource to put in the cache.
+
+Server push is the most visible of the improvements in HTTP/2 to appear in
+the servlet API. All of the new features in HTTP/2, including server push, are
+aimed at improving the performance of the web browsing experience.
+
+Server push derives its contribution to improved browser performance from the
+fact that servers know what additional assets (such as images, stylesheets,
+and scripts) go along with initial requests. For example, servers might know
+that whenever a browser requests `index.html`, it will shortly thereafter
+request `header.gif`, `footer.gif`, and `style.css`. Servers can preemptively
+start sending the bytes of these assets along with the bytes of the `index.html`.
+
+To use server push, obtain a reference to a `PushBuilder` from an `HttpServletRequest`,
+edit the builder as desired, then call `push()`. See the javadoc for the class
+`javax.servlet.http.PushBuilder` and the method
+`javax.servlet.http.HttpServletRequest.newPushBuilder()`.
