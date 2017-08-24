@@ -10,7 +10,7 @@ prev=cdi-adv009.html
 Using the Configurators Interfaces
 ----------------------------------
 
-The CDI 2.0 specification defines the following Configurators interface, which is available to CDI applications in matching container lifecycle events:
+The CDI 2.0 specification defines the following Configurators interface, which is available to CDI applications in matching container life cycle events:
 
 * `AnnotatedTypeConfigurator` SPI for `AnnotatedType` configuration
 * `InjectionPointConfigurator` interface for `InjectionPoint` configuration
