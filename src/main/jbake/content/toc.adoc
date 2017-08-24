@@ -3,8 +3,8 @@ status=published
 title=Java Platform, Enterprise Edition The Java EE Tutorial Java Platform, Enterprise Edition, Release 8
 next=title.html
 ~~~~~~
-Java Platform, Enterprise Edition The Java EE Tutorial Java Platform, Enterprise Edition, Release 8
-===================================================================================================
+= Java Platform, Enterprise Edition The Java EE Tutorial Java Platform, Enterprise Edition, Release 8
+
 
 [[contents]]
 Contents
@@ -929,6 +929,7 @@ Technology]
 ** link:servlets013.html#sthref109[Reading a Large HTTP POST Request
 Using Nonblocking I/O]
 * link:servlets014.html#BEIJHCDJ[Protocol Upgrade Processing]
+* link:servlets014a.html#server-push[Server Push]
 * link:servlets015.html#GKCPG[The mood Example Application]
 
 ** link:servlets015.html#CHDEBFCB[Components of the mood Example
@@ -3179,5 +3180,3 @@ Customer]
 ** link:dukes-forest004.html#CHDICAIJ[To Approve Shipment of a Product]
 
 ** link:dukes-forest004.html#CHDIFEGC[To Create a New Product]
-
-
