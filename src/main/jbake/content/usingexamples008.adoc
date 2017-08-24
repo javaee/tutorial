@@ -4,8 +4,8 @@ title=Getting the Latest Updates to the Tutorial
 next=usingexamples009.html
 prev=usingexamples007.html
 ~~~~~~
-Getting the Latest Updates to the Tutorial
-==========================================
+= Getting the Latest Updates to the Tutorial
+
 
 [[GIQWR]]
 
@@ -14,7 +14,7 @@ Getting the Latest Updates to the Tutorial
 ------------------------------------------
 
 Check for any updates to the tutorial by using the Update Tool included
-with the Java EE 7 SDK.
+with the Java EE SDK.
 
 [[GIQYK]]
 
@@ -22,15 +22,15 @@ with the Java EE 7 SDK.
 To Update the Tutorial Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.  Open the Services tab in NetBeans IDE and expand Servers.
-2.  Right-click the GlassFish Server instance and select View Domain
-Update Center to display the Update Tool.
-3.  Select Available Updates in the tree to display a list of updated
+1.  Open the *Services* tab in NetBeans IDE and expand *Servers*.
+2.  Right-click the GlassFish Server instance and select *View Domain
+Update Center* to display the Update Tool.
+3.  Select *Available Updates* in the tree to display a list of updated
 packages.
-4.  Look for updates to the Java EE 7 Tutorial (javaee-tutorial)
+4.  Look for updates to the Java EE Tutorial (javaee-tutorial)
 package.
-5.  If there is an updated version of the Tutorial, select Java EE 7
-Tutorial (javaee-tutorial) and click Install.
+5.  If there is an updated version of the Tutorial, select *Java EE
+Tutorial* (`javaee-tutorial`) and click *Install*.
 
 [[sthref18]]
 
@@ -45,11 +45,9 @@ the Update Tool:
 ----
 updatetool
 ----
-2.  Select Available Updates in the tree to display a list of updated
+2.  Select *Available Updates* in the tree to display a list of updated
 packages.
-3.  Look for updates to the Java EE 7 Tutorial (javaee-tutorial)
+3.  Look for updates to the Java EE Tutorial (`javaee-tutorial`)
 package.
-4.  If there is an updated version of the Tutorial, select Java EE 7
-Tutorial (javaee-tutorial) and click Install.
-
-
+4.  If there is an updated version of the tutorial, select *Java EE
+Tutorial* (`javaee-tutorial`) and click *Install*.

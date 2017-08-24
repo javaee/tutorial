@@ -1,22 +1,22 @@
 type=page
 status=published
-title=Java EE 7 Maven Archetypes in the Tutorial
+title=Java EE Maven Archetypes in the Tutorial
 next=usingexamples008.html
 prev=usingexamples006.html
 ~~~~~~
-Java EE 7 Maven Archetypes in the Tutorial
-==========================================
+= Java EE Maven Archetypes in the Tutorial
+
 
 [[CIHBHEFF]]
 
-[[java-ee-7-maven-archetypes-in-the-tutorial]]
-Java EE 7 Maven Archetypes in the Tutorial
-------------------------------------------
+[[java-ee-maven-archetypes-in-the-tutorial]]
+Java EE Maven Archetypes in the Tutorial
+----------------------------------------
 
 Some of the chapters have instructions on how to build an example
 application using Maven archetypes. Archetypes are templates for
 generating a particular Maven project. The Tutorial includes several
-Maven archetypes for generating Java EE 7 projects.
+Maven archetypes for generating Java EE projects.
 
 [[CHDJGCCA]]
 
@@ -34,7 +34,7 @@ You can install the archetypes using NetBeans IDE or Maven.
 Installing the Tutorial Archetypes Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.  From the File menu, choose Open Project.
+1.  From the *File* menu, choose *Open Project*.
 2.  In the Open Project dialog box, navigate to:
 +
 [source,oac_no_warn]
@@ -42,9 +42,9 @@ Installing the Tutorial Archetypes Using NetBeans IDE
 tut-install/examples
 ----
 3.  Select the `archetypes` folder.
-4.  Click Open Project.
-5.  In the Projects tab, right-click the `archetypes` project and select
-Build.
+4.  Click *Open Project*.
+5.  In the *Projects* tab, right-click the `archetypes` project and select
+*Build*.
 
 [[sthref17]]
 
@@ -64,5 +64,3 @@ tut-install/examples/archetypes/
 ----
 mvn install
 ----
-
-

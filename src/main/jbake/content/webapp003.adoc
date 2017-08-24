@@ -4,8 +4,8 @@ title=A Web Module That Uses JavaServer Faces Technology: The hello1 Example
 next=webapp004.html
 prev=webapp002.html
 ~~~~~~
-A Web Module That Uses JavaServer Faces Technology: The hello1 Example
-======================================================================
++ A Web Module That Uses JavaServer Faces Technology: The hello1 Example
+
 
 [[BNADX]]
 
@@ -18,7 +18,7 @@ technology to display a greeting and response. You can use a text editor
 to view the application files, or you can use NetBeans IDE.
 
 The source code for this application is in the
-tut-install`/examples/web/jsf/hello1/` directory.
+`_tut-install_/examples/web/jsf/hello1/` directory.
 
 The following topics are addressed here:
 
@@ -264,7 +264,7 @@ You can deploy a WAR file to GlassFish Server by:
 * Using NetBeans IDE
 * Using the `asadmin` command
 * Using the Administration Console
-* Copying the WAR file into the domain-dir`/autodeploy/` directory
+* Copying the WAR file into the `_domain-dir_/autodeploy/` directory
 
 Throughout the tutorial, you will use NetBeans IDE or Maven for
 packaging and deploying.
@@ -317,7 +317,7 @@ mvn install
 ----
 +
 This command spawns any necessary compilations and creates the WAR file
-in tut-install`/examples/web/jsf/hello1/target/`. It then deploys the
+in `_tut-install_/examples/web/jsf/hello1/target/`. It then deploys the
 project to the server.
 
 [[BNAEI]]
@@ -404,7 +404,7 @@ application or module when you change its code or deployment
 descriptors. All you have to do is copy the changed pages or class files
 into the deployment directory for the application or module. The
 deployment directory for a web module named context-root is
-domain-dir`/applications/`context-root. The server checks for changes
+`_domain-dir_/applications/_context-root_`. The server checks for changes
 periodically and redeploys the application, automatically and
 dynamically, with the changes.
 
@@ -467,5 +467,3 @@ following command:
 ----
 mvn clean
 ----
-
-

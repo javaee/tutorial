@@ -4,8 +4,8 @@ title=DataSource Objects and Connection Pools
 next=resource-creation003.html
 prev=resource-creation001.html
 ~~~~~~
-DataSource Objects and Connection Pools
-=======================================
+= DataSource Objects and Connection Pools
+
 
 [[BNCJJ]]
 
@@ -14,9 +14,9 @@ DataSource Objects and Connection Pools
 ---------------------------------------
 
 To store, organize, and retrieve data, most applications use a
-relational database. Java EE 7 components may access relational
+relational database. Java EE components may access relational
 databases through the JDBC API. For information on this API, see
-`http://docs.oracle.com/javase/7/docs/technotes/guides/jdbc/`.
+http://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/[`http://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/`].
 
 In the JDBC API, databases are accessed by using `DataSource` objects. A
 `DataSource` has a set of properties that identify and describe the
@@ -69,5 +69,3 @@ object they are using in the `jta-data-source` element of the
 
 This is typically the only reference to a JDBC object for a persistence
 unit. The application code does not refer to any JDBC objects.
-
-

@@ -1,7 +1,7 @@
 type=page
 status=published
 title=Using Stereotypes in CDI Applications
-next=cdi-adv-examples.html
+next=cdi-adv008.html
 prev=cdi-adv007.html
 ~~~~~~
 Using Stereotypes in CDI Applications
@@ -98,5 +98,3 @@ specifies that a bean is both `@Named` and `@RequestScoped`:
 @Retention(RUNTIME)
 public @interface Model {}
 ----
-
-

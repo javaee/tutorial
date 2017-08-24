@@ -4,8 +4,8 @@ title=Debugging Java EE Applications
 next=partplatform.html
 prev=usingexamples008.html
 ~~~~~~
-Debugging Java EE Applications
-==============================
+= Debugging Java EE Applications
+
 
 [[BNADL]]
 
@@ -27,7 +27,7 @@ domain-dir`/logs/server.log`. The log contains output from GlassFish
 Server and your applications. You can log messages from any Java class
 in your application with `System.out.println` and the Java Logging APIs
 (documented at
-`http://docs.oracle.com/javase/7/docs/technotes/guides/logging/index.html`)
+http://docs.oracle.com/javase/8/docs/technotes/guides/logging/index.html[`http://docs.oracle.com/javase/8/docs/technotes/guides/logging/index.html`])
 and from web components with the `ServletContext.log` method.
 
 If you use NetBeans IDE, logging output appears in the Output window as
@@ -46,14 +46,14 @@ viewer.
 To Use the Administration Console Log Viewer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.  Select the GlassFish Server node.
-2.  Click View Log Files.
+1.  Select the *GlassFish Server* node.
+2.  Click *View Log Files*.
 +
 The log viewer opens and displays the last 40 entries.
-3.  To display other entries, follow these steps.
-1.  Click Modify Search.
-2.  Specify any constraints on the entries you want to see.
-3.  Click Search at the top of the log viewer.
+3.  To display other entries, follow these steps:
+a.  Click *Modify Search*.
+b.  Specify any constraints on the entries you want to see.
+c.  Click Search at the top of the log viewer.
 
 [[BNADN]]
 
@@ -73,8 +73,8 @@ To Debug an Application Using a Debugger
 
 1.  Follow these steps to enable debugging in GlassFish Server using the
 Administration Console:
-1.  Expand the Configurations node, then expand the server-config node.
-2.  Select the JVM Settings node. The default debug options are set to:
+a.  Expand the *Configurations* node, then expand the *server-config* node.
+b.  Select the *JVM Settings* node. The default debug options are set to:
 +
 [source,oac_no_warn]
 ----
@@ -83,8 +83,6 @@ Administration Console:
 +
 As you can see, the default debugger socket port is 9009. You can change
 it to a port not in use by GlassFish Server or another service.
-3.  Select the Debug Enabled check box.
-4.  Click Save.
+c.  Select the *Debug Enabled* check box.
+d.  Click *Save*.
 2.  Stop GlassFish Server and then restart it.
-
-
