@@ -4,8 +4,8 @@ title=GlassFish Server Tools
 next=usingexamples.html
 prev=overview009.html
 ~~~~~~
-GlassFish Server Tools
-======================
+= GlassFish Server Tools
+
 
 [[BNADF]]
 
@@ -13,10 +13,10 @@ GlassFish Server Tools
 GlassFish Server Tools
 ----------------------
 
-GlassFish Server is a compliant implementation of the Java EE 7
+GlassFish Server is a compliant implementation of the Java EE
 platform. In addition to supporting all the APIs described in the
 previous sections, GlassFish Server includes a number of Java EE tools
-that are not part of the Java EE 7 platform but are provided as a
+that are not part of the Java EE platform but are provided as a
 convenience to the developer.
 
 This section briefly summarizes the tools that make up GlassFish Server.
@@ -34,7 +34,7 @@ tools.
 
 Table 1-1 GlassFish Server Tools
 
-[width="27%",cols="100%,",options="header",]
+[cols="28%,72%",options="header"]
 |=======================================================================
 |Tool |Description
 a|
@@ -76,6 +76,3 @@ endpoint implementation, and then deployed.
 generate all the required JAX-WS portable artifacts for web service
 deployment and invocation.
 |=======================================================================
-
-
-
