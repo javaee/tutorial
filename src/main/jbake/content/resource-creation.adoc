@@ -17,7 +17,7 @@ Resource Creation
 A resource is a program object that provides connections to such systems
 as database servers and messaging systems. Java EE components can access
 a wide variety of resources, including databases, mail sessions, Java
-Message Service objects, and URLs. The Java EE 7 platform provides
+Message Service objects, and URLs. The Java EE platform provides
 mechanisms that allow you to access all these resources in a similar
 manner. This chapter examines several types of resources and explains
 how to create them.
@@ -29,5 +29,3 @@ The following topics are addressed here:
 Pools]
 * link:resource-creation003.html#CACFBGBE[Creating Resources
 Administratively]
-
-

@@ -4,8 +4,8 @@ title=The Lifecycle of a JavaServer Faces Application
 next=jsf-intro008.html
 prev=jsf-intro006.html
 ~~~~~~
-The Lifecycle of a JavaServer Faces Application
-===============================================
+= The Lifecycle of a JavaServer Faces Application
+
 
 [[BNAQQ]]
 
@@ -96,7 +96,7 @@ a response. The application then acquires object references needed by
 the view and calls the `FacesContext.renderResponse` method, which
 forces immediate rendering of the view by skipping to the
 link:#BNAQX[Render Response Phase] of the lifecycle, as is shown by the
-arrows labelled Render Response in .
+arrows labelled Render Response in link:#BNAQR[Figure 7-3].
 
 Sometimes, an application might need to redirect to a different web
 application resource, such as a web service, or generate a response that
@@ -314,5 +314,3 @@ messages are displayed on the page.
 After the content of the view is rendered, the state of the response is
 saved so that subsequent requests can access it. The saved state is
 available to the Restore View phase.
-
-

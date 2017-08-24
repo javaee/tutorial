@@ -18,7 +18,7 @@ technology to display a greeting and response. You can use a text editor
 to view the application files, or you can use NetBeans IDE.
 
 The source code for this application is in the
-tut-install`/examples/web/servlet/hello2/` directory.
+`_tut-install_/examples/web/servlet/hello2/` directory.
 
 The following topics are addressed here:
 
@@ -249,7 +249,7 @@ mvn install
 ----
 +
 This target builds the WAR file, copies it to the
-tut-install`/examples/web/hello2/target/` directory, and deploys it.
+`_tut-install_/examples/web/hello2/target/` directory, and deploys it.
 4.  In a web browser, open the following URL:
 +
 [source,oac_no_warn]
@@ -262,5 +262,3 @@ The URL specifies the context root, followed by the URL pattern.
 The application looks much like the `hello1` application. The major
 difference is that after you click Submit the response appears below the
 greeting, not on a separate page.
-
-
