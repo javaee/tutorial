@@ -4,8 +4,8 @@ title=Protocol Upgrade Processing
 next=servlets015.html
 prev=servlets013.html
 ~~~~~~
-Protocol Upgrade Processing
-===========================
+= Protocol Upgrade Processing
+
 
 [[BEIJHCDJ]]
 
@@ -106,7 +106,7 @@ request from a client:
 @WebServlet(urlPatterns={"/xyzpresource"})
 public class XYZPUpgradeServlet extends HttpServlet {
    @Override
-   public void doGet(HttpServletRequest request, 
+   public void doGet(HttpServletRequest request,
                      HttpServletResponse response) {
       if ("XYZP".equals(request.getHeader("Upgrade"))) {
          /* Accept upgrade request */
@@ -145,5 +145,3 @@ current connection to communicate with the client using the new
 protocol. See the Servlet 4.0 specification at
 `http://jcp.org/en/jsr/detail?id=369` for details on HTTP protocol
 upgrade support.
-
-
