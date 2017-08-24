@@ -10,8 +10,8 @@ Using the Standard Validators
 [[BNATC]]
 
 [[using-the-standard-validators]]
-Using the Standard Validators
------------------------------
+= Using the Standard Validators
+
 
 JavaServer Faces technology provides a set of standard classes and
 associated tags that page authors and application developers can use to
@@ -172,5 +172,3 @@ digit, at least one lowercase letter, and at least one uppercase letter:
 <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})"
                  for="passwordVal"/>
 ----
-
-

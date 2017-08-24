@@ -10,8 +10,8 @@ Using the Standard Converters
 [[BNAST]]
 
 [[using-the-standard-converters]]
-Using the Standard Converters
------------------------------
+= Using the Standard Converters
+
 
 The JavaServer Faces implementation provides a set of `Converter`
 implementations that you can use to convert component data. The purpose
@@ -384,6 +384,3 @@ number string is formatted and parsed.
 formatted as a `number`, `currency`, or `percentage`. If not specified,
 `number` is used.
 |=======================================================================
-
-
-

@@ -4,8 +4,8 @@ title=Further Information about Web Applications
 next=jsf-intro.html
 prev=webapp005.html
 ~~~~~~
-Further Information about Web Applications
-==========================================
+= Further Information about Web Applications
+
 
 [[BNAFC]]
 

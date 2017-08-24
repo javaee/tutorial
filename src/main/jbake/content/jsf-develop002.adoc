@@ -10,8 +10,8 @@ Writing Bean Properties
 [[BNATY]]
 
 [[writing-bean-properties]]
-Writing Bean Properties
------------------------
+= Writing Bean Properties
+
 
 As explained in link:jsf-develop001.html#BNAQM[Managed Beans in
 JavaServer Faces Technology], a managed bean property can be bound to
@@ -118,7 +118,7 @@ component to the `name` property of a managed bean called `CashierBean`.
 
 [source,oac_no_warn]
 ----
-<h:inputText id="name" 
+<h:inputText id="name"
              size="30"
              value="#{cashierBean.name}"
     ...>
@@ -253,7 +253,7 @@ interfaces, as well as custom types.
 For UIData and UIRepeat, the supported types are:
 
 * `null` (becomes empty list)
-* `javax.faces.model.DataMode`l
+* `javax.faces.model.DataMode`
 * `java.util.List`
 * `java.lang.Object`[]
 * `java.sql.ResultSet`
@@ -605,5 +605,3 @@ into a `Date` object.
 The managed bean properties that are bound to validator or listener
 implementations are written in the same way and have the same general
 purpose.
-
-

@@ -4,8 +4,8 @@ title=Using Core Tags
 next=jsf-page-core.html
 prev=jsf-page002.html
 ~~~~~~
-Using Core Tags
-===============
+= Using Core Tags
+
 
 [[BNARC]]
 
