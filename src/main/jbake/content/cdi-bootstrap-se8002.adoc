@@ -1,0 +1,17 @@
+type=page
+status=published
+title=Configuring the CDI Container
+next=cdi-adv-examples.html
+prev=cdi-bootstrap-se8001.html
+~~~~~~
+= Configuring the CDI Container
+
+
+[[configuring-the-cdi-container]]
+Configuring the CDI Container
+-----------------------------
+
+The configuration of the `SeContainerInitializer` instance allows the explicit addition of elements into an internal *synthetic bean archive*. The synthetic bean archive represents the set of beans that have been loaded while initializing the container. The contents of the synthetic bean archive depend on whether discovery is enabled: 
+
+* If discovery is enabled, the synthetic bean archive is created using standard bean discovery rules and contains a superset of all JAR files on the classpath. Archives that do not include a `beans.xml` file are excluded.
+* If discovery is disabled, and beans are added programmatically, the synthetic bean archive contains only the beans that have been programmatically added.

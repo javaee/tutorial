@@ -2,7 +2,7 @@ type=page
 status=published
 title=Running the Advanced Contexts and Dependency Injection Examples
 next=cdi-adv-examples001.html
-prev=cdi-adv010.html
+prev=cdi-bootstrap-se8002.html
 ~~~~~~
 = Running the Advanced Contexts and Dependency Injection Examples
 
@@ -10,7 +10,7 @@ prev=cdi-adv010.html
 [[GKHRE]]
 
 [[running-the-advanced-contexts-and-dependency-injection-examples]]
-27 Running the Advanced Contexts and Dependency Injection Examples
+28 Running the Advanced Contexts and Dependency Injection Examples
 ------------------------------------------------------------------
 
 

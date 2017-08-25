@@ -1,0 +1,23 @@
+type=page
+status=published
+title=The Bootstrap API
+next=cdi-bootstrap-se8002.html
+prev=cdi-bootstrap-se8.html
+~~~~~~
+= The Bootstrap API
+
+
+[[the-bootstrap-api]]
+The Bootstrap API
+-----------------
+
+The API for bootstrapping a CDI container in Java SE consists of the following entities:
+
+* `javax.enterprise.inject.se.SeContainerInitializer` class – Allows you to configure and bootstrap the CDI container. This class includes the following key methods:
+
+** `newInstance()` obtains a `SeContainerInitializer` instance, which allows you to configure the container prior to bootstrapping it.
+
+** `initialize()` bootstraps the container. 
+
+* `javax.enterprise.inject.se.SeContainer` interface – Provides access to the `BeanManager` instance for programmatic lookup, as defined in the `SeContainer` interface, which is described at `http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#se_container`.
++
