@@ -4,8 +4,8 @@ title=Configuring Web Applications
 next=webapp006.html
 prev=webapp004.html
 ~~~~~~
-Configuring Web Applications
-============================
+= Configuring Web Applications
+
 
 [[CHDHGJIA]]
 
@@ -209,7 +209,7 @@ for more information on resources.
 
 Table 6-1 Web Components That Accept Resource Injections
 
-[width="23%",cols="100%,",options="header",]
+[width="23%",cols="2*[<.^]",options="header",]
 |================================================
 |Component |Interface/Class
 |Servlets |`javax.servlet.Servlet`
@@ -311,5 +311,3 @@ public class ResponseServlet extends HTTPServlet {
 @WebServiceRef(wsdlLocation="http://localhost:8080/helloservice/hello?wsdl")
 static HelloService service;
 ----
-
-
