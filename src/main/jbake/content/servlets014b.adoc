@@ -26,6 +26,6 @@ the `setTrailerFields` method of the `HttpServletResponse` interface. The
 supplier of the trailer headers can be obtained by accessing the
 `getTrailerFields` method of the `HttpServletResponse` interface.
 
-See the javadoc for `getTrailerFields()` and `isTrailerFieldsReady()` in
-`HttpServletRequest`, and `getTrailerFields()` and `setTrailerFields()` in
-`HttpServletResponse`.
+See the https://javaee.github.io/javaee-spec/[javadoc] for `getTrailerFields()`
+and `isTrailerFieldsReady()` in `HttpServletRequest`, and `getTrailerFields()`
+and `setTrailerFields()` in `HttpServletResponse`.
