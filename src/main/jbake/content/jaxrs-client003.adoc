@@ -290,9 +290,7 @@ csf.thenAccept(System.out::println);
 
 In the example, an asynchronous processing of the interface
 `CompletionStage<String>` is created and waits till it is completed and
-the result is displayed. The result of `CompletionStage` is important when
-there are parallel, multiple asynchronous computations are necessary to
-complete a task.
+the result is displayed. The `CompletionStage` that is returned can then be used only to retrieve the result as shown in the above example or can be combined with other completion stages to ease and improve the processing of asynchronous tasks.
 
 [[sthref142]]
 
@@ -424,6 +422,7 @@ try (SseEventSource source = SseEventSource.target(target).build()) {
 source.register(System.out::println);
 source.open();
 Thread.sleep(500); // Consume events for just 500 ms
+source.close();
 } catch (InterruptedException e) {
 // falls through
 }
