@@ -32,3 +32,6 @@ edit the builder as desired, then call `push()`. See the
 https://javaee.github.io/javaee-spec/[javadoc] for the class
 `javax.servlet.http.PushBuilder` and the method
 `javax.servlet.http.HttpServletRequest.newPushBuilder()`.
+
+View the GlassFish samples code for this feature at
+https://github.com/javaee/glassfish-samples/tree/master/ws/javaee8.

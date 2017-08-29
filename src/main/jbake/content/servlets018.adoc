@@ -17,4 +17,4 @@ For more information on Java Servlet technology, see the Java Servlet
 4.0 specification at `http://jcp.org/en/jsr/detail?id=369`.
 
 For additional samples, see the GlassFish samples at
-https://github.com/javaee/glassfish-samples/tree/master/ws/javaee8
+https://github.com/javaee/glassfish-samples/tree/master/ws/javaee8.
