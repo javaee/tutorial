@@ -180,6 +180,7 @@ the `web.xml` file to view it.
 The `web.xml` file contains several elements that are required for a
 Facelets application. All of the following are created automatically
 when you use NetBeans IDE to create an application.
+
 * A context parameter specifying the project stage:
 +
 [source,oac_no_warn]
