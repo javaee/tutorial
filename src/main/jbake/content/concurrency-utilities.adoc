@@ -4,8 +4,8 @@ title=Concurrency Utilities for Java EE
 next=concurrency-utilities001.html
 prev=batch-processing010.html
 ~~~~~~
-Concurrency Utilities for Java EE
-=================================
+= Concurrency Utilities for Java EE
+
 
 [[GKJIQ8]]
 
@@ -31,5 +31,3 @@ Example]
 Example]
 * link:concurrency-utilities007.html#CHDBIHAA[Further Information about
 the Concurrency Utilities]
-
-

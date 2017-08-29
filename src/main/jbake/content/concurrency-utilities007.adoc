@@ -4,8 +4,8 @@ title=Further Information about the Concurrency Utilities
 next=partcasestudies.html
 prev=concurrency-utilities006.html
 ~~~~~~
-Further Information about the Concurrency Utilities
-===================================================
+= Further Information about the Concurrency Utilities
+
 
 [[CHDBIHAA]]
 
@@ -24,5 +24,3 @@ For more information about concurrency, see
 * Concurrency Lesson in The Java Tutorials:
 +
 `http://docs.oracle.com/javase/tutorial/essential/concurrency/`
-
-

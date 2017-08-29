@@ -4,8 +4,8 @@ title=Configuring a CDI Application
 next=cdi-basic014.html
 prev=cdi-basic012.html
 ~~~~~~
-Configuring a CDI Application
-=============================
+= Configuring a CDI Application
+
 
 [[GJBNZ]]
 
@@ -31,5 +31,3 @@ For a web application, the `beans.xml` deployment descriptor, if
 present, must be in the `WEB-INF` directory. For EJB modules or JAR
 files, the `beans.xml` deployment descriptor, if present, must be in the
 `META-INF` directory.
-
-

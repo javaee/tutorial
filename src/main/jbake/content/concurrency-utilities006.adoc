@@ -4,8 +4,8 @@ title=The taskcreator Concurrency Example
 next=concurrency-utilities007.html
 prev=concurrency-utilities005.html
 ~~~~~~
-The taskcreator Concurrency Example
-===================================
+= The taskcreator Concurrency Example
+
 
 [[CIHBFEAE]]
 
@@ -84,7 +84,7 @@ public void submitTask(Task task, String type) {
             break;
         case "PERIODIC":
             ScheduledFuture<?> fut;
-            fut = sExecService.scheduleAtFixedRate(task, 0, 8, 
+            fut = sExecService.scheduleAtFixedRate(task, 0, 8,
                     TimeUnit.SECONDS);
             periodicTasks.put(task.getName(), fut);
             break;
@@ -205,5 +205,3 @@ execution log:
 +
 You can add more than one periodic task. To cancel a periodic task,
 select it from the form and click Cancel Task.
-
-
