@@ -24,18 +24,18 @@ If trailer headers are ready for reading, `isTrailerFieldsReady()` will return
  and will cause an `IllegalStateException`.
 
 A servlet can write trailer headers to the response by providing a supplier to
-the `setTrailerFields()` method of the `HttpServletResponse` interface.The
+the `setTrailerFields()` method of the `HttpServletResponse` interface. The
 following headers and types of headers must _not_ be included in the set of
-keys in the map passed to `setTrailerFields()`: Transfer-Encoding, Content-Length,
-Host, controls and conditional headers, authentication headers, Content-Encoding,
-Content-Type, Content-Range, and Trailer.
+keys in the map passed to `setTrailerFields()`: `Transfer-Encoding`,
+`Content-Length`, `Host`, controls and conditional headers, authentication
+headers, `Content-Encoding`, `Content-Type`, `Content-Range`, and `Trailer`.
+When sending response trailers, you must include a regular header, called `Trailer`,
+whose value is a comma-separated list of all the keys in the map that is supplied
+to the `setTrailerFields()` method. The value of the `Trailer` header lets the
+client know what trailers to expect.
 
 The supplier of the trailer headers can be obtained by accessing the
-`getTrailerFields()` method of the `HttpServletResponse` interface. When sending
-response trailers, you must include a regular header, called "Trailer," whose
-value is a comma-separated list of all the keys in the map that is supplied to
-the `setTrailerFields()` method. This map lets the client know what trailers
-to expect.
+`getTrailerFields()` method of the `HttpServletResponse` interface.
 
 
 See the https://javaee.github.io/javaee-spec/[javadoc] for `getTrailerFields()`
