@@ -4,8 +4,8 @@ title=Injecting Beans
 next=cdi-basic008.html
 prev=cdi-basic006.html
 ~~~~~~
-Injecting Beans
-===============
+= Injecting Beans
+
 
 [[GJBAN]]
 

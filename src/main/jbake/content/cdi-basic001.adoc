@@ -4,8 +4,8 @@ title=Getting Started
 next=cdi-basic002.html
 prev=cdi-basic.html
 ~~~~~~
-Getting Started
-===============
+= Getting Started
+
 
 [[BABJDJGA]]
 
@@ -118,5 +118,3 @@ link:cdi-basic006.html#GJBCK[Using Qualifiers] in this chapter and
 link:cdi-adv002.html#GJSDF[Using Alternatives in CDI Applications] in
 link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
 for Java EE: Advanced Topics"].
-
-

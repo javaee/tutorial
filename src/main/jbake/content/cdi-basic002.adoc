@@ -4,8 +4,8 @@ title=Overview of CDI
 next=cdi-basic003.html
 prev=cdi-basic001.html
 ~~~~~~
-Overview of CDI
-===============
+= Overview of CDI
+
 
 [[GIWHL]]
 
@@ -20,11 +20,11 @@ CDI also has many broader uses, allowing developers a great deal of
 flexibility to integrate various kinds of components in a loosely
 coupled but typesafe way
 
-CDI 1.1 is specified by JSR 346. Related specifications that CDI uses
+CDI 2.0 is specified by JSR 365. Related specifications that CDI uses
 include the following:
 
 * JSR 330, Dependency Injection for Java
-* The Managed Beans specification, an offshoot of the Java EE 7 platform
+* The Managed Beans specification, an offshoot of the Java EE platform
 specification (JSR 342)
 
 The most fundamental services provided by CDI are as follows.
@@ -49,7 +49,7 @@ interceptor bindings
 (request, session, and application) defined by the Java Servlet
 specification
 * A complete Service Provider Interface (SPI) that allows third-party
-frameworks to integrate cleanly in the Java EE 7 environment
+frameworks to integrate cleanly in the Java EE environment
 
 A major theme of CDI is loose coupling. CDI does the following:
 
@@ -73,5 +73,3 @@ correlations so that the compiler will detect typing errors
 everything, largely eliminating the need for XML deployment descriptors,
 and making it easy to provide tools that introspect the code and
 understand the dependency structure at development time
-
-

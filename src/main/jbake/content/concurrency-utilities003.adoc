@@ -4,8 +4,8 @@ title=Concurrency and Transactions
 next=concurrency-utilities004.html
 prev=concurrency-utilities002.html
 ~~~~~~
-Concurrency and Transactions
-============================
+= Concurrency and Transactions
+
 
 [[CIHIDBDG]]
 
@@ -38,25 +38,23 @@ bean and a database:
 [source,oac_no_warn]
 ----
 public class MyTransactionalTask implements Runnable {
- 
+
    UserTransaction ut = ... // obtained through JNDI or injection
- 
+
    public void run() {
- 
+
        // Start a transaction
        ut.begin();
- 
+
        // Invoke a Service or an EJB
        myEJB.businessMethod();
- 
+
        // Update a database entity using an XA JDBC driver
        myEJB.updateCustomer(customer);
- 
+
        // Commit the transaction
        ut.commit();
- 
+
    }
-} 
+}
 ----
-
-

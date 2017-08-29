@@ -4,8 +4,8 @@ title=Introduction to Contexts and Dependency Injection for Java EE
 next=cdi-basic001.html
 prev=partcdi.html
 ~~~~~~
-Introduction to Contexts and Dependency Injection for Java EE
-=============================================================
+= Introduction to Contexts and Dependency Injection for Java EE
+
 
 [[GIWHB]]
 
@@ -38,5 +38,3 @@ Methods]
 * link:cdi-basic014.html#BABJFEAI[Using the @PostConstruct and
 @PreDestroy Annotations with CDI Managed Bean Classes]
 * link:cdi-basic015.html#GIWEL[Further Information about CDI]
-
-
