@@ -2,7 +2,7 @@ type=page
 status=published
 title=Java Servlet Technology
 next=servlets001.html
-prev=jsf-configure013.html
+prev=jsf-ws007.html
 ~~~~~~
 = Java Servlet Technology
 
@@ -10,7 +10,7 @@ prev=jsf-configure013.html
 [[BNAFD]]
 
 [[java-servlet-technology]]
-17 Java Servlet Technology
+18 Java Servlet Technology
 --------------------------
 
 
