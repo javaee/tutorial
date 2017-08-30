@@ -46,3 +46,9 @@ public class Printer {
 More is needed for the complete picture of this bean. Its use of scope
 needs to be understood. In addition, for a JavaServer Faces application,
 the bean needs to be accessible through the EL.
+
+Now that you can identify the target of the injection, it is important to
+understand what can be injected and in what context. JSF 2.3 provides producers
+that enable most important JSF artifacts to be injected. For detailed information,
+see the package https://javaee.github.io/javaee-spec/[javadoc] for
+`javax.faces.annotation`.
