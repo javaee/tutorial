@@ -1,0 +1,15 @@
+type=page
+status=published
+title=Using WebSockets with JavaServer Faces Technology
+next=jsf-ws001.html
+prev=jsf-configure013.html
+~~~~~~
+= Using WebSockets with JavaServer Faces Technology
+
+
+[[using-websockets-with-javaserver-faces-technology]]
+18 Using WebSockets with JavaServer Faces Technology
+----------------------------------------------------
+This chapter describes using WebSockets in JavaServer Faces web applications.
+
+The following topics are addressed here:
