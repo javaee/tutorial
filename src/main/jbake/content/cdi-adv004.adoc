@@ -4,8 +4,8 @@ title=Using Predefined Beans in CDI Applications
 next=cdi-adv005.html
 prev=cdi-adv003.html
 ~~~~~~
-Using Predefined Beans in CDI Applications
-==========================================
+= Using Predefined Beans in CDI Applications
+
 
 [[CJGHGDBA]]
 
@@ -92,5 +92,3 @@ public class TransactionServlet extends HttpServlet {
     ...
 }
 ----
-
-
