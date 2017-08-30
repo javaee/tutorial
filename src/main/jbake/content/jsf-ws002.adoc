@@ -1,0 +1,12 @@
+type=page
+status=published
+title=Configuring WebSockets
+next=jsf-ws003.html
+prev=jsf-ws001.html
+~~~~~~
+= Configuring WebSockets
+
+
+[[configuring-websockets]]
+Configuring WebSockets
+----------------------
