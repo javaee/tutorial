@@ -54,7 +54,138 @@
 <div class="sect1">
 <h2 id="conditionally-connecting-websockets">Conditionally Connecting WebSockets</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>You can use the optional connected attribute to control whether to
+auto-reconnect the WebSocket.</p>
+</div>
+<div class="paragraph">
+<p><code>&lt;f:websocket &#8230;&#8203; connected="#{bean.pushable}" /&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>The connected attribute defaults to <code>true</code> and is interpreted as a JavaScript
+instruction to open or close the WebSocket push connection. If the value is an
+EL expression and it becomes <code>false</code> during an ajax request, then the push
+connection will explicitly be closed during <code>oncomplete</code> of that ajax request.</p>
+</div>
+<div class="paragraph">
+<p>You can also explicitly set it to <code>false</code> and manually open the push
+connection on the client side by invoking <code>jsf.push.open(clientId)</code>,
+passing the component&#8217;s client ID.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton ... onclick="jsf.push.open('foo')"&gt;
+&lt;f:ajax ... /&gt;
+&lt;/h:commandButton&gt;
+&lt;f:websocket id="foo" channel="bar" scope="view" ...
+connected="false" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you intend to have a one-time push and do not expect more messages,
+you can optionally explicitly close the push connection from the client side
+by invoking <code>jsf.push.close(clientId)</code>, passing the component&#8217;s client ID.
+For example, in the <code>onmessage</code> JavaScript listener function, as seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">function someWebsocketListener(message) {
+// ... jsf.push.close('foo');
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket-events-server">WebSocket Events: Server</h3>
+<div class="paragraph">
+<p>When a session or view-scoped socket is automatically closed with close reason
+code <code>1000</code> by the server (and thus, not manually closed by the client
+  via <code>jsf.push.close(clientId)</code>), it means that the session or view has expired.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ApplicationScoped
+public class WebsocketObserver {
 
+public void onOpen(@Observes @Opened WebsocketEvent event) { String channel = event.getChannel();
+// Returns &lt;f:websocket channel&gt;. Long userId = event.getUser();
+// Returns &lt;f:websocket user&gt;, if any.
+// ...
+
+}
+
+public void onClose(@Observes @Closed WebsocketEvent event) { String channel = event.getChannel();
+// Returns &lt;f:websocket channel&gt;. Long userId = event.getUser();
+// Returns &lt;f:websocket user&gt;, if any. CloseCode code = event.getCloseCode();
+// Returns close reason code.
+// ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket-events-clients">WebSocket Events: Clients</h3>
+<div class="paragraph">
+<p>You can use the optional <code>onopen</code> JavaScript listener function to listen for
+the open of a WebSocket on the client side. This function is invoked on the
+very first connection attempt, regardless of whether it will be successful.
+It will not be invoked when the WebSocket auto-reconnects a broken connection
+after the first successful connection.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:websocket ... onopen="websocketOpenListener" /&gt;
+function websocketOpenListener(channel) {
+// ...
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>onopen</code> JavaScript listener function is invoked with one argument: channel
+(the channel name, particularly useful if you have a global listener).</p>
+</div>
+<div class="paragraph">
+<p>You can use the optional <code>onclose</code> JavaScript listener function to listen for
+a normal or abnormal close of a WebSocket. This function is invoked when the
+very first connection attempt fails, or the server has returned close reason
+code <code>1000</code> (normal closure) or <code>1008</code> (policy violated), or the maximum
+reconnect attempts have been exceeded. It will not be invoked if the WebSocket
+makes an auto-reconnect attempt on a broken connection after the first
+successful connection.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:websocket ... onclose="websocketCloseListener" /&gt;
+function websocketCloseListener(code, channel, event) { if (code == -1) {
+// Websockets not supported by client.
+} else if (code == 1000) {
+// Normal close (as result of expired session or view).
+} else {
+// Abnormal close reason (as result of an error).
+}
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>onclose</code> JavaScript listener function is invoked with three arguments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>code</code>: The close reason code as an integer. If it is <code>-1</code>, the WebSocket
+is not supported by the client. If it is <code>1000</code>, then it was normally closed.
+Otherwise, if it is not <code>1000</code>, then there might be an error.</p>
+</li>
+<li>
+<p><code>channel</code>: The channel name</p>
+</li>
+<li>
+<p><code>event</code>: The <code>CloseEvent</code> instance</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 
