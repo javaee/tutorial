@@ -17,10 +17,9 @@ the `f:websocket` tag.
 
 [[attributes-of-the-f:websocket-tag]]
 
-.Table 17-1 Attributes of the `f:websocket` Tag
-
 [cols="1,1,2",options="header",]
-|=====================================================================
+.Table 17-1 Attributes of the `f:websocket` Tag
+|===
 |Name |Type |Description
 
 |`channel` |String |Required. The name of the WebSocket channel. It may not
@@ -52,7 +51,7 @@ and preferably have a low memory footprint.
 All open WebSockets on the same channel and user will receive the same push
 message from the server.
 
-|`Onopen` |String   |Optional. The JavaScript event handler function that is
+|`onopen` |String   |Optional. The JavaScript event handler function that is
 invoked when the WebSocket is opened. The function is invoked with one argument:
 the channel name.
 
@@ -86,7 +85,7 @@ This attribute is implicitly re-evaluated on every ajax request by a
 while the WebSocket is already opened, then the WebSocket will implicitly be closed.
 
 |`binding` |UIComponent  |Optional. The value binding expression to a backing
-bean property bound to the component instance for the `UIComponent` created by 
+bean property bound to the component instance for the `UIComponent` created by
 this tag.
 
-|=======================================================================
+|===
