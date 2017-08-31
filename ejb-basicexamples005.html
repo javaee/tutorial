@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the Timer Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-basicexamples004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-basicexamples006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-the-timer-service">Using the Timer Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Applications that model business work flows often rely on timed
+notifications. The timer service of the enterprise bean container
+enables you to schedule timed notifications for all types of enterprise
+beans except for stateful session beans. You can schedule a timed
+notification to occur according to a calendar schedule, at a specific
+time, after a duration of time, or at timed intervals. For example, you
+could set timers to go off at 10:30 a.m. on May 23, in 30 days, or every
+12 hours.</p>
+</div>
+<div class="paragraph">
+<p>Enterprise bean timers are either programmatic timers or automatic
+timers. Programmatic timers are set by explicitly calling one of the
+timer creation methods of the <code>TimerService</code> interface. Automatic timers
+are created upon the successful deployment of an enterprise bean that
+contains a method annotated with the <code>javax.ejb.Schedule</code> or
+<code>javax.ejb.Schedules</code> annotations.</p>
+</div>
+<div class="sect2">
+<h3 id="creating-calendar-based-timer-expressions">Creating Calendar-Based Timer Expressions</h3>
+<div class="paragraph">
+<p>Timers can be set according to a calendar-based schedule, expressed
+using a syntax similar to the UNIX <code>cron</code> utility. Both programmatic and
+automatic timers can use calendar-based timer expressions.
+<a href="#GIQLY">Table 35-1</a> shows the calendar-based timer attributes.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref156"></a><a id="GIQLY"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 35-1 Calendar-Based Timer Attributes</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 51%;">
+<colgroup>
+<col style="width: 29.7029%;">
+<col style="width: 44.5544%;">
+<col style="width: 24.7524%;">
+<col style="width: 0.9903%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Allowable Values and Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>second</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more seconds within a minute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code> to <code>59</code>. For
+example: <code>second="30"</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minute</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more minutes within an hour</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code> to <code>59</code>. For
+example: <code>minute="15"</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hour</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more hours within a day</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code> to <code>23</code>. For example:
+<code>hour="13"</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dayOfWeek</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more days within a week</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>0</code> to <code>7</code> (both 0 and 7 refer to Sunday). For example: <code>dayOfWeek="3"</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Sun</code>, <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code>. For example:
+<code>dayOfWeek="Mon"</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dayOfMonth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more days within a month</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>1</code> to <code>31</code>. For example: <code>dayOfMonth="15"</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>–7</code> to <code>–1</code> (a negative number means the nth day or days before the end
+of the month). For example: <code>dayOfMonth="–3"</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Last</code>. For example: <code>dayOfMonth="Last"</code>.</p>
+</div>
+<div class="paragraph">
+<p>[<code>1st</code>, <code>2nd</code>, <code>3rd</code>, <code>4th</code>, <code>5th</code>, <code>Last</code>] [<code>Sun</code>, <code>Mon</code>, <code>Tue</code>, <code>Wed</code>,
+<code>Thu</code>, <code>Fri</code>, <code>Sat</code>]. For example: <code>dayOfMonth="2nd Fri"</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>month</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more months within a year</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>1</code> to <code>12</code>. For example: <code>month="7"</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Jan</code>, <code>Feb</code>, <code>Mar</code>, <code>Apr</code>, <code>May</code>, <code>Jun</code>, <code>Jul</code>, <code>Aug</code>, <code>Sep</code>, <code>Oct</code>,
+<code>Nov</code>, <code>Dec</code>. For example: <code>month="July"</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>year</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A particular calendar year</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A four-digit calendar year. For example: <code>year="2011"</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="specifying-multiple-values-in-calendar-expressions">Specifying Multiple Values in Calendar Expressions</h4>
+<div class="paragraph">
+<p>You can specify multiple values in calendar expressions, as described in
+the following sections.</p>
+</div>
+<div class="paragraph">
+<p>Using Wildcards in Calendar Expressions</p>
+</div>
+<div class="paragraph">
+<p>Setting an attribute to an asterisk symbol (<code>*</code>) represents all
+allowable values for the attribute.</p>
+</div>
+<div class="paragraph">
+<p>The following expression represents every minute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">minute="*"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following expression represents every day of the week:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">dayOfWeek="*"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Specifying a List of Values</p>
+</div>
+<div class="paragraph">
+<p>To specify two or more values for an attribute, use a comma (<code>,</code>) to
+separate the values. A range of values is allowed as part of a list.
+Wildcards and intervals, however, are not allowed.</p>
+</div>
+<div class="paragraph">
+<p>Duplicates within a list are ignored.</p>
+</div>
+<div class="paragraph">
+<p>The following expression sets the day of the week to Tuesday and
+Thursday:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">dayOfWeek="Tue, Thu"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following expression represents 4:00 a.m., every hour from 9:00 a.m.
+to 5:00 p.m. using a range, and 10:00 p.m.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">hour="4,9-17,22"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Specifying a Range of Values</p>
+</div>
+<div class="paragraph">
+<p>Use a dash character (<code>-</code>) to specify an inclusive range of values for
+an attribute. Members of a range cannot be wildcards, lists, or
+intervals. A range of the form <code>x-x</code>, is equivalent to the single-valued
+expression <code>x</code>. A range of the form <code>x-y</code> where <code>x</code> is greater than <code>y</code>
+is equivalent to the expression <code>x-`maximumvalue</code>,` minimumvalue`-y`.
+That is, the expression begins at <code>x</code>, rolls over to the beginning of
+the allowable values, and continues up to <code>y</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following expression represents 9:00 a.m. to 5:00 p.m.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">hour="9-17"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following expression represents Friday through Monday:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">dayOfWeek="5-1"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following expression represents the twenty-fifth day of the month to
+the end of the month, and the beginning of the month to the fifth day of
+the month:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">dayOfMonth="25-5"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is equivalent to the following expression:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">dayOfMonth="25-Last,1-5"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Specifying Intervals</p>
+</div>
+<div class="paragraph">
+<p>The forward slash (<code>/</code>) constrains an attribute to a starting point and
+an interval and is used to specify every <code>N</code> seconds, minutes, or hours
+within the minute, hour, or day. For an expression of the form <code>x/y</code>,
+<code>x</code> represents the starting point and <code>y</code> represents the interval. The
+wildcard character may be used in the <code>x</code> position of an interval and is
+equivalent to setting <code>x</code> to <code>0</code>.</p>
+</div>
+<div class="paragraph">
+<p>Intervals may be set only for <code>second</code>, <code>minute</code>, and <code>hour</code> attributes.</p>
+</div>
+<div class="paragraph">
+<p>The following expression represents every 10 minutes within the hour:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">minute="*/10"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is equivalent to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">minute="0,10,20,30,40,50"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following expression represents every 2 hours starting at noon:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">hour="12/2"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="programmatic-timers">Programmatic Timers</h3>
+<div class="paragraph">
+<p>When a programmatic timer expires (goes off), the container calls the
+method annotated <code>@Timeout</code> in the bean&#8217;s implementation class. The
+<code>@Timeout</code> method contains the business logic that handles the timed
+event.</p>
+</div>
+<div class="sect3">
+<h4 id="the-timeout-method">The @Timeout Method</h4>
+<div class="paragraph">
+<p>Methods annotated <code>@Timeout</code> in the enterprise bean class must return
+<code>void</code> and optionally take a <code>javax.ejb.Timer</code> object as the only
+parameter. They may not throw application exceptions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Timeout
+public void timeout(Timer timer) {
+    System.out.println("TimerBean: timeout occurred");
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-programmatic-timers">Creating Programmatic Timers</h4>
+<div class="paragraph">
+<p>To create a timer, the bean invokes one of the <code>create</code> methods of the
+<code>TimerService</code> interface. These methods allow single-action, interval,
+or calendar-based timers to be created.</p>
+</div>
+<div class="paragraph">
+<p>For single-action or interval timers, the expiration of the timer can be
+expressed as either a duration or an absolute time. The duration is
+expressed as a the number of milliseconds before a timeout event is
+triggered. To specify an absolute time, create a <code>java.util.Date</code> object
+and pass it to the <code>TimerService.createSingleActionTimer</code> or the
+<code>TimerService.createTimer</code> method.</p>
+</div>
+<div class="paragraph">
+<p>The following code sets a programmatic timer that will expire in 1
+minute (60,000 milliseconds):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">long duration = 60000;
+Timer timer =
+    timerService.createSingleActionTimer(duration, new TimerConfig());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code sets a programmatic timer that will expire at 12:05
+p.m. on May 1, 2015, specified as a <code>java.util.Date</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SimpleDateFormatter formatter =
+    new SimpleDateFormatter("MM/dd/yyyy 'at' HH:mm");
+Date date = formatter.parse("05/01/2015 at 12:05");
+Timer timer = timerService.createSingleActionTimer(date, new TimerConfig());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For calendar-based timers, the expiration of the timer is expressed as a
+<code>javax.ejb.ScheduleExpression</code> object, passed as a parameter to the
+<code>TimerService.createCalendarTimer</code> method. The <code>ScheduleExpression</code>
+class represents calendar-based timer expressions and has methods that
+correspond to the attributes described in <a href="#GIQLK">Creating
+Calendar-Based Timer Expressions</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following code creates a programmatic timer using the
+<code>ScheduleExpression</code> helper class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">ScheduleExpression schedule = new ScheduleExpression();
+schedule.dayOfWeek("Mon");
+schedule.hour("12-17, 23");
+Timer timer = timerService.createCalendarTimer(schedule);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For details on the method signatures, see the <code>TimerService</code> API
+documentation at
+<code>http://docs.oracle.com/javaee/7/api/javax/ejb/TimerService.html</code>.</p>
+</div>
+<div class="paragraph">
+<p>The bean described in <a href="#BNBPE">The timersession Example</a> creates a
+timer as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Timer timer = timerService.createTimer(intervalDuration,
+        "Created new programmatic timer");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the <code>timersession</code> example, the method that calls <code>createTimer</code> is
+invoked in a business method, which is called by a client.</p>
+</div>
+<div class="paragraph">
+<p>Timers are persistent by default. If the server is shut down or crashes,
+persistent timers are saved and will become active again when the server
+is restarted. If a persistent timer expires while the server is down,
+the container will call the <code>@Timeout</code> method when the server is
+restarted.</p>
+</div>
+<div class="paragraph">
+<p>Nonpersistent programmatic timers are created by calling
+<code>TimerConfig.setPersistent(false)</code> and passing the <code>TimerConfig</code> object
+to one of the timer-creation methods.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Date</code> and <code>long</code> parameters of the <code>createTimer</code> methods represent
+time with the resolution of milliseconds. However, because the timer
+service is not intended for real-time applications, a callback to the
+<code>@Timeout</code> method might not occur with millisecond precision. The timer
+service is for business applications, which typically measure time in
+hours, days, or longer durations.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="automatic-timers">Automatic Timers</h3>
+<div class="paragraph">
+<p>Automatic timers are created by the EJB container when an enterprise
+bean that contains methods annotated with the <code>@Schedule</code> or
+<code>@Schedules</code> annotations is deployed. An enterprise bean can have
+multiple automatic timeout methods, unlike a programmatic timer, which
+allows only one method annotated with the <code>@Timeout</code> annotation in the
+enterprise bean class.</p>
+</div>
+<div class="paragraph">
+<p>Automatic timers can be configured through annotations or through the
+<code>ejb-jar.xml</code> deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>Adding a <code>@Schedule</code> annotation on an enterprise bean marks that method
+as a timeout method according to the calendar schedule specified in the
+attributes of <code>@Schedule</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Schedule</code> annotation has elements that correspond to the calendar
+expressions detailed in <a href="#GIQLK">Creating Calendar-Based Timer
+Expressions</a> and the <code>persistent</code>, <code>info</code>, and <code>timezone</code> elements.</p>
+</div>
+<div class="paragraph">
+<p>The optional <code>persistent</code> element takes a Boolean value and is used to
+specify whether the automatic timer should survive a server restart or
+crash. By default, all automatic timers are persistent.</p>
+</div>
+<div class="paragraph">
+<p>The optional <code>timezone</code> element is used to specify that the automatic
+timer is associated with a particular time zone. If set, this element
+will evaluate all timer expressions in relation to the specified time
+zone, regardless of the time zone in which the EJB container is running.
+By default, all automatic timers set are in relation to the default time
+zone of the server.</p>
+</div>
+<div class="paragraph">
+<p>The optional <code>info</code> element is used to set an informational description
+of the timer. A timer&#8217;s information can be retrieved later by using
+<code>Timer.getInfo</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following timeout method uses <code>@Schedule</code> to set a timer that will
+expire every Sunday at midnight:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Schedule(dayOfWeek="Sun", hour="0")
+public void cleanupWeekData() { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@Schedules</code> annotation is used to specify multiple calendar-based
+timer expressions for a given timeout method.</p>
+</div>
+<div class="paragraph">
+<p>The following timeout method uses the <code>@Schedules</code> annotation to set
+multiple calendar-based timer expressions. The first expression sets a
+timer to expire on the last day of every month. The second expression
+sets a timer to expire every Friday at 11:00 p.m.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Schedules ({
+    @Schedule(dayOfMonth="Last"),
+    @Schedule(dayOfWeek="Fri", hour="23")
+})
+public void doPeriodicCleanup() { ... }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="canceling-and-saving-timers">Canceling and Saving Timers</h3>
+<div class="paragraph">
+<p>Timers can be cancelled by the following events.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When a single-event timer expires, the EJB container calls the
+associated timeout method and then cancels the timer.</p>
+</li>
+<li>
+<p>When the bean invokes the <code>cancel</code> method of the <code>Timer</code> interface,
+the container cancels the timer.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If a method is invoked on a cancelled timer, the container throws the
+<code>javax.ejb.NoSuchObjectLocalException</code>.</p>
+</div>
+<div class="paragraph">
+<p>To save a <code>Timer</code> object for future reference, invoke its <code>getHandle</code>
+method and store the <code>TimerHandle</code> object in a database. (A
+<code>TimerHandle</code> object is serializable.) To reinstantiate the <code>Timer</code>
+object, retrieve the handle from the database and invoke <code>getTimer</code> on
+the handle. A <code>TimerHandle</code> object cannot be passed as an argument of a
+method defined in a remote or web service interface. In other words,
+remote clients and web service clients cannot access a bean&#8217;s
+<code>TimerHandle</code> object. Local clients, however, do not have this
+restriction.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="getting-timer-information">Getting Timer Information</h3>
+<div class="paragraph">
+<p>In addition to defining the <code>cancel</code> and <code>getHandle</code> methods, the
+<code>Timer</code> interface defines methods for obtaining information about
+timers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public long getTimeRemaining();
+public java.util.Date getNextTimeout();
+public java.io.Serializable getInfo();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>getInfo</code> method returns the object that was the last parameter of
+the <code>createTimer</code> invocation. For example, in the <code>createTimer</code> code
+snippet of the preceding section, this information parameter is a
+<code>String</code> object with the value <code>created timer</code>.</p>
+</div>
+<div class="paragraph">
+<p>To retrieve all of a bean&#8217;s active timers, call the <code>getTimers</code> method
+of the <code>TimerService</code> interface. The <code>getTimers</code> method returns a
+collection of <code>Timer</code> objects.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transactions-and-timers">Transactions and Timers</h3>
+<div class="paragraph">
+<p>An enterprise bean usually creates a timer within a transaction. If this
+transaction is rolled back, the timer creation also is rolled back.
+Similarly, if a bean cancels a timer within a transaction that gets
+rolled back, the timer cancellation is rolled back. In this case, the
+timer&#8217;s duration is reset as if the cancellation had never occurred.</p>
+</div>
+<div class="paragraph">
+<p>In beans that use container-managed transactions, the <code>@Timeout</code> method
+usually has the <code>Required</code> or <code>RequiresNew</code> transaction attribute to
+preserve transaction integrity. With these attributes, the EJB container
+begins the new transaction before calling the <code>@Timeout</code> method. If the
+transaction is rolled back, the container will call the <code>@Timeout</code>
+method at least one more time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-timersession-example">The timersession Example</h3>
+<div class="paragraph">
+<p>The source code for this example is in the
+tut-install`/examples/ejb/timersession/src/main/java/` directory.</p>
+</div>
+<div class="paragraph">
+<p><code>TimerSessionBean</code> is a singleton session bean that shows how to set
+both an automatic timer and a programmatic timer. In the source code
+listing of <code>TimerSessionBean</code> that follows, the <code>setTimer</code> and
+<code>@Timeout</code> methods are used to set a programmatic timer. A
+<code>TimerService</code> instance is injected by the container when the bean is
+created. Because it&#8217;s a business method, <code>setTimer</code> is exposed to the
+local, no-interface view of <code>TimerSessionBean</code> and can be invoked by the
+client. In this example, the client invokes <code>setTimer</code> with an interval
+duration of 8,000 milliseconds, or 8 seconds. The <code>setTimer</code> method
+creates a new timer by invoking the <code>createTimer</code> method of
+<code>TimerService</code>. Now that the timer is set, the EJB container will invoke
+the <code>programmaticTimeout</code> method of <code>TimerSessionBean</code> when the timer
+expires, in about 8 seconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+    public void setTimer(long intervalDuration) {
+        logger.log(Level.INFO,
+                "Setting a programmatic timeout for {0} milliseconds from now.",
+                intervalDuration);
+        Timer timer = timerService.createTimer(intervalDuration,
+                "Created new programmatic timer");
+    }
+
+    @Timeout
+    public void programmaticTimeout(Timer timer) {
+        this.setLastProgrammaticTimeout(new Date());
+        logger.info("Programmatic timeout occurred.");
+    }
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TimerSessionBean</code> also has an automatic timer and timeout method,
+<code>automaticTimeout</code>. The automatic timer is set to expire every 1 minute
+and is set by using a calendar-based timer expression in the <code>@Schedule</code>
+annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+    @Schedule(minute = "*/1", hour = "*", persistent = false)
+    public void automaticTimeout() {
+        this.setLastAutomaticTimeout(new Date());
+        logger.info("Automatic timeout occured");
+    }
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TimerSessionBean</code> also has two business methods:
+<code>getLastProgrammaticTimeout</code> and <code>getLastAutomaticTimeout</code>. Clients call
+these methods to get the date and time of the last timeout for the
+programmatic timer and automatic timer, respectively.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s the source code for the <code>TimerSessionBean</code> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.timersession.ejb;
+
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
+
+@Singleton
+@Startup
+public class TimerSessionBean {
+    @Resource
+    TimerService timerService;
+
+    private Date lastProgrammaticTimeout;
+    private Date lastAutomaticTimeout;
+
+    private static final Logger logger =
+            Logger.getLogger("timersession.ejb.TimerSessionBean");
+
+    public void setTimer(long intervalDuration) {
+        logger.log(Level.INFO,
+                "Setting a programmatic timeout for {0} milliseconds from now.",
+                intervalDuration);
+        Timer timer = timerService.createTimer(intervalDuration,
+                "Created new programmatic timer");
+    }
+
+    @Timeout
+    public void programmaticTimeout(Timer timer) {
+        this.setLastProgrammaticTimeout(new Date());
+        logger.info("Programmatic timeout occurred.");
+    }
+
+    @Schedule(minute = "*/1", hour = "*", persistent = false)
+    public void automaticTimeout() {
+        this.setLastAutomaticTimeout(new Date());
+        logger.info("Automatic timeout occured");
+    }
+
+    public String getLastProgrammaticTimeout() {
+        if (lastProgrammaticTimeout != null) {
+            return lastProgrammaticTimeout.toString();
+        } else {
+            return "never";
+        }
+    }
+
+    public void setLastProgrammaticTimeout(Date lastTimeout) {
+        this.lastProgrammaticTimeout = lastTimeout;
+    }
+
+    public String getLastAutomaticTimeout() {
+        if (lastAutomaticTimeout != null) {
+            return lastAutomaticTimeout.toString();
+        } else {
+            return "never";
+        }
+    }
+
+    public void setLastAutomaticTimeout(Date lastAutomaticTimeout) {
+        this.lastAutomaticTimeout = lastAutomaticTimeout;
+    }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>GlassFish Server has a default minimum timeout value of 1,000
+milliseconds, or 1 second. If you need to set the timeout value lower
+than 1,000 milliseconds, change the value of the Minimum Delivery
+Interval setting in the Administration Console. To modify the minimum
+timeout value, in the Administration Console expand Configurations, then
+expand server-config, select EJB Container, and click the EJB Timer
+Service tab. Enter a new timeout value under Minimum Delivery Interval
+and click Save. The lowest practical value for
+<code>minimum-delivery-interval-in-millis</code> is around 10 milliseconds, owing
+to virtual machine constraints.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="running-the-timersession-example">Running the timersession Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>timersession</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIQNI">To Run the timersession Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GIQNQ">To Build, Package, and Deploy the timersession Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#GIQOP">To Run the Web Client</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-timersession-example-using-netbeans-ide">To Run the timersession Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>timersession</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>From the Run menu, choose Run Project.</p>
+<div class="paragraph">
+<p>This builds and packages the application into a WAR file located at
+tut-install`/examples/ejb/timersession/target/timersession.war`, deploys
+this WAR file to your GlassFish Server instance, and then runs the web
+client.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-timersession-example-using-maven">To Build, Package, and Deploy the timersession Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb/timersession/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This builds and packages the application into a WAR file located at
+tut-install`/examples/ejb/timersession/target/timersession.war` and
+deploys this WAR file to your GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-web-client">To Run the Web Client</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a web browser to the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/timersession</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click Set Timer to set a programmatic timer.</p>
+</li>
+<li>
+<p>Wait for a while and click the browser&#8217;s Refresh button.</p>
+<div class="paragraph">
+<p>You will see the date and time of the last programmatic and automatic
+timeouts.</p>
+</div>
+<div class="paragraph">
+<p>To see the messages that are logged when a timeout occurs, open the
+<code>server.log</code> file located in domain-dir`/logs/`.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-basicexamples004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-basicexamples006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

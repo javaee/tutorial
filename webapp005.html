@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Configuring Web Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="webapp004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webapp006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="configuring-web-applications">Configuring Web Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes the following tasks involved with configuring web
+applications:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Setting context parameters</p>
+</li>
+<li>
+<p>Declaring welcome files</p>
+</li>
+<li>
+<p>Mapping errors to error screens</p>
+</li>
+<li>
+<p>Declaring resource references</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="setting-context-parameters">Setting Context Parameters</h3>
+<div class="paragraph">
+<p>The web components in a web module share an object that represents their
+application context. You can pass context parameters to the context, or
+you can pass initialization parameters to a servlet. Context parameters
+are available to the entire application. For information on
+initialization parameters, see <a href="servlets004.html#BNAFU">Creating and
+Initializing a Servlet</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="to-add-a-context-parameter-using-netbeans-ide">To Add a Context Parameter Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>These steps apply generally to web applications but do not apply
+specifically to the examples in this chapter.</p>
+</div>
+<div class="paragraph">
+<p>To add a context parameter using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the project.</p>
+</li>
+<li>
+<p>Expand the project&#8217;s node in the Projects tree.</p>
+</li>
+<li>
+<p>Expand the Web Pages node and then the WEB-INF node.</p>
+</li>
+<li>
+<p>Double-click <code>web.xml</code>.</p>
+<div class="paragraph">
+<p>If the project does not have a <code>web.xml</code> file, create one by following
+the steps in <a href="#GKIHH">To Create a web.xml File Using NetBeans IDE</a>.</p>
+</div>
+</li>
+<li>
+<p>Click General at the top of the editor window.</p>
+</li>
+<li>
+<p>Expand the Context Parameters node.</p>
+</li>
+<li>
+<p>Click Add.</p>
+</li>
+<li>
+<p>In the Add Context Parameter dialog box, in the Parameter Name
+field, enter the name that specifies the context object.</p>
+</li>
+<li>
+<p>In the Parameter Value field, enter the parameter to pass to the
+context object.</p>
+</li>
+<li>
+<p>Click OK.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-create-a-web.xml-file-using-netbeans-ide">To Create a web.xml File Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To create a <code>web.xml</code> file using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the File menu, choose New File.</p>
+</li>
+<li>
+<p>In the New File wizard, select the Web category, then select
+Standard Deployment Descriptor under File Types.</p>
+</li>
+<li>
+<p>Click Next.</p>
+</li>
+<li>
+<p>Click Finish.</p>
+<div class="paragraph">
+<p>A basic <code>web.xml</code> file appears in <code>web/WEB-INF/</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="declaring-welcome-files">Declaring Welcome Files</h3>
+<div class="paragraph">
+<p>The welcome files mechanism allows you to specify a list of files that
+the web container can append to a request for a URL (called a valid
+partial request) that is not mapped to a web component. For example,
+suppose that you define a welcome file <code>welcome.html</code>. When a client
+requests a URL such as host`:`port`/<code>webapp</code>/<code>directory, where directory
+is not mapped to a servlet or XHTML page, the file
+host</code>:`port`/<code>webapp</code>/<code>directory</code>/welcome.html` is returned to the
+client.</p>
+</div>
+<div class="paragraph">
+<p>If a web container receives a valid partial request, the web container
+examines the welcome file list, appends to the partial request each
+welcome file in the order specified, and checks whether a static
+resource or servlet in the WAR is mapped to that request URL. The web
+container then sends the request to the first resource that matches in
+the WAR.</p>
+</div>
+<div class="paragraph">
+<p>If no welcome file is specified, GlassFish Server will use a file named
+<code>index.html</code> as the default welcome file. If there is no welcome file
+and no file named <code>index.html</code>, GlassFish Server returns a directory
+listing.</p>
+</div>
+<div class="paragraph">
+<p>You specify welcome files in the <code>web.xml</code> file. The welcome file
+specification for the <code>hello1</code> example looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index.xhtml&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A specified welcome file must not have a leading or trailing slash
+(<code>/</code>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>hello2</code> example does not specify a welcome file, because the URL
+request is mapped to the <code>GreetingServlet</code> web component through the URL
+pattern <code>/greeting</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mapping-errors-to-error-screens">Mapping Errors to Error Screens</h3>
+<div class="paragraph">
+<p>When an error occurs during execution of a web application, you can have
+the application display a specific error screen according to the type of
+error. In particular, you can specify a mapping between the status code
+returned in an HTTP response or a Java programming language exception
+returned by any web component and any type of error screen.</p>
+</div>
+<div class="paragraph">
+<p>You can have multiple <code>error-page</code> elements in your deployment
+descriptor. Each element identifies a different error that causes an
+error page to open. This error page can be the same for any number of
+<code>error-page</code> elements.</p>
+</div>
+<div class="sect3">
+<h4 id="to-set-up-error-mapping-using-netbeans-ide">To Set Up Error Mapping Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>These steps apply generally to web applications but do not apply
+specifically to the examples in this chapter.</p>
+</div>
+<div class="paragraph">
+<p>To set up error mapping using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the project.</p>
+</li>
+<li>
+<p>Expand the project&#8217;s node in the Projects tab.</p>
+</li>
+<li>
+<p>Expand the Web Pages node and then the WEB-INF node.</p>
+</li>
+<li>
+<p>Double-click <code>web.xml</code>.</p>
+<div class="paragraph">
+<p>If the project does not have a <code>web.xml</code> file, create one by following
+the steps in <a href="#GKIHH">To Create a web.xml File Using NetBeans IDE</a>.</p>
+</div>
+</li>
+<li>
+<p>Click Pages at the top of the editor window.</p>
+</li>
+<li>
+<p>Expand the Error Pages node.</p>
+</li>
+<li>
+<p>Click Add.</p>
+</li>
+<li>
+<p>In the Add Error Page dialog box, click Browse to locate the page
+that you want to act as the error page.</p>
+</li>
+<li>
+<p>Specify either an error code or an exception type.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>To specify an error code, in the Error Code field enter the HTTP
+status code that will cause the error page to be opened, or leave the
+field blank to include all error codes.</p>
+</li>
+<li>
+<p>To specify an exception type, in the Exception Type field enter the
+exception that will cause the error page to load. To specify all
+throwable errors and exceptions, enter <code>java.lang.Throwable</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click OK.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="declaring-resource-references">Declaring Resource References</h3>
+<div class="paragraph">
+<p>If your web component uses such objects as enterprise beans, data
+sources, or web services, you use Java EE annotations to inject these
+resources into your application. Annotations eliminate a lot of the
+boilerplate lookup code and configuration elements that previous
+versions of Java EE required.</p>
+</div>
+<div class="paragraph">
+<p>Although resource injection using annotations can be more convenient for
+the developer, there are some restrictions on using it in web
+applications. First, you can inject resources only into
+container-managed objects, because a container must have control over
+the creation of a component so that it can perform the injection into a
+component. As a result, you cannot inject resources into such objects as
+simple JavaBeans components. However, managed beans are managed by the
+container; therefore, they can accept resource injections.</p>
+</div>
+<div class="paragraph">
+<p>Components that can accept resource injections are listed in
+<a href="#BNAEV">Table 6-1</a>.</p>
+</div>
+<div class="paragraph">
+<p>This section explains how to use a couple of the annotations supported
+by a web container to inject resources.
+<a href="persistence-basicexamples.html#GIJST">Chapter 39, "Running the
+Persistence Examples"</a>, explains how web applications use annotations
+supported by the Java Persistence API.
+<a href="security-webtier.html#BNCAS">Chapter 49, "Getting Started Securing
+Web Applications"</a>, explains how to use annotations to specify
+information about securing web applications. See
+<a href="resources.html#BNCJH">Chapter 53, "Resource Adapters and Contracts"</a>,
+for more information on resources.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref25"></a><a id="BNAEV"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 6-1 Web Components That Accept Resource Injections</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 23%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Interface/Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Servlets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.Servlet</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Servlet filters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.ServletFilter</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event listeners</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>javax.servlet.ServletContextListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>javax.servlet.ServletContextAttributeListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>javax.servlet.ServletRequestListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>javax.servlet.ServletRequestAttributeListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>javax.servlet.http.HttpSessionListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>javax.servlet.http.HttpSessionAttributeListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>javax.servlet.http.HttpSessionBindingListener</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Managed beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plain Old Java Objects</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="declaring-a-reference-to-a-resource">Declaring a Reference to a Resource</h4>
+<div class="paragraph">
+<p>The <code>@Resource</code> annotation is used to declare a reference to a resource,
+such as a data source, an enterprise bean, or an environment entry.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Resource</code> annotation is specified on a class, a method, or a
+field. The container is responsible for injecting references to
+resources declared by the <code>@Resource</code> annotation and mapping it to the
+proper JNDI resources.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the <code>@Resource</code> annotation is used to inject a
+data source into a component that needs to make a connection to the data
+source, as is done when using JDBC technology to access a relational
+database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Resource javax.sql.DataSource catalogDS;
+public getProductsByCategory() {
+    // get a connection and execute the query
+    Connection conn = catalogDS.getConnection();
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The container injects this data source prior to the component&#8217;s being
+made available to the application. The data source JNDI mapping is
+inferred from the field name, <code>catalogDS</code>, and the type,
+<code>javax.sql.DataSource</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you have multiple resources that you need to inject into one
+component, you need to use the <code>@Resources</code> annotation to contain them,
+as shown by the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Resources ({
+    @Resource(name="myDB" type=javax.sql.DataSource.class),
+    @Resource(name="myMQ" type=javax.jms.ConnectionFactory.class)
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web application examples in this tutorial use the Java Persistence
+API to access relational databases. This API does not require you to
+explicitly create a connection to a data source. Therefore, the examples
+do not use the <code>@Resource</code> annotation to inject a data source. However,
+this API supports the <code>@PersistenceUnit</code> and <code>@PersistenceContext</code>
+annotations for injecting <code>EntityManagerFactory</code> and <code>EntityManager</code>
+instances, respectively.
+<a href="persistence-basicexamples.html#GIJST">Chapter 39, "Running the
+Persistence Examples"</a> describes these annotations and the use of the
+Java Persistence API in web applications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="declaring-a-reference-to-a-web-service">Declaring a Reference to a Web Service</h4>
+<div class="paragraph">
+<p>The <code>@WebServiceRef</code> annotation provides a reference to a web service.
+The following example shows uses the <code>@WebServiceRef</code> annotation to
+declare a reference to a web service. <code>WebServiceRef</code> uses the
+<code>wsdlLocation</code> element to specify the URI of the deployed service&#8217;s WSDL
+file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+import javax.xml.ws.WebServiceRef;
+...
+public class ResponseServlet extends HTTPServlet {
+@WebServiceRef(wsdlLocation="http://localhost:8080/helloservice/hello?wsdl")
+static HelloService service;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="webapp004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webapp006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

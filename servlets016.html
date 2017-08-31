@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The fileupload Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets015.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets017.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-fileupload-example-application">The fileupload Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>fileupload</code> example, located in the
+tut-install`/examples/web/servlet/fileupload/` directory, illustrates
+how to implement and use the file upload feature.</p>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Forest case study provides a more complex example that
+uploads an image file and stores its content in a database.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Except where expressly provided otherwise, the site, and all content
+provided on or through the site, are provided on an "as is" and "as
+available" basis. Oracle expressly disclaims all warranties of any kind,
+whether express or implied, including, but not limited to, the implied
+warranties of merchantability, fitness for a particular purpose and
+non-infringement with respect to the site and all content provided on or
+through the site. Oracle makes no warranty that: (a) the site or content
+will meet your requirements; (b) the site will be available on an
+uninterrupted, timely, secure, or error-free basis; (c) the results that
+may be obtained from the use of the site or any content provided on or
+through the site will be accurate or reliable; or (d) the quality of any
+content purchased or obtained by you on or through the site will meet
+your expectations.</p>
+</div>
+<div class="paragraph">
+<p>Any content accessed, downloaded or otherwise obtained on or through the
+use of the site is used at your own discretion and risk. Oracle shall
+have no responsibility for any damage to your computer system or loss of
+data that results from the download or use of content.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDFGBGI">Architecture of the fileupload Example Application</a></p>
+</li>
+<li>
+<p><a href="#CHDIHJCI">Running the fileupload Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="architecture-of-the-fileupload-example-application">Architecture of the fileupload Example Application</h3>
+<div class="paragraph">
+<p>The <code>fileupload</code> example application consists of a single servlet and an
+HTML form that makes a file upload request to the servlet.</p>
+</div>
+<div class="paragraph">
+<p>This example includes a very simple HTML form with two fields, File and
+Destination. The input type, <code>file</code>, enables a user to browse the local
+file system to select the file. When the file is selected, it is sent to
+the server as a part of a POST request. During this process, two
+mandatory restrictions are applied to the form with input type <code>file</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>enctype</code> attribute must be set to a value of
+<code>multipart/form-data</code>.</p>
+</li>
+<li>
+<p>Its method must be POST.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When the form is specified in this manner, the entire request is sent to
+the server in encoded form. The servlet then uses its own means to
+handle the request to process the incoming file data and extract a file
+from the stream. The destination is the path to the location where the
+file will be saved on your computer. Pressing the Upload button at the
+bottom of the form posts the data to the servlet, which saves the file
+in the specified destination.</p>
+</div>
+<div class="paragraph">
+<p>The HTML form in <code>index.html</code> is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;File Upload&lt;/title&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form method="POST" action="upload" enctype="multipart/form-data" &gt;
+            File:
+            &lt;input type="file" name="file" id="file" /&gt; &lt;br/&gt;
+            Destination:
+            &lt;input type="text" value="/tmp" name="destination"/&gt;
+            &lt;/br&gt;
+            &lt;input type="submit" value="Upload" name="upload" id="upload" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A POST request method is used when the client needs to send data to the
+server as part of the request, such as when uploading a file or
+submitting a completed form. In contrast, a GET request method sends a
+URL and headers only to the server, whereas POST requests also include a
+message body. This allows arbitrary length data of any type to be sent
+to the server. A header field in the POST request usually indicates the
+message body&#8217;s Internet media type.</p>
+</div>
+<div class="paragraph">
+<p>When submitting a form, the browser streams the content in, combining
+all parts, with each part representing a field of a form. Parts are
+named after the <code>input</code> elements and are separated from each other with
+string delimiters named <code>boundary</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is what submitted data from the <code>fileupload</code> form looks like, after
+selecting <code>sample.txt</code> as the file that will be uploaded to the <code>tmp</code>
+directory on the local file system:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">POST /fileupload/upload HTTP/1.1
+Host: localhost:8080
+Content-Type: multipart/form-data;
+boundary=---------------------------263081694432439 Content-Length: 441
+-----------------------------263081694432439
+Content-Disposition: form-data; name="file"; filename="sample.txt"
+Content-Type: text/plain
+ Data from sample file
+-----------------------------263081694432439
+Content-Disposition: form-data; name="destination"
+ /tmp
+-----------------------------263081694432439
+Content-Disposition: form-data; name="upload"
+ Upload
+-----------------------------263081694432439--</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The servlet <code>FileUploadServlet.java</code> begins as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(name = "FileUploadServlet", urlPatterns = {"/upload"})
+@MultipartConfig
+public class FileUploadServlet extends HttpServlet {
+    private final static Logger LOGGER =
+            Logger.getLogger(FileUploadServlet.class.getCanonicalName());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@WebServlet</code> annotation uses the <code>urlPatterns</code> property to define
+servlet mappings.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@MultipartConfig</code> annotation indicates that the servlet expects
+requests to be made using the <code>multipart/form-data</code> MIME type.</p>
+</div>
+<div class="paragraph">
+<p>The <code>processRequest</code> method retrieves the destination and file part from
+the request, then calls the <code>getFileName</code> method to retrieve the file
+name from the file part. The method then creates a <code>FileOutputStream</code>
+and copies the file to the specified destination. The error-handling
+section of the method catches and handles some of the most common
+reasons why a file would not be found. The <code>processRequest</code> and
+<code>getFileName</code> methods look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">protected void processRequest(HttpServletRequest request,
+        HttpServletResponse response)
+        throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+
+    // Create path components to save the file
+    final String path = request.getParameter("destination");
+    final Part filePart = request.getPart("file");
+    final String fileName = getFileName(filePart);
+
+    OutputStream out = null;
+    InputStream filecontent = null;
+    final PrintWriter writer = response.getWriter();
+
+    try {
+        out = new FileOutputStream(new File(path + File.separator
+                + fileName));
+        filecontent = filePart.getInputStream();
+
+        int read = 0;
+        final byte[] bytes = new byte[1024];
+
+        while ((read = filecontent.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+        writer.println("New file " + fileName + " created at " + path);
+        LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
+                new Object[]{fileName, path});
+    } catch (FileNotFoundException fne) {
+        writer.println("You either did not specify a file to upload or are "
+                + "trying to upload a file to a protected or nonexistent "
+                + "location.");
+        writer.println("&lt;br/&gt; ERROR: " + fne.getMessage());
+
+        LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
+                new Object[]{fne.getMessage()});
+    } finally {
+        if (out != null) {
+            out.close();
+        }
+        if (filecontent != null) {
+            filecontent.close();
+        }
+        if (writer != null) {
+            writer.close();
+        }
+    }
+}
+
+private String getFileName(final Part part) {
+    final String partHeader = part.getHeader("content-disposition");
+    LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
+    for (String content : part.getHeader("content-disposition").split(";")) {
+        if (content.trim().startsWith("filename")) {
+            return content.substring(
+                    content.indexOf('=') + 1).trim().replace("\"", "");
+        }
+    }
+    return null;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-fileupload-example">Running the fileupload Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>fileupload</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDGDJCI">To Build, Package, and Deploy the fileupload Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CHDCFADG">To Build, Package, and Deploy the fileupload Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#CHDDDAAJ">To Run the fileupload Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-fileupload-example-using-netbeans-ide">To Build, Package, and Deploy the fileupload Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>fileupload</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>fileupload</code> project and select
+Build.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-fileupload-example-using-maven">To Build, Package, and Deploy the fileupload Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet/fileupload/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-fileupload-example">To Run the fileupload Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/fileupload/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the File Upload page, click Choose File to display a file browser
+window.</p>
+</li>
+<li>
+<p>Select a file to upload and click Open.</p>
+<div class="paragraph">
+<p>The name of the file you selected is displayed in the File field. If you
+do not select a file, an exception will be thrown.</p>
+</div>
+</li>
+<li>
+<p>In the Destination field, type a directory name.</p>
+<div class="paragraph">
+<p>The directory must have already been created and must also be writable.
+If you do not enter a directory name or if you enter the name of a
+nonexistent or protected directory, an exception will be thrown.</p>
+</div>
+</li>
+<li>
+<p>Click Upload to upload the file that you selected to the directory
+that you specified in the Destination field.</p>
+<div class="paragraph">
+<p>A message reports that the file was created in the directory that you
+specified.</p>
+</div>
+</li>
+<li>
+<p>Go to the directory that you specified in the Destination field and
+verify that the uploaded file is present.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets015.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets017.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

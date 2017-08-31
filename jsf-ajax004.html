@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Sending an Ajax Request</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ajax003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="sending-an-ajax-request">Sending an Ajax Request</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To activate Ajax functionality, the web application must create an Ajax
+request and send it to the server. The server then processes the
+request.</p>
+</div>
+<div class="paragraph">
+<p>The application uses the attributes of the <code>f:ajax</code> tag listed in
+<a href="jsf-ajax003.html#GKDER">Table 13-1</a> to create the Ajax request. The
+following sections explain the process of creating and sending an Ajax
+request using some of these attributes.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Behind the scenes, the <code>jsf.ajax.request()</code> method of the JavaScript
+resource library collects the data provided by the <code>f:ajax</code> tag and
+posts the request to the JavaServer Faces lifecycle.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHVT">Using the event Attribute</a></p>
+</li>
+<li>
+<p><a href="#GKHUZ">Using the execute Attribute</a></p>
+</li>
+<li>
+<p><a href="#GKHWM">Using the immediate Attribute</a></p>
+</li>
+<li>
+<p><a href="#GKHZS">Using the listener Attribute</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="using-the-event-attribute">Using the event Attribute</h3>
+<div class="paragraph">
+<p>The <code>event</code> attribute defines the event that triggers the Ajax action.
+Some of the possible values for this attribute are <code>click</code>, <code>keyup</code>,
+<code>mouseover</code>, <code>focus</code>, and <code>blur</code>.</p>
+</div>
+<div class="paragraph">
+<p>If not specified, a default event based on the parent component will be
+applied. The default event is <code>action</code> for
+<code>javax.faces.component.ActionSource</code> components, such as a
+<code>commandButton</code>, and <code>valueChange</code> for
+<code>javax.faces.component.EditableValueHolder</code> components, such as
+<code>inputText</code>. In the following example, an Ajax tag is associated with
+the button component, and the event that triggers the Ajax action is a
+mouse click:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton id="submit" value="Submit"&gt;
+    &lt;f:ajax event="click" /&gt;
+&lt;/h:commandButton&gt;
+&lt;h:outputText id="result" value="#{userNumberBean.response}" /&gt;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>You may have noticed that the listed events are very similar to
+JavaScript events. In fact, they are based on JavaScript events, but do
+not have the <code>on</code> prefix.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For a command button, the default event is <code>click</code>, so you do not
+actually need to specify <code>event="click"</code> to obtain the desired behavior.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-the-execute-attribute">Using the execute Attribute</h3>
+<div class="paragraph">
+<p>The <code>execute</code> attribute defines the component or components to be
+executed on the server. The component is identified by its <code>id</code>
+attribute. You can specify more than one executable component. If more
+than one component is to be executed, specify a space-delimited list of
+components.</p>
+</div>
+<div class="paragraph">
+<p>When a component is executed, it participates in all phases of the
+request-processing lifecycle except the Render Response phase.</p>
+</div>
+<div class="paragraph">
+<p>The <code>execute</code> attribute value can also be a keyword, such as <code>@all</code>,
+<code>@none</code>, <code>@this</code>, or <code>@form</code>. The default value is <code>@this</code>, which refers
+to the component within which the <code>f:ajax</code> tag is nested.</p>
+</div>
+<div class="paragraph">
+<p>The following code specifies that the <code>h:inputText</code> component with the
+<code>id</code> value of <code>userNo</code> should be executed when the button is clicked:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="userNo"
+             title="Type a number from 0 to 10:"
+             value="#{userNumberBean.userNumber}"&gt;
+    ...
+&lt;/h:inputText&gt;
+&lt;h:commandButton id="submit" value="Submit"&gt;
+    &lt;f:ajax event="click" execute="userNo" /&gt;
+&lt;/h:commandButton&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-the-immediate-attribute">Using the immediate Attribute</h3>
+<div class="paragraph">
+<p>The <code>immediate</code> attribute indicates whether user inputs are to be
+processed early in the application lifecycle or later. If the attribute
+is set to <code>true</code>, events generated from this component are broadcast
+during the Apply Request Values phase. Otherwise, the events will be
+broadcast during the Invoke Application phase.</p>
+</div>
+<div class="paragraph">
+<p>If not defined, the default value of this attribute is <code>false</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-the-listener-attribute">Using the listener Attribute</h3>
+<div class="paragraph">
+<p>The <code>listener</code> attribute refers to a method expression that is executed
+on the server side in response to an Ajax action on the client. The
+listener&#8217;s <code>javax.faces.event.AjaxBehaviorListener.processAjaxBehavior</code>
+method is called once during the Invoke Application phase of the
+lifecycle. In the following code from the <code>reservation</code> example
+application (see <a href="jsf-facelets009.html#BABGGIAA">The reservation
+Example Application</a>), a <code>listener</code> attribute is defined by an <code>f:ajax</code>
+tag, which refers to a method from the bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:ajax event="change" render="total"
+        listener="#{reservationBean.calculateTotal}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whenever either the price or the number of tickets ordered changes, the
+<code>calculateTotal</code> method of <code>ReservationBean</code> recalculates the total cost
+of the tickets and displays it in the output component named <code>total</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ajax003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

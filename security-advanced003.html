@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the JDBC Realm for User Authentication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-advanced002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-the-jdbc-realm-for-user-authentication">Using the JDBC Realm for User Authentication</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An authentication realm, sometimes called a security policy domain or
+security domain, is a scope over which an application server defines and
+enforces a common security policy. A realm contains a collection of
+users, who may or may not be assigned to a group. GlassFish Server comes
+preconfigured with the file, certificate, and administration realms. An
+administrator can also set up LDAP, JDBC, digest, or custom realms.</p>
+</div>
+<div class="paragraph">
+<p>An application can specify in its deployment descriptor which realm to
+use. If the application does not specify a realm, GlassFish Server uses
+its default realm, the <code>file</code> realm. If an application specifies that a
+JDBC realm is to be used for user authentication, GlassFish Server will
+retrieve user credentials from a database. The application server uses
+the database information and the enabled JDBC realm option in the
+configuration file.</p>
+</div>
+<div class="paragraph">
+<p>A database provides an easy way to add, edit, or delete users at runtime
+and enables users to create their own accounts without any
+administrative assistance. Using a database has an additional benefit:
+providing a place to securely store any extra user information. A realm
+can be thought of as a database of user names and passwords that
+identify valid users of a web application or set of web applications
+with an enumeration of the list of roles associated with each valid
+user. Access to specific web application resources is granted to all
+users in a particular role, instead of enumerating a list of associated
+users. A user name can have any number of roles associated with it.</p>
+</div>
+<div class="paragraph">
+<p>Two of the tutorial case studies, <a href="dukes-tutoring.html#GKAEE">Chapter
+59, "Duke&#8217;s Tutoring Case Study Example,"</a> and
+<a href="dukes-forest.html#GLNPW">Chapter 60, "Duke&#8217;s Forest Case Study
+Example,"</a> use a JDBC realm for user authentication.</p>
+</div>
+<div class="sect2">
+<h3 id="to-configure-a-jdbc-authentication-realm">To Configure a JDBC Authentication Realm</h3>
+<div class="paragraph">
+<p>GlassFish Server enables administrators to specify a user&#8217;s credentials
+(user name and password) in the JDBC realm instead of in the connection
+pool. This prevents other applications from browsing the database tables
+for user credentials. By default, storing passwords as clear text is not
+supported in the JDBC realm. Under normal circumstances, passwords
+should not be stored as clear text.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the database tables in which user credentials for the realm
+will be stored.</p>
+</li>
+<li>
+<p>Add user credentials to the database tables you created.</p>
+</li>
+<li>
+<p>Create a JDBC connection pool for the database.</p>
+<div class="paragraph">
+<p>You can use the Administration Console or the command line to create a
+connection pool.</p>
+</div>
+</li>
+<li>
+<p>Create a JDBC resource for the database.</p>
+<div class="paragraph">
+<p>You can use the Administration Console or the command line to create a
+JDBC resource.</p>
+</div>
+</li>
+<li>
+<p>Create a realm.</p>
+<div class="paragraph">
+<p>This step needs to associate the resource with the realm, define the
+tables and columns for users and groups used for authentication, and
+define the digest algorithm that will be used for storing passwords in
+the database.</p>
+</div>
+<div class="paragraph">
+<p>You can use the Administration Console or the command line to create a
+realm.</p>
+</div>
+</li>
+<li>
+<p>Modify the deployment descriptor for your application to specify the
+JDBC realm.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For an enterprise application in an EAR file, modify the
+<code>glassfish-application.xml</code> file.</p>
+</li>
+<li>
+<p>For a web application in a WAR file, modify the <code>web.xml</code> file.</p>
+</li>
+<li>
+<p>For an enterprise bean in an EJB JAR file, modify the
+<code>glassfish-ejb-jar.xml</code> file.</p>
+<div class="paragraph">
+<p>For example, for a hypothetical application, the <code>web.xml</code> file could
+specify the <code>jdbcRealm</code> realm, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;login-config&gt;
+    &lt;auth-method&gt;FORM&lt;/auth-method&gt;
+    &lt;realm-name&gt;jdbcRealm&lt;/realm-name&gt;
+    &lt;form-login-config&gt;
+        &lt;form-login-page&gt;/login.xhtml&lt;/form-login-page&gt;
+        &lt;form-error-page&gt;/login.xhtml&lt;/form-error-page&gt;
+    &lt;/form-login-config&gt;
+&lt;/login-config&gt;
+&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;Secure Pages&lt;/web-resource-name&gt;
+        &lt;description/&gt;
+        &lt;url-pattern&gt;/admin/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;ADMINS&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Form-based login is specified for all web pages under <code>/admin</code>. Access
+to those pages will be allowed only to users in the <code>ADMINS</code> role.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Assign security roles to users or groups of users in the realm.</p>
+<div class="paragraph">
+<p>To assign a security role to a group or to a user, add a
+security-role-mapping element to the application server-specific
+deployment descriptor, in this case <code>glassfish-web.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;security-role-mapping&gt;
+    &lt;role-name&gt;USERS&lt;/role-name&gt;
+    &lt;group-name&gt;USERS&lt;/group-name&gt;
+&lt;/security-role-mapping&gt;
+&lt;security-role-mapping&gt;
+    &lt;role-name&gt;ADMINS&lt;/role-name&gt;
+    &lt;group-name&gt;ADMINS&lt;/group-name&gt;
+&lt;/security-role-mapping&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since GlassFish Server users are assigned to groups during the user
+creation process, this is more efficient than mapping security roles to
+individual users.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-advanced002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Monitoring Events on the Client</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ajax004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="monitoring-events-on-the-client">Monitoring Events on the Client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To monitor ongoing Ajax requests, use the <code>onevent</code> attribute of the
+<code>f:ajax</code> tag. The value of this attribute is the name of a JavaScript
+function. JavaServer Faces calls the <code>onevent</code> function at each stage of
+the processing of an Ajax request: begin, complete, and success.</p>
+</div>
+<div class="paragraph">
+<p>When calling the JavaScript function assigned to the <code>onevent</code> property,
+JavaServer Faces passes a data object to it. The data object contains
+the properties listed in <a href="#GKGOE">Table 13-3</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref71"></a><a id="GKGOE"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 13-3 Properties of the onevent Data Object</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 20%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>responseXML</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The response to the Ajax call in XML format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>responseText</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The response to the Ajax call in text format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>responseCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The response to the Ajax call in numeric code</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>source</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The source of the current Ajax event: the DOM element</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The status of the current Ajax call: <code>begin</code>, <code>complete</code>, or
+<code>success</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the Ajax call: <code>event</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>By using the <code>status</code> property of the data object, you can identify the
+current status of the Ajax request and monitor its progress. In the
+following example, <code>monitormyajaxevent</code> is a JavaScript function that
+monitors the Ajax request sent by the event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:ajax event="click" render="statusmessage" onevent="monitormyajaxevent"/&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ajax004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

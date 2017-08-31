@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the f:websocket Tag</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ws002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ws004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-the-fwebsocket-tag">Using the f:websocket Tag</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#attributes-of-the-f:websocket-tag">Table 17-1</a> describes the attributes of
+the <code>f:websocket</code> tag.</p>
+</div>
+<table id="attributes-of-the-f:websocket-tag" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Table 17-1 Attributes of the <code>f:websocket</code> Tag</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>channel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required. The name of the WebSocket channel. It may not
+be an EL expression and may only contain alphanumeric characters, hyphens,
+underscores, and periods. All open WebSockets on the same channel name will
+receive the same push notification from the server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The identifier of the UIWebSocket component to be created.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scope</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The scope of the WebSocket channel. It may not be
+an EL expression. Allowed values (case insensitive) are: <code>application</code>, <code>session</code>,
+and <code>view</code>.
+</p><p class="tableblock">When the value is <code>application</code>, all channels with the same name throughout the
+application receive the same push message. When the value is <code>session</code>, only the
+channels with the same name in the current user session receive the same push
+message. When the value is <code>view</code>, only the channel in the current view receives
+the push message.
+</p><p class="tableblock">The default scope is <code>application</code>. When the <code>user</code> attribute is specified,
+then the default scope is <code>session</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Serializable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The user identifier of the WebSocket channel,
+so that user-targeted push messages can be sent. It must implement Serializable
+and preferably have a low memory footprint.
+</p><p class="tableblock"><strong>Hint</strong>: Use <code>#{request.remoteUser}</code> or #<code>{someLoggedInUser.id}</code>.
+</p><p class="tableblock">All open WebSockets on the same channel and user will receive the same push
+message from the server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>onopen</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The JavaScript event handler function that is
+invoked when the WebSocket is opened. The function is invoked with one argument:
+the channel name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>onmessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The JavaScript event handler function that is
+invoked when a push message is received from the server. The function is invoked
+with three arguments: the push message, the channel name, and the <code>MessageEvent</code>
+instance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>onclose</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The JavaScript event handler function that is
+invoked when the WebSocket is closed. The function is invoked with three
+arguments: the close reason code, the channel name, and the <code>CloseEvent</code>.
+</p><p class="tableblock">Note that this will also be invoked on errors. If an error occurred, you can
+inspect the close reason code and which code was given (for example, when the
+code is not <code>1000</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>connected</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. Specifies whether to auto-reconnect the
+WebSocket. Defaults to <code>true</code>. It is interpreted as a JavaScript instruction to
+open or close the WebSocket push connection.
+</p><p class="tableblock">This attribute is implicitly re-evaluated on every ajax request by a
+<code>PreRenderViewEvent</code> listener on the <code>UIViewRoot</code>. You can also explicitly set it
+to <code>false</code> and then manually control it in JavaScript using <code>jsf.push.open(clientId)</code>
+and <code>jsf.push.close(clientId)</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rendered</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. Specifies whether to render the WebSocket scripts.
+Defaults to <code>true</code>.
+</p><p class="tableblock">This attribute is implicitly re-evaluated on every ajax request by a
+<code>PreRenderViewEvent</code> listener on the <code>UIViewRoot</code>. If the value changes to <code>false</code>
+while the WebSocket is already opened, then the WebSocket will implicitly be closed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>binding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UIComponent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. The value binding expression to a backing
+bean property bound to the component instance for the <code>UIComponent</code> created by
+this tag.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ws002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ws004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

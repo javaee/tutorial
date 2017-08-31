@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Delegating Rendering to a Renderer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="delegating-rendering-to-a-renderer">Delegating Rendering to a Renderer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Both <code>MapComponent</code> and <code>AreaComponent</code> delegate all of their rendering
+to a separate renderer. The section
+<a href="jsf-custom005.html#BNAVW">Performing Encoding</a> explains how
+<code>MapRenderer</code> performs the encoding for <code>MapComponent</code>. This section
+explains in detail the process of delegating rendering to a renderer
+using <code>AreaRenderer</code>, which performs the rendering for <code>AreaComponent</code>.</p>
+</div>
+<div class="paragraph">
+<p>To delegate rendering, you perform the tasks described in the following
+topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAWB">Creating the Renderer Class</a></p>
+</li>
+<li>
+<p><a href="#BNAWC">Identifying the Renderer Type</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="creating-the-renderer-class">Creating the Renderer Class</h3>
+<div class="paragraph">
+<p>When delegating rendering to a renderer, you can delegate all encoding
+and decoding to the renderer, or you can choose to do part of it in the
+component class. The <code>AreaComponent</code> class delegates encoding to the
+<code>AreaRenderer</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The renderer class begins with a <code>@FacesRenderer</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@FacesRenderer(componentFamily = "Area", rendererType = "DemoArea")
+public class AreaRenderer extends Renderer {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@FacesRenderer</code> annotation registers the renderer class with the
+JavaServer Faces implementation as a renderer class. The annotation
+identifies the component family as well as the renderer type.</p>
+</div>
+<div class="paragraph">
+<p>To perform the rendering for <code>AreaComponent</code>, <code>AreaRenderer</code> must
+implement an <code>encodeEnd</code> method. The <code>encodeEnd</code> method of
+<code>AreaRenderer</code> retrieves the shape, coordinates, and alternative text
+values stored in the <code>ImageArea</code> bean that is bound to <code>AreaComponent</code>.
+Suppose that the <code>area</code> tag currently being rendered has a <code>value</code>
+attribute value of <code>"book203"</code>. The following line from <code>encodeEnd</code> gets
+the value of the attribute <code>"book203"</code> from the <code>FacesContext</code> instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">ImageArea ia = (ImageArea)area.getValue();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The attribute value is the <code>ImageArea</code> bean instance, which contains the
+<code>shape</code>, <code>coords</code>, and <code>alt</code> values associated with the <code>book203</code>
+<code>AreaComponent</code> instance. <a href="jsf-custom003.html#GLPBO">Configuring Model
+Data</a> describes how the application stores these values.</p>
+</div>
+<div class="paragraph">
+<p>After retrieving the <code>ImageArea</code> object, the method renders the values
+for <code>shape</code>, <code>coords</code>, and <code>alt</code> by simply calling the associated
+accessor methods and passing the returned values to the <code>ResponseWriter</code>
+instance, as shown by these lines of code, which write out the shape and
+coordinates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">writer.startElement("area", area);
+writer.writeAttribute("alt", iarea.getAlt(), "alt");
+writer.writeAttribute("coords", iarea.getCoords(), "coords");
+writer.writeAttribute("shape", iarea.getShape(), "shape");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>encodeEnd</code> method also renders the JavaScript for the <code>onmouseout</code>,
+<code>onmouseover</code>, and <code>onclick</code> attributes. The Facelets page needs to
+provide only the path to the images that are to be loaded during an
+<code>onmouseover</code> or <code>onmouseout</code> action:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;bookstore:area id="map3" value="#{Book203}"
+                onmouseover="resources/images/book_203.jpg"
+                onmouseout="resources/images/book_all.jpg"
+                targetImage="mapImage"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>AreaRenderer</code> class takes care of generating the JavaScript for
+these actions, as shown in the following code from <code>encodeEnd</code>. The
+JavaScript that <code>AreaRenderer</code> generates for the <code>onclick</code> action sets
+the value of the hidden field to the value of the current area&#8217;s
+component ID and submits the page.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">sb = new StringBuffer("document.forms[0]['").append(targetImageId).
+        append("'].src='");
+sb.append(
+        getURI(context,
+        (String) area.getAttributes().get("onmouseout")));
+sb.append("'");
+writer.writeAttribute("onmouseout", sb.toString(), "onmouseout");
+sb = new StringBuffer("document.forms[0]['").append(targetImageId).
+        append("'].src='");
+sb.append(
+        getURI(context,
+        (String) area.getAttributes().get("onmouseover")));
+sb.append("'");
+writer.writeAttribute("onmouseover", sb.toString(), "onmouseover");
+sb = new StringBuffer("document.forms[0]['");
+sb.append(getName(context, area));
+sb.append("'].value='");
+sb.append(iarea.getAlt());
+sb.append("'; document.forms[0].submit()");
+writer.writeAttribute("onclick", sb.toString(), "value");
+writer.endElement("area");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By submitting the page, this code causes the JavaServer Faces lifecycle
+to return back to the Restore View phase. This phase saves any state
+information, including the value of the hidden field, so that a new
+request component tree is constructed. This value is retrieved by the
+<code>decode</code> method of the <code>MapComponent</code> class. This decode method is
+called by the JavaServer Faces implementation during the Apply Request
+Values phase, which follows the Restore View phase.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the <code>encodeEnd</code> method, <code>AreaRenderer</code> contains an empty
+constructor. This is used to create an instance of <code>AreaRenderer</code> so
+that it can be added to the render kit.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@FacesRenderer</code> annotation registers the renderer class with the
+JavaServer Faces implementation as a renderer class. The annotation
+identifies the component family as well as the renderer type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="identifying-the-renderer-type">Identifying the Renderer Type</h3>
+<div class="paragraph">
+<p>Register the renderer with a render kit by using the <code>@FacesRenderer</code>
+annotation (or by using the application configuration resource file, as
+explained in <a href="jsf-configure011.html#BNAXH">Registering a Custom
+Renderer with a Render Kit</a>). During the Render Response phase, the
+JavaServer Faces implementation calls the <code>getRendererType</code> method of
+the component&#8217;s tag handler to determine which renderer to invoke, if
+there is one.</p>
+</div>
+<div class="paragraph">
+<p>You identify the type associated with the renderer in the <code>rendererType</code>
+element of the <code>@FacesRenderer</code> annotation for <code>AreaRenderer</code> as well as
+in the <code>renderer-type</code> element of the tag library descriptor.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

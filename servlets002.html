@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Servlet Lifecycle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="servlet-lifecycle">Servlet Lifecycle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The lifecycle of a servlet is controlled by the container in which the
+servlet has been deployed. When a request is mapped to a servlet, the
+container performs the following steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If an instance of the servlet does not exist, the web container:</p>
+</li>
+<li>
+<p>Loads the servlet class</p>
+</li>
+<li>
+<p>Creates an instance of the servlet class</p>
+</li>
+<li>
+<p>Initializes the servlet instance by calling the <code>init</code> method
+(initialization is covered in <a href="servlets004.html#BNAFU">Creating and
+Initializing a Servlet</a>)</p>
+</li>
+<li>
+<p>The container invokes the <code>service</code> method, passing request and
+response objects. Service methods are discussed in
+<a href="servlets005.html#BNAFV">Writing Service Methods</a>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If it needs to remove the servlet, the container finalizes the servlet
+by calling the servlet&#8217;s <code>destroy</code> method. For more information, see
+<a href="servlets010.html#BNAGS">Finalizing a Servlet</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="handling-servlet-lifecycle-events">Handling Servlet Lifecycle Events</h3>
+<div class="paragraph">
+<p>You can monitor and react to events in a servlet&#8217;s lifecycle by defining
+listener objects whose methods get invoked when lifecycle events occur.
+To use these listener objects, you must define and specify the listener
+class.</p>
+</div>
+<div class="sect3">
+<h4 id="defining-the-listener-class">Defining the Listener Class</h4>
+<div class="paragraph">
+<p>You define a listener class as an implementation of a listener
+interface. <a href="#BNAFL">Table 17-1</a> lists the events that can be
+monitored and the corresponding interface that must be implemented. When
+a listener method is invoked, it is passed an event that contains
+information appropriate to the event. For example, the methods in the
+<code>HttpSessionListener</code> interface are passed an <code>HttpSessionEvent</code>, which
+contains an <code>HttpSession</code>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref97"></a><a id="BNAFL"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 17-1 Servlet Lifecycle Events</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 45.5445%;">
+<col style="width: 53.4653%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object</th>
+<th class="tableblock halign-left valign-top">Event</th>
+<th class="tableblock halign-left valign-top">Listener Interface and Event Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initialization and destruction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.ServletContextListener</code> and <code>ServletContextEvent</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute added, removed, or replaced</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.ServletContextAttributeListener</code> and
+<code>ServletContextAttributeEvent</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creation, invalidation, activation, passivation, and timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.http.HttpSessionListener</code>,
+<code>javax.servlet.http.HttpSessionActivationListener</code>, and
+<code>HttpSessionEvent</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute added, removed, or replaced</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.http.HttpSessionAttributeListener</code> and
+<code>HttpSessionBindingEvent</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A servlet request has started being processed by web
+components</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.ServletRequestListener</code> and
+<code>ServletRequestEvent</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute added, removed, or replaced</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.ServletRequestAttributeListener</code> and
+<code>ServletRequestAttributeEvent</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Use the <code>@WebListener</code> annotation to define a listener to get events for
+various operations on the particular web application context. Classes
+annotated with <code>@WebListener</code> must implement one of the following
+interfaces:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">javax.servlet.ServletContextListener
+javax.servlet.ServletContextAttributeListener
+javax.servlet.ServletRequestListener
+javax.servlet.ServletRequestAttributeListener
+javax.servlet..http.HttpSessionListener
+javax.servlet..http.HttpSessionAttributeListener</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, the following code snippet defines a listener that
+implements two of these interfaces:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import javax.servlet.ServletContextAttributeListener;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+@WebListener()
+public class SimpleServletListener implements ServletContextListener,
+        ServletContextAttributeListener {
+    ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="handling-servlet-errors">Handling Servlet Errors</h3>
+<div class="paragraph">
+<p>Any number of exceptions can occur when a servlet executes. When an
+exception occurs, the web container generates a default page containing
+the following message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">A Servlet Exception Has Occurred</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But you can also specify that the container should return a specific
+error page for a given exception.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Concurrency Basics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="concurrency-utilities.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="concurrency-utilities002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="concurrency-basics">Concurrency Basics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Concurrency is the concept of executing two or more tasks at the same
+time (in parallel). Tasks may include methods (functions), parts of a
+program, or even other programs. With current computer architectures,
+support for multiple cores and multiple processors in a single CPU is
+very common.</p>
+</div>
+<div class="paragraph">
+<p>The Java Platform has always offered support for concurrent programming,
+which was the basis for implementing many of the services offered by
+Java EE containers. At Java SE 5, additional high-level API support for
+concurrency was provided by the <code>java.util.concurrent</code> package.</p>
+</div>
+<div class="paragraph">
+<p>Prior to Java EE 7, there were no specific APIs that allowed enterprise
+developers to use concurrency utilities in a safely standard manner. The
+Java EE web and EJB containers instantiate objects using
+container-managed thread pools. Therefore, using Java SE concurrent APIs
+to instantiate <code>Thread</code> objects was strongly discouraged. If a developer
+creates a new (non-managed) <code>Thread</code> object, the container could not
+guarantee that other Java EE platform services (for example,
+transactions and security) would be part of this <code>Thread</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="threads-and-processes">Threads and Processes</h3>
+<div class="paragraph">
+<p>The two main concurrency concepts are processes and threads.</p>
+</div>
+<div class="paragraph">
+<p>Processes are primarily associated with applications running on the
+operating system (OS). A process has specific runtime resources to
+interact with the underlying OS and allocate other resources, such as
+its own memory, just as the JVM process does. A JVM is in fact a
+process.</p>
+</div>
+<div class="paragraph">
+<p>The Java programming language and platform are primarily concerned with
+threads.</p>
+</div>
+<div class="paragraph">
+<p>Threads share some features with processes, since both consume resources
+from the OS or the execution environment. But threads are easier to
+create and consume many fewer resources than a process.</p>
+</div>
+<div class="paragraph">
+<p>Because threads are so lightweight, any modern CPU that has a couple of
+cores and a few gigabytes of RAM can handle thousands of threads in a
+single JVM process. The precise number of threads will depend on the
+combined output of the CPU, OS, and RAM available, as well as on correct
+configuration (tuning) of the JVM.</p>
+</div>
+<div class="paragraph">
+<p>Although concurrent programming solves many problems and can improve
+performance for most applications, there are a number of situations
+where multiple execution lines (threads or processes) can cause major
+problems. These situations include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deadlocks</p>
+</li>
+<li>
+<p>Thread starvation</p>
+</li>
+<li>
+<p>Concurrent accessing of shared resources</p>
+</li>
+<li>
+<p>Situations when the program generates incorrect data</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="concurrency-utilities.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="concurrency-utilities002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

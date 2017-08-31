@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The mood Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets014b.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets016.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-mood-example-application">The mood Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>mood</code> example application, located in the
+tut-install`/examples/web/servlet/mood/` directory, is a simple example
+that displays Duke&#8217;s moods at different times during the day. The
+example shows how to develop a simple application by using the
+<code>@WebServlet</code>, <code>@WebFilter</code>, and <code>@WebListener</code> annotations to create a
+servlet, a listener, and a filter.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDEBFCB">Components of the mood Example Application</a></p>
+</li>
+<li>
+<p><a href="#GKCOJ">Running the mood Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="components-of-the-mood-example-application">Components of the mood Example Application</h3>
+<div class="paragraph">
+<p>The <code>mood</code> example application is comprised of three components:
+<code>mood.web.MoodServlet</code>, <code>mood.web.TimeOfDayFilter</code>, and
+<code>mood.web.SimpleServletListener</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>MoodServlet</code>, the presentation layer of the application, displays
+Duke&#8217;s mood in a graphic, based on the time of day. The <code>@WebServlet</code>
+annotation specifies the URL pattern:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/report")
+public class MoodServlet extends HttpServlet {
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TimeOfDayFilter</code> sets an initialization parameter indicating that Duke
+is awake:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebFilter(filterName = "TimeOfDayFilter",
+urlPatterns = {"/*"},
+initParams = {
+    @WebInitParam(name = "mood", value = "awake")})
+public class TimeOfDayFilter implements Filter {
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The filter calls the <code>doFilter</code> method, which contains a <code>switch</code>
+statement that sets Duke&#8217;s mood based on the current time.</p>
+</div>
+<div class="paragraph">
+<p><code>SimpleServletListener</code> logs changes in the servlet&#8217;s lifecycle. The log
+entries appear in the server log.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-mood-example">Running the mood Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>mood</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKCOB">To Run the mood Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKCPJ">To Run the mood Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-mood-example-using-netbeans-ide">To Run the mood Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>mood</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>mood</code> project and select
+Build.</p>
+</li>
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/mood/report</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The URL specifies the context root, followed by the URL pattern.</p>
+</div>
+<div class="paragraph">
+<p>A web page appears with the title "Servlet MoodServlet at /mood", a text
+string describing Duke&#8217;s mood, and an illustrative graphic.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-mood-example-using-maven">To Run the mood Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet/mood/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/mood/report</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The URL specifies the context root, followed by the URL pattern.</p>
+</div>
+<div class="paragraph">
+<p>A web page appears with the title "Servlet MoodServlet at /mood", a text
+string describing Duke&#8217;s mood, and an illustrative graphic.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets014b.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets016.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

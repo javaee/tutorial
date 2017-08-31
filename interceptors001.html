@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of Interceptors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="interceptors.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="interceptors002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-interceptors">Overview of Interceptors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Interceptors are used in conjunction with Java EE managed classes to
+allow developers to invoke interceptor methods on an associated target
+class, in conjunction with method invocations or lifecycle events.
+Common uses of interceptors are logging, auditing, and profiling.</p>
+</div>
+<div class="paragraph">
+<p>Although interceptors are part of Enterprise JavaBeans 3.2 and Contexts
+and Dependency Injection for Java EE 1.1, the Interceptors 1.2
+specification is downloadable as part of a maintenance release of JSR
+318, Enterprise JavaBeans 3.1, available from
+<code>http://jcp.org/en/jsr/detail?id=318</code>. You can use interceptors with
+session beans, message-driven beans, and CDI managed beans. In all of
+these cases, the interceptor target class is the bean class.</p>
+</div>
+<div class="paragraph">
+<p>An interceptor can be defined within a target class as an interceptor
+method, or in an associated class called an interceptor class.
+Interceptor classes contain methods that are invoked in conjunction with
+the methods or lifecycle events of the target class.</p>
+</div>
+<div class="paragraph">
+<p>Interceptor classes and methods are defined using metadata annotations,
+or in the deployment descriptor of the application that contains the
+interceptors and target classes.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Applications that use the deployment descriptor to define interceptors
+are not portable across Java EE servers.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Interceptor methods within the target class or in an interceptor class
+are annotated with one of the metadata annotations defined in
+<a href="#GKECC">Table 55-1</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref253"></a><a id="GKECC"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 55-1 Interceptor Metadata Annotations</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 44%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interceptor Metadata Annotation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.interceptor.AroundConstruct</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Designates the method as an
+interceptor method that receives a callback after the target class is
+constructed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.interceptor.AroundInvoke</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Designates the method as an
+interceptor method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.interceptor.AroundTimeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Designates the method as a timeout
+interceptor for interposing on timeout methods for enterprise bean
+timers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.annotation.PostConstruct</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Designates the method as an
+interceptor method for post-construct lifecycle events</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.annotation.PreDestroy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Designates the method as an interceptor
+method for pre-destroy lifecycle events</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="interceptor-classes">Interceptor Classes</h3>
+<div class="paragraph">
+<p>Interceptor classes may be designated with the optional
+<code>javax.interceptor.Interceptor</code> annotation, but interceptor classes are
+not required to be so annotated. An interceptor class must have a
+public, no-argument constructor.</p>
+</div>
+<div class="paragraph">
+<p>The target class can have any number of interceptor classes associated
+with it. The order in which the interceptor classes are invoked is
+determined by the order in which the interceptor classes are defined in
+the <code>javax.interceptor.Interceptors</code> annotation. However, this order can
+be overridden in the deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>Interceptor classes may be targets of dependency injection. Dependency
+injection occurs when the interceptor class instance is created, using
+the naming context of the associated target class, and before any
+<code>@PostConstruct</code> callbacks are invoked.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="interceptor-lifecycle">Interceptor Lifecycle</h3>
+<div class="paragraph">
+<p>Interceptor classes have the same lifecycle as their associated target
+class. When a target class instance is created, an interceptor class
+instance is also created for each declared interceptor class in the
+target class. That is, if the target class declares multiple interceptor
+classes, an instance of each class is created when the target class
+instance is created. The target class instance and all interceptor class
+instances are fully instantiated before any <code>@PostConstruct</code> callbacks
+are invoked, and any <code>@PreDestroy</code> callbacks are invoked before the
+target class and interceptor class instances are destroyed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="interceptors-and-cdi">Interceptors and CDI</h3>
+<div class="paragraph">
+<p>Contexts and Dependency Injection for Java EE (CDI) builds on the basic
+functionality of Java EE interceptors. For information on CDI
+interceptors, including a discussion of interceptor binding types, see
+<a href="cdi-adv006.html#GKHJX">Using Interceptors in CDI Applications</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="interceptors.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="interceptors002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

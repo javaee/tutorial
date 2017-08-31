@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Providing Localized Messages and Labels</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="webi18n001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webi18n003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="providing-localized-messages-and-labels">Providing Localized Messages and Labels</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Messages and labels should be tailored according to the conventions of a
+user&#8217;s language and region. There are two approaches to providing
+localized messages and labels in a web application.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Provide a version of the web page in each of the target locales and
+have a controller servlet dispatch the request to the appropriate page
+depending on the requested locale. This approach is useful if large
+amounts of data on a page or an entire web application need to be
+internationalized.</p>
+</li>
+<li>
+<p>Isolate any locale-sensitive data on a page into resource bundles, and
+access the data so that the corresponding translated message is fetched
+automatically and inserted into the page. Thus, instead of creating
+strings directly in your code, you create a resource bundle that
+contains translations and read the translations from that bundle using
+the corresponding key.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Bookstore application follows the second approach. Here are a
+few lines from the default resource bundle <code>messages</code>.<code>properties</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">TitleShoppingCart=Shopping Cart
+TitleReceipt=Receipt
+TitleBookCatalog=Book Catalog
+TitleCashier=Cashier
+TitleBookDescription=Book Description
+Visitor=You are visitor number
+What=What We\'re Reading</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="establishing-the-locale">Establishing the Locale</h3>
+<div class="paragraph">
+<p>To get the correct strings for a given user, a web application either
+retrieves the locale (set by a browser language preference) from the
+request using the <code>getLocale</code> method, or allows the user to explicitly
+select the locale.</p>
+</div>
+<div class="paragraph">
+<p>A component can explicitly set the locale by using the <code>fmt:setLocale</code>
+tag.</p>
+</div>
+<div class="paragraph">
+<p>The <code>locale-config</code> element in the configuration file registers the
+default locale and also registers other supported locales. This element
+in Duke&#8217;s Bookstore registers English as the default locale and
+indicates that German, French, and Spanish are supported locales.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;locale-config&gt;
+    &lt;default-locale&gt;en&lt;/default-locale&gt;
+    &lt;supported-locale&gt;es&lt;/supported-locale&gt;
+    &lt;supported-locale&gt;de&lt;/supported-locale&gt;
+    &lt;supported-locale&gt;fr&lt;/supported-locale&gt;
+&lt;/locale-config&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>LocaleBean</code> in the Duke&#8217;s Bookstore application uses the
+<code>getLocale</code> method to retrieve the locale.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class LocaleBean {
+
+    ...
+    private FacesContext ctx = FacesContext.getCurrentInstance();
+    private Locale locale = ctx.getViewRoot().getLocale();;
+
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-the-resource-bundle">Setting the Resource Bundle</h3>
+<div class="paragraph">
+<p>The resource bundle is set with the <code>resource-bundle</code> element in the
+configuration file. The setting for Duke&#8217;s Bookstore looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;resource-bundle&gt;
+    &lt;base-name&gt;
+        javaeetutorial.dukesbookstore.web.messages.Messages
+    &lt;/base-name&gt;
+    &lt;var&gt;bundle&lt;/var&gt;
+&lt;/resource-bundle&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the locale is set, the controller of a web application could
+retrieve the resource bundle for that locale and save it as a session
+attribute (see <a href="servlets009.html#BNAGO">Associating Objects with a
+Session</a>) for use by other components or simply be used to return a text
+string appropriate for the selected locale:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public String toString(Locale locale) {
+    ResourceBundle res =
+        ResourceBundle.getBundle(
+            "javaeetutorial.dukesbookstore.web.messages.Messages", locale);
+    return res.getString(name() + ".string");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, an application could use the <code>f:loadBundle</code> tag to set
+the resource bundle. This tag loads the correct resource bundle
+according to the locale stored in <code>FacesContext</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:loadBundle basename="javaeetutorial.dukesbookstore.web.messages.Messages"
+    var="bundle"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Resource bundles containing messages that are explicitly referenced from
+a JavaServer Faces tag attribute using a value expression must be
+registered using the <code>resource-bundle</code> element of the configuration
+file.</p>
+</div>
+<div class="paragraph">
+<p>For more information on using this element, see
+<a href="jsf-configure006.html#BNAXB">Registering Application Messages</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retrieving-localized-messages">Retrieving Localized Messages</h3>
+<div class="paragraph">
+<p>A web component written in the Java programming language retrieves the
+resource bundle from the session:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">ResourceBundle messages = (ResourceBundle)session.getAttribute("messages");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then it looks up the string associated with the key <code>person.lastName</code> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">messages.getString("person.lastName");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can only use a <code>message</code> or <code>messages</code> tag to display messages that
+are queued onto a component as a result of a converter or validator
+being registered on the component. The following example shows a
+<code>message</code> tag that displays the error message queued on the <code>userNo</code>
+input component if the validator registered on the component fails to
+validate the value the user enters into the component.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="userNo" value="#{UserNumberBean.userNumber}"&gt;
+    &lt;f:validateLongRange minimum="0" maximum="10" /&gt;
+&lt;/h:inputText&gt;
+...
+&lt;h:message style="color: red; text-decoration: overline"
+           id="errors1" for="userNo"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information on using the <code>message</code> or <code>messages</code> tags, see
+<a href="jsf-page002.html#BNASO">Displaying Error Messages with the h:message
+and h:messages Tags</a>.</p>
+</div>
+<div class="paragraph">
+<p>Messages that are not queued on a component and are therefore not loaded
+automatically are referenced using a value expression. You can reference
+a localized message from almost any JavaServer Faces tag attribute.</p>
+</div>
+<div class="paragraph">
+<p>The value expression that references a message has the same notation
+whether you loaded the resource bundle with the <code>loadBundle</code> tag or
+registered it with the <code>resource-bundle</code> element in the configuration
+file.</p>
+</div>
+<div class="paragraph">
+<p>The value expression notation is <code>var.message</code>, in which <code>var</code> matches
+the <code>var</code> attribute of the <code>loadBundle</code> tag or the <code>var</code> element defined
+in the <code>resource-bundle</code> element of the configuration file, and
+<code>message</code> matches the key of the message contained in the resource
+bundle, referred to by the <code>var</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example from <code>bookcashier.xhtml</code> in Duke&#8217;s Bookstore:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:outputLabel for="name" value="#{bundle.Name}" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that <code>bundle</code> matches the <code>var</code> element from the configuration
+file and that <code>Name</code> matches the key in the resource bundle.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="webi18n001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webi18n003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

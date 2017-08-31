@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Integrating JAX-RS with EJB Technology and CDI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-advanced003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="integrating-jax-rs-with-ejb-technology-and-cdi">Integrating JAX-RS with EJB Technology and CDI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JAX-RS works with Enterprise JavaBeans technology (enterprise beans) and
+Contexts and Dependency Injection for Java EE (CDI).</p>
+</div>
+<div class="paragraph">
+<p>In general, for JAX-RS to work with enterprise beans, you need to
+annotate the class of a bean with <code>@Path</code> to convert it to a root
+resource class. You can use the <code>@Path</code> annotation with stateless
+session beans and singleton POJO beans.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows a stateless session bean and a
+singleton bean that have been converted to JAX-RS root resource classes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Stateless
+@Path("stateless-bean")
+public class StatelessResource {...}
+
+@Singleton
+@Path("singleton-bean")
+public class SingletonResource {...}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Session beans can also be used for subresources.</p>
+</div>
+<div class="paragraph">
+<p>JAX-RS and CDI have slightly different component models. By default,
+JAX-RS root resource classes are managed in the request scope, and no
+annotations are required for specifying the scope. CDI managed beans
+annotated with <code>@RequestScoped</code> or <code>@ApplicationScoped</code> can be converted
+to JAX-RS resource classes.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows a JAX-RS resource class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employee/{id}")
+public class Employee {
+    public Employee(@PathParam("id") String id) {...}
+}
+
+@Path("{lastname}")
+public final class EmpDetails {...}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows this JAX-RS resource class converted to
+a CDI bean. The beans must be proxyable, so the <code>Employee</code> class
+requires a nonprivate constructor with no parameters, and the
+<code>EmpDetails</code> class must not be <code>final</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employee/{id}")
+@RequestScoped
+public class Employee {
+    public Employee() {...}
+
+    @Inject
+    public Employee(@PathParam("id") String id) {...}
+}
+
+@Path("{lastname}")
+@RequestScoped
+public class EmpDetails {...}</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-advanced003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

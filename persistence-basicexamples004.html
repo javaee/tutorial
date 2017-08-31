@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The address-book Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-basicexamples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-querylanguage.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-address-book-application">The address-book Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>address-book</code> example application is a simple web application that
+stores contact data. It uses a single entity class, <code>Contact</code>, that uses
+the Java API for JavaBeans Validation (Bean Validation) to validate the
+data stored in the persistent attributes of the entity, as described in
+<a href="persistence-intro002.html#GKAHQ">Validating Persistent Fields and
+Properties</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKAOJ">Bean Validation Constraints in address-book</a></p>
+</li>
+<li>
+<p><a href="#GKANL">Specifying Error Messages for Constraints in address-book</a></p>
+</li>
+<li>
+<p><a href="#GKAON">Validating Contact Input from a JavaServer Faces
+Application</a></p>
+</li>
+<li>
+<p><a href="#GKAOP">Running the address-book Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="bean-validation-constraints-in-address-book">Bean Validation Constraints in address-book</h3>
+<div class="paragraph">
+<p>The <code>Contact</code> entity uses the <code>@NotNull</code>, <code>@Pattern</code>, and <code>@Past</code>
+constraints on the persistent attributes.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@NotNull</code> constraint marks the attribute as a required field. The
+attribute must be set to a non-null value before the entity can be
+persisted or modified. Bean Validation will throw a validation error if
+the attribute is null when the entity is persisted or modified.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Pattern</code> constraint defines a regular expression that the value of
+the attribute must match before the entity can be persisted or modified.
+This constraint has two different uses in <code>address-book</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The regular expression declared in the <code>@Pattern</code> annotation on the
+<code>email</code> field matches email addresses of the form name`@<code>domain
+name</code>.<code>top level domain, allowing only valid characters for email
+addresses. For example, `username@example.com</code> will pass validation, as
+will <code>firstname.lastname@mail.example.com</code>. However,
+<code>firstname,lastname@example.com</code>, which contains an illegal comma
+character in the local name, will fail validation.</p>
+</li>
+<li>
+<p>The <code>mobilePhone</code> and <code>homePhone</code> fields are annotated with a
+<code>@Pattern</code> constraint that defines a regular expression to match phone
+numbers of the form <code>(`xxx</code>)` xxx`-`xxxx.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>@Past</code> constraint is applied to the birthday field, which must be a
+<code>java.util.Date</code> in the past.</p>
+</div>
+<div class="paragraph">
+<p>Here are the relevant parts of the <code>Contact</code> entity class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class Contact implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
+    protected String firstName;
+    @NotNull
+    protected String lastName;
+    @Pattern(regexp = "[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\\."
+            + "[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9]"
+            + "(?:[a-z0-9-]*[a-z0-9])?",
+            message = "{invalid.email}")
+    protected String email;
+    @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+            message = "{invalid.phonenumber}")
+    protected String mobilePhone;
+    @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+            message = "{invalid.phonenumber}")
+    protected String homePhone;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Past
+    protected Date birthday;
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specifying-error-messages-for-constraints-in-address-book">Specifying Error Messages for Constraints in address-book</h3>
+<div class="paragraph">
+<p>Some of the constraints in the <code>Contact</code> entity specify an optional
+message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+        message = "{invalid.phonenumber}")
+protected String homePhone;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The optional message element in the <code>@Pattern</code> constraint overrides the
+default validation message. The message can be specified directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+        message = "Invalid phone number!")
+protected String homePhone;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The constraints in <code>Contact</code>, however, are strings in the resource
+bundle <code>ValidationMessages.properties</code>, under
+tut-install`/examples/persistence/address-book/src/java/<code>. This allows
+the validation messages to be located in one single properties file and
+the messages to be easily localized. Overridden Bean Validation messages
+must be placed in a resource bundle properties file named
+`ValidationMessages.properties</code> in the default package, with localized
+resource bundles taking the form
+<code>ValidationMessages_`locale-prefix</code>.properties`. For example,
+<code>ValidationMessages_es.properties</code> is the resource bundle used in
+Spanish-speaking locales.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="validating-contact-input-from-a-javaserver-faces-application">Validating Contact Input from a JavaServer Faces Application</h3>
+<div class="paragraph">
+<p>The <code>address-book</code> application uses a JavaServer Faces web front end to
+allow users to enter contacts. While JavaServer Faces has a form input
+validation mechanism using tags in Facelets XHTML files, <code>address-book</code>
+doesn&#8217;t use these validation tags. Bean Validation constraints in
+JavaServer Faces managed beans, in this case in the <code>Contact</code> entity,
+automatically trigger validation when the forms are submitted.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet from the <code>Create.xhtml</code> Facelets file shows
+some of the input form for creating new <code>Contact</code> instances:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:form&gt;
+    &lt;table columns="3" role="presentation"&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;h:outputLabel value="#{bundle.CreateContactLabel_firstName}"
+                               for="firstName" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;h:inputText id="firstName"
+                             value="#{contactController.selected.firstName}"
+                             title="#{bundle.CreateContactTitle_firstName}"/&gt;
+            &lt;/td&gt;
+            &lt;td&gt;&lt;h:message for="firstName" /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;h:outputLabel value="#{bundle.CreateContactLabel_lastName}"
+                               for="lastName" /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;h:inputText id="lastName"
+                             value="#{contactController.selected.lastName}"
+                             title="#{bundle.CreateContactTitle_lastName}" /&gt;
+            &lt;/td&gt;
+            &lt;td&gt;&lt;h:message for="lastName" /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        ...
+    &lt;/table&gt;
+&lt;/h:form&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>&lt;h:inputText&gt;</code> tags <code>firstName</code> and <code>lastName</code> are bound to the
+attributes in the <code>Contact</code> entity instance <code>selected</code> in the
+<code>ContactController</code> stateless session bean. Each <code>&lt;h:inputText&gt;</code> tag has
+an associated <code>&lt;h:message&gt;</code> tag that will display validation error
+messages. The form doesn&#8217;t require any JavaServer Faces validation tags,
+however.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-address-book-example">Running the address-book Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>address-book</code> application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKAOD">To Run the address-book Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKANZ">To Run the address-book Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-address-book-example-using-netbeans-ide">To Run the address-book Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/persistence</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>address-book</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>address-book</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>After the application has been deployed, a web browser window appears at
+the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/address-book/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click Show All Contact Items, then Create New Contact. Enter values
+in the fields; then click Save.</p>
+<div class="paragraph">
+<p>If any of the values entered violate the constraints in <code>Contact</code>, an
+error message will appear in red beside the field with the incorrect
+values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-address-book-example-using-maven">To Run the address-book Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/persistence/address-book/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will compile and assemble the <code>address-book</code> application into a
+WAR. The WAR file is then deployed to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Open a web browser window and enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/address-book/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click Show All Contact Items, then Create New Contact. Enter values
+in the fields; then click Save.</p>
+<div class="paragraph">
+<p>If any of the values entered violate the constraints in <code>Contact</code>, an
+error message will appear in red beside the field with the incorrect
+values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-basicexamples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-querylanguage.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

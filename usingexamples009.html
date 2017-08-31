@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Debugging Java EE Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="usingexamples008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partplatform.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="debugging-java-ee-applications">Debugging Java EE Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section explains how to determine what is causing an error in your
+application deployment or execution.</p>
+</div>
+<div class="sect2">
+<h3 id="using-the-server-log">Using the Server Log</h3>
+<div class="paragraph">
+<p>One way to debug applications is to look at the server log in
+domain-dir`/logs/server.log`. The log contains output from GlassFish
+Server and your applications. You can log messages from any Java class
+in your application with <code>System.out.println</code> and the Java Logging APIs
+(documented at
+<a href="http://docs.oracle.com/javase/8/docs/technotes/guides/logging/index.html"><code>http://docs.oracle.com/javase/8/docs/technotes/guides/logging/index.html</code></a>)
+and from web components with the <code>ServletContext.log</code> method.</p>
+</div>
+<div class="paragraph">
+<p>If you use NetBeans IDE, logging output appears in the Output window as
+well as the server log.</p>
+</div>
+<div class="paragraph">
+<p>If you start GlassFish Server with the <code>--verbose</code> flag, all logging and
+debugging output will appear on the terminal window or command prompt
+and the server log. If you start GlassFish Server in the background,
+debugging information is available only in the log. You can view the
+server log with a text editor or with the Administration Console log
+viewer.</p>
+</div>
+<div class="sect3">
+<h4 id="to-use-the-administration-console-log-viewer">To Use the Administration Console Log Viewer</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select the <strong>GlassFish Server</strong> node.</p>
+</li>
+<li>
+<p>Click <strong>View Log Files</strong>.</p>
+<div class="paragraph">
+<p>The log viewer opens and displays the last 40 entries.</p>
+</div>
+</li>
+<li>
+<p>To display other entries, follow these steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Click <strong>Modify Search</strong>.</p>
+</li>
+<li>
+<p>Specify any constraints on the entries you want to see.</p>
+</li>
+<li>
+<p>Click Search at the top of the log viewer.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-a-debugger">Using a Debugger</h3>
+<div class="paragraph">
+<p>GlassFish Server supports the Java Platform Debugger Architecture
+(JPDA). With JPDA, you can configure GlassFish Server to communicate
+debugging information using a socket.</p>
+</div>
+<div class="sect3">
+<h4 id="to-debug-an-application-using-a-debugger">To Debug an Application Using a Debugger</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow these steps to enable debugging in GlassFish Server using the
+Administration Console:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Expand the <strong>Configurations</strong> node, then expand the <strong>server-config</strong> node.</p>
+</li>
+<li>
+<p>Select the <strong>JVM Settings</strong> node. The default debug options are set to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9009</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, the default debugger socket port is 9009. You can change
+it to a port not in use by GlassFish Server or another service.</p>
+</div>
+</li>
+<li>
+<p>Select the <strong>Debug Enabled</strong> check box.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Stop GlassFish Server and then restart it.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="usingexamples008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partplatform.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

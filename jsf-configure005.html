@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Configuring Managed Beans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="configuring-managed-beans">Configuring Managed Beans</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a page references a managed bean for the first time, the JavaServer
+Faces implementation initializes it either based on a <code>@Named</code>
+annotation and scope annotation in the bean class or according to its
+configuration in the application configuration resource file. For
+information on using annotations to initialize beans, see
+<a href="jsf-configure002.html#GIRCH">Using Annotations to Configure Managed
+Beans</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can use either annotations or the application configuration resource
+file to instantiate managed beans that are used in a JavaServer Faces
+application and to store them in scope. The managed bean creation
+facility is configured in the application configuration resource file
+using <code>managed-bean</code> XML elements to define each bean. This file is
+processed at application startup time. For information on using this
+facility, see <a href="#BNAWR">Using the managed-bean Element</a>.</p>
+</div>
+<div class="paragraph">
+<p>Managed beans created in the application configuration resource file are
+JavaServer Faces managed beans, not CDI managed beans.</p>
+</div>
+<div class="paragraph">
+<p>With the managed bean creation facility, you can</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create beans in one centralized file that is available to the entire
+application, rather than conditionally instantiate beans throughout the
+application</p>
+</li>
+<li>
+<p>Customize a bean&#8217;s properties without any additional code</p>
+</li>
+<li>
+<p>Customize a bean&#8217;s property values directly from within the
+configuration file so that it is initialized with these values when it
+is created</p>
+</li>
+<li>
+<p>Using <code>value</code> elements, set a property of one managed bean to be the
+result of evaluating another value expression</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This section shows you how to initialize beans using the managed bean
+creation facility. See <a href="jsf-develop002.html#BNATY">Writing Bean
+Properties</a> and <a href="jsf-develop003.html#BNAVB">Writing Managed Bean
+Methods</a> for information on programming managed beans.</p>
+</div>
+<div class="sect2">
+<h3 id="using-the-managed-bean-element">Using the managed-bean Element</h3>
+<div class="paragraph">
+<p>A managed bean is initiated in the application configuration resource
+file using a <code>managed-bean</code> element, which represents an instance of a
+bean class that must exist in the application. At runtime, the
+JavaServer Faces implementation processes the <code>managed-bean</code> element. If
+a page references the bean and no bean instance exists, the JavaServer
+Faces implementation instantiates the bean as specified by the element
+configuration.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example managed bean configuration from the Duke&#8217;s Bookstore
+case study:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean eager="true"&gt;
+    &lt;managed-bean-name&gt;Book201&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;dukesbookstore.model.ImageArea&lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt;application&lt;/managed-bean-scope&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;shape&lt;/property-name&gt;
+        &lt;value&gt;rect&lt;/value&gt;
+    &lt;/managed-property&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;alt&lt;/property-name&gt;
+        &lt;value&gt;Duke&lt;/value&gt;
+    &lt;/managed-property&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;coords&lt;/property-name&gt;
+        &lt;value&gt;67,23,212,268&lt;/value&gt;
+    &lt;/managed-property&gt;
+&lt;/managed-bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>managed-bean-name</code> element defines the key under which the bean
+will be stored in a scope. For a component&#8217;s value to map to this bean,
+the component tag&#8217;s <code>value</code> attribute must match the <code>managed-bean-name</code>
+up to the first period.</p>
+</div>
+<div class="paragraph">
+<p>The <code>managed-bean-class</code> element defines the fully qualified name of the
+JavaBeans component class used to instantiate the bean.</p>
+</div>
+<div class="paragraph">
+<p>The <code>managed-bean</code> element can contain zero or more <code>managed-property</code>
+elements, each corresponding to a property defined in the bean class.
+These elements are used to initialize the values of the bean properties.
+If you don&#8217;t want a particular property initialized with a value when
+the bean is instantiated, do not include a <code>managed-property</code> definition
+for it in your application configuration resource file.</p>
+</div>
+<div class="paragraph">
+<p>If a <code>managed-bean</code> element does not contain other <code>managed-bean</code>
+elements, it can contain one <code>map-entries</code> element or <code>list-entries</code>
+element. The <code>map-entries</code> element configures a set of beans that are
+instances of <code>Map</code>. The <code>list-entries</code> element configures a set of beans
+that are instances of <code>List</code>.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the <code>newsletters</code> managed bean, representing a
+<code>UISelectItems</code> component, is configured as an <code>ArrayList</code> that
+represents a set of <code>SelectItem</code> objects. Each <code>SelectItem</code> object is in
+turn configured as a managed bean with properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;newsletters&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;java.util.ArrayList&lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt;application&lt;/managed-bean-scope&gt;
+    &lt;list-entries&gt;
+        &lt;value-class&gt;javax.faces.model.SelectItem&lt;/value-class&gt;
+        &lt;value&gt;#{newsletter0}&lt;/value&gt;
+        &lt;value&gt;#{newsletter1}&lt;/value&gt;
+        &lt;value&gt;#{newsletter2}&lt;/value&gt;
+        &lt;value&gt;#{newsletter3}&lt;/value&gt;
+    &lt;/list-entries&gt;
+&lt;/managed-bean&gt;
+&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;newsletter0&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;javax.faces.model.SelectItem&lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt;none&lt;/managed-bean-scope&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;label&lt;/property-name&gt;
+        &lt;value&gt;Duke's Quarterly&lt;/value&gt;
+    &lt;/managed-property&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;value&lt;/property-name&gt;
+        &lt;value&gt;200&lt;/value&gt;
+    &lt;/managed-property&gt;
+&lt;/managed-bean&gt;
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This approach may be useful for quick-and-dirty creation of selection
+item lists before a development team has had time to create such lists
+from the database. Note that each of the individual newsletter beans has
+a <code>managed-bean-scope</code> setting of <code>none</code> so that they will not
+themselves be placed into any scope.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#BNAWX">Initializing Array and List Properties</a> for more
+information on configuring collections as beans.</p>
+</div>
+<div class="paragraph">
+<p>To map to a property defined by a <code>managed-property</code> element, you must
+ensure that the part of a component tag&#8217;s <code>value</code> expression after the
+period matches the <code>managed-property</code> element&#8217;s <code>property-name</code> element.
+The next section, <a href="#BNAWS">Initializing Properties Using the
+managed-property Element</a>, explains in more detail how to use the
+<code>managed-property</code> element. See <a href="#BNAWY">Initializing Managed Bean
+Properties</a> for an example of initializing a managed bean property.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="initializing-properties-using-the-managed-property-element">Initializing Properties Using the managed-property Element</h3>
+<div class="paragraph">
+<p>A <code>managed-property</code> element must contain a <code>property-name</code> element,
+which must match the name of the corresponding property in the bean. A
+<code>managed-property</code> element must also contain one of a set of elements
+that defines the value of the property. This value must be of the same
+type as that defined for the property in the corresponding bean. Which
+element you use to define the value depends on the type of the property
+defined in the bean. <a href="#BNAWT">Table 16-1</a> lists all the elements that
+are used to initialize a value.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref94"></a><a id="BNAWT"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 16-1 Subelements of managed-property Elements That Define Property
+Values</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 18%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Value It Defines</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list-entries</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the values in a list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>map-entries</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the values of a map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null-value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicitly sets the property to <code>null</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a single value, such as a <code>String</code>, <code>int</code>, or
+JavaServer Faces EL expression</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#BNAWR">Using the managed-bean Element</a> includes an example of
+initializing an <code>int</code> property (a primitive type) using the <code>value</code>
+subelement. You also use the <code>value</code> subelement to initialize <code>String</code>
+and other reference types. The rest of this section describes how to use
+the <code>value</code> subelement and other subelements to initialize properties of
+Java <code>Enum</code> types, <code>Map</code>, <code>array</code>, and <code>Collection</code>, as well as
+initialization parameters.</p>
+</div>
+<div class="sect3">
+<h4 id="referencing-a-java-enum-type">Referencing a Java Enum Type</h4>
+<div class="paragraph">
+<p>A managed bean property can also be a Java <code>Enum</code> type (see
+<code>http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html</code>). In this
+case, the <code>value</code> element of the <code>managed-property</code> element must be a
+<code>String</code> that matches one of the <code>String</code> constants of the <code>Enum</code>. In
+other words, the <code>String</code> must be one of the valid values that can be
+returned if you were to call <code>valueOf(Class, String)</code> on <code>enum</code>, where
+<code>Class</code> is the <code>Enum</code> class and <code>String</code> is the contents of the <code>value</code>
+subelement. For example, suppose the managed bean property is the
+following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public enum Suit { Hearts, Spades, Diamonds, Clubs }
+ ...
+public Suit getSuit() { ... return Suit.Hearts; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assuming you want to configure this property in the application
+configuration resource file, the corresponding <code>managed-property</code>
+element looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-property&gt;
+    &lt;property-name&gt;Suit&lt;/property-name&gt;
+    &lt;value&gt;Hearts&lt;/value&gt;
+&lt;/managed-property&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the system encounters this property, it iterates over each of the
+members of the <code>enum</code> and calls <code>toString()</code> on each member until it
+finds one that is exactly equal to the value from the <code>value</code> element.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="referencing-a-context-initialization-parameter">Referencing a Context Initialization Parameter</h4>
+<div class="paragraph">
+<p>Another powerful feature of the managed bean creation facility is the
+ability to reference implicit objects from a managed bean property.</p>
+</div>
+<div class="paragraph">
+<p>Suppose you have a page that accepts data from a customer, including the
+customer&#8217;s address. Suppose also that most of your customers live in a
+particular area code. You can make the area code component render this
+area code by saving it in an implicit object and referencing it when the
+page is rendered.</p>
+</div>
+<div class="paragraph">
+<p>You can save the area code as an initial default value in the context
+<code>initParam</code> implicit object by adding a context parameter to your web
+application and setting its value in the deployment descriptor. For
+example, to set a context parameter called <code>defaultAreaCode</code> to <code>650</code>,
+add a <code>context-param</code> element to the deployment descriptor and give the
+parameter the name <code>defaultAreaCode</code> and the value <code>650</code>.</p>
+</div>
+<div class="paragraph">
+<p>Next, write a <code>managed-bean</code> declaration that configures a property that
+references the parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;customer&lt;/managed-bean-name&gt;
+        &lt;managed-bean-class&gt;CustomerBean&lt;/managed-bean-class&gt;
+        &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
+        &lt;managed-property&gt;
+            &lt;property-name&gt;areaCode&lt;/property-name&gt;
+                &lt;value&gt;#{initParam.defaultAreaCode}&lt;/value&gt;
+            &lt;/managed-property&gt;
+            ...
+&lt;/managed-bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To access the area code at the time the page is rendered, refer to the
+property from the <code>area</code> component tag&#8217;s <code>value</code> attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id=area value="#{customer.areaCode}"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Values are retrieved from other implicit objects in a similar way.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="initializing-map-properties">Initializing Map Properties</h4>
+<div class="paragraph">
+<p>The <code>map-entries</code> element is used to initialize the values of a bean
+property with a type of <code>Map</code> if the <code>map-entries</code> element is used
+within a <code>managed-property</code> element. A <code>map-entries</code> element contains an
+optional <code>key-class</code> element, an optional <code>value-class</code> element, and
+zero or more <code>map-entry</code> elements.</p>
+</div>
+<div class="paragraph">
+<p>Each of the <code>map-entry</code> elements must contain a <code>key</code> element and either
+a <code>null-value</code> or <code>value</code> element. Here is an example that uses the
+<code>map-entries</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean&gt;
+    ...
+    &lt;managed-property&gt;
+        &lt;property-name&gt;prices&lt;/property-name&gt;
+        &lt;map-entries&gt;
+            &lt;map-entry&gt;
+                &lt;key&gt;My Early Years: Growing Up on *7&lt;/key&gt;
+                &lt;value&gt;30.75&lt;/value&gt;
+            &lt;/map-entry&gt;
+            &lt;map-entry&gt;
+                &lt;key&gt;Web Servers for Fun and Profit&lt;/key&gt;
+                &lt;value&gt;40.75&lt;/value&gt;
+            &lt;/map-entry&gt;
+        &lt;/map-entries&gt;
+    &lt;/managed-property&gt;
+&lt;/managed-bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The map created from this <code>map-entries</code> tag contains two entries. By
+default, all the keys and values are converted to <code>String</code>. If you want
+to specify a different type for the keys in the map, embed the
+<code>key-class</code> element just inside the <code>map-entries</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;map-entries&gt;
+    &lt;key-class&gt;java.math.BigDecimal&lt;/key-class&gt;
+    ...
+&lt;/map-entries&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This declaration will convert all the keys into <code>java.math.BigDecimal</code>.
+Of course, you must make sure that the keys can be converted to the type
+you specify. The key from the example in this section cannot be
+converted to a <code>BigDecimal</code>, because it is a <code>String</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you want to specify a different type for all the values in the map,
+include the <code>value-class</code> element after the <code>key-class</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;map-entries&gt;
+    &lt;key-class&gt;int&lt;/key-class&gt;
+    &lt;value-class&gt;java.math.BigDecimal&lt;/value-class&gt;
+    ...
+&lt;/map-entries&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that this tag sets only the type of all the <code>value</code> subelements.</p>
+</div>
+<div class="paragraph">
+<p>Each <code>map-entry</code> in the preceding example includes a <code>value</code> subelement.
+The <code>value</code> subelement defines a single value, which will be converted
+to the type specified in the bean.</p>
+</div>
+<div class="paragraph">
+<p>Instead of using a <code>map-entries</code> element, it is also possible to assign
+the entire map using a <code>value</code> element that specifies a map-typed
+expression.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="initializing-array-and-list-properties">Initializing Array and List Properties</h4>
+<div class="paragraph">
+<p>The <code>list-entries</code> element is used to initialize the values of an array
+or <code>List</code> property. Each individual value of the array or <code>List</code> is
+initialized using a <code>value</code> or <code>null-value</code> element. Here is an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean&gt;
+    ...
+    &lt;managed-property&gt;
+        &lt;property-name&gt;books&lt;/property-name&gt;
+        &lt;list-entries&gt;
+            &lt;value-class&gt;java.lang.String&lt;/value-class&gt;
+            &lt;value&gt;Web Servers for Fun and Profit&lt;/value&gt;
+            &lt;value&gt;#{myBooks.bookId[3]}&lt;/value&gt;
+            &lt;null-value/&gt;
+        &lt;/list-entries&gt;
+    &lt;/managed-property&gt;
+&lt;/managed-bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example initializes an array or a <code>List</code>. The type of the
+corresponding property in the bean determines which data structure is
+created. The <code>list-entries</code> element defines the list of values in the
+array or <code>List</code>. The <code>value</code> element specifies a single value in the
+array or <code>List</code> and can reference a property in another bean. The
+<code>null-value</code> element will cause the <code>setBooks</code> method to be called with
+an argument of <code>null</code>. A <code>null</code> property cannot be specified for a
+property whose data type is a Java primitive, such as <code>int</code> or
+<code>boolean</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="initializing-managed-bean-properties">Initializing Managed Bean Properties</h4>
+<div class="paragraph">
+<p>Sometimes you might want to create a bean that also references other
+managed beans so that you can construct a graph or a tree of beans. For
+example, suppose you want to create a bean representing a customer&#8217;s
+information, including the mailing address and street address, each of
+which is also a bean. The following <code>managed-bean</code> declarations create a
+<code>CustomerBean</code> instance that has two <code>AddressBean</code> properties: one
+representing the mailing address and the other representing the street
+address. This declaration results in a tree of beans with <code>CustomerBean</code>
+as its root and the two <code>AddressBean</code> objects as children.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;customer&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;
+        com.example.mybeans.CustomerBean
+    &lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt; request &lt;/managed-bean-scope&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;mailingAddress&lt;/property-name&gt;
+        &lt;value&gt;#{addressBean}&lt;/value&gt;
+    &lt;/managed-property&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;streetAddress&lt;/property-name&gt;
+        &lt;value&gt;#{addressBean}&lt;/value&gt;
+    &lt;/managed-property&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;customerType&lt;/property-name&gt;
+        &lt;value&gt;New&lt;/value&gt;
+    &lt;/managed-property&gt;
+&lt;/managed-bean&gt;
+&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;addressBean&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;
+        com.example.mybeans.AddressBean
+    &lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt; none &lt;/managed-bean-scope&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;street&lt;/property-name&gt;
+        &lt;null-value/&gt;
+    &lt;managed-property&gt;
+    ...
+&lt;/managed-bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first <code>CustomerBean</code> declaration (with the <code>managed-bean-name</code> of
+<code>customer</code>) creates a <code>CustomerBean</code> in request scope. This bean has two
+properties, <code>mailingAddress</code> and <code>streetAddress</code>. These properties use
+the <code>value</code> element to reference a bean named <code>addressBean</code>.</p>
+</div>
+<div class="paragraph">
+<p>The second managed bean declaration defines an <code>AddressBean</code> but does
+not create it, because its <code>managed-bean-scope</code> element defines a scope
+of <code>none</code>. Recall that a scope of <code>none</code> means that the bean is created
+only when something else references it. Because both the
+<code>mailingAddress</code> and the <code>streetAddress</code> properties reference
+<code>addressBean</code> using the <code>value</code> element, two instances of <code>AddressBean</code>
+are created when <code>CustomerBean</code> is created.</p>
+</div>
+<div class="paragraph">
+<p>When you create an object that points to other objects, do not try to
+point to an object with a shorter life span, because it might be
+impossible to recover that scope&#8217;s resources when it goes away. A
+session-scoped object, for example, cannot point to a request-scoped
+object. And objects with <code>none</code> scope have no effective life span
+managed by the framework, so they can point only to other <code>none</code>-scoped
+objects. <a href="#BNAWZ">Table 16-2</a> outlines all of the allowed
+connections.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref95"></a><a id="BNAWZ"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 16-2 Allowable Connections between Scoped Objects</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 27%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">An Object of This Scope</th>
+<th class="tableblock halign-left valign-top">May Point to an Object of This Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code>, <code>application</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>session</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code>, <code>application</code>, <code>session</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code>, <code>application</code>, <code>session</code>, <code>request</code>, <code>view</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>view</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code>, <code>application</code>, <code>session</code>, <code>view</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Be sure not to allow cyclical references between objects. For example,
+neither of the <code>AddressBean</code> objects in the preceding example should
+point back to the <code>CustomerBean</code> object, because <code>CustomerBean</code> already
+points to the <code>AddressBean</code> objects.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="initializing-maps-and-lists">Initializing Maps and Lists</h3>
+<div class="paragraph">
+<p>In addition to configuring <code>Map</code> and <code>List</code> properties, you can also
+configure a <code>Map</code> and a <code>List</code> directly so that you can reference them
+from a tag rather than referencing a property that wraps a <code>Map</code> or a
+<code>List</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

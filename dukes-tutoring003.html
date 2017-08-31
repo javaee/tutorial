@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Administration Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="dukes-tutoring002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="dukes-tutoring004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="administration-interface">Administration Interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The administration interface of Duke&#8217;s Tutoring is used by the tutoring
+center staff to manage the data employed by the main interface: the
+students, the students' guardians, and the addresses. The administration
+interface uses many of the same components as the main interface.
+Additional components that are only used in the administration interface
+are described here.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKAEN">Enterprise Beans Used in the Administration Interface</a></p>
+</li>
+<li>
+<p><a href="#GKACB">Facelets Files Used in the Administration Interface</a></p>
+</li>
+<li>
+<p><a href="#BCGHIDEG">CDI Managed Beans Used in the Administration Interface</a></p>
+</li>
+<li>
+<p><a href="#BCGFFFCA">Helper Classes Used in the Administration Interface</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="enterprise-beans-used-in-the-administration-interface">Enterprise Beans Used in the Administration Interface</h3>
+<div class="paragraph">
+<p>The following enterprise bean, in the <code>dukestutoring.ejb</code> package of the
+<code>dukes-tutoring-war</code> project, is used in the administration interface.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AdminBean</code>: A stateless session bean for all the business logic used
+in the administration interface. Calls security methods to allow
+invocation of the business methods only by authorized users.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="facelets-files-used-in-the-administration-interface">Facelets Files Used in the Administration Interface</h3>
+<div class="paragraph">
+<p>The following Facelets files, under <code>src/main/webapp/</code>, are used in the
+administration interface:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>admin/adminTemplate.xhtml</code>: Template for the administration interface</p>
+</li>
+<li>
+<p><code>admin/index.xhtml</code>: Landing page for the administration interface</p>
+</li>
+<li>
+<p><code>login.xhtml</code>: Login page for the security-constrained administration
+interface</p>
+</li>
+<li>
+<p><code>loginError.xhtml</code>: Page displayed if there are errors authenticating
+the administration user</p>
+</li>
+<li>
+<p><code>admin/address</code> directory: Pages that allow you to create, edit, and
+delete <code>Address</code> entities</p>
+</li>
+<li>
+<p><code>admin/guardian</code> directory: Pages that allow you to create, edit, and
+delete <code>Guardian</code> entities</p>
+</li>
+<li>
+<p><code>admin/student</code> directory: Pages that allow you to create, edit, and
+delete <code>Student</code> entities</p>
+</li>
+<li>
+<p><code>resources/components/formLogin.xhtml</code>: Composite component for a
+login form using Java EE security</p>
+</li>
+<li>
+<p><code>WEB-INF/includes/adminNav.xhtml</code>: XHTML fragment for the
+administration interface&#8217;s navigation bar</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cdi-managed-beans-used-in-the-administration-interface">CDI Managed Beans Used in the Administration Interface</h3>
+<div class="paragraph">
+<p>The CDI managed beans used in the administration interface are located
+in the <code>dukestutoring.web</code> package in the <code>dukes-tutoring-war</code> project.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>StudentBean.java</code>: A managed bean for the Facelets pages used to
+create and edit students. The first and last names have Bean Validation
+annotations that require the fields to be filled in. The phone numbers
+have Bean Validation annotations to ensure that the submitted data is
+well-formed.</p>
+</li>
+<li>
+<p><code>GuardianBean.java</code>: A managed bean for the Facelets pages used to
+create guardians for and assign guardians to students. The first and
+last names have Bean Validation annotations that require the fields to
+be filled in. The phone numbers have Bean Validation annotations to
+ensure that the submitted data is well-formed.</p>
+</li>
+<li>
+<p><code>AddressBean.java</code>: A managed bean for the Facelets pages used to
+create addresses for students. The street, city, province, and postal
+code attributes have Bean Validation annotations that require the fields
+to be filled in, and the postal code attribute has an additional
+annotation to ensure that the data is properly formed.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="helper-classes-used-in-the-administration-interface">Helper Classes Used in the Administration Interface</h3>
+<div class="paragraph">
+<p>The following helper classes, found in the <code>dukes-tutoring-war</code>
+project&#8217;s <code>dukestutoring.web.util</code> package, are used in the
+administration interface.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EntityConverter</code>: A parent class to <code>StudentConverter</code> and
+<code>GuardianConverter</code> that defines a cache to store the entity classes
+when converting the entities for use in JavaServer Faces user interface
+components. The cache helps increase performance. The cache is stored in
+the JavaServer Faces context.</p>
+</li>
+<li>
+<p><code>StudentConverter</code>: A JavaServer Faces converter for the <code>Student</code>
+entity class. This class contains methods to convert <code>Student</code> instances
+to strings and back again, so they can be used in the user interface
+components of the application.</p>
+</li>
+<li>
+<p><code>GuardianConverter</code>: Similar to <code>StudentConverter</code>, this class is a
+converter for the <code>Guardian</code> entity class.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="dukes-tutoring002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="dukes-tutoring004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

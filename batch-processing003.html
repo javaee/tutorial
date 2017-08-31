@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Simple Use Case</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="batch-processing002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="simple-use-case">Simple Use Case</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section demonstrates how to define a simple job using the Job
+Specification Language (JSL) and how to implement the corresponding
+batch artifacts. Refer to the rest of the sections in this chapter for
+detailed descriptions of the elements in the batch framework.</p>
+</div>
+<div class="paragraph">
+<p>The following job definition specifies a chunk step and a task step as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;job id="simplejob" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+                    version="1.0"&gt;
+  &lt;properties&gt;
+    &lt;property name="input_file" value="input.txt"/&gt;
+    &lt;property name="output_file" value="output.txt"/&gt;
+  &lt;/properties&gt;
+  &lt;step id="mychunk" next="mytask"&gt;
+    &lt;chunk&gt;
+      &lt;reader ref="MyReader"&gt;&lt;/reader&gt;
+      &lt;processor ref="MyProcessor"&gt;&lt;/processor&gt;
+      &lt;writer ref="MyWriter"&gt;&lt;/writer&gt;
+    &lt;/chunk&gt;
+  &lt;/step&gt;
+  &lt;step id="mytask"&gt;
+    &lt;batchlet ref="MyBatchlet"&gt;&lt;/batchlet&gt;
+    &lt;end on="COMPLETED"/&gt;
+  &lt;/step&gt;
+&lt;/job&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="chunk-step">Chunk Step</h3>
+<div class="paragraph">
+<p>In most cases, you have to implement a checkpoint class for
+chunk-oriented steps. The following class just keeps track of the line
+number in a text file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class MyCheckpoint implements Serializable {
+    private long lineNum = 0;
+    public void increase() { lineNum++; }
+    public long getLineNum() { return lineNum; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following item reader implementation continues reading the input
+file from the provided checkpoint if the job was restarted. The items
+consist of each line in the text file (in more complex scenarios, the
+items are custom Java types and the input source can be a database):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("MyReader")
+public class MyReader implements javax.batch.api.chunk.ItemReader {
+    private MyCheckpoint checkpoint;
+    private BufferedReader breader;
+    @Inject
+    JobContext jobCtx;
+
+    public MyReader() {}
+
+    @Override
+    public void open(Serializable ckpt) throws Exception {
+        if (ckpt == null)
+            checkpoint = new MyCheckpoint();
+        else
+            checkpoint = (MyCheckpoint) ckpt;
+        String fileName = jobCtx.getProperties()
+                                .getProperty("input_file");
+        breader = new BufferedReader(new FileReader(fileName));
+        for (long i = 0; i &lt; checkpoint.getLineNum(); i++)
+            breader.readLine();
+    }
+
+    @Override
+    public void close() throws Exception {
+        breader.close();
+    }
+
+    @Override
+    public Object readItem() throws Exception {
+        String line = breader.readLine();
+        return line;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following case, the item processor only converts the line to
+uppercase. More complex examples can process items in different ways or
+transform them into custom output Java types:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("MyProcessor")
+public class MyProcessor implements javax.batch.api.chunk.ItemProcessor {
+    public MyProcessor() {}
+
+    @Override
+    public Object processItem(Object obj) throws Exception {
+        String line = (String) obj;
+        return line.toUpperCase();
+    }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>The batch processing API does not support generics. In most cases, you
+need to cast items to their specific type before processing them.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The item writer writes the processed items to the output file. It
+overwrites the output file if no checkpoint is provided; otherwise, it
+resumes writing at the end of the file. Items are written in chunks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("MyWriter")
+public class MyWriter implements javax.batch.api.chunk.ItemWriter {
+    private BufferedWriter bwriter;
+    @Inject
+    private JobContext jobCtx;
+
+    @Override
+    public void open(Serializable ckpt) throws Exception {
+        String fileName = jobCtx.getProperties()
+                                .getProperty("output_file");
+        bwriter = new BufferedWriter(new FileWriter(fileName,
+                                                    (ckpt != null)));
+    }
+
+    @Override
+    public void writeItems(List&lt;Object&gt; items) throws Exception {
+        for (int i = 0; i &lt; items.size(); i++) {
+            String line = (String) items.get(i);
+            bwriter.write(line);
+            bwriter.newLine();
+        }
+    }
+
+    @Override
+    public Serializable checkpointInfo() throws Exception {
+        return new MyCheckpoint();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task-step">Task Step</h3>
+<div class="paragraph">
+<p>The task step displays the length of the output file. In more complex
+scenarios, task steps perform any task that does not fit the chunk
+processing programming model:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("MyBatchlet")
+public class MyBatchlet implements javax.batch.api.chunk.Batchlet {
+    @Inject
+    private JobContext jobCtx;
+
+    @Override
+    public String process() throws Exception {
+        String fileName = jobCtx.getProperties()
+                                .getProperty("output_file");
+        System.out.println(""+(new File(fileName)).length());
+        return "COMPLETED";
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="batch-processing002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

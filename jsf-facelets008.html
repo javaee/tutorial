@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Resource Library Contracts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="resource-library-contracts">Resource Library Contracts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Resource library contracts allow you to define a different look and feel
+for different parts of one or more applications, instead of either
+having to use the same look and feel for all or having to specify a
+different look on a page-by-page basis.</p>
+</div>
+<div class="paragraph">
+<p>To do this, you create a <code>contracts</code> section of your web application.
+Within the <code>contracts</code> section, you can specify any number of named
+areas, each of which is called a contract. Within each contract you can
+specify resources such as template files, stylesheets, JavaScript files,
+and images.</p>
+</div>
+<div class="paragraph">
+<p>For example, you could specify two contracts named <code>c1</code> and <code>c2</code>, each
+of which uses a template and other files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">src/main/webapp
+    WEB-INF/
+    contracts
+        c1
+            template.xhtml
+            style.css
+            myImg.gif
+            myJS.js
+        c2
+            template.xhtml
+            style2.css
+            img2.gif
+            JS2.js
+    index.xhtml
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>One part of the application can use <code>c1</code>, while another can use <code>c2</code>.</p>
+</div>
+<div class="paragraph">
+<p>Another way to use contracts is to specify a single contract that
+contains multiple templates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">src/main/webapp
+    contracts
+        myContract
+            template1.xhtml
+            template2.xhtml
+            style.css
+            img.png
+            img2.png</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can package a resource library contract in a JAR file for reuse in
+different applications. If you do so, the contracts must be located
+under <code>META-INF/contracts</code>. You can then place the JAR file in the
+<code>WEB-INF/lib</code> directory of an application. This means that the
+application would be organized as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">src/main/webapp/
+    WEB-INF/lib/myContract.jar
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can specify the contract usage within an application&#8217;s
+<code>faces-config.xml</code> file, under the <code>resource-library-contracts</code> element.
+You need to use this element only if your application uses more than one
+contract, however.</p>
+</div>
+<div class="sect2">
+<h3 id="the-hello1-rlc-example-application">The hello1-rlc Example Application</h3>
+<div class="paragraph">
+<p>The <code>hello1-rlc</code> example modifies the simple <code>hello1</code> example from
+<a href="webapp003.html#BNADX">A Web Module That Uses JavaServer Faces
+Technology: The hello1 Example</a> to use two resource library contracts.
+Each of the two pages in the application uses a different contract.</p>
+</div>
+<div class="paragraph">
+<p>The managed bean for <code>hello1-rlc</code>, <code>Hello.java</code>, is identical to the one
+for <code>hello1</code> (except that it replaces the <code>@Named</code> and <code>@RequestScoped</code>
+annotations with <code>@Model</code>).</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+tut-install`/examples/web/jsf/hello1-rlc/` directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABGEDEB">Configuring the hello1-rlc Example</a></p>
+</li>
+<li>
+<p><a href="#BABDHCFG">The Facelets Pages for the hello1-rlc Example</a></p>
+</li>
+<li>
+<p><a href="#BABBGFFF">To Build, Package, and Deploy the hello1-rlc Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#BABJAGFB">To Build, Package, and Deploy the hello1-rlc Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#BABFCHEB">To Run the hello1-rlc Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="configuring-the-hello1-rlc-example">Configuring the hello1-rlc Example</h4>
+<div class="paragraph">
+<p>The <code>faces-config.xml</code> file for the <code>hello1-rlc</code> example contains the
+following elements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;resource-library-contracts&gt;
+    &lt;contract-mapping&gt;
+        &lt;url-pattern&gt;/reply/*&lt;/url-pattern&gt;
+        &lt;contracts&gt;reply&lt;/contracts&gt;
+    &lt;/contract-mapping&gt;
+    &lt;contract-mapping&gt;
+        &lt;url-pattern&gt;*&lt;/url-pattern&gt;
+        &lt;contracts&gt;hello&lt;/contracts&gt;
+    &lt;/contract-mapping&gt;
+&lt;/resource-library-contracts&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>contract-mapping</code> elements within the <code>resource-library-contracts</code>
+element map each contract to a different set of pages within the
+application. One contract, named <code>reply</code>, is used for all pages under
+the <code>reply</code> area of the application (<code>/reply/*</code>). The other contract,
+<code>hello</code>, is used for all other pages in the application (<code>*</code>).</p>
+</div>
+<div class="paragraph">
+<p>The application is organized as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">hello1-rlc
+    pom.xml
+    src/main/java/javaeetutorial/hello1rlc/Hello.java
+    src/main/webapp
+        WEB-INF
+            faces-config.xml
+            web.xml
+        contracts
+            hello
+                default.css
+                duke.handsOnHips.gif
+                template.xhtml
+            reply
+                default.css
+                duke.thumbsup.gif
+                template.xhtml
+        reply
+            response.xhtml
+        greeting.xhtml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>web.xml</code> file specifies the <code>welcome-file</code> as <code>greeting.xhtml</code>.
+Because it is not located under <code>src/main/webapp/reply</code>, this Facelets
+page uses the <code>hello</code> contract, whereas
+<code>src/main/webapp/reply/response.xhtml</code> uses the <code>reply</code> contract.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-facelets-pages-for-the-hello1-rlc-example">The Facelets Pages for the hello1-rlc Example</h4>
+<div class="paragraph">
+<p>The <code>greeting.xhtml</code> and <code>response.xhtml</code> pages have identical code
+calling in their templates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;ui:composition template="/template.xhtml"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>template.xhtml</code> files in the <code>hello</code> and <code>reply</code> contracts differ
+only in two respects: the placeholder text for the <code>title</code> element
+("Hello Template" and "Reply Template") and the graphic that each
+specifies.</p>
+</div>
+<div class="paragraph">
+<p>The <code>default.css</code> stylesheets in the two contracts differ in only one
+respect: the background color specified for the <code>body</code> element.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-hello1-rlc-example-using-netbeans-ide">To Build, Package, and Deploy the hello1-rlc Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello1-rlc</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>hello1-rlc</code> project and select
+Build.</p>
+<div class="paragraph">
+<p>This option builds the example application and deploys it to your
+GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-hello1-rlc-example-using-maven">To Build, Package, and Deploy the hello1-rlc Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/hello1-rlc/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>hello1-rlc.war</code>, that is located in the <code>target</code> directory. It then
+deploys it to your GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-hello1-rlc-example">To Run the hello1-rlc Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enter the following URL in your web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/hello1-rlc</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <code>greeting.xhtml</code> page looks just like the one from <code>hello1</code>
+except for its background color and graphic.</p>
+</li>
+<li>
+<p>In the text field, enter your name and click Submit.</p>
+</li>
+<li>
+<p>The response page also looks just like the one from <code>hello1</code> except
+for its background color and graphic.</p>
+<div class="paragraph">
+<p>The page displays the name you submitted. Click Back to return to the
+<code>greeting.xhtml</code> page.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

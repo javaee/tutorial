@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using NetBeans IDE to Create JMS Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-examples009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partsecurity.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-netbeans-ide-to-create-jms-resources">Using NetBeans IDE to Create JMS Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you write your own JMS applications, you will need to create
+resources for them. This section explains how to use NetBeans IDE to
+create <code>src/main/setup/glassfish-resources.xml</code> files similar to those
+used in the examples in this chapter. It also explains how to use
+NetBeans IDE to delete the resources.</p>
+</div>
+<div class="paragraph">
+<p>You can also create, list, and delete JMS resources using the
+Administration Console or the <code>asadmin create-jms-resource</code>,
+<code>asadmin list-jms-resources</code>, and <code>asadmin delete-jms-resources</code>
+commands. For information, consult the GlassFish Server documentation or
+enter <code>asadmin help</code> command-name.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDFIJBJ">To Create JMS Resources Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CHDCFADI">To Delete JMS Resources Using NetBeans IDE</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="to-create-jms-resources-using-netbeans-ide">To Create JMS Resources Using NetBeans IDE</h3>
+<div class="paragraph">
+<p>Follow these steps to create a JMS resource in GlassFish Server using
+NetBeans IDE. Repeat these steps for each resource you need.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Right-click the project for which you want to create resources and
+select New, then select Other.</p>
+</li>
+<li>
+<p>In the New File wizard, under Categories, select GlassFish.</p>
+</li>
+<li>
+<p>Under File Types, select JMS Resource.</p>
+</li>
+<li>
+<p>On the General Attributes - JMS Resource page, in the JNDI Name
+field, enter the name of the resource.</p>
+<div class="paragraph">
+<p>By convention, JMS resource names begin with <code>jms/</code>.</p>
+</div>
+</li>
+<li>
+<p>Select the option for the resource type.</p>
+<div class="paragraph">
+<p>Normally, this is either <code>javax.jms.Queue</code>, <code>javax.jms.Topic</code>, or
+<code>javax.jms.ConnectionFactory</code>.</p>
+</div>
+</li>
+<li>
+<p>Click Next.</p>
+</li>
+<li>
+<p>On the JMS Properties page, for a queue or topic, enter a name for a
+physical queue in the Value field for the Name property.</p>
+<div class="paragraph">
+<p>You can enter any value for this required field.</p>
+</div>
+<div class="paragraph">
+<p>Connection factories have no required properties. In a few situations,
+you may need to specify a property.</p>
+</div>
+</li>
+<li>
+<p>Click Finish.</p>
+<div class="paragraph">
+<p>A file named <code>glassfish-resources.xml</code> is created in your Maven project,
+in a directory named <code>src/main/setup/</code>. In the Projects tab, you can
+find it under the Other Sources node. You will need to run the
+<code>asadmin add-resources</code> command to create the resources in GlassFish
+Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-delete-jms-resources-using-netbeans-ide">To Delete JMS Resources Using NetBeans IDE</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the Services tab, expand the Servers node, then expand the
+GlassFish Server node.</p>
+</li>
+<li>
+<p>Expand the Resources node, then expand the Connector Resources node.</p>
+</li>
+<li>
+<p>Expand the Admin Object Resources node.</p>
+</li>
+<li>
+<p>Right-click any destination you want to remove and select
+Unregister.</p>
+</li>
+<li>
+<p>Expand the Connector Connection Pools node.</p>
+</li>
+<li>
+<p>Right-click the connection pool that corresponds to the connection
+factory you removed and select Unregister.</p>
+<div class="paragraph">
+<p>When you remove a connector connection pool, the associated connector
+resource is also deleted. This action removes the connection factory.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-examples009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partsecurity.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

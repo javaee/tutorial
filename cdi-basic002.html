@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of CDI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-basic001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-cdi">Overview of CDI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CDI is a set of services that, used together, make it easy for
+developers to use enterprise beans along with JavaServer Faces
+technology in web applications. Designed for use with stateful objects,
+CDI also has many broader uses, allowing developers a great deal of
+flexibility to integrate various kinds of components in a loosely
+coupled but typesafe way</p>
+</div>
+<div class="paragraph">
+<p>CDI 2.0 is specified by JSR 365. Related specifications that CDI uses
+include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JSR 330, Dependency Injection for Java</p>
+</li>
+<li>
+<p>The Managed Beans specification, an offshoot of the Java EE platform
+specification (JSR 342)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The most fundamental services provided by CDI are as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Contexts: This service enables you to bind the lifecycle and
+interactions of stateful components to well-defined but extensible
+lifecycle contexts.</p>
+</li>
+<li>
+<p>Dependency injection: This service enables you to inject components
+into an application in a typesafe way and to choose at deployment time
+which implementation of a particular interface to inject.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition, CDI provides the following services:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Integration with the Expression Language (EL), which allows any
+component to be used directly within a JavaServer Faces page or a
+JavaServer Pages page</p>
+</li>
+<li>
+<p>The ability to decorate injected components</p>
+</li>
+<li>
+<p>The ability to associate interceptors with components using typesafe
+interceptor bindings</p>
+</li>
+<li>
+<p>An event-notification model</p>
+</li>
+<li>
+<p>A web conversation scope in addition to the three standard scopes
+(request, session, and application) defined by the Java Servlet
+specification</p>
+</li>
+<li>
+<p>A complete Service Provider Interface (SPI) that allows third-party
+frameworks to integrate cleanly in the Java EE environment</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A major theme of CDI is loose coupling. CDI does the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Decouples the server and the client by means of well-defined types and
+qualifiers, so that the server implementation may vary</p>
+</li>
+<li>
+<p>Decouples the lifecycles of collaborating components by</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Making components contextual, with automatic lifecycle management</p>
+</li>
+<li>
+<p>Allowing stateful components to interact like services, purely by
+message passing</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Completely decouples message producers from consumers, by means of
+events</p>
+</li>
+<li>
+<p>Decouples orthogonal concerns by means of Java EE interceptors</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Along with loose coupling, CDI provides strong typing by</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Eliminating lookup using string-based names for wiring and
+correlations so that the compiler will detect typing errors</p>
+</li>
+<li>
+<p>Allowing the use of declarative Java annotations to specify
+everything, largely eliminating the need for XML deployment descriptors,
+and making it easy to provide tools that introspect the code and
+understand the dependency structure at development time</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-basic001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The async Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-async001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partpersist.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-async-example-application">The async Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>async</code> example demonstrates how to define an asynchronous business
+method on a session bean and call it from a web client. This example
+contains two modules.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A web application (<code>async-war</code>) that contains a stateless session bean
+and a JavaServer Faces interface. The <code>MailerBean</code> stateless session
+bean defines an asynchronous method, <code>sendMessage</code>, which uses the
+JavaMail API to send an email to an specified email address.</p>
+</li>
+<li>
+<p>An auxiliary Java SE program (<code>async-smtpd</code>) that simulates an SMTP
+server. This program listens on TCP port 3025 for SMTP requests and
+prints the email messages to the standard output (instead of delivering
+them).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following section describes the architecture of the <code>async-war</code>
+module.</p>
+</div>
+<div class="sect2">
+<h3 id="architecture-of-the-async-war-module">Architecture of the async-war Module</h3>
+<div class="paragraph">
+<p>The <code>async-war</code> module consists of a single stateless session bean,
+<code>MailerBean</code>, and a JavaServer Faces web application front end that uses
+Facelets tags in XHTML files to display a form for users to enter the
+email address for the recipient of an email. The status of the email is
+updated when the email is finally sent.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MailerBean</code> session bean injects a JavaMail resource used to send
+an email message to an address specified by the user. The message is
+created, modified, and sent using the JavaMail API. The session bean
+looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@Stateless
+public class MailerBean {
+    @Resource(name="mail/myExampleSession")
+    private Session session;
+    private static final Logger logger =
+            Logger.getLogger(MailerBean.class.getName());
+
+    @Asynchronous
+    public Future&lt;String&gt; sendMessage(String email) {
+        String status;
+        try {
+            Properties properties = new Properties();            properties.put("mail.smtp.port", "3025");            session = Session.getInstance(properties);                        Message message = new MimeMessage(session);
+            message.setFrom();
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(email, false));
+            message.setSubject("Test message from async example");
+            message.setHeader("X-Mailer", "JavaMail");
+            DateFormat dateFormatter = DateFormat
+                    .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
+            Date timeStamp = new Date();
+            String messageBody = "This is a test message from the async "
+                    + "example of the Java EE Tutorial. It was sent on "
+                    + dateFormatter.format(timeStamp)
+                    + ".";
+            message.setText(messageBody);
+            message.setSentDate(timeStamp);
+            Transport.send(message);
+            status = "Sent";
+            logger.log(Level.INFO, "Mail sent to {0}", email);
+        } catch (MessagingException ex) {
+            logger.severe("Error in sending message.");
+            status = "Encountered an error: " + ex.getMessage();
+            logger.severe(ex.getMessage());
+        }
+        return new AsyncResult&lt;&gt;(status);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The injected JavaMail resource can be configured through the GlassFish
+Server Administration Console, through a GlassFish Server administrative
+command, or through a resource configuration file packaged with the
+application. The resource configuration can be modified at runtime by
+the GlassFish Server administrator to use a different mail server or
+transport protocol.</p>
+</div>
+<div class="paragraph">
+<p>The web client consists of a Facelets template, <code>template.xhtml</code>; two
+Facelets clients, <code>index.xhtml</code> and <code>response.xhtml</code>; and a JavaServer
+Faces managed bean, <code>MailerManagedBean</code>. The <code>index.xhtml</code> file contains
+a form for the target email address. When the user submits the form, the
+<code>MailerManagedBean.send</code> method is called. This method uses an injected
+instance of the <code>MailerBean</code> session bean to call
+<code>MailerBean.sendMessage</code>. The result is sent to the <code>response.xhtml</code>
+Facelets view.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-async-example">Running the async Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>async</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKINW">To Run the async Example Application Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKRFB">To Run the async Example Application Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-async-example-application-using-netbeans-ide">To Run the async Example Application Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>async</code> folder, select Open Required Projects, and click
+Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>async-smtpd</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>The SMTP server simulator starts accepting connections. The async-smptd
+output tab shows the following message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">[Test SMTP server listening on port 3025]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>async-war</code> project and select
+Build.</p>
+<div class="paragraph">
+<p>This command configures the JavaMail resource using a GlassFish Server
+administrative command and builds, packages, and deploys the <code>async-war</code>
+module.</p>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser window:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/async-war</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the web browser window, enter an email address and click Send
+email.</p>
+<div class="paragraph">
+<p>The <code>MailerBean</code> stateless bean uses the JavaMail API to deliver an
+email to the SMTP server simulator. The async-smptd output window in
+NetBeans IDE shows the resulting email message, including its headers.</p>
+</div>
+</li>
+<li>
+<p>To stop the SMTP server simulator, click the X button on the right
+side of the status bar in NetBeans IDE.</p>
+</li>
+<li>
+<p>Delete the JavaMail session resource.</p>
+</li>
+<li>
+<p>In the Services tab, expand the Servers node, then expand the
+GlassFish Server server node.</p>
+</li>
+<li>
+<p>Expand the Resources node, then expand the JavaMail Sessions node.</p>
+</li>
+<li>
+<p>Right-click mail/myExampleSession and select Unregister.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-async-example-application-using-maven">To Run the async Example Application Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb/async/async-smtpd/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to build and package the SMTP server
+simulator:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to start the STMP server simulator:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn exec:java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following message appears:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">[Test SMTP server listening on port 3025]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep this terminal window open.</p>
+</div>
+</li>
+<li>
+<p>In a new terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb/async/async-war</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to configure the JavaMail resource and
+to build, package, and deploy the <code>async-war</code> module:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser window:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/async-war</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the web browser window, enter an email address and click Send
+email.</p>
+<div class="paragraph">
+<p>The <code>MailerBean</code> stateless bean uses the JavaMail API to deliver an
+email to the SMTP server simulator. The resulting email message appears
+on the first terminal window, including its headers.</p>
+</div>
+</li>
+<li>
+<p>To stop the SMTP server simulator, close the terminal window in
+which you issued the command to start the STMP server simulator.</p>
+</li>
+<li>
+<p>To delete the JavaMail session resource, type the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">asadmin delete-javamail-resource mail/myExampleSession</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-async001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partpersist.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

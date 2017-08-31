@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The order Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-basicexamples001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-basicexamples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-order-application">The order Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>order</code> application is a simple inventory and ordering application
+for maintaining a catalog of parts and placing an itemized order of
+those parts. The application has entities that represent parts, vendors,
+orders, and line items. These entities are accessed using a stateful
+session bean that holds the business logic of the application. A simple
+singleton session bean creates the initial entities on application
+deployment. A Facelets web application manipulates the data and displays
+data from the catalog.</p>
+</div>
+<div class="paragraph">
+<p>The information contained in an order can be divided into elements. What
+is the order number? What parts are included in the order? What parts
+make up that part? Who makes the part? What are the specifications for
+the part? Are there any schematics for the part? The <code>order</code> application
+is a simplified version of an ordering system that has all these
+elements.</p>
+</div>
+<div class="paragraph">
+<p>The <code>order</code> application consists of a single WAR module that includes
+the enterprise bean classes, the entities, the support classes, and the
+Facelets XHTML and class files.</p>
+</div>
+<div class="paragraph">
+<p>The database schema in the Java DB database for <code>order</code> is shown in
+<a href="#CHDGGDIA">Figure 39-1</a>.</p>
+</div>
+<div id="CHDGGDIA" class="paragraph">
+<div class="title"><strong>Figure 39-1 Database Schema for the order Application</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_024.png" alt="Diagram showing the database schema for the order application"></span></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In this diagram, for simplicity, the <code>PERSISTENCE_ORDER_</code> prefix is
+omitted from the table names.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="entity-relationships-in-the-order-application">Entity Relationships in the order Application</h3>
+<div class="paragraph">
+<p>The <code>order</code> application demonstrates several types of entity
+relationships: self-referential, one-to-one, one-to-many, many-to-one,
+and unidirectional relationships.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIQQR">Self-Referential Relationships</a></p>
+</li>
+<li>
+<p><a href="#GIQSR">One-to-One Relationships</a></p>
+</li>
+<li>
+<p><a href="#GIQTJ">One-to-Many Relationship Mapped to Overlapping Primary and
+Foreign Keys</a></p>
+</li>
+<li>
+<p><a href="#GIQUD">Unidirectional Relationships</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="self-referential-relationships">Self-Referential Relationships</h4>
+<div class="paragraph">
+<p>A self-referential relationship occurs between relationship fields in
+the same entity. <code>Part</code> has a field, <code>bomPart</code>, which has a one-to-many
+relationship with the field <code>parts</code>, which is also in <code>Part</code>. That is, a
+part can be made up of many parts, and each of those parts has exactly
+one bill-of-material part.</p>
+</div>
+<div class="paragraph">
+<p>The primary key for <code>Part</code> is a compound primary key, a combination of
+the <code>partNumber</code> and <code>revision</code> fields. This key is mapped to the
+<code>PARTNUMBER</code> and <code>REVISION</code> columns in the <code>PERSISTENCE_ORDER_PART</code>
+table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+@ManyToOne
+@JoinColumns({
+    @JoinColumn(name="BOMPARTNUMBER", referencedColumnName="PARTNUMBER"),
+    @JoinColumn(name="BOMREVISION", referencedColumnName="REVISION")
+})
+public Part getBomPart() {
+    return bomPart;
+}
+...
+@OneToMany(mappedBy="bomPart")
+public Collection&lt;Part&gt; getParts() {
+    return parts;
+}
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="one-to-one-relationships">One-to-One Relationships</h4>
+<div class="paragraph">
+<p><code>Part</code> has a field, <code>vendorPart</code>, that has a one-to-one relationship
+with <code>VendorPart</code>'s <code>part</code> field. That is, each part has exactly one
+vendor part, and vice versa.</p>
+</div>
+<div class="paragraph">
+<p>Here is the relationship mapping in <code>Part</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToOne(mappedBy="part")
+public VendorPart getVendorPart() {
+    return vendorPart;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the relationship mapping in <code>VendorPart</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToOne
+@JoinColumns({
+    @JoinColumn(name="PARTNUMBER", referencedColumnName="PARTNUMBER"),
+    @JoinColumn(name="PARTREVISION", referencedColumnName="REVISION")
+})
+public Part getPart() {
+    return part;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that, because <code>Part</code> uses a compound primary key, the
+<code>@JoinColumns</code> annotation is used to map the columns in the
+<code>PERSISTENCE_ORDER_VENDOR_PART</code> table to the columns in
+<code>PERSISTENCE_ORDER_PART</code>. The <code>PERSISTENCE_ORDER_VENDOR_PART</code> table&#8217;s
+<code>PARTREVISION</code> column refers to <code>PERSISTENCE_ORDER_PART</code>'s <code>REVISION</code>
+column.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="one-to-many-relationship-mapped-to-overlapping-primary-and-foreign-keys">One-to-Many Relationship Mapped to Overlapping Primary and Foreign Keys</h4>
+<div class="paragraph">
+<p><code>CustomerOrder</code> has a field, <code>lineItems</code>, that has a one-to-many
+relationship with <code>LineItem</code>'s field <code>customerOrder</code>. That is, each
+order has one or more line item.</p>
+</div>
+<div class="paragraph">
+<p><code>LineItem</code> uses a compound primary key that is made up of the <code>orderId</code>
+and <code>itemId</code> fields. This compound primary key maps to the <code>ORDERID</code> and
+<code>ITEMID</code> columns in the <code>PERSISTENCE_ORDER_LINEITEM</code> table. <code>ORDERID</code> is
+a foreign key to the <code>ORDERID</code> column in the
+<code>PERSISTENCE_ORDER_CUSTOMERORDER</code> table. This means that the <code>ORDERID</code>
+column is mapped twice: once as a primary key field, <code>orderId</code>; and
+again as a relationship field, <code>order</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is the relationship mapping in <code>CustomerOrder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToMany(cascade=ALL, mappedBy="customerOrder")
+public Collection&lt;LineItem&gt; getLineItems() {
+    return lineItems;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the relationship mapping in <code>LineItem</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Id
+@ManyToOne
+@JoinColumn(name="ORDERID")
+public CustomerOrder getCustomerOrder() {
+    return customerOrder;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="unidirectional-relationships">Unidirectional Relationships</h4>
+<div class="paragraph">
+<p><code>LineItem</code> has a field, <code>vendorPart</code>, that has a unidirectional
+many-to-one relationship with <code>VendorPart</code>. That is, there is no field
+in the target entity in this relationship:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@JoinColumn(name="VENDORPARTNUMBER")
+@ManyToOne
+public VendorPart getVendorPart() {
+    return vendorPart;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="primary-keys-in-the-order-application">Primary Keys in the order Application</h3>
+<div class="paragraph">
+<p>The <code>order</code> application uses several types of primary keys:
+single-valued primary keys, generated primary keys, and compound primary
+keys.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIQUV">Generated Primary Keys</a></p>
+</li>
+<li>
+<p><a href="#GIQUF">Compound Primary Keys</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="generated-primary-keys">Generated Primary Keys</h4>
+<div class="paragraph">
+<p><code>VendorPart</code> uses a generated primary key value. That is, the
+application does not assign primary key values for the entities but
+instead relies on the persistence provider to generate the primary key
+values. The <code>@GeneratedValue</code> annotation is used to specify that an
+entity will use a generated primary key.</p>
+</div>
+<div class="paragraph">
+<p>In <code>VendorPart</code>, the following code specifies the settings for
+generating primary key values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@TableGenerator(
+    name="vendorPartGen",
+    table="PERSISTENCE_ORDER_SEQUENCE_GENERATOR",
+    pkColumnName="GEN_KEY",
+    valueColumnName="GEN_VALUE",
+    pkColumnValue="VENDOR_PART_ID",
+    allocationSize=10)
+@Id
+@GeneratedValue(strategy=GenerationType.TABLE, generator="vendorPartGen")
+public Long getVendorPartNumber() {
+    return vendorPartNumber;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@TableGenerator</code> annotation is used in conjunction with
+<code>@GeneratedValue</code>'s <code>strategy=TABLE</code> element. That is, the strategy used
+to generate the primary keys is to use a table in the database. The
+<code>@TableGenerator</code> annotation is used to configure the settings for the
+generator table. The name element sets the name of the generator, which
+is <code>vendorPartGen</code> in <code>VendorPart</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PERSISTENCE_ORDER_SEQUENCE_GENERATOR</code> table, whose two columns are
+<code>GEN_KEY</code> and <code>GEN_VALUE</code>, will store the generated primary key values.
+This table could be used to generate other entities' primary keys, so
+the <code>pkColumnValue</code> element is set to <code>VENDOR_PART_ID</code> to distinguish
+this entity&#8217;s generated primary keys from other entities' generated
+primary keys. The <code>allocationSize</code> element specifies the amount to
+increment when allocating primary key values. In this case, each
+<code>VendorPart</code>'s primary key will increment by 10.</p>
+</div>
+<div class="paragraph">
+<p>The primary key field <code>vendorPartNumber</code> is of type <code>Long</code>, as the
+generated primary key&#8217;s field must be an integral type.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="compound-primary-keys">Compound Primary Keys</h4>
+<div class="paragraph">
+<p>A compound primary key is made up of multiple fields and follows the
+requirements described in <a href="persistence-intro002.html#BNBQF">Primary
+Keys in Entities</a>. To use a compound primary key, you must create a
+wrapper class.</p>
+</div>
+<div class="paragraph">
+<p>In <code>order</code>, two entities use compound primary keys: <code>Part</code> and
+<code>LineItem</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Part</code> uses the <code>PartKey</code> wrapper class. <code>Part</code>'s primary key is a
+combination of the part number and the revision number. <code>PartKey</code>
+encapsulates this primary key.</p>
+</li>
+<li>
+<p><code>LineItem</code> uses the <code>LineItemKey</code> class. <code>LineItem</code>'s primary key is a
+combination of the order number and the item number. <code>LineItemKey</code>
+encapsulates this primary key.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is the <code>LineItemKey</code> compound primary key wrapper class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.order.entity;
+
+import java.io.Serializable;
+
+public final class LineItemKey implements Serializable {
+
+    private Integer customerOrder;
+    private int itemId;
+
+    public LineItemKey() {}
+
+    public LineItemKey(Integer order, int itemId) {
+        this.setCustomerOrder(order);
+        this.setItemId(itemId);
+    }
+
+    @Override
+    public int hashCode() {
+        return ((this.getCustomerOrder() == null
+                ? 0 : this.getCustomerOrder().hashCode())
+                ^ ((int) this.getItemId()));
+    }
+
+    @Override
+    public boolean equals(Object otherOb) {
+        if (this == otherOb) {
+            return true;
+        }
+        if (!(otherOb instanceof LineItemKey)) {
+            return false;
+        }
+        LineItemKey other = (LineItemKey) otherOb;
+        return ((this.getCustomerOrder() == null
+                ? other.getCustomerOrder == null : this.getOrderId()
+                .equals(other.getCustomerOrder()))
+                &amp;&amp; (this.getItemId == oother.getItemId()));
+    }
+
+    @Override
+    public String toString() {
+        return "" + getCustomerOrder() + "-" + getItemId();
+    }
+
+    public Integer getCustomerOrder() {
+        return customerOrder;
+    }
+
+    public void setCustomerOrder(Integer order) {
+        this.customerOrder = order;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@IdClass</code> annotation is used to specify the primary key class in
+the entity class. In <code>LineItem</code>, <code>@IdClass</code> is used as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@IdClass(LineItemKey.class)
+@Entity
+...
+public class LineItem implements Serializable {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The two fields in <code>LineItem</code> are tagged with the <code>@Id</code> annotation to
+mark those fields as part of the compound primary key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Id
+public int getItemId() {
+    return itemId;
+}
+...
+@Id
+@ManyToOne
+@JoinColumn(name="ORDERID")
+public CustomerOrder getCustomerOrder() {
+    return customerOrder;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For <code>customerOrder</code>, you also use the <code>@JoinColumn</code> annotation to
+specify the column name in the table and that this column is an
+overlapping foreign key pointing at the
+<code>PERSISTENCE_ORDER_CUSTOMERORDER</code> table&#8217;s <code>ORDERID</code> column (see
+<a href="#GIQTJ">One-to-Many Relationship Mapped to Overlapping Primary and
+Foreign Keys</a>). That is, <code>customerOrder</code> will be set by the
+<code>CustomerOrder</code> entity.</p>
+</div>
+<div class="paragraph">
+<p>In <code>LineItem</code>'s constructor, the line item number (<code>LineItem.itemId</code>) is
+set using the <code>CustomerOrder.getNextId</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public LineItem(CustomerOrder order, int quantity, VendorPart vendorPart) {
+    this.customerOrder = order;
+    this.itemId = order.getNextId();
+    this.quantity = quantity;
+    this.vendorPart = vendorPart;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>CustomerOrder.getNextId</code> counts the number of current line items, adds
+1, and returns that number:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Transient
+public int getNextId() {
+    return this.lineItems.size() + 1;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Part</code> requires the <code>@Column</code> annotation on the two fields that comprise
+<code>Part</code>'s compound primary key, because <code>Part</code>'s compound primary key is
+an overlapping primary key/foreign key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@IdClass(PartKey.class)
+@Entity
+...
+public class Part implements Serializable {
+    ...
+    @Id
+    @Column(nullable=false)
+    public String getPartNumber() {
+        return partNumber;
+    }
+    ...
+    @Id
+    @Column(nullable=false)
+    public int getRevision() {
+        return revision;
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="entity-mapped-to-more-than-one-database-table">Entity Mapped to More Than One Database Table</h3>
+<div class="paragraph">
+<p><code>Part</code>'s fields map to more than one database table:
+<code>PERSISTENCE_ORDER_PART</code> and <code>PERSISTENCE_ORDER_PART_DETAIL</code>. The
+<code>PERSISTENCE_ORDER_PART_DETAIL</code> table holds the specification and
+schematics for the part. The <code>@SecondaryTable</code> annotation is used to
+specify the secondary table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+@Entity
+@Table(name="PERSISTENCE_ORDER_PART")
+@SecondaryTable(name="PERSISTENCE_ORDER_PART_DETAIL", pkJoinColumns={
+    @PrimaryKeyJoinColumn(name="PARTNUMBER",
+        referencedColumnName="PARTNUMBER"),
+    @PrimaryKeyJoinColumn(name="REVISION",
+        referencedColumnName="REVISION")
+})
+public class Part implements Serializable {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PERSISTENCE_ORDER_PART_DETAIL</code> and <code>PERSISTENCE_ORDER_PART</code> share the
+same primary key values. The <code>pkJoinColumns</code> element of
+<code>@SecondaryTable</code> is used to specify that
+<code>PERSISTENCE_ORDER_PART_DETAIL</code>'s primary key columns are foreign keys
+to <code>PERSISTENCE_ORDER_PART</code>. The <code>@PrimaryKeyJoinColumn</code> annotation sets
+the primary key column names and specifies which column in the primary
+table the column refers to. In this case, the primary key column names
+for both <code>PERSISTENCE_ORDER_PART_DETAIL</code> and <code>PERSISTENCE_ORDER_PART</code>
+are the same: <code>PARTNUMBER</code> and <code>REVISION</code>, respectively.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cascade-operations-in-the-order-application">Cascade Operations in the order Application</h3>
+<div class="paragraph">
+<p>Entities that have relationships to other entities often have
+dependencies on the existence of the other entity in the relationship.
+For example, a line item is part of an order; if the order is deleted,
+then the line item also should be deleted. This is called a cascade
+delete relationship.</p>
+</div>
+<div class="paragraph">
+<p>In <code>order</code>, there are two cascade delete dependencies in the entity
+relationships. If the <code>CustomerOrder</code> to which a <code>LineItem</code> is related
+is deleted, the <code>LineItem</code> also should be deleted. If the <code>Vendor</code> to
+which a <code>VendorPart</code> is related is deleted, the <code>VendorPart</code> also should
+be deleted.</p>
+</div>
+<div class="paragraph">
+<p>You specify the cascade operations for entity relationships by setting
+the <code>cascade</code> element in the inverse (nonowning) side of the
+relationship. The cascade element is set to <code>ALL</code> in the case of
+<code>CustomerOrder.lineItems</code>. This means that all persistence operations
+(deletes, updates, and so on) are cascaded from orders to line items.</p>
+</div>
+<div class="paragraph">
+<p>Here is the relationship mapping in <code>CustomerOrder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToMany(cascade=ALL, mappedBy="customerOrder")
+public Collection&lt;LineItem&gt; getLineItems() {
+    return lineItems;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the relationship mapping in <code>LineItem</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Id
+@ManyToOne
+@JoinColumn(name="ORDERID")
+public CustomerOrder getCustomerOrder() {
+    return customerOrder;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="blob-and-clob-database-types-in-the-order-application">BLOB and CLOB Database Types in the order Application</h3>
+<div class="paragraph">
+<p>The <code>PARTDETAIL</code> table in the database has a column, <code>DRAWING</code>, of type
+<code>BLOB</code>. <code>BLOB</code> stands for binary large objects, which are used for
+storing binary data, such as an image. The <code>DRAWING</code> column is mapped to
+the field <code>Part.drawing</code> of type <code>java.io.Serializable</code>. The <code>@Lob</code>
+annotation is used to denote that the field is a large object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Column(table="PERSISTENCE_ORDER_PART_DETAIL")
+@Lob
+public Serializable getDrawing() {
+    return drawing;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PERSISTENCE_ORDER_PART_DETAIL</code> also has a column, <code>SPECIFICATION</code>, of
+type <code>CLOB</code>. <code>CLOB</code> stands for character large objects, which are used
+to store string data too large to be stored in a <code>VARCHAR</code> column.
+<code>SPECIFICATION</code> is mapped to the field <code>Part.specification</code> of type
+<code>java.lang.String</code>. The <code>@Lob</code> annotation is also used here to denote
+that the field is a large object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Column(table="PERSISTENCE_ORDER_PART_DETAIL")
+@Lob
+public String getSpecification() {
+    return specification;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both of these fields use the <code>@Column</code> annotation and set the <code>table</code>
+element to the secondary table.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="temporal-types-in-the-order-application">Temporal Types in the order Application</h3>
+<div class="paragraph">
+<p>The <code>CustomerOrder.lastUpdate</code> persistent property, which is of type
+<code>java.util.Date</code>, is mapped to the
+<code>PERSISTENCE_ORDER_CUSTOMERORDER.LASTUPDATE</code> database field, which is of
+the SQL type <code>TIMESTAMP</code>. To ensure the proper mapping between these
+types, you must use the <code>@Temporal</code> annotation with the proper temporal
+type specified in <code>@Temporal</code>'s element. <code>@Temporal</code>'s elements are of
+type <code>javax.persistence.TemporalType</code>. The possible values are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DATE</code>, which maps to <code>java.sql.Date</code></p>
+</li>
+<li>
+<p><code>TIME</code>, which maps to <code>java.sql.Time</code></p>
+</li>
+<li>
+<p><code>TIMESTAMP</code>, which maps to <code>java.sql.Timestamp</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is the relevant section of <code>CustomerOrder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Temporal(TIMESTAMP)
+public Date getLastUpdate() {
+    return lastUpdate;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-the-order-applications-entities">Managing the order Application&#8217;s Entities</h3>
+<div class="paragraph">
+<p>The <code>RequestBean</code> stateful session bean contains the business logic and
+manages the entities of <code>order</code>. <code>RequestBean</code> uses the
+<code>@PersistenceContext</code> annotation to retrieve an entity manager instance,
+which is used to manage <code>order</code>'s entities in <code>RequestBean</code>'s business
+methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PersistenceContext
+private EntityManager em;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This <code>EntityManager</code> instance is a container-managed entity manager, so
+the container takes care of all the transactions involved in managing
+<code>order</code>'s entities.</p>
+</div>
+<div class="sect3">
+<h4 id="creating-entities">Creating Entities</h4>
+<div class="paragraph">
+<p>The <code>RequestBean.createPart</code> business method creates a new <code>Part</code>
+entity. The <code>EntityManager.persist</code> method is used to persist the newly
+created entity to the database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Part part = new Part(partNumber,
+        revision,
+        description,
+        revisionDate,
+        specification,
+        drawing);
+em.persist(part);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ConfigBean</code> singleton session bean is used to initialize the data
+in <code>order</code>. <code>ConfigBean</code> is annotated with <code>@Startup</code>, which indicates
+that the EJB container should create <code>ConfigBean</code> when <code>order</code> is
+deployed. The <code>createData</code> method is annotated with <code>@PostConstruct</code> and
+creates the initial entities used by <code>order</code> by calling <code>RequestBean</code>'s
+business methods.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="finding-entities">Finding Entities</h4>
+<div class="paragraph">
+<p>The <code>RequestBean.getOrderPrice</code> business method returns the price of a
+given order based on the <code>orderId</code>. The <code>EntityManager.find</code> method is
+used to retrieve the entity from the database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CustomerOrder order = em.find(CustomerOrder.class, orderId);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first argument of <code>EntityManager.find</code> is the entity class, and the
+second is the primary key.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-entity-relationships">Setting Entity Relationships</h4>
+<div class="paragraph">
+<p>The <code>RequestBean.createVendorPart</code> business method creates a
+<code>VendorPart</code> associated with a particular <code>Vendor</code>. The
+<code>EntityManager.persist</code> method is used to persist the newly created
+<code>VendorPart</code> entity to the database, and the <code>VendorPart.setVendor</code> and
+<code>Vendor.setVendorPart</code> methods are used to associate the <code>VendorPart</code>
+with the <code>Vendor</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">PartKey pkey = new PartKey();
+pkey.setPartNumber(partNumber);
+pkey.setRevision(revision);
+
+Part part = em.find(Part.class, pkey);
+
+VendorPart vendorPart = new VendorPart(description, price, part);
+em.persist(vendorPart);
+
+Vendor vendor = em.find(Vendor.class, vendorId);
+vendor.addVendorPart(vendorPart);
+vendorPart.setVendor(vendor);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-queries">Using Queries</h4>
+<div class="paragraph">
+<p>The <code>RequestBean.adjustOrderDiscount</code> business method updates the
+discount applied to all orders. This method uses the <code>findAllOrders</code>
+named query, defined in <code>CustomerOrder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NamedQuery(
+    name="findAllOrders",
+    query="SELECT co FROM CustomerOrder co " +
+          "ORDER BY co.orderId"
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>EntityManager.createNamedQuery</code> method is used to run the query.
+Because the query returns a <code>List</code> of all the orders, the
+<code>Query.getResultList</code> method is used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">List orders = em.createNamedQuery(
+        "findAllOrders")
+        .getResultList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>RequestBean.getTotalPricePerVendor</code> business method returns the
+total price of all the parts for a particular vendor. This method uses a
+named parameter, <code>id</code>, defined in the named query
+<code>findTotalVendorPartPricePerVendor</code> defined in <code>VendorPart</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NamedQuery(
+    name="findTotalVendorPartPricePerVendor",
+    query="SELECT SUM(vp.price) " +
+    "FROM VendorPart vp " +
+    "WHERE vp.vendor.vendorId = :id"
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When running the query, the <code>Query.setParameter</code> method is used to set
+the named parameter <code>id</code> to the value of <code>vendorId</code>, the parameter to
+<code>RequestBean.getTotalPricePerVendor</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">return (Double) em.createNamedQuery(
+    "findTotalVendorPartPricePerVendor")
+    .setParameter("id", vendorId)
+    .getSingleResult();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Query.getSingleResult</code> method is used for this query because the
+query returns a single value.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-entities">Removing Entities</h4>
+<div class="paragraph">
+<p>The <code>RequestBean.removeOrder</code> business method deletes a given order from
+the database. This method uses the <code>EntityManager.remove</code> method to
+delete the entity from the database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CustomerOrder order = em.find(CustomerOrder.class, orderId);
+em.remove(order);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-order-example">Running the order Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>order</code> application. First, you will create the database tables
+in the Java DB server.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIQSG">To Run the order Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GIQTY">To Run the order Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-order-example-using-netbeans-ide">To Run the order Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/persistence</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>order</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>order</code> project and select Run.</p>
+<div class="paragraph">
+<p>NetBeans IDE opens a web browser to the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/order/</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-order-example-using-maven">To Run the order Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/persistence/order/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This compiles the source files and packages the application into a WAR
+file located at
+tut-install`/examples/persistence/order/target/order.war`. Then the WAR
+file is deployed to your GlassFish Server instance.</p>
+</div>
+</li>
+<li>
+<p>To create and update the order data, open a web browser to the
+following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/order/</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-basicexamples001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-basicexamples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Conditional HTTP Requests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-advanced004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="conditional-http-requests">Conditional HTTP Requests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JAX-RS provides support for conditional <code>GET</code> and <code>PUT</code> HTTP requests.
+Conditional <code>GET</code> requests help save bandwidth by improving the
+efficiency of client processing.</p>
+</div>
+<div class="paragraph">
+<p>A <code>GET</code> request can return a Not Modified (304) response if the
+representation has not changed since the previous request. For example,
+a website can return 304 responses for all its static images that have
+not changed since the previous request.</p>
+</div>
+<div class="paragraph">
+<p>A <code>PUT</code> request can return a Precondition Failed (412) response if the
+representation has been modified since the last request. The conditional
+<code>PUT</code> can help avoid the lost update problem.</p>
+</div>
+<div class="paragraph">
+<p>Conditional HTTP requests can be used with the <code>Last-Modified</code> and
+<code>ETag</code> headers. The <code>Last-Modified</code> header can represent dates with
+granularity of one second.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employee/{joiningdate}")
+public class Employee {
+
+    Date joiningdate;
+
+    @GET
+    @Produces("application/xml")
+    public Employee(@PathParam("joiningdate") Date joiningdate,
+                    @Context Request req,
+                    @Context UriInfo ui) {
+
+        this.joiningdate = joiningdate;
+        ...
+        this.tag = computeEntityTag(ui.getRequestUri());
+        if (req.getMethod().equals("GET")) {
+            Response.ResponseBuilder rb = req.evaluatePreconditions(tag);
+            if (rb != null) {
+                throw new WebApplicationException(rb.build());
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this code snippet, the constructor of the <code>Employee</code> class computes
+the entity tag from the request URI and calls the
+<code>request.evaluatePreconditions</code> method with that tag. If a client
+request returns an <code>If-none-match</code> header with a value that has the same
+entity tag that was computed, <code>evaluate.Preconditions</code> returns a
+pre-filled-out response with a 304 status code and an entity tag set
+that may be built and returned.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-advanced004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

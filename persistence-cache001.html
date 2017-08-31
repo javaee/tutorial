@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of the Second-Level Cache</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-cache.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-cache002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-the-second-level-cache">Overview of the Second-Level Cache</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A second-level cache is a local store of entity data managed by the
+persistence provider to improve application performance. A second-level
+cache helps improve performance by avoiding expensive database calls,
+keeping the entity data local to the application. A second-level cache
+is typically transparent to the application, as it is managed by the
+persistence provider and underlies the persistence context of an
+application. That is, the application reads and commits data through the
+normal entity manager operations without knowing about the cache.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Persistence providers are not required to support a second-level cache.
+Portable applications should not rely on support by persistence
+providers for a second-level cache.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The second-level cache for a persistence unit may be configured to one
+of several second-level cache modes. The following cache mode settings
+are defined by the Java Persistence API.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref188"></a><a id="GKJDG"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 45-1 Cache Mode Settings for the Second-Level Cache</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 28%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Cache Mode Setting</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ALL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All entity data is stored in the second-level cache for this
+persistence unit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NONE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No data is cached in the persistence unit. The persistence
+provider must not cache any data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ENABLE_SELECTIVE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable caching for entities that have been
+explicitly set with the <code>@Cacheable</code> annotation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DISABLE_SELECTIVE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable caching for all entities except those that
+have been explicitly set with the <code>@Cacheable(false)</code> annotation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UNSPECIFIED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The caching behavior for the persistence unit is
+undefined. The persistence provider&#8217;s default caching behavior will be
+used.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>One consequence of using a second-level cache in an application is that
+the underlying data may have changed in the database tables, while the
+value in the cache has not, a circumstance called a stale read. To avoid
+stale reads, use any of these strategies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change the second-level cache to one of the cache mode settings</p>
+</li>
+<li>
+<p>Control which entities may be cached (see <a href="#GKJIW">Controlling
+whether Entities May Be Cached</a>)</p>
+</li>
+<li>
+<p>Change the cache&#8217;s retrieval or store modes (see
+<a href="persistence-cache002.html#GKJDK">Setting the Cache Retrieval and
+Store Modes</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Which of these strategies works best to avoid stale reads depends upon
+the application.</p>
+</div>
+<div class="sect2">
+<h3 id="controlling-whether-entities-may-be-cached">Controlling whether Entities May Be Cached</h3>
+<div class="paragraph">
+<p>The <code>javax.persistence.Cacheable</code> annotation is used to specify that an
+entity class, and any subclasses, may be cached when using the
+<code>ENABLE_SELECTIVE</code> or <code>DISABLE_SELECTIVE</code> cache modes. Subclasses may
+override the <code>@Cacheable</code> setting by adding a <code>@Cacheable</code> annotation
+and changing the value.</p>
+</div>
+<div class="paragraph">
+<p>To specify that an entity may be cached, add a <code>@Cacheable</code> annotation
+at the class level:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Cacheable
+@Entity
+public class Person { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, the <code>@Cacheable</code> annotation is <code>true</code>. The following example
+is equivalent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Cacheable(true)
+@Entity
+public class Person{ ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To specify that an entity must not be cached, add a <code>@Cacheable</code>
+annotation and set it to <code>false</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Cacheable(false)
+@Entity
+public class OrderStatus { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the <code>ENABLE_SELECTIVE</code> cache mode is set, the persistence provider
+will cache any entities that have the <code>@Cacheable(true)</code> annotation and
+any subclasses of that entity that have not been overridden. The
+persistence provider will not cache entities that have
+<code>@Cacheable(false)</code> or have no <code>@Cacheable</code> annotation. That is, the
+<code>ENABLE_SELECTIVE</code> mode will cache only entities that have been
+explicitly marked for the cache using the <code>@Cacheable</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>When the <code>DISABLE_SELECTIVE</code> cache mode is set, the persistence provider
+will cache any entities that do not have the <code>@Cacheable(false)</code>
+annotation. Entities that do not have <code>@Cacheable</code> annotations, and
+entities with the <code>@Cacheable(true)</code> annotation, will be cached. That
+is, the <code>DISABLE_SELECTIVE</code> mode will cache all entities that have not
+been explicitly prevented from being cached.</p>
+</div>
+<div class="paragraph">
+<p>If the cache mode is set to <code>UNDEFINED</code>, or is left unset, the behavior
+of entities annotated with <code>@Cacheable</code> is undefined. If the cache mode
+is set to <code>ALL</code> or <code>NONE</code>, the value of the <code>@Cacheable</code> annotation is
+ignored by the persistence provider.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-cache.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-cache002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

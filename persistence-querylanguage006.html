@@ -1,0 +1,2208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Full Query Language Syntax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-querylanguage005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-criteria.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="full-query-language-syntax">Full Query Language Syntax</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section discusses the query language syntax, as defined in the Java
+Persistence API 2.0 specification available at
+<code>http://jcp.org/en/jsr/detail?id=317</code>. Much of the following material
+paraphrases or directly quotes the specification.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBUG">BNF Symbols</a></p>
+</li>
+<li>
+<p><a href="#BNBUI">BNF Grammar of the Java Persistence Query Language</a></p>
+</li>
+<li>
+<p><a href="#BNBUJ">FROM Clause</a></p>
+</li>
+<li>
+<p><a href="#BNBUQ">Path Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBUU">WHERE Clause</a></p>
+</li>
+<li>
+<p><a href="#BNBVX">SELECT Clause</a></p>
+</li>
+<li>
+<p><a href="#BNBWD">ORDER BY Clause</a></p>
+</li>
+<li>
+<p><a href="#BNBWE">GROUP BY and HAVING Clauses</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="bnf-symbols">BNF Symbols</h3>
+<div class="paragraph">
+<p><a href="#BNBUH">Table 40-1</a> describes the BNF symbols used in this chapter.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref169"></a><a id="BNBUH"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-1 BNF Symbol Summary</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 17%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symbol</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>::=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The element to the left of the symbol is defined by the
+constructs on the right.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The preceding construct may occur zero or more times.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{...}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The constructs within the braces are grouped together.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[...]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The constructs within the brackets are optional.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>`</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">`</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An exclusive <code>OR</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BOLDFACE</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A keyword; although capitalized in the BNF diagram,
+keywords are not case-sensitive.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">White space</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="bnf-grammar-of-the-java-persistence-query-language">BNF Grammar of the Java Persistence Query Language</h3>
+<div class="paragraph">
+<p>Here is the entire BNF diagram for the query language:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">QL_statement ::= select_statement | update_statement | delete_statement
+select_statement ::= select_clause from_clause [where_clause] [groupby_clause]
+    [having_clause] [orderby_clause]
+update_statement ::= update_clause [where_clause]
+delete_statement ::= delete_clause [where_clause]
+from_clause ::=
+    FROM identification_variable_declaration
+        {, {identification_variable_declaration |
+            collection_member_declaration}}*
+identification_variable_declaration ::=
+        range_variable_declaration { join | fetch_join }*
+range_variable_declaration ::= abstract_schema_name [AS]
+        identification_variable
+join ::= join_spec join_association_path_expression [AS]
+        identification_variable
+fetch_join ::= join_specFETCH join_association_path_expression
+association_path_expression ::=
+        collection_valued_path_expression |
+        single_valued_association_path_expression
+join_spec::= [LEFT [OUTER] |INNER] JOIN
+join_association_path_expression ::=
+        join_collection_valued_path_expression |
+        join_single_valued_association_path_expression
+join_collection_valued_path_expression::=
+    identification_variable.collection_valued_association_field
+join_single_valued_association_path_expression::=
+        identification_variable.single_valued_association_field
+collection_member_declaration ::=
+        IN (collection_valued_path_expression) [AS]
+        identification_variable
+single_valued_path_expression ::=
+        state_field_path_expression |
+        single_valued_association_path_expression
+state_field_path_expression ::=
+    {identification_variable |
+    single_valued_association_path_expression}.state_field
+single_valued_association_path_expression ::=
+    identification_variable.{single_valued_association_field.}*
+    single_valued_association_field
+collection_valued_path_expression ::=
+    identification_variable.{single_valued_association_field.}*
+    collection_valued_association_field
+state_field ::=
+    {embedded_class_state_field.}*simple_state_field
+update_clause ::=UPDATE abstract_schema_name [[AS]
+    identification_variable] SET update_item {, update_item}*
+update_item ::= [identification_variable.]{state_field |
+    single_valued_association_field} = new_value
+new_value ::=
+     simple_arithmetic_expression |
+    string_primary |
+    datetime_primary |
+    boolean_primary |
+    enum_primary simple_entity_expression |
+    NULL
+delete_clause ::= DELETE FROM abstract_schema_name [[AS]
+    identification_variable]
+select_clause ::= SELECT [DISTINCT] select_expression {,
+    select_expression}*
+select_expression ::=
+    single_valued_path_expression |
+    aggregate_expression |
+    identification_variable |
+    OBJECT(identification_variable) |
+    constructor_expression
+constructor_expression ::=
+    NEW constructor_name(constructor_item {,
+    constructor_item}*)
+constructor_item ::= single_valued_path_expression |
+    aggregate_expression
+aggregate_expression ::=
+    {AVG |MAX |MIN |SUM} ([DISTINCT]
+        state_field_path_expression) |
+    COUNT ([DISTINCT] identification_variable |
+        state_field_path_expression |
+        single_valued_association_path_expression)
+where_clause ::= WHERE conditional_expression
+groupby_clause ::= GROUP BY groupby_item {, groupby_item}*
+groupby_item ::= single_valued_path_expression
+having_clause ::= HAVING conditional_expression
+orderby_clause ::= ORDER BY orderby_item {, orderby_item}*
+orderby_item ::= state_field_path_expression [ASC |DESC]
+subquery ::= simple_select_clause subquery_from_clause
+    [where_clause] [groupby_clause] [having_clause]
+subquery_from_clause ::=
+    FROM subselect_identification_variable_declaration
+        {, subselect_identification_variable_declaration}*
+subselect_identification_variable_declaration ::=
+    identification_variable_declaration |
+    association_path_expression [AS] identification_variable |
+    collection_member_declaration
+simple_select_clause ::= SELECT [DISTINCT]
+    simple_select_expression
+simple_select_expression::=
+    single_valued_path_expression |
+    aggregate_expression |
+    identification_variable
+conditional_expression ::= conditional_term |
+    conditional_expression OR conditional_term
+conditional_term ::= conditional_factor | conditional_term AND
+    conditional_factor
+conditional_factor ::= [NOT] conditional_primary
+conditional_primary ::= simple_cond_expression |(
+    conditional_expression)
+simple_cond_expression ::=
+    comparison_expression |
+    between_expression |
+    like_expression |
+    in_expression |
+    null_comparison_expression |
+    empty_collection_comparison_expression |
+    collection_member_expression |
+    exists_expression
+between_expression ::=
+    arithmetic_expression [NOT] BETWEEN
+        arithmetic_expressionAND arithmetic_expression |
+    string_expression [NOT] BETWEEN string_expression AND
+        string_expression |
+    datetime_expression [NOT] BETWEEN
+        datetime_expression AND datetime_expression
+in_expression ::=
+    state_field_path_expression [NOT] IN (in_item {, in_item}*
+    | subquery)
+in_item ::= literal | input_parameter
+like_expression ::=
+    string_expression [NOT] LIKE pattern_value [ESCAPE
+        escape_character]
+null_comparison_expression ::=
+    {single_valued_path_expression | input_parameter} IS [NOT]
+        NULL
+empty_collection_comparison_expression ::=
+    collection_valued_path_expression IS [NOT] EMPTY
+collection_member_expression ::= entity_expression
+    [NOT] MEMBER [OF] collection_valued_path_expression
+exists_expression::= [NOT] EXISTS (subquery)
+all_or_any_expression ::= {ALL |ANY |SOME} (subquery)
+comparison_expression ::=
+    string_expression comparison_operator {string_expression |
+    all_or_any_expression} |
+    boolean_expression {= |&lt;&gt; } {boolean_expression |
+    all_or_any_expression} |
+    enum_expression {= |&lt;&gt; } {enum_expression |
+    all_or_any_expression} |
+    datetime_expression comparison_operator
+        {datetime_expression | all_or_any_expression} |
+    entity_expression {= |&lt;&gt; } {entity_expression |
+    all_or_any_expression} |
+    arithmetic_expression comparison_operator
+        {arithmetic_expression | all_or_any_expression}
+comparison_operator ::= = |&gt; |&gt;= |&lt; |&lt;= |&lt;&gt;
+arithmetic_expression ::= simple_arithmetic_expression |
+    (subquery)
+simple_arithmetic_expression ::=
+    arithmetic_term | simple_arithmetic_expression {+ |- }
+        arithmetic_term
+arithmetic_term ::= arithmetic_factor | arithmetic_term {* |/ }
+    arithmetic_factor
+arithmetic_factor ::= [{+ |- }] arithmetic_primary
+arithmetic_primary ::=
+    state_field_path_expression |
+    numeric_literal |
+    (simple_arithmetic_expression) |
+    input_parameter |
+    functions_returning_numerics |
+    aggregate_expression
+string_expression ::= string_primary | (subquery)
+string_primary ::=
+    state_field_path_expression |
+    string_literal |
+    input_parameter |
+    functions_returning_strings |
+    aggregate_expression
+datetime_expression ::= datetime_primary | (subquery)
+datetime_primary ::=
+    state_field_path_expression |
+    input_parameter |
+    functions_returning_datetime |
+    aggregate_expression
+boolean_expression ::= boolean_primary | (subquery)
+boolean_primary ::=
+    state_field_path_expression |
+    boolean_literal |
+    input_parameter
+ enum_expression ::= enum_primary | (subquery)
+enum_primary ::=
+    state_field_path_expression |
+    enum_literal |
+    input_parameter
+entity_expression ::=
+    single_valued_association_path_expression |
+        simple_entity_expression
+simple_entity_expression ::=
+    identification_variable |
+    input_parameter
+functions_returning_numerics::=
+    LENGTH(string_primary) |
+    LOCATE(string_primary, string_primary[,
+        simple_arithmetic_expression]) |
+    ABS(simple_arithmetic_expression) |
+    SQRT(simple_arithmetic_expression) |
+    MOD(simple_arithmetic_expression,
+        simple_arithmetic_expression) |
+    SIZE(collection_valued_path_expression)
+functions_returning_datetime ::=
+    CURRENT_DATE |
+    CURRENT_TIME |
+    CURRENT_TIMESTAMP
+functions_returning_strings ::=
+    CONCAT(string_primary, string_primary) |
+    SUBSTRING(string_primary,
+        simple_arithmetic_expression,
+        simple_arithmetic_expression)|
+    TRIM([[trim_specification] [trim_character] FROM]
+        string_primary) |
+    LOWER(string_primary) |
+    UPPER(string_primary)
+trim_specification ::= LEADING | TRAILING | BOTH</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="from-clause">FROM Clause</h3>
+<div class="paragraph">
+<p>The <code>FROM</code> clause defines the domain of the query by declaring
+identification variables.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBUK">Identifiers</a></p>
+</li>
+<li>
+<p><a href="#BNBUM">Identification Variables</a></p>
+</li>
+<li>
+<p><a href="#BNBUN">Range Variable Declarations</a></p>
+</li>
+<li>
+<p><a href="#BNBUO">Collection Member Declarations</a></p>
+</li>
+<li>
+<p><a href="#BNBUP">Joins</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="identifiers">Identifiers</h4>
+<div class="paragraph">
+<p>An identifier is a sequence of one or more characters. The first
+character must be a valid first character (letter, <code>$</code>, <code>_</code>) in an
+identifier of the Java programming language, hereafter in this chapter
+called simply "Java." Each subsequent character in the sequence must be
+a valid nonfirst character (letter, digit, <code>$</code>, <code>_</code>) in a Java
+identifier. (For details, see the Java SE API documentation of the
+<code>isJavaIdentifierStart</code> and <code>isJavaIdentifierPart</code> methods of the
+<code>Character</code> class.) The question mark (<code>?</code>) is a reserved character in
+the query language and cannot be used in an identifier.</p>
+</div>
+<div class="paragraph">
+<p>A query language identifier is case-sensitive, with two exceptions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Keywords</p>
+</li>
+<li>
+<p>Identification variables</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An identifier cannot be the same as a query language keyword. Here is a
+list of query language keywords:</p>
+</div>
+<div class="paragraph">
+<p><code>ABS</code><br>
+<code>ALL</code><br>
+<code>AND</code><br>
+<code>ANY</code><br>
+<code>AS</code><br>
+<code>ASC</code><br>
+<code>AVG</code><br>
+<code>BETWEEN</code><br>
+<code>BIT_LENGTH</code><br>
+<code>BOTH</code><br>
+<code>BY</code><br>
+<code>CASE</code><br>
+<code>CHAR_LENGTH</code><br>
+<code>CHARACTER_LENGTH</code><br>
+<code>CLASS</code><br>
+<code>COALESCE</code><br>
+<code>CONCAT</code><br>
+<code>COUNT</code><br>
+<code>CURRENT_DATE</code><br>
+<code>CURRENT_TIMESTAMP</code><br>
+<code>DELETE</code><br>
+<code>DESC</code><br>
+<code>DISTINCT</code><br>
+<code>ELSE</code><br>
+<code>EMPTY</code><br>
+<code>END</code><br>
+<code>ENTRY</code><br>
+<code>ESCAPE</code><br>
+<code>EXISTS</code><br>
+<code>FALSE</code><br>
+<code>FETCH</code><br>
+<code>FROM</code><br>
+<code>GROUP</code><br>
+<code>HAVING</code><br>
+<code>IN</code><br>
+<code>INDEX</code><br>
+<code>INNER</code><br>
+<code>IS</code><br>
+<code>JOIN</code><br>
+<code>KEY</code><br>
+<code>LEADING</code><br>
+<code>LEFT</code><br>
+<code>LENGTH</code><br>
+<code>LIKE</code><br>
+<code>LOCATE</code><br>
+<code>LOWER</code><br>
+<code>MAX</code><br>
+<code>MEMBER</code><br>
+<code>MIN</code><br>
+<code>MOD</code><br>
+<code>NEW</code><br>
+<code>NOT</code><br>
+<code>NULL</code><br>
+<code>NULLIF</code><br>
+<code>OBJECT</code><br>
+<code>OF</code><br>
+<code>OR</code><br>
+<code>ORDER</code><br>
+<code>OUTER</code><br>
+<code>POSITION</code><br>
+<code>SELECT</code><br>
+<code>SET</code><br>
+<code>SIZE</code><br>
+<code>SOME</code><br>
+<code>SQRT</code><br>
+<code>SUBSTRING</code><br>
+<code>SUM</code><br>
+<code>THEN</code><br>
+<code>TRAILING</code><br>
+<code>TRIM</code><br>
+<code>TRUE</code><br>
+<code>TYPE</code><br>
+<code>UNKNOWN</code><br>
+<code>UPDATE</code><br>
+<code>UPPER</code><br>
+<code>VALUE</code><br>
+<code>WHEN</code><br>
+<code>WHERE</code><br></p>
+</div>
+<div class="paragraph">
+<p>It is not recommended that you use an SQL keyword as an identifier,
+because the list of keywords may expand to include other reserved SQL
+words in the future.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="identification-variables">Identification Variables</h4>
+<div class="paragraph">
+<p>An identification variable is an identifier declared in the <code>FROM</code>
+clause. Although they can reference identification variables, the
+<code>SELECT</code> and <code>WHERE</code> clauses cannot declare them. All identification
+variables must be declared in the <code>FROM</code> clause.</p>
+</div>
+<div class="paragraph">
+<p>Because it is an identifier, an identification variable has the same
+naming conventions and restrictions as an identifier, with the exception
+that an identification variable is case-insensitive. For example, an
+identification variable cannot be the same as a query language keyword.
+(See <a href="#BNBUK">Identifiers</a> for more naming rules.) Also, within a
+given persistence unit, an identification variable name must not match
+the name of any entity or abstract schema.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FROM</code> clause can contain multiple declarations, separated by
+commas. A declaration can reference another identification variable that
+has been previously declared (to the left). In the following <code>FROM</code>
+clause, the variable <code>t</code> references the previously declared variable
+<code>p</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player p, IN (p.teams) AS t</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Even if it is not used in the <code>WHERE</code> clause, an identification
+variable&#8217;s declaration can affect the results of the query. For example,
+compare the next two queries. The following query returns all players,
+whether or not they belong to a team:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
+FROM Player p</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In contrast, because it declares the <code>t</code> identification variable, the
+next query fetches all players who belong to a team:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
+FROM Player p, IN (p.teams) AS t</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following query returns the same results as the preceding query, but
+the <code>WHERE</code> clause makes it easier to read:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
+FROM Player p
+WHERE p.teams IS NOT EMPTY</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An identification variable always designates a reference to a single
+value whose type is that of the expression used in the declaration.
+There are two kinds of declarations: range variable and collection
+member.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="range-variable-declarations">Range Variable Declarations</h4>
+<div class="paragraph">
+<p>To declare an identification variable as an abstract schema type, you
+specify a range variable declaration. In other words, an identification
+variable can range over the abstract schema type of an entity. In the
+following example, an identification variable named <code>p</code> represents the
+abstract schema named <code>Player</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player p</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A range variable declaration can include the optional <code>AS</code> operator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player AS p</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain objects, a query usually uses path expressions to navigate
+through the relationships. But for those objects that cannot be obtained
+by navigation, you can use a range variable declaration to designate a
+starting point, or query root.</p>
+</div>
+<div class="paragraph">
+<p>If the query compares multiple values of the same abstract schema type,
+the <code>FROM</code> clause must declare multiple identification variables for the
+abstract schema:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player p1, Player p2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For an example of such a query, see
+<a href="persistence-querylanguage005.html#BNBUB">Comparison Operators</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="collection-member-declarations">Collection Member Declarations</h4>
+<div class="paragraph">
+<p>In a one-to-many relationship, the multiple side consists of a
+collection of entities. An identification variable can represent a
+member of this collection. To access a collection member, the path
+expression in the variable&#8217;s declaration navigates through the
+relationships in the abstract schema. (For more information on path
+expressions, see <a href="#BNBUQ">Path Expressions</a>.) Because a path
+expression can be based on another path expression, the navigation can
+traverse several relationships. See
+<a href="persistence-querylanguage005.html#BNBTU">Traversing Multiple
+Relationships</a>.</p>
+</div>
+<div class="paragraph">
+<p>A collection member declaration must include the <code>IN</code> operator but can
+omit the optional <code>AS</code> operator.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the entity represented by the abstract schema
+named <code>Player</code> has a relationship field called <code>teams</code>. The
+identification variable called <code>t</code> represents a single member of the
+<code>teams</code> collection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player p, IN (p.teams) t</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="joins">Joins</h4>
+<div class="paragraph">
+<p>The <code>JOIN</code> operator is used to traverse over relationships between
+entities and is functionally similar to the <code>IN</code> operator.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the query joins over the relationship between
+customers and orders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c
+FROM Customer c JOIN c.orders o
+WHERE c.status = 1 AND o.totalPrice &gt; 10000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>INNER</code> keyword is optional:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c
+FROM Customer c INNER JOIN c.orders o
+WHERE c.status = 1 AND o.totalPrice &gt; 10000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These examples are equivalent to the following query, which uses the
+<code>IN</code> operator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c
+FROM Customer c, IN (c.orders) o
+WHERE c.status = 1 AND o.totalPrice &gt; 10000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also join a single-valued relationship:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
+FROM Team t JOIN t.league l
+WHERE l.sport = :sport</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>LEFT JOIN</code> or <code>LEFT OUTER JOIN</code> retrieves a set of entities where
+matching values in the join condition may be absent. The <code>OUTER</code> keyword
+is optional:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c.name, o.totalPrice
+FROM CustomerOrder o LEFT JOIN o.customer c</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>FETCH JOIN</code> is a join operation that returns associated entities as a
+side effect of running the query. In the following example, the query
+returns a set of departments and, as a side effect, the associated
+employees of the departments, even though the employees were not
+explicitly retrieved by the <code>SELECT</code> clause:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT d
+FROM Department d LEFT JOIN FETCH d.employees
+WHERE d.deptno = 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="path-expressions">Path Expressions</h3>
+<div class="paragraph">
+<p>Path expressions are important constructs in the syntax of the query
+language for several reasons. First, path expressions define navigation
+paths through the relationships in the abstract schema. These path
+definitions affect both the scope and the results of a query. Second,
+path expressions can appear in any of the main clauses of a query
+(<code>SELECT</code>, <code>DELETE</code>, <code>HAVING</code>, <code>UPDATE</code>, <code>WHERE</code>, <code>FROM</code>, <code>GROUP BY</code>,
+<code>ORDER BY</code>). Finally, although much of the query language is a subset of
+SQL, path expressions are extensions not found in SQL.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBUR">Examples of Path Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBUS">Expression Types</a></p>
+</li>
+<li>
+<p><a href="#BNBUT">Navigation</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="examples-of-path-expressions">Examples of Path Expressions</h4>
+<div class="paragraph">
+<p>Here, the <code>WHERE</code> clause contains a <code>single_valued_path_expression</code>; the
+<code>p</code> is an identification variable, and <code>salary</code> is a persistent field of
+<code>Player</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p
+WHERE p.salary BETWEEN :lowerSalary AND :higherSalary</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the <code>WHERE</code> clause also contains a
+<code>single_valued_path_expression</code>; <code>t</code> is an identification variable,
+<code>league</code> is a single-valued relationship field, and <code>sport</code> is a
+persistent field of <code>league</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p, IN (p.teams) t
+WHERE t.league.sport = :sport</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the <code>WHERE</code> clause contains a <code>collection_valued_path_expression</code>;
+<code>p</code> is an identification variable, and <code>teams</code> designates a
+collection-valued relationship field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p
+WHERE p.teams IS EMPTY</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="expression-types">Expression Types</h4>
+<div class="paragraph">
+<p>The type of a path expression is the type of the object represented by
+the ending element, which can be one of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Persistent field</p>
+</li>
+<li>
+<p>Single-valued relationship field</p>
+</li>
+<li>
+<p>Collection-valued relationship field</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, the type of the expression <code>p.salary</code> is <code>double</code> because
+the terminating persistent field (<code>salary</code>) is a <code>double</code>.</p>
+</div>
+<div class="paragraph">
+<p>In the expression <code>p.teams</code>, the terminating element is a
+collection-valued relationship field (<code>teams</code>). This expression&#8217;s type
+is a collection of the abstract schema type named <code>Team</code>. Because <code>Team</code>
+is the abstract schema name for the <code>Team</code> entity, this type maps to the
+entity. For more information on the type mapping of abstract schemas,
+see <a href="#BNBVY">Return Types</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="navigation">Navigation</h4>
+<div class="paragraph">
+<p>A path expression enables the query to navigate to related entities. The
+terminating elements of an expression determine whether navigation is
+allowed. If an expression contains a single-valued relationship field,
+the navigation can continue to an object that is related to the field.
+However, an expression cannot navigate beyond a persistent field or a
+collection-valued relationship field. For example, the expression
+<code>p.teams.league.sport</code> is illegal because <code>teams</code> is a collection-valued
+relationship field. To reach the <code>sport</code> field, the <code>FROM</code> clause could
+define an identification variable named <code>t</code> for the <code>teams</code> field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player AS p, IN (p.teams) t
+WHERE t.league.sport = 'soccer'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="where-clause">WHERE Clause</h3>
+<div class="paragraph">
+<p>The <code>WHERE</code> clause specifies a conditional expression that limits the
+values returned by the query. The query returns all corresponding values
+in the data store for which the conditional expression is <code>TRUE</code>.
+Although usually specified, the <code>WHERE</code> clause is optional. If the
+<code>WHERE</code> clause is omitted, the query returns all values. The high-level
+syntax for the <code>WHERE</code> clause is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">where_clause ::= WHERE conditional_expression</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBUV">Literals</a></p>
+</li>
+<li>
+<p><a href="#BNBVA">Input Parameters</a></p>
+</li>
+<li>
+<p><a href="#BNBVB">Conditional Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVC">Operators and Their Precedence</a></p>
+</li>
+<li>
+<p><a href="#BNBVE">BETWEEN Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVF">IN Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVG">LIKE Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVI">NULL Comparison Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVJ">Empty Collection Comparison Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVK">Collection Member Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVL">Subqueries</a></p>
+</li>
+<li>
+<p><a href="#BNBVO">Functional Expressions</a></p>
+</li>
+<li>
+<p><a href="#GJJND">Case Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBVR">NULL Values</a></p>
+</li>
+<li>
+<p><a href="#BNBVU">Equality Semantics</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="literals">Literals</h4>
+<div class="paragraph">
+<p>There are four kinds of literals: string, numeric, Boolean, and enum.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>String literals: A string literal is enclosed in single quotes:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">'Duke'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a string literal contains a single quote, you indicate the quote by
+using two single quotes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">'Duke''s'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Like a Java <code>String</code>, a string literal in the query language uses the
+Unicode character encoding.</p>
+</div>
+</li>
+<li>
+<p>Numeric literals: There are two types of numeric literals: exact and
+approximate.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>An exact numeric literal is a numeric value without a decimal point,
+such as 65, –233, and +12. Using the Java integer syntax, exact numeric
+literals support numbers in the range of a Java <code>long</code>.</p>
+</li>
+<li>
+<p>An approximate numeric literal is a numeric value in scientific
+notation, such as 57., –85.7, and +2.1. Using the syntax of the Java
+floating-point literal, approximate numeric literals support numbers in
+the range of a Java <code>double</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Boolean literals: A Boolean literal is either <code>TRUE</code> or <code>FALSE</code>. These
+keywords are not case-sensitive.</p>
+</li>
+<li>
+<p>Enum literals: The Java Persistence query language supports the use of
+enum literals using the Java enum literal syntax. The enum class name
+must be specified as a fully qualified class name:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT e
+FROM Employee e
+WHERE e.status = com.example.EmployeeStatus.FULL_TIME</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="input-parameters">Input Parameters</h4>
+<div class="paragraph">
+<p>An input parameter can be either a named parameter or a positional
+parameter.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A named input parameter is designated by a colon (<code>:</code>) followed by a
+string; for example, <code>:name</code>.</p>
+</li>
+<li>
+<p>A positional input parameter is designated by a question mark (<code>?</code>)
+followed by an integer. For example, the first input parameter is <code>?1</code>,
+the second is <code>?2</code>, and so forth.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following rules apply to input parameters.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>They can be used only in a <code>WHERE</code> or <code>HAVING</code> clause.</p>
+</li>
+<li>
+<p>Positional parameters must be numbered, starting with the integer 1.</p>
+</li>
+<li>
+<p>Named parameters and positional parameters may not be mixed in a
+single query.</p>
+</li>
+<li>
+<p>Named parameters are case-sensitive.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="conditional-expressions">Conditional Expressions</h4>
+<div class="paragraph">
+<p>A <code>WHERE</code> clause consists of a conditional expression, which is
+evaluated from left to right within a precedence level. You can change
+the order of evaluation by using parentheses.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="operators-and-their-precedence">Operators and Their Precedence</h4>
+<div class="paragraph">
+<p><a href="#BNBVD">Table 40-2</a> lists the query language operators in order of
+decreasing precedence.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref170"></a><a id="BNBVD"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-2 Query Language Order Precedence</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 21%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Precedence Order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Navigation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.</code> (a period)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arithmetic</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>+ –</code> (unary)</p>
+</div>
+<div class="paragraph">
+<p><code>* /</code> (multiplication and division)</p>
+</div>
+<div class="paragraph">
+<p><code>+ –</code> (addition and subtraction)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comparison</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>=</code></p>
+</div>
+<div class="paragraph">
+<p><code>&gt;</code></p>
+</div>
+<div class="paragraph">
+<p><code>&gt;=</code></p>
+</div>
+<div class="paragraph">
+<p><code>&lt;</code></p>
+</div>
+<div class="paragraph">
+<p><code>&#8656;</code></p>
+</div>
+<div class="paragraph">
+<p><code>&lt;&gt;</code> (not equal)</p>
+</div>
+<div class="paragraph">
+<p><code>[NOT] BETWEEN</code></p>
+</div>
+<div class="paragraph">
+<p><code>[NOT] LIKE</code></p>
+</div>
+<div class="paragraph">
+<p><code>[NOT] IN</code></p>
+</div>
+<div class="paragraph">
+<p><code>IS [NOT] NULL</code></p>
+</div>
+<div class="paragraph">
+<p><code>IS [NOT] EMPTY</code></p>
+</div>
+<div class="paragraph">
+<p><code>[NOT] MEMBER OF</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logical</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>NOT</code></p>
+</div>
+<div class="paragraph">
+<p><code>AND</code></p>
+</div>
+<div class="paragraph">
+<p><code>OR</code></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="between-expressions">BETWEEN Expressions</h4>
+<div class="paragraph">
+<p>A <code>BETWEEN</code> expression determines whether an arithmetic expression falls
+within a range of values.</p>
+</div>
+<div class="paragraph">
+<p>These two expressions are equivalent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">p.age BETWEEN 15 AND 19
+p.age &gt;= 15 AND p.age &lt;= 19</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following two expressions also are equivalent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">p.age NOT BETWEEN 15 AND 19
+p.age &lt; 15 OR p.age &gt; 19</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an arithmetic expression has a <code>NULL</code> value, the value of the
+<code>BETWEEN</code> expression is unknown.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="in-expressions">IN Expressions</h4>
+<div class="paragraph">
+<p>An <code>IN</code> expression determines whether a string belongs to a set of
+string literals or whether a number belongs to a set of number values.</p>
+</div>
+<div class="paragraph">
+<p>The path expression must have a string or numeric value. If the path
+expression has a <code>NULL</code> value, the value of the <code>IN</code> expression is
+unknown.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the expression is <code>TRUE</code> if the country is
+<code>UK</code> , but <code>FALSE</code> if the country is <code>Peru</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">o.country IN ('UK', 'US', 'France')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may also use input parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">o.country IN ('UK', 'US', 'France', :country)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="like-expressions">LIKE Expressions</h4>
+<div class="paragraph">
+<p>A <code>LIKE</code> expression determines whether a wildcard pattern matches a
+string.</p>
+</div>
+<div class="paragraph">
+<p>The path expression must have a string or numeric value. If this value
+is <code>NULL</code>, the value of the <code>LIKE</code> expression is unknown. The pattern
+value is a string literal that can contain wildcard characters. The
+underscore (<code>_</code>) wildcard character represents any single character. The
+percent (<code>%</code>) wildcard character represents zero or more characters. The
+<code>ESCAPE</code> clause specifies an escape character for the wildcard
+characters in the pattern value. <a href="#BNBVH">Table 40-3</a> shows some
+sample <code>LIKE</code> expressions.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref171"></a><a id="BNBVH"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-3 LIKE Expression Examples</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 43%;">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 48%;">
+<col style="width: 51%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Expression</th>
+<th class="tableblock halign-left valign-top">TRUE</th>
+<th class="tableblock halign-left valign-top">FALSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.phone LIKE '12%3'</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>'123'</code></p>
+</div>
+<div class="paragraph">
+<p><code>'12993'</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'1234'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asentence.word LIKE 'l_se'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'lose'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'loose'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>aword.underscored LIKE '\_%' ESCAPE '\'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'_foo'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'bar'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.phone NOT LIKE '12%3'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'1234'</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>'123'</code></p>
+</div>
+<div class="paragraph">
+<p><code>'12993'</code></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="null-comparison-expressions">NULL Comparison Expressions</h4>
+<div class="paragraph">
+<p>A <code>NULL</code> comparison expression tests whether a single-valued path
+expression or an input parameter has a <code>NULL</code> value. Usually, the <code>NULL</code>
+comparison expression is used to test whether a single-valued
+relationship has been set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
+FROM Team t
+WHERE t.league IS NULL</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This query selects all teams where the league relationship is not set.
+Note that the following query is not equivalent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
+FROM Team t
+WHERE t.league = NULL</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The comparison with <code>NULL</code> using the equals operator (<code>=</code>) always
+returns an unknown value, even if the relationship is not set. The
+second query will always return an empty result.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="empty-collection-comparison-expressions">Empty Collection Comparison Expressions</h4>
+<div class="paragraph">
+<p>The <code>IS [NOT] EMPTY</code> comparison expression tests whether a
+collection-valued path expression has no elements. In other words, it
+tests whether a collection-valued relationship has been set.</p>
+</div>
+<div class="paragraph">
+<p>If the collection-valued path expression is <code>NULL</code>, the empty collection
+comparison expression has a <code>NULL</code> value.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example that finds all orders that do not have any line
+items:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT o
+FROM CustomerOrder o
+WHERE o.lineItems IS EMPTY</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="collection-member-expressions">Collection Member Expressions</h4>
+<div class="paragraph">
+<p>The <code>[NOT]</code> <code>MEMBER [OF]</code> collection member expression determines
+whether a value is a member of a collection. The value and the
+collection members must have the same type.</p>
+</div>
+<div class="paragraph">
+<p>If either the collection-valued or single-valued path expression is
+unknown, the collection member expression is unknown. If the
+collection-valued path expression designates an empty collection, the
+collection member expression is <code>FALSE</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>OF</code> keyword is optional.</p>
+</div>
+<div class="paragraph">
+<p>The following example tests whether a line item is part of an order:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT o
+FROM CustomerOrder o
+WHERE :lineItem MEMBER OF o.lineItems</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subqueries">Subqueries</h4>
+<div class="paragraph">
+<p>Subqueries may be used in the <code>WHERE</code> or <code>HAVING</code> clause of a query.
+Subqueries must be surrounded by parentheses.</p>
+</div>
+<div class="paragraph">
+<p>The following example finds all customers who have placed more than ten
+orders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c
+FROM Customer c
+WHERE (SELECT COUNT(o) FROM c.orders o)&gt; 10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Subqueries may contain <code>EXISTS</code>, <code>ALL</code>, and <code>ANY</code> expressions.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>EXISTS expressions: The <code>[NOT] EXISTS</code> expression is used with a
+subquery and is true only if the result of the subquery consists of one
+or more values; otherwise, it is false.</p>
+<div class="paragraph">
+<p>The following example finds all employees whose spouses are also
+employees:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT emp
+FROM Employee emp
+WHERE EXISTS (
+    SELECT spouseEmp
+    FROM Employee spouseEmp
+    WHERE spouseEmp = emp.spouse)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>ALL and ANY expressions: The <code>ALL</code> expression is used with a subquery
+and is true if all the values returned by the subquery are true or if
+the subquery is empty.</p>
+<div class="paragraph">
+<p>The <code>ANY</code> expression is used with a subquery and is true if some of the
+values returned by the subquery are true. An <code>ANY</code> expression is false
+if the subquery result is empty or if all the values returned are false.
+The <code>SOME</code> keyword is synonymous with <code>ANY</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ALL</code> and <code>ANY</code> expressions are used with the <code>=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>,
+<code>&gt;=</code>, and <code>&lt;&gt;</code> comparison operators.</p>
+</div>
+<div class="paragraph">
+<p>The following example finds all employees whose salaries are higher than
+the salaries of the managers in the employee&#8217;s department:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT emp
+FROM Employee emp
+WHERE emp.salary &gt; ALL (
+    SELECT m.salary
+    FROM Manager m
+    WHERE m.department = emp.department)</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="functional-expressions">Functional Expressions</h4>
+<div class="paragraph">
+<p>The query language includes several string, arithmetic, and date/time
+functions that may be used in the <code>SELECT</code>, <code>WHERE</code>, or <code>HAVING</code> clause
+of a query. The functions are listed in <a href="#BNBVP">Table 40-4</a>,
+<a href="#BNBVQ">Table 40-5</a>, and <a href="#GJJNL">Table 40-6</a>.</p>
+</div>
+<div class="paragraph">
+<p>In <a href="#BNBVP">Table 40-4</a>, the <code>start</code> and <code>length</code> arguments are of
+type <code>int</code> and designate positions in the <code>String</code> argument. The first
+position in a string is designated by 1.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref172"></a><a id="BNBVP"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-4 String Expressions</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 28%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Function Syntax</th>
+<th class="tableblock halign-left valign-top">Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CONCAT(String, String)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LENGTH(String)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOCATE(String, String [, start])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SUBSTRING(String, start, length)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">`TRIM([[LEADING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRAILING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOTH] char) FROM] (String)`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOWER(String)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UPPER(String)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>CONCAT</code> function concatenates two strings into one string.</p>
+</div>
+<div class="paragraph">
+<p>The <code>LENGTH</code> function returns the length of a string in characters as an
+integer.</p>
+</div>
+<div class="paragraph">
+<p>The <code>LOCATE</code> function returns the position of a given string within a
+string. This function returns the first position at which the string was
+found as an integer. The first argument is the string to be located. The
+second argument is the string to be searched. The optional third
+argument is an integer that represents the starting string position. By
+default, <code>LOCATE</code> starts at the beginning of the string. The starting
+position of a string is <code>1</code>. If the string cannot be located, <code>LOCATE</code>
+returns <code>0</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>SUBSTRING</code> function returns a string that is a substring of the
+first argument based on the starting position and length.</p>
+</div>
+<div class="paragraph">
+<p>The <code>TRIM</code> function trims the specified character from the beginning
+and/or end of a string. If no character is specified, <code>TRIM</code> removes
+spaces or blanks from the string. If the optional <code>LEADING</code>
+specification is used, <code>TRIM</code> removes only the leading characters from
+the string. If the optional <code>TRAILING</code> specification is used, <code>TRIM</code>
+removes only the trailing characters from the string. The default is
+<code>BOTH</code>, which removes the leading and trailing characters from the
+string.</p>
+</div>
+<div class="paragraph">
+<p>The <code>LOWER</code> and <code>UPPER</code> functions convert a string to lowercase or
+uppercase, respectively.</p>
+</div>
+<div class="paragraph">
+<p>In <a href="#BNBVQ">Table 40-5</a>, the <code>number</code> argument can be an <code>int</code>, a
+<code>float</code>, or a <code>double</code>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref173"></a><a id="BNBVQ"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-5 Arithmetic Expressions</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 38%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Function Syntax</th>
+<th class="tableblock halign-left valign-top">Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ABS(number)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code>, <code>float</code>, or <code>double</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MOD(int, int)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SQRT(double)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>double</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SIZE(Collection)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>ABS</code> function takes a numeric expression and returns a number of
+the same type as the argument.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MOD</code> function returns the remainder of the first argument divided
+by the second.</p>
+</div>
+<div class="paragraph">
+<p>The <code>SQRT</code> function returns the square root of a number.</p>
+</div>
+<div class="paragraph">
+<p>The <code>SIZE</code> function returns an integer of the number of elements in the
+given collection.</p>
+</div>
+<div class="paragraph">
+<p>In <a href="#GJJNL">Table 40-6</a>, the date/time functions return the date,
+time, or timestamp on the database server.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref174"></a><a id="GJJNL"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-6 Date/Time Expressions</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Function Syntax</th>
+<th class="tableblock halign-left valign-top">Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CURRENT_DATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.sql.Date</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CURRENT_TIME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.sql.Time</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CURRENT_TIMESTAMP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.sql.Timestamp</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="case-expressions">Case Expressions</h4>
+<div class="paragraph">
+<p>Case expressions change based on a condition, similar to the <code>case</code>
+keyword of the Java programming language. The <code>CASE</code> keyword indicates
+the start of a case expression, and the expression is terminated by the
+<code>END</code> keyword. The <code>WHEN</code> and <code>THEN</code> keywords define individual
+conditions, and the <code>ELSE</code> keyword defines the default condition should
+none of the other conditions be satisfied.</p>
+</div>
+<div class="paragraph">
+<p>The following query selects the name of a person and a conditional
+string, depending on the subtype of the <code>Person</code> entity. If the subtype
+is <code>Student</code>, the string <code>kid</code> is returned. If the subtype is <code>Guardian</code>
+or <code>Staff</code>, the string <code>adult</code> is returned. If the entity is some other
+subtype of <code>Person</code>, the string <code>unknown</code> is returned:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p.name
+CASE TYPE(p)
+    WHEN Student THEN 'kid'
+    WHEN Guardian THEN 'adult'
+    WHEN Staff THEN 'adult'
+    ELSE 'unknown'
+END
+FROM Person p</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following query sets a discount for various types of customers.
+Gold-level customers get a 20% discount, silver-level customers get a
+15% discount, bronze-level customers get a 10% discount, and everyone
+else gets a 5% discount:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">UPDATE Customer c
+SET c.discount =
+    CASE c.level
+        WHEN 'Gold' THEN 20
+        WHEN 'SILVER' THEN 15
+        WHEN 'Bronze' THEN 10
+        ELSE 5
+    END</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="null-values">NULL Values</h4>
+<div class="paragraph">
+<p>If the target of a reference is not in the persistent store, the target
+is <code>NULL</code>. For conditional expressions containing <code>NULL</code>, the query
+language uses the semantics defined by SQL92. Briefly, these semantics
+are as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If a comparison or arithmetic operation has an unknown value, it
+yields a <code>NULL</code> value.</p>
+</li>
+<li>
+<p>Two <code>NULL</code> values are not equal. Comparing two <code>NULL</code> values yields an
+unknown value.</p>
+</li>
+<li>
+<p>The <code>IS NULL</code> test converts a <code>NULL</code> persistent field or a
+single-valued relationship field to <code>TRUE</code>. The <code>IS NOT NULL</code> test
+converts them to <code>FALSE</code>.</p>
+</li>
+<li>
+<p>Boolean operators and conditional tests use the three-valued logic
+defined by <a href="#BNBVS">Table 40-7</a> and <a href="#BNBVT">Table 40-8</a>. (In
+these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U for unknown.)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="sthref175"></a><a id="BNBVS"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-7 AND Operator Logic</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">AND</th>
+<th class="tableblock halign-left valign-top">T</th>
+<th class="tableblock halign-left valign-top">F</th>
+<th class="tableblock halign-left valign-top">U</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref176"></a><a id="BNBVT"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-8 OR Operator Logic</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">OR</th>
+<th class="tableblock halign-left valign-top">T</th>
+<th class="tableblock halign-left valign-top">F</th>
+<th class="tableblock halign-left valign-top">U</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="equality-semantics">Equality Semantics</h4>
+<div class="paragraph">
+<p>In the query language, only values of the same type can be compared.
+However, this rule has one exception: Exact and approximate numeric
+values can be compared. In such a comparison, the required type
+conversion adheres to the rules of Java numeric promotion.</p>
+</div>
+<div class="paragraph">
+<p>The query language treats compared values as if they were Java types and
+not as if they represented types in the underlying data store. For
+example, a persistent field that could be either an integer or a <code>NULL</code>
+must be designated as an <code>Integer</code> object and not as an <code>int</code> primitive.
+This designation is required because a Java object can be <code>NULL</code>, but a
+primitive cannot.</p>
+</div>
+<div class="paragraph">
+<p>Two strings are equal only if they contain the same sequence of
+characters. Trailing blanks are significant; for example, the strings
+<code>'abc'</code> and <code>'abc '</code> are not equal.</p>
+</div>
+<div class="paragraph">
+<p>Two entities of the same abstract schema type are equal only if their
+primary keys have the same value. <a href="#BNBVV">Table 40-9</a> shows the
+operator logic of a negation, and <a href="#BNBVW">Table 40-10</a> shows the
+truth values of conditional tests.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref177"></a><a id="BNBVV"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-9 NOT Operator Logic</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 45%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">NOT Value</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref178"></a><a id="BNBVW"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-10 Conditional Test</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 36%;">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Conditional Test</th>
+<th class="tableblock halign-left valign-top">T</th>
+<th class="tableblock halign-left valign-top">F</th>
+<th class="tableblock halign-left valign-top">U</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression <code>IS TRUE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression <code>IS FALSE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression is unknown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-clause">SELECT Clause</h3>
+<div class="paragraph">
+<p>The <code>SELECT</code> clause defines the types of the objects or values returned
+by the query.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBVY">Return Types</a></p>
+</li>
+<li>
+<p><a href="#BNBWB">The DISTINCT Keyword</a></p>
+</li>
+<li>
+<p><a href="#BNBWC">Constructor Expressions</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="return-types">Return Types</h4>
+<div class="paragraph">
+<p>The return type of the <code>SELECT</code> clause is defined by the result types of
+the select expressions contained within it. If multiple expressions are
+used, the result of the query is an <code>Object[]</code>, and the elements in the
+array correspond to the order of the expressions in the <code>SELECT</code> clause
+and in type to the result types of each expression.</p>
+</div>
+<div class="paragraph">
+<p>A <code>SELECT</code> clause cannot specify a collection-valued expression. For
+example, the <code>SELECT</code> clause <code>p.teams</code> is invalid because <code>teams</code> is a
+collection. However, the clause in the following query is valid because
+<code>t</code> is a single element of the <code>teams</code> collection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
+FROM Player p, IN (p.teams) t</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following query is an example of a query with multiple expressions
+in the <code>SELECT</code> clause:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c.name, c.country.name
+FROM customer c
+WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This query returns a list of <code>Object[]</code> elements; the first array
+element is a string denoting the customer name, and the second array
+element is a string denoting the name of the customer&#8217;s country.</p>
+</div>
+<div class="paragraph">
+<p>The result of a query may be the result of an aggregate function, listed
+in <a href="#BNBWA">Table 40-11</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref179"></a><a id="BNBWA"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 40-11 Aggregate Functions in Select Statements</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 57%;">
+<colgroup>
+<col style="width: 35.6435%;">
+<col style="width: 0.99%;">
+<col style="width: 63.3665%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Return Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AVG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Double</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the mean average of the fields</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>COUNT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the total number of results</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MAX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the highest value in the result
+set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MIN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the lowest value in the result
+set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SUM</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>Long</code> (for integral fields)</p>
+</div>
+<div class="paragraph">
+<p><code>Double</code> (for floating-point fields)</p>
+</div>
+<div class="paragraph">
+<p><code>BigInteger</code> (for <code>BigInteger</code> fields)</p>
+</div>
+<div class="paragraph">
+<p><code>BigDecimal</code> (for <code>BigDecimal</code> fields)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the sum of all the values in the result set</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For select method queries with an aggregate function (<code>AVG</code>, <code>COUNT</code>,
+<code>MAX</code>, <code>MIN</code>, or <code>SUM</code>) in the <code>SELECT</code> clause, the following rules
+apply.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AVG</code>, <code>MAX</code>, <code>MIN</code>, and <code>SUM</code> functions return <code>null</code> if there
+are no values to which the function can be applied.</p>
+</li>
+<li>
+<p>The <code>COUNT</code> function returns 0 if there are no values to which the
+function can be applied.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following example returns the average order quantity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT AVG(o.quantity)
+FROM CustomerOrder o</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example returns the total cost of the items ordered by
+Roxane Coss:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT SUM(l.price)
+FROM CustomerOrder o JOIN o.lineItems l JOIN o.customer c
+WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example returns the total number of orders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT COUNT(o)
+FROM CustomerOrder o</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example returns the total number of items that have prices
+in Hal Incandenza&#8217;s order:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT COUNT(l.price)
+FROM CustomerOrder o JOIN o.lineItems l JOIN o.customer c
+WHERE c.lastname = 'Incandenza' AND c.firstname = 'Hal'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-distinct-keyword">The DISTINCT Keyword</h4>
+<div class="paragraph">
+<p>The <code>DISTINCT</code> keyword eliminates duplicate return values. If a query
+returns a <code>java.util.Collection</code>, which allows duplicates, you must
+specify the <code>DISTINCT</code> keyword to eliminate duplicates.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="constructor-expressions">Constructor Expressions</h4>
+<div class="paragraph">
+<p>Constructor expressions allow you to return Java instances that store a
+query result element instead of an <code>Object[]</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following query creates a <code>CustomerDetail</code> instance per <code>Customer</code>
+matching the <code>WHERE</code> clause. A <code>CustomerDetail</code> stores the customer name
+and customer&#8217;s country name. So the query returns a <code>List</code> of
+<code>CustomerDetail</code> instances:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT NEW com.example.CustomerDetail(c.name, c.country.name)
+FROM customer c
+WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="order-by-clause">ORDER BY Clause</h3>
+<div class="paragraph">
+<p>As its name suggests, the <code>ORDER BY</code> clause orders the values or objects
+returned by the query.</p>
+</div>
+<div class="paragraph">
+<p>If the <code>ORDER BY</code> clause contains multiple elements, the left-to-right
+sequence of the elements determines the high-to-low precedence.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ASC</code> keyword specifies ascending order, the default, and the <code>DESC</code>
+keyword indicates descending order.</p>
+</div>
+<div class="paragraph">
+<p>When using the <code>ORDER BY</code> clause, the <code>SELECT</code> clause must return an
+orderable set of objects or values. You cannot order the values or
+objects for values or objects not returned by the <code>SELECT</code> clause. For
+example, the following query is valid because the <code>ORDER BY</code> clause uses
+the objects returned by the <code>SELECT</code> clause:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT o
+FROM Customer c JOIN c.orders o JOIN c.address a
+WHERE a.state = 'CA'
+ORDER BY o.quantity, o.totalcost</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example is not valid, because the <code>ORDER BY</code> clause uses a
+value not returned by the <code>SELECT</code> clause:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p.product_name
+FROM CustomerOrder o, IN(o.lineItems) l JOIN o.customer c
+WHERE c.lastname = 'Faehmel' AND c.firstname = 'Robert'
+ORDER BY o.quantity</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="group-by-and-having-clauses">GROUP BY and HAVING Clauses</h3>
+<div class="paragraph">
+<p>The <code>GROUP BY</code> clause allows you to group values according to a set of
+properties.</p>
+</div>
+<div class="paragraph">
+<p>The following query groups the customers by their country and returns
+the number of customers per country:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c.country, COUNT(c)
+FROM Customer c GROUP BY c.country</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>HAVING</code> clause is used with the <code>GROUP BY</code> clause to further
+restrict the returned result of a query.</p>
+</div>
+<div class="paragraph">
+<p>The following query groups orders by the status of their customer and
+returns the customer status plus the average <code>totalPrice</code> for all orders
+where the corresponding customers have the same status. In addition, it
+considers only customers with status <code>1</code>, <code>2</code>, or <code>3</code>, so orders of
+other customers are not taken into account:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT c.status, AVG(o.totalPrice)
+FROM CustomerOrder o JOIN o.customer c
+GROUP BY c.status HAVING c.status IN (1, 2, 3)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-querylanguage005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-criteria.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

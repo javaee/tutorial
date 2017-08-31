@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Named Entity Graphs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-entitygraphs002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-entitygraphs004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-named-entity-graphs">Using Named Entity Graphs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Named entity graphs are created using annotations applied to entity
+classes or the <code>named-entity-graph</code> element and its sub-elements in the
+application&#8217;s deployment descriptor. The persistence provider will scan
+for all named entity graphs, defined in both annotations and in XML,
+within an application. A named entity graph set using an annotation may
+be overridden using <code>named-entity-graph</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="applying-named-entity-graph-annotations-to-entity-classes">Applying Named Entity Graph Annotations to Entity Classes</h3>
+<div class="paragraph">
+<p>The <code>javax.persistence.NamedEntityGraph</code> annotation defines a single
+named entity graph and is applied at the class level. Multiple
+<code>@NamedEntityGraph</code> annotations may be defined for a class by adding
+them within a <code>javax.persistence.NamedEntityGraphs</code> class-level
+annotation.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@NamedEntityGraph</code> annotation must be applied on the root of the
+graph of entities. That is, if the <code>EntityManager.find</code> or query
+operation has as its root entity the <code>EmailMessage</code> class, the named
+entity graph used in the operation must be defined in the <code>EmailMessage</code>
+class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NamedEntityGraph
+@Entity
+public class EmailMessage {
+    @Id
+    String messageId;
+    String subject;
+    String body;
+    String sender;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>EmailMessage</code> class has a <code>@NamedEntityGraph</code>
+annotation to define a named entity graph that defaults to the name of
+the class, <code>EmailMessage</code>. No fields are included in the
+<code>@NamedEntityGraph</code> annotation as attribute nodes, and the fields are
+not annotated with metadata to set the fetch type, so the only field
+that will be eagerly fetched in either a load graph or fetch graph is
+<code>messageId</code>.</p>
+</div>
+<div class="paragraph">
+<p>The attributes of a named entity graph are the fields of the entity that
+should be included in the entity graph. Add the fields to the entity
+graph by specifying them in the <code>attributeNodes</code> element of
+<code>@NamedEntityGraph</code> with a <code>javax.persistence.NamedAttributeNode</code>
+annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NamedEntityGraph(name="emailEntityGraph", attributeNodes={
+    @NamedAttributeNode("subject"),
+    @NamedAttributeNode("sender")
+})
+@Entity
+public class EmailMessage { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the name of the named entity graph is
+<code>emailEntityGraph</code> and includes the <code>subject</code> and <code>sender</code> fields.</p>
+</div>
+<div class="paragraph">
+<p>Multiple <code>@NamedEntityGraph</code> definitions may be applied to a class by
+grouping them within a <code>@NamedEntityGraphs</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, two entity graphs are defined on the
+<code>EmailMessage</code> class. One is for a preview pane, which fetches only the
+sender, subject, and body of the message. The other is for a full view
+of the message, including any message attachments:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NamedEntityGraphs({
+    @NamedEntityGraph(name="previewEmailEntityGraph", attributeNodes={
+        @NamedAttributeNode("subject"),
+        @NamedAttributeNode("sender"),
+        @NamedAttributeNode("body")
+    }),
+    @NamedEntityGraph(name="fullEmailEntityGraph", attributeNodes={
+        @NamedAttributeNode("sender"),
+        @NamedAttributeNode("subject"),
+        @NamedAttributeNode("body"),
+        @NamedAttributeNode("attachments")
+    })
+})
+@Entity
+public class EmailMessage { ... }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="obtaining-entitygraph-instances-from-named-entity-graphs">Obtaining EntityGraph Instances from Named Entity Graphs</h3>
+<div class="paragraph">
+<p>Use the <code>EntityManager.getEntityGraph</code> method, passing in the named
+entity graph name, to obtain <code>EntityGraph</code> instances for a named entity
+graph:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityGraph&lt;EmailMessage&gt; eg = em.getEntityGraph("emailEntityGraph");</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-entitygraphs002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-entitygraphs004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

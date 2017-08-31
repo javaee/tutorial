@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Composite Components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="composite-components">Composite Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JavaServer Faces technology offers the concept of composite components
+with Facelets. A composite component is a special type of template that
+acts as a component.</p>
+</div>
+<div class="paragraph">
+<p>Any component is essentially a piece of reusable code that behaves in a
+particular way. For example, an input component accepts user input. A
+component can also have validators, converters, and listeners attached
+to it to perform certain defined actions.</p>
+</div>
+<div class="paragraph">
+<p>A composite component consists of a collection of markup tags and other
+existing components. This reusable, user-created component has a
+customized, defined functionality and can have validators, converters,
+and listeners attached to it like any other component.</p>
+</div>
+<div class="paragraph">
+<p>With Facelets, any XHTML page that contains markup tags and other
+components can be converted into a composite component. Using the
+resources facility, the composite component can be stored in a library
+that is available to the application from the defined resources
+location.</p>
+</div>
+<div class="paragraph">
+<p><a href="#GJCWC">Table 8-3</a> lists the most commonly used composite tags and
+their functions.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref31"></a><a id="GJCWC"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 8-3 Composite Component Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 39%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:interface</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declares the usage contract for a composite
+component. The composite component can be used as a single component
+whose feature set is the union of the features declared in the usage
+contract.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:implementation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the implementation of the composite
+component. If a <code>composite:interface</code> element appears, there must be a
+corresponding <code>composite:implementation</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:attribute</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declares an attribute that may be given to an
+instance of the composite component in which this tag is declared.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:insertChildren</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any child components or template text
+within the composite component tag in the using page will be reparented
+into the composite component at the point indicated by this tag&#8217;s
+placement within the <code>composite:implementation</code> section.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:valueHolder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declares that the composite component whose
+contract is declared by the <code>composite:interface</code> in which this element
+is nested exposes an implementation of <code>ValueHolder</code> suitable for use as
+the target of attached objects in the using page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:editableValueHolder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declares that the composite component
+whose contract is declared by the <code>composite:interface</code> in which this
+element is nested exposes an implementation of <code>EditableValueHolder</code>
+suitable for use as the target of attached objects in the using page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>composite:actionSource</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declares that the composite component whose
+contract is declared by the <code>composite:interface</code> in which this element
+is nested exposes an implementation of <code>ActionSource2</code> suitable for use
+as the target of attached objects in the using page.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For more information and a complete list of Facelets composite tags, see
+the o<a href="JSFTL">JavaServer Faces Facelets Tag Library documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows a composite component that accepts an email
+address as input:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+
+    &lt;h:head&gt;
+        &lt;title&gt;This content will not be displayed&lt;/title&gt;
+    &lt;/h:head&gt;
+    &lt;h:body&gt;
+        &lt;composite:interface&gt;
+            &lt;composite:attribute name="value" required="false"/&gt;
+        &lt;/composite:interface&gt;
+
+        &lt;composite:implementation&gt;
+            &lt;h:outputLabel value="Email id: "&gt;&lt;/h:outputLabel&gt;
+            &lt;h:inputText value="#{cc.attrs.value}"&gt;&lt;/h:inputText&gt;
+        &lt;/composite:implementation&gt;
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the use of <code>cc.attrs.value</code> when defining the value of the
+<code>inputText</code> component. The word <code>cc</code> in JavaServer Faces is a reserved
+word for composite components. The <code>#{cc.attrs.`attribute-name</code>}`
+expression is used to access the attributes defined for the composite
+component&#8217;s interface, which in this case happens to be <code>value</code>.</p>
+</div>
+<div class="paragraph">
+<p>The preceding example content is stored as a file named <code>email.xhtml</code> in
+a folder named <code>resources/emcomp</code>, under the application web root
+directory. This directory is considered a library by JavaServer Faces,
+and a component can be accessed from such a library. For more
+information on resources, see <a href="jsf-facelets006.html#GIRGM">Web
+Resources</a>.</p>
+</div>
+<div class="paragraph">
+<p>The web page that uses this composite component is generally called a
+using page. The using page includes a reference to the composite
+component, in the <code>xml</code> namespace declarations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:em="http://xmlns.jcp.org/jsf/composite/emcomp"&gt;
+
+    &lt;h:head&gt;
+        &lt;title&gt;Using a sample composite component&lt;/title&gt;
+    &lt;/h:head&gt;
+
+    &lt;body&gt;
+        &lt;h:form&gt;
+            &lt;em:email value="Enter your email id" /&gt;
+        &lt;/h:form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The local composite component library is defined in the <code>xmlns</code>
+namespace with the declaration
+<code>xmlns:em="http://xmlns.jcp.org/jsf/composite/emcomp"</code>. The component
+itself is accessed through the <code>em:email</code> tag. The preceding example
+content can be stored as a web page named <code>emuserpage.xhtml</code> under the
+web root directory. When compiled and deployed on a server, it can be
+accessed with the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/application-name/emuserpage.xhtml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-advanced-cc.html#GKHXA">Chapter 14, "Composite Components:
+Advanced Topics and an Example,"</a> for more information and an example.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

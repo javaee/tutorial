@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Ajax Request Lifecycle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ajax007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="ajax-request-lifecycle">Ajax Request Lifecycle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An Ajax request varies from other typical JavaServer Faces requests, and
+its processing is also handled differently by the JavaServer Faces
+lifecycle.</p>
+</div>
+<div class="paragraph">
+<p>As described in <a href="jsf-intro008.html#GKNOJ">Partial Processing and
+Partial Rendering</a>, when an Ajax request is received, the state
+associated with that request is captured by the
+<code>javax.faces.context.PartialViewContext</code>. This object provides access to
+information such as which components are targeted for
+processing/rendering. The <code>processPartial</code> method of
+<code>PartialViewContext</code> uses this information to perform partial component
+tree processing and rendering.</p>
+</div>
+<div class="paragraph">
+<p>The <code>execute</code> attribute of the <code>f:ajax</code> tag identifies which segments of
+the server-side component tree should be processed. Because components
+can be uniquely identified in the JavaServer Faces component tree, it is
+easy to identify and process a single component, a few components, or a
+whole tree. This is made possible by the <code>visitTree</code> method of the
+<code>UIComponent</code> class. The identified components then run through the
+JavaServer Faces request lifecycle phases.</p>
+</div>
+<div class="paragraph">
+<p>Similar to the <code>execute</code> attribute, the <code>render</code> attribute identifies
+which segments of the JavaServer Faces component tree need to be
+rendered during the render response phase.</p>
+</div>
+<div class="paragraph">
+<p>During the render response phase, the <code>render</code> attribute is examined.
+The identified components are found and asked to render themselves and
+their children. The components are then packaged up and sent back to the
+client as a response.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ajax007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

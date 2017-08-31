@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Container-Managed Transactions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="transactions003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="transactions005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="container-managed-transactions">Container-Managed Transactions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In an enterprise bean with container-managed transaction demarcation,
+the EJB container sets the boundaries of the transactions. You can use
+container-managed transactions with any type of enterprise bean: session
+or message-driven. Container-managed transactions simplify development
+because the enterprise bean code does not explicitly mark the
+transaction&#8217;s boundaries. The code does not include statements that
+begin and end the transaction. By default, if no transaction demarcation
+is specified, enterprise beans use container-managed transaction
+demarcation.</p>
+</div>
+<div class="paragraph">
+<p>Typically, the container begins a transaction immediately before an
+enterprise bean method starts and commits the transaction just before
+the method exits. Each method can be associated with a single
+transaction. Nested or multiple transactions are not allowed within a
+method.</p>
+</div>
+<div class="paragraph">
+<p>Container-managed transactions do not require all methods to be
+associated with transactions. When developing a bean, you can set the
+transaction attributes to specify which of the bean&#8217;s methods are
+associated with transactions.</p>
+</div>
+<div class="paragraph">
+<p>Enterprise beans that use container-managed transaction demarcation must
+not use any transaction-management methods that interfere with the
+container&#8217;s transaction demarcation boundaries. Examples of such methods
+are the <code>commit</code>, <code>setAutoCommit</code>, and <code>rollback</code> methods of
+<code>java.sql.Connection</code> or the <code>commit</code> and <code>rollback</code> methods of
+<code>javax.jms.Session</code>. If you require control over the transaction
+demarcation, you must use application-managed transaction demarcation.</p>
+</div>
+<div class="paragraph">
+<p>Enterprise beans that use container-managed transaction demarcation also
+must not use the <code>javax.transaction.UserTransaction</code> interface.</p>
+</div>
+<div class="sect2">
+<h3 id="transaction-attributes">Transaction Attributes</h3>
+<div class="paragraph">
+<p>A transaction attribute controls the scope of a transaction.
+<a href="#BNCIL">Figure 52-1</a> illustrates why controlling the scope is
+important. In the diagram, <code>method-A</code> begins a transaction and then
+invokes <code>method-B</code> of <code>Bean-2</code>. When <code>method-B</code> executes, does it run
+within the scope of the transaction started by <code>method-A</code>, or does it
+execute with a new transaction? The answer depends on the transaction
+attribute of <code>method-B</code>.</p>
+</div>
+<div id="BNCIL" class="paragraph">
+<div class="title"><strong>Figure 52-1 Transaction Scope</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_050.png" alt="A diagram showing a transaction between two beans."></span></p>
+</div>
+<div class="paragraph">
+<p>A transaction attribute can have one of the following values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Required</code></p>
+</li>
+<li>
+<p><code>RequiresNew</code></p>
+</li>
+<li>
+<p><code>Mandatory</code></p>
+</li>
+<li>
+<p><code>NotSupported</code></p>
+</li>
+<li>
+<p><code>Supports</code></p>
+</li>
+<li>
+<p><code>Never</code></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="required-attribute">Required Attribute</h4>
+<div class="paragraph">
+<p>If the client is running within a transaction and invokes the enterprise
+bean&#8217;s method, the method executes within the client&#8217;s transaction. If
+the client is not associated with a transaction, the container starts a
+new transaction before running the method.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Required</code> attribute is the implicit transaction attribute for all
+enterprise bean methods running with container-managed transaction
+demarcation. You typically do not set the <code>Required</code> attribute unless
+you need to override another transaction attribute. Because transaction
+attributes are declarative, you can easily change them later.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="requiresnew-attribute">RequiresNew Attribute</h4>
+<div class="paragraph">
+<p>If the client is running within a transaction and invokes the enterprise
+bean&#8217;s method, the container takes the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Suspends the client&#8217;s transaction</p>
+</li>
+<li>
+<p>Starts a new transaction</p>
+</li>
+<li>
+<p>Delegates the call to the method</p>
+</li>
+<li>
+<p>Resumes the client&#8217;s transaction after the method completes</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If the client is not associated with a transaction, the container starts
+a new transaction before running the method.</p>
+</div>
+<div class="paragraph">
+<p>You should use the <code>RequiresNew</code> attribute when you want to ensure that
+the method always runs within a new transaction.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mandatory-attribute">Mandatory Attribute</h4>
+<div class="paragraph">
+<p>If the client is running within a transaction and invokes the enterprise
+bean&#8217;s method, the method executes within the client&#8217;s transaction. If
+the client is not associated with a transaction, the container throws a
+<code>TransactionRequiredException</code>.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>Mandatory</code> attribute if the enterprise bean&#8217;s method must use
+the transaction of the client.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="notsupported-attribute">NotSupported Attribute</h4>
+<div class="paragraph">
+<p>If the client is running within a transaction and invokes the enterprise
+bean&#8217;s method, the container suspends the client&#8217;s transaction before
+invoking the method. After the method has completed, the container
+resumes the client&#8217;s transaction.</p>
+</div>
+<div class="paragraph">
+<p>If the client is not associated with a transaction, the container does
+not start a new transaction before running the method.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>NotSupported</code> attribute for methods that don&#8217;t need
+transactions. Because transactions involve overhead, this attribute may
+improve performance.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="supports-attribute">Supports Attribute</h4>
+<div class="paragraph">
+<p>If the client is running within a transaction and invokes the enterprise
+bean&#8217;s method, the method executes within the client&#8217;s transaction. If
+the client is not associated with a transaction, the container does not
+start a new transaction before running the method.</p>
+</div>
+<div class="paragraph">
+<p>Because the transactional behavior of the method may vary, you should
+use the <code>Supports</code> attribute with caution.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="never-attribute">Never Attribute</h4>
+<div class="paragraph">
+<p>If the client is running within a transaction and invokes the enterprise
+bean&#8217;s method, the container throws a <code>RemoteException</code>. If the client
+is not associated with a transaction, the container does not start a new
+transaction before running the method.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="summary-of-transaction-attributes">Summary of Transaction Attributes</h4>
+<div class="paragraph">
+<p><a href="#BNCIT">Table 52-1</a> summarizes the effects of the transaction
+attributes. Both the <code>T1</code> and the <code>T2</code> transactions are controlled by
+the container. A <code>T1</code> transaction is associated with the client that
+calls a method in the enterprise bean. In most cases, the client is
+another enterprise bean. A <code>T2</code> transaction is started by the container
+just before the method executes.</p>
+</div>
+<div class="paragraph">
+<p>In the last column of <a href="#BNCIT">Table 52-1</a>, the word "None" means
+that the business method does not execute within a transaction
+controlled by the container. However, the database calls in such a
+business method might be controlled by the transaction manager of the
+database management system.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref235"></a><a id="BNCIT"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 52-1 Transaction Attributes and Scope</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 57%;">
+<colgroup>
+<col style="width: 49.5049%;">
+<col style="width: 49.5049%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Transaction Attribute</th>
+<th class="tableblock halign-left valign-top">Client&#8217;s Transaction</th>
+<th class="tableblock halign-left valign-top">Business Method&#8217;s
+Transaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Required</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Required</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RequiresNew</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RequiresNew</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Mandatory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Mandatory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NotSupported</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NotSupported</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Supports</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Supports</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Never</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Never</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="setting-transaction-attributes">Setting Transaction Attributes</h4>
+<div class="paragraph">
+<p>Transaction attributes are specified by decorating the enterprise bean
+class or method with a <code>javax.ejb.TransactionAttribute</code> annotation and
+setting it to one of the <code>javax.ejb.TransactionAttributeType</code> constants.</p>
+</div>
+<div class="paragraph">
+<p>If you decorate the enterprise bean class with <code>@TransactionAttribute</code>,
+the specified <code>TransactionAttributeType</code> is applied to all the business
+methods in the class. Decorating a business method with
+<code>@TransactionAttribute</code> applies the <code>TransactionAttributeType</code> only to
+that method. If a <code>@TransactionAttribute</code> annotation decorates both the
+class and the method, the method <code>TransactionAttributeType</code> overrides
+the class <code>TransactionAttributeType</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>TransactionAttributeType</code> constants shown in <a href="#GKCFD">Table
+52-2</a> encapsulate the transaction attributes described earlier in this
+section.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref236"></a><a id="GKCFD"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 52-2 TransactionAttributeType Constants</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 34%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Transaction Attribute</th>
+<th class="tableblock halign-left valign-top">TransactionAttributeType Constant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Required</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransactionAttributeType.REQUIRED</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RequiresNew</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransactionAttributeType.REQUIRES_NEW</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Mandatory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransactionAttributeType.MANDATORY</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NotSupported</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransactionAttributeType.NOT_SUPPORTED</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Supports</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransactionAttributeType.SUPPORTS</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Never</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransactionAttributeType.NEVER</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following code snippet demonstrates how to use the
+<code>@TransactionAttribute</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@TransactionAttribute(NOT_SUPPORTED)
+@Stateful
+public class TransactionBean implements Transaction {
+...
+    @TransactionAttribute(REQUIRES_NEW)
+    public void firstMethod() {...}
+
+    @TransactionAttribute(REQUIRED)
+    public void secondMethod() {...}
+
+    public void thirdMethod() {...}
+
+    public void fourthMethod() {...}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>TransactionBean</code> class&#8217;s transaction attribute has
+been set to <code>NotSupported</code>, <code>firstMethod</code> has been set to <code>RequiresNew</code>,
+and <code>secondMethod</code> has been set to <code>Required</code>. Because a
+<code>@TransactionAttribute</code> set on a method overrides the class
+<code>@TransactionAttribute</code>, calls to <code>firstMethod</code> will create a new
+transaction, and calls to <code>secondMethod</code> will either run in the current
+transaction or start a new transaction. Calls to <code>thirdMethod</code> or
+<code>fourthMethod</code> do not take place within a transaction.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rolling-back-a-container-managed-transaction">Rolling Back a Container-Managed Transaction</h3>
+<div class="paragraph">
+<p>There are two ways to roll back a container-managed transaction. First,
+if a system exception is thrown, the container will automatically roll
+back the transaction. Second, by invoking the <code>setRollbackOnly</code> method
+of the <code>EJBContext</code> interface, the bean method instructs the container
+to roll back the transaction. If the bean throws an application
+exception, the rollback is not automatic but can be initiated by a call
+to <code>setRollbackOnly</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="synchronizing-a-session-beans-instance-variables">Synchronizing a Session Bean&#8217;s Instance Variables</h3>
+<div class="paragraph">
+<p>The <code>SessionSynchronization</code> interface, which is optional, allows
+stateful session bean instances to receive transaction synchronization
+notifications. For example, you could synchronize the instance variables
+of an enterprise bean with their corresponding values in the database.
+The container invokes the <code>SessionSynchronization</code> methods
+(<code>afterBegin</code>, <code>beforeCompletion</code>, and <code>afterCompletion</code>) at each of the
+main stages of a transaction.</p>
+</div>
+<div class="paragraph">
+<p>The <code>afterBegin</code> method informs the instance that a new transaction has
+begun. The container invokes <code>afterBegin</code> immediately before it invokes
+the business method.</p>
+</div>
+<div class="paragraph">
+<p>The container invokes the <code>beforeCompletion</code> method after the business
+method has finished but just before the transaction commits. The
+<code>beforeCompletion</code> method is the last opportunity for the session bean
+to roll back the transaction (by calling <code>setRollbackOnly</code>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>afterCompletion</code> method indicates that the transaction has
+completed. This method has a single <code>boolean</code> parameter whose value is
+<code>true</code> if the transaction was committed and <code>false</code> if it was rolled
+back.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="methods-not-allowed-in-container-managed-transactions">Methods Not Allowed in Container-Managed Transactions</h3>
+<div class="paragraph">
+<p>You should not invoke any method that might interfere with the
+transaction boundaries set by the container. The following methods are
+prohibited:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>commit</code>, <code>setAutoCommit</code>, and <code>rollback</code> methods of
+<code>java.sql.Connection</code></p>
+</li>
+<li>
+<p>The <code>getUserTransaction</code> method of <code>javax.ejb.EJBContext</code></p>
+</li>
+<li>
+<p>Any method of <code>javax.transaction.UserTransaction</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can, however, use these methods to set boundaries in
+application-managed transactions.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="transactions003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="transactions005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

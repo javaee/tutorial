@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Setting Up a Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-page.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="setting-up-a-page">Setting Up a Page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A typical JavaServer Faces web page includes the following elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A set of namespace declarations that declare the JavaServer Faces tag
+libraries</p>
+</li>
+<li>
+<p>Optionally, the HTML head (<code>h:head</code>) and body (<code>h:body</code>) tags</p>
+</li>
+<li>
+<p>A form tag (<code>h:form</code>) that represents the user input components</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To add the JavaServer Faces components to your web page, you need to
+provide the page access to the two standard tag libraries: the
+JavaServer Faces HTML render kit tag library and the JavaServer Faces
+core tag library. The o<a href="JSFRK">JavaServer Faces standard HTML tag
+library</a> defines tags that represent common HTML user interface
+components. The JavaServer Faces core tag library defines tags that
+perform core actions and are independent of a particular render kit.</p>
+</div>
+<div class="paragraph">
+<p>For a complete list of JavaServer Faces Facelets tags and their
+attributes, refer to the o<a href="JSFTL">JavaServer Faces Facelets Tag
+Library documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>To use any of the JavaServer Faces tags, you need to include appropriate
+directives at the top of each page specifying the tag libraries.</p>
+</div>
+<div class="paragraph">
+<p>For Facelets applications, the XML namespace directives uniquely
+identify the tag library URI and the tag prefix.</p>
+</div>
+<div class="paragraph">
+<p>For example, when you create a Facelets XHTML page, include namespace
+directives as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The XML namespace URI identifies the tag library location, and the
+prefix value is used to distinguish the tags belonging to that specific
+tag library. You can also use other prefixes instead of the standard <code>h</code>
+or <code>f</code>. However, when including the tag in the page you must use the
+prefix that you have chosen for the tag library. For example, in the
+following web page the <code>form</code> tag must be referenced using the <code>h</code>
+prefix because the preceding tag library directive uses the <code>h</code> prefix
+to distinguish the tags defined in the HTML tag library:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:form ...&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sections <a href="jsf-page002.html#BNARF">Adding Components to a Page
+Using HTML Tag Library Tags</a> and <a href="jsf-page003.html#BNARC">Using Core
+Tags</a> describe how to use the component tags from the JavaServer Faces
+standard HTML tag library and the core tags from the JavaServer Faces
+core tag library.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-page.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

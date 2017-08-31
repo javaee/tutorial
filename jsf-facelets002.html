@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The Lifecycle of a Facelets Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-lifecycle-of-a-facelets-application">The Lifecycle of a Facelets Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The JavaServer Faces specification defines the lifecycle of a JavaServer
+Faces application. For more information on this lifecycle, see
+<a href="jsf-intro007.html#BNAQQ">The Lifecycle of a JavaServer Faces
+Application</a>. The following steps describe that process as applied to a
+Facelets-based application.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When a client, such as a browser, makes a new request to a page that
+is created using Facelets, a new component tree or
+<code>javax.faces.component.UIViewRoot</code> is created and placed in the
+<code>FacesContext</code>.</p>
+</li>
+<li>
+<p><a id="BABGCBAJ"></a></p>
+<div class="paragraph">
+<p>The <code>UIViewRoot</code> is applied to the Facelets, and the view is populated
+with components for rendering.</p>
+</div>
+</li>
+<li>
+<p>The newly built view is rendered back as a response to the client.</p>
+</li>
+<li>
+<p>On rendering, the state of this view is stored for the next request.
+The state of input components and form data is stored.</p>
+</li>
+<li>
+<p>The client may interact with the view and request another view or
+change from the JavaServer Faces application. At this time, the saved
+view is restored from the stored state.</p>
+</li>
+<li>
+<p>The restored view is once again passed through the JavaServer Faces
+lifecycle, which eventually will either generate a new view or re-render
+the current view if there were no validation problems and no action was
+triggered.</p>
+</li>
+<li>
+<p>If the same view is requested, the stored view is rendered once
+again.</p>
+</li>
+<li>
+<p>If a new view is requested, then the process described in Step
+<a href="#BABGCBAJ">2</a> is continued.</p>
+</li>
+<li>
+<p>The new view is then rendered back as a response to the client.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

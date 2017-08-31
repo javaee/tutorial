@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The websocketbot Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="websocket011.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="websocket013.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-websocketbot-example-application">The websocketbot Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>websocketbot</code> example application, located in the
+tut-install`/examples/web/websocket/websocketbot/` directory,
+demonstrates how to use a WebSocket endpoint to implement a chat. The
+example resembles a chat room in which many users can join and have a
+conversation. Users can ask simple questions to a bot agent that is
+always available in the chat room.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CIHICIDE">Architecture of the websocketbot Example Application</a></p>
+</li>
+<li>
+<p><a href="#CIHHJHDB">Running the websocketbot Example Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="architecture-of-the-websocketbot-example-application">Architecture of the websocketbot Example Application</h3>
+<div class="paragraph">
+<p>The <code>websocketbot</code> example application consists of the following
+elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CIHDAEHF">The CDI Bean</a> – A CDI bean (<code>BotBean</code>) that contains
+the logic for the bot agent to reply to messages</p>
+</li>
+<li>
+<p><a href="#CIHJJJHG">The WebSocket Endpoint</a> – A WebSocket endpoint
+(<code>BotEndpoint</code>) that implements the chat room</p>
+</li>
+<li>
+<p><a href="#CIHFDGHG">The Application Messages</a> – A set of classes
+(<code>Message</code>, <code>ChatMessage</code>, <code>InfoMessage</code>, <code>JoinMessage</code>, and
+<code>UsersMessage</code>) that represent application messages</p>
+</li>
+<li>
+<p><a href="#CIHGHHBD">The Encoder Classes</a> – A set of classes
+(<code>ChatMessageEncoder</code>, <code>InfoMessageEncoder</code>, <code>JoinMessageEncoder</code>, and
+<code>UsersMessageEncoder</code>) that encode application messages into WebSocket
+text messages as JSON data</p>
+</li>
+<li>
+<p><a href="#CIHHFICG">The Message Decoder</a> – A class (<code>MessageDecoder</code>) the
+parses WebSocket text messages as JSON data and decodes them into
+<code>JoinMessage</code> or <code>ChatMessage</code> objects</p>
+</li>
+<li>
+<p><a href="websocket011.html#CIHHIEFH">The HTML Page</a> – An HTML page
+(<code>index.html</code>) that uses JavaScript code to implement the client for the
+chat room</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-cdi-bean">The CDI Bean</h4>
+<div class="paragraph">
+<p>The CDI bean (<code>BotBean</code>) is a Java class that contains the <code>respond</code>
+method. This method compares the incoming chat message with a set of
+predefined questions and returns a chat response.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+public class BotBean {
+    public String respond(String msg) { ... }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-websocket-endpoint">The WebSocket Endpoint</h4>
+<div class="paragraph">
+<p>The WebSocket endpoint (<code>BotEndpoint</code>) is an annotated endpoint that
+performs the following functions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Receives messages from clients</p>
+</li>
+<li>
+<p>Forwards messages to clients</p>
+</li>
+<li>
+<p>Maintains a list of connected clients</p>
+</li>
+<li>
+<p>Invokes the bot agent functionality</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The endpoint specifies its deployment URI and the message encoders and
+decoders using the <code>ServerEndpoint</code> annotation. The endpoint obtains an
+instance of the <code>BotBean</code> class and a managed executor service resource
+through dependency injection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ServerEndpoint(
+   value = "/websocketbot",
+   decoders = { MessageDecoder.class },
+   encoders = { JoinMessageEncoder.class, ChatMessageEncoder.class,
+                InfoMessageEncoder.class, UsersMessageEncoder.class }
+)
+/* There is a BotEndpoint instance per connection */
+public class BotEndpoint {
+   private static final Logger logger = Logger.getLogger("BotEndpoint");
+   /* Bot functionality bean */
+   @Inject private BotBean botbean;
+   /* Executor service for asynchronous processing */
+   @Resource(name="comp/DefaultManagedExecutorService")
+   private ManagedExecutorService mes;
+
+   @OnOpen
+   public void openConnection(Session session) {
+       logger.log(Level.INFO, "Connection opened.");
+   }
+   ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>message</code> method processes incoming messages from clients. The
+decoder converts incoming text messages into <code>JoinMessage</code> or
+<code>ChatMessage</code> objects, which inherit from the <code>Message</code> class. The
+<code>message</code> method receives a <code>Message</code> object as a parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OnMessage
+public void message(Session session, Message msg) {
+   logger.log(Level.INFO, "Received: {0}", msg.toString());
+
+   if (msg instanceof JoinMessage) {
+      /* Add the new user and notify everybody */
+      JoinMessage jmsg = (JoinMessage) msg;
+      session.getUserProperties().put("name", jmsg.getName());
+      session.getUserProperties().put("active", true);
+      logger.log(Level.INFO, "Received: {0}", jmsg.toString());
+      sendAll(session, new InfoMessage(jmsg.getName() +
+              " has joined the chat"));
+      sendAll(session, new ChatMessage("Duke", jmsg.getName(),
+              "Hi there!!"));
+      sendAll(session, new UsersMessage(this.getUserList(session)));
+
+   } else if (msg instanceof ChatMessage) {
+      /* Forward the message to everybody */
+      ChatMessage cmsg = (ChatMessage) msg;
+      logger.log(Level.INFO, "Received: {0}", cmsg.toString());
+      sendAll(session, cmsg);
+      if (cmsg.getTarget().compareTo("Duke") == 0) {
+         /* The bot replies to the message */
+         mes.submit(new Runnable() {
+            @Override
+            public void run() {
+               String resp = botbean.respond(cmsg.getMessage());
+               sendAll(session, new ChatMessage("Duke",
+                       cmsg.getName(), resp));
+            }
+         });
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the message is a join message, the endpoint adds the new user to the
+list and notifies all connected clients. If the message is a chat
+message, the endpoint forwards it to all connected clients.</p>
+</div>
+<div class="paragraph">
+<p>If a chat message is for the bot agent, the endpoint obtains a response
+using the <code>BotBean</code> instance and sends it to all connected clients. The
+<code>sendAll</code> method is similar to the example in
+<a href="websocket005.html#BABIFBCG">Sending Messages to All Peers Connected
+to an Endpoint</a>.</p>
+</div>
+<div class="paragraph">
+<p>Asynchronous Processing and Concurrency Considerations</p>
+</div>
+<div class="paragraph">
+<p>The WebSocket endpoint calls the <code>BotBean.respond</code> method to obtain a
+response from the bot. In this example, this is a blocking operation;
+the user that sent the associated message would not be able to send or
+receive other chat messages until the operation completes. To avoid this
+problem, the endpoint obtains an executor service from the container and
+executes the blocking operation in a different thread using the
+<code>ManagedExecutorService.submit</code> method from Concurrency Utilities for
+Java EE.</p>
+</div>
+<div class="paragraph">
+<p>The Java API for WebSocket specification requires that Java EE
+implementations instantiate endpoint classes once per connection. This
+facilitates the development of WebSocket endpoints, because you are
+guaranteed that only one thread is executing the code in a WebSocket
+endpoint class at any given time. When you introduce a new thread in an
+endpoint, as in this example, you must ensure that variables and methods
+accessed by more than one thread are thread safe. In this example, the
+code in <code>BotBean</code> is thread safe, and the <code>BotEndpoint.sendAll</code> method
+has been declared <code>synchronized</code>.</p>
+</div>
+<div class="paragraph">
+<p>Refer to <a href="concurrency-utilities.html#GKJIQ8">Chapter 57, "Concurrency
+Utilities for Java EE"</a> for more information on the managed executor
+service and Concurrency Utilities for Java EE.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-application-messages">The Application Messages</h4>
+<div class="paragraph">
+<p>The classes that represent application messages (<code>Message</code>,
+<code>ChatMessage</code>, <code>InfoMessage</code>, <code>JoinMessage</code>, and <code>UsersMessage</code>) contain
+only properties and getter and setter methods. For example, the
+<code>ChatMessage</code> class looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class ChatMessage extends Message {
+    private String name;
+    private String target;
+    private String message;
+    /* ... Constructor, getters, and setters ... */
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-encoder-classes">The Encoder Classes</h4>
+<div class="paragraph">
+<p>The encoder classes convert application message objects into JSON text
+using the Java API for JSON Processing. For example, the
+<code>ChatMessageEncoder</code> class is implemented as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">/* Encode a ChatMessage as JSON.
+ * For example, (new ChatMessage("Peter","Duke","How are you?"))
+ * is encoded as follows:
+ * {"type":"chat","target":"Duke","message":"How are you?"}
+ */
+public class ChatMessageEncoder implements Encoder.Text&lt;ChatMessage&gt; {
+   @Override
+   public void init(EndpointConfig ec) { }
+   @Override
+   public void destroy() { }
+   @Override
+   public String encode(ChatMessage chatMessage) throws EncodeException {
+      // Access properties in chatMessage and write JSON text...
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="jsonp.html#GLRBB">Chapter 19</a>, <a href="jsonp.html#GLRBB">JSON
+Processing</a> for more information on the Java API for JSON Processing.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-message-decoder">The Message Decoder</h4>
+<div class="paragraph">
+<p>The message decoder (<code>MessageDecoder</code>) class converts WebSocket text
+messages into application messages by parsing JSON text. It is
+implemented as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">/* Decode a JSON message into a JoinMessage or a ChatMessage.
+ * For example, the incoming message
+ * {"type":"chat","name":"Peter","target":"Duke","message":"How are you?"}
+ * is decoded as (new ChatMessage("Peter", "Duke", "How are you?"))
+ */
+public class MessageDecoder implements Decoder.Text&lt;Message&gt; {
+    /* Stores the name-value pairs from a JSON message as a Map */
+    private Map&lt;String,String&gt; messageMap;
+
+    @Override
+    public void init(EndpointConfig ec) { }
+    @Override
+    public void destroy() { }
+
+    /* Create a new Message object if the message can be decoded */
+    @Override
+    public Message decode(String string) throws DecodeException {
+       Message msg = null;
+       if (willDecode(string)) {
+          switch (messageMap.get("type")) {
+             case "join":
+                msg = new JoinMessage(messageMap.get("name"));
+                break;
+             case "chat":
+                msg = new ChatMessage(messageMap.get("name"),
+                                      messageMap.get("target"),
+                                      messageMap.get("message"));
+          }
+       } else {
+          throw new DecodeException(string, "[Message] Can't decode.");
+       }
+       return msg;
+   }
+
+   /* Decode a JSON message into a Map and check if it contains
+    * all the required fields according to its type. */
+   @Override
+   public boolean willDecode(String string) {
+      // Convert JSON data from the message into a name-value map...
+      // Check if the message has all the fields for its message type...
+   }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-html-page">The HTML Page</h4>
+<div class="paragraph">
+<p>The HTML page (<code>index.html</code>) contains a field for the user name. After
+the user types a name and clicks Join, three text areas are available:
+one to type and send messages, one for the chat room, and one with the
+list of users. The page also contains a WebSocket console that shows the
+messages sent and received as JSON text.</p>
+</div>
+<div class="paragraph">
+<p>The JavaScript code on the page uses the WebSocket API to connect to the
+endpoint, send messages, and designate callback methods. The WebSocket
+API is supported by most modern browsers and is widely used for web
+client development with HTML5.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-websocketbot-example-application">Running the websocketbot Example Application</h3>
+<div class="paragraph">
+<p>This section describes how to run the <code>websocketbot</code> example application
+using NetBeans IDE and from the command line.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CIHFDDGE">To Run the websocketbot Example Application Using
+NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CIHEDEHB">To Run the websocketbot Example Application Using
+Maven</a></p>
+</li>
+<li>
+<p><a href="#BABDDAAG">To Test the websocketbot Example Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-websocketbot-example-application-using-netbeans-ide">To Run the websocketbot Example Application Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/websocket</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>websocketbot</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>websocketbot</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>websocketbot.war</code>, located in the <code>target/</code> directory; deploys it to
+the server; and launches a web browser window with the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/websocketbot/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="#BABDDAAG">To Test the websocketbot Example Application</a> for
+more information.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-websocketbot-example-application-using-maven">To Run the websocketbot Example Application Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/websocket/websocketbot/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open a web browser window and type the following address:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/websocketbot/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="#BABDDAAG">To Test the websocketbot Example Application</a> for
+more information.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-test-the-websocketbot-example-application">To Test the websocketbot Example Application</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the main page, type your name on the first text field and press
+the Enter key.</p>
+<div class="paragraph">
+<p>The list of connected users appears on the text area on the right. The
+text area on the left is the chat room.</p>
+</div>
+</li>
+<li>
+<p>Type a message on the text area below the login button. For example,
+type the messages in bold and press enter to obtain responses similar to
+the following:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">[--Peter has joined the chat--]
+Duke: @Peter Hi there!!
+Peter: @Duke how are you?
+Duke: @Peter I'm doing great, thank you!
+Peter: @Duke when is your birthday?
+Duke: @Peter My birthday is on May 23rd. Thanks for asking!</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Join the chat from another browser window by copying and pasting the
+URI on the address bar and joining with a different name.</p>
+<div class="paragraph">
+<p>The new user name appears in the list of users in both browser windows.
+You can send messages from either window and see how they appear in the
+other.</p>
+</div>
+</li>
+<li>
+<p>Click Show WebSocket Console.</p>
+<div class="paragraph">
+<p>The console shows the messages sent and received as JSON text.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="websocket011.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="websocket013.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Example Applications for JAX-RS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="example-applications-for-jax-rs">Example Applications for JAX-RS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides an introduction to creating, deploying, and
+running your own JAX-RS applications. This section demonstrates the
+steps that are needed to create, build, deploy, and test a very simple
+web application that uses JAX-RS annotations.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPYZ">Creating a Simple RESTful Web Service</a></p>
+</li>
+<li>
+<p><a href="#GJVBC">The rsvp Example Application</a></p>
+</li>
+<li>
+<p><a href="#GIRCI">Real-World Examples</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="creating-a-simple-restful-web-service">Creating a Simple RESTful Web Service</h3>
+<div class="paragraph">
+<p>This section explains how to use NetBeans IDE to create a RESTful web
+service using a Maven archetype. The archetype generates a skeleton for
+the application, and you simply need to implement the appropriate
+method.</p>
+</div>
+<div class="paragraph">
+<p>You can find a version of this application at
+tut-install`/examples/jaxrs/hello/`.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIQAA">To Create a RESTful Web Service Using NetBeans IDE</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-create-a-restful-web-service-using-netbeans-ide">To Create a RESTful Web Service Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure you have installed the tutorial archetypes as described in
+<a href="usingexamples007.html#CHDJGCCA">Installing the Tutorial Archetypes</a>.</p>
+</li>
+<li>
+<p>In NetBeans IDE, create a simple web application using the
+<code>jaxrs-service-archetype</code> Maven archetype. This archetype creates a very
+simple "Hello, World" web application.</p>
+</li>
+<li>
+<p>From the File menu, choose New Project.</p>
+</li>
+<li>
+<p>From Categories, select Maven. From Projects, select Project From
+Archetype. Click Next.</p>
+</li>
+<li>
+<p>Under Search enter <code>jaxrs-service</code>, select the
+<code>jaxrs-service-archetype</code>, and click Next.</p>
+</li>
+<li>
+<p>Under Project Name enter <code>HelloWorldApplication</code>, set the Project
+Location, and set the Package name to <code>javaeetutorial.hello</code>, and click
+Finish.</p>
+<div class="paragraph">
+<p>The project is created.</p>
+</div>
+</li>
+<li>
+<p>In <code>HelloWorld.java</code>, find the <code>getHtml()</code> method. Replace the
+<code>//TODO</code> comment with the following text, so that the finished product
+resembles the following method:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+@Produces("text/html")
+public String getHtml() {
+    return "&lt;html lang=\"en\"&gt;&lt;body&gt;&lt;h1&gt;Hello, World!!&lt;/body&gt;&lt;/h1&gt;&lt;/html&gt;";
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Because the MIME type produced is HTML, you can use HTML tags in your
+return statement.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Right-click the <code>HelloWorldApplication</code> project in the Projects pane
+and select Run.</p>
+<div class="paragraph">
+<p>This will build and deploy the application to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>In a browser, open the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/HelloWorldApplication/HelloWorldApplication</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A browser window opens and displays the return value of <code>Hello, World!!</code></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For other sample applications that demonstrate deploying and running
+JAX-RS applications using NetBeans IDE, see <a href="#GJVBC">The rsvp Example
+Application</a> and Your First Cup: An Introduction to the Java EE Platform
+at <code>http://docs.oracle.com/javaee/7/firstcup/doc/</code>. You may also look at
+the tutorials on the NetBeans IDE tutorial site, such as the one titled
+"Getting Started with RESTful Web Services" at
+<code>https://netbeans.org/kb/docs/websvc/rest.html</code>. This tutorial includes
+a section on creating a CRUD application from a database. Create, read,
+update, and delete (CRUD) are the four basic functions of persistent
+storage and relational databases.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-rsvp-example-application">The rsvp Example Application</h3>
+<div class="paragraph">
+<p>The <code>rsvp</code> example application, located in the
+tut-install`/examples/jaxrs/rsvp/` directory, allows invitees to an
+event to indicate whether they will attend. The events, people invited
+to the event, and the responses to the invite are stored in a Java DB
+database using the Java Persistence API. The JAX-RS resources in <code>rsvp</code>
+are exposed in a stateless session enterprise bean.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJVAW">Components of the rsvp Example Application</a></p>
+</li>
+<li>
+<p><a href="#GKCCA">Running the rsvp Example Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="components-of-the-rsvp-example-application">Components of the rsvp Example Application</h4>
+<div class="paragraph">
+<p>The three enterprise beans in the <code>rsvp</code> example application are
+<code>rsvp.ejb.ConfigBean</code>, <code>rsvp.ejb.StatusBean</code>, and
+<code>rsvp.ejb.ResponseBean</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ConfigBean</code> is a singleton session bean that initializes the data in
+the database.</p>
+</div>
+<div class="paragraph">
+<p><code>StatusBean</code> exposes a JAX-RS resource for displaying the current status
+of all invitees to an event. The URI path template is declared first on
+the class and then on the <code>getEvent</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Stateless
+@Named
+@Path("/status")
+public class StatusBean {
+    ...
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("{eventId}/")
+    public Event getEvent(@PathParam("eventId") Long eventId) {
+         ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The combination of the two <code>@Path</code> annotations results in the following
+URI path template:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/status/{eventId}/")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The URI path variable <code>eventId</code> is a <code>@PathParam</code> variable in the
+<code>getEvent</code> method, which responds to HTTP GET requests and has been
+annotated with <code>@GET</code>. The <code>eventId</code> variable is used to look up all the
+current responses in the database for that particular event.</p>
+</div>
+<div class="paragraph">
+<p><code>ResponseBean</code> exposes a JAX-RS resource for setting an invitee&#8217;s
+response to a particular event. The URI path template for <code>ResponseBean</code>
+is declared as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/{eventId}/{inviteId}")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two URI path variables are declared in the path template: <code>eventId</code> and
+<code>inviteId</code>. As in <code>StatusBean</code>, <code>eventId</code> is the unique ID for a
+particular event. Each invitee to that event has a unique ID for the
+invitation, and that is the <code>inviteId</code>. Both of these path variables are
+used in two JAX-RS methods in <code>ResponseBean</code>: <code>getResponse</code> and
+<code>putResponse</code>. The <code>getResponse</code> method responds to HTTP GET requests
+and displays the invitee&#8217;s current response and a form to change the
+response.</p>
+</div>
+<div class="paragraph">
+<p>The <code>javaeetutorial.rsvp.rest.RsvpApplication</code> class defines the root
+application path for the resources by applying the
+<code>javax.ws.rs.ApplicationPath</code> annotation at the class level.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ApplicationPath("/webapi")
+public class RsvpApplication extends Application {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An invitee who wants to change his or her response selects the new
+response and submits the form data, which is processed as an HTTP POST
+request by the <code>putResponse</code> method. The new response is extracted from
+the HTTP POST request and stored as the <code>userResponse</code> string. The
+<code>putResponse</code> method uses <code>userResponse</code>, <code>eventId</code>, and <code>inviteId</code> to
+update the invitee&#8217;s response in the database.</p>
+</div>
+<div class="paragraph">
+<p>The events, people, and responses in <code>rsvp</code> are encapsulated in Java
+Persistence API entities. The <code>rsvp.entity.Event</code>, <code>rsvp.entity.Person</code>,
+and <code>rsvp.entity.Response</code> entities respectively represent events,
+invitees, and responses to an event.</p>
+</div>
+<div class="paragraph">
+<p>The <code>rsvp.util.ResponseEnum</code> class declares an enumerated type that
+represents all the possible response statuses an invitee may have.</p>
+</div>
+<div class="paragraph">
+<p>The web application also includes two CDI managed beans, <code>StatusManager</code>
+and <code>EventManager</code>, which use the JAX-RS Client API to call the
+resources exposed in <code>StatusBean</code> and <code>ResponseBean</code>. For information on
+how the Client API is used in <code>rsvp</code>, see
+<a href="jaxrs-client002.html#BABEDFIG">"The Client API in the rsvp Example
+Application"</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="running-the-rsvp-example-application">Running the rsvp Example Application</h4>
+<div class="paragraph">
+<p>Both NetBeans IDE and Maven can be used to deploy and run the <code>rsvp</code>
+example application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CIHEFEHA">To Run the rsvp Example Application Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CIHHHIEI">To Run the rsvp Example Application Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="to-run-the-rsvp-example-application-using-netbeans-ide">To Run the rsvp Example Application Using NetBeans IDE</h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jaxrs</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>rsvp</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>rsvp</code> project and select Run.</p>
+<div class="paragraph">
+<p>The project will be compiled, assembled, and deployed to GlassFish
+Server. A web browser window will open to the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/rsvp/index.xhtml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the web browser window, click the Event status link for the
+Duke&#8217;s Birthday event.</p>
+<div class="paragraph">
+<p>You&#8217;ll see the current invitees and their responses.</p>
+</div>
+</li>
+<li>
+<p>Click the current response of one of the invitees in the Status
+column of the table, select a new response, and click Update your
+status.</p>
+<div class="paragraph">
+<p>The invitee&#8217;s new status should now be displayed in the table of
+invitees and their response statuses.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="to-run-the-rsvp-example-application-using-maven">To Run the rsvp Example Application Using Maven</h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jaxrs/rsvp/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds, assembles, and deploys <code>rsvp</code> to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Open a web browser window to the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/rsvp/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the web browser window, click the Event status link for the
+Duke&#8217;s Birthday event.</p>
+<div class="paragraph">
+<p>You&#8217;ll see the current invitees and their responses.</p>
+</div>
+</li>
+<li>
+<p>Click the current response of one of the invitees in the Status
+column of the table, select a new response, and click Update your
+status.</p>
+<div class="paragraph">
+<p>The invitee&#8217;s new status should now be displayed in the table of
+invitees and their response statuses.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="real-world-examples">Real-World Examples</h3>
+<div class="paragraph">
+<p>Most blog sites use RESTful web services. These sites involve
+downloading XML files, in RSS or Atom format, that contain lists of
+links to other resources. Other websites and web applications that use
+REST-like developer interfaces to data include Twitter and Amazon S3
+(Simple Storage Service). With Amazon S3, buckets and objects can be
+created, listed, and retrieved using either a REST-style HTTP interface
+or a SOAP interface. The examples that ship with Jersey include a
+storage service example with a RESTful interface.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

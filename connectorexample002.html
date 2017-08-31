@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The trading Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="connectorexample001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="connectorexample003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-trading-example">The trading Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>trading</code> example demonstrates how to implement and use a simple
+outbound resource adapter that submits requests to a legacy EIS using a
+TCP socket. The example demonstrates the scenario in
+<a href="#CHDHADIG">Figure 54-1</a> and consists of the following modules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>trading-eis</code>: A Java SE program that simulates a legacy EIS</p>
+</li>
+<li>
+<p><code>trading-rar</code>: The outbound resource adapter implementation</p>
+</li>
+<li>
+<p><code>trading-war</code>: A web application that uses the resource adapter</p>
+</li>
+<li>
+<p><code>trading-ear</code>: An enterprise archive that contains the resource
+adapter and the web application</p>
+</li>
+</ul>
+</div>
+<div id="CHDHADIG" class="paragraph">
+<div class="title"><strong>Figure 54-1 The trading Example</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_054.png" alt="This figure shows the trading example components: a deployed WAR and RAR that communicate with the EIS over a TCP socket."></span></p>
+</div>
+<div class="paragraph">
+<p>The <code>trading-eis</code> module is an auxiliary project that resembles a legacy
+stock trading execution platform. It contains a Java SE program that
+listens for trading requests in plain text on a TCP socket. The program
+replies to trading requests with a status value, a confirmation number,
+and the dollar amounts for the requested shares and fees. For example, a
+request-response pair would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&gt;&gt; BUY 1000 ZZZZ MARKET
+&lt;&lt; EXECUTED #1234567 TOTAL 50400.00 FEE 252.00</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>trading-rar</code> module implements the outbound contract of the Java EE
+Connector Architecture to submit requests and obtain responses from the
+legacy stock trading execution platform. The <code>trading-rar</code> module
+provides and implements a custom client interface for Java EE
+applications to use. This interface is simpler than the Common Client
+Interface (CCI).</p>
+</div>
+<div class="paragraph">
+<p>The <code>trading-war</code> module is a web application with a JavaServer Faces
+interface and a managed bean. This application enables clients to submit
+trades to the EIS using the resource adapter provided by the
+<code>trading-rar</code> module. The <code>trading-war</code> module uses the custom client
+interface provided by the resource adapter to obtain connections to the
+EIS.</p>
+</div>
+<div class="sect2">
+<h3 id="using-the-outbound-resource-adapter">Using the Outbound Resource Adapter</h3>
+<div class="paragraph">
+<p>In most cases, Java EE application developers use outbound resource
+adapters developed by a third party. Outbound resource adapters either
+implement the Common Client Interface (CCI) or provide a custom
+interface for applications to interact with the EIS. Outbound resource
+adapters provide Java EE applications with the following elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Connection factories</p>
+</li>
+<li>
+<p>Connection handles</p>
+</li>
+<li>
+<p>Other interfaces and objects specific to the EIS domain</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Java EE applications obtain an instance of the connection factory via
+resource injection and then use the factory object to obtain connection
+handles to the EIS. The connection handles enable the application to
+make requests and obtain information from the EIS.</p>
+</div>
+<div class="paragraph">
+<p>The <code>trading-rar</code> module provides a custom client interface that
+consists of the classes listed in <a href="#CHDCHJAC">Table 54-1</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref242"></a><a id="CHDCHJAC"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 54-1 Classes and Interfaces in the javaeetutorial.trading.rar.api
+Package</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 32%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">API Component</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeOrder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents a trade order for the EIS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeResponse</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents a response from the EIS to a trade request</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeConnection</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Represents a connection handle to the EIS</p>
+</div>
+<div class="paragraph">
+<p>Provides a method for applications to submit trades to the EIS</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeConnectionFactory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables applications to obtain connection
+handles to the EIS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeProcessingException</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that a problem occurred
+processing a trade request</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>ResourceAccessBean</code> managed bean in the <code>trading-war</code> module
+configures a connection factory for the <code>trading-rar</code> resource adapter
+by using the <code>@ConnectionFactoryDefinition</code> annotation as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@SessionScoped
+@ConnectionFactoryDefinition(
+    name = "java:comp/env/eis/TradeConnectionFactory",
+    interfaceName = "javaeetutorial.trading.rar.api.TradeConnectionFactory",
+    resourceAdapter = "#trading-rar",
+    minPoolSize = 5,
+    transactionSupport =
+            TransactionSupport.TransactionSupportLevel.NoTransaction
+)
+public class ResourceAccessBean implements Serializable { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>name</code> parameter specifies the JNDI name for the connection factory.
+This example registers the connection factory in the <code>java:comp</code> scope.
+You can use the <code>ConnectionFactoryDefinition</code> annotation to specify a
+different scope, such as <code>java:global</code>, <code>java:app</code>, or <code>java:module</code>.
+The <code>AdministeredObjectDefinition</code> annotation also enables you to
+register administered connector objects in the JNDI namespace.</p>
+</div>
+<div class="paragraph">
+<p>The <code>interfaceName</code> parameter specifies the interface implemented by the
+connection factory included in the resource adapter. In this example,
+this is a custom interface.</p>
+</div>
+<div class="paragraph">
+<p>The <code>resourceAdapter</code> parameter specifies the name of the resource
+adapter that contains the connection factory implementation. The <code>#</code>
+prefix in <code>#trading-rar</code> indicates that <code>trading-rar</code> is an embedded
+resource adapter that is bundled in the same EAR as this web
+application.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>You can also configure a connection factory for a previously deployed
+outbound resource adapter using the administration commands from your
+application server. However, this is a vendor-specific procedure.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The managed bean obtains a connection factory object using resource
+injection as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+public class ResourceAccessBean implements Serializable {
+    @Resource(lookup = "java:comp/env/eis/TradeConnectionFactory")
+    private TradeConnectionFactory connectionFactory;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The managed bean uses the connection factory to obtain connection
+handles as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">TradeConnection connection = connectionFactory.getConnection();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resource adapter returns a connection handle associated with a
+physical connection to the EIS. Once a connection handle is available,
+the managed bean submits a trade and obtains the response as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">TradeOrder order = new TradeOrder();
+order.setNShares(1000);
+order.setTicker(TradeOrder.Ticker.YYYY);
+order.setOrderType(TradeOrder.OrderType.BUY);
+order.setOrderClass(TradeOrder.OrderClass.MARKET);
+...
+try {
+    TradeResponse response = connection.submitOrder(order);
+    ...
+} catch (TradeProcessingException ex) { ... }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="implementing-the-outbound-resource-adapter">Implementing the Outbound Resource Adapter</h3>
+<div class="paragraph">
+<p>The <code>trading-rar</code> module implements the outbound contract and a custom
+client interface for the simple legacy stock trading platform EIS used
+in this example. The architecture of the outbound resource adapter is
+shown in <a href="#CHDIGAJE">Figure 54-2</a>.</p>
+</div>
+<div id="CHDIGAJE" class="paragraph">
+<div class="title"><strong>Figure 54-2 Architecture of the trading Example</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_055.png" alt="This figure shows the classes in each of the modules of the trading example."></span></p>
+</div>
+<div class="paragraph">
+<p>The <code>trading-rar</code> module implements the interfaces listed in
+<a href="#CHDIBBIC">Table 54-2</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref245"></a><a id="CHDIBBIC"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 54-2 Interfaces Implemented in the trading-rar Module</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 58%;">
+<colgroup>
+<col style="width: 44.5544%;">
+<col style="width: 54.4554%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.resource.spi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ResourceAdapter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the lifecycle methods
+of the resource adapter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.resource.spi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedConnectionFactory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a connection
+factory that the connection manager from the application server uses to
+obtain physical connections to the EIS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.resource.spi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedConnection</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a physical
+connection to the EIS that can be managed by the connection manager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trading.rar.api</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeConnectionFactory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a connection
+factory that applications use to obtain connection handles</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trading.rar.api</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TradeConnection</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a connection handle that
+applications use to interact with the EIS</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When the <code>trading-ear</code> archive is deployed and a connection pool
+resource is configured as described in <a href="#CHDFADJD">Using the Outbound
+Resource Adapter</a>, the application server creates
+<code>TradeConnectionFactory</code> objects that applications can obtain using
+resource injection. The <code>TradeConnectionFactory</code> implementation
+delegates creating connections to the connection manager provided by the
+application server.</p>
+</div>
+<div class="paragraph">
+<p>The connection manager uses the <code>ManagedConnectionFactory</code>
+implementation to obtain physical connections to the EIS and maintains a
+pool of active physical connections. When an application requests a
+connection handle, the connection manager associates a connection from
+the pool with a new connection handle that the application can use.
+Connection pooling improves application performance and simplifies
+resource adapter development.</p>
+</div>
+<div class="paragraph">
+<p>For more details, see the code and the comments in the <code>trading-rar</code>
+module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-trading-example">Running the trading Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>trading</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABCHDDC">To Run the trading Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#BABFJAAG">To Run the trading Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-trading-example-using-netbeans-ide">To Run the trading Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/connectors</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>trading</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, expand the <code>trading</code> node.</p>
+</li>
+<li>
+<p>Right-click the <code>trading-eis</code> module and select Open Project.</p>
+</li>
+<li>
+<p>Right-click the <code>trading-eis</code> project and select Run.</p>
+<div class="paragraph">
+<p>The messages from the EIS appear in the Output tab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Trade execution server listening on port 4004.</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Right-click the <code>trading-ear</code> project and select Build.</p>
+<div class="paragraph">
+<p>This command packages the resource adapter and the web application in an
+EAR file and deploys it to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/trading/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web interface enables you to connect to the EIS and submit trades.
+The server log shows the requests from the web application and the call
+sequence that provides connection handles from the resource adapter.</p>
+</div>
+</li>
+<li>
+<p>Before undeploying the <code>trading-ear</code> application, close the
+<code>trading-eis</code> application from the status bar.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-trading-example-using-maven">To Run the trading Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/connectors/trading/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the resource adapter and the web
+application into an EAR archive and deploys it to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>In the same terminal window, go to the <code>trading-eis</code> directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd trading-eis</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to run the trade execution platform:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn exec:java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The messages from the EIS appear in the terminal window:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Trade execution server listening on port 4004.</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/trading/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web interface enables you to connect to the EIS and submit trades.
+The server log shows the requests from the web application and the call
+sequence that provides connection handles from the resource adapter.</p>
+</div>
+</li>
+<li>
+<p>Before undeploying the <code>trading-ear</code> application, press Ctrl+C on
+the terminal window to close the <code>trading-eis</code> application.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="connectorexample001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="connectorexample003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

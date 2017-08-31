@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Is a JavaServer Faces Application?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-intro001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="what-is-a-javaserver-faces-application">What Is a JavaServer Faces Application?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The functionality provided by a JavaServer Faces application is similar
+to that of any other Java web application. A typical JavaServer Faces
+application includes the following parts.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A set of web pages in which components are laid out.</p>
+</li>
+<li>
+<p>A set of tags to add components to the web page.</p>
+</li>
+<li>
+<p>A set of managed beans, which are lightweight, container-managed
+objects (POJOs). In a JavaServer Faces application, managed beans serve
+as backing beans, which define properties and functions for UI
+components on a page.</p>
+</li>
+<li>
+<p>A web deployment descriptor (<code>web.xml</code> file).</p>
+</li>
+<li>
+<p>Optionally, one or more application configuration resource files, such
+as a <code>faces-config.xml</code> file, which can be used to define page
+navigation rules and configure beans and other custom objects, such as
+custom components.</p>
+</li>
+<li>
+<p>Optionally, a set of custom objects, which can include custom
+components, validators, converters, or listeners, created by the
+application developer.</p>
+</li>
+<li>
+<p>Optionally, a set of custom tags for representing custom objects on
+the page.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#BNAPI">Figure 7-1</a> shows the interaction between client and server
+in a typical JavaServer Faces application. In response to a client
+request, a web page is rendered by the web container that implements
+JavaServer Faces technology.</p>
+</div>
+<div id="BNAPI" class="paragraph">
+<div class="title"><strong>Figure 7-1 Responding to a Client Request for a JavaServer Faces Page</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_014.png" alt="Diagram that shows a browser accessing the myfacelet.xhtml page using an HTTP Request and the server sending the rendered HTML page using an HTTP Response."></span></p>
+</div>
+<div class="paragraph">
+<p>The web page, <code>myfacelet.xhtml</code>, is built using JavaServer Faces
+component tags. Component tags are used to add components to the <code>view</code>
+(represented by <code>myView</code> in the diagram), which is the server-side
+representation of the page. In addition to components, the web page can
+also reference objects, such as the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Any event listeners, validators, and converters that are registered on
+the components</p>
+</li>
+<li>
+<p>The JavaBeans components that capture the data and process the
+application-specific functionality of the components</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>On request from the client, the view is rendered as a response.
+Rendering is the process whereby, based on the server-side view, the web
+container generates output, such as HTML or XHTML, that can be read by
+the client, such as a browser.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-intro001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

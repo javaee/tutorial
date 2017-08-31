@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Core Tags</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-page002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page-core.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-core-tags">Using Core Tags</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The tags included in the JavaServer Faces core tag library are used to
+perform core actions that are not performed by HTML tags.</p>
+</div>
+<div class="paragraph">
+<p><a href="#GKVYB">Table 10-8</a> lists the event-handling core tags.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref53"></a><a id="GKVYB"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-8 Event-Handling Core Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 36%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:actionListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an action listener to a parent component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:phaseListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>PhaseListener</code> to a page</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:setPropertyActionListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registers a special action listener
+whose sole purpose is to push a value into a managed bean when a form is
+submitted</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:valueChangeListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a value-change listener to a parent
+component</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#GKVYY">Table 10-9</a> lists the data-conversion core tags.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref54"></a><a id="GKVYY"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-9 Data-Conversion Core Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 30%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:converter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an arbitrary converter to the parent component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:convertDateTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>DateTimeConverter</code> instance to the parent
+component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:convertNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>NumberConverter</code> instance to the parent
+component</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#GKVZG">Table 10-10</a> lists the facet core tags.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref55"></a><a id="GKVZG"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-10 Facet Core Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 30%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:facet</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a nested component that has a special relationship to
+its enclosing tag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registers a <code>facet</code> on a parent component</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#GKVZA">Table 10-11</a> lists the core tags that represent items in a
+list.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref56"></a><a id="GKVZA"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-11 Core Tags That Represent Items in a List</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 30%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:selectItem</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents one item in a list of items</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:selectItems</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents a set of items</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#GKVYV">Table 10-12</a> lists the validator core tags.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref57"></a><a id="GKVYV"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-12 Validator Core Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 30%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validateDoubleRange</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>DoubleRangeValidator</code> to a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validateLength</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>LengthValidator</code> to a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validateLongRange</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>LongRangeValidator</code> to a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a custom validator to a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validateRegEx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>RegExValidator</code> to a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validateBean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delegates the validation of a local value to a
+<code>BeanValidator</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:validateRequired</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enforces the presence of a value in a component</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#GKVYU">Table 10-13</a> lists the core tags that fall into other
+categories.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref58"></a><a id="GKVYU"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-13 Miscellaneous Core Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 47%;">
+<colgroup>
+<col style="width: 59.4059%;">
+<col style="width: 39.6039%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag Category</th>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute configuration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:attribute</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds configurable attributes to
+a parent component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Localization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:loadBundle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies a <code>ResourceBundle</code> that is
+exposed as a <code>Map</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameter substitution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:param</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Substitutes parameters into a
+<code>MessageFormat</code> instance and adds query string name-value pairs to a URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ajax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:ajax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Associates an Ajax action with a single component or a
+group of components based on placement</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:event</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows installing a <code>ComponentSystemEventListener</code> on
+a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebSocket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:websocket</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows server-side communications to be
+pushed to all instances of a socket containing the same channel name.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>These tags, which are used in conjunction with component tags, are
+explained in other sections of this tutorial.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNARE">Table 10-14</a> lists the sections that explain how to use
+specific core tags.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref59"></a><a id="BNARE"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 10-14 Where the Core Tags Are Explained</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 28%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tags</th>
+<th class="tableblock halign-left valign-top">Where Explained</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event-handling tags</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-page-core002.html#BNASZ">Registering Listeners on Components</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data-conversion tags</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-page-core001.html#BNAST">Using the Standard Converters</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:facet</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="jsf-page002.html#BNARZ">Using Data-Bound Table
+Components</a> and <a href="jsf-page002.html#BNASC">Laying Out Components with
+the h:panelGrid and h:panelGroup Tags</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:loadBundle</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="webi18n002.html#BNAXY">Setting the Resource Bundle</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-page002.html#GIQWQ">Using View Parameters to Configure
+Bookmarkable URLs</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:param</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-page002.html#BNARU">Displaying a Formatted Message with the
+h:outputFormat Tag</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:selectItem</code> and <code>f:selectItems</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-page002.html#BNASK">Using the f:selectItem and f:selectItems
+Tags</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Validator tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="jsf-page-core003.html#BNATC">Using the Standard
+Validators</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:ajax</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-ajax.html#GKIOW">Chapter 13, "Using Ajax with JavaServer Faces
+Technology"</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:websocket</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><a href="jsf-ws.html#using-websockets-with-javaserver-faces-technology">Chapter 17, "Using WebSockets with JavaServer Faces Technology"</a></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-page002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page-core.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

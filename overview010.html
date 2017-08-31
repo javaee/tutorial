@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>GlassFish Server Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="overview009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="usingexamples.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="glassfish-server-tools">GlassFish Server Tools</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GlassFish Server is a compliant implementation of the Java EE
+platform. In addition to supporting all the APIs described in the
+previous sections, GlassFish Server includes a number of Java EE tools
+that are not part of the Java EE platform but are provided as a
+convenience to the developer.</p>
+</div>
+<div class="paragraph">
+<p>This section briefly summarizes the tools that make up GlassFish Server.
+Instructions for starting and stopping GlassFish Server, starting the
+Administration Console, and starting and stopping the Java DB server are
+in <a href="usingexamples.html#GFIUD">Chapter 2, "Using the Tutorial
+Examples"</a>.</p>
+</div>
+<div class="paragraph">
+<p>GlassFish Server contains the tools listed in <a href="#BNADH">Table 1-1</a>.
+Basic usage information for many of the tools appears throughout the
+tutorial. For detailed information, see the online help in the GUI
+tools.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref13"></a><a id="BNADH"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 1-1 GlassFish Server Tools</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 28%;">
+<col style="width: 72%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Administration Console</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A web-based GUI GlassFish Server administration utility. Used to stop
+GlassFish Server and to manage users, resources, and applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asadmin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line GlassFish Server administration utility. Used
+to start and stop GlassFish Server and to manage users, resources, and
+applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>appclient</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool that launches the application client
+container and invokes the client application packaged in the application
+client JAR file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>capture-schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool to extract schema information
+from a database, producing a schema file that GlassFish Server can use
+for container-managed persistence.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>package-appclient</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool to package the application
+client container libraries and JAR files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Java DB database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A copy of the Java DB server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xjc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool to transform, or bind, a source XML schema
+to a set of JAXB content classes in the Java programming language.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schemagen</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool to create a schema file for each
+namespace referenced in your Java classes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wsimport</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool to generate JAX-WS portable artifacts
+for a given WSDL file. After generation, these artifacts can be packaged
+in a WAR file with the WSDL and schema documents, along with the
+endpoint implementation, and then deployed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wsgen</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A command-line tool to read a web service endpoint class and
+generate all the required JAX-WS portable artifacts for web service
+deployment and invocation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="overview009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="usingexamples.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

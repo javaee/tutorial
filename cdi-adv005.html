@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Events in CDI Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-events-in-cdi-applications">Using Events in CDI Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Events allow beans to communicate without any compile-time dependency.
+One bean can define an event, another bean can fire the event, and yet
+another bean can handle the event. In addition, events can be fired asynchronously. The beans can be in separate packages
+and even in separate tiers of the application.</p>
+</div>
+<div class="sect2">
+<h3 id="defining-events">Defining Events</h3>
+<div class="paragraph">
+<p>An event consists of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The event object, a Java object</p>
+</li>
+<li>
+<p>Zero or more qualifier types, the event qualifiers</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, in the <code>billpayment</code> example described in
+<a href="cdi-adv-examples005.html#GKHPA">The billpayment Example: Using Events
+and Interceptors</a>, a <code>PaymentEvent</code> bean defines an event using three
+properties, which have setter and getter methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    public String paymentType;
+    public BigDecimal value;
+    public Date datetime;
+
+    public PaymentEvent() {
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example also defines qualifiers that distinguish between two kinds
+of <code>PaymentEvent</code>. Every event also has the default qualifier <code>@Any</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-observer-methods-to-handle-events">Using Observer Methods to Handle Events</h3>
+<div class="paragraph">
+<p>An event handler uses an observer method to consume events.</p>
+</div>
+<div class="paragraph">
+<p>Each observer method takes as a parameter an event of a specific event
+type that is annotated with the <code>@Observes</code> annotation and with any
+qualifiers for that event type. The observer method is notified of an
+event if the event object matches the event type and if all the
+qualifiers of the event match the observer method event qualifiers.</p>
+</div>
+<div class="paragraph">
+<p>The observer method can take other parameters in addition to the event
+parameter. The additional parameters are injection points and can
+declare qualifiers.</p>
+</div>
+<div class="paragraph">
+<p>The event handler for the <code>billpayment</code> example, <code>PaymentHandler</code>,
+defines two observer methods, one for each type of <code>PaymentEvent</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public void creditPayment(@Observes @Credit PaymentEvent event) {
+    ...
+}
+
+public void debitPayment(@Observes @Debit PaymentEvent event) {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="conditional-and-transactional-observer-methods">Conditional and Transactional Observer Methods</h4>
+<div class="paragraph">
+<p>Observer methods can also be conditional or transactional:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A conditional observer method is notified of an event only if an
+instance of the bean that defines the observer method already exists in
+the current context. To declare a conditional observer method, specify
+<code>notifyObserver=IF_EXISTS</code> as an argument to <code>@Observes</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Observes(notifyObserver=IF_EXISTS)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain the default unconditional behavior, you can specify
+<code>@Observes(notifyObserver=ALWAYS)</code>.</p>
+</div>
+</li>
+<li>
+<p>A transactional observer method is notified of an event during the
+before-completion or after-completion phase of the transaction in which
+the event was fired. You can also specify that the notification is to
+occur only after the transaction has completed successfully or
+unsuccessfully. To specify a transactional observer method, use any of
+the following arguments to <code>@Observes</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Observes(during=BEFORE_COMPLETION)
+
+@Observes(during=AFTER_COMPLETION)
+
+@Observes(during=AFTER_SUCCESS)
+
+@Observes(during=AFTER_FAILURE)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain the default nontransactional behavior, specify
+<code>@Observes(during=IN_PROGRESS)</code>.</p>
+</div>
+<div class="paragraph">
+<p>An observer method that is called before completion of a transaction may
+call the <code>setRollbackOnly</code> method on the transaction instance to force a
+transaction rollback.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Observer methods may throw exceptions. If a transactional observer
+method throws an exception, the exception is caught by the container. If
+the observer method is nontransactional, the exception terminates
+processing of the event, and no other observer methods for the event are
+called.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="observer-method-ordering">Observer Method Ordering</h4>
+<div class="paragraph">
+<p>Before a certain observer event notification is generated, the container determines the order in which observer methods for that event are invoked. Observer method order is established through the declaration of the <code>@Priority</code> annotation on an event parameter of an observer method, as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">void afterLogin(@Observes @Priority(javax.interceptor.Interceptor.Priority.APPLICATION) LoggedInEvent event) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>@Priority</code> annotation is not specified, the default value is <code>javax.interceptor.Interceptor.Priority.APPLICATION + 500</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="firing-events">Firing Events</h3>
+<div class="paragraph">
+<p>Beans fire events by implementing an instance of the <code>javax.enterprise.event.Event</code> interface. Events can be fired synchronously or asynchronously.</p>
+</div>
+<div class="sect3">
+<h4 id="firing-events-synchronously">Firing Events Synchronously</h4>
+<div class="paragraph">
+<p>To activate an event synchronously, call the <code>javax.enterprise.event.Event.fire</code>
+method. This method fires an event and notifies any observer methods.</p>
+</div>
+<div class="paragraph">
+<p>In the <code>billpayment</code> example, a managed bean called <code>PaymentBean</code> fires
+the appropriate event by using information it receives from the user
+interface. There are actually four event beans, two for the event object
+and two for the payload. The managed bean injects the two event beans.
+The <code>pay</code> method uses a <code>switch</code> statement to choose which event to
+fire, using <code>new</code> to create the payload.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    @Inject
+    @Credit
+    Event&lt;PaymentEvent&gt; creditEvent;
+
+    @Inject
+    @Debit
+    Event&lt;PaymentEvent&gt; debitEvent;
+
+    private static final int DEBIT = 1;
+    private static final int CREDIT = 2;
+    private int paymentOption = DEBIT;
+    ...
+
+    @Logged
+    public String pay() {
+        ...
+        switch (paymentOption) {
+            case DEBIT:
+                PaymentEvent debitPayload = new PaymentEvent();
+                // populate payload ...
+                debitEvent.fire(debitPayload);
+                break;
+            case CREDIT:
+                PaymentEvent creditPayload = new PaymentEvent();
+                // populate payload ...
+                creditEvent.fire(creditPayload);
+                break;
+            default:
+                logger.severe("Invalid payment option!");
+        }
+        ...
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The argument to the <code>fire</code> method is a <code>PaymentEvent</code> that contains the
+payload. The fired event is then consumed by the observer methods.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="firing-events-asynchronously">Firing Events Asynchronously</h4>
+<div class="paragraph">
+<p>To activate an event asynchronously, call the <code>javax.enterprise.event.Event.fireAsync</code> method. When events are fired asynchronously, observer methods are notified asynchronously; consequently, observer method ordering cannot be guaranteed. Observer method invocation and the firing of asynchronous events occur on separate threads.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

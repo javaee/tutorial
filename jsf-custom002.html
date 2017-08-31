@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Determining Whether You Need a Custom Component or Renderer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="determining-whether-you-need-a-custom-component-or-renderer">Determining Whether You Need a Custom Component or Renderer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The JavaServer Faces implementation supports a very basic set of
+components and associated renderers. This section helps you to decide
+whether you can use standard components and renderers in your
+application or need a custom component or custom renderer.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAVI">When to Use a Custom Component</a></p>
+</li>
+<li>
+<p><a href="#BNAVJ">When to Use a Custom Renderer</a></p>
+</li>
+<li>
+<p><a href="#BNAVK">Component, Renderer, and Tag Combinations</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="when-to-use-a-custom-component">When to Use a Custom Component</h3>
+<div class="paragraph">
+<p>A component class defines the state and behavior of a UI component. This
+behavior includes converting the value of a component to the appropriate
+markup, queuing events on components, performing validation, and any
+other behavior related to how the component interacts with the browser
+and the request-processing lifecycle.</p>
+</div>
+<div class="paragraph">
+<p>You need to create a custom component in the following situations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You need to add new behavior to a standard component, such as
+generating an additional type of event (for example, notifying another
+part of the page that something changed in this component as a result of
+user interaction).</p>
+</li>
+<li>
+<p>You need to take a different action in the request processing of the
+value of a component from what is available in any of the existing
+standard components.</p>
+</li>
+<li>
+<p>You want to take advantage of an HTML capability offered by your
+target browser, but none of the standard JavaServer Faces components
+take advantage of the capability in the way you want, if at all. The
+current release does not contain standard components for complex HTML
+components, such as frames; however, because of the extensibility of the
+component architecture, you can use JavaServer Faces technology to
+create components like these. The Duke&#8217;s Bookstore case study creates
+custom components that correspond to the HTML <code>map</code> and <code>area</code> tags.</p>
+</li>
+<li>
+<p>You need to render to a non-HTML client that requires extra components
+not supported by HTML. Eventually, the standard HTML render kit will
+provide support for all standard HTML components. However, if you are
+rendering to a different client, such as a phone, you might need to
+create custom components to represent the controls uniquely supported by
+the client. For example, some component architectures for wireless
+clients include support for tickers and progress bars, which are not
+available on an HTML client. In this case, you might also need a custom
+renderer along with the component, or you might need only a custom
+renderer.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You do not need to create a custom component in the following cases.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You need to aggregate components to create a new component that has
+its own unique behavior. In this situation, you can use a composite
+component to combine existing standard components. For more information
+on composite components, see <a href="jsf-facelets005.html#GIQZR">Composite
+Components</a> and <a href="jsf-advanced-cc.html#GKHXA">Chapter 14, "Composite
+Components: Advanced Topics and an Example"</a>.</p>
+</li>
+<li>
+<p>You simply need to manipulate data on the component or add
+application-specific functionality to it. In this situation, you should
+create a managed bean for this purpose and bind it to the standard
+component rather than create a custom component. See
+<a href="jsf-develop001.html#BNAQM">Managed Beans in JavaServer Faces
+Technology</a> for more information on managed beans.</p>
+</li>
+<li>
+<p>You need to convert a component&#8217;s data to a type not supported by its
+renderer. See <a href="jsf-page-core001.html#BNAST">Using the Standard
+Converters</a> for more information about converting a component&#8217;s data.</p>
+</li>
+<li>
+<p>You need to perform validation on the component data. Standard
+validators and custom validators can be added to a component by using
+the validator tags from the page. See
+<a href="jsf-page-core003.html#BNATC">Using the Standard Validators</a> and
+<a href="jsf-custom012.html#BNAUW">Creating and Using a Custom Validator</a> for
+more information about validating a component&#8217;s data.</p>
+</li>
+<li>
+<p>You need to register event listeners on components. You can either
+register event listeners on components using the <code>f:valueChangeListener</code>
+and <code>f:actionListener</code> tags, or you can point at an event-processing
+method on a managed bean using the component&#8217;s <code>actionListener</code> or
+<code>valueChangeListener</code> attributes. See
+<a href="jsf-custom007.html#BNAUT">Implementing an Event Listener</a> and
+<a href="jsf-develop003.html#BNAVB">Writing Managed Bean Methods</a> for more
+information.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="when-to-use-a-custom-renderer">When to Use a Custom Renderer</h3>
+<div class="paragraph">
+<p>A renderer, which generates the markup to display a component on a web
+page, allows you to separate the semantics of a component from its
+appearance. By keeping this separation, you can support different kinds
+of client devices with the same kind of authoring experience. You can
+think of a renderer as a "client adapter." It produces output suitable
+for consumption and display by the client and accepts input from the
+client when the user interacts with that component.</p>
+</div>
+<div class="paragraph">
+<p>If you are creating a custom component, you need to ensure, among other
+things, that your component class performs these operations that are
+central to rendering the component:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Decoding: Converting the incoming request parameters to the local
+value of the component</p>
+</li>
+<li>
+<p>Encoding: Converting the current local value of the component into the
+corresponding markup that represents it in the response</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces specification supports two programming models for
+handling encoding and decoding.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Direct implementation: The component class itself implements the
+decoding and encoding.</p>
+</li>
+<li>
+<p>Delegated implementation: The component class delegates the
+implementation of encoding and decoding to a separate renderer.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By delegating the operations to the renderer, you have the option of
+associating your custom component with different renderers so that you
+can render the component on different clients. If you don&#8217;t plan to
+render a particular component on different clients, it may be simpler to
+let the component class handle the rendering. However, a separate
+renderer enables you to preserve the separation of semantics from
+appearance. The Duke&#8217;s Bookstore application separates the renderers
+from the components, although it renders only to HTML 4 web browsers.</p>
+</div>
+<div class="paragraph">
+<p>If you aren&#8217;t sure whether you will need the flexibility offered by
+separate renderers but you want to use the simpler direct-implementation
+approach, you can actually use both models. Your component class can
+include some default rendering code, but it can delegate rendering to a
+renderer if there is one.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="component-renderer-and-tag-combinations">Component, Renderer, and Tag Combinations</h3>
+<div class="paragraph">
+<p>When you create a custom component, you can create a custom renderer to
+go with it. To associate the component with the renderer and to
+reference the component from the page, you will also need a custom tag.</p>
+</div>
+<div class="paragraph">
+<p>Although you need to write the custom component and renderer, there is
+no need to write code for a custom tag (called a tag handler). If you
+specify the component and renderer combination, Facelets creates the tag
+handler automatically.</p>
+</div>
+<div class="paragraph">
+<p>In rare situations, you might use a custom renderer with a standard
+component rather than a custom component. Or you might use a custom tag
+without a renderer or a component. This section gives examples of these
+situations and summarizes what is required for a custom component,
+renderer, and tag.</p>
+</div>
+<div class="paragraph">
+<p>You would use a custom renderer without a custom component if you wanted
+to add some client-side validation on a standard component. You would
+implement the validation code with a client-side scripting language,
+such as JavaScript, and then render the JavaScript with the custom
+renderer. In this situation, you need a custom tag to go with the
+renderer so that its tag handler can register the renderer on the
+standard component.</p>
+</div>
+<div class="paragraph">
+<p>Custom components as well as custom renderers need custom tags
+associated with them. However, you can have a custom tag without a
+custom renderer or custom component. For example, suppose that you need
+to create a custom validator that requires extra attributes on the
+validator tag. In this case, the custom tag corresponds to a custom
+validator and not to a custom component or custom renderer. In any case,
+you still need to associate the custom tag with a server-side object.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNAVL">Table 15-1</a> summarizes what you must or can associate with a
+custom component, custom renderer, or custom tag.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref76"></a><a id="BNAVL"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 15-1 Requirements for Custom Components, Custom Renderers, and
+Custom Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 33.6633%;">
+<col style="width: 0.99%;">
+<col style="width: 65.3467%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Custom Item</th>
+<th class="tableblock halign-left valign-top">Must Have</th>
+<th class="tableblock halign-left valign-top">Can Have</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom renderer or standard renderer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom renderer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom component or standard component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom JavaServer Faces tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Some server-side object, like a component,
+a custom renderer, or custom validator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom component or standard
+component associated with a custom renderer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

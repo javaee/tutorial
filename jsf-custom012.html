@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Creating and Using a Custom Validator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom011.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom013.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="creating-and-using-a-custom-validator">Creating and Using a Custom Validator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the standard validators or Bean Validation don&#8217;t perform the
+validation checking you need, you can create a custom validator to
+validate user input. As explained in
+<a href="jsf-intro005.html#BNAQK">Validation Model</a>, there are two ways to
+implement validation code.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Implement a managed bean method that performs the validation.</p>
+</li>
+<li>
+<p>Provide an implementation of the <code>javax.faces.validator.Validator</code>
+interface to perform the validation.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="jsf-develop003.html#BNAVE">Writing a Method to Perform Validation</a>
+explains how to implement a managed bean method to perform validation.
+The rest of this section explains how to implement the <code>Validator</code>
+interface.</p>
+</div>
+<div class="paragraph">
+<p>If you choose to implement the <code>Validator</code> interface and you want to
+allow the page author to configure the validator&#8217;s attributes from the
+page, you also must specify a custom tag for registering the validator
+on a component.</p>
+</div>
+<div class="paragraph">
+<p>If you prefer to configure the attributes in the <code>Validator</code>
+implementation, you can forgo specifying a custom tag and instead let
+the page author register the validator on a component using the
+<code>f:validator</code> tag, as described in <a href="#BNATV">Using a Custom
+Validator</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can also create a managed bean property that accepts and returns the
+<code>Validator</code> implementation you create, as described in
+<a href="jsf-develop002.html#BNAUL">Writing Properties Bound to Converters,
+Listeners, or Validators</a>. You can use the <code>f:validator</code> tag&#8217;s binding
+attribute to bind the <code>Validator</code> implementation to the managed bean
+property.</p>
+</div>
+<div class="paragraph">
+<p>Usually, you will want to display an error message when data fails
+validation. You need to store these error messages in a resource bundle.</p>
+</div>
+<div class="paragraph">
+<p>After creating the resource bundle, you have two ways to make the
+messages available to the application. You can queue the error messages
+onto the <code>FacesContext</code> programmatically, or you can register the error
+messages in the application configuration resource file, as explained in
+<a href="jsf-configure006.html#BNAXB">Registering Application Messages</a>.</p>
+</div>
+<div class="paragraph">
+<p>For example, an e-commerce application might use a general-purpose
+custom validator called <code>FormatValidator.java</code> to validate input data
+against a format pattern that is specified in the custom validator tag.
+This validator would be used with a Credit Card Number field on a
+Facelets page. Here is the custom validator tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;mystore:formatValidator
+ formatPatterns="9999999999999999|9999 9999 9999 9999|9999-9999-9999-9999"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>According to this validator, the data entered in the field must be one
+of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A 16-digit number with no spaces</p>
+</li>
+<li>
+<p>A 16-digit number with a space between every four digits</p>
+</li>
+<li>
+<p>A 16-digit number with hyphens between every four digits</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>f:validateRegex</code> tag makes a custom validator unnecessary in this
+situation. However, the rest of this section describes how this
+validator would be implemented and how to specify a custom tag so that
+the page author could register the validator on a component.</p>
+</div>
+<div class="sect2">
+<h3 id="implementing-the-validator-interface">Implementing the Validator Interface</h3>
+<div class="paragraph">
+<p>A <code>Validator</code> implementation must contain a constructor, a set of
+accessor methods for any attributes on the tag, and a <code>validate</code> method,
+which overrides the <code>validate</code> method of the <code>Validator</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>The hypothetical <code>FormatValidator</code> class also defines accessor methods
+for setting the <code>formatPatterns</code> attribute, which specifies the
+acceptable format patterns for input into the fields. The setter method
+calls the <code>parseFormatPatterns</code> method, which separates the components
+of the pattern string into a string array, <code>formatPatternsList</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public String getFormatPatterns() {
+    return (this.formatPatterns);
+}
+public void setFormatPatterns(String formatPatterns) {
+    this.formatPatterns = formatPatterns;
+    parseFormatPatterns();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to defining accessor methods for the attributes, the class
+overrides the <code>validate</code> method of the <code>Validator</code> interface. This
+method validates the input and also accesses the custom error messages
+to be displayed when the <code>String</code> is invalid.</p>
+</div>
+<div class="paragraph">
+<p>The <code>validate</code> method performs the actual validation of the data. It
+takes the <code>FacesContext</code> instance, the component whose data needs to be
+validated, and the value that needs to be validated. A validator can
+validate only data of a component that implements
+<code>javax.faces.component.EditableValueHolder</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is an implementation of the <code>validate</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@FacesValidator
+public class FormatValidator implements Validator, StateHolder {
+    ...
+    public void validate(FacesContext context, UIComponent component,
+                         Object toValidate) {
+
+        boolean valid = false;
+        String value = null;
+        if ((context == null) || (component == null)) {
+            throw new NullPointerException();
+        }
+        if (!(component instanceof UIInput)) {
+            return;
+        }
+        if ( null == formatPatternsList || null == toValidate) {
+            return;
+        }
+        value = toValidate.toString();
+        // validate the value against the list of valid patterns.
+        Iterator patternIt = formatPatternsList.iterator();
+        while (patternIt.hasNext()) {
+            valid = isFormatValid(
+                ((String)patternIt.next()), value);
+            if (valid) {
+                break;
+            }
+        }
+        if ( !valid ) {
+            FacesMessage errMsg =
+                new FacesMessage(FORMAT_INVALID_MESSAGE_ID);
+            FacesContext.getCurrentInstance().addMessage(null, errMsg);
+            throw new ValidatorException(errMsg);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@FacesValidator</code> annotation registers the <code>FormatValidator</code> class
+as a validator with the JavaServer Faces implementation. The <code>validate</code>
+method gets the local value of the component and converts it to a
+<code>String</code>. It then iterates over the <code>formatPatternsList</code> list, which is
+the list of acceptable patterns that was parsed from the
+<code>formatPatterns</code> attribute of the custom validator tag.</p>
+</div>
+<div class="paragraph">
+<p>While iterating over the list, this method checks the pattern of the
+component&#8217;s local value against the patterns in the list. If the pattern
+of the local value does not match any pattern in the list, this method
+generates an error message. It then creates a
+<code>javax.faces.application.FacesMessage</code> and queues it on the
+<code>FacesContext</code> for display, using a <code>String</code> that represents the key in
+the <code>Properties</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public static final String FORMAT_INVALID_MESSAGE_ID =
+     "FormatInvalid";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, the method passes the message to the constructor of
+<code>javax.faces.validator.ValidatorException</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the error message is displayed, the format pattern will be
+substituted for the <code>{0}</code> in the error message, which, in English, is as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Input must match one of the following patterns: {0}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may wish to save and restore state for your validator, although
+state saving is not usually necessary. To do so, you will need to
+implement the <code>StateHolder</code> interface as well as the <code>Validator</code>
+interface. To implement <code>StateHolder</code>, you would need to implement its
+four methods: <code>saveState(FacesContext)</code>,
+<code>restoreState(FacesContext, Object)</code>, <code>isTransient</code>, and
+<code>setTransient(boolean)</code>. See <a href="jsf-custom005.html#BNAVZ">Saving and
+Restoring State</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specifying-a-custom-tag">Specifying a Custom Tag</h3>
+<div class="paragraph">
+<p>If you implemented a <code>Validator</code> interface rather than implementing a
+managed bean method that performs the validation, you need to do one of
+the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Allow the page author to specify the <code>Validator</code> implementation to use
+with the <code>f:validator</code> tag. In this case, the <code>Validator</code> implementation
+must define its own properties. <a href="#BNATV">Using a Custom Validator</a>
+explains how to use the <code>f:validator</code> tag.</p>
+</li>
+<li>
+<p>Specify a custom tag that provides attributes for configuring the
+properties of the validator from the page.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To create a custom tag, you need to add the tag to the tag library
+descriptor for the application, <code>bookstore.taglib.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;tag&gt;
+    &lt;tag-name&gt;validator&lt;/tag-name&gt;
+    &lt;validator&gt;
+        &lt;validator-id&gt;formatValidator&lt;/validator-id&gt;
+        &lt;validator-class&gt;
+            dukesbookstore.validators.FormatValidator
+        &lt;/validator-class&gt;
+    &lt;/validator&gt;
+&lt;/tag&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>tag-name</code> element defines the name of the tag as it must be used in
+a Facelets page. The <code>validator-id</code> element identifies the custom
+validator. The <code>validator-class</code> element wires the custom tag to its
+implementation class.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNATV">Using a Custom Validator</a> explains how to use the custom
+validator tag on the page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-a-custom-validator">Using a Custom Validator</h3>
+<div class="paragraph">
+<p>To register a custom validator on a component, you must do one of the
+following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nest the validator&#8217;s custom tag inside the tag of the component whose
+value you want to be validated.</p>
+</li>
+<li>
+<p>Nest the standard <code>f:validator</code> tag within the tag of the component
+and reference the custom <code>Validator</code> implementation from the
+<code>f:validator</code> tag.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is a hypothetical custom <code>formatValidator</code> tag for the Credit Card
+Number field, nested within the <code>h:inputText</code> tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="ccno" size="19"
+  ...
+  required="true"&gt;
+  &lt;mystore:formatValidator
+  formatPatterns="9999999999999999|9999 9999 9999 9999|9999-9999-9999-9999"/&gt;
+&lt;/h:inputText&gt;
+&lt;h:message styleClass="validationMessage" for="ccno"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This tag validates the input of the <code>ccno</code> field against the patterns
+defined by the page author in the <code>formatPatterns</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>You can use the same custom validator for any similar component by
+simply nesting the custom validator tag within the component tag.</p>
+</div>
+<div class="paragraph">
+<p>If the application developer who created the custom validator prefers to
+configure the attributes in the <code>Validator</code> implementation rather than
+allow the page author to configure the attributes from the page, the
+developer will not create a custom tag for use with the validator.</p>
+</div>
+<div class="paragraph">
+<p>In this case, the page author must nest the <code>f:validator</code> tag inside the
+tag of the component whose data needs to be validated. Then the page
+author needs to do one of the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the <code>f:validator</code> tag&#8217;s <code>validatorId</code> attribute to the ID of the
+validator that is defined in the application configuration resource
+file.</p>
+</li>
+<li>
+<p>Bind the custom <code>Validator</code> implementation to a managed bean property
+using the <code>f:validator</code> tag&#8217;s <code>binding</code> attribute, as described in
+<a href="jsf-custom014.html#BNATM">Binding Converters, Listeners, and
+Validators to Managed Bean Properties</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following tag registers a hypothetical validator on a component
+using an <code>f:validator</code> tag and references the ID of the validator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="name" value="#{CustomerBean.name}"
+            size="10" ...&gt;
+    &lt;f:validator validatorId="customValidator" /&gt;
+    ...
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom011.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom013.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

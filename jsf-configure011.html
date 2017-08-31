@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Registering a Custom Renderer with a Render Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure012.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="registering-a-custom-renderer-with-a-render-kit">Registering a Custom Renderer with a Render Kit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the application developer creates a custom renderer, as described
+in <a href="jsf-custom006.html#BNAWA">Delegating Rendering to a Renderer</a>, you
+must register it using the appropriate render kit. Because the image map
+application implements an HTML image map, the <code>AreaRenderer</code> and
+<code>MapRenderer</code> classes in the Duke&#8217;s Bookstore case study should be
+registered using the HTML render kit.</p>
+</div>
+<div class="paragraph">
+<p>You register the renderer either by using the <code>@FacesRenderer</code>
+annotation, as described in <a href="jsf-custom006.html#BNAWB">Creating the
+Renderer Class</a>, or by using the <code>render-kit</code> element of the application
+configuration resource file. Here is a hypothetical configuration of
+<code>AreaRenderer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;render-kit&gt;
+    &lt;renderer&gt;
+        &lt;component-family&gt;Area&lt;/component-family&gt;
+        &lt;renderer-type&gt;DemoArea&lt;/renderer-type&gt;
+        &lt;renderer-class&gt;
+            dukesbookstore.renderers.AreaRenderer
+        &lt;/renderer-class&gt;
+        &lt;attribute&gt;
+            &lt;attribute-name&gt;onmouseout&lt;/attribute-name&gt;
+            &lt;attribute-class&gt;java.lang.String&lt;/attribute-class&gt;
+        &lt;/attribute&gt;
+        &lt;attribute&gt;
+            &lt;attribute-name&gt;onmouseover&lt;/attribute-name&gt;
+            &lt;attribute-class&gt;java.lang.String&lt;/attribute-class&gt;
+        &lt;/attribute&gt;
+        &lt;attribute&gt;
+            &lt;attribute-name&gt;styleClass&lt;/attribute-name&gt;
+            &lt;attribute-class&gt;java.lang.String&lt;/attribute-class&gt;
+        &lt;/attribute&gt;
+    &lt;/renderer&gt;
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Attributes specified in a <code>renderer</code> tag override any settings in the
+<code>@FacesRenderer</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>The <code>render-kit</code> element represents a javax.faces.render.<code>RenderKit</code>
+implementation. If no <code>render-kit-id</code> is specified, the default HTML
+render kit is assumed. The <code>renderer</code> element represents a
+<code>javax.faces.render.Renderer</code> implementation. By nesting the <code>renderer</code>
+element inside the <code>render-kit</code> element, you are registering the
+renderer with the <code>RenderKit</code> implementation associated with the
+<code>render-kit</code> element.</p>
+</div>
+<div class="paragraph">
+<p>The <code>renderer-class</code> is the fully qualified class name of the
+<code>Renderer</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>component-family</code> and <code>renderer-type</code> elements are used by a
+component to find renderers that can render it. The <code>component-family</code>
+identifier must match that returned by the component class&#8217;s <code>getFamily</code>
+method. The component family represents a component or set of components
+that a particular renderer can render. The <code>renderer-type</code> must match
+that returned by the <code>getRendererType</code> method of the tag handler class.</p>
+</div>
+<div class="paragraph">
+<p>By using the component family and renderer type to look up renderers for
+components, the JavaServer Faces implementation allows a component to be
+rendered by multiple renderers and allows a renderer to render multiple
+components.</p>
+</div>
+<div class="paragraph">
+<p>Each of the <code>attribute</code> tags specifies a render-dependent attribute and
+its type. The <code>attribute</code> element doesn&#8217;t affect the runtime execution
+of your application. Rather, it provides information to tools about the
+attributes the <code>Renderer</code> supports.</p>
+</div>
+<div class="paragraph">
+<p>The object responsible for rendering a component (be it the component
+itself or a renderer to which the component delegates the rendering) can
+use facets to aid in the rendering process. These facets allow the
+custom component developer to control some aspects of rendering the
+component. Consider this custom component tag example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;d:dataScroller&gt;
+    &lt;f:facet name="header"&gt;
+        &lt;h:panelGroup&gt;
+            &lt;h:outputText value="Account Id"/&gt;
+            &lt;h:outputText value="Customer Name"/&gt;
+            &lt;h:outputText value="Total Sales"/&gt;
+        &lt;/h:panelGroup&gt;
+    &lt;/f:facet&gt;
+    &lt;f:facet name="next"&gt;
+        &lt;h:panelGroup&gt;
+            &lt;h:outputText value="Next"/&gt;
+            &lt;h:graphicImage url="/images/arrow-right.gif" /&gt;
+        &lt;/h:panelGroup&gt;
+    &lt;/f:facet&gt;
+    ...
+&lt;/d:dataScroller&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>dataScroller</code> component tag includes a component that will render
+the header and a component that will render the Next button. If the
+renderer associated with this component renders the facets, you can
+include the following <code>facet</code> elements in the <code>renderer</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;facet&gt;
+    &lt;description&gt;This facet renders as the header of the table. It should be
+         a panelGroup with the same number of columns as the data.
+    &lt;/description&gt;
+    &lt;display-name&gt;header&lt;/display-name&gt;
+    &lt;facet-name&gt;header&lt;/facet-name&gt;
+&lt;/facet&gt;
+&lt;facet&gt;
+    &lt;description&gt;This facet renders as the content of the "next" button in
+         the scroller. It should be a panelGroup that includes an outputText
+         tag that has the text "Next" and a right arrow icon.
+    &lt;/description&gt;
+    &lt;display-name&gt;Next&lt;/display-name&gt;
+    &lt;facet-name&gt;next&lt;/facet-name&gt;
+&lt;/facet&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a component that supports facets provides its own rendering and you
+want to include <code>facet</code> elements in the application configuration
+resource file, you need to put them in the component&#8217;s configuration
+rather than the renderer&#8217;s configuration.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure012.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

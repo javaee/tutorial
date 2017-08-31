@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Steps for Creating a Custom Component</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="steps-for-creating-a-custom-component">Steps for Creating a Custom Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can apply the following steps while developing your own custom
+component.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a custom component class that does the following:</p>
+</li>
+<li>
+<p>Overrides the <code>getFamily</code> method to return the component family,
+which is used to look up renderers that can render the component</p>
+</li>
+<li>
+<p>Includes the rendering code or delegates it to a renderer (explained
+in Step <a href="#CDECBJAE">2</a>)</p>
+</li>
+<li>
+<p>Enables component attributes to accept expressions</p>
+</li>
+<li>
+<p>Queues an event on the component if the component generates events</p>
+</li>
+<li>
+<p>Saves and restores the component state</p>
+</li>
+<li>
+<p><a id="CDECBJAE"></a></p>
+<div class="paragraph">
+<p>Delegate rendering to a renderer if your component does not handle the
+rendering. To do this:</p>
+</div>
+</li>
+<li>
+<p>Create a custom renderer class by extending
+<code>javax.faces.render.Renderer</code>.</p>
+</li>
+<li>
+<p>Register the renderer to a render kit.</p>
+</li>
+<li>
+<p>Register the component.</p>
+</li>
+<li>
+<p>Create an event handler if your component generates events.</p>
+</li>
+<li>
+<p>Create a tag library descriptor (TLD) that defines the custom tag.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-configure012.html#BNAXI">Registering a Custom Component</a> and
+<a href="jsf-configure011.html#BNAXH">Registering a Custom Renderer with a
+Render Kit</a> for information on registering the custom component and the
+renderer. The section <a href="jsf-custom010.html#BNATT">Using a Custom
+Component</a> discusses how to use the custom component in a JavaServer
+Faces page.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

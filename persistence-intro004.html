@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Managing Entities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-intro003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="managing-entities">Managing Entities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Entities are managed by the entity manager, which is represented by
+<code>javax.persistence.EntityManager</code> instances. Each <code>EntityManager</code>
+instance is associated with a persistence context: a set of managed
+entity instances that exist in a particular data store. A persistence
+context defines the scope under which particular entity instances are
+created, persisted, and removed. The <code>EntityManager</code> interface defines
+the methods that are used to interact with the persistence context.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBQY">The EntityManager Interface</a></p>
+</li>
+<li>
+<p><a href="#BNBRJ">Persistence Units</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-entitymanager-interface">The EntityManager Interface</h3>
+<div class="paragraph">
+<p>The <code>EntityManager</code> API creates and removes persistent entity instances,
+finds entities by the entity&#8217;s primary key, and allows queries to be run
+on entities.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBQZ">Container-Managed Entity Managers</a></p>
+</li>
+<li>
+<p><a href="#BNBRA">Application-Managed Entity Managers</a></p>
+</li>
+<li>
+<p><a href="#BNBRB">Finding Entities Using the EntityManager</a></p>
+</li>
+<li>
+<p><a href="#BNBRC">Managing an Entity Instance&#8217;s Lifecycle</a></p>
+</li>
+<li>
+<p><a href="#BNBRD">Persisting Entity Instances</a></p>
+</li>
+<li>
+<p><a href="#BNBRE">Removing Entity Instances</a></p>
+</li>
+<li>
+<p><a href="#BNBRF">Synchronizing Entity Data to the Database</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="container-managed-entity-managers">Container-Managed Entity Managers</h4>
+<div class="paragraph">
+<p>With a container-managed entity manager, an <code>EntityManager</code> instance&#8217;s
+persistence context is automatically propagated by the container to all
+application components that use the <code>EntityManager</code> instance within a
+single Java Transaction API (JTA) transaction.</p>
+</div>
+<div class="paragraph">
+<p>JTA transactions usually involve calls across application components. To
+complete a JTA transaction, these components usually need access to a
+single persistence context. This occurs when an <code>EntityManager</code> is
+injected into the application components by means of the
+<code>javax.persistence.PersistenceContext</code> annotation. The persistence
+context is automatically propagated with the current JTA transaction,
+and <code>EntityManager</code> references that are mapped to the same persistence
+unit provide access to the persistence context within that transaction.
+By automatically propagating the persistence context, application
+components don&#8217;t need to pass references to <code>EntityManager</code> instances to
+each other in order to make changes within a single transaction. The
+Java EE container manages the lifecycle of container-managed entity
+managers.</p>
+</div>
+<div class="paragraph">
+<p>To obtain an <code>EntityManager</code> instance, inject the entity manager into
+the application component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PersistenceContext
+EntityManager em;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="application-managed-entity-managers">Application-Managed Entity Managers</h4>
+<div class="paragraph">
+<p>With an application-managed entity manager, on the other hand, the
+persistence context is not propagated to application components, and the
+lifecycle of <code>EntityManager</code> instances is managed by the application.</p>
+</div>
+<div class="paragraph">
+<p>Application-managed entity managers are used when applications need to
+access a persistence context that is not propagated with the JTA
+transaction across <code>EntityManager</code> instances in a particular persistence
+unit. In this case, each <code>EntityManager</code> creates a new, isolated
+persistence context. The <code>EntityManager</code> and its associated persistence
+context are created and destroyed explicitly by the application. They
+are also used when directly injecting <code>EntityManager</code> instances can&#8217;t be
+done because <code>EntityManager</code> instances are not thread-safe.
+<code>EntityManagerFactory</code> instances are thread-safe.</p>
+</div>
+<div class="paragraph">
+<p>Applications create <code>EntityManager</code> instances in this case by using the
+<code>createEntityManager</code> method of
+<code>javax.persistence.EntityManagerFactory</code>.</p>
+</div>
+<div class="paragraph">
+<p>To obtain an <code>EntityManager</code> instance, you first must obtain an
+<code>EntityManagerFactory</code> instance by injecting it into the application
+component by means of the <code>javax.persistence.PersistenceUnit</code>
+annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PersistenceUnit
+EntityManagerFactory emf;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then obtain an <code>EntityManager</code> from the <code>EntityManagerFactory</code> instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = emf.createEntityManager();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Application-managed entity managers don&#8217;t automatically propagate the
+JTA transaction context. Such applications need to manually gain access
+to the JTA transaction manager and add transaction demarcation
+information when performing entity operations. The
+<code>javax.transaction.UserTransaction</code> interface defines methods to begin,
+commit, and roll back transactions. Inject an instance of
+<code>UserTransaction</code> by creating an instance variable annotated with
+<code>@Resource</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Resource
+UserTransaction utx;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To begin a transaction, call the <code>UserTransaction.begin</code> method. When
+all the entity operations are complete, call the
+<code>UserTransaction.commit</code> method to commit the transaction. The
+<code>UserTransaction.rollback</code> method is used to roll back the current
+transaction.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to manage transactions in an application
+that uses an application-managed entity manager:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PersistenceUnit
+EntityManagerFactory emf;
+EntityManager em;
+@Resource
+UserTransaction utx;
+...
+em = emf.createEntityManager();
+try {
+    utx.begin();
+    em.persist(SomeEntity);
+    em.merge(AnotherEntity);
+    em.remove(ThirdEntity);
+    utx.commit();
+} catch (Exception e) {
+    utx.rollback();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="finding-entities-using-the-entitymanager">Finding Entities Using the EntityManager</h4>
+<div class="paragraph">
+<p>The <code>EntityManager.find</code> method is used to look up entities in the data
+store by the entity&#8217;s primary key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PersistenceContext
+EntityManager em;
+public void enterOrder(int custID, CustomerOrder newOrder) {
+    Customer cust = em.find(Customer.class, custID);
+    cust.getOrders().add(newOrder);
+    newOrder.setCustomer(cust);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="managing-an-entity-instances-lifecycle">Managing an Entity Instance&#8217;s Lifecycle</h4>
+<div class="paragraph">
+<p>You manage entity instances by invoking operations on the entity by
+means of an <code>EntityManager</code> instance. Entity instances are in one of
+four states: new, managed, detached, or removed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>New entity instances have no persistent identity and are not yet
+associated with a persistence context.</p>
+</li>
+<li>
+<p>Managed entity instances have a persistent identity and are associated
+with a persistence context.</p>
+</li>
+<li>
+<p>Detached entity instances have a persistent identity and are not
+currently associated with a persistence context.</p>
+</li>
+<li>
+<p>Removed entity instances have a persistent identity, are associated
+with a persistent context, and are scheduled for removal from the data
+store.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="persisting-entity-instances">Persisting Entity Instances</h4>
+<div class="paragraph">
+<p>New entity instances become managed and persistent either by invoking
+the <code>persist</code> method or by a cascading <code>persist</code> operation invoked from
+related entities that have the <code>cascade=PERSIST</code> or <code>cascade=ALL</code>
+elements set in the relationship annotation. This means that the
+entity&#8217;s data is stored to the database when the transaction associated
+with the <code>persist</code> operation is completed. If the entity is already
+managed, the <code>persist</code> operation is ignored, although the <code>persist</code>
+operation will cascade to related entities that have the <code>cascade</code>
+element set to <code>PERSIST</code> or <code>ALL</code> in the relationship annotation. If
+<code>persist</code> is called on a removed entity instance, the entity becomes
+managed. If the entity is detached, either <code>persist</code> will throw an
+<code>IllegalArgumentException</code>, or the transaction commit will fail. The
+following method performs a <code>persist</code> operation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PersistenceContext
+EntityManager em;
+...
+public LineItem createLineItem(CustomerOrder order, Product product,
+        int quantity) {
+    LineItem li = new LineItem(order, product, quantity);
+    order.getLineItems().add(li);
+    em.persist(li);
+    return li;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>persist</code> operation is propagated to all entities related to the
+calling entity that have the <code>cascade</code> element set to <code>ALL</code> or <code>PERSIST</code>
+in the relationship annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToMany(cascade=ALL, mappedBy="order")
+public Collection&lt;LineItem&gt; getLineItems() {
+    return lineItems;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-entity-instances">Removing Entity Instances</h4>
+<div class="paragraph">
+<p>Managed entity instances are removed by invoking the <code>remove</code> method or
+by a cascading <code>remove</code> operation invoked from related entities that
+have the <code>cascade=REMOVE</code> or <code>cascade=ALL</code> elements set in the
+relationship annotation. If the <code>remove</code> method is invoked on a new
+entity, the <code>remove</code> operation is ignored, although <code>remove</code> will
+cascade to related entities that have the <code>cascade</code> element set to
+<code>REMOVE</code> or <code>ALL</code> in the relationship annotation. If <code>remove</code> is invoked
+on a detached entity, either <code>remove</code> will throw an
+<code>IllegalArgumentException</code>, or the transaction commit will fail. If
+invoked on an already removed entity, <code>remove</code> will be ignored. The
+entity&#8217;s data will be removed from the data store when the transaction
+is completed or as a result of the <code>flush</code> operation.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, all <code>LineItem</code> entities associated with the
+order are also removed, as <code>CustomerOrder.getLineItems</code> has
+<code>cascade=ALL</code> set in the relationship annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public void removeOrder(Integer orderId) {
+    try {
+        CustomerOrder order = em.find(CustomerOrder.class, orderId);
+        em.remove(order);
+    }...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="synchronizing-entity-data-to-the-database">Synchronizing Entity Data to the Database</h4>
+<div class="paragraph">
+<p>The state of persistent entities is synchronized to the database when
+the transaction with which the entity is associated commits. If a
+managed entity is in a bidirectional relationship with another managed
+entity, the data will be persisted, based on the owning side of the
+relationship.</p>
+</div>
+<div class="paragraph">
+<p>To force synchronization of the managed entity to the data store, invoke
+the <code>flush</code> method of the <code>EntityManager</code> instance. If the entity is
+related to another entity and the relationship annotation has the
+<code>cascade</code> element set to <code>PERSIST</code> or <code>ALL</code>, the related entity&#8217;s data
+will be synchronized with the data store when <code>flush</code> is called.</p>
+</div>
+<div class="paragraph">
+<p>If the entity is removed, calling <code>flush</code> will remove the entity data
+from the data store.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="persistence-units">Persistence Units</h3>
+<div class="paragraph">
+<p>A persistence unit defines a set of all entity classes that are managed
+by <code>EntityManager</code> instances in an application. This set of entity
+classes represents the data contained within a single data store.</p>
+</div>
+<div class="paragraph">
+<p>Persistence units are defined by the <code>persistence.xml</code> configuration
+file. The following is an example <code>persistence.xml</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;persistence&gt;
+    &lt;persistence-unit name="OrderManagement"&gt;
+        &lt;description&gt;This unit manages orders and customers.
+            It does not rely on any vendor-specific features and can
+            therefore be deployed to any persistence provider.
+        &lt;/description&gt;
+        &lt;jta-data-source&gt;jdbc/MyOrderDB&lt;/jta-data-source&gt;
+        &lt;jar-file&gt;MyOrderApp.jar&lt;/jar-file&gt;
+        &lt;class&gt;com.widgets.CustomerOrder&lt;/class&gt;
+        &lt;class&gt;com.widgets.Customer&lt;/class&gt;
+    &lt;/persistence-unit&gt;
+&lt;/persistence&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This file defines a persistence unit named <code>OrderManagement</code>, which uses
+a JTA-aware data source, <code>jdbc/MyOrderDB</code>. The <code>jar-file</code> and <code>class</code>
+elements specify managed persistence classes: entity classes, embeddable
+classes, and mapped superclasses. The <code>jar-file</code> element specifies JAR
+files that are visible to the packaged persistence unit that contain
+managed persistence classes, whereas the <code>class</code> element explicitly
+names managed persistence classes.</p>
+</div>
+<div class="paragraph">
+<p>The <code>jta-data-source</code> (for JTA-aware data sources) and
+<code>non-jta-data-source</code> (for non-JTA-aware data sources) elements specify
+the global JNDI name of the data source to be used by the container.</p>
+</div>
+<div class="paragraph">
+<p>The JAR file or directory whose <code>META-INF</code> directory contains
+<code>persistence.xml</code> is called the root of the persistence unit. The scope
+of the persistence unit is determined by the persistence unit&#8217;s root.
+Each persistence unit must be identified with a name that is unique to
+the persistence unit&#8217;s scope.</p>
+</div>
+<div class="paragraph">
+<p>Persistent units can be packaged as part of a WAR or EJB JAR file or can
+be packaged as a JAR file that can then be included in an WAR or EAR
+file.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you package the persistent unit as a set of classes in an EJB JAR
+file, <code>persistence.xml</code> should be put in the EJB JAR&#8217;s <code>META-INF</code>
+directory.</p>
+</li>
+<li>
+<p>If you package the persistence unit as a set of classes in a WAR file,
+<code>persistence.xml</code> should be located in the WAR file&#8217;s
+<code>WEB-INF/classes/META-INF</code> directory.</p>
+</li>
+<li>
+<p>If you package the persistence unit in a JAR file that will be
+included in a WAR or EAR file, the JAR file should be located in either</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>WEB-INF/lib</code> directory of a WAR</p>
+</li>
+<li>
+<p>Or the EAR file&#8217;s library directory</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In the Java Persistence API 1.0, JAR files could be located at the root
+of an EAR file as the root of the persistence unit. This is no longer
+supported. Portable applications should use the EAR file&#8217;s library
+directory as the root of the persistence unit.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-intro003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

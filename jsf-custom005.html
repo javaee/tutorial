@@ -1,0 +1,693 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Creating Custom Component Classes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="creating-custom-component-classes">Creating Custom Component Classes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As explained in <a href="jsf-custom002.html#BNAVI">When to Use a Custom
+Component</a>, a component class defines the state and behavior of a UI
+component. The state information includes the component&#8217;s type,
+identifier, and local value. The behavior defined by the component class
+includes the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Decoding (converting the request parameter to the component&#8217;s local
+value)</p>
+</li>
+<li>
+<p>Encoding (converting the local value into the corresponding markup)</p>
+</li>
+<li>
+<p>Saving the state of the component</p>
+</li>
+<li>
+<p>Updating the bean value with the local value</p>
+</li>
+<li>
+<p>Processing validation on the local value</p>
+</li>
+<li>
+<p>Queueing events</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>javax.faces.component.UIComponentBase</code> class defines the default
+behavior of a component class. All the classes representing the standard
+components extend from <code>UIComponentBase</code>. These classes add their own
+behavior definitions, as your custom component class will do.</p>
+</div>
+<div class="paragraph">
+<p>Your custom component class must either extend <code>UIComponentBase</code>
+directly or extend a class representing one of the standard components.
+These classes are located in the <code>javax.faces.component</code> package, and
+their names begin with <code>UI</code>.</p>
+</div>
+<div class="paragraph">
+<p>If your custom component serves the same purpose as a standard
+component, you should extend that standard component rather than
+directly extend <code>UIComponentBase</code>. For example, suppose you want to
+create an editable menu component. It makes sense to have this component
+extend <code>UISelectOne</code> rather than <code>UIComponentBase</code> because you can reuse
+the behavior already defined in <code>UISelectOne</code>. The only new
+functionality you need to define is to make the menu editable.</p>
+</div>
+<div class="paragraph">
+<p>Whether you decide to have your component extend <code>UIComponentBase</code> or a
+standard component, you might also want your component to implement one
+or more of these behavioral interfaces defined in the
+<code>javax.faces.component</code> package:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ActionSource</code>: Indicates that the component can fire a
+<code>javax.faces.event.ActionEvent</code></p>
+</li>
+<li>
+<p><code>ActionSource2</code>: Extends <code>ActionSource</code> and allows component
+properties referencing methods that handle action events to use method
+expressions as defined by the EL</p>
+</li>
+<li>
+<p><code>EditableValueHolder</code>: Extends <code>ValueHolder</code> and specifies additional
+features for editable components, such as validation and emitting
+value-change events</p>
+</li>
+<li>
+<p><code>NamingContainer</code>: Mandates that each component rooted at this
+component has a unique ID</p>
+</li>
+<li>
+<p><code>StateHolder</code>: Denotes that a component has state that must be saved
+between requests</p>
+</li>
+<li>
+<p><code>ValueHolder</code>: Indicates that the component maintains a local value as
+well as the option of accessing data in the model tier</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If your component extends <code>UIComponentBase</code>, it automatically implements
+only <code>StateHolder</code>. Because all components directly or indirectly extend
+<code>UIComponentBase</code>, they all implement <code>StateHolder</code>. Any component that
+implements <code>StateHolder</code> also implements the <code>StateHelper</code> interface,
+which extends <code>StateHolder</code> and defines a <code>Map</code>-like contract that makes
+it easy for components to save and restore a partial view state.</p>
+</div>
+<div class="paragraph">
+<p>If your component extends one of the other standard components, it might
+also implement other behavioral interfaces in addition to <code>StateHolder</code>.
+If your component extends <code>UICommand</code>, it automatically implements
+<code>ActionSource2</code>. If your component extends <code>UIOutput</code> or one of the
+component classes that extend <code>UIOutput</code>, it automatically implements
+<code>ValueHolder</code>. If your component extends <code>UIInput</code>, it automatically
+implements <code>EditableValueHolder</code> and <code>ValueHolder</code>. See the JavaServer
+Faces API documentation to find out what the other component classes
+implement.</p>
+</div>
+<div class="paragraph">
+<p>You can also make your component explicitly implement a behavioral
+interface that it doesn&#8217;t already by virtue of extending a particular
+standard component. For example, if you have a component that extends
+<code>UIInput</code> and you want it to fire action events, you must make it
+explicitly implement <code>ActionSource2</code> because a <code>UIInput</code> component
+doesn&#8217;t automatically implement this interface.</p>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Bookstore image map example has two component classes:
+<code>AreaComponent</code> and <code>MapComponent</code>. The <code>MapComponent</code> class extends
+<code>UICommand</code> and therefore implements <code>ActionSource2</code>, which means it can
+fire action events when a user clicks on the map. The <code>AreaComponent</code>
+class extends the standard component <code>UIOutput</code>. The <code>@FacesComponent</code>
+annotation registers the components with the JavaServer Faces
+implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@FacesComponent("DemoMap")
+public class MapComponent extends UICommand {...}
+
+@FacesComponent("DemoArea")
+public class AreaComponent extends UIOutput {...}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>MapComponent</code> class represents the component corresponding to the
+<code>bookstore:map</code> tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;bookstore:map id="bookMap"
+               current="map1"
+               immediate="true"
+               action="bookstore"&gt;
+    ...
+&lt;/bookstore:map&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>AreaComponent</code> class represents the component corresponding to the
+<code>bookstore:area</code> tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;bookstore:area id="map1" value="#{Book201}"
+                onmouseover="resources/images/book_201.jpg"
+                onmouseout="resources/images/book_all.jpg"
+                targetImage="mapImage"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>MapComponent</code> has one or more <code>AreaComponent</code> instances as children.
+Its behavior consists of the following actions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Retrieving the value of the currently selected area</p>
+</li>
+<li>
+<p>Defining the properties corresponding to the component&#8217;s values</p>
+</li>
+<li>
+<p>Generating an event when the user clicks on the image map</p>
+</li>
+<li>
+<p>Queuing the event</p>
+</li>
+<li>
+<p>Saving its state</p>
+</li>
+<li>
+<p>Rendering the HTML <code>map</code> tag and the HTML <code>input</code> tag</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>MapComponent</code> delegates the rendering of the HTML <code>map</code> and <code>input</code>
+tags to the <code>MapRenderer</code> class.</p>
+</div>
+<div class="paragraph">
+<p><code>AreaComponent</code> is bound to a bean that stores the shape and coordinates
+of the region of the image map. You will see how all this data is
+accessed through the value expression in
+<a href="jsf-custom006.html#BNAWB">Creating the Renderer Class</a>. The behavior
+of <code>AreaComponent</code> consists of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Retrieving the shape and coordinate data from the bean</p>
+</li>
+<li>
+<p>Setting the value of the hidden tag to the <code>id</code> of this component</p>
+</li>
+<li>
+<p>Rendering the <code>area</code> tag, including the JavaScript for the
+<code>onmouseover</code>, <code>onmouseout</code>, and <code>onclick</code> functions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Although these tasks are actually performed by <code>AreaRenderer</code>,
+<code>AreaComponent</code> must delegate the tasks to <code>AreaRenderer</code>. See
+<a href="jsf-custom006.html#BNAWA">Delegating Rendering to a Renderer</a> for
+more information.</p>
+</div>
+<div class="paragraph">
+<p>The rest of this section describes the tasks that <code>MapComponent</code>
+performs as well as the encoding and decoding that it delegates to
+<code>MapRenderer</code>. <a href="jsf-custom008.html#BNAWD">Handling Events for Custom
+Components</a> details how <code>MapComponent</code> handles events.</p>
+</div>
+<div class="sect2">
+<h3 id="specifying-the-component-family">Specifying the Component Family</h3>
+<div class="paragraph">
+<p>If your custom component class delegates rendering, it needs to override
+the <code>getFamily</code> method of <code>UIComponent</code> to return the identifier of a
+component family, which is used to refer to a component or set of
+components that can be rendered by a renderer or set of renderers. The
+component family is used along with the renderer type to look up
+renderers that can render the component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public String getFamily() {
+    return ("Map");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The component family identifier, <code>Map</code>, must match that defined by the
+<code>component-family</code> elements included in the component and renderer
+configurations in the application configuration resource file.
+<a href="jsf-configure011.html#BNAXH">Registering a Custom Renderer with a
+Render Kit</a> explains how to define the component family in the renderer
+configuration. <a href="jsf-configure012.html#BNAXI">Registering a Custom
+Component</a> explains how to define the component family in the component
+configuration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="performing-encoding">Performing Encoding</h3>
+<div class="paragraph">
+<p>During the Render Response phase, the JavaServer Faces implementation
+processes the encoding methods of all components and their associated
+renderers in the view. The encoding methods convert the current local
+value of the component into the corresponding markup that represents it
+in the response.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UIComponentBase</code> class defines a set of methods for rendering
+markup: <code>encodeBegin</code>, <code>encodeChildren</code>, and <code>encodeEnd</code>. If the
+component has child components, you might need to use more than one of
+these methods to render the component; otherwise, all rendering should
+be done in <code>encodeEnd</code>. Alternatively, you can use the <code>encodeALL</code>
+method, which encompasses all the methods.</p>
+</div>
+<div class="paragraph">
+<p>Because <code>MapComponent</code> is a parent component of <code>AreaComponent</code>, the
+<code>area</code> tags must be rendered after the beginning <code>map</code> tag and before
+the ending <code>map</code> tag. To accomplish this, the <code>MapRenderer</code> class
+renders the beginning <code>map</code> tag in <code>encodeBegin</code> and the rest of the
+<code>map</code> tag in <code>encodeEnd</code>.</p>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces implementation automatically invokes the
+<code>encodeEnd</code> method of <code>AreaComponent</code>'s renderer after it invokes
+<code>MapRenderer</code>'s <code>encodeBegin</code> method and before it invokes
+<code>MapRenderer</code>'s <code>encodeEnd</code> method. If a component needs to perform the
+rendering for its children, it does this in the <code>encodeChildren</code> method.</p>
+</div>
+<div class="paragraph">
+<p>Here are the <code>encodeBegin</code> and <code>encodeEnd</code> methods of <code>MapRenderer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void encodeBegin(FacesContext context, UIComponent component)
+        throws IOException {
+    if ((context == null)|| (component == null)) {
+        throw new NullPointerException();
+    }
+    MapComponent map = (MapComponent) component;
+    ResponseWriter writer = context.getResponseWriter();
+    writer.startElement("map", map);
+    writer.writeAttribute("name", map.getId(), "id");
+}
+
+@Override
+public void encodeEnd(FacesContext context, UIComponent component)
+        throws IOException {
+    if ((context == null) || (component == null)){
+        throw new NullPointerException();
+    }
+    MapComponent map = (MapComponent) component;
+    ResponseWriter writer = context.getResponseWriter();
+    writer.startElement("input", map);
+    writer.writeAttribute("type", "hidden", null);
+    writer.writeAttribute("name", getName(context,map), "clientId");
+    writer.endElement("input");
+    writer.endElement("map");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that <code>encodeBegin</code> renders only the beginning <code>map</code> tag. The
+<code>encodeEnd</code> method renders the <code>input</code> tag and the ending <code>map</code> tag.</p>
+</div>
+<div class="paragraph">
+<p>The encoding methods accept a <code>UIComponent</code> argument and a
+<code>javax.faces.context.FacesContext</code> argument. The <code>FacesContext</code> instance
+contains all the information associated with the current request. The
+<code>UIComponent</code> argument is the component that needs to be rendered.</p>
+</div>
+<div class="paragraph">
+<p>The rest of the method renders the markup to the
+<code>javax.faces.context.ResponseWriter</code> instance, which writes out the
+markup to the current response. This basically involves passing the HTML
+tag names and attribute names to the <code>ResponseWriter</code> instance as
+strings, retrieving the values of the component attributes, and passing
+these values to the <code>ResponseWriter</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>The <code>startElement</code> method takes a <code>String</code> (the name of the tag) and the
+component to which the tag corresponds (in this case, <code>map</code>). (Passing
+this information to the <code>ResponseWriter</code> instance helps design-time
+tools know which portions of the generated markup are related to which
+components.)</p>
+</div>
+<div class="paragraph">
+<p>After calling <code>startElement</code>, you can call <code>writeAttribute</code> to render
+the tag&#8217;s attributes. The <code>writeAttribute</code> method takes the name of the
+attribute, its value, and the name of a property or attribute of the
+containing component corresponding to the attribute. The last parameter
+can be null, and it won&#8217;t be rendered.</p>
+</div>
+<div class="paragraph">
+<p>The <code>name</code> attribute value of the <code>map</code> tag is retrieved using the
+<code>getId</code> method of <code>UIComponent</code>, which returns the component&#8217;s unique
+identifier. The <code>name</code> attribute value of the <code>input</code> tag is retrieved
+using the <code>getName(FacesContext, UIComponent)</code> method of <code>MapRenderer</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you want your component to perform its own rendering but delegate to
+a renderer if there is one, include the following lines in the encoding
+method to check whether there is a renderer associated with this
+component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">if (getRendererType() != null) {
+    super.encodeEnd(context);
+    return;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If there is a renderer available, this method invokes the superclass&#8217;s
+<code>encodeEnd</code> method, which does the work of finding the renderer. The
+<code>MapComponent</code> class delegates all rendering to <code>MapRenderer</code>, so it
+does not need to check for available renderers.</p>
+</div>
+<div class="paragraph">
+<p>In some custom component classes that extend standard components, you
+might need to implement other methods in addition to <code>encodeEnd</code>. For
+example, if you need to retrieve the component&#8217;s value from the request
+parameters, you must also implement the <code>decode</code> method.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="performing-decoding">Performing Decoding</h3>
+<div class="paragraph">
+<p>During the Apply Request Values phase, the JavaServer Faces
+implementation processes the <code>decode</code> methods of all components in the
+tree. The <code>decode</code> method extracts a component&#8217;s local value from
+incoming request parameters and uses a <code>javax.faces.convert.Converter</code>
+implementation to convert the value to a type that is acceptable to the
+component class.</p>
+</div>
+<div class="paragraph">
+<p>A custom component class or its renderer must implement the <code>decode</code>
+method only if it must retrieve the local value or if it needs to queue
+events. The component queues the event by calling <code>queueEvent</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is the <code>decode</code> method of <code>MapRenderer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void decode(FacesContext context, UIComponent component) {
+    if ((context == null) || (component == null)) {
+        throw new NullPointerException();
+    }
+    MapComponent map = (MapComponent) component;
+    String key = getName(context, map);
+    String value = (String) context.getExternalContext().
+            getRequestParameterMap().get(key);
+    if (value != null)
+        map.setCurrent(value);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>decode</code> method first gets the name of the hidden <code>input</code> field by
+calling <code>getName(FacesContext, UIComponent)</code>. It then uses that name as
+the key to the request parameter map to retrieve the current value of
+the <code>input</code> field. This value represents the currently selected area.
+Finally, it sets the value of the <code>MapComponent</code> class&#8217;s <code>current</code>
+attribute to the value of the <code>input</code> field.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling-component-properties-to-accept-expressions">Enabling Component Properties to Accept Expressions</h3>
+<div class="paragraph">
+<p>Nearly all the attributes of the standard JavaServer Faces tags can
+accept expressions, whether they are value expressions or method
+expressions. It is recommended that you also enable your component
+attributes to accept expressions because it gives you much more
+flexibility when you write Facelets pages.</p>
+</div>
+<div class="paragraph">
+<p>To enable the attributes to accept expressions, the component class must
+implement getter and setter methods for the component properties. These
+methods can use the facilities offered by the <code>StateHelper</code> interface to
+store and retrieve not only the values for these properties but also the
+state of the components across multiple requests.</p>
+</div>
+<div class="paragraph">
+<p>Because <code>MapComponent</code> extends <code>UICommand</code>, the <code>UICommand</code> class
+already does the work of getting the <code>ValueExpression</code> and
+<code>MethodExpression</code> instances associated with each of the attributes that
+it supports. Similarly, the <code>UIOutput</code> class that <code>AreaComponent</code>
+extends already obtains the <code>ValueExpression</code> instances for its
+supported attributes. For both components, the simple getter and setter
+methods store and retrieve the key values and state for the attributes,
+as shown in this code fragment from <code>AreaComponent</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">enum PropertyKeys {
+    alt, coords, shape, targetImage;
+}
+public String getAlt() {
+    return (String) getStateHelper().eval(PropertyKeys.alt, null);
+}
+public void setAlt(String alt) {
+    getStateHelper().put(PropertyKeys.alt, alt);
+}
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, if you have a custom component class that extends
+<code>UIComponentBase</code>, you will need to implement the methods that get the
+<code>ValueExpression</code> and <code>MethodExpression</code> instances associated with those
+attributes that are enabled to accept expressions. For example, you
+could include a method that gets the <code>ValueExpression</code> instance for the
+<code>immediate</code> attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public boolean isImmediate() {
+    if (this.immediateSet) {
+        return (this.immediate);
+    }
+    ValueExpression ve = getValueExpression("immediate");
+    if (ve != null) {
+        Boolean value = (Boolean) ve.getValue(
+            getFacesContext().getELContext());
+        return (value.booleanValue());
+    } else {
+        return (this.immediate);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The properties corresponding to the component attributes that accept
+method expressions must accept and return a <code>MethodExpression</code> object.
+For example, if <code>MapComponent</code> extended <code>UIComponentBase</code> instead of
+<code>UICommand</code>, it would need to provide an <code>action</code> property that returns
+and accepts a <code>MethodExpression</code> object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public MethodExpression getAction() {
+    return (this.action);
+}
+public void setAction(MethodExpression action) {
+    this.action = action;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-and-restoring-state">Saving and Restoring State</h3>
+<div class="paragraph">
+<p>As described in <a href="#BNAVY">Enabling Component Properties to Accept
+Expressions</a>, use of the <code>StateHelper</code> interface facilities allows you
+to save the component&#8217;s state at the same time you set and retrieve
+property values. The <code>StateHelper</code> implementation allows partial state
+saving; it saves only the changes in the state since the initial
+request, not the entire state, because the full state can be restored
+during the Restore View phase.</p>
+</div>
+<div class="paragraph">
+<p>Component classes that implement <code>StateHolder</code> may prefer to implement
+the <code>saveState(FacesContext)</code> and <code>restoreState(FacesContext, Object)</code>
+methods to help the JavaServer Faces implementation save and restore the
+state of components across multiple requests.</p>
+</div>
+<div class="paragraph">
+<p>To save a set of values, you can implement the <code>saveState(FacesContext)</code>
+method. This method is called during the Render Response phase, during
+which the state of the response is saved for processing on subsequent
+requests. Here is a hypothetical method from <code>MapComponent</code>, which has
+only one attribute, <code>current</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public Object saveState(FacesContext context) {
+    Object values[] = new Object[2];
+    values[0] = super.saveState(context);
+    values[1] = current;
+    return (values);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This method initializes an array, which will hold the saved state. It
+next saves all of the state associated with the component.</p>
+</div>
+<div class="paragraph">
+<p>A component that implements <code>StateHolder</code> may also provide an
+implementation for <code>restoreState(FacesContext, Object)</code>, which restores
+the state of the component to that saved with the
+<code>saveState(FacesContext)</code> method. The
+<code>restoreState(FacesContext, Object)</code> method is called during the Restore
+View phase, during which the JavaServer Faces implementation checks
+whether there is any state that was saved during the last Render
+Response phase and needs to be restored in preparation for the next
+postback.</p>
+</div>
+<div class="paragraph">
+<p>Here is a hypothetical <code>restoreState(FacesContext, Object)</code> method from
+<code>MapComponent</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public void restoreState(FacesContext context, Object state) {
+    Object values[] = (Object[]) state;
+    super.restoreState(context, values[0]);
+    current = (String) values[1];
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This method takes a <code>FacesContext</code> and an <code>Object</code> instance,
+representing the array that is holding the state for the component. This
+method sets the component&#8217;s properties to the values saved in the
+<code>Object</code> array.</p>
+</div>
+<div class="paragraph">
+<p>Whether or not you implement these methods in your component class, you
+can use the <code>javax.faces.STATE_SAVING_METHOD</code> context parameter to
+specify in the deployment descriptor where you want the state to be
+saved: either <code>client</code> or <code>server</code>. If state is saved on the client, the
+state of the entire view is rendered to a hidden field on the page. By
+default, the state is saved on the server.</p>
+</div>
+<div class="paragraph">
+<p>The web applications in the Duke&#8217;s Forest case study save their view
+state on the client.</p>
+</div>
+<div class="paragraph">
+<p>Saving state on the client uses more bandwidth as well as more client
+resources, whereas saving it on the server uses more server resources.
+You may also want to save state on the client if you expect your users
+to disable cookies.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

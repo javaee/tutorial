@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Invoking Other Web Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="invoking-other-web-resources">Invoking Other Web Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web components can invoke other web resources both indirectly and
+directly. A web component indirectly invokes another web resource by
+embedding a URL that points to another web component in content returned
+to a client. While it is executing, a web component directly invokes
+another resource by either including the content of another resource or
+forwarding a request to another resource.</p>
+</div>
+<div class="paragraph">
+<p>To invoke a resource available on the server that is running a web
+component, you must first obtain a <code>RequestDispatcher</code> object by using
+the <code>getRequestDispatcher("URL")</code> method. You can get a
+<code>RequestDispatcher</code> object from either a request or the web context;
+however, the two methods have slightly different behavior. The method
+takes the path to the requested resource as an argument. A request can
+take a relative path (that is, one that does not begin with a <code>/</code>), but
+the web context requires an absolute path. If the resource is not
+available or if the server has not implemented a <code>RequestDispatcher</code>
+object for that type of resource, <code>getRequestDispatcher</code> will return
+null. Your servlet should be prepared to deal with this condition.</p>
+</div>
+<div class="sect2">
+<h3 id="including-other-resources-in-the-response">Including Other Resources in the Response</h3>
+<div class="paragraph">
+<p>It is often useful to include another web resource, such as banner
+content or copyright information, in the response returned from a web
+component. To include another resource, invoke the <code>include</code> method of a
+<code>RequestDispatcher</code> object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">include(request, response);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the resource is static, the <code>include</code> method enables programmatic
+server-side includes. If the resource is a web component, the effect of
+the method is to send the request to the included web component, execute
+the web component, and then include the result of the execution in the
+response from the containing servlet. An included web component has
+access to the request object but is limited in what it can do with the
+response object.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It can write to the body of the response and commit a response.</p>
+</li>
+<li>
+<p>It cannot set headers or call any method, such as <code>setCookie</code>, that
+affects the headers of the response.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transferring-control-to-another-web-component">Transferring Control to Another Web Component</h3>
+<div class="paragraph">
+<p>In some applications, you might want to have one web component do
+preliminary processing of a request and have another component generate
+the response. For example, you might want to partially process a request
+and then transfer to another component, depending on the nature of the
+request.</p>
+</div>
+<div class="paragraph">
+<p>To transfer control to another web component, you invoke the <code>forward</code>
+method of a <code>RequestDispatcher</code>. When a request is forwarded, the
+request URL is set to the path of the forwarded page. The original URI
+and its constituent parts are saved as the following request attributes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">javax.servlet.forward.request_uri
+javax.servlet.forward.context_path
+javax.servlet.forward.servlet_path
+javax.servlet.forward.path_info
+javax.servlet.forward.query_string</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>forward</code> method should be used to give another resource
+responsibility for replying to the user. If you have already accessed a
+<code>ServletOutputStream</code> or <code>PrintWriter</code> object within the servlet, you
+cannot use this method; doing so throws an <code>IllegalStateException</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

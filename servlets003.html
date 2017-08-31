@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Sharing Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="sharing-information">Sharing Information</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web components, like most objects, usually work with other objects to
+accomplish their tasks. Web components can do so by doing the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using private helper objects (for example, JavaBeans components).</p>
+</li>
+<li>
+<p>Sharing objects that are attributes of a public scope.</p>
+</li>
+<li>
+<p>Using a database.</p>
+</li>
+<li>
+<p>Invoking other web resources. The Java Servlet technology mechanisms
+that allow a web component to invoke other web resources are described
+in <a href="servlets007.html#BNAGI">Invoking Other Web Resources</a>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="using-scope-objects">Using Scope Objects</h3>
+<div class="paragraph">
+<p>Collaborating web components share information by means of objects that
+are maintained as attributes of four scope objects. You access these
+attributes by using the <code>getAttribute</code> and <code>setAttribute</code> methods of the
+class representing the scope. <a href="#BNAFQ">Table 17-2</a> lists the scope
+objects.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref98"></a><a id="BNAFQ"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 17-2 Scope Objects</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 54%;">
+<colgroup>
+<col style="width: 29.7029%;">
+<col style="width: 69.3069%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Scope Object</th>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Accessible From</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.ServletContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web components within a
+web context. See <a href="servlets008.html#BNAGL">Accessing the Web Context</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.http.HttpSession</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web components handling a
+request that belongs to the session. See
+<a href="servlets009.html#BNAGM">Maintaining Client State</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subtype of <code>javax.servlet.ServletRequest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web components
+handling the request.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.servlet.jsp.JspContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JSP page that creates the
+object.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="controlling-concurrent-access-to-shared-resources">Controlling Concurrent Access to Shared Resources</h3>
+<div class="paragraph">
+<p>In a multithreaded server, shared resources can be accessed
+concurrently. In addition to scope object attributes, shared resources
+include in-memory data, such as instance or class variables, and
+external objects, such as files, database connections, and network
+connections.</p>
+</div>
+<div class="paragraph">
+<p>Concurrent access can arise in several situations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Multiple web components accessing objects stored in the web context.</p>
+</li>
+<li>
+<p>Multiple web components accessing objects stored in a session.</p>
+</li>
+<li>
+<p>Multiple threads within a web component accessing instance variables.
+A web container will typically create a thread to handle each request.
+To ensure that a servlet instance handles only one request at a time, a
+servlet can implement the <code>SingleThreadModel</code> interface. If a servlet
+implements this interface, no two threads will execute concurrently in
+the servlet&#8217;s service method. A web container can implement this
+guarantee by synchronizing access to a single instance of the servlet or
+by maintaining a pool of web component instances and dispatching each
+new request to a free instance. This interface does not prevent
+synchronization problems that result from web components' accessing
+shared resources, such as static class variables or external objects.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When resources can be accessed concurrently, they can be used in an
+inconsistent fashion. You prevent this by controlling the access using
+the synchronization techniques described in the Threads lesson at
+<code>http://docs.oracle.com/javase/tutorial/essential/concurrency/</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

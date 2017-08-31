@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Referencing a Managed Bean Method</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-page-core003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-develop.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="referencing-a-managed-bean-method">Referencing a Managed Bean Method</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A component tag has a set of attributes for referencing managed bean
+methods that can perform certain functions for the component associated
+with the tag. These attributes are summarized in <a href="#BNATO">Table
+11-7</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref66"></a><a id="BNATO"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 11-7 Component Tag Attributes That Reference Managed Bean Methods</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 26%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>action</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a managed bean method that performs navigation
+processing for the component and returns a logical outcome <code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>actionListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a managed bean method that handles action
+events</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a managed bean method that performs validation
+on the component&#8217;s value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>valueChangeListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a managed bean method that handles
+value-change events</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Only components that implement <code>ActionSource</code> can use the <code>action</code> and
+<code>actionListener</code> attributes. Only components that implement
+<code>EditableValueHolder</code> can use the <code>validator</code> or <code>valueChangeListener</code>
+attributes.</p>
+</div>
+<div class="paragraph">
+<p>The component tag refers to a managed bean method using a method
+expression as a value of one of the attributes. The method referenced by
+an attribute must follow a particular signature, which is defined by the
+tag attribute&#8217;s definition in the o<a href="JSFTL">JavaServer Faces Facelets
+Tag Library documentation</a>. For example, the definition of the
+<code>validator</code> attribute of the <code>inputText</code> tag is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">void validate(javax.faces.context.FacesContext,
+              javax.faces.component.UIComponent, java.lang.Object)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following sections give examples of how to use the attributes.</p>
+</div>
+<div class="sect2">
+<h3 id="referencing-a-method-that-performs-navigation">Referencing a Method That Performs Navigation</h3>
+<div class="paragraph">
+<p>If your page includes a component, such as a button or a link, that
+causes the application to navigate to another page when the component is
+activated, the tag corresponding to this component must include an
+<code>action</code> attribute. This attribute does one of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Specifies a logical outcome <code>String</code> that tells the application which
+page to access next</p>
+</li>
+<li>
+<p>References a managed bean method that performs some processing and
+returns a logical outcome <code>String</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following example shows how to reference a navigation method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton value="#{bundle.Submit}"
+                 action="#{cashierBean.submit}" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-develop003.html#BNAVC">Writing a Method to Handle Navigation</a>
+for information on how to write such a method.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="referencing-a-method-that-handles-an-action-event">Referencing a Method That Handles an Action Event</h3>
+<div class="paragraph">
+<p>If a component on your page generates an action event, and if that event
+is handled by a managed bean method, you refer to the method by using
+the component&#8217;s <code>actionListener</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how such a method could be referenced:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandLink id="Duke" action="bookstore"
+               actionListener="#{actionBean.chooseBookFromLink}"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>actionListener</code> attribute of this component tag references the
+<code>chooseBookFromLink</code> method using a method expression. The
+<code>chooseBookFromLink</code> method handles the event when the user clicks the
+link rendered by this component. See
+<a href="jsf-develop003.html#BNAVD">Writing a Method to Handle an Action
+Event</a> for information on how to write such a method.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="referencing-a-method-that-performs-validation">Referencing a Method That Performs Validation</h3>
+<div class="paragraph">
+<p>If the input of one of the components on your page is validated by a
+managed bean method, refer to the method from the component&#8217;s tag by
+using the <code>validator</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>The following simplified example from
+<a href="cdi-basicexamples003.html#GJCXV">The guessnumber-cdi CDI Example</a>
+shows how to reference a method that performs validation on
+<code>inputGuess</code>, an input component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="inputGuess"
+    value="#{userNumberBean.userNumber}"
+    required="true" size="3"
+    disabled="#{userNumberBean.number eq userNumberBean.userNumber ...}"
+    validator="#{userNumberBean.validateNumberRange}"&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The managed bean method <code>validateNumberRange</code> verifies that the input
+value is within the valid range, which changes each time another guess
+is made. See <a href="jsf-develop003.html#BNAVE">Writing a Method to Perform
+Validation</a> for information on how to write such a method.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="referencing-a-method-that-handles-a-value-change-event">Referencing a Method That Handles a Value-Change Event</h3>
+<div class="paragraph">
+<p>If you want a component on your page to generate a value-change event
+and you want that event to be handled by a managed bean method instead
+of a <code>ValueChangeListener</code> implementation, you refer to the method by
+using the component&#8217;s <code>valueChangeListener</code> attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="name"
+             size="30"
+             value="#{cashierBean.name}"
+             required="true"
+             valueChangeListener="#{cashierBean.processValueChange}" /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>valueChangeListener</code> attribute of this component tag references the
+<code>processValueChange</code> method of <code>CashierBean</code> by using a method
+expression. The <code>processValueChange</code> method handles the event of a user
+entering a name in the input field rendered by this component.</p>
+</div>
+<div class="paragraph">
+<p><a href="jsf-develop003.html#BNAVF">Writing a Method to Handle a Value-Change
+Event</a> describes how to implement a method that handles a
+<code>ValueChangeEvent</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-page-core003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-develop.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

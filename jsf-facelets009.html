@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>HTML5-Friendly Markup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="html5-friendly-markup">HTML5-Friendly Markup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you want to produce user interface features for which HTML does not
+have its own elements, you can create a custom JavaServer Faces
+component and insert it in your Facelets page. This mechanism can cause
+a simple element to create complex web code. However, creating such a
+component is a significant task (see <a href="jsf-custom.html#BNAVG">Chapter
+15, "Creating Custom UI Components and Other Custom Objects"</a>).</p>
+</div>
+<div class="paragraph">
+<p>HTML5 offers new elements and attributes that can make it unnecessary to
+write your own components. It also provides many new capabilities for
+existing components. JavaServer Faces technology supports HTML5 not by
+introducing new UI components that imitate HTML5 ones but by allowing
+you to use HTML5 markup directly. It also allows you to use JavaServer
+Faces attributes within HTML5 elements. JavaServer Faces technology
+support for HTML5 falls into two categories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pass-through elements</p>
+</li>
+<li>
+<p>Pass-through attributes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The effect of the HTML5-friendly markup feature is to offer the Facelets
+page author almost complete control over the rendered page output,
+rather than having to pass this control off to component authors. You
+can mix and match JavaServer Faces and HTML5 components and elements as
+you see fit.</p>
+</div>
+<div class="sect2">
+<h3 id="using-pass-through-elements">Using Pass-Through Elements</h3>
+<div class="paragraph">
+<p>Pass-through elements allow you to use HTML5 tags and attributes but to
+treat them as equivalent to JavaServer Faces components associated with
+a server-side <code>UIComponent</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>To make an element that is not a JavaServer Faces element a pass-through
+element, specify at least one of its attributes using the
+<code>http://xmlns.jcp.org/jsf</code> namespace. For example, the following code
+declares the namespace with the short name <code>jsf</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html ... xmlns:jsf="http://xmlns.jcp.org/jsf"
+...
+    &lt;input type="email" jsf:id="email" name="email"
+           value="#{reservationBean.email}" required="required"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the <code>jsf</code> prefix is placed on the <code>id</code> attribute so that the HTML5
+input tag&#8217;s attributes are treated as part of the Facelets page. This
+means that, for example, you can use EL expressions to retrieve managed
+bean properties.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BABJADGH">Table 8-4</a> shows how pass-through elements are rendered
+as Facelets tags. The JSF implementation uses the element name and the
+identifying attribute to determine the corresponding Facelets tag that
+will be used in the server-side processing. The browser, however,
+interprets the markup that the page author has written.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref34"></a><a id="BABJADGH"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 8-4 How Facelets Renders HTML5 Elements</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 66%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 49.5049%;">
+<col style="width: 49.5051%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTML5 Element Name</th>
+<th class="tableblock halign-left valign-top">Identifying Attribute</th>
+<th class="tableblock halign-left valign-top">Facelets Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:action</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:commandLink</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:actionListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:commandLink</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:outputLink</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:outcome</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:link</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>body</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:body</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>button</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:commandButton</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>button</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:outcome</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:button</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>form</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:form</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>head</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:head</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>img</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:graphicImage</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="button"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:commandButton</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="checkbox"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:selectBooleanCheckbox</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="color"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="date"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="datetime"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="datetime-local"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="email"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="month"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="number"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="range"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="search"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="time"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="url"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="week"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="file"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputFile</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="hidden"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputHidden</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="password"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputSecret</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="reset"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:commandButton</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="submit"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:commandButton</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type="*"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputText</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>label</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:outputLabel</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>link</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:outputStylesheet</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>script</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:outputScript</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>multiple="*"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:selectManyListbox</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:selectOneListbox</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>textarea</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:inputTextArea</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="using-pass-through-attributes">Using Pass-Through Attributes</h3>
+<div class="paragraph">
+<p>Pass-through attributes are the converse of pass-through elements. They
+allow you to pass attributes that are not JavaServer Faces attributes
+through to the browser without interpretation. If you specify a
+pass-through attribute in a JavaServer Faces <code>UIComponent</code>, the
+attribute name and value are passed straight through to the browser
+without being interpreted by JavaServer Faces components or renderers.
+There are several ways to specify pass-through attributes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the JavaServer Faces namespace for pass-through attributes to
+prefix the attribute names within a JavaServer Faces component. For
+example, the following code declares the namespace with the short name
+<code>p</code>, then passes the <code>type</code>, <code>min</code>, <code>max</code>, <code>required</code>, and <code>title</code>
+attributes through to the HTML5 <code>input</code> component:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html ... xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+...
+
+&lt;h:form prependId="false"&gt;
+&lt;h:inputText id="nights" p:type="number" value="#{bean.nights}"
+             p:min="1" p:max="30" p:required="required"
+             p:title="Enter a number between 1 and 30 inclusive."&gt;
+        ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will cause the following markup to be rendered (assuming that
+<code>bean.nights</code> has a default value set to 1):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;input id="nights" type="number" value="1" min="1" max="30"
+       required="required"
+       title="Enter a number between 1 and 30 inclusive."&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To pass a single attribute, nest the <code>f:passThroughAttribute</code> tag
+within a component tag. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText value="#{user.email}"&gt;
+    &lt;f:passThroughAttribute name="type" value="email" /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This code would be rendered similarly to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;input value="me@me.com" type="email" /&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To pass a group of attributes, nest the <code>f:passThroughAttributes</code> tag
+within a component tag, specifying an EL value that must evaluate to a
+<code>Map&lt;String, Object&gt;</code>. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText value="#{bean.nights"&gt;
+    &lt;f:passThroughAttributes value="#{bean.nameValuePairs}" /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the bean used the following <code>Map</code> declaration and initialized the map
+in the constructor as follows, the markup would be similar to the output
+of the code that uses the pass-through attribute namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private Map&lt;String, Object&gt; nameValuePairs;
+...
+public Bean() {
+    this.nameValuePairs = new HashMap&lt;&gt;();
+    this.nameValuePairs.put("type", "number");
+    this.nameValuePairs.put("min", "1");
+    this.nameValuePairs.put("max", "30");
+    this.nameValuePairs.put("required", "required");
+    this.nameValuePairs.put("title",
+            "Enter a number between 1 and 4 inclusive.");
+}</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-reservation-example-application">The reservation Example Application</h3>
+<div class="paragraph">
+<p>The <code>reservation</code> example application provides a set of HTML5 <code>input</code>
+elements of various types to simulate purchasing tickets for a
+theatrical event. It consists of two Facelets pages, <code>reservation.xhtml</code>
+and <code>confirmation.xhtml</code>, and a backing bean, <code>ReservationBean.java</code>.
+The pages use both pass-through attributes and pass-through elements.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+tut-install`/examples/web/jsf/reservation/` directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABGCAHH">The Facelets Pages for the reservation Application</a></p>
+</li>
+<li>
+<p><a href="#BABHFCCG">The Managed Bean for the reservation Application</a></p>
+</li>
+<li>
+<p><a href="#BABIHHGC">To Build, Package, and Deploy the reservation Example
+Using NetBeans IDE</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-facelets-pages-for-the-reservation-application">The Facelets Pages for the reservation Application</h4>
+<div class="paragraph">
+<p>The first important feature of the Facelets pages for the <code>reservation</code>
+application is the <code>DOCTYPE</code> header. Most Facelets pages in JavaServer
+Faces applications refer to the XHTML DTD. The facelets pages for this
+application begin simply with the following <code>DOCTYPE</code> header, which
+indicates an HTML5 page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The namespace declarations in the <code>html</code> element of the
+<code>reservation.xhtml</code> page specify both the <code>jsf</code> and the <code>passthrough</code>
+namespaces:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, an empty <code>h:head</code> tag followed by an <code>h:outputStylesheet</code> tag
+within the <code>h:body</code> tag illustrates the use of a relocatable resource
+(as described in <a href="jsf-facelets007.html#BABHGBJI">Relocatable
+Resources</a>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:head&gt;
+&lt;/h:head&gt;
+&lt;h:body&gt;
+    &lt;h:outputStylesheet name="css/stylesheet.css" target="head"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>reservation.xhtml</code> page uses pass-through elements for most of the
+form fields on the page. This allows it to use some HTML5-specific
+<code>input</code> element types, such as <code>date</code> and <code>email</code>. For example, the
+following element renders both a date format and a calendar from which
+you can choose a date. The <code>jsf</code> prefix on the <code>id</code> attribute makes the
+element a pass-through one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;input type="date" jsf:id="date" name="date"
+           value="#{reservationBean.date}" required="required"
+           title="Enter or choose a date."/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The field for the number of tickets, however, uses the
+<code>h:passThroughAttributes</code> tag to pass a <code>Map</code> defined in the managed
+bean. It also recalculates the total in response to a change in the
+field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;h:inputText id="tickets" value="#{reservationBean.tickets}"&gt;
+        &lt;f:passThroughAttributes value="#{reservationBean.ticketAttrs}"/&gt;
+        &lt;f:ajax event="change" render="total"
+                listener="#{reservationBean.calculateTotal}"/&gt;
+    &lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The field for the price specifies the <code>number</code> type as a pass-through
+attribute of the <code>h:inputText</code> element, offering a range of four ticket
+prices. Here, the <code>p</code> prefix on the HTML5 attributes passes them through
+to the browser uninterpreted by the JavaServer Faces input component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;h:inputText id="price" p:type="number"
+                 value="#{reservationBean.price}"
+                 p:min="80" p:max="120"
+                 p:step="20" p:required="required"
+                 p:title="Enter a price: 80, 100, 120, or 140."&gt;
+        &lt;f:ajax event="change" render="total"
+                listener="#{reservationBean.calculateTotal}"/&gt;
+    &lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the <code>calculateTotal</code> method that is specified as the
+listener for the Ajax event is rendered in the output element whose <code>id</code>
+and <code>name</code> value is <code>total</code>. See <a href="jsf-ajax.html#GKIOW">Chapter 13,
+"Using Ajax with JavaServer Faces Technology"</a>, for more information.</p>
+</div>
+<div class="paragraph">
+<p>The second Facelets page, <code>confirmation.xhtml</code>, uses a pass-through
+<code>output</code> element to display the values entered by the user and provides
+a Facelets <code>h:commandButton</code> tag to allow the user to return to the
+<code>reservation.xhtml</code> page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-managed-bean-for-the-reservation-application">The Managed Bean for the reservation Application</h4>
+<div class="paragraph">
+<p>The session-scoped managed bean for the reservation application,
+<code>ReservationBean.java</code>, contains properties for all the elements on the
+Facelets pages. It also contains two methods, <code>calculateTotal</code> and
+<code>clear</code>, that act as listeners for Ajax events on the
+<code>reservation.xhtml</code> page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-reservation-example-using-netbeans-ide">To Build, Package, and Deploy the reservation Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>reservation</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>reservation</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This option builds the example application and deploys it to your
+GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-reservation-example-using-maven">To Build, Package, and Deploy the reservation Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/reservation/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>reservation.war</code>, that is located in the <code>target</code> directory. It then
+deploys the WAR file to your GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-reservation-example">To Run the reservation Example</h4>
+<div class="paragraph">
+<p>At the time of the publication of this tutorial, the browser that most
+fully implements HTML5 is Google Chrome, and it is recommended that you
+use it to run this example. Other browsers are catching up, however, and
+may work equally well by the time you read this.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enter the following URL in your web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/reservation</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter information in the fields of the <code>reservation.xhtml</code> page.</p>
+<div class="paragraph">
+<p>The Performance Date field has a date field with up and down arrows that
+allow you to increment and decrement the month, day, and year as well as
+a larger down arrow that brings up a date editor in calendar form.</p>
+</div>
+<div class="paragraph">
+<p>The Number of Tickets and Ticket Price fields also have up and down
+arrows that allow you to increment and decrement the values within the
+allowed range and steps. The Estimated Total changes when you change
+either of these two fields.</p>
+</div>
+<div class="paragraph">
+<p>Email addresses and dates are checked for format, but not for validity
+(you can make a reservation for a past date, for instance).</p>
+</div>
+</li>
+<li>
+<p>Click Make Reservation to complete the reservation or Clear to
+restore the fields to their default values.</p>
+</li>
+<li>
+<p>If you click Make Reservation, the <code>confirmation.xhtml</code> page
+appears, displaying the submitted values.</p>
+<div class="paragraph">
+<p>Click Back to return to the <code>reservation.xhtml</code> page.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

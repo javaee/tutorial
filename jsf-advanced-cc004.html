@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The compositecomponentexample Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-advanced-cc003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-compositecomponentexample-example-application">The compositecomponentexample Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>compositecomponentexample</code> application creates a composite
+component that accepts a name (or any other string). The component
+interacts with a managed bean that calculates whether the letters in the
+name, if converted to numeric values, add up to a prime number. The
+component displays the sum of the letter values and reports whether it
+is or is not prime.</p>
+</div>
+<div class="paragraph">
+<p>The <code>compositecomponentexample</code> application has a composite component
+file, a using page, and a managed bean.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+tut-install`/examples/web/jsf/compositecomponentexample/` directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHUU">The Composite Component File</a></p>
+</li>
+<li>
+<p><a href="#GKHVX">The Using Page</a></p>
+</li>
+<li>
+<p><a href="#GKHVQ">The Managed Bean</a></p>
+</li>
+<li>
+<p><a href="#GLECV">Running the compositecomponentexample Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-composite-component-file">The Composite Component File</h3>
+<div class="paragraph">
+<p>The composite component file is an XHTML file,
+<code>/web/resources/ezcomp/PrimePanel.xhtml</code>. It has a <code>composite:interface</code>
+section that declares the labels for the name and a command button. It
+also declares a managed bean, which defines properties for the name.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;composite:interface&gt;
+    &lt;composite:attribute name="namePrompt"
+                         default="Name, word, or phrase: "/&gt;
+    &lt;composite:attribute name="calcButtonText" default="Calculate"/&gt;
+    &lt;composite:attribute name="calcAction"
+                         method-signature="java.lang.String action()"/&gt;
+    &lt;composite:attribute name="primeBean"/&gt;
+    &lt;composite:editableValueHolder name="nameVal" targets="form:name"/&gt;
+&lt;/composite:interface&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The composite component implementation accepts the input value for the
+<code>name</code> property of the managed bean. The <code>h:outputStylesheet</code> tag
+specifies the stylesheet as a relocatable resource. The implementation
+then specifies the format of the output, using properties of the managed
+bean, as well as the format of error messages. The sum value is rendered
+only after it has been calculated, and the report of whether the sum is
+prime or not is rendered only if the input value is validated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;composite:implementation&gt;
+    &lt;h:form id="form"&gt;
+        &lt;h:outputStylesheet library="css" name="default.css"
+                            target="head"/&gt;
+        &lt;h:panelGrid columns="2" role="presentation"&gt;
+            &lt;h:outputLabel for="name"
+                           value="#{cc.attrs.namePrompt}"/&gt;
+            &lt;h:inputText id="name"
+                         size="45"
+                         value="#{cc.attrs.primeBean.name}"
+                         required="true"/&gt;
+        &lt;/h:panelGrid&gt;
+        &lt;p&gt;
+            &lt;h:commandButton id="calcButton"
+                             value="#{cc.attrs.calcButtonText}"
+                             action="#{cc.attrs.calcAction}"&gt;
+                &lt;f:ajax execute="name" render="outputGroup"/&gt;
+            &lt;/h:commandButton&gt;
+        &lt;/p&gt;
+
+       &lt;h:panelGroup id="outputGroup" layout="block"&gt;
+            &lt;p&gt;
+                &lt;h:outputText id="result" style="color:blue"
+                              rendered="#{cc.attrs.primeBean.totalSum gt 0}"
+                              value="Sum is #{cc.attrs.primeBean.totalSum}" /&gt;
+            &lt;/p&gt;
+            &lt;p&gt;
+                &lt;h:outputText id="response" style="color:blue"
+                              value="#{cc.attrs.primeBean.response}"
+                              rendered="#{!facesContext.validationFailed}"/&gt;
+                &lt;h:message id="errors1"
+                           showSummary="true"
+                           showDetail="false"
+                           style="color: #d20005;
+                           font-family: 'New Century Schoolbook', serif;
+                           font-style: oblique;
+                           text-decoration: overline"
+                           for="name"/&gt;
+            &lt;/p&gt;
+        &lt;/h:panelGroup&gt;
+    &lt;/h:form&gt;
+&lt;/composite:implementation&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-using-page">The Using Page</h3>
+<div class="paragraph">
+<p>The using page in this example application, <code>web/index.xhtml</code>, is an
+XHTML file that invokes the <code>PrimePanel.xhtml</code> composite component file
+along with the managed bean. It validates the user&#8217;s input.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;div id="compositecomponent"&gt;
+    &lt;ez:PrimePanel primeBean="#{primeBean}"
+                   calcAction="#{primeBean.calculate}"&gt;
+    &lt;/ez:PrimePanel&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-managed-bean">The Managed Bean</h3>
+<div class="paragraph">
+<p>The managed bean, <code>PrimeBean.java</code>, defines a method called <code>calculate</code>,
+which performs the calculations on the input string and sets properties
+accordingly. The bean first creates an array of prime numbers. It
+calculates the sum of the letters in the string, with <code>'a'</code> equal to 1
+and <code>'z'</code> equal to 26, and determines whether the value can be found in
+the array of primes. An uppercase letter in the input string has the
+same value as its lowercase equivalent.</p>
+</div>
+<div class="paragraph">
+<p>The bean specifies the minimum and maximum size of the <code>name</code> string,
+which is enforced by the Bean Validation <code>@Size</code> constraint. The bean
+uses the <code>@Model</code> annotation, a shortcut for <code>@Named</code> and
+<code>@RequestScoped</code>, as described in Step <a href="webapp003.html#CHDCABHC">7</a> of
+<a href="webapp003.html#GJWTV">To View the hello1 Web Module Using NetBeans
+IDE</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Model
+public class PrimeBean implements Serializable {
+    ...
+    @Size(min=1, max=45)
+    private String name;
+    ...
+
+    public String calculate() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-compositecomponentexample-example">Running the compositecomponentexample Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>compositecomponentexample</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHVC">To Build, Package, and Deploy the
+compositecomponentexample Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GLEAE">To Build, Package, and Deploy the
+compositecomponentexample Example Using Maven</a></p>
+</li>
+<li>
+<p><a href="#GLEEU">To Run the compositecomponentexample Example</a></p>
+</li>
+</ul>
+</div>
+<div id="to-build-package-and-deploy-the-compositecomponentexample-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the compositecomponentexample Example
+Using NetBeans IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>compositecomponentexample</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>compositecomponentexample</code>
+project and select Build.</p>
+<div class="paragraph">
+<p>This command builds and deploys the application.</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="to-build-package-and-deploy-the-compositecomponentexample-example-using-maven" class="paragraph">
+<p>To Build, Package, and Deploy the compositecomponentexample Example
+Using Maven
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/compositecomponentexample/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to build and deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-compositecomponentexample-example">To Run the compositecomponentexample Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/compositecomponentexample</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the page that appears, enter a string in the Name, word, or
+phrase field, then click Calculate.</p>
+<div class="paragraph">
+<p>The page reports the sum of the letters and whether the sum is prime. A
+validation error is reported if no value is entered or if the string
+contains more than 45 characters.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-advanced-cc003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

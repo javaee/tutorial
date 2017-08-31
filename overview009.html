@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Java EE 8 APIs in the Java Platform, Standard Edition 8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="overview008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="java-ee-8-apis-in-the-java-platform-standard-edition-8">Java EE 8 APIs in the Java Platform, Standard Edition 8</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Several APIs that are required by the Java EE 8 platform are included in
+the Java Platform, Standard Edition 8 (Java SE 8) and are thus available
+to Java EE applications.</p>
+</div>
+<div class="sect2">
+<h3 id="java-database-connectivity-api">Java Database Connectivity API</h3>
+<div class="paragraph">
+<p>The Java Database Connectivity (JDBC) API lets you invoke SQL commands
+from Java programming language methods. You use the JDBC API in an
+enterprise bean when you have a session bean access the database. You
+can also use the JDBC API from a servlet or a JSP page to access the
+database directly without going through an enterprise bean.</p>
+</div>
+<div class="paragraph">
+<p>The JDBC API has two parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application-level interface used by the application components to
+access a database</p>
+</li>
+<li>
+<p>A service provider interface to attach a JDBC driver to the Java EE
+platform</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JDBC 4.1.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-naming-and-directory-interface-api">Java Naming and Directory Interface API</h3>
+<div class="paragraph">
+<p>The Java Naming and Directory Interface (JNDI) API provides naming and
+directory functionality, enabling applications to access multiple naming
+and directory services, such as LDAP, DNS, and NIS. The JNDI API
+provides applications with methods for performing standard directory
+operations, such as associating attributes with objects and searching
+for objects using their attributes. Using JNDI, a Java EE application
+can store and retrieve any type of named Java object, allowing Java EE
+applications to coexist with many legacy applications and systems.</p>
+</div>
+<div class="paragraph">
+<p>Java EE naming services provide application clients, enterprise beans,
+and web components with access to a JNDI naming environment. A naming
+environment allows a component to be customized without the need to
+access or change the component&#8217;s source code. A container implements the
+component&#8217;s environment and provides it to the component as a JNDI
+naming context.</p>
+</div>
+<div class="paragraph">
+<p>The naming environment provides four logical namespaces: <code>java:comp</code>,
+<code>java:module</code>, <code>java:app</code>, and <code>java:global</code> for objects available to
+components, modules, or applications or shared by all deployed
+applications. A Java EE component can access named system-provided and
+user-defined objects. The names of some system-provided objects, such as
+a default JDBC <code>DataSource</code> object, a default JMS connection factory,
+and a JTA <code>UserTransaction</code> object, are stored in the <code>java:comp</code>
+namespace. The Java EE platform allows a component to name user-defined
+objects, such as enterprise beans, environment entries, JDBC
+<code>DataSource</code> objects, and messaging destinations.</p>
+</div>
+<div class="paragraph">
+<p>A Java EE component can also locate its environment naming context by
+using JNDI interfaces. A component can create a
+<code>javax.naming.InitialContext</code> object and look up the environment naming
+context in <code>InitialContext</code> under the name <code>java:comp/env</code>. A
+component&#8217;s naming environment is stored directly in the environment
+naming context or in any of its direct or indirect subcontexts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="javabeans-activation-framework">JavaBeans Activation Framework</h3>
+<div class="paragraph">
+<p>The JavaBeans Activation Framework (JAF) is used by the JavaMail API.
+JAF provides standard services to determine the type of an arbitrary
+piece of data, encapsulate access to it, discover the operations
+available on it, and create the appropriate JavaBeans component to
+perform those operations.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-api-for-xml-processing">Java API for XML Processing</h3>
+<div class="paragraph">
+<p>The Java API for XML Processing (JAXP), part of the Java SE platform,
+supports the processing of XML documents using Document Object Model
+(DOM), Simple API for XML (SAX), and Extensible Stylesheet Language
+Transformations (XSLT). JAXP enables applications to parse and transform
+XML documents independently of a particular XML-processing
+implementation.</p>
+</div>
+<div class="paragraph">
+<p>JAXP also provides namespace support, which lets you work with schemas
+that might otherwise have naming conflicts. Designed to be flexible,
+JAXP lets you use any XML-compliant parser or XSL processor from within
+your application and supports the Worldwide Web Consortium (W3C) schema.
+You can find information on the W3C schema at
+<code><a href="http://www.w3.org/XML/Schema" class="bare">http://www.w3.org/XML/Schema</a></code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-architecture-for-xml-binding">Java Architecture for XML Binding</h3>
+<div class="paragraph">
+<p>The Java Architecture for XML Binding (JAXB) provides a convenient way
+to bind an XML schema to a representation in Java language programs.
+JAXB can be used independently or in combination with JAX-WS, in which
+case it provides a standard data binding for web service messages. All
+Java EE application client containers, web containers, and EJB
+containers support the JAXB API.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JAXB 2.2.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-api-for-xml-web-services">Java API for XML Web Services</h3>
+<div class="paragraph">
+<p>The Java API for XML Web Services (JAX-WS) specification provides
+support for web services that use the JAXB API for binding XML data to
+Java objects. The JAX-WS specification defines client APIs for accessing
+web services as well as techniques for implementing web service
+endpoints. The Implementing Enterprise Web Services specification
+describes the deployment of JAX-WS-based services and clients. The EJB
+and Java Servlet specifications also describe aspects of such
+deployment. JAX-WS-based applications can be deployed using any of these
+deployment models.</p>
+</div>
+<div class="paragraph">
+<p>The JAX-WS specification describes the support for message handlers that
+can process message requests and responses. In general, these message
+handlers execute in the same container and with the same privileges and
+execution context as the JAX-WS client or endpoint component with which
+they are associated. These message handlers have access to the same JNDI
+namespace as their associated component. Custom serializers and
+deserializers, if supported, are treated in the same way as message
+handlers.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JAX-WS 2.2.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="soap-with-attachments-api-for-java">SOAP with Attachments API for Java</h3>
+<div class="paragraph">
+<p>The SOAP with Attachments API for Java (SAAJ) is a low-level API on
+which JAX-WS depends. SAAJ enables the production and consumption of
+messages that conform to the SOAP 1.1 and 1.2 specifications and the
+SOAP with Attachments note. Most developers do not use the SAAJ API,
+instead using the higher-level JAX-WS API.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-authentication-and-authorization-service">Java Authentication and Authorization Service</h3>
+<div class="paragraph">
+<p>The Java Authentication and Authorization Service (JAAS) provides a way
+for a Java EE application to authenticate and authorize a specific user
+or group of users to run it.</p>
+</div>
+<div class="paragraph">
+<p>JAAS is a Java programming language version of the standard Pluggable
+Authentication Module (PAM) framework, which extends the Java platform
+security architecture to support user-based authorization.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="common-annotations-for-the-java-platform">Common Annotations for the Java Platform</h3>
+<div class="paragraph">
+<p>Annotations enable a declarative style of programming in the Java
+platform.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 7 platform requires Common Annotations for the Java Platform
+1.2.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="overview008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

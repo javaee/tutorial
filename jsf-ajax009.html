@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Grouping of Components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ajax008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="grouping-of-components">Grouping of Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The previous sections describe how to associate a single UI component
+with Ajax functionality. You can also associate Ajax with more than one
+component at a time by grouping them together on a page. The following
+example shows how a number of components can be grouped by using the
+<code>f:ajax</code> tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:ajax&gt;
+    &lt;h:form&gt;
+        &lt;h:inputText id="input1" value="#{user.name}"/&gt;
+        &lt;h:commandButton id="Submit"/&gt;
+    &lt;/h:form&gt;
+&lt;/f:ajax&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example, neither component is associated with any Ajax <code>event</code> or
+<code>render</code> attributes yet. Therefore, no action will take place in case of
+user input. You can associate the above components with an <code>event</code> and a
+<code>render</code> attribute as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:ajax event="click" render="@all"&gt;
+    &lt;h:form&gt;
+        &lt;h:inputText id="input1" value="#{user.name}"/&gt;
+        &lt;h:commandButton id="Submit"/&gt;
+    &lt;/h:form&gt;
+&lt;/f:ajax&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the updated example, when the user clicks either component, the
+updated results will be displayed for all components. You can further
+fine-tune the Ajax action by adding specific events to each of the
+components, in which case Ajax functionality becomes cumulative.
+Consider the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:ajax event="click" render="@all"&gt;
+    ...
+    &lt;h:commandButton id="Submit"&gt;
+        &lt;f:ajax event="mouseover"/&gt;
+    &lt;/h:commandButton&gt;
+    ...
+&lt;/f:ajax&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now the button component will fire an Ajax action in case of a
+<code>mouseover</code> event as well as a mouse-click event.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ajax008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

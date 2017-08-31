@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Entity Graph Basics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-entitygraphs001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-entitygraphs003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="entity-graph-basics">Entity Graph Basics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can create entity graphs statically by using annotations or a
+deployment descriptor, or dynamically by using standard interfaces.</p>
+</div>
+<div class="paragraph">
+<p>You can use an entity graph with the <code>EntityManager.find</code> method or as
+part of a JPQL or Criteria API query by specifying the entity graph as a
+hint to the operation or query.</p>
+</div>
+<div class="paragraph">
+<p>Entity graphs have attributes that correspond to the fields that will be
+eagerly fetched during a <code>find</code> or query operation. The primary key and
+version fields of the entity class are always fetched and do not need to
+be explicitly added to an entity graph.</p>
+</div>
+<div class="sect2">
+<h3 id="the-default-entity-graph">The Default Entity Graph</h3>
+<div class="paragraph">
+<p>By default, all fields in an entity are fetched lazily unless the
+<code>fetch</code> attribute of the entity metadata is set to
+<code>javax.persistence.FetchType.EAGER</code>. The default entity graph consists
+of all the fields of an entity whose fields are set to be eagerly
+fetched.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following <code>EmailMessage</code> entity specifies that some
+fields will be fetched eagerly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class EmailMessage implements Serializable {
+    @Id
+    String messageId;
+    @Basic(fetch=EAGER)
+    String subject;
+    String body;
+    @Basic(fetch=EAGER)
+    String sender;
+    @OneToMany(mappedBy="message", fetch=LAZY)
+    Set&lt;EmailAttachment&gt; attachments;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default entity graph for this entity would contain the <code>messageId</code>,
+<code>subject</code>, and <code>sender</code> fields, but not the <code>body</code> or <code>attachments</code>
+fields.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-entity-graphs-in-persistence-operations">Using Entity Graphs in Persistence Operations</h3>
+<div class="paragraph">
+<p>Entity graphs are used by creating an instance of the
+<code>javax.persistence.EntityGraph</code> interface by calling either
+<code>EntityManager.getEntityGraph</code> for named entity graphs or
+<code>EntityManager.createEntityGraph</code> for creating dynamic entity graphs.</p>
+</div>
+<div class="paragraph">
+<p>A named entity graph is an entity graph specified by the
+<code>@NamedEntityGraph</code> annotation applied to entity classes, or the
+<code>named-entity-graph</code> element in the application&#8217;s deployment
+descriptors. Named entity graphs defined within the deployment
+descriptor override any annotation-based entity graphs with the same
+name.</p>
+</div>
+<div class="paragraph">
+<p>The created entity graph can be either a fetch graph or a load graph.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABGEFCG">Fetch Graphs</a></p>
+</li>
+<li>
+<p><a href="#BABHJBHG">Load Graphs</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="fetch-graphs">Fetch Graphs</h4>
+<div class="paragraph">
+<p>To specify a fetch graph, set the <code>javax.persistence.fetchgraph</code>
+property when you execute an <code>EntityManager.find</code> or query operation. A
+fetch graph consists of only the fields explicitly specified in the
+<code>EntityGraph</code> instance, and ignores the default entity graph settings.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the default entity graph is ignored, and only
+the <code>body</code> field is included in the dynamically created fetch graph:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityGraph&lt;EmailMessage&gt; eg = em.createEntityGraph(EmailMessage.class);
+eg.addAttributeNodes("body");
+...
+Properties props = new Properties();
+props.put("javax.persistence.fetchgraph", eg);
+EmailMessage message = em.find(EmailMessage.class, id, props);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="load-graphs">Load Graphs</h4>
+<div class="paragraph">
+<p>To specify a load graph, set the <code>javax.persistence.loadgraph</code> property
+when you execute an <code>EntityManager.find</code> or query operation. A load
+graph consists of the fields explicitly specified in the <code>EntityGraph</code>
+instance plus any fields in the default entity graph.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the dynamically created load graph contains
+all the fields in the default entity graph plus the <code>body</code> field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityGraph&lt;EmailMessage&gt; eg = em.createEntityGraph(EmailMessage.class);
+eg.addAttributeNodes("body");
+...
+Properties props = new Properties();
+props.put("javax.persistence.loadgraph", eg);
+EmailMessage message = em.find(EmailMessage.class, id, props);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-entitygraphs001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-entitygraphs003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

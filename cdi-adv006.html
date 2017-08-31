@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Interceptors in CDI Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-interceptors-in-cdi-applications">Using Interceptors in CDI Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An interceptor is a class used to interpose in method invocations or
+lifecycle events that occur in an associated target class. The
+interceptor performs tasks, such as logging or auditing, that are
+separate from the business logic of the application and are repeated
+often within an application. Such tasks are often called cross-cutting
+tasks. Interceptors allow you to specify the code for these tasks in one
+place for easy maintenance. When interceptors were first introduced to
+the Java EE platform, they were specific to enterprise beans. On the
+Java EE platform, you can use them with Java EE managed objects of all
+kinds, including managed beans.</p>
+</div>
+<div class="paragraph">
+<p>For information on Java EE interceptors, see
+<a href="interceptors.html#GKEED">Chapter 55, "Using Java EE Interceptors"</a>.</p>
+</div>
+<div class="paragraph">
+<p>An interceptor class often contains a method annotated <code>@AroundInvoke</code>,
+which specifies the tasks the interceptor will perform when intercepted
+methods are invoked. It can also contain a method annotated
+<code>@PostConstruct</code>, <code>@PreDestroy</code>, <code>@PrePassivate</code>, or <code>@PostActivate</code>, to
+specify lifecycle callback interceptors, and a method annotated
+<code>@AroundTimeout</code>, to specify EJB timeout interceptors. An interceptor
+class can contain more than one interceptor method, but it must have no
+more than one method of each type.</p>
+</div>
+<div class="paragraph">
+<p>Along with an interceptor, an application defines one or more
+interceptor binding types, which are annotations that associate an
+interceptor with target beans or methods. For example, the <code>billpayment</code>
+example contains an interceptor binding type named <code>@Logged</code> and an
+interceptor named <code>LoggedInterceptor</code>. The interceptor binding type
+declaration looks something like a qualifier declaration, but it is
+annotated with <code>javax.interceptor.InterceptorBinding</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Inherited
+@InterceptorBinding
+@Retention(RUNTIME)
+@Target({METHOD, TYPE})
+public @interface Logged {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An interceptor binding also has the <code>java.lang.annotation.Inherited</code>
+annotation, to specify that the annotation can be inherited from
+superclasses. The <code>@Inherited</code> annotation also applies to custom scopes
+(not discussed in this tutorial) but does not apply to qualifiers.</p>
+</div>
+<div class="paragraph">
+<p>An interceptor binding type may declare other interceptor bindings.</p>
+</div>
+<div class="paragraph">
+<p>The interceptor class is annotated with the interceptor binding as well
+as with the <code>@Interceptor</code> annotation. For an example, see
+<a href="cdi-adv-examples005.html#GKHRQ">The LoggedInterceptor Interceptor
+Class</a>.</p>
+</div>
+<div class="paragraph">
+<p>Every <code>@AroundInvoke</code> method takes a
+<code>javax.interceptor.InvocationContext</code> argument, returns a
+<code>java.lang.Object</code>, and throws an <code>Exception</code>. It can call
+<code>InvocationContext</code> methods. The <code>@AroundInvoke</code> method must call the
+<code>proceed</code> method, which causes the target class method to be invoked.</p>
+</div>
+<div class="paragraph">
+<p>Once an interceptor and binding type are defined, you can annotate beans
+and individual methods with the binding type to specify that the
+interceptor is to be invoked either on all methods of the bean or on
+specific methods. For example, in the <code>billpayment</code> example, the
+<code>PaymentHandler</code> bean is annotated <code>@Logged</code>, which means that any
+invocation of its business methods will cause the interceptor&#8217;s
+<code>@AroundInvoke</code> method to be invoked:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Logged
+@SessionScoped
+public class PaymentHandler implements Serializable {...}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, in the <code>PaymentBean</code> bean, only the <code>pay</code> and <code>reset</code> methods
+have the <code>@Logged</code> annotation, so the interceptor is invoked only when
+these methods are invoked:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Logged
+public String pay() {...}
+
+@Logged
+public void reset() {...}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order for an interceptor to be invoked in a CDI application, it must,
+like an alternative, be specified in the <code>beans.xml</code> file. For example,
+the <code>LoggedInterceptor</code> class is specified as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;interceptors&gt;
+    &lt;class&gt;javaeetutorial.billpayment.interceptors.LoggedInterceptor&lt;/class&gt;
+&lt;/interceptors&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an application uses more than one interceptor, the interceptors are
+invoked in the order specified in the <code>beans.xml</code> file.</p>
+</div>
+<div class="paragraph">
+<p>The interceptors that you specify in the <code>beans.xml</code> file apply only to
+classes in the same archive. Use the <code>@Priority</code> annotation to specify
+interceptors globally for an application that consists of multiple
+modules, as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Logged
+@Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
+public class LoggedInterceptor implements Serializable { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Interceptors with lower priority values are called first. You do not
+need to specify the interceptor in the <code>beans.xml</code> file when you use the
+<code>@Priority</code> annotation.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

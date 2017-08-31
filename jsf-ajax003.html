@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Ajax with Facelets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ajax002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-ajax-with-facelets">Using Ajax with Facelets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As mentioned in the previous section, JavaServer Faces technology
+supports Ajax by using a built-in JavaScript resource library that is
+provided as part of the JavaServer Faces core libraries. This built-in
+Ajax resource can be used in JavaServer Faces web applications in one of
+the following ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>By using the <code>f:ajax</code> tag along with another standard component in a
+Facelets application. This method adds Ajax functionality to any UI
+component without additional coding and configuration.</p>
+</li>
+<li>
+<p>By using the JavaScript API method <code>jsf.ajax.request()</code> directly
+within the Facelets application. This method provides direct access to
+Ajax methods and allows customized control of component behavior.</p>
+</li>
+<li>
+<p>By using the <code>&lt;h:commandScript&gt;</code> component to execute arbitrary
+server-side methods from a view. The component generates a JavaScript
+function with a given name that when invoked, in turn invokes, a given
+server-side method via Ajax.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="using-the-fajax-tag">Using the f:ajax Tag</h3>
+<div class="paragraph">
+<p>The <code>f:ajax</code> tag is a JavaServer Faces core tag that provides Ajax
+functionality to any regular UI component when used in conjunction with
+that component. In the following example, Ajax behavior is added to an
+input component by including the <code>f:ajax</code> core tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText value="#{bean.message}"&gt;
+    &lt;f:ajax /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, although Ajax is enabled, the other attributes of the
+<code>f:ajax</code> tag are not defined. If an event is not defined, the default
+action for the component is performed. For the <code>inputText</code> component,
+when no <code>event</code> attribute is specified, the default event is
+<code>valueChange</code>. <a href="#GKDER">Table 13-1</a> lists the attributes of the
+<code>f:ajax</code> tag and their default actions.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref69"></a><a id="GKDER"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 13-1 Attributes of the f:ajax Tag</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 48%;">
+<colgroup>
+<col style="width: 27.7227%;">
+<col style="width: 71.2871%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>disabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to a <code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A
+<code>Boolean</code> value that identifies the tag status. A value of <code>true</code>
+indicates that the Ajax behavior should not be rendered. A value of
+<code>false</code> indicates that the Ajax behavior should be rendered. The default
+value is <code>false</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>event</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to a <code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A
+<code>String</code> that identifies the type of event to which the Ajax action will
+apply. If specified, it must be one of the events supported by the
+component. If not specified, the default event (the event that triggers
+the Ajax request) is determined for the component. The default event is
+<code>action</code> for <code>javax.faces.component.ActionSource</code> components and
+<code>valueChange</code> for <code>javax.faces.component.EditableValueHolder</code>
+components.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>execute</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to an <code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A
+<code>Collection</code> that identifies a list of components to be executed on the
+server. If a literal is specified, it must be a space-delimited <code>String</code>
+of component identifiers and/or one of the keywords. If a
+<code>ValueExpression</code> is specified, it must refer to a property that returns
+a <code>Collection</code> of <code>String</code> objects. If not specified, the default value
+is <code>@this</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>immediate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to a <code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>Boolean</code> value that indicates whether inputs are to be processed
+early in the lifecycle. If <code>true</code>, behavior events generated from this
+behavior are broadcast during the Apply Request Values phase. Otherwise,
+the events will be broadcast during the Invoke Application phase.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.MethodExpression</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the listener
+method that is called when a <code>javax.faces.event.AjaxBehaviorEvent</code> has
+been broadcast for the listener.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>onevent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to a <code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The
+name of the JavaScript function that handles UI events.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>onerror</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to a <code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The
+name of the JavaScript function that handles errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>render</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.el.ValueExpression</code> that evaluates to an <code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A
+<code>Collection</code> that identifies a list of components to be rendered on the
+client. If a literal is specified, it must be a space-delimited <code>String</code>
+of component identifiers and/or one of the keywords. If a
+<code>ValueExpression</code> is specified, it must refer to a property that returns
+a <code>Collection</code> of <code>String</code> objects. If not specified, the default value
+is <code>@none</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The keywords listed in <a href="#GKNLK">Table 13-2</a> can be used with the
+<code>execute</code> and <code>render</code> attributes of the <code>f:ajax</code> tag.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref70"></a><a id="GKNLK"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 13-2 Execute and Render Keywords</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 14%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Keyword</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@all</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All component identifiers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@form</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The form that encloses the component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No component identifiers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@this</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The element that triggered the request</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Note that when you use the <code>f:ajax</code> tag in a Facelets page, the
+JavaScript resource library is loaded implicitly. This resource library
+can also be loaded explicitly as described in
+<a href="jsf-ajax010.html#GKAAM">Loading JavaScript as a Resource</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ajax002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

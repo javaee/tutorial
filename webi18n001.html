@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Java Platform Localization Classes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="webi18n.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webi18n002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="java-platform-localization-classes">Java Platform Localization Classes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the Java platform, java.util.Locale
+(<code>http://docs.oracle.com/javase/7/docs/api/java/util/Locale.html</code>)
+represents a specific geographical, political, or cultural region. The
+string representation of a locale consists of the international standard
+two-character abbreviation for language and country and an optional
+variant, all separated by underscore (<code>_</code>) characters. Examples of
+locale strings include <code>fr</code> (French), <code>de_CH</code> (Swiss German), and
+<code>en_US_POSIX</code> (English on a POSIX-compliant platform).</p>
+</div>
+<div class="paragraph">
+<p>Locale-sensitive data is stored in a java.util.ResourceBundle
+(<code>http://docs.oracle.com/javase/7/docs/api/java/util/ResourceBundle.html</code>).
+A resource bundle contains key-value pairs, where the keys uniquely
+identify a locale-specific object in the bundle. A resource bundle can
+be backed by a text file (properties resource bundle) or a class (list
+resource bundle) containing the pairs. You construct a resource bundle
+instance by appending a locale string representation to a base name.</p>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Bookstore application (see
+<a href="dukes-bookstore.html#GLNVI">Chapter 58, "Duke&#8217;s Bookstore Case Study
+Example"</a>) contains resource bundles with the base name
+<code>messages.properties</code> for the locales <code>de</code> (German), <code>es</code> (Spanish), and
+<code>fr</code> (French). The default locale, <code>en</code> (English), which is specified in
+the <code>faces-config.xml</code> file, uses the resource bundle with the base
+name, <code>messages.properties</code>.</p>
+</div>
+<div class="paragraph">
+<p>For more details on internationalization and localization in the Java
+platform, see <code>http://docs.oracle.com/javase/tutorial/i18n/index.html</code>.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="webi18n.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webi18n002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

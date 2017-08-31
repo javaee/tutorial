@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Filtering Requests and Responses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="filtering-requests-and-responses">Filtering Requests and Responses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A filter is an object that can transform the header and content (or
+both) of a request or response. Filters differ from web components in
+that filters usually do not themselves create a response. Instead, a
+filter provides functionality that can be "attached" to any kind of web
+resource. Consequently, a filter should not have any dependencies on a
+web resource for which it is acting as a filter; this way, it can be
+composed with more than one type of web resource.</p>
+</div>
+<div class="paragraph">
+<p>The main tasks that a filter can perform are as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Query the request and act accordingly.</p>
+</li>
+<li>
+<p>Block the request-and-response pair from passing any further.</p>
+</li>
+<li>
+<p>Modify the request headers and data. You do this by providing a
+customized version of the request.</p>
+</li>
+<li>
+<p>Modify the response headers and data. You do this by providing a
+customized version of the response.</p>
+</li>
+<li>
+<p>Interact with external resources.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Applications of filters include authentication, logging, image
+conversion, data compression, encryption, tokenizing streams, XML
+transformations, and so on.</p>
+</div>
+<div class="paragraph">
+<p>You can configure a web resource to be filtered by a chain of zero, one,
+or more filters in a specific order. This chain is specified when the
+web application containing the component is deployed and is instantiated
+when a web container loads the component.</p>
+</div>
+<div class="sect2">
+<h3 id="programming-filters">Programming Filters</h3>
+<div class="paragraph">
+<p>The filtering API is defined by the <code>Filter</code>, <code>FilterChain</code>, and
+<code>FilterConfig</code> interfaces in the <code>javax.servlet</code> package. You define a
+filter by implementing the <code>Filter</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>@WebFilter</code> annotation to define a filter in a web application.
+This annotation is specified on a class and contains metadata about the
+filter being declared. The annotated filter must specify at least one
+URL pattern. This is done by using the <code>urlPatterns</code> or <code>value</code>
+attribute on the annotation. All other attributes are optional, with
+default settings. Use the <code>value</code> attribute when the only attribute on
+the annotation is the URL pattern; use the <code>urlPatterns</code> attribute when
+other attributes are also used.</p>
+</div>
+<div class="paragraph">
+<p>Classes annotated with the <code>@WebFilter</code> annotation must implement the
+<code>javax.servlet.Filter</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>To add configuration data to the filter, specify the <code>initParams</code>
+attribute of the <code>@WebFilter</code> annotation. The <code>initParams</code> attribute
+contains a <code>@WebInitParam</code> annotation. The following code snippet
+defines a filter, specifying an initialization parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import javax.servlet.Filter;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
+
+@WebFilter(filterName = "TimeOfDayFilter",
+urlPatterns = {"/*"},
+initParams = {
+    @WebInitParam(name = "mood", value = "awake")})
+public class TimeOfDayFilter implements Filter {
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most important method in the <code>Filter</code> interface is <code>doFilter</code>, which
+is passed request, response, and filter chain objects. This method can
+perform the following actions.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Examine the request headers.</p>
+</li>
+<li>
+<p>Customize the request object if the filter wishes to modify request
+headers or data.</p>
+</li>
+<li>
+<p>Customize the response object if the filter wishes to modify response
+headers or data.</p>
+</li>
+<li>
+<p>Invoke the next entity in the filter chain. If the current filter is
+the last filter in the chain that ends with the target web component or
+static resource, the next entity is the resource at the end of the
+chain; otherwise, it is the next filter that was configured in the WAR.
+The filter invokes the next entity by calling the <code>doFilter</code> method on
+the chain object, passing in the request and response it was called with
+or the wrapped versions it may have created. Alternatively, the filter
+can choose to block the request by not making the call to invoke the
+next entity. In the latter case, the filter is responsible for filling
+out the response.</p>
+</li>
+<li>
+<p>Examine response headers after invoking the next filter in the chain.</p>
+</li>
+<li>
+<p>Throw an exception to indicate an error in processing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to <code>doFilter</code>, you must implement the <code>init</code> and <code>destroy</code>
+methods. The <code>init</code> method is called by the container when the filter is
+instantiated. If you wish to pass initialization parameters to the
+filter, you retrieve them from the <code>FilterConfig</code> object passed to
+<code>init</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="programming-customized-requests-and-responses">Programming Customized Requests and Responses</h3>
+<div class="paragraph">
+<p>There are many ways for a filter to modify a request or a response. For
+example, a filter can add an attribute to the request or can insert data
+in the response.</p>
+</div>
+<div class="paragraph">
+<p>A filter that modifies a response must usually capture the response
+before it is returned to the client. To do this, you pass a stand-in
+stream to the servlet that generates the response. The stand-in stream
+prevents the servlet from closing the original response stream when it
+completes and allows the filter to modify the servlet&#8217;s response.</p>
+</div>
+<div class="paragraph">
+<p>To pass this stand-in stream to the servlet, the filter creates a
+response wrapper that overrides the <code>getWriter</code> or <code>getOutputStream</code>
+method to return this stand-in stream. The wrapper is passed to the
+<code>doFilter</code> method of the filter chain. Wrapper methods default to
+calling through to the wrapped request or response object.</p>
+</div>
+<div class="paragraph">
+<p>To override request methods, you wrap the request in an object that
+extends either <code>ServletRequestWrapper</code> or <code>HttpServletRequestWrapper</code>.
+To override response methods, you wrap the response in an object that
+extends either <code>ServletResponseWrapper</code> or <code>HttpServletResponseWrapper</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specifying-filter-mappings">Specifying Filter Mappings</h3>
+<div class="paragraph">
+<p>A web container uses filter mappings to decide how to apply filters to
+web resources. A filter mapping matches a filter to a web component by
+name or to web resources by URL pattern. The filters are invoked in the
+order in which filter mappings appear in the filter mapping list of a
+WAR. You specify a filter mapping list for a WAR in its deployment
+descriptor by either using NetBeans IDE or coding the list by hand with
+XML.</p>
+</div>
+<div class="paragraph">
+<p>If you want to log every request to a web application, you map the hit
+counter filter to the URL pattern <code>/*</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can map a filter to one or more web resources, and you can map more
+than one filter to a web resource. This is illustrated in
+<a href="#BNAGH">Figure 17-1</a>, in which filter F1 is mapped to servlets S1,
+S2, and S3; filter F2 is mapped to servlet S2; and filter F3 is mapped
+to servlets S1 and S2.</p>
+</div>
+<div id="BNAGH" class="paragraph">
+<div class="title"><strong>Figure 17-1 Filter-to-Servlet Mapping</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_018.png" alt="Diagram of filter-to-servlet mapping with filters F1-F3 and servlets S1-S3. F1 filters S1-S3, then F2 filters S2, then F3 filters S1 and S2."></span></p>
+</div>
+<div class="paragraph">
+<p>Recall that a filter chain is one of the objects passed to the
+<code>doFilter</code> method of a filter. This chain is formed indirectly by means
+of filter mappings. The order of the filters in the chain is the same as
+the order in which filter mappings appear in the web application
+deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>When a filter is mapped to servlet S1, the web container invokes the
+<code>doFilter</code> method of F1. The <code>doFilter</code> method of each filter in S1&#8217;s
+filter chain is invoked by the preceding filter in the chain by means of
+the <code>chain.doFilter</code> method. Because S1&#8217;s filter chain contains filters
+F1 and F3, F1&#8217;s call to <code>chain.doFilter</code> invokes the <code>doFilter</code> method
+of filter F3. When F3&#8217;s <code>doFilter</code> method completes, control returns to
+F1&#8217;s <code>doFilter</code> method.</p>
+</div>
+<div class="sect3">
+<h4 id="to-specify-filter-mappings-using-netbeans-ide">To Specify Filter Mappings Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Expand the application&#8217;s project node in the Project tab.</p>
+</li>
+<li>
+<p>Expand the Web Pages and WEB-INF nodes under the project node.</p>
+</li>
+<li>
+<p>Double-click <code>web.xml</code>.</p>
+</li>
+<li>
+<p>Click Filters at the top of the editor window.</p>
+</li>
+<li>
+<p>Expand the Servlet Filters node in the editor window.</p>
+</li>
+<li>
+<p>Click Add Filter Element to map the filter to a web resource by name
+or by URL pattern.</p>
+</li>
+<li>
+<p>In the Add Servlet Filter dialog box, enter the name of the filter
+in the Filter Name field.</p>
+</li>
+<li>
+<p>Click Browse to locate the servlet class to which the filter
+applies.</p>
+<div class="paragraph">
+<p>You can include wildcard characters so that you can apply the filter to
+more than one servlet.</p>
+</div>
+</li>
+<li>
+<p>Click OK.</p>
+</li>
+<li>
+<p>To constrain how the filter is applied to requests, follow these
+steps.</p>
+</li>
+<li>
+<p>Expand the Filter Mappings node.</p>
+</li>
+<li>
+<p>Select the filter from the list of filters.</p>
+</li>
+<li>
+<p>Click Add.</p>
+</li>
+<li>
+<p>In the Add Filter Mapping dialog box, select one of the following
+dispatcher types:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>REQUEST: Only when the request comes directly from the client</p>
+</li>
+<li>
+<p>ASYNC: Only when the asynchronous request comes from the client</p>
+</li>
+<li>
+<p>FORWARD: Only when the request has been forwarded to a component (see
+<a href="servlets007.html#BNAGK">Transferring Control to Another Web
+Component</a>)</p>
+</li>
+<li>
+<p>INCLUDE: Only when the request is being processed by a component that
+has been included (see <a href="servlets007.html#BNAGJ">Including Other
+Resources in the Response</a>)</p>
+</li>
+<li>
+<p>ERROR: Only when the request is being processed with the error page
+mechanism (see <a href="servlets002.html#BNAFN">Handling Servlet Errors</a>)</p>
+<div class="paragraph">
+<p>You can direct the filter to be applied to any combination of the
+preceding situations by selecting multiple dispatcher types. If no types
+are specified, the default option is REQUEST.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

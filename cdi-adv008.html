@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Stereotypes in CDI Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-stereotypes-in-cdi-applications">Using Stereotypes in CDI Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A stereotype is a kind of annotation, applied to a bean, that
+incorporates other annotations. Stereotypes can be particularly useful
+in large applications in which you have a number of beans that perform
+similar functions. A stereotype is a kind of annotation that specifies
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A default scope</p>
+</li>
+<li>
+<p>Zero or more interceptor bindings</p>
+</li>
+<li>
+<p>Optionally, a <code>@Named</code> annotation, guaranteeing default EL naming</p>
+</li>
+<li>
+<p>Optionally, an <code>@Alternative</code> annotation, specifying that all beans
+with this stereotype are alternatives</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A bean annotated with a particular stereotype will always use the
+specified annotations, so you do not have to apply the same annotations
+to many beans.</p>
+</div>
+<div class="paragraph">
+<p>For example, you might create a stereotype named <code>Action</code>, using the
+<code>javax.enterprise.inject.Stereotype</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@RequestScoped
+@Secure
+@Transactional
+@Named
+@Stereotype
+@Target(TYPE)
+@Retention(RUNTIME)
+public @interface Action {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All beans annotated <code>@Action</code> will have request scope, use default EL
+naming, and have the interceptor bindings <code>@Transactional</code> and
+<code>@Secure</code>.</p>
+</div>
+<div class="paragraph">
+<p>You could also create a stereotype named <code>Mock</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Alternative
+@Stereotype
+@Target(TYPE)
+@Retention(RUNTIME)
+public @interface Mock {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All beans with this annotation are alternatives.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to apply multiple stereotypes to the same bean, so you
+can annotate a bean as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Action
+@Mock
+public class MockLoginAction extends LoginAction { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is also possible to override the scope specified by a stereotype,
+simply by specifying a different scope for the bean. The following
+declaration gives the <code>MockLoginAction</code> bean session scope instead of
+request scope:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@SessionScoped
+@Action
+@Mock
+public class MockLoginAction extends LoginAction { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>CDI makes available a built-in stereotype called <code>Model</code>, which is
+intended for use with beans that define the model layer of a
+model-view-controller application architecture. This stereotype
+specifies that a bean is both <code>@Named</code> and <code>@RequestScoped</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@RequestScoped
+@Stereotype
+@Target({TYPE, METHOD, FIELD})
+@Retention(RUNTIME)
+public @interface Model {}</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Starting and Stopping GlassFish Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="usingexamples001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="usingexamples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="starting-and-stopping-glassfish-server">Starting and Stopping GlassFish Server</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can start and stop GlassFish Server using either NetBeans IDE or the
+command line.</p>
+</div>
+<div class="sect2">
+<h3 id="to-start-glassfish-server-using-netbeans-ide">To Start GlassFish Server Using NetBeans IDE</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click the Services tab.</p>
+</li>
+<li>
+<p>Expand Servers.</p>
+</li>
+<li>
+<p>Right-click the GlassFish Server instance and select Start.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-stop-glassfish-server-using-netbeans-ide">To Stop GlassFish Server Using NetBeans IDE</h3>
+<div class="paragraph">
+<p>To stop GlassFish Server using NetBeans IDE, right-click the GlassFish
+Server instance and select Stop.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-start-glassfish-server-using-the-command-line">To Start GlassFish Server Using the Command Line</h3>
+<div class="paragraph">
+<p>To start GlassFish Server from the command line, open a terminal window
+or command prompt and execute the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">asadmin start-domain --verbose</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A domain is a set of one or more GlassFish Server instances managed by
+one administration server. The following elements are associated with a
+domain:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The GlassFish Server port number: The default is 8080.</p>
+</li>
+<li>
+<p>The administration server&#8217;s port number: The default is 4848.</p>
+</li>
+<li>
+<p>An administration user name and password: The default user name is
+<code>admin</code>, and by default no password is required.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You specify these values when you install GlassFish Server. The examples
+in this tutorial assume that you chose the default ports as well as the
+default user name and lack of password.</p>
+</div>
+<div class="paragraph">
+<p>With no arguments, the <code>start-domain</code> command initiates the default
+domain, which is <code>domain1</code>. The <code>--verbose</code> flag causes all logging and
+debugging output to appear on the terminal window or command prompt. The
+output also goes into the server log, which is located in
+domain-dir`/logs/server.log`.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-stop-glassfish-server-using-the-command-line">To Stop GlassFish Server Using the Command Line</h3>
+<div class="paragraph">
+<p>To stop GlassFish Server, open a terminal window or command prompt and
+execute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">asadmin stop-domain domain1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="usingexamples001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="usingexamples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

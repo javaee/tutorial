@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Packaging Enterprise Beans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="packaging001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="packaging003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="packaging-enterprise-beans">Packaging Enterprise Beans</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section explains how enterprise beans can be packaged in EJB JAR or
+WAR modules. It includes the following sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDFCDBG">Packaging Enterprise Beans in EJB JAR Modules</a></p>
+</li>
+<li>
+<p><a href="#CHDJABEJ">Packaging Enterprise Beans in WAR Modules</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="packaging-enterprise-beans-in-ejb-jar-modules">Packaging Enterprise Beans in EJB JAR Modules</h3>
+<div class="paragraph">
+<p>An EJB JAR file is portable and can be used for various applications.</p>
+</div>
+<div class="paragraph">
+<p>To assemble a Java EE application, package one or more modules, such as
+EJB JAR files, into an EAR file, the archive file that holds the
+application. When deploying the EAR file that contains the enterprise
+bean&#8217;s EJB JAR file, you also deploy the enterprise bean to GlassFish
+Server. You can also deploy an EJB JAR that is not contained in an EAR
+file. <a href="#BCGFJIJI">Figure 5-2</a> shows the contents of an EJB JAR file.</p>
+</div>
+<div id="BCGFJIJI" class="paragraph">
+<div class="title"><strong>Figure 5-2 Structure of an Enterprise Bean JAR</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_011.png" alt="Diagram showing the structure and contents of an enterprise bean JAR file."></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="packaging-enterprise-beans-in-war-modules">Packaging Enterprise Beans in WAR Modules</h3>
+<div class="paragraph">
+<p>Enterprise beans often provide the business logic of a web application.
+In these cases, packaging the enterprise bean within the web
+application&#8217;s WAR module simplifies deployment and application
+organization. Enterprise beans may be packaged within a WAR module as
+Java programming language class files or within a JAR file that is
+bundled within the WAR module.</p>
+</div>
+<div class="paragraph">
+<p>To include enterprise bean class files in a WAR module, the class files
+should be in the <code>WEB-INF/classes</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>To include a JAR file that contains enterprise beans in a WAR module,
+add the JAR to the <code>WEB-INF/lib</code> directory of the WAR module.</p>
+</div>
+<div class="paragraph">
+<p>WAR modules that contain enterprise beans do not require an
+<code>ejb-jar.xml</code> deployment descriptor. If the application uses
+<code>ejb-jar.xml</code>, it must be located in the WAR module&#8217;s <code>WEB-INF</code>
+directory.</p>
+</div>
+<div class="paragraph">
+<p>JAR files that contain enterprise bean classes packaged within a WAR
+module are not considered EJB JAR files, even if the bundled JAR file
+conforms to the format of an EJB JAR file. The enterprise beans
+contained within the JAR file are semantically equivalent to enterprise
+beans located in the WAR module&#8217;s <code>WEB-INF/classes</code> directory, and the
+environment namespace of all the enterprise beans are scoped to the WAR
+module.</p>
+</div>
+<div class="paragraph">
+<p>For example, suppose that a web application consists of a shopping cart
+enterprise bean, a credit card–processing enterprise bean, and a Java
+servlet front end. The shopping cart bean exposes a local, no-interface
+view and is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package com.example.cart;
+
+@Stateless
+public class CartBean { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The credit card–processing bean is packaged within its own JAR file,
+<code>cc.jar</code>, exposes a local, no-interface view, and is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package com.example.cc;
+
+@Stateless
+public class CreditCardBean { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The servlet, <code>com.example.web.StoreServlet</code>, handles the web front end
+and uses both <code>CartBean</code> and <code>CreditCardBean</code>. The WAR module layout for
+this application is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">WEB-INF/classes/com/example/cart/CartBean.class
+WEB-INF/classes/com/example/web/StoreServlet
+WEB-INF/lib/cc.jar
+WEB-INF/ejb-jar.xml
+WEB-INF/web.xml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="packaging001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="packaging003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

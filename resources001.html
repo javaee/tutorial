@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Is a Resource Adapter?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="resources.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resources002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="what-is-a-resource-adapter">What Is a Resource Adapter?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A resource adapter is a Java EE component that implements the Java EE
+Connector Architecture for a specific EIS. Examples of EISs include
+enterprise resource planning, mainframe transaction processing, and
+database systems. In a Java EE server, the Java Message Server and
+JavaMail also act as EISs that you access using resource adapters. As
+illustrated in <a href="#GJTZO">Figure 53-1</a>, the resource adapter
+facilitates communication between a Java EE application and an EIS.</p>
+</div>
+<div id="GJTZO" class="paragraph">
+<div class="title"><strong>Figure 53-1 Resource Adapters</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_053.png" alt="Resource Adapter Contracts"></span></p>
+</div>
+<div class="paragraph">
+<p>Stored in a Resource Adapter Archive (RAR) file, a resource adapter can
+be deployed on any Java EE server, much like a Java EE application. A
+RAR file may be contained in an Enterprise Archive (EAR) file, or it may
+exist as a separate file.</p>
+</div>
+<div class="paragraph">
+<p>A resource adapter is analogous to a JDBC driver. Both provide a
+standard API through which an application can access a resource that is
+outside the Java EE server. For a resource adapter, the target system is
+an EIS; for a JDBC driver, it is a DBMS. Resource adapters and JDBC
+drivers are rarely created by application developers. In most cases,
+both types of software are built by vendors that sell tools, servers, or
+integration software.</p>
+</div>
+<div class="paragraph">
+<p>The resource adapter mediates communication between the Java EE server
+and the EIS by means of contracts. The application contract defines the
+API through which a Java EE component, such as an enterprise bean,
+accesses the EIS. This API is the only view that the component has of
+the EIS. The system contracts link the resource adapter to important
+services that are managed by the Java EE server. The resource adapter
+itself and its system contracts are transparent to the Java EE
+component.</p>
+</div>
+<div class="sect2">
+<h3 id="management-contracts">Management Contracts</h3>
+<div class="paragraph">
+<p>The Java EE Connector Architecture defines system contracts that enable
+resource adapter lifecycle and thread management.</p>
+</div>
+<div class="sect3">
+<h4 id="lifecycle-management">Lifecycle Management</h4>
+<div class="paragraph">
+<p>The Connector Architecture specifies a lifecycle management contract
+that allows an application server to manage the lifecycle of a resource
+adapter. This contract provides a mechanism for the application server
+to bootstrap a resource adapter instance during the deployment or
+application server startup. This contract also provides a means for the
+application server to notify the resource adapter instance when it is
+undeployed or when an orderly shutdown of the application server takes
+place.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="work-management-contract">Work Management Contract</h4>
+<div class="paragraph">
+<p>The Connector Architecture work management contract ensures that
+resource adapters use threads in the proper, recommended manner. This
+contract also enables an application server to manage threads for
+resource adapters.</p>
+</div>
+<div class="paragraph">
+<p>Resource adapters that improperly use threads can jeopardize the entire
+application server environment. For example, a resource adapter might
+create too many threads or might not properly release threads it has
+created. Poor thread handling inhibits application server shutdown and
+impacts the application server&#8217;s performance because creating and
+destroying threads are expensive operations.</p>
+</div>
+<div class="paragraph">
+<p>The work management contract establishes a means for the application
+server to pool and reuse threads, similar to pooling and reusing
+connections. By adhering to this contract, the resource adapter does not
+have to manage threads itself. Instead, the resource adapter has the
+application server create and provide needed threads. When it is
+finished with a given thread, the resource adapter returns the thread to
+the application server. The application server manages the thread,
+either returning it to a pool for later reuse or destroying it. Handling
+threads in this manner results in increased application server
+performance and more efficient use of resources.</p>
+</div>
+<div class="paragraph">
+<p>In addition to moving thread management to the application server, the
+Connector Architecture provides a flexible model for a resource adapter
+that uses threads.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The requesting thread can choose to block (stop its own execution)
+until the work thread completes.</p>
+</li>
+<li>
+<p>The requesting thread can block while it waits to get the work thread.
+When the application server provides a work thread, the requesting
+thread and the work thread execute in parallel.</p>
+</li>
+<li>
+<p>The resource adapter can opt to submit the work for the thread to a
+queue. The thread executes the work from the queue at some later point.
+The resource adapter continues its own execution from the point it
+submitted the work to the queue, no matter when the thread executes it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With the latter two approaches, the submitting thread and the work
+thread may execute simultaneously or independently. For these
+approaches, the contract specifies a listener mechanism to notify the
+resource adapter that the thread has completed its operation. The
+resource adapter can also specify the execution context for the thread,
+and the work management contract controls the context in which the
+thread executes.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generic-work-context-contract">Generic Work Context Contract</h3>
+<div class="paragraph">
+<p>The work management contract between the application server and a
+resource adapter enables a resource adapter to do a task, such as
+communicating with the EIS or delivering messages, by delivering <code>Work</code>
+instances for execution.</p>
+</div>
+<div class="paragraph">
+<p>A generic work context contract enables a resource adapter to control
+the contexts in which the <code>Work</code> instances that it submits are executed
+by the application server&#8217;s <code>WorkManager</code>. A generic work context
+mechanism also enables an application server to support message inflow
+and delivery schemes. It also provides a richer contextual <code>Work</code>
+execution environment to the resource adapter while still maintaining
+control over concurrent behavior in a managed environment.</p>
+</div>
+<div class="paragraph">
+<p>The generic work context contract standardizes the transaction context
+and the security context.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="outbound-and-inbound-contracts">Outbound and Inbound Contracts</h3>
+<div class="paragraph">
+<p>The Connector Architecture defines the following outbound contracts,
+system-level contracts between an application server and an EIS that
+enable outbound connectivity to an EIS.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The connection management contract supports connection pooling, a
+technique that enhances application performance and scalability.
+Connection pooling is transparent to the application, which simply
+obtains a connection to the EIS.</p>
+</li>
+<li>
+<p>The transaction management contract extends the connection management
+contract and provides support for management of both local and XA
+transactions.</p>
+<div class="paragraph">
+<p>A local transaction is limited in scope to a single EIS system, and the
+EIS resource manager itself manages such a transaction. An XA
+transaction or global transaction can span multiple resource managers.
+This form of transaction requires transaction coordination by an
+external transaction manager, typically bundled with an application
+server. A transaction manager uses a two-phase commit protocol to manage
+a transaction that spans multiple resource managers or EISs, and uses
+one-phase commit optimization if only one resource manager is
+participating in an XA transaction.</p>
+</div>
+</li>
+<li>
+<p>The security management contract provides mechanisms for
+authentication, authorization, and secure communication between a Java
+EE server and an EIS to protect the information in the EIS.</p>
+<div class="paragraph">
+<p>A work security map matches EIS identities to the application server
+domain&#8217;s identities.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Inbound contracts are system contracts between a Java EE server and an
+EIS that enable inbound connectivity from the EIS: pluggability
+contracts for message providers and contracts for importing
+transactions.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="resources.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resources002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,605 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using an Entity to Join Messages from Two MDBs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-examples008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-examples010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-an-entity-to-join-messages-from-two-mdbs">Using an Entity to Join Messages from Two MDBs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section explains how to write, compile, package, deploy, and run an
+application that uses the JMS API with an entity. The application uses
+the following components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application client that both sends and receives messages</p>
+</li>
+<li>
+<p>Two message-driven beans</p>
+</li>
+<li>
+<p>An entity class</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You will find the source files for this section in the
+tut-install`/examples/jms/clientmdbentity/` directory. Path names in
+this section are relative to this directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCHG">Overview of the clientmdbentity Example Application</a></p>
+</li>
+<li>
+<p><a href="#BNCHI">Writing the Application Components for the clientmdbentity
+Example</a></p>
+</li>
+<li>
+<p><a href="#CHDEEDJH">Running the clientmdbentity Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-clientmdbentity-example-application">Overview of the clientmdbentity Example Application</h3>
+<div class="paragraph">
+<p>This application simulates, in a simplified way, the work flow of a
+company&#8217;s human resources (HR) department when it processes a new hire.
+This application also demonstrates how to use the Java EE platform to
+accomplish a task that many JMS applications need to perform.</p>
+</div>
+<div class="paragraph">
+<p>A messaging client must often wait for several messages from various
+sources. It then uses the information in all these messages to assemble
+a message that it then sends to another destination. The common term for
+this design pattern (which is not specific to JMS) is joining messages.
+Such a task must be transactional, with all the receives and the send as
+a single transaction. If not all the messages are received successfully,
+the transaction can be rolled back. For an application client example
+that illustrates this task, see <a href="jms-examples004.html#BNCGJ">Using
+Local Transactions</a>.</p>
+</div>
+<div class="paragraph">
+<p>A message-driven bean can process only one message at a time in a
+transaction. To provide the ability to join messages, an application can
+have the message-driven bean store the interim information in a Java
+Persistence API entity. The entity can then determine whether all the
+information has been received; when it has, the entity can report this
+back to one of the message-driven beans, which then creates and sends
+the message to the other destination. After it has completed its task,
+the entity can be removed.</p>
+</div>
+<div class="paragraph">
+<p>The basic steps of the application are as follows.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The HR department&#8217;s application client generates an employee ID for
+each new hire and then publishes a message (M1) containing the new
+hire&#8217;s name, employee ID, and position. It publishes the message to a
+topic because the message needs to be consumed by two message-driven
+beans. The client then creates a temporary queue, <code>ReplyQueue</code>, with a
+message listener that waits for a reply to the message. (See
+<a href="jms-concepts004.html#BNCGB">Creating Temporary Destinations</a> for more
+information.)</p>
+</li>
+<li>
+<p>Two message-driven beans process each message: One bean,
+<code>OfficeMDB</code>, assigns the new hire&#8217;s office number, and the other bean,
+<code>EquipmentMDB</code>, assigns the new hire&#8217;s equipment. The first bean to
+process the message creates and persists an entity named <code>SetupOffice</code>,
+then calls a business method of the entity to store the information it
+has generated. The second bean locates the existing entity and calls
+another business method to add its information.</p>
+</li>
+<li>
+<p>When both the office and the equipment have been assigned, the
+entity business method returns a value of <code>true</code> to the message-driven
+bean that called the method. The message-driven bean then sends to the
+reply queue a message (M2) describing the assignments. Then it removes
+the entity. The application client&#8217;s message listener retrieves the
+information.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="#BNCHH">Figure 47-5</a> illustrates the structure of this application.
+Of course, an actual HR application would have more components; other
+beans could set up payroll and benefits records, schedule orientation,
+and so on.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNCHH">Figure 47-5</a> assumes that <code>OfficeMDB</code> is the first
+message-driven bean to consume the message from the client. <code>OfficeMDB</code>
+then creates and persists the <code>SetupOffice</code> entity and stores the office
+information. <code>EquipmentMDB</code> then finds the entity, stores the equipment
+information, and learns that the entity has completed its work.
+<code>EquipmentMDB</code> then sends the message to the reply queue and removes the
+entity.</p>
+</div>
+<div id="BNCHH" class="paragraph">
+<div class="title"><strong>Figure 47-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_038.png" alt="Diagram of application showing an application client, two message-driven beans, and an entity, as well as the associated topic and queue"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="writing-the-application-components-for-the-clientmdbentity-example">Writing the Application Components for the clientmdbentity Example</h3>
+<div class="paragraph">
+<p>Writing the components of the application involves coding the
+application client, the message-driven beans, and the entity class.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCHJ">Coding the Application Client: HumanResourceClient.java</a></p>
+</li>
+<li>
+<p><a href="#BNCHK">Coding the Message-Driven Beans for the clientmdbentity
+Example</a></p>
+</li>
+<li>
+<p><a href="#BNCHL">Coding the Entity Class for the clientmdbentity Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="coding-the-application-client-humanresourceclient.java">Coding the Application Client: HumanResourceClient.java</h4>
+<div class="paragraph">
+<p>The application client, <code>HumanResourceClient.java</code>, found under
+<code>clientmdbentity-app-client</code>, performs the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Defines a topic for the application, using the <code>java:app</code> namespace
+because the topic is used in both the application client and the EJB
+module</p>
+</li>
+<li>
+<p>Injects <code>ConnectionFactory</code> and <code>Topic</code> resources</p>
+</li>
+<li>
+<p>Creates a <code>TemporaryQueue</code> to receive notification of processing
+that occurs, based on new-hire events it has published</p>
+</li>
+<li>
+<p>Creates a <code>JMSConsumer</code> for the <code>TemporaryQueue</code>, sets the
+<code>JMSConsumer</code>'s message listener, and starts the connection</p>
+</li>
+<li>
+<p>Creates a <code>MapMessage</code></p>
+</li>
+<li>
+<p>Creates five new employees with randomly generated names, positions,
+and ID numbers (in sequence) and publishes five messages containing this
+information</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The message listener, <code>HRListener</code>, waits for messages that contain the
+assigned office and equipment for each employee. When a message arrives,
+the message listener displays the information received and determines
+whether all five messages have arrived. When they have, the message
+listener notifies the <code>main</code> method, which then exits.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="coding-the-message-driven-beans-for-the-clientmdbentity-example">Coding the Message-Driven Beans for the clientmdbentity Example</h4>
+<div class="paragraph">
+<p>This example uses two message-driven beans, both under
+<code>clientmdbentity-ejb</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EquipmentMDB.java</code></p>
+</li>
+<li>
+<p><code>OfficeMDB.java</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The beans take the following steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>They inject a <code>MessageDrivenContext</code> resource, an <code>EntityManager</code>,
+and a <code>JMSContext</code>.</p>
+</li>
+<li>
+<p>The <code>onMessage</code> method retrieves the information in the message. The
+<code>EquipmentMDB</code>'s <code>onMessage</code> method chooses equipment, based on the new
+hire&#8217;s position; the <code>OfficeMDB</code>'s <code>onMessage</code> method randomly generates
+an office number.</p>
+</li>
+<li>
+<p>After a slight delay to simulate real world processing hitches, the
+<code>onMessage</code> method calls a helper method, <code>compose</code>.</p>
+</li>
+<li>
+<p>The <code>compose</code> method takes the following steps.</p>
+</li>
+<li>
+<p>It either creates and persists the <code>SetupOffice</code> entity or finds it
+by primary key.</p>
+</li>
+<li>
+<p>It uses the entity to store the equipment or the office information
+in the database, calling either the <code>doEquipmentList</code> or the
+<code>doOfficeNumber</code> business method.</p>
+</li>
+<li>
+<p>If the business method returns <code>true</code>, meaning that all of the
+information has been stored, it retrieves the reply destination
+information from the message, creates a <code>JMSProducer</code>, and sends a reply
+message that contains the information stored in the entity.</p>
+</li>
+<li>
+<p>It removes the entity.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="coding-the-entity-class-for-the-clientmdbentity-example">Coding the Entity Class for the clientmdbentity Example</h4>
+<div class="paragraph">
+<p>The <code>SetupOffice.java</code> class, also under <code>clientmdbentity-ejb</code>, is an
+entity class. The entity and the message-driven beans are packaged
+together in an EJB JAR file. The entity class is declared as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class SetupOffice implements Serializable {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The class contains a no-argument constructor and a constructor that
+takes two arguments, the employee ID and name. It also contains getter
+and setter methods for the employee ID, name, office number, and
+equipment list. The getter method for the employee ID has the <code>@Id</code>
+annotation to indicate that this field is the primary key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Id
+public String getEmployeeId() {
+    return id;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The class also implements the two business methods, <code>doEquipmentList</code>
+and <code>doOfficeNumber</code>, and their helper method, <code>checkIfSetupComplete</code>.</p>
+</div>
+<div class="paragraph">
+<p>The message-driven beans call the business methods and the getter
+methods.</p>
+</div>
+<div class="paragraph">
+<p>The <code>persistence.xml</code> file for the entity specifies the most basic
+settings:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+               http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"&gt;
+  &lt;persistence-unit name="clientmdbentity-ejbPU" transaction-type="JTA"&gt;
+    &lt;provider&gt;org.eclipse.persistence.jpa.PersistenceProvider&lt;/provider&gt;
+    &lt;jta-data-source&gt;java:comp/DefaultDataSource&lt;/jta-data-source&gt;
+    &lt;properties&gt;
+      &lt;property name="eclipselink.ddl-generation"
+                value="drop-and-create-tables"/&gt;
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-clientmdbentity-example">Running the clientmdbentity Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, deploy, and run the
+<code>clientmdbentity</code> example.</p>
+</div>
+<div class="paragraph">
+<p>Because the example defines its own application-private topic and uses
+the preconfigured default connection factory
+<code>java:comp/DefaultJMSConnectionFactory</code> and the preconfigured default
+JDBC resource <code>java:comp/DefaultDataSource</code>, you do not need to create
+resources for it.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDIJDEE">To Run clientmdbentity Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CHDICHGH">To Run clientmdbentity Using Maven</a></p>
+</li>
+<li>
+<p><a href="#CHDCDEEF">Viewing the Application Output</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-clientmdbentity-using-netbeans-ide">To Run clientmdbentity Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>), as well as the database server (see
+<a href="usingexamples004.html#BNADK">Starting and Stopping the Java DB
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jms/clientmdbentity</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>clientmdbentity</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>clientmdbentity</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command creates the following:
+* An application client JAR file that contains the client class and
+listener class files, along with a manifest file that specifies the main
+class
+* An EJB JAR file that contains the message-driven beans and the entity
+class, along with the <code>persistence.xml</code> file
+* An application EAR file that contains the two JAR files along with an
+<code>application.xml</code> file</p>
+</div>
+<div class="paragraph">
+<p>+
+The <code>clientmdbentity.ear</code> file is created in the
+<code>clientmdbentity-ear/target/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>+
+The command then deploys the EAR file, retrieves the client stubs, and
+runs the application client.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-clientmdbentity-using-maven">To Run clientmdbentity Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>), as well as the database server (see
+<a href="usingexamples004.html#BNADK">Starting and Stopping the Java DB
+Server</a>).</p>
+</li>
+<li>
+<p>Go to the following directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jms/clientmdbentity/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To compile the source files and package, deploy, and run the
+application, enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command creates the following:
+* An application client JAR file that contains the client class and
+listener class files, along with a manifest file that specifies the main
+class
+* An EJB JAR file that contains the message-driven beans and the entity
+class, along with the <code>persistence.xml</code> file
+* An application EAR file that contains the two JAR files along with an
+<code>application.xml</code> file</p>
+</div>
+<div class="paragraph">
+<p>+
+The command then deploys the application, retrieves the client stubs,
+and runs the application client.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="viewing-the-application-output">Viewing the Application Output</h4>
+<div class="paragraph">
+<p>The output in the NetBeans IDE output window or in the terminal window
+looks something like this (preceded by application client container
+output and Maven output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SENDER: Setting hire ID to 50, name Bill Tudor, position Programmer
+SENDER: Setting hire ID to 51, name Carol Jones, position Senior Programmer
+SENDER: Setting hire ID to 52, name Mark Wilson, position Manager
+SENDER: Setting hire ID to 53, name Polly Wren, position Senior Programmer
+SENDER: Setting hire ID to 54, name Joe Lawrence, position Director
+Waiting for 5 message(s)
+New hire event processed:
+  Employee ID: 52
+  Name: Mark Wilson
+  Equipment: Tablet
+  Office number: 294
+Waiting for 4 message(s)
+New hire event processed:
+  Employee ID: 53
+  Name: Polly Wren
+  Equipment: Laptop
+  Office number: 186
+Waiting for 3 message(s)
+New hire event processed:
+  Employee ID: 54
+  Name: Joe Lawrence
+  Equipment: Mobile Phone
+  Office number: 135
+Waiting for 2 message(s)
+New hire event processed:
+  Employee ID: 50
+  Name: Bill Tudor
+  Equipment: Desktop System
+  Office number: 200
+Waiting for 1 message(s)
+New hire event processed:
+  Employee ID: 51
+  Name: Carol Jones
+  Equipment: Laptop
+  Office number: 262</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output from the message-driven beans and the entity class appears in
+the server log.</p>
+</div>
+<div class="paragraph">
+<p>For each employee, the application first creates the entity and then
+finds it. You may see runtime errors in the server log, and transaction
+rollbacks may occur. The errors occur if both of the message-driven
+beans discover at the same time that the entity does not yet exist, so
+they both try to create it. The first attempt succeeds, but the second
+fails because the bean already exists. After the rollback, the second
+message-driven bean tries again and succeeds in finding the entity.
+Container-managed transactions allow the application to run correctly,
+in spite of these errors, with no special programming.</p>
+</div>
+<div class="paragraph">
+<p>To undeploy the application after you have finished running it, use the
+Services tab or issue the <code>mvn cargo:undeploy</code> command.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-examples008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-examples010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

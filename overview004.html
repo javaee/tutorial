@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Distributed Multitiered Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="overview003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="distributed-multitiered-applications">Distributed Multitiered Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Java EE platform uses a distributed multitiered application model
+for enterprise applications. Application logic is divided into
+components according to function, and the application components that
+make up a Java EE application are installed on various machines
+depending on the tier in the multitiered Java EE environment to which
+the application component belongs.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNAAZ">Figure 1-1</a> shows two multitiered Java EE applications
+divided into the tiers described in the following list. The Java EE
+application parts shown in <a href="#BNAAZ">Figure 1-1</a> are presented in
+<a href="#BNABB">Java EE Components</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Client-tier components run on the client machine.</p>
+</li>
+<li>
+<p>Web-tier components run on the Java EE server.</p>
+</li>
+<li>
+<p>Business-tier components run on the Java EE server.</p>
+</li>
+<li>
+<p>Enterprise information system (EIS)-tier software runs on the EIS
+server.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Although a Java EE application can consist of all tiers shown in
+<a href="#BNAAZ">Figure 1-1</a>, Java EE multitiered applications are generally
+considered to be three-tiered applications because they are distributed
+over three locations: client machines, the Java EE server machine, and
+the database or legacy machines at the back end. Three-tiered
+applications that run in this way extend the standard two-tiered
+client-and-server model by placing a multithreaded application server
+between the client application and back-end storage.</p>
+</div>
+<div id="BNAAZ" class="paragraph">
+<div class="title"><strong>Figure 1-1 Multitiered Applications</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_001.png" alt="Diagram of multitiered application structure, including client tier, web tier, business tier, and EIS tier."></span></p>
+</div>
+<div class="sect2">
+<h3 id="security">Security</h3>
+<div class="paragraph">
+<p>Although other enterprise application models require platform-specific
+security measures in each application, the Java EE security environment
+enables security constraints to be defined at deployment time. The Java
+EE platform makes applications portable to a wide variety of security
+implementations by shielding application developers from the complexity
+of implementing security features.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE platform provides standard declarative access control rules
+that are defined by the developer and interpreted when the application
+is deployed on the server. Java EE also provides standard login
+mechanisms so that application developers do not have to implement these
+mechanisms in their applications. The same application works in a
+variety of security environments without changing the source code.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-ee-components">Java EE Components</h3>
+<div class="paragraph">
+<p>Java EE applications are made up of components. A Java EE component is a
+self-contained functional software unit that is assembled into a Java EE
+application with its related classes and files and that communicates
+with other components.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE specification defines the following Java EE components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Application clients and applets are components that run on the client.</p>
+</li>
+<li>
+<p>Java Servlet, JavaServer Faces, and JavaServer Pages (JSP) technology
+components are web components that run on the server.</p>
+</li>
+<li>
+<p>EJB components (enterprise beans) are business components that run on
+the server.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Java EE components are written in the Java programming language and are
+compiled in the same way as any program in the language. The differences
+between Java EE components and "standard" Java classes are that Java EE
+components are assembled into a Java EE application, they are verified
+to be well formed and in compliance with the Java EE specification, and
+they are deployed to production, where they are run and managed by the
+Java EE server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-ee-clients">Java EE Clients</h3>
+<div class="paragraph">
+<p>A Java EE client is usually either a web client or an application
+client.</p>
+</div>
+<div class="sect3">
+<h4 id="web-clients">Web Clients</h4>
+<div class="paragraph">
+<p>A web client consists of two parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Dynamic web pages containing various types of markup language (HTML,
+XML, and so on), which are generated by web components running in the
+web tier</p>
+</li>
+<li>
+<p>A web browser, which renders the pages received from the server</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A web client is sometimes called a thin client. Thin clients usually do
+not query databases, execute complex business rules, or connect to
+legacy applications. When you use a thin client, such heavyweight
+operations are off-loaded to enterprise beans executing on the Java EE
+server, where they can leverage the security, speed, services, and
+reliability of Java EE server-side technologies.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="application-clients">Application Clients</h4>
+<div class="paragraph">
+<p>An application client runs on a client machine and provides a way for
+users to handle tasks that require a richer user interface than can be
+provided by a markup language. An application client typically has a
+graphical user interface (GUI) created from the Swing API or the
+Abstract Window Toolkit (AWT) API, but a command-line interface is
+certainly possible.</p>
+</div>
+<div class="paragraph">
+<p>Application clients directly access enterprise beans running in the
+business tier. However, if application requirements warrant it, an
+application client can open an HTTP connection to establish
+communication with a servlet running in the web tier. Application
+clients written in languages other than Java can interact with Java EE
+servers, enabling the Java EE platform to interoperate with legacy
+systems, clients, and non-Java languages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="applets">Applets</h4>
+<div class="paragraph">
+<p>A web page received from the web tier can include an embedded applet.
+Written in the Java programming language, an applet is a small client
+application that executes in the Java virtual machine installed in the
+web browser. However, client systems will likely need the Java Plug-in
+and possibly a security policy file for the applet to successfully
+execute in the web browser.</p>
+</div>
+<div class="paragraph">
+<p>Web components are the preferred API for creating a web client program
+because no plug-ins or security policy files are needed on the client
+systems. Also, web components enable cleaner and more modular
+application design because they provide a way to separate applications
+programming from web page design. Personnel involved in web page design
+thus do not need to understand Java programming language syntax to do
+their jobs.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-javabeans-component-architecture">The JavaBeans Component Architecture</h4>
+<div class="paragraph">
+<p>The server and client tiers might also include components based on the
+JavaBeans component architecture (JavaBeans components) to manage the
+data flow between the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application client or applet and components running on the Java EE
+server</p>
+</li>
+<li>
+<p>Server components and a database</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>JavaBeans components are not considered Java EE components by the Java
+EE specification.</p>
+</div>
+<div class="paragraph">
+<p>JavaBeans components have properties and have <code>get</code> and <code>set</code> methods
+for accessing those properties. JavaBeans components used in this way
+are typically simple in design and implementation but should conform to
+the naming and design conventions outlined in the JavaBeans component
+architecture.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="java-ee-server-communications">Java EE Server Communications</h4>
+<div class="paragraph">
+<p><a href="#BNABI">Figure 1-2</a> shows the various elements that can make up the
+client tier. The client communicates with the business tier running on
+the Java EE server either directly or, as in the case of a client
+running in a browser, by going through web pages or servlets running in
+the web tier.</p>
+</div>
+<div id="BNABI" class="paragraph">
+<div class="title"><strong>Figure 1-2 Server Communication</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_002.png" alt="Diagram of client-server communication. Application clients access the business tier directly. Browsers, web pages, and applets access the web tier."></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="web-components">Web Components</h3>
+<div class="paragraph">
+<p>Java EE web components are either servlets or web pages created using
+JavaServer Faces technology and/or JSP technology (JSP pages). Servlets
+are Java programming language classes that dynamically process requests
+and construct responses. JSP pages are text-based documents that execute
+as servlets but allow a more natural approach to creating static
+content. JavaServer Faces technology builds on servlets and JSP
+technology and provides a user interface component framework for web
+applications.</p>
+</div>
+<div class="paragraph">
+<p>Static HTML pages and applets are bundled with web components during
+application assembly but are not considered web components by the Java
+EE specification. Server-side utility classes can also be bundled with
+web components and, like HTML pages, are not considered web components.</p>
+</div>
+<div class="paragraph">
+<p>As shown in <a href="#BNABM">Figure 1-3</a>, the web tier, like the client tier,
+might include a JavaBeans component to manage the user input and send
+that input to enterprise beans running in the business tier for
+processing.</p>
+</div>
+<div id="BNABM" class="paragraph">
+<div class="title"><strong>Figure 1-3 Web Tier and Java EE Applications</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_003.png" alt="Diagram of client-server communication showing detail of JavaBeans components and web pages in the web tier."></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="business-components">Business Components</h3>
+<div class="paragraph">
+<p>Business code, which is logic that solves or meets the needs of a
+particular business domain such as banking, retail, or finance, is
+handled by enterprise beans running in either the business tier or the
+web tier. <a href="#BNABN">Figure 1-4</a> shows how an enterprise bean receives
+data from client programs, processes it (if necessary), and sends it to
+the enterprise information system tier for storage. An enterprise bean
+also retrieves data from storage, processes it (if necessary), and sends
+it back to the client program.</p>
+</div>
+<div id="BNABN" class="paragraph">
+<div class="title"><strong>Figure 1-4 Business and EIS Tiers</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_004.png" alt="Diagram of client-server communication showing detail of entities, session beans, and message-driven beans in the business tier."></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enterprise-information-system-tier">Enterprise Information System Tier</h3>
+<div class="paragraph">
+<p>The enterprise information system tier handles EIS software and includes
+enterprise infrastructure systems, such as enterprise resource planning
+(ERP), mainframe transaction processing, database systems, and other
+legacy information systems. For example, Java EE application components
+might need access to enterprise information systems for database
+connectivity.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="overview003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

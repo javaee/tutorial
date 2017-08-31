@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Annotations for Field and Bean Properties of Resource Classes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-advanced.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="annotations-for-field-and-bean-properties-of-resource-classes">Annotations for Field and Bean Properties of Resource Classes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JAX-RS annotations for resource classes let you extract specific parts
+or values from a Uniform Resource Identifier (URI) or request header.</p>
+</div>
+<div class="paragraph">
+<p>JAX-RS provides the annotations listed in <a href="#GKOBO">Table 32-1</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref146"></a><a id="GKOBO"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 32-1 Advanced JAX-RS Annotations</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 22%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Context</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Injects information into a class field, bean property, or
+method parameter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@CookieParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extracts information from cookies declared in the
+cookie request header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@FormParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extracts information from a request representation whose
+content type is <code>application/x-www-form-urlencoded</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HeaderParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extracts the value of a header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@MatrixParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extracts the value of a URI matrix parameter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PathParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extracts the value of a URI template parameter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@QueryParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extracts the value of a URI query parameter</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="extracting-path-parameters">Extracting Path Parameters</h3>
+<div class="paragraph">
+<p>URI path templates are URIs with variables embedded within the URI
+syntax. The <code>@PathParam</code> annotation lets you use variable URI path
+fragments when you call a method.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows how to extract the last name of an
+employee when the employee&#8217;s email address is provided:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employees/{firstname}.{lastname}@{domain}.com")
+public class EmpResource {
+
+    @GET
+    @Produces("text/xml")
+    public String getEmployeelastname(@PathParam("lastname") String lastName) {
+      ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>@Path</code> annotation defines the URI variables (or
+path parameters) <code>{firstname}</code>, <code>{lastname}</code>, and <code>{domain}</code>. The
+<code>@PathParam</code> in the method parameter of the request method extracts the
+last name from the email address.</p>
+</div>
+<div class="paragraph">
+<p>If your HTTP request is <code>GET</code> <code>/employees/john.doe@example.com</code>, the
+value "<code>doe</code>" is injected into <code>{lastname}</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can specify several path parameters in one URI.</p>
+</div>
+<div class="paragraph">
+<p>You can declare a regular expression with a URI variable. For example,
+if it is required that the last name must consist only of lowercase and
+uppercase characters, you can declare the following regular expression:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employees/{firstname}.{lastname[a-zA-Z]*}@{domain}.com")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the last name does not match the regular expression, a 404 response
+is returned.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="extracting-query-parameters">Extracting Query Parameters</h3>
+<div class="paragraph">
+<p>Use the <code>@QueryParam</code> annotation to extract query parameters from the
+query component of the request URI.</p>
+</div>
+<div class="paragraph">
+<p>For instance, to query all employees who have joined within a specific
+range of years, use a method signature like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employees/")
+@GET
+public Response getEmployees(
+        @DefaultValue("2003") @QueryParam("minyear") int minyear,
+        @DefaultValue("2013") @QueryParam("maxyear") int maxyear)
+    {...}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This code snippet defines two query parameters, <code>minyear</code> and <code>maxyear</code>.
+The following HTTP request would query for all employees who have joined
+between 2003 and 2013:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">GET /employees?maxyear=2013&amp;minyear=2003</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@DefaultValue</code> annotation defines a default value, which is to be
+used if no values are provided for the query parameters. By default,
+JAX-RS assigns a null value for <code>Object</code> values and zero for primitive
+data types. You can use the <code>@DefaultValue</code> annotation to eliminate null
+or zero values and define your own default values for a parameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="extracting-form-data">Extracting Form Data</h3>
+<div class="paragraph">
+<p>Use the <code>@FormParam</code> annotation to extract form parameters from HTML
+forms. For example, the following form accepts the name, address, and
+manager&#8217;s name of an employee:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;FORM action="http://example.com/employees/" method="post"&gt;
+  &lt;p&gt;
+    &lt;fieldset&gt;
+      Employee name: &lt;INPUT type="text" name="empname" tabindex="1"&gt;
+      Employee address: &lt;INPUT type="text" name="empaddress" tabindex="2"&gt;
+      Manager name: &lt;INPUT type="text" name="managername" tabindex="3"&gt;
+    &lt;/fieldset&gt;
+  &lt;/p&gt;
+&lt;/FORM&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the following code snippet to extract the manager name from this
+HTML form:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@POST
+@Consumes("application/x-www-form-urlencoded")
+public void post(@FormParam("managername") String managername) {
+    // Store the value
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain a map of form parameter names to values, use a code snippet
+like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@POST
+@Consumes("application/x-www-form-urlencoded")
+public void post(MultivaluedMap&lt;String, String&gt; formParams) {
+    // Store the message
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="extracting-the-java-type-of-a-request-or-response">Extracting the Java Type of a Request or Response</h3>
+<div class="paragraph">
+<p>The <code>javax.ws.rs.core.Context</code> annotation retrieves the Java types
+related to a request or response.</p>
+</div>
+<div class="paragraph">
+<p>The <code>javax.ws.rs.core.UriInfo</code> interface provides information about the
+components of a request URI. The following code snippet shows how to
+obtain a map of query and path parameter names to values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+public String getParams(@Context UriInfo ui) {
+    MultivaluedMap&lt;String, String&gt; queryParams = ui.getQueryParameters();
+    MultivaluedMap&lt;String, String&gt; pathParams = ui.getPathParameters();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>javax.ws.rs.core.HttpHeaders</code> interface provides information about
+request headers and cookies. The following code snippet shows how to
+obtain a map of header and cookie parameter names to values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+public String getHeaders(@Context HttpHeaders hh) {
+    MultivaluedMap&lt;String, String&gt; headerParams = hh.getRequestHeaders();
+    MultivaluedMap&lt;String, Cookie&gt; pathParams = hh.getCookies();
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-advanced.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

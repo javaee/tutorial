@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The encoder Example: Using Alternatives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv-examples001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-encoder-example-using-alternatives">The encoder Example: Using Alternatives</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>encoder</code> example shows how to use alternatives to choose between
+two beans at deployment time, as described in
+<a href="cdi-adv002.html#GJSDF">Using Alternatives in CDI Applications</a>. The
+example includes an interface and two implementations of it, a managed
+bean, a Facelets page, and configuration files.</p>
+</div>
+<div class="paragraph">
+<p>The source files are located in the
+tut-install`/examples/cdi/encoder/src/main/java/javaeetutorial/encoder/`
+directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHQA">The Coder Interface and Implementations</a></p>
+</li>
+<li>
+<p><a href="#GKHPM">The encoder Facelets Page and Managed Bean</a></p>
+</li>
+<li>
+<p><a href="#GKHQQ">Running the encoder Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-coder-interface-and-implementations">The Coder Interface and Implementations</h3>
+<div class="paragraph">
+<p>The <code>Coder</code> interface contains just one method, <code>codeString</code>, that takes
+two arguments: a string, and an integer value that specifies how the
+letters in the string should be transposed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public interface Coder {
+
+    public String codeString(String s, int tval);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The interface has two implementation classes, <code>CoderImpl</code> and
+<code>TestCoderImpl</code>. The implementation of <code>codeString</code> in <code>CoderImpl</code>
+shifts the string argument forward in the alphabet by the number of
+letters specified in the second argument; any characters that are not
+letters are left unchanged. (This simple shift code is known as a Caesar
+cipher because Julius Caesar reportedly used it to communicate with his
+generals.) The implementation in <code>TestCoderImpl</code> merely displays the
+values of the arguments. The <code>TestCoderImpl</code> implementation is annotated
+<code>@Alternative</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import javax.enterprise.inject.Alternative;
+
+@Alternative
+public class TestCoderImpl implements Coder {
+
+    @Override
+    public String codeString(String s, int tval) {
+        return ("input string is " + s + ", shift value is " + tval);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>beans.xml</code> file for the <code>encoder</code> example contains an
+<code>alternatives</code> element for the <code>TestCoderImpl</code> class, but by default the
+element is commented out:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;beans ...&gt;
+    &lt;!--&lt;alternatives&gt;
+        &lt;class&gt;javaeetutorial.encoder.TestCoderImpl&lt;/class&gt;
+    &lt;/alternatives&gt;--&gt;
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This means that by default, the <code>TestCoderImpl</code> class, annotated
+<code>@Alternative</code>, will not be used. Instead, the <code>CoderImpl</code> class will be
+used.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-encoder-facelets-page-and-managed-bean">The encoder Facelets Page and Managed Bean</h3>
+<div class="paragraph">
+<p>The simple Facelets page for the <code>encoder</code> example, <code>index.xhtml</code>, asks
+the user to enter the string and integer values and passes them to the
+managed bean, <code>CoderBean</code>, as <code>coderBean.inputString</code> and
+<code>coderBean.transVal</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"&gt;
+    &lt;h:head&gt;
+        &lt;h:outputStylesheet library="css" name="default.css"/&gt;
+        &lt;title&gt;String Encoder&lt;/title&gt;
+    &lt;/h:head&gt;
+    &lt;h:body&gt;
+        &lt;h2&gt;String Encoder&lt;/h2&gt;
+        &lt;p&gt;Type a string and an integer, then click Encode.&lt;/p&gt;
+        &lt;p&gt;Depending on which alternative is enabled, the coder bean
+            will either display the argument values or return a string that
+            shifts the letters in the original string by the value you
+            specify. The value must be between 0 and 26.&lt;/p&gt;
+        &lt;h:form id="encodeit"&gt;
+            &lt;p&gt;&lt;h:outputLabel value="Enter a string: " for="inputString"/&gt;
+                &lt;h:inputText id="inputString"
+                             value="#{coderBean.inputString}"/&gt;
+                &lt;h:outputLabel value="Enter the number of letters to shift by: "
+                               for="transVal"/&gt;
+                &lt;h:inputText id="transVal" value="#{coderBean.transVal}"/&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;h:commandButton value="Encode"
+                                action="#{coderBean.encodeString()}"/&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;h:outputLabel value="Result: " for="outputString"/&gt;
+                &lt;h:outputText id="outputString"
+                              value="#{coderBean.codedString}"
+                              style="color:blue"/&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;h:commandButton value="Reset"
+                                action="#{coderBean.reset}"/&gt;&lt;/p&gt;
+        &lt;/h:form&gt;
+        ...
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the user clicks the Encode button, the page invokes the managed
+bean&#8217;s <code>encodeString</code> method and displays the result,
+<code>coderBean.codedString</code>, in blue. The page also has a Reset button that
+clears the fields.</p>
+</div>
+<div class="paragraph">
+<p>The managed bean, <code>CoderBean</code>, is a <code>@RequestScoped</code> bean that declares
+its input and output properties. The <code>transVal</code> property has three Bean
+Validation constraints that enforce limits on the integer value, so that
+if the user enters an invalid value, a default error message appears on
+the Facelets page. The bean also injects an instance of the <code>Coder</code>
+interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@RequestScoped
+public class CoderBean {
+
+    private String inputString;
+    private String codedString;
+    @Max(26)
+    @Min(0)
+    @NotNull
+    private int transVal;
+
+    @Inject
+    Coder coder;
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to simple getter and setter methods for the three
+properties, the bean defines the <code>encodeString</code> action method called by
+the Facelets page. This method sets the <code>codedString</code> property to the
+value returned by a call to the <code>codeString</code> method of the <code>Coder</code>
+implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    public void encodeString() {
+        setCodedString(coder.codeString(inputString, transVal));
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, the bean defines the <code>reset</code> method to empty the fields of the
+Facelets page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    public void reset() {
+        setInputString("");
+        setTransVal(0);
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-encoder-example">Running the encoder Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>encoder</code> application.</p>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-encoder-example-using-netbeans-ide">To Build, Package, and Deploy the encoder Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>encoder</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>encoder</code> project and select
+Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>encoder.war</code>, located in the <code>target</code> directory, and then deploys it to
+GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-encoder-example-using-netbeans-ide">To Run the encoder Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/encoder</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the String Encoder page, enter a string and the number of letters
+to shift by, and then click Encode.</p>
+<div class="paragraph">
+<p>The encoded string appears in blue on the Result line. For example, if
+you enter <code>Java</code> and <code>4</code>, the result is <code>Neze</code>.</p>
+</div>
+</li>
+<li>
+<p>Now, edit the <code>beans.xml</code> file to enable the alternative
+implementation of <code>Coder</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the Projects tab, under the <code>encoder</code> project, expand the Web
+Pages node, then expand the WEB-INF node.</p>
+</li>
+<li>
+<p>Double-click the <code>beans.xml</code> file to open it.</p>
+</li>
+<li>
+<p>Remove the comment characters that surround the <code>alternatives</code>
+element, so that it looks like this:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;alternatives&gt;
+    &lt;class&gt;javaeetutorial.encoder.TestCoderImpl&lt;/class&gt;
+&lt;/alternatives&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Right-click the <code>encoder</code> project and select Clean and Build.</p>
+</li>
+<li>
+<p>In the web browser, reenter the URL to show the String Encoder page
+for the redeployed project:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/encoder/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter a string and the number of letters to shift by, and then click
+Encode.</p>
+<div class="paragraph">
+<p>This time, the Result line displays your arguments. For example, if you
+enter <code>Java</code> and <code>4</code>, the result is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Result: input string is Java, shift value is 4</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-encoder-example-using-maven">To Build, Package, and Deploy the encoder Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi/encoder/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>encoder.war</code>, located in the <code>target</code> directory, and then deploys it to
+GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-encoder-example-using-maven">To Run the encoder Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/encoder/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The String Encoder page opens.</p>
+</div>
+</li>
+<li>
+<p>Enter a string and the number of letters to shift by, and then click
+Encode.</p>
+<div class="paragraph">
+<p>The encoded string appears in blue on the Result line. For example, if
+you enter <code>Java</code> and <code>4</code>, the result is <code>Neze</code>.</p>
+</div>
+</li>
+<li>
+<p>Now, edit the <code>beans.xml</code> file to enable the alternative
+implementation of <code>Coder</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In a text editor, open the following file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi/encoder/src/main/webapp/WEB-INF/beans.xml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Remove the comment characters that surround the <code>alternatives</code>
+element, so that it looks like this:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;alternatives&gt;
+    &lt;class&gt;javaeetutorial.encoder.TestCoderImpl&lt;/class&gt;
+&lt;/alternatives&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save and close the file.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn clean install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the web browser, reenter the URL to show the String Encoder page
+for the redeployed project:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/encoder</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter a string and the number of letters to shift by, and then click
+Encode.</p>
+<div class="paragraph">
+<p>This time, the Result line displays your arguments. For example, if you
+enter <code>Java</code> and <code>4</code>, the result is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Result: input string is Java, shift value is 4</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv-examples001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

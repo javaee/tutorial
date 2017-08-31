@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Web Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="web-resources">Web Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web resources are any software artifacts that the web application
+requires for proper rendering, including images, script files, and any
+user-created component libraries. Resources must be collected in a
+standard location, which can be one of the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A resource packaged in the web application root must be in a
+subdirectory of a <code>resources</code> directory at the web application root:
+`resources/`resource-identifier.</p>
+</li>
+<li>
+<p>A resource packaged in the web application&#8217;s classpath must be in a
+subdirectory of the <code>META-INF/resources</code> directory within a web
+application: `META-INF/resources/`resource-identifier. You can use this
+file structure to package resources in a JAR file bundled in the web
+application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces runtime will look for the resources in the
+preceding listed locations, in that order.</p>
+</div>
+<div class="paragraph">
+<p>Resource identifiers are unique strings that conform to the following
+format (all on one line):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">[locale-prefix/][library-name/][library-version/]resource-name[/resource-version]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Elements of the resource identifier in brackets (<code>[]</code>) are optional,
+indicating that only a resource-name, which is usually a file name, is a
+required element. For example, the most common way to specify a style
+sheet, image, or script is to use the <code>library</code> and <code>name</code> attributes,
+as in the following tag from the <code>guessnumber-jsf</code> example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:outputStylesheet library="css" name="default.css"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This tag specifies that the <code>default.css</code> style sheet is in the
+directory <code>web/resources/css</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can also specify the location of an image using the following
+syntax, also from the <code>guessnumber-jsf</code> example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:graphicImage value="#{resource['images:wave.med.gif']}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This tag specifies that the image named <code>wave.med.gif</code> is in the
+directory <code>web/resources/images</code>.</p>
+</div>
+<div class="paragraph">
+<p>Resources can be considered as a library location. Any artifact, such as
+a composite component or a template that is stored in the <code>resources</code>
+directory, becomes accessible to the other application components, which
+can use it to create a resource instance.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

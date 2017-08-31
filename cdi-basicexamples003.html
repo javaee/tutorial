@@ -1,0 +1,604 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The guessnumber-cdi CDI Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-basicexamples002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-guessnumber-cdi-cdi-example">The guessnumber-cdi CDI Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>guessnumber-cdi</code> example, somewhat more complex than the
+<code>simplegreeting</code> example, illustrates the use of producer methods and of
+session and application scope. The example is a game in which you try to
+guess a number in fewer than ten attempts. It is similar to the
+<code>guessnumber-jsf</code> example described in
+<a href="jsf-facelets.html#GIEPX">Chapter 8, "Introduction to Facelets"</a>,
+except that you can keep guessing until you get the right answer or
+until you use up your ten attempts.</p>
+</div>
+<div class="paragraph">
+<p>The example includes four source files, a Facelets page and template,
+and configuration files. The configuration files and the template are
+the same as those used for the <code>simplegreeting</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJDJU">The guessnumber-cdi Source Files</a></p>
+</li>
+<li>
+<p><a href="#GJDON">The Facelets Page</a></p>
+</li>
+<li>
+<p><a href="#GJDPW">Running the guessnumber-cdi Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-guessnumber-cdi-source-files">The guessnumber-cdi Source Files</h3>
+<div class="paragraph">
+<p>The four source files for the <code>guessnumber-cdi</code> example are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>@MaxNumber</code> qualifier interface</p>
+</li>
+<li>
+<p>The <code>@Random</code> qualifier interface</p>
+</li>
+<li>
+<p>The <code>Generator</code> managed bean, which defines producer methods</p>
+</li>
+<li>
+<p>The <code>UserNumberBean</code> managed bean</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The source files are located in the
+<code><em>tut-install</em>/examples/cdi/guessnumber-cdi/src/main/java/javaeetutorial/guessnumber</code>
+directory.</p>
+</div>
+<div class="sect3">
+<h4 id="the-maxnumber-and-random-qualifier-interfaces">The @MaxNumber and @Random Qualifier Interfaces</h4>
+<div class="paragraph">
+<p>The <code>@MaxNumber</code> qualifier interface is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package guessnumber;
+
+import java.lang.annotation.Documented;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Target;
+import javax.inject.Qualifier;
+
+@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Retention(RUNTIME)
+@Documented
+@Qualifier
+public @interface MaxNumber {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@Random</code> qualifier interface is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package guessnumber;
+
+import java.lang.annotation.Documented;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Target;
+import javax.inject.Qualifier;
+
+@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Retention(RUNTIME)
+@Documented
+@Qualifier
+public @interface Random {
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-generator-managed-bean">The Generator Managed Bean</h4>
+<div class="paragraph">
+<p>The <code>Generator</code> managed bean contains the two producer methods for the
+application. The bean has the <code>@ApplicationScoped</code> annotation to specify
+that its context extends for the duration of the user&#8217;s interaction with
+the application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package guessnumber;
+
+import java.io.Serializable;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+
+@ApplicationScoped
+public class Generator implements Serializable {
+
+    private static final long serialVersionUID = -7213673465118041882L;
+
+    private final java.util.Random random =
+        new java.util.Random( System.currentTimeMillis() );
+
+    private final int maxNumber = 100;
+
+    java.util.Random getRandom() {
+        return random;
+    }
+
+    @Produces @Random int next() {
+        return getRandom().nextInt(maxNumber + 1);
+    }
+
+    @Produces @MaxNumber int getMaxNumber() {
+        return maxNumber;
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-usernumberbean-managed-bean">The UserNumberBean Managed Bean</h4>
+<div class="paragraph">
+<p>The <code>UserNumberBean</code> managed bean, the managed bean for the JavaServer
+Faces application, provides the basic logic for the game. This bean does
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Implements setter and getter methods for the bean fields</p>
+</li>
+<li>
+<p>Injects the two qualifier objects</p>
+</li>
+<li>
+<p>Provides a <code>reset</code> method that allows you to begin a new game after
+you complete one</p>
+</li>
+<li>
+<p>Provides a <code>check</code> method that determines whether the user has guessed
+the number</p>
+</li>
+<li>
+<p>Provides a <code>validateNumberRange</code> method that determines whether the
+user&#8217;s input is correct</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The bean is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package guessnumber;
+
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Instance;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
+@SessionScoped
+public class UserNumberBean implements Serializable {
+
+    private static final long serialVersionUID = -7698506329160109476L;
+
+    private int number;
+    private Integer userNumber;
+    private int minimum;
+    private int remainingGuesses;
+
+    @MaxNumber
+    @Inject
+    private int maxNumber;
+
+    private int maximum;
+
+    @Random
+    @Inject
+    Instance&lt;Integer&gt; randomInt;
+
+    public UserNumberBean() {
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setUserNumber(Integer user_number) {
+        userNumber = user_number;
+    }
+
+    public Integer getUserNumber() {
+        return userNumber;
+    }
+
+    public int getMaximum() {
+        return (this.maximum);
+    }
+
+    public void setMaximum(int maximum) {
+        this.maximum = maximum;
+    }
+
+    public int getMinimum() {
+        return (this.minimum);
+    }
+
+    public void setMinimum(int minimum) {
+        this.minimum = minimum;
+    }
+
+    public int getRemainingGuesses() {
+        return remainingGuesses;
+    }
+
+    public String check() throws InterruptedException {
+        if (userNumber &gt; number) {
+            maximum = userNumber - 1;
+        }
+        if (userNumber &lt; number) {
+            minimum = userNumber + 1;
+        }
+        if (userNumber == number) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Correct!"));
+        }
+        remainingGuesses--;
+        return null;
+    }
+
+    @PostConstruct
+    public void reset() {
+        this.minimum = 0;
+        this.userNumber = 0;
+        this.remainingGuesses = 10;
+        this.maximum = maxNumber;
+        this.number = randomInt.get();
+    }
+
+    public void validateNumberRange(FacesContext context,
+                                    UIComponent toValidate,
+                                    Object value) {
+        int input = (Integer) value;
+
+        if (input &lt; minimum || input &gt; maximum) {
+            ((UIInput) toValidate).setValid(false);
+
+            FacesMessage message = new FacesMessage("Invalid guess");
+            context.addMessage(toValidate.getClientId(context), message);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-facelets-page">The Facelets Page</h3>
+<div class="paragraph">
+<p>This example uses the same template that the <code>simplegreeting</code> example
+uses. The <code>index.xhtml</code> file, however, is more complex.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+    &lt;ui:composition template="/template.xhtml"&gt;
+
+        &lt;ui:define name="title"&gt;Guess My Number&lt;/ui:define&gt;
+        &lt;ui:define name="head"&gt;Guess My Number&lt;/ui:define&gt;
+        &lt;ui:define name="content"&gt;
+            &lt;h:form id="GuessMain"&gt;
+                &lt;div style="color: black; font-size: 24px;"&gt;
+                    &lt;p&gt;I'm thinking of a number from
+                    &lt;span style="color: blue"&gt;#{userNumberBean.minimum}&lt;/span&gt;
+                    to
+                    &lt;span style="color: blue"&gt;#{userNumberBean.maximum}&lt;/span&gt;.
+                    You have
+                    &lt;span style="color: blue"&gt;
+                        #{userNumberBean.remainingGuesses}
+                    &lt;/span&gt;
+                    guesses.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;h:panelGrid border="0" columns="5" style="font-size: 18px;"&gt;
+                    &lt;h:outputLabel for="inputGuess"&gt;Number:&lt;/h:outputLabel&gt;
+                    &lt;h:inputText id="inputGuess"
+                                 value="#{userNumberBean.userNumber}"
+                                 required="true" size="3"
+disabled="#{userNumberBean.number eq userNumberBean.userNumber or userNumberBean.remainingGuesses le 0}"
+                               validator="#{userNumberBean.validateNumberRange}"&gt;
+                    &lt;/h:inputText&gt;
+                    &lt;h:commandButton id="GuessButton" value="Guess"
+                                     action="#{userNumberBean.check}"
+disabled="#{userNumberBean.number eq userNumberBean.userNumber or userNumberBean.remainingGuesses le 0}"/&gt;
+                    &lt;h:commandButton id="RestartButton" value="Reset"
+                                     action="#{userNumberBean.reset}"
+                                     immediate="true" /&gt;
+                    &lt;h:outputText id="Higher" value="Higher!"
+rendered="#{userNumberBean.number gt userNumberBean.userNumber and userNumberBean.userNumber ne 0}"
+                                  style="color: #d20005"/&gt;
+                    &lt;h:outputText id="Lower" value="Lower!"
+rendered="#{userNumberBean.number lt userNumberBean.userNumber and userNumberBean.userNumber ne 0}"
+                                  style="color: #d20005"/&gt;
+                &lt;/h:panelGrid&gt;
+                &lt;div style="color: #d20005; font-size: 14px;"&gt;
+                    &lt;h:messages id="messages" globalOnly="false"/&gt;
+                &lt;/div&gt;
+            &lt;/h:form&gt;
+        &lt;/ui:define&gt;
+
+    &lt;/ui:composition&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Facelets page presents the user with the minimum and maximum values
+and the number of guesses remaining. The user&#8217;s interaction with the
+game takes place within the <code>panelGrid</code> table, which contains an input
+field, <strong>Guess</strong> and <strong>Reset</strong> buttons, and a field that appears if the guess is
+higher or lower than the correct number. Every time the user clicks
+<strong>Guess</strong>, the <code>userNumberBean.check</code> method is called to reset the
+maximum or minimum value or, if the guess is correct, to generate a
+<code>FacesMessage</code> to that effect. The method that determines whether each
+guess is valid is <code>userNumberBean.validateNumberRange</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-guessnumber-cdi-example">Running the guessnumber-cdi Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>guessnumber-cdi</code> application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJDPS">To Build, Package, and Deploy the guessnumber-cdi Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GJDPR">To Build, Package, and Deploy the guessnumber-cdi Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#GJDQB">To Run the guessnumber Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-guessnumber-cdi-example-using-netbeans-ide">To Build, Package, and Deploy the guessnumber-cdi Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the <strong>File</strong> menu, choose <strong>Open Project</strong>.</p>
+</li>
+<li>
+<p>In the <strong>Open Project</strong> dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>guessnumber-cdi</code> folder.</p>
+</li>
+<li>
+<p>Click <strong>Open Project</strong>.</p>
+</li>
+<li>
+<p>In the <strong>Projects</strong> tab, right-click the <code>guessnumber-cdi</code> project and
+select <strong>Build</strong>.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>guessnumber-cdi.war</code>, located in the <code>target</code> directory, and then
+deploys it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-guessnumber-cdi-example-using-maven">To Build, Package, and Deploy the guessnumber-cdi Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, change to the following directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi/guessnumber-cdi/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>guessnumber-cdi.war</code>, located in the <code>target</code> directory, and then
+deploys it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-guessnumber-example">To Run the guessnumber Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/guessnumber-cdi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Guess My Number</strong> page opens.</p>
+</div>
+</li>
+<li>
+<p>On the <strong>Guess My Number</strong> page, enter a number in the <strong>Number</strong> field and
+click <strong>Guess</strong>.</p>
+<div class="paragraph">
+<p>The minimum and maximum values are modified, along with the remaining
+number of guesses.</p>
+</div>
+</li>
+<li>
+<p>Keep guessing numbers until you get the right answer or run out of
+guesses.</p>
+<div class="paragraph">
+<p>If you get the right answer or run out of guesses, the input field and
+<strong>Guess</strong> button are grayed out.</p>
+</div>
+</li>
+<li>
+<p>Click <strong>Reset</strong> to play the game again with a new random number.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-basicexamples002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

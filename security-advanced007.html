@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Configuring Security Using Deployment Descriptors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-advanced006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="configuring-security-using-deployment-descriptors">Configuring Security Using Deployment Descriptors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The recommended way to configure security in the Java EE 7 platform is
+with annotations. If you wish to override the security settings at
+deployment time, you can use security elements in the <code>web.xml</code>
+deployment descriptor to do so. This section describes how to use the
+deployment descriptor to specify basic authentication and to override
+default principal-to-role mapping.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCCM">Specifying Security for Basic Authentication in the
+Deployment Descriptor</a></p>
+</li>
+<li>
+<p><a href="#GKAFQ">Specifying Non-Default Principal-to-Role Mapping in the
+Deployment Descriptor</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="specifying-security-for-basic-authentication-in-the-deployment-descriptor">Specifying Security for Basic Authentication in the Deployment Descriptor</h3>
+<div class="paragraph">
+<p>The elements of the deployment descriptor that add basic authentication
+to an example tell the server or browser to perform the following tasks.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Send a standard login dialog box to collect user name and password
+data.</p>
+</li>
+<li>
+<p>Verify that the user is authorized to access the application.</p>
+</li>
+<li>
+<p>If authorized, display the servlet to the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sample code shows the security elements for a deployment
+descriptor that could be used in the example of basic authentication
+found in the tut-install`/examples/security/hello2_basicauth/`
+directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;security-constraint&gt;
+        &lt;display-name&gt;SecurityConstraint&lt;/display-name&gt;
+        &lt;web-resource-collection&gt;
+             &lt;web-resource-name&gt;WRCollection&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;/greeting&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;auth-constraint&gt;
+            &lt;role-name&gt;TutorialUser&lt;/role-name&gt;
+        &lt;/auth-constraint&gt;
+        &lt;user-data-constraint&gt;
+             &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
+        &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
+    &lt;login-config&gt;
+        &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+        &lt;realm-name&gt;file&lt;/realm-name&gt;
+    &lt;/login-config&gt;
+    &lt;security-role&gt;
+        &lt;role-name&gt;TutorialUser&lt;/role-name&gt;
+    &lt;/security-role&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This deployment descriptor specifies that the request URI <code>/greeting</code>
+can be accessed only by users who have entered their user names and
+passwords and have been authorized to access this URL because they have
+been verified to be in the role <code>TutorialUser</code>. The user name and
+password data will be sent over a protected transport in order to keep
+it from being read in transit.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor">Specifying Non-Default Principal-to-Role Mapping in the Deployment Descriptor</h3>
+<div class="paragraph">
+<p>To map a role name permitted by the application or module to principals
+(users) and groups defined on the server, use the
+<code>security-role-mapping</code> element in the runtime deployment descriptor
+file (<code>glassfish-application.xml</code>, <code>glassfish-web.xml</code>, or
+<code>glassfish-ejb-jar.xml</code>). The entry needs to declare a mapping between a
+security role used in the application and one or more groups or
+principals defined for the applicable realm of GlassFish Server. An
+example for the <code>glassfish-web.xml</code> file is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;glassfish-web-app&gt;
+    &lt;security-role-mapping&gt;
+        &lt;role-name&gt;DIRECTOR&lt;/role-name&gt;
+        &lt;principal-name&gt;schwartz&lt;/principal-name&gt;
+    &lt;/security-role-mapping&gt;
+    &lt;security-role-mapping&gt;
+        &lt;role-name&gt;DEPT-ADMIN&lt;/role-name&gt;
+        &lt;group-name&gt;dept-admins&lt;/group-name&gt;
+    &lt;/security-role-mapping&gt;
+&lt;/glassfish-web-app&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The role name can be mapped to either a specific principal (user), a
+group, or both. The principal or group names referenced must be valid
+principals or groups in the current default realm of GlassFish Server.
+The <code>role-name</code> in this example must exactly match the <code>role-name</code> in
+the <code>security-role</code> element of the corresponding <code>web.xml</code> file or the
+role name defined in the <code>@DeclareRoles</code> and/or <code>@RolesAllowed</code>
+annotations.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-advanced006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

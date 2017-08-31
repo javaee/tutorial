@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Running the Duke&apos;s Forest Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="dukes-forest003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="running-the-dukes-forest-application">Running the Duke&#8217;s Forest Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Running the Duke&#8217;s Forest application involves several tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Registering as a customer of Duke&#8217;s Store</p>
+</li>
+<li>
+<p>As a customer, purchasing products</p>
+</li>
+<li>
+<p>As an administrator, approving or denying shipment of a product</p>
+</li>
+<li>
+<p>As an administrator, creating a new product, customer, group, or
+category</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDBDEHH">To Register as a Duke&#8217;s Store Customer</a></p>
+</li>
+<li>
+<p><a href="#CHDCEJIC">To Purchase Products</a></p>
+</li>
+<li>
+<p><a href="#CHDICAIJ">To Approve Shipment of a Product</a></p>
+</li>
+<li>
+<p><a href="#CHDIFEGC">To Create a New Product</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="to-register-as-a-dukes-store-customer">To Register as a Duke&#8217;s Store Customer</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/dukes-store</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Forest - Store page opens.</p>
+</div>
+</li>
+<li>
+<p>Click Sign Up at the top of the page.</p>
+</li>
+<li>
+<p>Fill in the form fields, then click Save.</p>
+<div class="paragraph">
+<p>All fields are required, and the Password value must be at least 7
+characters in length.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-purchase-products">To Purchase Products</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>To log in as the user you created, or as one of two users already in
+the database, enter the user name and password and click Log In.</p>
+<div class="paragraph">
+<p>The preexisting users have the user names <code>jack@example.com</code> and
+<code>robert@example.com</code>, and they both have the same password, <code>1234</code>.</p>
+</div>
+</li>
+<li>
+<p>Click Products in the left sidebar.</p>
+</li>
+<li>
+<p>On the page that appears, click one of the categories (Plants, Food,
+Services, or Tools).</p>
+</li>
+<li>
+<p>Choose a product and click Add to Cart.</p>
+<div class="paragraph">
+<p>You can order only one of any one product, but you can order multiple
+different products in multiple categories. The products and a running
+total appear in the Shopping Cart in the left sidebar.</p>
+</div>
+</li>
+<li>
+<p>When you have finished choosing products, click Checkout.</p>
+<div class="paragraph">
+<p>A message appears: "Your order is being processed. Check the Orders page
+to see the status of your order."</p>
+</div>
+</li>
+<li>
+<p>Click Orders in the left sidebar to verify your order.</p>
+<div class="paragraph">
+<p>If the total of the order exceeds $1,000, the status of the order is
+"Order cancelled," because the Payment web service denies orders over
+that limit. Otherwise, the status is "Ready to ship."</p>
+</div>
+</li>
+<li>
+<p>When you have finished placing orders, click Logout at the top of
+the page.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-approve-shipment-of-a-product">To Approve Shipment of a Product</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to Duke&#8217;s Store as an administrator.</p>
+<div class="paragraph">
+<p>Your user name is <code>admin@example.com</code>, and your password is <code>1234</code>.</p>
+</div>
+<div class="paragraph">
+<p>The main administration page allows you to view categories, customers,
+administrators, groups, products, and orders, and to create new objects
+of all types except orders.</p>
+</div>
+</li>
+<li>
+<p>At the bottom of the page, click Approve Shipment.</p>
+<div class="paragraph">
+<p>This action takes you to Duke&#8217;s Shipment, retaining your administrator
+login.</p>
+</div>
+</li>
+<li>
+<p>On the Pending list, click Approve to approve an order and move it
+to the Shipped area of the page.</p>
+<div class="paragraph">
+<p>If you click Deny, the order disappears from the page. If you log in to
+Duke&#8217;s Store again as the customer, it will appear in the Orders list as
+"Order cancelled."</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To return to Duke&#8217;s Store from Duke&#8217;s Shipment, click Return to Duke&#8217;s
+Store.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-create-a-new-product">To Create a New Product</h3>
+<div class="paragraph">
+<p>You can create other kinds of objects as well as products. Creating
+products is more complex than the other creation processes, so it is
+described here.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to Duke&#8217;s Store as an administrator.</p>
+</li>
+<li>
+<p>On the main administration page, click Create New Product.</p>
+</li>
+<li>
+<p>Enter values in the Name, Price, and Description fields.</p>
+</li>
+<li>
+<p>Select a category, then click Next.</p>
+</li>
+<li>
+<p>On the Upload the Product Image page, click Browse to locate an
+image on your file system using a file chooser.</p>
+</li>
+<li>
+<p>Click Next.</p>
+</li>
+<li>
+<p>On the next page, view the product fields, then click Done.</p>
+</li>
+<li>
+<p>Click Products in the left sidebar, then click the category to
+verify that the product has been added.</p>
+</li>
+<li>
+<p>Click Administration at the top of the page to return to the main
+administration page, or click Logout to log out.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="dukes-forest003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

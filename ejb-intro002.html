@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Is a Session Bean?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-intro001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="what-is-a-session-bean">What Is a Session Bean?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A session bean encapsulates business logic that can be invoked
+programmatically by a client over local, remote, or web service client
+views. To access an application that is deployed on the server, the
+client invokes the session bean&#8217;s methods. The session bean performs
+work for its client, shielding it from complexity by executing business
+tasks inside the server.</p>
+</div>
+<div class="paragraph">
+<p>A session bean is not persistent. (That is, its data is not saved to a
+database.)</p>
+</div>
+<div class="paragraph">
+<p>For code samples, see <a href="ejb-basicexamples.html#GIJRB">Chapter 35,
+"Running the Enterprise Bean Examples"</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPKR">Types of Session Beans</a></p>
+</li>
+<li>
+<p><a href="#GIPMT">When to Use Session Beans</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="types-of-session-beans">Types of Session Beans</h3>
+<div class="paragraph">
+<p>Session beans are of three types: stateful, stateless, and singleton.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPNL">Stateful Session Beans</a></p>
+</li>
+<li>
+<p><a href="#GIPIN">Stateless Session Beans</a></p>
+</li>
+<li>
+<p><a href="#GIPIM">Singleton Session Beans</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="stateful-session-beans">Stateful Session Beans</h4>
+<div class="paragraph">
+<p>The state of an object consists of the values of its instance variables.
+In a stateful session bean, the instance variables represent the state
+of a unique client/bean session. Because the client interacts ("talks")
+with its bean, this state is often called the conversational state.</p>
+</div>
+<div class="paragraph">
+<p>As its name suggests, a session bean is similar to an interactive
+session. A session bean is not shared; it can have only one client, in
+the same way that an interactive session can have only one user. When
+the client terminates, its session bean appears to terminate and is no
+longer associated with the client.</p>
+</div>
+<div class="paragraph">
+<p>The state is retained for the duration of the client/bean session. If
+the client removes the bean, the session ends and the state disappears.
+This transient nature of the state is not a problem, however, because
+when the conversation between the client and the bean ends, there is no
+need to retain the state.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="stateless-session-beans">Stateless Session Beans</h4>
+<div class="paragraph">
+<p>A stateless session bean does not maintain a conversational state with
+the client. When a client invokes the methods of a stateless bean, the
+bean&#8217;s instance variables may contain a state specific to that client
+but only for the duration of the invocation. When the method is
+finished, the client-specific state should not be retained. Clients may,
+however, change the state of instance variables in pooled stateless
+beans, and this state is held over to the next invocation of the pooled
+stateless bean. Except during method invocation, all instances of a
+stateless bean are equivalent, allowing the EJB container to assign an
+instance to any client. That is, the state of a stateless session bean
+should apply across all clients.</p>
+</div>
+<div class="paragraph">
+<p>Because they can support multiple clients, stateless session beans can
+offer better scalability for applications that require large numbers of
+clients. Typically, an application requires fewer stateless session
+beans than stateful session beans to support the same number of clients.</p>
+</div>
+<div class="paragraph">
+<p>A stateless session bean can implement a web service, but a stateful
+session bean cannot.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="singleton-session-beans">Singleton Session Beans</h4>
+<div class="paragraph">
+<p>A singleton session bean is instantiated once per application and exists
+for the lifecycle of the application. Singleton session beans are
+designed for circumstances in which a single enterprise bean instance is
+shared across and concurrently accessed by clients.</p>
+</div>
+<div class="paragraph">
+<p>Singleton session beans offer similar functionality to stateless session
+beans but differ from them in that there is only one singleton session
+bean per application, as opposed to a pool of stateless session beans,
+any of which may respond to a client request. Like stateless session
+beans, singleton session beans can implement web service endpoints.</p>
+</div>
+<div class="paragraph">
+<p>Singleton session beans maintain their state between client invocations
+but are not required to maintain their state across server crashes or
+shutdowns.</p>
+</div>
+<div class="paragraph">
+<p>Applications that use a singleton session bean may specify that the
+singleton should be instantiated upon application startup, which allows
+the singleton to perform initialization tasks for the application. The
+singleton may perform cleanup tasks on application shutdown as well,
+because the singleton will operate throughout the lifecycle of the
+application.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="when-to-use-session-beans">When to Use Session Beans</h3>
+<div class="paragraph">
+<p>Stateful session beans are appropriate if any of the following
+conditions are true.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The bean&#8217;s state represents the interaction between the bean and a
+specific client.</p>
+</li>
+<li>
+<p>The bean needs to hold information about the client across method
+invocations.</p>
+</li>
+<li>
+<p>The bean mediates between the client and the other components of the
+application, presenting a simplified view to the client.</p>
+</li>
+<li>
+<p>Behind the scenes, the bean manages the work flow of several
+enterprise beans.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To improve performance, you might choose a stateless session bean if it
+has any of these traits.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The bean&#8217;s state has no data for a specific client.</p>
+</li>
+<li>
+<p>In a single method invocation, the bean performs a generic task for
+all clients. For example, you might use a stateless session bean to send
+an email that confirms an online order.</p>
+</li>
+<li>
+<p>The bean implements a web service.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Singleton session beans are appropriate in the following circumstances.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>State needs to be shared across the application.</p>
+</li>
+<li>
+<p>A single enterprise bean needs to be accessed by multiple threads
+concurrently.</p>
+</li>
+<li>
+<p>The application needs an enterprise bean to perform tasks upon
+application startup and shutdown.</p>
+</li>
+<li>
+<p>The bean implements a web service.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-intro001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

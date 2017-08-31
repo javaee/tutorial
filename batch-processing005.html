@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Creating Batch Artifacts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="batch-processing004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="creating-batch-artifacts">Creating Batch Artifacts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After you define a job in terms of its batch artifacts using the Job
+Specification Language (JSL), you create these artifacts as Java classes
+that implement the interfaces in the <code>javax.batch.api</code> package and its
+subpackages.</p>
+</div>
+<div class="paragraph">
+<p>This section lists the main batch artifact interfaces, demonstrates how
+to access context objects from the batch runtime, and provides some
+examples.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABDAIBI">Batch Artifact Interfaces</a></p>
+</li>
+<li>
+<p><a href="#BCGIFJBB">Dependency Injection in Batch Artifacts</a></p>
+</li>
+<li>
+<p><a href="#BCGCJEEF">Using the Context Objects from the Batch Runtime</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="batch-artifact-interfaces">Batch Artifact Interfaces</h3>
+<div class="paragraph">
+<p>The following tables list the interfaces that you implement to create
+batch artifacts. The interface implementations are referenced from the
+elements described in <a href="batch-processing004.html#BCGDDBBG">Using the
+Job Specification Language</a>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BCGGCIDC">Table 56-3</a> lists the interfaces to implement batch
+artifacts for chunk steps, task steps, and decision elements.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BCGEAAEA">Table 56-4</a> lists the interfaces to implement batch
+artifacts for partitioned steps.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BCGCAEDI">Table 56-5</a> lists the interfaces to implement batch
+artifacts for job and step listeners.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref279"></a><a id="BCGGCIDC"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 56-3 Main Batch Artifact Interfaces</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 56%;">
+<colgroup>
+<col style="width: 51.4851%;">
+<col style="width: 47.5247%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Batchlet</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements the business logic of a
+task-oriented step. It is referenced from the <code>batchlet</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Decider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decides the next step, flow, or split to
+execute based on information from the execution of the previous step,
+flow, or split. It is referenced from the <code>decision</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CheckPointAlgorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements a custom
+checkpoint policy for chunk steps. It is referenced from the
+<code>checkpoint-algorithm</code> element inside the <code>chunk</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ItemReader</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reads items from an input source
+in a chunk step. It is referenced from the <code>reader</code> element inside the
+<code>chunk</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ItemProcessor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Processes input items to
+obtain output items in chunk steps. It is referenced from the
+<code>processor</code> element inside the <code>chunk</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ItemWriter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Writes output items in chunk
+steps. It is referenced from the <code>writer</code> element inside the <code>chunk</code>
+element.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref280"></a><a id="BCGEAAEA"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 56-4 Partition Batch Artifact Interfaces</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 58%;">
+<colgroup>
+<col style="width: 56.4356%;">
+<col style="width: 42.5742%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.partition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PartitionPlan</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides details on how
+to execute a partitioned step, such as the number of partitions, the
+number of threads, and the parameters for each partition. This artifact
+is not referenced directly from the job definition file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.partition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PartitionMapper</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides a
+<code>PartitionPlan</code> object. It is referenced from the <code>mapper</code> element
+inside the <code>partition</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.partition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PartitionReducer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Receives control when
+a partitioned step begins, ends, or rolls back. It is referenced from
+the <code>reducer</code> element inside the <code>partition</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.partition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PartitionCollector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sends intermediary
+results from each partition to a partition analyzer. It is referenced
+from the <code>collector</code> element inside the <code>partition</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.partition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PartitionAnalyzer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Processes data and
+final results from each partition. It is referenced from the <code>analyzer</code>
+element inside the <code>partition</code> element.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref281"></a><a id="BCGCAEDI"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 56-5 Listener Batch Artifact Interfaces</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 61%;">
+<colgroup>
+<col style="width: 1%;">
+<col style="width: 44%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JobListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts job execution
+before and after running a job. It is referenced from the <code>listener</code>
+element inside the <code>job</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>StepListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts step execution
+before and after running a step. It is referenced from the <code>listener</code>
+element inside the <code>step</code> element</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ChunkListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts chunk
+processing in chunk steps before and after processing each chunk, and on
+errors. It is referenced from the <code>listener</code> element inside the <code>step</code>
+element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ItemReadListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts item
+reading in chunk steps before and after reading each item, and on
+errors. It is referenced from the <code>listener</code> element inside the <code>step</code>
+element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ItemProcessListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts
+item processing in chunk steps before and after processing each item,
+and on errors. It is referenced from the <code>listener</code> element inside the
+<code>step</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ItemWriteListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts item
+writing in chunk steps before and after writing each item, and on
+errors. It is referenced from the <code>listener</code> element inside the <code>step</code>
+element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RetryReadListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts retry
+item reading in chunk steps when an exception occurs. It is referenced
+from the <code>listener</code> element inside the <code>step</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RetryProcessListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts
+retry item processing in chunk steps when an exception occurs. It is
+referenced from the <code>listener</code> element inside the <code>step</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RetryWriteListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts
+retry item writing in chunk steps when an exception occurs. It is
+referenced from the <code>listener</code> element inside the <code>step</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SkipReadListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts
+skippable exception handling for item readers in chunk steps. It is
+referenced from the <code>listener</code> element inside the <code>step</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SkipProcessListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts
+skippable exception handling for item processors in chunk steps. It is
+referenced from the <code>listener</code> element inside the <code>step</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.batch.api.chunk.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SkipWriteListener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercepts
+skippable exception handling for item writers in chunk steps. It is
+referenced from the <code>listener</code> element inside the <code>step</code> element.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="dependency-injection-in-batch-artifacts">Dependency Injection in Batch Artifacts</h3>
+<div class="paragraph">
+<p>To ensure that Contexts and Dependency Injection (CDI) works in your
+batch artifacts, follow these steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Define your batch artifact implementations as CDI named beans using
+the <code>Named</code> annotation.</p>
+<div class="paragraph">
+<p>For example, define an item reader implementation in a chunk step as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named("MyItemReaderImpl")
+public class MyItemReaderImpl implements ItemReader {
+    /* ... Override the ItemReader interface methods ... */
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Provide a public, empty, no-argument constructor for your batch
+artifacts.</p>
+<div class="paragraph">
+<p>For example, provide the following constructor for the artifact above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public MyItemReaderImpl() {}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Specify the CDI name for the batch artifacts in the job definition
+file, instead of using the fully qualified name of the class.</p>
+<div class="paragraph">
+<p>For example, define the step for the artifact above as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepA" next="stepB"&gt;
+  &lt;chunk&gt;
+    &lt;reader ref="MyItemReaderImpl"&gt;&lt;/reader&gt;
+    ...
+  &lt;/chunk&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example uses the CDI name (<code>MyItemReaderImpl</code>) instead of the fully
+qualified name of the class (<code>com.example.pkg.MyItemReaderImpl</code>) to
+specify a batch artifact.</p>
+</div>
+</li>
+<li>
+<p>Ensure that your module is a CDI bean archive by annotating your
+batch artifacts with the <code>javax.enterprise.context.Dependent</code> annotation
+or by including an empty <code>beans.xml</code> deployment description with your
+application. For example, the following batch artifact is annotated with
+<code>@Dependent</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("MyItemReaderImpl")
+public class MyItemReaderImpl implements ItemReader { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information on bean archives, see
+<a href="cdi-adv001.html#CACDCFDE">Packaging CDI Applications</a> in
+<a href="cdi-adv.html#GJEHI">Chapter 26, "Contexts and Dependency Injection
+for Java EE: Advanced Topics"</a>.</p>
+</div>
+</li>
+</ol>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Contexts and Dependency Injection (CDI) is required in order to access
+context objects from the batch runtime in batch artifacts.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You may encounter the following errors if you do not follow this
+procedure.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The batch runtime cannot locate some batch artifacts.</p>
+</li>
+<li>
+<p>The batch artifacts throw null pointer exceptions when accessing
+injected objects.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-the-context-objects-from-the-batch-runtime">Using the Context Objects from the Batch Runtime</h3>
+<div class="paragraph">
+<p>The batch runtime provides context objects that implement the
+<code>JobContext</code> and <code>StepContext</code> interfaces in the
+<code>javax.batch.runtime.context</code> package. These objects are associated with
+the current job and step, respectively, and enable you to do the
+following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Get information from the current job or step, such as its name,
+instance ID, execution ID, batch status, and exit status</p>
+</li>
+<li>
+<p>Set the user-defined exit status</p>
+</li>
+<li>
+<p>Store user data</p>
+</li>
+<li>
+<p>Get property values from the job or step definition</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can inject context objects from the batch runtime inside batch
+artifact implementations like item readers, item processors, item
+writers, batchlets, listeners, and so on. The following example
+demonstrates how to access property values from the job definition file
+in an item reader implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("MyItemReaderImpl")
+public class MyItemReaderImpl implements ItemReader {
+    @Inject
+    JobContext jobCtx;
+
+    public MyItemReaderImpl() {}
+
+    @Override
+    public void open(Serializable checkpoint) throws Exception {
+        String fileName = jobCtx.getProperties()
+                                .getProperty("log_file_name");
+        ...
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="#BCGIFJBB">Dependency Injection in Batch Artifacts</a> for
+instructions on how to define your batch artifacts to use dependency
+injection.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Do not access batch context objects inside artifact constructors.</p>
+</div>
+<div class="paragraph">
+<p>Because the job does not run until you submit it to the batch runtime,
+the batch context objects are not available when CDI instantiates your
+artifacts upon loading your application. The instantiation of these
+beans fails and the batch runtime cannot find your batch artifacts when
+your application submits the job.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="batch-processing004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

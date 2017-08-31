@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of the Client API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-client.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-client002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-the-client-api">Overview of the Client API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The JAX-RS Client API provides a high-level API for accessing any REST
+resources, not just JAX-RS services. The Client API is defined in the
+<code>javax.ws.rs.client</code> package.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDFCABB">Creating a Basic Client Request Using the Client API</a></p>
+</li>
+<li>
+<p><a href="#CHDHBFHJ">Obtaining the Client Instance</a></p>
+</li>
+<li>
+<p><a href="#CHDDCICC">Setting the Client Target</a></p>
+</li>
+<li>
+<p><a href="#CHDDBFCG">Setting Path Parameters in Targets</a></p>
+</li>
+<li>
+<p><a href="#CHDEFCDB">Invoking the Request</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="creating-a-basic-client-request-using-the-client-api">Creating a Basic Client Request Using the Client API</h3>
+<div class="paragraph">
+<p>The following steps are needed to access a REST resource using the
+Client API.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Obtain an instance of the <code>javax.ws.rs.client.Client</code> interface.</p>
+</li>
+<li>
+<p>Configure the <code>Client</code> instance with a target.</p>
+</li>
+<li>
+<p>Create a request based on the target.</p>
+</li>
+<li>
+<p>Invoke the request.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The Client API is designed to be fluent, with method invocations chained
+together to configure and submit a request to a REST resource in only a
+few lines of code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+String name = client.target("http://example.com/webapi/hello")
+        .request(MediaType.TEXT_PLAIN)
+        .get(String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the client instance is first created by calling the
+<code>javax.ws.rs.client.ClientBuilder.newClient</code> method. Then, the request
+is configured and invoked by chaining method calls together in one line
+of code. The <code>Client.target</code> method sets the target based on a URI. The
+<code>javax.ws.rs.client.WebTarget.request</code> method sets the media type for
+the returned entity. The <code>javax.ws.rs.client.Invocation.Builder.get</code>
+method invokes the service using an HTTP <code>GET</code> request, setting the type
+of the returned entity to <code>String</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="obtaining-the-client-instance">Obtaining the Client Instance</h3>
+<div class="paragraph">
+<p>The <code>Client</code> interface defines the actions and infrastructure a REST
+client requires to consume a RESTful web service. Instances of <code>Client</code>
+are obtained by calling the <code>ClientBuilder.newClient</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the <code>close</code> method to close <code>Client</code> instances after all the
+invocations for the target resource have been performed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+...
+client.close();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Client</code> instances are heavyweight objects. For performance reasons,
+limit the number of <code>Client</code> instances in your application, as the
+initialization and destruction of these instances may be expensive in
+your runtime environment.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-the-client-target">Setting the Client Target</h3>
+<div class="paragraph">
+<p>The target of a client, the REST resource at a particular URI, is
+represented by an instance of the <code>javax.ws.rs.client.WebTarget</code>
+interface. You obtain a <code>WebTarget</code> instance by calling the
+<code>Client.target</code> method and passing in the URI of the target REST
+resource.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For complex REST resources, it may be beneficial to create several
+instances of <code>WebTarget</code>. In the following example, a base target is
+used to construct several other targets that represent different
+services provided by a REST resource.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget base = client.target("http://example.com/webapi");
+// WebTarget at http://example.com/webapi/read
+WebTarget read = base.path("read");
+// WebTarget at http://example.com/webapi/write
+WebTarget write = base.path("write");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>WebTarget.path</code> method creates a new <code>WebTarget</code> instance by
+appending the current target URI with the path that was passed in.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-path-parameters-in-targets">Setting Path Parameters in Targets</h3>
+<div class="paragraph">
+<p>Path parameters in client requests can be specified as URI template
+parameters, similar to the template parameters used when defining a
+resource URI in a JAX-RS service. Template parameters are specified by
+surrounding the template variable with braces (<code>{}</code>). Call the
+<code>resolveTemplate</code> method to substitute the <code>{username}</code>, and then call
+the <code>queryParam</code> method to add another variable to pass.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">WebTarget myResource = client.target("http://example.com/webapi/read")
+        .path("{userName}")
+        .resolveTemplate("userName", "janedoe")        .queryParam("chapter", "1");// http://example.com/webapi/read/janedoe?chapter=1Response response = myResource.request(...)        .get();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="invoking-the-request">Invoking the Request</h3>
+<div class="paragraph">
+<p>After setting and applying any configuration options to the target, call
+one of the <code>WebTarget.request</code> methods to begin creating the request.
+This is usually accomplished by passing to <code>WebTarget.request</code> the
+accepted media response type for the request either as a string of the
+MIME type or using one of the constants in <code>javax.ws.rs.core.MediaType</code>.
+The <code>WebTarget.request</code> method returns an instance of
+<code>javax.ws.rs.client.Invocation.Builder</code>, a helper object that provides
+methods for preparing the client request.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Invocation.Builder builder = myResource.request(MediaType.TEXT_PLAIN);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using a <code>MediaType</code> constant is equivalent to using the string defining
+the MIME type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Invocation.Builder builder = myResource.request("text/plain");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After setting the media type, invoke the request by calling one of the
+methods of the <code>Invocation.Builder</code> instance that corresponds to the
+type of HTTP request the target REST resource expects. These methods
+are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>get()</code></p>
+</li>
+<li>
+<p><code>post()</code></p>
+</li>
+<li>
+<p><code>delete()</code></p>
+</li>
+<li>
+<p><code>put()</code></p>
+</li>
+<li>
+<p><code>head()</code></p>
+</li>
+<li>
+<p><code>options()</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if the target REST resource is for an HTTP GET request,
+call the <code>Invocation.Builder.get</code> method. The return type should
+correspond to the entity returned by the target REST resource.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .get(String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the target REST resource is expecting an HTTP POST request, call the
+<code>Invocation.Builder.post</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+StoreOrder order = new StoreOrder(...);
+WebTarget myResource = client.target("http://example.com/webapi/write");
+TrackingNumber trackingNumber = myResource.request(MediaType.APPLICATION_XML)
+                                   .post(Entity.xml(order), TrackingNumber.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, the return type is a custom class and is
+retrieved by setting the type in the
+<code>Invocation.Builder.post(Entity&lt;?&gt; entity, Class&lt;T&gt; responseType)</code>
+method as a parameter.</p>
+</div>
+<div class="paragraph">
+<p>If the return type is a collection, use
+<code>javax.ws.rs.core.GenericType&lt;T&gt;</code> as the response type parameter, where
+<code>T</code> is the collection type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">List&lt;StoreOrder&gt; orders = client.target("http://example.com/webapi/read")
+        .path("allOrders")
+        .request(MediaType.APPLICATION_XML)
+        .get(new GenericType&lt;List&lt;StoreOrder&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This preceding example shows how methods are chained together in the
+Client API to simplify how requests are configured and invoked.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-client.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-client002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

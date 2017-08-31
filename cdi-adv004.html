@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Predefined Beans in CDI Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-predefined-beans-in-cdi-applications">Using Predefined Beans in CDI Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java EE provides predefined beans that implement the following
+interfaces.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>javax.transaction.UserTransaction</code>: A Java Transaction API (JTA) user
+transaction.</p>
+</li>
+<li>
+<p><code>java.security.Principal</code>: The abstract notion of a principal, which
+represents any entity, such as an individual, a corporation, or a login
+ID. Whenever the injected principal is accessed, it always represents
+the identity of the current caller. For example, a principal is injected
+into a field at initialization. Later, a method that uses the injected
+principal is called on the object into which the principal was injected.
+In this situation, the injected principal represents the identity of the
+current caller when the method is run.</p>
+</li>
+<li>
+<p><code>javax.validation.Validator</code>: A validator for bean instances. The bean
+that implements this interface enables a <code>Validator</code> object for the
+default bean validation object <code>ValidatorFactory</code> to be injected.</p>
+</li>
+<li>
+<p><code>javax.validation.ValidatorFactory</code>: A factory class for returning
+initialized <code>Validator</code> instances. The bean that implements this
+interface enables the default bean validation <code>ValidatorFactory</code> object
+to be injected.</p>
+</li>
+<li>
+<p><code>javax.servlet.http.HttpServletRequest</code>: An HTTP request from a
+client. The bean that implements this interface enables a servlet to
+obtain all the details of a request.</p>
+</li>
+<li>
+<p><code>javax.servlet.http.HttpSession</code>: An HTTP session between a client and
+a server. The bean that implements this interface enables a servlet to
+access information about a session and to bind objects to a session.</p>
+</li>
+<li>
+<p><code>javax.servlet.ServletContext</code>: A context object that servlets can use
+to communicate with the servlet container.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To inject a predefined bean, create an injection point to obtain an
+instance of the bean by using the <code>javax.annotation.Resource</code> annotation
+for resources or the <code>javax.inject.Inject</code> annotation for CDI beans. For
+the bean type, specify the class name of the interface the bean
+implements.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref130"></a><a id="sthref131"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 26-1 Injection of Predefined Beans</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 51%;">
+<colgroup>
+<col style="width: 47.5247%;">
+<col style="width: 51.4851%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Predefined Bean</th>
+<th class="tableblock halign-left valign-top">Resource or CDI Bean</th>
+<th class="tableblock halign-left valign-top">Injection Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UserTransaction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Resource UserTransaction transaction;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Principal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Resource Principal principal;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Validator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Resource Validator validator;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ValidatorFactory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Resource ValidatorFactory factory;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HttpServletRequest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CDI bean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Inject HttpServletRequest req;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HttpSession</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CDI bean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Inject HttpSession session;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ServletContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CDI bean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Inject ServletContext context;</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Predefined beans are injected with dependent scope and the predefined
+default qualifier <code>@Default</code>.</p>
+</div>
+<div class="paragraph">
+<p>For more information about injecting resources, see
+<a href="injection001.html#BABHDCAI">Resource Injection</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows how to use the <code>@Resource</code> and
+<code>@Inject</code> annotations to inject predefined beans. This code snippet
+injects a user transaction and a context object into the servlet class
+<code>TransactionServlet</code>. The user transaction is an instance of the
+predefined bean that implements the <code>javax.transaction.UserTransaction</code>
+interface. The context object is an instance of the predefined bean that
+implements the <code>javax.servlet.ServletContext</code> interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServlet;
+import javax.transaction.UserTransaction;
+...
+public class TransactionServlet extends HttpServlet {
+    @Resource UserTransaction transaction;
+    @Inject ServletContext context;
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

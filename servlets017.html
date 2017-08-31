@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The dukeetf Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets016.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets018.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-dukeetf-example-application">The dukeetf Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>dukeetf</code> example application, located in the
+tut-install`/examples/web/dukeetf/` directory, demonstrates how to use
+asynchronous processing in a servlet to provide data updates to web
+clients. The example resembles a service that provides periodic updates
+on the price and trading volume of an electronically traded fund (ETF).</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDBBEDA">Architecture of the dukeetf Example Application</a></p>
+</li>
+<li>
+<p><a href="#CHDHBBBI">Running the dukeetf Example Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="architecture-of-the-dukeetf-example-application">Architecture of the dukeetf Example Application</h3>
+<div class="paragraph">
+<p>The <code>dukeetf</code> example application consists of a servlet, an enterprise
+bean, and an HTML page.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The servlet puts requests in asynchronous mode, stores them in a
+queue, and writes the responses when new data for price and trading
+volume becomes available.</p>
+</li>
+<li>
+<p>The enterprise bean updates the price and volume information once
+every second.</p>
+</li>
+<li>
+<p>The HTML page uses JavaScript code to make requests to the servlet for
+new data, parse the response from the servlet, and update the price and
+volume information without reloading the page.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>dukeetf</code> example application uses a programming model known as long
+polling. In the traditional HTTP request and response model, the user
+must make an explicit request (such as clicking a link or submitting a
+form) to get any new information from the server, and the page has to be
+reloaded. Long polling provides a mechanism for web applications to push
+updates to clients using HTTP without the user making an explicit
+request. The server handles connections asynchronously, and the client
+uses JavaScript to make new connections. In this model, clients make a
+new request immediately after receiving new data, and the server keeps
+the connection open until new data becomes available.</p>
+</div>
+<div class="sect3">
+<h4 id="the-servlet">The Servlet</h4>
+<div class="paragraph">
+<p>The <code>DukeETFServlet</code> class uses asynchronous processing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns={"/dukeetf"}, asyncSupported=true)
+public class DukeETFServlet extends HttpServlet {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following code, the <code>init</code> method initializes a queue to hold
+client requests and registers the servlet with the enterprise bean that
+provides the price and volume updates. The <code>send</code> method gets called
+once per second by the <code>PriceVolumeBean</code> to send updates and close the
+connection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void init(ServletConfig config) {
+   /* Queue for requests */
+   requestQueue = new ConcurrentLinkedQueue&lt;&gt;();
+   /* Register with the enterprise bean that provides price/volume updates */
+   pvbean.registerServlet(this);
+}
+
+/* PriceVolumeBean calls this method every second to send updates */
+public void send(double price, int volume) {
+   /* Send update to all connected clients */
+   for (AsyncContext acontext : requestQueue) {
+      try {
+         String msg = String.format("%.2f / %d", price, volume);
+         PrintWriter writer = acontext.getResponse().getWriter();
+         writer.write(msg);
+         logger.log(Level.INFO, "Sent: {0}", msg);
+         /* Close the connection
+          * The client (JavaScript) makes a new one instantly */
+         acontext.complete();
+      } catch (IOException ex) {
+         logger.log(Level.INFO, ex.toString());
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The service method puts client requests in asynchronous mode and adds a
+listener to each request. The listener is implemented as an anonymous
+class that removes the request from the queue when the servlet finishes
+writing a response or when there is an error. Finally, the service
+method adds the request to the request queue created in the <code>init</code>
+method. The service method is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void doGet(HttpServletRequest request,
+                  HttpServletResponse response) {
+   response.setContentType("text/html");
+   /* Put request in async mode */
+   final AsyncContext acontext = request.startAsync();
+   /* Remove from the queue when done */
+   acontext.addListener(new AsyncListener() {
+      public void onComplete(AsyncEvent ae) throws IOException {
+         requestQueue.remove(acontext);
+      }
+      public void onTimeout(AsyncEvent ae) throws IOException {
+         requestQueue.remove(acontext);
+      }
+      public void onError(AsyncEvent ae) throws IOException {
+         requestQueue.remove(acontext);
+      }
+      public void onStartAsync(AsyncEvent ae) throws IOException {}
+   });
+   /* Add to the queue */
+   requestQueue.add(acontext);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-enterprise-bean">The Enterprise Bean</h4>
+<div class="paragraph">
+<p>The <code>PriceVolumeBean</code> class is an enterprise bean that uses the timer
+service from the container to update the price and volume information
+and call the servlet&#8217;s <code>send</code> method once every second:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Startup
+@Singleton
+public class PriceVolumeBean {
+    /* Use the container's timer service */
+    @Resource TimerService tservice;
+    private DukeETFServlet servlet;
+    ...
+
+    @PostConstruct
+    public void init() {
+        /* Initialize the EJB and create a timer */
+        random = new Random();
+        servlet = null;
+        tservice.createIntervalTimer(1000, 1000, new TimerConfig());
+    }
+
+    public void registerServlet(DukeETFServlet servlet) {
+        /* Associate a servlet to send updates to */
+        this.servlet = servlet;
+    }
+
+    @Timeout
+    public void timeout() {
+        /* Adjust price and volume and send updates */
+        price += 1.0*(random.nextInt(100)-50)/100.0;
+        volume += random.nextInt(5000) - 2500;
+        if (servlet != null)
+            servlet.send(price, volume);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="ejb-basicexamples005.html#BNBOY">Using the Timer Service</a> in
+<a href="ejb-basicexamples.html#GIJRB">Chapter 35, "Running the Enterprise
+Bean Examples"</a> for more information on the timer service.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-html-page">The HTML Page</h4>
+<div class="paragraph">
+<p>The HTML page consists of a table and some JavaScript code. The table
+contains two fields referenced from JavaScript code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;...&lt;/head&gt;
+&lt;body onload="makeAjaxRequest();"&gt;
+  ...
+  &lt;table&gt;
+    ...
+    &lt;td id="price"&gt;--.--&lt;/td&gt;
+    ...
+    &lt;td id="volume"&gt;--&lt;/td&gt;
+    ...
+  &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JavaScript code uses the <code>XMLHttpRequest</code> API, which provides
+functionality for transferring data between a client and a server. The
+script makes an asynchronous request to the servlet and designates a
+callback method. When the server provides a response, the callback
+method updates the fields in the table and makes a new request. The
+JavaScript code is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">var ajaxRequest;
+function updatePage() {
+   if (ajaxRequest.readyState === 4) {
+      var arraypv = ajaxRequest.responseText.split("/");
+      document.getElementById("price").innerHTML = arraypv[0];
+      document.getElementById("volume").innerHTML = arraypv[1];
+      makeAjaxRequest();
+   }
+}
+function makeAjaxRequest() {
+   ajaxRequest = new XMLHttpRequest();
+   ajaxRequest.onreadystatechange = updatePage;
+   ajaxRequest.open("GET", "http://localhost:8080/dukeetf/dukeetf",
+                    true);
+   ajaxRequest.send(null);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>XMLHttpRequest</code> API is supported by most modern browsers, and it is
+widely used in Ajax web client development (Asynchronous JavaScript and
+XML).</p>
+</div>
+<div class="paragraph">
+<p>See <a href="websocket011.html#BABGCEHE">The dukeetf2 Example Application</a> in
+<a href="websocket.html#GKJIQ5">Chapter 18, "Java API for WebSocket"</a> for an
+equivalent version of this example implemented using a WebSocket
+endpoint.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-dukeetf-example-application">Running the dukeetf Example Application</h3>
+<div class="paragraph">
+<p>This section describes how to run the <code>dukeetf</code> example application
+using NetBeans IDE and from the command line.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDCGCJD">To Run the dukeetf Example Application Using NetBeans
+IDE</a></p>
+</li>
+<li>
+<p><a href="#CHDHHAFG">To Run the dukeetf Example Application Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-dukeetf-example-application-using-netbeans-ide">To Run the dukeetf Example Application Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>dukeetf</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>dukeetf</code> project and select
+Run.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file
+(<code>dukeetf.war</code>) located in the <code>target</code> directory, deploys it to the
+server, and launches a web browser window with the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/dukeetf/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open the same URL in a different web browser to see how both pages get
+price and volume updates simultaneously.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-dukeetf-example-application-using-maven">To Run the dukeetf Example Application Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet/dukeetf/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open a web browser window and type the following address:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/dukeetf/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open the same URL in a different web browser to see how both pages get
+price and volume updates simultaneously.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets016.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets018.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the Criteria API and Metamodel API to Create Basic Typesafe Queries</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-criteria002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-string-queries.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-the-criteria-api-and-metamodel-api-to-create-basic-typesafe-queries">Using the Criteria API and Metamodel API to Create Basic Typesafe Queries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The basic semantics of a Criteria query consists of a <code>SELECT</code> clause, a
+<code>FROM</code> clause, and an optional <code>WHERE</code> clause, similar to a JPQL query.
+Criteria queries set these clauses by using Java programming language
+objects, so the query can be created in a typesafe manner.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJIVS">Creating a Criteria Query</a></p>
+</li>
+<li>
+<p><a href="#GJIVQ">Query Roots</a></p>
+</li>
+<li>
+<p><a href="#GJIUV">Querying Relationships Using Joins</a></p>
+</li>
+<li>
+<p><a href="#GJIVE">Path Navigation in Criteria Queries</a></p>
+</li>
+<li>
+<p><a href="#GJIVI">Restricting Criteria Query Results</a></p>
+</li>
+<li>
+<p><a href="#GJIXE">Managing Criteria Query Results</a></p>
+</li>
+<li>
+<p><a href="#GJIVY">Executing Queries</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="creating-a-criteria-query">Creating a Criteria Query</h3>
+<div class="paragraph">
+<p>The <code>javax.persistence.criteria.CriteriaBuilder</code> interface is used to
+construct</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Criteria queries</p>
+</li>
+<li>
+<p>Selections</p>
+</li>
+<li>
+<p>Expressions</p>
+</li>
+<li>
+<p>Predicates</p>
+</li>
+<li>
+<p>Ordering</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To obtain an instance of the <code>CriteriaBuilder</code> interface, call the
+<code>getCriteriaBuilder</code> method on either an <code>EntityManager</code> or an
+<code>EntityManagerFactory</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>The following code shows how to obtain a <code>CriteriaBuilder</code> instance by
+using the <code>EntityManager.getCriteriaBuilder</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+CriteriaBuilder cb = em.getCriteriaBuilder();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Criteria queries are constructed by obtaining an instance of the
+following interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">javax.persistence.criteria.CriteriaQuery</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>CriteriaQuery</code> objects define a particular query that will navigate
+over one or more entities. Obtain <code>CriteriaQuery</code> instances by calling
+one of the <code>CriteriaBuilder.createQuery</code> methods. To create typesafe
+queries, call the <code>CriteriaBuilder.createQuery</code> method as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>CriteriaQuery</code> object&#8217;s type should be set to the expected result
+type of the query. In the preceding code, the object&#8217;s type is set to
+<code>CriteriaQuery&lt;Pet&gt;</code> for a query that will find instances of the <code>Pet</code>
+entity.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet creates a <code>CriteriaQuery</code> object for a query
+that returns a <code>String</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;String&gt; cq = cb.createQuery(String.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="query-roots">Query Roots</h3>
+<div class="paragraph">
+<p>For a particular <code>CriteriaQuery</code> object, the root entity of the query,
+from which all navigation originates, is called the query root. It is
+similar to the <code>FROM</code> clause in a JPQL query.</p>
+</div>
+<div class="paragraph">
+<p>Create the query root by calling the <code>from</code> method on the
+<code>CriteriaQuery</code> instance. The argument to the <code>from</code> method is either
+the entity class or an <code>EntityType&lt;T&gt;</code> instance for the entity.</p>
+</div>
+<div class="paragraph">
+<p>The following code sets the query root to the <code>Pet</code> entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code sets the query root to the <code>Pet</code> class by using an
+<code>EntityType&lt;T&gt;</code> instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Metamodel m = em.getMetamodel();
+EntityType&lt;Pet&gt; Pet_ = m.entity(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet_);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Criteria queries may have more than one query root. This usually occurs
+when the query navigates from several entities.</p>
+</div>
+<div class="paragraph">
+<p>The following code has two <code>Root</code> instances:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet1 = cq.from(Pet.class);
+Root&lt;Pet&gt; pet2 = cq.from(Pet.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querying-relationships-using-joins">Querying Relationships Using Joins</h3>
+<div class="paragraph">
+<p>For queries that navigate to related entity classes, the query must
+define a join to the related entity by calling one of the <code>From.join</code>
+methods on the query root object or another join object. The <code>join</code>
+methods are similar to the <code>JOIN</code> keyword in JPQL.</p>
+</div>
+<div class="paragraph">
+<p>The target of the join uses the Metamodel class of type <code>EntityType&lt;T&gt;</code>
+to specify the persistent field or property of the joined entity.</p>
+</div>
+<div class="paragraph">
+<p>The <code>join</code> methods return an object of type <code>Join&lt;X, Y&gt;</code>, where <code>X</code> is
+the source entity and <code>Y</code> is the target of the join. In the following
+code snippet, <code>Pet</code> is the source entity, <code>Owner</code> is the target, and
+<code>Pet_</code> is a statically generated metamodel class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+Join&lt;Pet, Owner&gt; owner = pet.join(Pet_.owners);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can chain joins together to navigate to related entities of the
+target entity without having to create a <code>Join&lt;X, Y&gt;</code> instance for each
+join:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+Join&lt;Owner, Address&gt; address = pet.join(Pet_.owners).join(Owner_.addresses);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="path-navigation-in-criteria-queries">Path Navigation in Criteria Queries</h3>
+<div class="paragraph">
+<p><code>Path</code> objects, which are used in the <code>SELECT</code> and <code>WHERE</code> clauses of a
+Criteria query, can be query root entities, join entities, or other
+<code>Path</code> objects. Use the <code>Path.get</code> method to navigate to attributes of
+the entities of a query.</p>
+</div>
+<div class="paragraph">
+<p>The argument to the <code>get</code> method is the corresponding attribute of the
+entity&#8217;s Metamodel class. The attribute can be either a single-valued
+attribute, specified by <code>@SingularAttribute</code> in the Metamodel class, or
+a collection-valued attribute, specified by one of
+<code>@CollectionAttribute</code>, <code>@SetAttribute</code>, <code>@ListAttribute</code>, or
+<code>@MapAttribute</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following query returns the names of all the pets in the data store.
+The <code>get</code> method is called on the query root, <code>pet</code>, with the <code>name</code>
+attribute of the <code>Pet</code> entity&#8217;s Metamodel class, <code>Pet_</code>, as the
+argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;String&gt; cq = cb.createQuery(String.class);
+
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.select(pet.get(Pet_.name));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restricting-criteria-query-results">Restricting Criteria Query Results</h3>
+<div class="paragraph">
+<p>Conditions that are set by calling the <code>CriteriaQuery.where</code> method can
+restrict the results of a query on the <code>CriteriaQuery</code> object. Calling
+the <code>where</code> method is analogous to setting the <code>WHERE</code> clause in a JPQL
+query.</p>
+</div>
+<div class="paragraph">
+<p>The <code>where</code> method evaluates instances of the <code>Expression</code> interface to
+restrict the results according to the conditions of the expressions. To
+create <code>Expression</code> instances, use methods defined in the <code>Expression</code>
+and <code>CriteriaBuilder</code> interfaces.</p>
+</div>
+<div class="sect3">
+<h4 id="the-expression-interface-methods">The Expression Interface Methods</h4>
+<div class="paragraph">
+<p>An <code>Expression</code> object is used in a query&#8217;s <code>SELECT</code>, <code>WHERE</code>, or
+<code>HAVING</code> clause. <a href="#GJIWW">Table 41-1</a> shows conditional methods you
+can use with <code>Expression</code> objects.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref180"></a><a id="GJIWW"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 41-1 Conditional Methods in the Expression Interface</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 20%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isNull</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether an expression is null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isNotNull</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether an expression is not null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether an expression is within a list of values</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following query uses the <code>Expression.isNull</code> method to find all pets
+where the <code>color</code> attribute is null:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.where(pet.get(Pet_.color).isNull());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following query uses the <code>Expression.in</code> method to find all brown
+and black pets:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.where(pet.get(Pet_.color).in("brown", "black"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>in</code> method can also check whether an attribute is a member of a
+collection.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="expression-methods-in-the-criteriabuilder-interface">Expression Methods in the CriteriaBuilder Interface</h4>
+<div class="paragraph">
+<p>The <code>CriteriaBuilder</code> interface defines additional methods for creating
+expressions. These methods correspond to the arithmetic, string, date,
+time, and case operators and functions of JPQL. <a href="#GJIXL">Table 41-2</a>
+shows conditional methods you can use with <code>CriteriaBuilder</code> objects.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref181"></a><a id="GJIXL"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 41-2 Conditional Methods in the CriteriaBuilder Interface</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 20%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Conditional Method</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>equal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether two expressions are equal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>notEqual</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether two expressions are not equal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether the first numeric expression is greater than the
+second numeric expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ge</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether the first numeric expression is greater than or
+equal to the second numeric expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether the first numeric expression is less than the
+second numeric expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>le</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether the first numeric expression is less than or equal
+to the second numeric expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>between</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether the first expression is between the second and
+third expression in value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>like</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tests whether the expression matches a given pattern</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following code uses the <code>CriteriaBuilder.equal</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.where(cb.equal(pet.get(Pet_.name), "Fido"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code uses the <code>CriteriaBuilder.gt</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+Date someDate = new Date(...);
+cq.where(cb.gt(pet.get(Pet_.birthday), date));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code uses the <code>CriteriaBuilder.between</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+Date firstDate = new Date(...);
+Date secondDate = new Date(...);
+cq.where(cb.between(pet.get(Pet_.birthday), firstDate, secondDate));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code uses the <code>CriteriaBuilder.like</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.where(cb.like(pet.get(Pet_.name), "*do"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To specify multiple conditional predicates, use the compound predicate
+methods of the <code>CriteriaBuilder</code> interface, as shown in
+<a href="#GJIWU">Table 41-3</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref182"></a><a id="GJIWU"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 41-3 Compound Predicate Methods in the CriteriaBuilder Interface</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 20%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>and</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A logical conjunction of two Boolean expressions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>or</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A logical disjunction of two Boolean expressions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>not</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A logical negation of the given Boolean expression</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following code shows the use of compound predicates in queries:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.where(cb.equal(pet.get(Pet_.name), "Fido")
+        .and(cb.equal(pet.get(Pet_.color), "brown")));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-criteria-query-results">Managing Criteria Query Results</h3>
+<div class="paragraph">
+<p>For queries that return more than one result, it is often helpful to
+organize those results. The <code>CriteriaQuery</code> interface defines the
+following ordering and grouping methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>orderBy</code> method orders query results according to attributes of
+an entity</p>
+</li>
+<li>
+<p>The <code>groupBy</code> method groups the results of a query together according
+to attributes of an entity, and the <code>having</code> method restricts those
+groups according to a condition</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJIWO">Ordering Results</a></p>
+</li>
+<li>
+<p><a href="#GJIXG">Grouping Results</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="ordering-results">Ordering Results</h4>
+<div class="paragraph">
+<p>To order the results of a query, call the <code>CriteriaQuery.orderBy</code>
+method, passing in an <code>Order</code> object. To create an <code>Order</code> object, call
+either the <code>CriteriaBuilder.asc</code> or the <code>CriteriaBuilder.desc</code> method.
+The <code>asc</code> method is used to order the results by ascending value of the
+passed expression parameter. The <code>desc</code> method is used to order the
+results by descending value of the passed expression parameter. The
+following query shows the use of the <code>desc</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.select(pet);
+cq.orderBy(cb.desc(pet.get(Pet_.birthday)));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this query, the results will be ordered by the pet&#8217;s birthday from
+highest to lowest. That is, pets born in December will appear before
+pets born in May.</p>
+</div>
+<div class="paragraph">
+<p>The following query shows the use of the <code>asc</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+Join&lt;Owner, Address&gt; address = pet.join(Pet_.owners).join(Owner_.address);
+cq.select(pet);
+cq.orderBy(cb.asc(address.get(Address_.postalCode)));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this query, the results will be ordered by the pet owner&#8217;s postal
+code from lowest to highest. That is, pets whose owner lives in the
+10001 zip code will appear before pets whose owner lives in the 91000
+zip code.</p>
+</div>
+<div class="paragraph">
+<p>If more than one <code>Order</code> object is passed to <code>orderBy</code>, the precedence
+is determined by the order in which they appear in the argument list of
+<code>orderBy</code>. The first <code>Order</code> object has precedence.</p>
+</div>
+<div class="paragraph">
+<p>The following code orders results by multiple criteria:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+Join&lt;Pet, Owner&gt; owner = pet.join(Pet_.owners);
+cq.select(pet);
+cq.orderBy(cb.asc(owner.get(Owner_.lastName)), owner.get(Owner_.firstName)));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The results of this query will be ordered alphabetically by the pet
+owner&#8217;s last name, then first name.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="grouping-results">Grouping Results</h4>
+<div class="paragraph">
+<p>The <code>CriteriaQuery.groupBy</code> method partitions the query results into
+groups. To set these groups, pass an expression to <code>groupBy</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.groupBy(pet.get(Pet_.color));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This query returns all <code>Pet</code> entities and groups the results by the
+pet&#8217;s color.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>CriteriaQuery.having</code> method in conjunction with <code>groupBy</code> to
+filter over the groups. The <code>having</code> method, which takes a conditional
+expression as a parameter, restricts the query result according to the
+conditional expression:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+Root&lt;Pet&gt; pet = cq.from(Pet.class);
+cq.groupBy(pet.get(Pet_.color));
+cq.having(cb.in(pet.get(Pet_.color)).value("brown").value("blonde"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the query groups the returned <code>Pet</code> entities by color,
+as in the preceding example. However, the only returned groups will be
+<code>Pet</code> entities where the <code>color</code> attribute is set to <code>brown</code> or
+<code>blonde</code>. That is, no gray-colored pets will be returned in this query.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="executing-queries">Executing Queries</h3>
+<div class="paragraph">
+<p>To prepare a query for execution, create a <code>TypedQuery&lt;T&gt;</code> object with
+the type of the query result, passing the <code>CriteriaQuery</code> object to
+<code>EntityManager.createQuery</code>.</p>
+</div>
+<div class="paragraph">
+<p>To execute a query, call either <code>getSingleResult</code> or <code>getResultList</code> on
+the <code>TypedQuery&lt;T&gt;</code> object.</p>
+</div>
+<div class="sect3">
+<h4 id="single-valued-query-results">Single-Valued Query Results</h4>
+<div class="paragraph">
+<p>Use the <code>TypedQuery&lt;T&gt;.getSingleResult</code> method to execute queries that
+return a single result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+...
+TypedQuery&lt;Pet&gt; q = em.createQuery(cq);
+Pet result = q.getSingleResult();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="collection-valued-query-results">Collection-Valued Query Results</h4>
+<div class="paragraph">
+<p>Use the <code>TypedQuery&lt;T&gt;.getResultList</code> method to execute queries that
+return a collection of objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;Pet&gt; cq = cb.createQuery(Pet.class);
+...
+TypedQuery&lt;Pet&gt; q = em.createQuery(cq);
+List&lt;Pet&gt; results = q.getResultList();</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-criteria002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-string-queries.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

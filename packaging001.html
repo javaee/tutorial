@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Packaging Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="packaging.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="packaging002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="packaging-applications">Packaging Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Java EE application is delivered in a Java Archive (JAR) file, a Web
+Archive (WAR) file, or an Enterprise Archive (EAR) file. A WAR or EAR
+file is a standard JAR (<code>.jar</code>) file with a <code>.war</code> or <code>.ear</code> extension.
+Using JAR, WAR, and EAR files and modules makes it possible to assemble
+a number of different Java EE applications using some of the same
+components. No extra coding is needed; it is only a matter of assembling
+(or packaging) various Java EE modules into Java EE JAR, WAR, or EAR
+files.</p>
+</div>
+<div class="paragraph">
+<p>An EAR file (see <a href="#BCGHHIIH">Figure 5-1</a>) contains Java EE modules
+and, optionally, deployment descriptors. A deployment descriptor, an XML
+document with an <code>.xml</code> extension, describes the deployment settings of
+an application, a module, or a component. Because deployment descriptor
+information is declarative, it can be changed without the need to modify
+the source code. At runtime, the Java EE server reads the deployment
+descriptor and acts upon the application, module, or component
+accordingly.</p>
+</div>
+<div class="paragraph">
+<p>Deployment information is most commonly specified in the source code by
+annotations. Deployment descriptors, if present, override what is
+specified in the source code.</p>
+</div>
+<div id="BCGHHIIH" class="paragraph">
+<div class="title"><strong>Figure 5-1 EAR File Structure</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_010.png" alt="Diagram of EAR file structure. META-INF and web, application client, EJB, and resource adapter modules are under the assembly root."></span></p>
+</div>
+<div class="paragraph">
+<p>The two types of deployment descriptors are Java EE and runtime. A Java
+EE deployment descriptor is defined by a Java EE specification and can
+be used to configure deployment settings on any Java EE-compliant
+implementation. A runtime deployment descriptor is used to configure
+Java EE implementation-specific parameters. For example, the GlassFish
+Server runtime deployment descriptor contains such information as the
+context root of a web application as well as GlassFish Server
+implementation-specific parameters, such as caching directives. The
+GlassFish Server runtime deployment descriptors are named
+<code>glassfish-`moduleType</code>.xml` and are located in the same <code>META-INF</code>
+directory as the Java EE deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>A Java EE module consists of one or more Java EE components for the same
+container type and, optionally, one component deployment descriptor of
+that type. An enterprise bean module deployment descriptor, for example,
+declares transaction attributes and security authorizations for an
+enterprise bean. A Java EE module can be deployed as a stand-alone
+module.</p>
+</div>
+<div class="paragraph">
+<p>Java EE modules are of the following types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>EJB modules, which contain class files for enterprise beans and,
+optionally, an EJB deployment descriptor. EJB modules are packaged as
+JAR files with a <code>.jar</code> extension.</p>
+</li>
+<li>
+<p>Web modules, which contain servlet class files, web files, supporting
+class files, GIF and HTML files, and, optionally, a web application
+deployment descriptor. Web modules are packaged as JAR files with a
+<code>.war</code> (web archive) extension.</p>
+</li>
+<li>
+<p>Application client modules, which contain class files and, optionally,
+an application client deployment descriptor. Application client modules
+are packaged as JAR files with a <code>.jar</code> extension.</p>
+</li>
+<li>
+<p>Resource adapter modules, which contain all Java interfaces, classes,
+native libraries, and, optionally, a resource adapter deployment
+descriptor. Together, these implement the Connector architecture (see
+<a href="overview008.html#BNACZ">Java EE Connector Architecture</a>) for a
+particular EIS. Resource adapter modules are packaged as JAR files with
+an <code>.rar</code> (resource adapter archive) extension.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="packaging.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="packaging002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

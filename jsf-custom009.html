@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Defining the Custom Component Tag in a Tag Library Descriptor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="defining-the-custom-component-tag-in-a-tag-library-descriptor">Defining the Custom Component Tag in a Tag Library Descriptor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To use a custom tag, you declare it in a Tag Library Descriptor (TLD).
+The TLD file defines how the custom tag is used in a JavaServer Faces
+page. The web container uses the TLD to validate the tag. The set of
+tags that are part of the HTML render kit are defined in the HTML_BASIC
+TLD, available in the o<a href="JSFRK">JavaServer Faces standard HTML tag
+library</a>.</p>
+</div>
+<div class="paragraph">
+<p>The TLD file name must end with <code>taglib.xml</code>. In the Duke&#8217;s Bookstore
+case study, the custom tags <code>area</code> and <code>map</code> are defined in the file
+<code>web/WEB-INF/bookstore.taglib.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>All tag definitions must be nested inside the <code>facelet-taglib</code> element
+in the TLD. Each tag is defined by a <code>tag</code> element. Here are the tag
+definitions for the <code>area</code> and <code>map</code> components:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;facelet-taglib xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+...&gt;
+    &lt;namespace&gt;http://dukesbookstore&lt;/namespace&gt;
+    &lt;tag&gt;
+        &lt;tag-name&gt;area&lt;/tag-name&gt;
+        &lt;component&gt;
+            &lt;component-type&gt;DemoArea&lt;/component-type&gt;
+            &lt;renderer-type&gt;DemoArea&lt;/renderer-type&gt;
+        &lt;/component&gt;
+    &lt;/tag&gt;
+    &lt;tag&gt;
+        &lt;tag-name&gt;map&lt;/tag-name&gt;
+        &lt;component&gt;
+            &lt;component-type&gt;DemoMap&lt;/component-type&gt;
+            &lt;renderer-type&gt;DemoMap&lt;/renderer-type&gt;
+        &lt;/component&gt;
+    &lt;/tag&gt;
+&lt;/facelet-taglib&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>component-type</code> element specifies the name defined in the
+<code>@FacesComponent</code> annotation, and the <code>renderer-type</code> element specifies
+the <code>rendererType</code> defined in the <code>@FacesRenderer</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>The <code>facelet-taglib</code> element must also include a <code>namespace</code> element,
+which defines the namespace to be specified in pages that use the custom
+component. See <a href="jsf-custom010.html#BNATT">Using a Custom Component</a>
+for information on specifying the namespace in pages.</p>
+</div>
+<div class="paragraph">
+<p>The TLD file is located in the <code>WEB-INF</code> directory. In addition, an
+entry is included in the web deployment descriptor (<code>web.xml</code>) to
+identify the custom tag library descriptor file, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;context-param&gt;
+        &lt;param-name&gt;javax.faces.FACELETS_LIBRARIES&lt;/param-name&gt;
+        &lt;param-value&gt;/WEB-INF/bookstore.taglib.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

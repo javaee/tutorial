@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Method Constraints in Type Hierarchies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="bean-validation-advanced003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partcdi.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-method-constraints-in-type-hierarchies">Using Method Constraints in Type Hierarchies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you add validation constraints to objects in an inheritance
+hierarchy, take special care to avoid unintended errors when using
+subtypes.</p>
+</div>
+<div class="paragraph">
+<p>For a given type, subtypes should be able to be substituted without
+encountering errors. For example, if you have a <code>Person</code> class and an
+<code>Employee</code> subclass that extends <code>Person</code>, you should be able to use
+<code>Employee</code> instances wherever you might use <code>Person</code> instances. If
+<code>Employee</code> overrides a method in <code>Person</code> by adding method parameter
+constraints, code that works correctly with <code>Person</code> objects may throw
+validation exceptions with <code>Employee</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>The following code shows an incorrect use of method parameter
+constraints within a class hierarchy:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class Person {
+...
+  public void setPhone(String phone) { ... }
+}
+
+public class Employee extends Person {
+...
+  @Override
+  public void setPhone(@Verified String phone) { ... }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By adding the <code>@Verified</code> constraint to <code>Employee.setPhone</code>, parameters
+that were valid with <code>Person.setPhone</code> will not be valid with
+<code>Employee.setPhone</code>. This is called strengthening the preconditions
+(that is, the method parameters) of a subtype&#8217;s method. You may not
+strengthen the preconditions of subtype method calls.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, the return values from method calls should not be weakened in
+subtypes. The following code shows an incorrect use of constraints on
+method return values in a class hierarchy:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class Person {
+...
+  @Verified
+  public USPhoneNumber getPhone() { ... }
+}
+
+public class Employee extends Person {
+...
+  @Override
+  public USPhoneNumber getPhone() { ... }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>Employee.getPhone</code> method removes the <code>@Verified</code>
+constraint on the return value. Return values that would be not pass
+validation when calling <code>Person.getEmail</code> are allowed when calling
+<code>Employee.getPhone</code>. This is called weakening the postconditions (that
+is, return values) of a subtype. You may not weaken the postconditions
+of a subtype method call.</p>
+</div>
+<div class="paragraph">
+<p>If your type hierarchy strengthens the preconditions or weakens the
+postconditions of subtype method calls, a
+<code>javax.validation.ConstraintDeclarationException</code> will be thrown by the
+Bean Validation runtime.</p>
+</div>
+<div class="paragraph">
+<p>Classes that implement several interfaces that each have the same method
+signature, known as parallel types, need to be aware of the constraints
+applied to the interfaces that they implement to avoid strengthening the
+preconditions. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public interface PaymentService {
+  void processOrder(Order order, double amount);
+...
+}
+
+public interface CreditCardPaymentService {
+  void processOrder(@NotNull Order order, @NotNull double amount);
+...
+}
+
+public class MyPaymentService implements PaymentService,
+        CreditCardPaymentService {
+
+  @Override
+  public void processOrder(Order order, double amount) { ... }
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, <code>MyPaymentService</code> has the constraints from the
+<code>processOrder</code> method in <code>CreditCardPaymentService</code>, but client code
+that calls <code>PaymentService.processOrder</code> doesn&#8217;t expect these
+constraints. This is another example of strengthening the preconditions
+of a subtype and will result in a <code>ConstraintDeclarationException</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="rules-for-using-method-constraints-in-type-hierarchies">Rules for Using Method Constraints in Type Hierarchies</h3>
+<div class="paragraph">
+<p>The following rules define how method validation constraints should be
+used in type hierarchies.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do not add method parameter constraints to overridden or implemented
+methods in a subtype.</p>
+</li>
+<li>
+<p>Do not add method parameter constraints to overridden or implemented
+methods in a subtype that was originally declared in several parallel
+types.</p>
+</li>
+<li>
+<p>You may add return value constraints to an overridden or implemented
+method in a subtype.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="bean-validation-advanced003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partcdi.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

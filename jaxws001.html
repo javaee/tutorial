@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of Java API for XML Web Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxws.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxws002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-java-api-for-xml-web-services">Overview of Java API for XML Web Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In JAX-WS, a web service operation invocation is represented by an
+XML-based protocol, such as SOAP. The SOAP specification defines the
+envelope structure, encoding rules, and conventions for representing web
+service invocations and responses. These calls and responses are
+transmitted as SOAP messages (XML files) over HTTP.</p>
+</div>
+<div class="paragraph">
+<p>Although SOAP messages are complex, the JAX-WS API hides this complexity
+from the application developer. On the server side, the developer
+specifies the web service operations by defining methods in an interface
+written in the Java programming language. The developer also codes one
+or more classes that implement those methods. Client programs are also
+easy to code. A client creates a proxy (a local object representing the
+service) and then simply invokes methods on the proxy. With JAX-WS, the
+developer does not generate or parse SOAP messages. It is the JAX-WS
+runtime system that converts the API calls and responses to and from
+SOAP messages.</p>
+</div>
+<div class="paragraph">
+<p>With JAX-WS, clients and web services have a big advantage: the platform
+independence of the Java programming language. In addition, JAX-WS is
+not restrictive: A JAX-WS client can access a web service that is not
+running on the Java platform and vice versa. This flexibility is
+possible because JAX-WS uses technologies defined by the W3C: HTTP,
+SOAP, and WSDL. WSDL specifies an XML format for describing a service as
+a set of endpoints operating on messages.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Several files in the JAX-WS examples depend on the port that you
+specified when you installed GlassFish Server. These tutorial examples
+assume that the server runs on the default port, 8080. They do not run
+with a nondefault port setting.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxws.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxws002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

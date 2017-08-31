@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Uploading Files with Java Servlet Technology</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets012.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="uploading-files-with-java-servlet-technology">Uploading Files with Java Servlet Technology</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Supporting file uploads is a very basic and common requirement for many
+web applications. In prior versions of the Servlet specification,
+implementing file upload required the use of external libraries or
+complex input processing. The Java Servlet specification now helps to
+provide a viable solution to the problem in a generic and portable way.
+Java Servlet technology now supports file upload out of the box, so any
+web container that implements the specification can parse multipart
+requests and make mime attachments available through the
+<code>HttpServletRequest</code> object.</p>
+</div>
+<div class="paragraph">
+<p>A new annotation, <code>javax.servlet.annotation.MultipartConfig</code>, is used to
+indicate that the servlet on which it is declared expects requests to be
+made using the <code>multipart/form-data</code> MIME type. Servlets that are
+annotated with <code>@MultipartConfig</code> can retrieve the <code>Part</code> components of
+a given <code>multipart/form-data</code> request by calling the
+<code>request.getPart(String name)</code> or <code>request.getParts()</code> method.</p>
+</div>
+<div class="sect2">
+<h3 id="the-multipartconfig-annotation">The @MultipartConfig Annotation</h3>
+<div class="paragraph">
+<p>The <code>@MultipartConfig</code> annotation supports the following optional
+attributes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>location</code>: An absolute path to a directory on the file system. The
+<code>location</code> attribute does not support a path relative to the application
+context. This location is used to store files temporarily while the
+parts are processed or when the size of the file exceeds the specified
+<code>fileSizeThreshold</code> setting. The default location is <code>""</code>.</p>
+</li>
+<li>
+<p><code>fileSizeThreshold</code>: The file size in bytes after which the file will
+be temporarily stored on disk. The default size is 0 bytes.</p>
+</li>
+<li>
+<p><code>MaxFileSize</code>: The maximum size allowed for uploaded files, in bytes.
+If the size of any uploaded file is greater than this size, the web
+container will throw an exception (<code>IllegalStateException</code>). The default
+size is unlimited.</p>
+</li>
+<li>
+<p><code>maxRequestSize</code>: The maximum size allowed for a <code>multipart/form-data</code>
+request, in bytes. The web container will throw an exception if the
+overall size of all uploaded files exceeds this threshold. The default
+size is unlimited.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For, example, the <code>@MultipartConfig</code> annotation could be constructed as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@MultipartConfig(location="/tmp", fileSizeThreshold=1024*1024,
+    maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of using the <code>@MultipartConfig</code> annotation to hard-code these
+attributes in your file upload servlet, you could add the following as a
+child element of the servlet configuration element in the <code>web.xml</code>
+file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;multipart-config&gt;
+    &lt;location&gt;/tmp&lt;/location&gt;
+    &lt;max-file-size&gt;20848820&lt;/max-file-size&gt;
+    &lt;max-request-size&gt;418018841&lt;/max-request-size&gt;
+    &lt;file-size-threshold&gt;1048576&lt;/file-size-threshold&gt;
+&lt;/multipart-config&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-getparts-and-getpart-methods">The getParts and getPart Methods</h3>
+<div class="paragraph">
+<p>The Servlet specification supports two additional <code>HttpServletRequest</code>
+methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Collection&lt;Part&gt; getParts()</code></p>
+</li>
+<li>
+<p><code>Part getPart(String name)</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>request.getParts()</code> method returns collections of all <code>Part</code>
+objects. If you have more than one input of type file, multiple <code>Part</code>
+objects are returned. Because <code>Part</code> objects are named, the
+<code>getPart(String name)</code> method can be used to access a particular <code>Part</code>.
+Alternatively, the <code>getParts()</code> method, which returns an
+<code>Iterable&lt;Part&gt;</code>, can be used to get an <code>Iterator</code> over all the <code>Part</code>
+objects.</p>
+</div>
+<div class="paragraph">
+<p>The <code>javax.servlet.http.Part</code> interface is a simple one, providing
+methods that allow introspection of each <code>Part</code>. The methods do the
+following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Retrieve the name, size, and content-type of the <code>Part</code></p>
+</li>
+<li>
+<p>Query the headers submitted with a <code>Part</code></p>
+</li>
+<li>
+<p>Delete a <code>Part</code></p>
+</li>
+<li>
+<p>Write a <code>Part</code> out to disk</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, the <code>Part</code> interface provides the <code>write(String filename)</code>
+method to write the file with the specified name. The file can then be
+saved in the directory that is specified with the <code>location</code> attribute
+of the <code>@MultipartConfig</code> annotation or, in the case of the <code>fileupload</code>
+example, in the location specified by the Destination field in the form.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets012.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

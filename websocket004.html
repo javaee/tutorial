@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Annotated Endpoints</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="websocket003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="websocket005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="annotated-endpoints">Annotated Endpoints</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following example shows how to create the same endpoint from
+<a href="websocket003.html#BABGJEIG">Programmatic Endpoints</a> using annotations
+instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ServerEndpoint("/echo")
+public class EchoEndpoint {
+   @OnMessage
+   public void onMessage(Session session, String msg) {
+      try {
+         session.getBasicRemote().sendText(msg);
+      } catch (IOException e) { ... }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The annotated endpoint is simpler than the equivalent programmatic
+endpoint, and it is deployed automatically with the application to the
+relative path defined in the <code>ServerEndpoint</code> annotation. Instead of
+having to create an additional class for the message handler, this
+example uses the <code>OnMessage</code> annotation to designate the method invoked
+to handle messages.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BABDGEJH">Table 18-1</a> lists the annotations available in the
+<code>javax.websocket</code> package to designate the methods that handle lifecycle
+events. The examples in the table show the most common parameters for
+these methods. See the API reference for details on what combinations of
+parameters are allowed in each case.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref115"></a><a id="BABDGEJH"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 18-1 WebSocket Endpoint Lifecycle Annotations</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 46%;">
+<colgroup>
+<col style="width: 41.5841%;">
+<col style="width: 57.4257%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Event</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OnOpen</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection opened</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OnOpen
+public void open(Session session,
+                 EndpointConfig conf) { }</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OnMessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message received</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OnMessage
+public void message(Session session,
+                    String msg) { }</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OnError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection error</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OnError
+public void error(Session session,
+                  Throwable error) { }</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OnClose</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection closed</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OnClose
+public void close(Session session,
+                  CloseReason reason) { }</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="websocket003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="websocket005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

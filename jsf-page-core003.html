@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the Standard Validators</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-page-core002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page-core004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<h1 id="using-the-standard-validators" class="sect0">Using the Standard Validators</h1>
+<div class="paragraph">
+<p>JavaServer Faces technology provides a set of standard classes and
+associated tags that page authors and application developers can use to
+validate a component&#8217;s data. <a href="#BNATD">Table 11-6</a> lists all the
+standard validator classes and the tags that allow you to use the
+validators from the page.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref65"></a><a id="BNATD"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 11-6 The Validator Classes</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 53%;">
+<colgroup>
+<col style="width: 50.495%;">
+<col style="width: 48.5148%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Validator Class</th>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BeanValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateBean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registers a bean validator for the
+component.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BeanValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateWholeBean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows cross-field validation by
+enabling class-level bean validation on CDI-based backing beans.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DoubleRangeValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateDoubleRange</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks whether the local
+value of a component is within a certain range. The value must be
+floating-point or convertible to floating-point.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LengthValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateLength</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks whether the length of a
+component&#8217;s local value is within a certain range. The value must be a
+<code>java.lang.String</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LongRangeValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateLongRange</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks whether the local
+value of a component is within a certain range. The value must be any
+numeric type or <code>String</code> that can be converted to a <code>long</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RegexValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateRegex</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks whether the local value of a
+component is a match against a regular expression from the
+<code>java.util.regex</code> package.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RequiredValidator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validateRequired</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensures that the local value
+is not empty on an <code>EditableValueHolder</code> component.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All of these validator classes implement the <code>Validator</code> interface.
+Component writers and application developers can also implement this
+interface to define their own set of constraints for a component&#8217;s
+value.</p>
+</div>
+<div class="paragraph">
+<p>Similar to the standard converters, each of these validators has one or
+more standard error messages associated with it. If you have registered
+one of these validators onto a component on your page and the validator
+is unable to validate the component&#8217;s value, the validator&#8217;s error
+message will display on the page. For example, the error message that
+displays when the component&#8217;s value exceeds the maximum value allowed by
+<code>LongRangeValidator</code> is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">{1}: Validation Error: Value is greater than allowable maximum of "{0}"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the <code>{1}</code> substitution parameter is replaced by the
+component&#8217;s label or <code>id</code>, and the <code>{0}</code> substitution parameter is
+replaced with the maximum value allowed by the validator.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-page002.html#BNASO">Displaying Error Messages with the
+h:message and h:messages Tags</a> for information on how to display
+validation error messages on the page when validation fails.</p>
+</div>
+<div class="paragraph">
+<p>Instead of using the standard validators, you can use Bean Validation to
+validate data. If you specify bean validation constraints on your
+managed bean properties, the constraints are automatically placed on the
+corresponding fields on your applications web pages. See
+<a href="bean-validation.html#CHDGJIIA">Chapter 22, "Introduction to Bean
+Validation"</a> for more information. You do not need to specify the
+<code>validateBean</code> tag to use Bean Validation, but the tag allows you to use
+more advanced Bean Validation features. For example, you can use the
+<code>validationGroups</code> attribute of the tag to specify constraint groups.</p>
+</div>
+<div class="paragraph">
+<p>You can also create and register custom validators, although Bean
+Validation has made this feature less useful. For details, see
+<a href="jsf-custom012.html#BNAUW">Creating and Using a Custom Validator</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="validating-a-components-value">Validating a Component&#8217;s Value</h3>
+<div class="paragraph">
+<p>To validate a component&#8217;s value using a particular validator, you need
+to register that validator on the component. You can do this in one of
+the following ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nest the validator&#8217;s corresponding tag (shown in <a href="#BNATD">Table
+11-6</a>) inside the component&#8217;s tag. <a href="#BNATF">Using Validator Tags</a>
+explains how to use the <code>validateLongRange</code> tag. You can use the other
+standard tags in the same way.</p>
+</li>
+<li>
+<p>Refer to a method that performs the validation from the component
+tag&#8217;s <code>validator</code> attribute.</p>
+</li>
+<li>
+<p>Nest a validator tag inside the component tag, and use either the
+validator tag&#8217;s <code>validatorId</code> attribute or its <code>binding</code> attribute to
+refer to the validator.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-page-core004.html#BNATR">Referencing a Method That Performs
+Validation</a> for more information on using the <code>validator</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>The <code>validatorId</code> attribute works similarly to the <code>converterId</code>
+attribute of the <code>converter</code> tag, as described in
+<a href="jsf-page-core001.html#BNASU">Converting a Component&#8217;s Value</a>.</p>
+</div>
+<div class="paragraph">
+<p>Keep in mind that validation can be performed only on components that
+implement <code>EditableValueHolder</code>, because these components accept values
+that can be validated.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-validator-tags">Using Validator Tags</h3>
+<div class="paragraph">
+<p>The following example shows how to use the <code>f:validateLongRange</code>
+validator tag on an input component named <code>quantity</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="quantity" size="4" value="#{item.quantity}"&gt;
+    &lt;f:validateLongRange minimum="1"/&gt;
+&lt;/h:inputText&gt;
+&lt;h:message for="quantity"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This tag requires the user to enter a number that is at least 1. The
+<code>validateLongRange</code> tag also has a <code>maximum</code> attribute, which sets a
+maximum value for the input.</p>
+</div>
+<div class="paragraph">
+<p>The attributes of all the standard validator tags accept EL value
+expressions. This means that the attributes can reference managed bean
+properties rather than specify literal values. For example, the
+<code>f:validateLongRange</code> tag in the preceding example can reference managed
+bean properties called <code>minimum</code> and <code>maximum</code> to get the minimum and
+maximum values acceptable to the validator implementation, as shown in
+this snippet from the <code>guessnumber-jsf</code> example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="userNo"
+             title="Type a number from 0 to 10:"
+             value="#{userNumberBean.userNumber}"&gt;
+    &lt;f:validateLongRange minimum="#{userNumberBean.minimum}"
+                         maximum="#{userNumberBean.maximum}"/&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following <code>f:validateRegex</code> tag shows how you might ensure that a
+password is from 4 to 10 characters long and contains at least one
+digit, at least one lowercase letter, and at least one uppercase letter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})"
+                 for="passwordVal"/&gt;</code></pre>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-page-core002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page-core004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

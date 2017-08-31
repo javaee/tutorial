@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Server Push</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets014.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets014b.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="server-push">Server Push</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Server push is the ability of the server to anticipate what will be
+needed by the client in advance of the client&#8217;s request. It lets the server
+pre-populate the browser&#8217;s cache in advance of the browser asking for the
+resource to put in the cache.</p>
+</div>
+<div class="paragraph">
+<p>Server push is the most visible of the improvements in HTTP/2 to appear in
+the servlet API. All of the new features in HTTP/2, including server push, are
+aimed at improving the performance of the web browsing experience.</p>
+</div>
+<div class="paragraph">
+<p>Server push derives its contribution to improved browser performance from the
+fact that servers know what additional assets (such as images, stylesheets,
+and scripts) go along with initial requests. For example, servers might know
+that whenever a browser requests <code>index.html</code>, it will shortly thereafter
+request <code>header.gif</code>, <code>footer.gif</code>, and <code>style.css</code>. Servers can preemptively
+start sending the bytes of these assets along with the bytes of the <code>index.html</code>.</p>
+</div>
+<div class="paragraph">
+<p>To use server push, obtain a reference to a <code>PushBuilder</code> from an <code>HttpServletRequest</code>,
+edit the builder as desired, then call <code>push()</code>. See the
+<a href="https://javaee.github.io/javaee-spec/">javadoc</a> for the class
+<code>javax.servlet.http.PushBuilder</code> and the method
+<code>javax.servlet.http.HttpServletRequest.newPushBuilder()</code>.</p>
+</div>
+<div class="paragraph">
+<p>To view the GlassFish samples code for this feature, see
+<a href="https://github.com/javaee/glassfish-samples/tree/master/ws/javaee8" class="bare">https://github.com/javaee/glassfish-samples/tree/master/ws/javaee8</a>.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets014.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets014b.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

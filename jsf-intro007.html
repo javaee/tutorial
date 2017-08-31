@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The Lifecycle of a JavaServer Faces Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-intro006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-lifecycle-of-a-javaserver-faces-application">The Lifecycle of a JavaServer Faces Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The lifecycle of an application refers to the various stages of
+processing of that application, from its initiation to its conclusion.
+All applications have lifecycles. During a web application lifecycle,
+common tasks are performed, including the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Handling incoming requests</p>
+</li>
+<li>
+<p>Decoding parameters</p>
+</li>
+<li>
+<p>Modifying and saving state</p>
+</li>
+<li>
+<p>Rendering web pages to the browser</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces web application framework manages lifecycle phases
+automatically for simple applications or allows you to manage them
+manually for more complex applications as required.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces applications that use advanced features may require
+interaction with the lifecycle at certain phases. For example, Ajax
+applications use partial processing features of the lifecycle (see
+<a href="jsf-intro008.html#GKNOJ">Partial Processing and Partial Rendering</a>).
+A clearer understanding of the lifecycle phases is key to creating
+well-designed components.</p>
+</div>
+<div class="paragraph">
+<p>A simplified view of the JavaServer faces lifecycle, consisting of the
+two main phases of a JavaServer Faces web application, is introduced in
+<a href="jsf-intro004.html#GJAAM">A Simple JavaServer Faces Application</a>. This
+section examines the JavaServer Faces lifecycle in more detail.</p>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-javaserver-faces-lifecycle">Overview of the JavaServer Faces Lifecycle</h3>
+<div class="paragraph">
+<p>The lifecycle of a JavaServer Faces application begins when the client
+makes an HTTP request for a page and ends when the server responds with
+the page, translated to HTML.</p>
+</div>
+<div class="paragraph">
+<p>The lifecycle can be divided into two main phases: Execute and Render.
+The Execute phase is further divided into subphases to support the
+sophisticated component tree. This structure requires that component
+data be converted and validated, component events be handled, and
+component data be propagated to beans in an orderly fashion.</p>
+</div>
+<div class="paragraph">
+<p>A JavaServer Faces page is represented by a tree of components, called a
+view. During the lifecycle, the JavaServer Faces implementation must
+build the view while considering the state saved from a previous
+submission of the page. When the client requests a page, the JavaServer
+Faces implementation performs several tasks, such as validating the data
+input of components in the view and converting input data to types
+specified on the server side.</p>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces implementation performs all these tasks as a series
+of steps in the JavaServer Faces request-response lifecycle.
+<a href="#BNAQR">Figure 7-3</a> illustrates these steps.</p>
+</div>
+<div id="BNAQR" class="paragraph">
+<div class="title"><strong>Figure 7-3 JavaServer Faces Standard Request-Response Lifecycle</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_016.png" alt="Flow diagram of Faces request and Faces response, including event and validation processing, error handling, model updating, application invocation."></span></p>
+</div>
+<div class="paragraph">
+<p>The request-response lifecycle handles two kinds of requests: initial
+requests and postbacks. An initial request occurs when a user makes a
+request for a page for the first time. A postback request occurs when a
+user submits the form contained on a page that was previously loaded
+into the browser as a result of executing an initial request.</p>
+</div>
+<div class="paragraph">
+<p>When the lifecycle handles an initial request, it executes only the
+Restore View and Render Response phases, because there is no user input
+or action to process. Conversely, when the lifecycle handles a postback,
+it executes all of the phases.</p>
+</div>
+<div class="paragraph">
+<p>Usually, the first request for a JavaServer Faces page comes in from a
+client, as a result of clicking a link or button component on a
+JavaServer Faces page. To render a response that is another JavaServer
+Faces page, the application creates a new view and stores it in the
+<code>javax.faces.context.FacesContext</code> instance, which represents all of the
+information associated with processing an incoming request and creating
+a response. The application then acquires object references needed by
+the view and calls the <code>FacesContext.renderResponse</code> method, which
+forces immediate rendering of the view by skipping to the
+<a href="#BNAQX">Render Response Phase</a> of the lifecycle, as is shown by the
+arrows labelled Render Response in <a href="#BNAQR">Figure 7-3</a>.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes, an application might need to redirect to a different web
+application resource, such as a web service, or generate a response that
+does not contain JavaServer Faces components. In these situations, the
+developer must skip the Render Response phase by calling the
+<code>FacesContext.responseComplete</code> method. This situation is also shown in
+, with the arrows labelled Response Complete.</p>
+</div>
+<div class="paragraph">
+<p>The most common situation is that a JavaServer Faces component submits a
+request for another JavaServer Faces page. In this case, the JavaServer
+Faces implementation handles the request and automatically goes through
+the phases in the lifecycle to perform any necessary conversions,
+validations, and model updates and to generate the response.</p>
+</div>
+<div class="paragraph">
+<p>There is one exception to the lifecycle described in this section. When
+a component&#8217;s <code>immediate</code> attribute is set to <code>true</code>, the validation,
+conversion, and events associated with these components are processed
+during the <a href="#BNAQT">Apply Request Values Phase</a> rather than in a
+later phase.</p>
+</div>
+<div class="paragraph">
+<p>The details of the lifecycle explained in the following sections are
+primarily intended for developers who need to know information such as
+when validations, conversions, and events are usually handled and ways
+to change how and when they are handled. For more information on each of
+the lifecycle phases, download the latest JavaServer Faces Specification
+documentation from <code><a href="https://jcp.org/en/jsr/detail?id=372" class="bare">https://jcp.org/en/jsr/detail?id=372</a></code>.</p>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces application lifecycle Execute phase contains the
+following subphases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAQS">Restore View Phase</a></p>
+</li>
+<li>
+<p><a href="#BNAQT">Apply Request Values Phase</a></p>
+</li>
+<li>
+<p><a href="#GJSBP">Process Validations Phase</a></p>
+</li>
+<li>
+<p><a href="#BNAQV">Update Model Values Phase</a></p>
+</li>
+<li>
+<p><a href="#BNAQW">Invoke Application Phase</a></p>
+</li>
+<li>
+<p><a href="#BNAQX">Render Response Phase</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restore-view-phase">Restore View Phase</h3>
+<div class="paragraph">
+<p>When a request for a JavaServer Faces page is made, usually by an
+action, such as when a link or a button component is clicked, the
+JavaServer Faces implementation begins the Restore View phase.</p>
+</div>
+<div class="paragraph">
+<p>During this phase, the JavaServer Faces implementation builds the view
+of the page, wires event handlers and validators to components in the
+view, and saves the view in the <code>FacesContext</code> instance, which contains
+all the information needed to process a single request. All the
+application&#8217;s components, event handlers, converters, and validators
+have access to the <code>FacesContext</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>If the request for the page is an initial request, the JavaServer Faces
+implementation creates an empty view during this phase and the lifecycle
+advances to the Render Response phase, during which the empty view is
+populated with the components referenced by the tags in the page.</p>
+</div>
+<div class="paragraph">
+<p>If the request for the page is a postback, a view corresponding to this
+page already exists in the <code>FacesContext</code> instance. During this phase,
+the JavaServer Faces implementation restores the view by using the state
+information saved on the client or the server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="apply-request-values-phase">Apply Request Values Phase</h3>
+<div class="paragraph">
+<p>After the component tree is restored during a postback request, each
+component in the tree extracts its new value from the request parameters
+by using its <code>decode</code> (<code>processDecodes()</code>) method. The value is then
+stored locally on each component.</p>
+</div>
+<div class="paragraph">
+<p>If any <code>decode</code> methods or event listeners have called the
+<code>renderResponse</code> method on the current <code>FacesContext</code> instance, the
+JavaServer Faces implementation skips to the Render Response phase.</p>
+</div>
+<div class="paragraph">
+<p>If any events have been queued during this phase, the JavaServer Faces
+implementation broadcasts the events to interested listeners.</p>
+</div>
+<div class="paragraph">
+<p>If some components on the page have their <code>immediate</code> attributes (see
+<a href="jsf-page002.html#BNARI">The immediate Attribute</a>) set to <code>true</code>, then
+the validations, conversions, and events associated with these
+components will be processed during this phase. If any conversion fails,
+an error message associated with the component is generated and queued
+on <code>FacesContext</code>. This message will be displayed during the Render
+Response phase, along with any validation errors resulting from the
+Process Validations phase.</p>
+</div>
+<div class="paragraph">
+<p>At this point, if the application needs to redirect to a different web
+application resource or generate a response that does not contain any
+JavaServer Faces components, it can call the
+<code>FacesContext.responseComplete</code> method.</p>
+</div>
+<div class="paragraph">
+<p>At the end of this phase, the components are set to their new values,
+and messages and events have been queued.</p>
+</div>
+<div class="paragraph">
+<p>If the current request is identified as a partial request, the partial
+context is retrieved from the <code>FacesContext</code>, and the partial processing
+method is applied.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="process-validations-phase">Process Validations Phase</h3>
+<div class="paragraph">
+<p>During this phase, the JavaServer Faces implementation processes all
+validators registered on the components in the tree by using its
+<code>validate</code> (<code>processValidators</code>) method. It examines the component
+attributes that specify the rules for the validation and compares these
+rules to the local value stored for the component. The JavaServer Faces
+implementation also completes conversions for input components that do
+not have the <code>immediate</code> attribute set to true.</p>
+</div>
+<div class="paragraph">
+<p>If the local value is invalid, or if any conversion fails, the
+JavaServer Faces implementation adds an error message to the
+<code>FacesContext</code> instance, and the lifecycle advances directly to the
+Render Response phase so that the page is rendered again with the error
+messages displayed. If there were conversion errors from the Apply
+Request Values phase, the messages for these errors are also displayed.</p>
+</div>
+<div class="paragraph">
+<p>If any <code>validate</code> methods or event listeners have called the
+<code>renderResponse</code> method on the current <code>FacesContext</code>, the JavaServer
+Faces implementation skips to the Render Response phase.</p>
+</div>
+<div class="paragraph">
+<p>At this point, if the application needs to redirect to a different web
+application resource or generate a response that does not contain any
+JavaServer Faces components, it can call the
+<code>FacesContext.responseComplete</code> method.</p>
+</div>
+<div class="paragraph">
+<p>If events have been queued during this phase, the JavaServer Faces
+implementation broadcasts them to interested listeners.</p>
+</div>
+<div class="paragraph">
+<p>If the current request is identified as a partial request, the partial
+context is retrieved from the <code>FacesContext</code>, and the partial processing
+method is applied.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="update-model-values-phase">Update Model Values Phase</h3>
+<div class="paragraph">
+<p>After the JavaServer Faces implementation determines that the data is
+valid, it traverses the component tree and sets the corresponding
+server-side object properties to the components' local values. The
+JavaServer Faces implementation updates only the bean properties pointed
+at by an input component&#8217;s <code>value</code> attribute. If the local data cannot
+be converted to the types specified by the bean properties, the
+lifecycle advances directly to the Render Response phase so that the
+page is re-rendered with errors displayed. This is similar to what
+happens with validation errors.</p>
+</div>
+<div class="paragraph">
+<p>If any <code>updateModels</code> methods or any listeners have called the
+<code>renderResponse</code> method on the current <code>FacesContext</code> instance, the
+JavaServer Faces implementation skips to the Render Response phase.</p>
+</div>
+<div class="paragraph">
+<p>At this point, if the application needs to redirect to a different web
+application resource or generate a response that does not contain any
+JavaServer Faces components, it can call the
+<code>FacesContext.responseComplete</code> method.</p>
+</div>
+<div class="paragraph">
+<p>If any events have been queued during this phase, the JavaServer Faces
+implementation broadcasts them to interested listeners.</p>
+</div>
+<div class="paragraph">
+<p>If the current request is identified as a partial request, the partial
+context is retrieved from the <code>FacesContext</code>, and the partial processing
+method is applied.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="invoke-application-phase">Invoke Application Phase</h3>
+<div class="paragraph">
+<p>During this phase, the JavaServer Faces implementation handles any
+application-level events, such as submitting a form or linking to
+another page.</p>
+</div>
+<div class="paragraph">
+<p>At this point, if the application needs to redirect to a different web
+application resource or generate a response that does not contain any
+JavaServer Faces components, it can call the
+<code>FacesContext.responseComplete</code> method.</p>
+</div>
+<div class="paragraph">
+<p>If the view being processed was reconstructed from state information
+from a previous request and if a component has fired an event, these
+events are broadcast to interested listeners.</p>
+</div>
+<div class="paragraph">
+<p>Finally, the JavaServer Faces implementation transfers control to the
+Render Response phase.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="render-response-phase">Render Response Phase</h3>
+<div class="paragraph">
+<p>During this phase, JavaServer Faces builds the view and delegates
+authority to the appropriate resource for rendering the pages.</p>
+</div>
+<div class="paragraph">
+<p>If this is an initial request, the components that are represented on
+the page will be added to the component tree. If this is not an initial
+request, the components are already added to the tree and need not be
+added again.</p>
+</div>
+<div class="paragraph">
+<p>If the request is a postback and errors were encountered during the
+Apply Request Values phase, Process Validations phase, or Update Model
+Values phase, the original page is rendered again during this phase. If
+the pages contain <code>h:message</code> or <code>h:messages</code> tags, any queued error
+messages are displayed on the page.</p>
+</div>
+<div class="paragraph">
+<p>After the content of the view is rendered, the state of the response is
+saved so that subsequent requests can access it. The saved state is
+available to the Restore View phase.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-intro006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

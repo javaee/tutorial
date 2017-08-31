@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the Streaming API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsonp003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-the-streaming-api">Using the Streaming API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes two use cases of the streaming API.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABGCHIG">Reading JSON Data Using a Parser</a></p>
+</li>
+<li>
+<p><a href="#BABGJEEF">Writing JSON Data Using a Generator</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="reading-json-data-using-a-parser">Reading JSON Data Using a Parser</h3>
+<div class="paragraph">
+<p>The streaming API is the most efficient approach for parsing JSON text.
+The following code demonstrates how to create a <code>JsonParser</code> object and
+how to parse JSON data using events:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import javax.json.Json;
+import javax.json.stream.JsonParser;
+...
+JsonParser parser = Json.createParser(new StringReader(jsonData));
+while (parser.hasNext()) {
+   JsonParser.Event event = parser.next();
+   switch(event) {
+      case START_ARRAY:
+      case END_ARRAY:
+      case START_OBJECT:
+      case END_OBJECT:
+      case VALUE_FALSE:
+      case VALUE_NULL:
+      case VALUE_TRUE:
+         System.out.println(event.toString());
+         break;
+      case KEY_NAME:
+         System.out.print(event.toString() + " " +
+                          parser.getString() + " - ");
+         break;
+      case VALUE_STRING:
+      case VALUE_NUMBER:
+         System.out.println(event.toString() + " " +
+                            parser.getString());
+         break;
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example consists of three steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Obtain a parser instance by calling the <code>Json.createParser</code> static
+method.</p>
+</li>
+<li>
+<p>Iterate over the parser events with the <code>JsonParser.hasNext</code> and the
+<code>JsonParser.next</code> methods.</p>
+</li>
+<li>
+<p>Perform local processing for each element.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The example shows the ten possible event types from the parser. The
+parser&#8217;s <code>next</code> method advances it to the next event. For the event
+types <code>KEY_NAME</code>, <code>VALUE_STRING</code>, and <code>VALUE_NUMBER</code>, you can obtain the
+content of the element by calling the method <code>JsonParser.getString</code>. For
+<code>VALUE_NUMBER</code> events, you can also use the following methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>JsonParser.isIntegralNumber</code></p>
+</li>
+<li>
+<p><code>JsonParser.getInt</code></p>
+</li>
+<li>
+<p><code>JsonParser.getLong</code></p>
+</li>
+<li>
+<p><code>JsonParser.getBigDecimal</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the Java EE 7 API reference for the <code>javax.json.stream.JsonParser</code>
+interface for more information.</p>
+</div>
+<div class="paragraph">
+<p>The output of this example is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">START_OBJECT
+KEY_NAME firstName - VALUE_STRING Duke
+KEY_NAME lastName - VALUE_STRING Java
+KEY_NAME age - VALUE_NUMBER 18
+KEY_NAME streetAddress - VALUE_STRING 100 Internet Dr
+KEY_NAME city - VALUE_STRING JavaTown
+KEY_NAME state - VALUE_STRING JA
+KEY_NAME postalCode - VALUE_STRING 12345
+KEY_NAME phoneNumbers - START_ARRAY
+START_OBJECT
+KEY_NAME type - VALUE_STRING mobile
+KEY_NAME number - VALUE_STRING 111-111-1111
+END_OBJECT
+START_OBJECT
+KEY_NAME type - VALUE_STRING home
+KEY_NAME number - VALUE_STRING 222-222-2222
+END_OBJECT
+END_ARRAY
+END_OBJECT</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="writing-json-data-using-a-generator">Writing JSON Data Using a Generator</h3>
+<div class="paragraph">
+<p>The following code demonstrates how to write JSON data to a file using
+the streaming API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FileWriter writer = new FileWriter("test.txt");
+JsonGenerator gen = Json.createGenerator(writer);
+gen.writeStartObject()
+   .write("firstName", "Duke")
+   .write("lastName", "Java")
+   .write("age", 18)
+   .write("streetAddress", "100 Internet Dr")
+   .write("city", "JavaTown")
+   .write("state", "JA")
+   .write("postalCode", "12345")
+   .writeStartArray("phoneNumbers")
+      .writeStartObject()
+         .write("type", "mobile")
+         .write("number", "111-111-1111")
+      .writeEnd()
+      .writeStartObject()
+         .write("type", "home")
+         .write("number", "222-222-2222")
+      .writeEnd()
+   .writeEnd()
+.writeEnd();
+gen.close();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example obtains a JSON generator by calling the
+<code>Json.createGenerator</code> static method, which takes a writer or an output
+stream as a parameter. The example writes JSON data to the <code>test.txt</code>
+file by nesting calls to the <code>write</code>, <code>writeStartArray</code>,
+<code>writeStartObject</code>, and <code>writeEnd</code> methods. The <code>JsonGenerator.close</code>
+method closes the underlying writer or output stream.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsonp003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

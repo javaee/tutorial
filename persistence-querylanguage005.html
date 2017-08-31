@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Example Queries</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-querylanguage004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-querylanguage006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="example-queries">Example Queries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following queries are from the <code>Player</code> entity of the <code>roster</code>
+application, which is documented in
+<a href="persistence-basicexamples003.html#GIQSQ">The roster Application</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBTM">Simple Queries</a></p>
+</li>
+<li>
+<p><a href="#BNBTQ">Queries That Navigate to Related Entities</a></p>
+</li>
+<li>
+<p><a href="#BNBTW">Queries with Other Conditional Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNBUC">Bulk Updates and Deletes</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="simple-queries">Simple Queries</h3>
+<div class="paragraph">
+<p>If you are unfamiliar with the query language, these simple queries are
+a good place to start.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBTN">A Basic Select Query</a></p>
+</li>
+<li>
+<p><a href="#BNBTO">Eliminating Duplicate Values</a></p>
+</li>
+<li>
+<p><a href="#BNBTP">Using Named Parameters</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="a-basic-select-query">A Basic Select Query</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
+FROM Player p</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: All players.</p>
+</li>
+<li>
+<p>Description: The <code>FROM</code> clause declares an identification variable
+named <code>p</code>, omitting the optional keyword <code>AS</code>. If the <code>AS</code> keyword were
+included, the clause would be written as follows:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player AS p</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Player</code> element is the abstract schema name of the <code>Player</code> entity.</p>
+</div>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBUM">Identification
+Variables</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="eliminating-duplicate-values">Eliminating Duplicate Values</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p
+WHERE p.position = ?1</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: The players with the position specified by the query&#8217;s
+parameter.</p>
+</li>
+<li>
+<p>Description: The <code>DISTINCT</code> keyword eliminates duplicate values.</p>
+<div class="paragraph">
+<p>The <code>WHERE</code> clause restricts the players retrieved by checking their
+<code>position</code>, a persistent field of the <code>Player</code> entity. The <code>?1</code> element
+denotes the input parameter of the query.</p>
+</div>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBVA">Input
+Parameters</a> and <a href="persistence-querylanguage006.html#BNBWB">The DISTINCT
+Keyword</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-named-parameters">Using Named Parameters</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p
+WHERE p.position = :position AND p.name = :name</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: The players having the specified positions and names.</p>
+</li>
+<li>
+<p>Description: The <code>position</code> and <code>name</code> elements are persistent fields
+of the <code>Player</code> entity. The <code>WHERE</code> clause compares the values of these
+fields with the named parameters of the query, set using the
+<code>Query.setNamedParameter</code> method. The query language denotes a named
+input parameter using a colon (<code>:</code>) followed by an identifier. The first
+input parameter is <code>:position</code>, the second is <code>:name</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="queries-that-navigate-to-related-entities">Queries That Navigate to Related Entities</h3>
+<div class="paragraph">
+<p>In the query language, an expression can traverse, or navigate, to
+related entities. These expressions are the primary difference between
+the Java Persistence query language and SQL. Queries navigates to
+related entities, whereas SQL joins tables.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBTR">A Simple Query with Relationships</a></p>
+</li>
+<li>
+<p><a href="#BNBTS">Navigating to Single-Valued Relationship Fields</a></p>
+</li>
+<li>
+<p><a href="#BNBTT">Traversing Relationships with an Input Parameter</a></p>
+</li>
+<li>
+<p><a href="#BNBTU">Traversing Multiple Relationships</a></p>
+</li>
+<li>
+<p><a href="#BNBTV">Navigating According to Related Fields</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="a-simple-query-with-relationships">A Simple Query with Relationships</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p, IN (p.teams) t</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: All players who belong to a team.</p>
+</li>
+<li>
+<p>Description: The <code>FROM</code> clause declares two identification variables:
+<code>p</code> and <code>t</code>. The <code>p</code> variable represents the <code>Player</code> entity, and the
+<code>t</code> variable represents the related <code>Team</code> entity. The declaration for
+<code>t</code> references the previously declared <code>p</code> variable. The <code>IN</code> keyword
+signifies that <code>teams</code> is a collection of related entities. The
+<code>p.teams</code> expression navigates from a <code>Player</code> to its related <code>Team</code>.
+The period in the <code>p.teams</code> expression is the navigation operator.</p>
+<div class="paragraph">
+<p>You may also use the <code>JOIN</code> statement to write the same query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p JOIN p.teams t</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This query could also be rewritten as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p
+WHERE p.team IS NOT EMPTY</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="navigating-to-single-valued-relationship-fields">Navigating to Single-Valued Relationship Fields</h4>
+<div class="paragraph">
+<p>Use the <code>JOIN</code> clause statement to navigate to a single-valued
+relationship field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
+FROM Team t JOIN t.league l
+WHERE l.sport = 'soccer' OR l.sport ='football'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the query will return all teams that are in either
+soccer or football leagues.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="traversing-relationships-with-an-input-parameter">Traversing Relationships with an Input Parameter</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p, IN (p.teams) AS t
+WHERE t.city = :city</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: The players whose teams belong to the specified city.</p>
+</li>
+<li>
+<p>Description: This query is similar to the previous example but adds an
+input parameter. The <code>AS</code> keyword in the <code>FROM</code> clause is optional. In
+the <code>WHERE</code> clause, the period preceding the persistent variable <code>city</code>
+is a delimiter, not a navigation operator. Strictly speaking,
+expressions can navigate to relationship fields (related entities) but
+not to persistent fields. To access a persistent field, an expression
+uses the period as a delimiter.</p>
+<div class="paragraph">
+<p>Expressions cannot navigate beyond (or further qualify) relationship
+fields that are collections. In the syntax of an expression, a
+collection-valued field is a terminal symbol. Because the <code>teams</code> field
+is a collection, the <code>WHERE</code> clause cannot specify <code>p.teams.city</code> (an
+illegal expression).</p>
+</div>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBUQ">Path
+Expressions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="traversing-multiple-relationships">Traversing Multiple Relationships</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p, IN (p.teams) t
+WHERE t.league = :league</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: The players who belong to the specified league.</p>
+</li>
+<li>
+<p>Description: The expressions in this query navigate over two
+relationships. The <code>p.teams</code> expression navigates the <code>Player</code>-<code>Team</code>
+relationship, and the <code>t.league</code> expression navigates the
+<code>Team</code>-<code>League</code> relationship.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the other examples, the input parameters are <code>String</code> objects; in
+this example, the parameter is an object whose type is a <code>League</code>. This
+type matches the <code>league</code> relationship field in the comparison
+expression of the <code>WHERE</code> clause.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="navigating-according-to-related-fields">Navigating According to Related Fields</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p, IN (p.teams) t
+WHERE t.league.sport = :sport</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: The players who participate in the specified sport.</p>
+</li>
+<li>
+<p>Description: The <code>sport</code> persistent field belongs to the <code>League</code>
+entity. To reach the <code>sport</code> field, the query must first navigate from
+the <code>Player</code> entity to <code>Team</code> (<code>p.teams</code>) and then from <code>Team</code> to the
+<code>League</code> entity (<code>t.league</code>). Because it is not a collection, the
+<code>league</code> relationship field can be followed by the <code>sport</code> persistent
+field.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="queries-with-other-conditional-expressions">Queries with Other Conditional Expressions</h3>
+<div class="paragraph">
+<p>Every <code>WHERE</code> clause must specify a conditional expression, of which
+there are several kinds. In the previous examples, the conditional
+expressions are comparison expressions that test for equality. The
+following examples demonstrate some of the other kinds of conditional
+expressions. For descriptions of all conditional expressions, see
+<a href="persistence-querylanguage006.html#BNBUU">WHERE Clause</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBTX">The LIKE Expression</a></p>
+</li>
+<li>
+<p><a href="#BNBTY">The IS NULL Expression</a></p>
+</li>
+<li>
+<p><a href="#BNBTZ">The IS EMPTY Expression</a></p>
+</li>
+<li>
+<p><a href="#BNBUA">The BETWEEN Expression</a></p>
+</li>
+<li>
+<p><a href="#BNBUB">Comparison Operators</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-like-expression">The LIKE Expression</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
+FROM Player p
+WHERE p.name LIKE 'Mich%'</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: All players whose names begin with "Mich."</p>
+</li>
+<li>
+<p>Description: The <code>LIKE</code> expression uses wildcard characters to search
+for strings that match the wildcard pattern. In this case, the query
+uses the <code>LIKE</code> expression and the <code>%</code> wildcard to find all players
+whose names begin with the string "Mich." For example, "Michael" and
+"Michelle" both match the wildcard pattern.</p>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBVG">LIKE
+Expressions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-is-null-expression">The IS NULL Expression</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
+FROM Team t
+WHERE t.league IS NULL</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: All teams not associated with a league.</p>
+</li>
+<li>
+<p>Description: The <code>IS NULL</code> expression can be used to check whether a
+relationship has been set between two entities. In this case, the query
+checks whether the teams are associated with any leagues and returns the
+teams that do not have a league.</p>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBVI">NULL Comparison
+Expressions</a> and <a href="persistence-querylanguage006.html#BNBVR">NULL
+Values</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-is-empty-expression">The IS EMPTY Expression</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
+FROM Player p
+WHERE p.teams IS EMPTY</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: All players who do not belong to a team.</p>
+</li>
+<li>
+<p>Description: The <code>teams</code> relationship field of the <code>Player</code> entity is
+a collection. If a player does not belong to a team, the <code>teams</code>
+collection is empty, and the conditional expression is <code>TRUE</code>.</p>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBVJ">Empty Collection
+Comparison Expressions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-between-expression">The BETWEEN Expression</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
+FROM Player p
+WHERE p.salary BETWEEN :lowerSalary AND :higherSalary</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: The players whose salaries fall within the range of
+the specified salaries.</p>
+</li>
+<li>
+<p>Description: This <code>BETWEEN</code> expression has three arithmetic
+expressions: a persistent field (<code>p.salary</code>) and the two input
+parameters (<code>:lowerSalary</code> and <code>:higherSalary</code>). The following
+expression is equivalent to the <code>BETWEEN</code> expression:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">p.salary &gt;= :lowerSalary AND p.salary &lt;= :higherSalary</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBVE">BETWEEN
+Expressions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="comparison-operators">Comparison Operators</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p1
+FROM Player p1, Player p2
+WHERE p1.salary &gt; p2.salary AND p2.name = :name</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Data retrieved: All players whose salaries are higher than the salary
+of the player with the specified name.</p>
+</li>
+<li>
+<p>Description: The <code>FROM</code> clause declares two identification variables
+(<code>p1</code> and <code>p2</code>) of the same type (<code>Player</code>). Two identification
+variables are needed because the <code>WHERE</code> clause compares the salary of
+one player (<code>p2</code>) with that of the other players (<code>p1</code>).</p>
+</li>
+<li>
+<p>See also: <a href="persistence-querylanguage006.html#BNBUM">Identification
+Variables</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bulk-updates-and-deletes">Bulk Updates and Deletes</h3>
+<div class="paragraph">
+<p>The following examples show how to use the <code>UPDATE</code> and <code>DELETE</code>
+expressions in queries. <code>UPDATE</code> and <code>DELETE</code> operate on multiple
+entities according to the condition or conditions set in the <code>WHERE</code>
+clause. The <code>WHERE</code> clause in <code>UPDATE</code> and <code>DELETE</code> queries follows the
+same rules as <code>SELECT</code> queries.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBUD">Update Queries</a></p>
+</li>
+<li>
+<p><a href="#BNBUE">Delete Queries</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="update-queries">Update Queries</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">UPDATE Player p
+SET p.status = 'inactive'
+WHERE p.lastPlayed &lt; :inactiveThresholdDate</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description: This query sets the status of a set of players to
+<code>inactive</code> if the player&#8217;s last game was longer ago than the date
+specified in <code>inactiveThresholdDate</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-queries">Delete Queries</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">DELETE
+FROM Player p
+WHERE p.status = 'inactive'
+AND p.teams IS EMPTY</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Description: This query deletes all inactive players who are not on a
+team.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-querylanguage004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-querylanguage006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

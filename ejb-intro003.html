@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Is a Message-Driven Bean?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-intro002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="what-is-a-message-driven-bean">What Is a Message-Driven Bean?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A message-driven bean is an enterprise bean that allows Java EE
+applications to process messages asynchronously. This type of bean
+normally acts as a JMS message listener, which is similar to an event
+listener but receives JMS messages instead of events. The messages can
+be sent by any Java EE component (an application client, another
+enterprise bean, or a web component) or by a JMS application or system
+that does not use Java EE technology. Message-driven beans can process
+JMS messages or other kinds of messages.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPMJ">What Makes Message-Driven Beans Different from Session
+Beans?</a></p>
+</li>
+<li>
+<p><a href="#GIPJX">When to Use Message-Driven Beans</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="what-makes-message-driven-beans-different-from-session-beans">What Makes Message-Driven Beans Different from Session Beans?</h3>
+<div class="paragraph">
+<p>The most visible difference between message-driven beans and session
+beans is that clients do not access message-driven beans through
+interfaces. Interfaces are described in the section
+<a href="ejb-intro004.html#GIPJF">Accessing Enterprise Beans</a>. Unlike a
+session bean, a message-driven bean has only a bean class.</p>
+</div>
+<div class="paragraph">
+<p>In several respects, a message-driven bean resembles a stateless session
+bean.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A message-driven bean&#8217;s instances retain no data or conversational
+state for a specific client.</p>
+</li>
+<li>
+<p>All instances of a message-driven bean are equivalent, allowing the
+EJB container to assign a message to any message-driven bean instance.
+The container can pool these instances to allow streams of messages to
+be processed concurrently.</p>
+</li>
+<li>
+<p>A single message-driven bean can process messages from multiple
+clients.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The instance variables of the message-driven bean instance can contain
+some state across the handling of client messages, such as a JMS API
+connection, an open database connection, or an object reference to an
+enterprise bean object.</p>
+</div>
+<div class="paragraph">
+<p>Client components do not locate message-driven beans and invoke methods
+directly on them. Instead, a client accesses a message-driven bean
+through, for example, JMS by sending messages to the message destination
+for which the message-driven bean class is the <code>MessageListener</code>. You
+assign a message-driven bean&#8217;s destination during deployment by using
+GlassFish Server resources.</p>
+</div>
+<div class="paragraph">
+<p>Message-driven beans have the following characteristics.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>They execute upon receipt of a single client message.</p>
+</li>
+<li>
+<p>They are invoked asynchronously.</p>
+</li>
+<li>
+<p>They are relatively short-lived.</p>
+</li>
+<li>
+<p>They do not represent directly shared data in the database, but they
+can access and update this data.</p>
+</li>
+<li>
+<p>They can be transaction-aware.</p>
+</li>
+<li>
+<p>They are stateless.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a message arrives, the container calls the message-driven bean&#8217;s
+<code>onMessage</code> method to process the message. The <code>onMessage</code> method
+normally casts the message to one of the five JMS message types and
+handles it in accordance with the application&#8217;s business logic. The
+<code>onMessage</code> method can call helper methods or can invoke a session bean
+to process the information in the message or to store it in a database.</p>
+</div>
+<div class="paragraph">
+<p>A message can be delivered to a message-driven bean within a transaction
+context, so all operations within the <code>onMessage</code> method are part of a
+single transaction. If message processing is rolled back, the message
+will be redelivered. For more information, see
+<a href="jms-examples007.html#BNBPK">Receiving Messages Asynchronously Using a
+Message-Driven Bean</a> and <a href="transactions.html#BNCIH">Chapter 52,
+"Transactions"</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="when-to-use-message-driven-beans">When to Use Message-Driven Beans</h3>
+<div class="paragraph">
+<p>Session beans allow you to send JMS messages and to receive them
+synchronously but not asynchronously. To avoid tying up server
+resources, do not to use blocking synchronous receives in a server-side
+component; in general, JMS messages should not be sent or received
+synchronously. To receive messages asynchronously, use a message-driven
+bean.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-intro002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

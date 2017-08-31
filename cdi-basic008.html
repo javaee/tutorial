@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Scopes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-basic007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-scopes">Using Scopes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For a web application to use a bean that injects another bean class, the
+bean needs to be able to hold state over the duration of the user&#8217;s
+interaction with the application. The way to define this state is to
+give the bean a scope. You can give an object any of the scopes
+described in <a href="#GJDBG">Table 24-1</a>, depending on how you are using it.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref126"></a><a id="GJDBG"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 24-1 Scopes</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 49%;">
+<colgroup>
+<col style="width: 44.5544%;">
+<col style="width: 54.4554%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Scope</th>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@RequestScoped</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user&#8217;s interaction with a web application
+in a single HTTP request.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@SessionScoped</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user&#8217;s interaction with a web application
+across multiple HTTP requests.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ApplicationScoped</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shared state across all users'
+interactions with a web application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dependent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Dependent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default scope if none is specified; it
+means that an object exists to serve exactly one client (bean) and has
+the same lifecycle as that client (bean).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conversation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ConversationScoped</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user&#8217;s interaction with a
+servlet, including JavaServer Faces applications. The conversation scope
+exists within developer-controlled boundaries that extend it across
+multiple requests for long-running conversations. All long-running
+conversations are scoped to a particular HTTP servlet session and may
+not cross session boundaries.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The first three scopes are defined by both JSR 365 and the JavaServer
+Faces specification. The last two are defined by JSR 365.</p>
+</div>
+<div class="paragraph">
+<p>All predefined scopes except <code>@Dependent</code> are contextual scopes. CDI
+places beans of contextual scope in the context whose lifecycle is
+defined by the Java EE specifications. For example, a session context
+and its beans exist during the lifetime of an HTTP session. Injected
+references to the beans are contextually aware. The references always
+apply to the bean that is associated with the context for the thread
+that is making the reference. The CDI container ensures that the objects
+are created and injected at the correct time as determined by the scope
+that is specified for these objects.</p>
+</div>
+<div class="paragraph">
+<p>You can also define and implement custom scopes, but that is an advanced
+topic. Custom scopes are likely to be used by those who implement and
+extend the CDI specification.</p>
+</div>
+<div class="paragraph">
+<p>A scope gives an object a well-defined lifecycle context. A scoped
+object can be automatically created when it is needed and automatically
+destroyed when the context in which it was created ends. Moreover, its
+state is automatically shared by any clients that execute in the same
+context.</p>
+</div>
+<div class="paragraph">
+<p>Java EE components, such as servlets and enterprise beans, and JavaBeans
+components do not by definition have a well-defined scope. These
+components are one of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Singletons, such as Enterprise JavaBeans singleton beans, whose state
+is shared among all clients</p>
+</li>
+<li>
+<p>Stateless objects, such as servlets and stateless session beans, which
+do not contain client-visible state</p>
+</li>
+<li>
+<p>Objects that must be explicitly created and destroyed by their client,
+such as JavaBeans components and stateful session beans, whose state is
+shared by explicit reference passing between clients</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However, if you create a Java EE component that is a managed bean, then it
+becomes a scoped object, which exists in a well-defined lifecycle
+context.</p>
+</div>
+<div class="paragraph">
+<p>The web application for the <code>Printer</code> bean will use a simple request and
+response mechanism, so the managed bean can be annotated as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+@RequestScoped
+public class Printer {
+
+    @Inject @Informal Greeting greeting;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Beans that use session, application, or conversation scope must be
+serializable, but beans that use request scope do not have to be
+serializable.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-basic007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

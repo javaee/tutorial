@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Navigation Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-intro005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="navigation-model">Navigation Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The JavaServer Faces navigation model makes it easy to define page
+navigation and to handle any additional processing that is needed to
+choose the sequence in which pages are loaded.</p>
+</div>
+<div class="paragraph">
+<p>In JavaServer Faces technology, navigation is a set of rules for
+choosing the next page or view to be displayed after an application
+action, such as when a button or link is clicked.</p>
+</div>
+<div class="paragraph">
+<p>Navigation can be implicit or user-defined. Implicit navigation comes
+into play when user-defined navigation rules are not configured in the
+application configuration resource files.</p>
+</div>
+<div class="paragraph">
+<p>When you add a component such as a <code>commandButton</code> to a Facelets page,
+and assign another page as the value for its <code>action</code> property, the
+default navigation handler will try to match a suitable page within the
+application implicitly. In the following example, the default navigation
+handler will try to locate a page named <code>response.xhtml</code> within the
+application and navigate to it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton value="submit" action="response"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>User-defined navigation rules are declared in zero or more application
+configuration resource files, such as <code>faces-config.xml</code>, by using a set
+of XML elements. The default structure of a navigation rule is as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;navigation-rule&gt;
+    &lt;description&gt;&lt;/description
+    &lt;from-view-id&gt;&lt;/from-view-id&gt;
+    &lt;navigation-case&gt;
+        &lt;from-action&gt;&lt;/from-action&gt;
+        &lt;from-outcome&gt;&lt;/from-outcome&gt;
+        &lt;if&gt;&lt;/if&gt;
+        &lt;to-view-id&gt;&lt;/to-view-id&gt;
+    &lt;/navigation-case&gt;
+&lt;/navigation-rule&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>User-defined navigation is handled as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Define the rules in the application configuration resource file.</p>
+</li>
+<li>
+<p>Refer to an outcome <code>String</code> from the button or link component&#8217;s
+<code>action</code> attribute. This outcome <code>String</code> is used by the JavaServer
+Faces implementation to select the navigation rule.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is an example navigation rule:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;navigation-rule&gt;
+    &lt;from-view-id&gt;/greeting.xhtml&lt;/from-view-id&gt;
+    &lt;navigation-case&gt;
+        &lt;from-outcome&gt;success&lt;/from-outcome&gt;
+        &lt;to-view-id&gt;/response.xhtml&lt;/to-view-id&gt;
+    &lt;/navigation-case&gt;
+&lt;/navigation-rule&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This rule states that when a command component (such as an
+<code>h:commandButton</code> or an <code>h:commandLink</code>) on <code>greeting.xhtml</code> is
+activated, the application will navigate from the <code>greeting.xhtml</code> page
+to the <code>response.xhtml</code> page if the outcome referenced by the button
+component&#8217;s tag is <code>success</code>. Here is an <code>h:commandButton</code> tag from
+<code>greeting.xhtml</code> that would specify a logical outcome of <code>success</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton id="submit" value="Submit" action="success"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the example demonstrates, each <code>navigation-rule</code> element defines how
+to get from one page (specified in the <code>from-view-id</code> element) to the
+other pages of the application. The <code>navigation-rule</code> elements can
+contain any number of <code>navigation-case</code> elements, each of which defines
+the page to open next (defined by <code>to-view-id</code>) based on a logical
+outcome (defined by <code>from-outcome</code>).</p>
+</div>
+<div class="paragraph">
+<p>In more complicated applications, the logical outcome can also come from
+the return value of an action method in a managed bean. This method
+performs some processing to determine the outcome. For example, the
+method can check whether the password the user entered on the page
+matches the one on file. If it does, the method might return <code>success</code>;
+otherwise, it might return <code>failure</code>. An outcome of <code>failure</code> might
+result in the logon page being reloaded. An outcome of <code>success</code> might
+cause the page displaying the user&#8217;s credit card activity to open. If
+you want the outcome to be returned by a method on a bean, you must
+refer to the method using a method expression with the <code>action</code>
+attribute, as shown by this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton id="submit" value="Submit"
+                 action="#{cashierBean.submit}" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the user clicks the button represented by this tag, the
+corresponding component generates an action event. This event is handled
+by the default <code>javax.faces.event.ActionListener</code> instance, which calls
+the action method referenced by the component that triggered the event.
+The action method returns a logical outcome to the action listener.</p>
+</div>
+<div class="paragraph">
+<p>The listener passes the logical outcome and a reference to the action
+method that produced the outcome to the default
+<code>javax.faces.application.NavigationHandler</code>. The <code>NavigationHandler</code>
+selects the page to display next by matching the outcome or the action
+method reference against the navigation rules in the application
+configuration resource file by the following process.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>NavigationHandler</code> selects the navigation rule that matches the
+page currently displayed.</p>
+</li>
+<li>
+<p>It matches the outcome or the action method reference that it
+received from the default <code>javax.faces.event.ActionListener</code> with those
+defined by the navigation cases.</p>
+</li>
+<li>
+<p>It tries to match both the method reference and the outcome against
+the same navigation case.</p>
+</li>
+<li>
+<p>If the previous step fails, the navigation handler attempts to match
+the outcome.</p>
+</li>
+<li>
+<p>Finally, the navigation handler attempts to match the action method
+reference if the previous two attempts failed.</p>
+</li>
+<li>
+<p>If no navigation case is matched, it displays the same view again.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When the <code>NavigationHandler</code> achieves a match, the Render Response phase
+begins. During this phase, the page selected by the <code>NavigationHandler</code>
+will be rendered.</p>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Tutoring case study example application uses navigation rules
+in the business methods that handle creating, editing, and deleting the
+users of the application. For example, the form for creating a student
+has the following <code>h:commandButton</code> tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton id="submit"
+        action="#{adminBean.createStudent(studentManager.newStudent)}"
+        value="#{bundle['action.submit']}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The action event calls the <code>dukestutoring.ejb.AdminBean.createStudent</code>
+method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public String createStudent(Student student) {
+    em.persist(student);
+    return "createdStudent";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The return value of <code>createdStudent</code> has a corresponding navigation case
+in the <code>faces-config.xml</code> configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;navigation-rule&gt;
+    &lt;from-view-id&gt;/admin/student/createStudent.xhtml&lt;/from-view-id&gt;
+    &lt;navigation-case&gt;
+        &lt;from-outcome&gt;createdStudent&lt;/from-outcome&gt;
+        &lt;to-view-id&gt;/admin/index.xhtml&lt;/to-view-id&gt;
+    &lt;/navigation-case&gt;
+&lt;/navigation-rule&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the student is created, the user is returned to the Administration
+index page.</p>
+</div>
+<div class="paragraph">
+<p>For more information on how to define navigation rules, see
+<a href="jsf-configure010.html#BNAXF">Configuring Navigation Rules</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more information on how to implement action methods to handle
+navigation, see <a href="jsf-develop003.html#BNAVD">Writing a Method to Handle
+an Action Event</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more information on how to reference outcomes or action methods from
+component tags, see <a href="jsf-page-core004.html#BNATP">Referencing a Method
+That Performs Navigation</a>.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-intro005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

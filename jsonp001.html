@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Introduction to JSON</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsonp.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="introduction-to-json">Introduction to JSON</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JSON is a text-based data exchange format derived from JavaScript that
+is used in web services and other connected applications. The following
+sections provide an introduction to JSON syntax, an overview of JSON
+uses, and a description of the most common approaches to generate and
+parse JSON.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABGHEHG">JSON Syntax</a></p>
+</li>
+<li>
+<p><a href="#CEGJHJAB">Uses of JSON</a></p>
+</li>
+<li>
+<p><a href="#BABJJACI">Generating and Parsing JSON Data</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="json-syntax">JSON Syntax</h3>
+<div class="paragraph">
+<p>JSON defines only two data structures: objects and arrays. An object is
+a set of name-value pairs, and an array is a list of values. JSON
+defines seven value types: string, number, object, array, true, false,
+and null.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows JSON data for a sample object that contains
+name-value pairs. The value for the name <code>"phoneNumbers"</code> is an array
+whose elements are two objects.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">{
+   "firstName": "Duke",
+   "lastName": "Java",
+   "age": 18,
+   "streetAddress": "100 Internet Dr",
+   "city": "JavaTown",
+   "state": "JA",
+   "postalCode": "12345",
+   "phoneNumbers": [
+      { "Mobile": "111-111-1111" },
+      { "Home": "222-222-2222" }
+   ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>JSON has the following syntax.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Objects are enclosed in braces (<code>{}</code>), their name-value pairs are
+separated by a comma (<code>,</code>), and the name and value in a pair are
+separated by a colon (<code>:</code>). Names in an object are strings, whereas
+values may be of any of the seven value types, including another object
+or an array.</p>
+</li>
+<li>
+<p>Arrays are enclosed in brackets (<code>[]</code>), and their values are separated
+by a comma (<code>,</code>). Each value in an array may be of a different type,
+including another array or an object.</p>
+</li>
+<li>
+<p>When objects and arrays contain other objects or arrays, the data has
+a tree-like structure.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="uses-of-json">Uses of JSON</h3>
+<div class="paragraph">
+<p>JSON is often used as a common format to serialize and deserialize data
+in applications that communicate with each other over the Internet.
+These applications are created using different programming languages and
+run in very different environments. JSON is suited to this scenario
+because it is an open standard, it is easy to read and write, and it is
+more compact than other representations.</p>
+</div>
+<div class="paragraph">
+<p>RESTful web services use JSON extensively as the format for the data
+inside requests and responses. The HTTP header used to indicate that the
+content of a request or a response is JSON data is</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Content-Type: application/json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>JSON representations are usually more compact than XML representations
+because JSON does not have closing tags. Unlike XML, JSON does not have
+a widely accepted schema for defining and validating the structure of
+JSON data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-and-parsing-json-data">Generating and Parsing JSON Data</h3>
+<div class="paragraph">
+<p>For generating and parsing JSON data, there are two programming models,
+which are similar to those used for XML documents.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The object model creates a tree that represents the JSON data in
+memory. The tree can then be navigated, analyzed, or modified. This
+approach is the most flexible and allows for processing that requires
+access to the complete contents of the tree. However, it is often slower
+than the streaming model and requires more memory. The object model
+generates JSON output by navigating the entire tree at once.</p>
+</li>
+<li>
+<p>The streaming model uses an event-based parser that reads JSON data
+one element at a time. The parser generates events and stops for
+processing when an object or an array begins or ends, when it finds a
+key, or when it finds a value. Each element can be processed or
+discarded by the application code, and then the parser proceeds to the
+next event. This approach is adequate for local processing, in which the
+processing of an element does not require information from the rest of
+the data. The streaming model generates JSON output to a given stream by
+making a function call with one element at a time.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are many JSON generators and parsers available for different
+programming languages and environments. <a href="jsonp002.html#BABDFHHD">JSON
+Processing in the Java EE Platform</a> describes the functionality provided
+by the Java API for JSON Processing (JSR 374).</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsonp.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

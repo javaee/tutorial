@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Main Components of the Concurrency Utilities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="concurrency-utilities001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="concurrency-utilities003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="main-components-of-the-concurrency-utilities">Main Components of the Concurrency Utilities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Concurrent resources are managed objects that provide concurrency
+capabilities to Java EE applications. In GlassFish Server, you configure
+concurrent resources and then make them available for use by application
+components such as servlets and enterprise beans. Concurrent resources
+are accessed through JNDI lookup or resource injection.</p>
+</div>
+<div class="paragraph">
+<p>The primary components of the concurrency utilities are as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ManagedExecutorService</code>: A managed executor service is used by
+applications to execute submitted tasks asynchronously. Tasks are
+executed on threads that are started and managed by the container. The
+context of the container is propagated to the thread executing the task.</p>
+<div class="paragraph">
+<p>For example, by using an <code>ManagedExecutorService.submit()</code> call, a task,
+such as the GenerateReportTask, could be submitted to execute at a later
+time and then, by using the <code>Future</code> object callback, retrieve the
+result when it becomes available.</p>
+</div>
+</li>
+<li>
+<p><code>ManagedScheduledExecutorService</code>: A managed scheduled executor
+service is used by applications to execute submitted tasks
+asynchronously at specific times. Tasks are executed on threads that are
+started and managed by the container. The context of the container is
+propagated to the thread executing the task. The API provides the
+scheduling functionality that allows users to set a specific date/time
+for the Task execution programmatically in the application.</p>
+</li>
+<li>
+<p><code>ContextService</code>: A context service is used to create dynamic proxy
+objects that capture the context of a container and enable applications
+to run within that context at a later time or be submitted to a Managed
+Executor Service. The context of the container is propagated to the
+thread executing the task.</p>
+</li>
+<li>
+<p><code>ManagedThreadFactory</code>: A managed thread factory is used by
+applications to create managed threads. The threads are started and
+managed by the container. The context of the container is propagated to
+the thread executing the task. This object can also be used to provide
+custom factories for specific use cases (with custom Threads) and, for
+example, set specific/proprietary properties to these objects.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="concurrency-utilities001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="concurrency-utilities003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

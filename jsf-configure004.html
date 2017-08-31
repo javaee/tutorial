@@ -1,0 +1,888 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Faces Flows</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-faces-flows">Using Faces Flows</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Faces Flows feature of JavaServer Faces technology allows you to
+create a set of pages with a scope, <code>FlowScoped</code>, that is greater than
+request scope but less than session scope. For example, you might want
+to create a series of pages for the checkout process in an online store.
+You could create a set of self-contained pages that could be transferred
+from one store to another as needed.</p>
+</div>
+<div class="paragraph">
+<p>Faces Flows are somewhat analogous to subroutines in procedural
+programming, in the following ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Like a subroutine, a flow has a well defined entry point, list of
+parameters, and return value. However, unlike a subroutine, a flow can
+return multiple values.</p>
+</li>
+<li>
+<p>Like a subroutine, a flow has a scope, allowing information to be
+available only during the invocation of the flow. Such information is
+not available outside the scope of the flow and does not consume any
+resources once the flow returns.</p>
+</li>
+<li>
+<p>Like a subroutine, a flow may call other flows before returning. The
+invocation of flows is maintained in a call stack: a new flow causes a
+push onto the stack, and a return causes a pop.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An application can have any number of flows. Each flow includes a set of
+pages and, usually, one or more managed beans scoped to that flow. Each
+flow has a starting point, called a start node, and an exit point,
+called a return node.</p>
+</div>
+<div class="paragraph">
+<p>The data in a flow is scoped to that flow alone, but you can pass data
+from one flow to another by specifying parameters and calling the other
+flow.</p>
+</div>
+<div class="paragraph">
+<p>Flows can be nested, so that if you call one flow from another and then
+exit the second flow, you return to the calling flow rather than to the
+second flow&#8217;s return node.</p>
+</div>
+<div class="paragraph">
+<p>You can configure a flow programmatically, by creating a class annotated
+<code>@FlowDefinition</code>, or you can configure a flow by using a configuration
+file. The configuration file can be limited to one flow, or you can use
+the <code>faces-config.xml</code> file to put all the flows in one place, if you
+have many flows in an application. The programmatic configuration places
+the code closer to the rest of the flow code and enables you to
+modularize the flows.</p>
+</div>
+<div class="paragraph">
+<p><a href="#CHDIHDCD">Figure 16-1</a> shows two flows and illustrates how they
+interact.</p>
+</div>
+<div id="CHDIHDCD" class="paragraph">
+<div class="title"><strong>Figure 16-1 Two Faces Flows and Their Interactions</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_017.png" alt="This figure shows two Faces flows, Flow A and Flow B. Each has a start node and two additional pages. Each has an associated managed bean. Each defines a return node, and each defines two parameters to be passed to the other flow."></span></p>
+</div>
+<div class="paragraph">
+<p>In this figure, Flow A has a start node named <code>flow-a</code> and two
+additional pages, <code>next_a1</code> and <code>next_a2</code>. From <code>next_a2</code>, a user can
+either exit the flow using the defined return node, <code>taskFlowReturn1</code>,
+or call Flow B, passing two parameters. Flow A also defines two inbound
+parameters that it can accept from Flow B. Flow B is identical to Flow A
+except for the names of the flow and files. Each flow also has an
+associated managed bean; the beans are <code>Flow_a_Bean</code> and <code>Flow_b_Bean</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="packaging-flows-in-an-application">Packaging Flows in an Application</h3>
+<div class="paragraph">
+<p>Typically, you package flows in a web application using a directory
+structure that modularizes the flows. In the <code>src/main/webapp</code> directory
+of a Maven project, for example, you would place the Facelets files that
+are outside the flow at the top level as usual. Then the <code>webapp</code> files
+for each flow would be in a separate directory, and the Java files would
+be under <code>src/main/java</code>. For example, the files for the application
+shown in <a href="#CHDIHDCD">Figure 16-1</a> might look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">src/main/webapp/
+    index.xhtml
+    return.xhtml
+    WEB_INF/
+        beans.xml
+        web.xml
+    flow-a/
+        flow-a.xhtml
+        next_a1.xhtml
+        next_a2.xhtml
+    flow-b/
+        flow-b-flow.xml
+        next_b1.xhtml
+        next_b2.xhtml
+src/main/java/javaeetutorial/flowexample
+            FlowA.java
+            Flow_a_Bean.java
+            Flow_b_Bean.java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, <code>flow-a</code> is defined programmatically in <code>FlowA.java</code>,
+while <code>flow-b</code> is defined by the configuration file <code>flow-b-flow.xml</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-simplest-possible-flow-the-simple-flow-example-application">The Simplest Possible Flow: The simple-flow Example Application</h3>
+<div class="paragraph">
+<p>The <code>simple-flow</code> example application demonstrates the most basic
+building blocks of a Faces Flows application and illustrates some of the
+conventions that make it easy to get started with iterative development
+using flows. You may want to start with a simple example like this one
+and build upon it.</p>
+</div>
+<div class="paragraph">
+<p>This example provides an implicit flow definition by including an empty
+configuration file. A configuration file that has content, or a class
+annotated <code>@FlowDefinition</code>, provides an explicit flow definition.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+tut-install`/examples/web/jsf/simple-flow/` directory.</p>
+</div>
+<div class="paragraph">
+<p>The file layout of the <code>simple-flow</code> example looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">src/main/webapp
+    index.xhtml
+    simple-flow-return.xhtml
+    WEB_INF/
+        web.xml
+    simple-flow
+        simple-flow-flow.xml
+        simple-flow.xhtml
+        simple-flow-page2.xhtml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>simple-flow</code> example has an empty configuration file, which is by
+convention named flow-name-<code>flow.xml</code>. The flow does not require any
+configuration for the following reasons.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The flow does not call another flow, nor does it pass parameters to
+another flow.</p>
+</li>
+<li>
+<p>The flow uses default names for the first page of the flow,
+flow-name`.xhtml`, and the return page, flow-name`-return.xhtml`.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This example has only four Facelets pages.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>index.xhtml</code>, the start page, which contains almost nothing but a
+button that navigates to the first page of the flow:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;&lt;h:commandButton value="Enter Flow" action="simple-flow"/&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>simple-flow.xhtml</code> and <code>simple-flow-page2.xhtml</code>, the two pages of
+the flow itself. In the absence of an explicit flow definition, the page
+whose name is the same as the name of the flow is assumed to be the
+start node of the flow. In this case, the flow is named <code>simple-flow</code>,
+so the page named <code>simple-flow.xhtml</code> is assumed to be the start node of
+the flow. The start node is the node navigated to upon entry into the
+flow. It can be thought of as the home page of the flow.</p>
+<div class="paragraph">
+<p>The <code>simple-flow.xhtml</code> page asks you to enter a flow-scoped value and
+provides a button that navigates to the next page of the flow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;Value: &lt;h:inputText id="input" value="#{flowScope.value}" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;h:commandButton value="Next" action="simple-flow-page2" /&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The second page, which can have any name, displays the flow-scoped value
+and provides a button that navigates to the return page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;Value: #{flowScope.value}&lt;/p&gt;
+
+&lt;p&gt;&lt;h:commandButton value="Return" action="simple-flow-return" /&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>simple-flow-return.xhtml</code>, the return page. The return page, which by
+convention is named flow-name`-return.xhtml`, must be located outside of
+the flow. This page displays the flow-scoped value, to show that it has
+no value outside of the flow, and provides a link that navigates to the
+<code>index.xhtml</code> page:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;Value (should be empty):
+    "&lt;h:outputText id="output" value="#{flowScope.value}" /&gt;"&lt;/p&gt;
+
+&lt;p&gt;&lt;h:link outcome="index" value="Back to Start" /&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Facelets pages use only flow-scoped data, so the example does not
+need a managed bean.</p>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-simple-flow-example-using-netbeans-ide">To Build, Package, and Deploy the simple-flow Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>simple-flow</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>simple-flow</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>simple-flow.war</code>, that is located in the <code>target</code> directory. It then
+deploys the application to the server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-simple-flow-example-using-maven">To Build, Package, and Deploy the simple-flow Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/simple-flow/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>simple-flow.war</code>, that is located in the <code>target</code> directory. It then
+deploys the application to the server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-simple-flow-example">To Run the simple-flow Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enter the following URL in your web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/simple-flow</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the <code>index.xhtml</code> page, click Enter Flow.</p>
+</li>
+<li>
+<p>On the first page of the flow, enter any string in the Value field,
+then click Next.</p>
+</li>
+<li>
+<p>On the second page of the flow, you can see the value you entered.
+Click Return.</p>
+</li>
+<li>
+<p>On the return page, an empty pair of quotation marks encloses the
+inaccessible value. Click Back to Start to return to the <code>index.xhtml</code>
+page.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-checkout-module-example-application">The checkout-module Example Application</h3>
+<div class="paragraph">
+<p>The <code>checkout-module</code> example application is considerably more complex
+than <code>simple-flow</code>. It shows how you might use the Faces Flows feature
+to implement a checkout module for an online store.</p>
+</div>
+<div class="paragraph">
+<p>Like the hypothetical example in <a href="#CHDIHDCD">Figure 16-1</a>, the
+example application contains two flows, each of which can call the
+other. Both flows have explicit flow definitions. One flow,
+<code>checkoutFlow</code>, is specified programmatically. The other flow,
+<code>joinFlow</code>, is specified in a configuration file.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+tut-install`/examples/web/jsf/checkout-module/` directory.</p>
+</div>
+<div class="paragraph">
+<p>For the <code>checkout-module</code> application, the directory structure is as
+follows (there is also a <code>src/main/webapp/resources</code> directory with a
+stylesheet and an image):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">src/main/webapp/
+    index.xhtml
+    exithome.xhtml
+    WEB_INF/
+        beans.xml
+        web.xml
+    checkoutFlow/
+        checkoutFlow.xhtml
+        checkoutFlow2.xhtml
+        checkoutFlow3.xhtml
+        checkoutFlow4.xhtml
+    joinFlow/
+        joinFlow-flow.xml
+        joinFlow.xhtml
+        joinFlow2.xhtml
+src/main/java/javaeetutorial/checkoutmodule
+            CheckoutBean.java
+            CheckoutFlow.java
+            CheckoutFlowBean.java
+            JoinFlowBean.java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the example, <code>index.xhtml</code> is the beginning page for the application
+as well as the return node for the checkout flow. The <code>exithome.xhtml</code>
+page is the return node for the join flow.</p>
+</div>
+<div class="paragraph">
+<p>The configuration file <code>joinFlow-flow.xml</code> defines the join flow, and
+the source file <code>CheckoutFlow.java</code> defines the checkout flow.</p>
+</div>
+<div class="paragraph">
+<p>The checkout flow contains four Facelets pages, whereas the join flow
+contains two.</p>
+</div>
+<div class="paragraph">
+<p>The managed beans scoped to each flow are <code>CheckoutFlowBean.java</code> and
+<code>JoinFlowBean.java</code>, whereas <code>CheckoutBean.java</code> is the backing bean for
+the <code>index.html</code> page.</p>
+</div>
+<div class="sect3">
+<h4 id="the-facelets-pages-for-the-checkout-module-example">The Facelets Pages for the checkout-module Example</h4>
+<div class="paragraph">
+<p>The starting page for the example, <code>index.xhtml</code>, summarizes the
+contents of a hypothetical shopping cart. It allows the user to click
+either of two buttons to enter one of the two flows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;&lt;h:commandButton value="Check Out" action="checkoutFlow"/&gt;&lt;/p&gt;
+...
+&lt;p&gt;&lt;h:commandButton value="Join" action="joinFlow"/&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This page is also the return node for the checkout flow.</p>
+</div>
+<div class="paragraph">
+<p>The Facelets page <code>exithome.xhtml</code> is the return node for the join flow.
+This page has a button that allows you to return to the <code>index.xhtml</code>
+page.</p>
+</div>
+<div class="paragraph">
+<p>The four Facelets pages within the checkout flow, starting with
+<code>checkoutFlow.xhtml</code> and ending with <code>checkoutFlow4.xhtml</code>, allow you to
+proceed to the next page or, in some cases, to return from the flow. The
+<code>checkoutFlow.xhtml</code> page allows you to access parameters passed from
+the join flow through the flow scope. These appear as empty quotation
+marks if you have not called the checkout flow from the join flow.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;If you called this flow from the Join flow, you can see these parameters:
+    "&lt;h:outputText value="#{flowScope.param1Value}"/&gt;" and
+    "&lt;h:outputText value="#{flowScope.param2Value}"/&gt;"
+&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Only <code>checkoutFlow2.xhtml</code> has a button to return to the previous page,
+but moving between pages is generally permitted within flows. Here are
+the buttons for c`heckoutFlow2.xhtml`:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;&lt;h:commandButton value="Continue" action="checkoutFlow3"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;h:commandButton value="Go Back" action="checkoutFlow"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;h:commandButton value="Exit Flow" action="returnFromCheckoutFlow"/&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The action <code>returnFromCheckoutFlow</code> is defined in the configuration
+source code file, <code>CheckoutFlow.java</code>.</p>
+</div>
+<div class="paragraph">
+<p>The final page of the checkout flow, <code>checkoutFlow4.xhtml</code>, contains a
+button that calls the join flow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;&lt;h:commandButton value="Join" action="calljoin"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;h:commandButton value="Exit Flow" action="returnFromCheckoutFlow"/&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>calljoin</code> action is also defined in the configuration source code
+file, <code>CheckoutFlow.java</code>. This action enters the join flow, passing two
+parameters from the checkout flow.</p>
+</div>
+<div class="paragraph">
+<p>The two pages in the join flow, <code>joinFlow.xhtml</code> and <code>joinFlow2.xhtml</code>,
+are similar to those in the checkout flow. The second page has a button
+to call the checkout flow as well as one to return from the join flow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;&lt;h:commandButton value="Check Out" action="callcheckoutFlow"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;h:commandButton value="Exit Flow" action="returnFromJoinFlow"/&gt;&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For this flow, the actions <code>callcheckoutFlow</code> and <code>returnFromJoinFlow</code>
+are defined in the configuration file <code>joinFlow-flow.xml</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-a-configuration-file-to-configure-a-flow">Using a Configuration File to Configure a Flow</h4>
+<div class="paragraph">
+<p>If you use an application configuration resource file to configure a
+flow, it must be named flowName`-flow.xml`. In this example, the join
+flow uses a configuration file named <code>joinFlow-flow.xml</code>. The file is a
+<code>faces-config</code> file that specifies a <code>flow-definition</code> element. This
+element must define the flow name using the <code>id</code> attribute. Under the
+<code>flow-definition</code> element, there must be a <code>flow-return</code> element that
+specifies the return point for the flow. Any inbound parameters are
+specified with <code>inbound-parameter</code> elements. If the flow calls another
+flow, the <code>call-flow</code> element must use the flow-reference element to
+name the called flow and may use the <code>outbound-parameter</code> element to
+specify any outbound parameters.</p>
+</div>
+<div class="paragraph">
+<p>The configuration file for the join flow looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee \
+              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"&gt;
+
+    &lt;flow-definition id="joinFlow"&gt;
+        &lt;flow-return id="returnFromJoinFlow"&gt;
+            &lt;from-outcome&gt;#{joinFlowBean.returnValue}&lt;/from-outcome&gt;
+        &lt;/flow-return&gt;
+
+        &lt;inbound-parameter&gt;
+            &lt;name&gt;param1FromCheckoutFlow&lt;/name&gt;
+            &lt;value&gt;#{flowScope.param1Value}&lt;/value&gt;
+        &lt;/inbound-parameter&gt;
+        &lt;inbound-parameter&gt;
+            &lt;name&gt;param2FromCheckoutFlow&lt;/name&gt;
+            &lt;value&gt;#{flowScope.param2Value}&lt;/value&gt;
+        &lt;/inbound-parameter&gt;
+
+        &lt;flow-call id="callcheckoutFlow"&gt;
+            &lt;flow-reference&gt;
+                &lt;flow-id&gt;checkoutFlow&lt;/flow-id&gt;
+            &lt;/flow-reference&gt;
+            &lt;outbound-parameter&gt;
+                &lt;name&gt;param1FromJoinFlow&lt;/name&gt;
+                &lt;value&gt;param1 joinFlow value&lt;/value&gt;
+            &lt;/outbound-parameter&gt;
+            &lt;outbound-parameter&gt;
+                &lt;name&gt;param2FromJoinFlow&lt;/name&gt;
+                &lt;value&gt;param2 joinFlow value&lt;/value&gt;
+            &lt;/outbound-parameter&gt;
+        &lt;/flow-call&gt;
+    &lt;/flow-definition&gt;
+&lt;/faces-config&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>id</code> attribute of the <code>flow-definition</code> element defines the name of
+the flow as <code>joinFlow</code>. The value of the <code>id</code> attribute of the
+<code>flow-return</code> element identifies the name of the return node, and its
+value is defined in the <code>from-outcome</code> element as the <code>returnValue</code>
+property of the flow-scoped managed bean for the join flow,
+<code>JoinFlowBean</code>.</p>
+</div>
+<div class="paragraph">
+<p>The names and values of the inbound parameters are retrieved from the
+flow scope in order (<code>flowScope.param1Value</code>, <code>flowScope.param2Value</code>),
+based on the way they were defined in the checkout flow configuration.</p>
+</div>
+<div class="paragraph">
+<p>The <code>flow-call</code> element defines how the join flow calls the checkout
+flow. The <code>id</code> attribute of the element, <code>callcheckoutFlow</code>, defines the
+action of calling the flow. Within the <code>flow-call</code> element, the
+<code>flow-reference</code> element defines the actual name of the flow to call,
+<code>checkoutFlow</code>. The <code>outbound-parameter</code> elements define the parameters
+to be passed when <code>checkoutFlow</code> is called. Here they are just arbitrary
+strings.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-a-java-class-to-configure-a-flow">Using a Java Class to Configure a Flow</h4>
+<div class="paragraph">
+<p>If you use a Java class to configure a flow, it must have the name of
+the flow. The class for the checkout flow is called <code>CheckoutFlow.java</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import java.io.Serializable;
+import javax.enterprise.inject.Produces;
+import javax.faces.flow.Flow;
+import javax.faces.flow.builder.FlowBuilder;
+import javax.faces.flow.builder.FlowBuilderParameter;
+import javax.faces.flow.builder.FlowDefinition;
+
+class CheckoutFlow implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Produces
+    @FlowDefinition
+    public Flow defineFlow(@FlowBuilderParameter FlowBuilder flowBuilder) {
+
+        String flowId = "checkoutFlow";
+        flowBuilder.id("", flowId);
+        flowBuilder.viewNode(flowId,
+                "/" + flowId + "/" + flowId + ".xhtml").
+                markAsStartNode();
+
+        flowBuilder.returnNode("returnFromCheckoutFlow").
+                fromOutcome("#{checkoutFlowBean.returnValue}");
+
+        flowBuilder.inboundParameter("param1FromJoinFlow",
+                "#{flowScope.param1Value}");
+        flowBuilder.inboundParameter("param2FromJoinFlow",
+                "#{flowScope.param2Value}");
+
+        flowBuilder.flowCallNode("calljoin").flowReference("", "joinFlow").
+                outboundParameter("param1FromCheckoutFlow",
+                    "#{checkoutFlowBean.name}").
+                outboundParameter("param2FromCheckoutFlow",
+                    "#{checkoutFlowBean.city}");
+        return flowBuilder.getFlow();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The class performs actions that are almost identical to those performed
+by the configuration file <code>joinFlow-flow.xml</code>. It contains a single
+method, <code>defineFlow</code>, as a producer method with the <code>@FlowDefinition</code>
+qualifier that returns a <code>javax.faces.flow.Flow</code> class. The <code>defineFlow</code>
+method takes one parameter, a <code>FlowBuilder</code> with the qualifier
+<code>@FlowBuilderParameter</code>, which is passed in from the JavaServer Faces
+implementation. The method then calls methods from the
+<code>javax.faces.flow.Builder.FlowBuilder</code> class to configure the flow.</p>
+</div>
+<div class="paragraph">
+<p>First, the method defines the flow <code>id</code> as <code>checkoutFlow</code>. Then, it
+explicitly defines the start node for the flow. By default, this is the
+name of the flow with an <code>.xhtml</code> suffix.</p>
+</div>
+<div class="paragraph">
+<p>The method then defines the return node similarly to the way the
+configuration file does. The <code>returnNode</code> method sets the name of the
+return node as <code>returnFromCheckoutFlow</code>, and the chained <code>fromOutcome</code>
+method specifies its value as the <code>returnValue</code> property of the
+flow-scoped managed bean for the checkout flow, <code>CheckoutFlowBean</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>inboundParameter</code> method sets the names and values of the inbound
+parameters from the join flow, which are retrieved from the flow scope
+in order (<code>flowScope.param1Value</code>, <code>flowScope.param2Value</code>), based on
+the way they were defined in the join flow configuration.</p>
+</div>
+<div class="paragraph">
+<p>The <code>flowCallNode</code> method defines how the checkout flow calls the join
+flow. The argument, <code>calljoin</code>, specifies the action of calling the
+flow. The chained <code>flowReference</code> method defines the actual name of the
+flow to call, <code>joinFlow</code>, then calls <code>outboundParameter</code> methods to
+define the parameters to be passed when <code>joinFlow</code> is called. Here they
+are values from the <code>CheckoutFlowBean</code> managed bean.</p>
+</div>
+<div class="paragraph">
+<p>Finally, the <code>defineFlow</code> method calls the <code>getFlow</code> method and returns
+the result.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-flow-scoped-managed-beans">The Flow-Scoped Managed Beans</h4>
+<div class="paragraph">
+<p>Each of the two flows has a managed bean that defines properties for the
+pages within the flow. For example, the <code>CheckoutFlowBean</code> defines
+properties whose values are entered by the user on both the
+<code>checkoutFlow.xhtml</code> page and the <code>checkoutFlow3.xhtml</code> page.</p>
+</div>
+<div class="paragraph">
+<p>Each managed bean has a <code>getReturnValue</code> method that sets the value of
+the return node. For the <code>CheckoutFlowBean</code>, the return node is the
+<code>index.xhtml</code> page, specified using implicit navigation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public String getReturnValue() {
+    return "index";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the <code>JoinFlowBean</code>, the return node is the <code>exithome.xhtml</code> page.</p>
+</div>
+<div id="to-build-package-and-deploy-the-checkout-module-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the checkout-module Example Using NetBeans
+IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>checkout-module</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>checkout-module</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>checkout-module.war</code>, that is located in the <code>target</code> directory. It
+then deploys the application to the server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-checkout-module-example-using-maven">To Build, Package, and Deploy the checkout-module Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/checkout-module/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>checkout-module.war</code>, that is located in the <code>target</code> directory. It
+then deploys the application to the server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-checkout-module-example">To Run the checkout-module Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enter the following URL in your web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/checkout-module</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <code>index.xhtml</code> page presents hypothetical results of the shopping
+expedition. Click either Check Out or Join to enter one of the two
+flows.</p>
+</li>
+<li>
+<p>Follow the flow, providing input as needed and choosing whether to
+continue, go back, or exit the flow.</p>
+<div class="paragraph">
+<p>In the checkout flow, only one of the input fields is validated (the
+credit card field expects 16 digits), so you can enter any values you
+like. The join flow does not require you to check any boxes in its
+checkbox menus.</p>
+</div>
+</li>
+<li>
+<p>On the last page of a flow, select the option to enter the other
+flow. This allows you to view the inbound parameters from the previous
+flow.</p>
+</li>
+<li>
+<p>Because flows are nested, if you click Exit Flow from a called flow,
+you will return to the first page of the calling flow. (You may see a
+warning, which you can ignore.) Click Exit Flow on that page to go to
+the specified return node.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Resource Injection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="injection.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="injection002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="resource-injection">Resource Injection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Resource injection enables you to inject any resource available in the
+JNDI namespace into any container-managed object, such as a servlet, an
+enterprise bean, or a managed bean. For example, you can use resource
+injection to inject data sources, connectors, or custom resources
+available in the JNDI namespace.</p>
+</div>
+<div class="paragraph">
+<p>The type you use for the reference to the injected instance is usually
+an interface, which decouples your code from the implementation of the
+resource.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following code injects a data source object that
+provides connections to the default Java DB database shipped with
+GlassFish Server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class MyServlet extends HttpServlet {
+    @Resource(name="java:comp/DefaultDataSource")
+    private javax.sql.DataSource dsc;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to field-based injection as in the preceding example, you
+can inject resources using method-based injection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class MyServlet extends HttpServlet {
+    private javax.sql.DataSource dsc;
+    ...
+    @Resource(name="java:comp/DefaultDataSource")
+    public void setDsc(java.sql.DataSource ds) {
+        dsc = ds;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use method-based injection, the setter method must follow the
+JavaBeans conventions for property names: The method name must begin
+with <code>set</code>, have a <code>void</code> return type, and have only one parameter.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Resource</code> annotation is in the <code>javax.annotation</code> package and is
+defined in JSR 250 (Common Annotations for the Java Platform). Resource
+injection resolves by name, so it is not typesafe: the type of the
+resource object is not known at compile time, so you can get runtime
+errors if the types of the object and its reference do not match.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="injection.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="injection002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

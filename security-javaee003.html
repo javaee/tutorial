@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Examples: Securing Enterprise Beans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-javaee002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="examples-securing-enterprise-beans">Examples: Securing Enterprise Beans</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following examples show how to secure enterprise beans using
+declarative and programmatic security.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBZK">The cart-secure Example: Securing an Enterprise Bean with
+Declarative Security</a></p>
+</li>
+<li>
+<p><a href="#BNCAA">The converter-secure Example: Securing an Enterprise Bean
+with Programmatic Security</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security">The cart-secure Example: Securing an Enterprise Bean with Declarative Security</h3>
+<div class="paragraph">
+<p>This section discusses how to configure an enterprise bean for basic
+user name/password authentication. When a bean that is constrained in
+this way is requested, the server requests a user name and password from
+the client and verifies that the user name and password are valid by
+comparing them against a database of authorized users in GlassFish
+Server.</p>
+</div>
+<div class="paragraph">
+<p>If the topic of authentication is new to you, see
+<a href="security-webtier002.html#GKBSA">Specifying Authentication
+Mechanisms</a>.</p>
+</div>
+<div class="paragraph">
+<p>This example demonstrates security by starting with the unsecured
+enterprise bean application, <code>cart</code>, which is found in the
+tut-install`/examples/ejb/cart/` directory and is discussed in
+<a href="ejb-basicexamples002.html#BNBOD">The cart Example</a>.</p>
+</div>
+<div class="paragraph">
+<p>In general, the following steps are necessary to add user name/password
+authentication to an existing application that contains an enterprise
+bean. In the example application included with this tutorial, these
+steps have been completed for you and are listed here simply to show
+what needs to be done should you wish to create a similar application.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an application like the one in
+<a href="ejb-basicexamples002.html#BNBOD">The cart Example</a>. The example in
+this tutorial starts with this example and demonstrates adding basic
+authentication of the client to this application. The example
+application discussed in this section can be found at
+tut-install`/examples/security/cart-secure/`.</p>
+</li>
+<li>
+<p>If you have not already done so, complete the steps in
+<a href="security-webtier004.html#GJJLK">To Set Up Your System for Running the
+Security Examples</a> to configure your system for running the tutorial
+applications.</p>
+</li>
+<li>
+<p>Modify the source code for the enterprise bean, <code>CartBean.java</code>, to
+specify which roles are authorized to access which protected methods.
+This step is discussed in <a href="#BNBZL">Annotating the Bean</a>.</p>
+</li>
+<li>
+<p>Build, package, and deploy the enterprise bean; then build and run
+the client application by following the steps in <a href="#BNBZN">To Run the
+cart-secure Example Using NetBeans IDE</a> or <a href="#BNBZO">To Run the
+cart-secure Example Using Maven</a>.</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="annotating-the-bean">Annotating the Bean</h4>
+<div class="paragraph">
+<p>The source code for the original <code>cart</code> application was modified as
+shown in the following code snippet (modifications in bold). The
+resulting file can be found in the file
+tut-install`/examples/security/cart-secure/cart-secure-ejb/src/main/java/javaeetutorial/cart/ejb/CartBean.java`.</p>
+</div>
+<div class="paragraph">
+<p>The code snippet is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.cartsecure.ejb;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javaeetutorial.cart.util.BookException;
+import javaeetutorial.cart.util.IdVerifier;
+import javax.ejb.Remove;
+import javax.ejb.Stateful;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
+
+@Stateful
+@DeclareRoles("TutorialUser")
+public class CartBean implements Cart, Serializable {
+    List&lt;String&gt; contents;
+    String customerId;
+    String customerName;
+
+    @Override
+    public void initialize(String person) throws BookException {
+        if (person == null) {
+            throw new BookException("Null person not allowed.");
+        } else {
+            customerName = person;
+        }
+
+        customerId = "0";
+        contents = new ArrayList&lt;&gt;();
+    }
+
+    @Override
+    public void initialize(String person, String id) throws BookException {
+        if (person == null) {
+            throw new BookException("Null person not allowed.");
+        } else {
+            customerName = person;
+        }
+
+        IdVerifier idChecker = new IdVerifier();
+
+        if (idChecker.validate(id)) {
+            customerId = id;
+        } else {
+            throw new BookException("Invalid id: " + id);
+        }
+
+        contents = new ArrayList&lt;&gt;();
+    }
+
+    @Override
+    @RolesAllowed("TutorialUser")
+    public void addBook(String title) {
+        contents.add(title);
+    }
+
+    @Override
+    @RolesAllowed("TutorialUser")
+    public void removeBook(String title) throws BookException {
+        boolean result = contents.remove(title);
+
+        if (result == false) {
+            throw new BookException("\"" + title + "\" not in cart.");
+        }
+    }
+
+    @Override
+    @RolesAllowed("TutorialUser")
+    public List&lt;String&gt; getContents() {
+        return contents;
+    }
+
+    @Override
+    @Remove()
+    @RolesAllowed("TutorialUser")
+    public void remove() {
+        contents = null;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@RolesAllowed</code> annotation is specified on methods for which you
+want to restrict access. In this example, only users in the role of
+<code>TutorialUser</code> will be allowed to add and remove books from the cart and
+to list the contents of the cart. A <code>@RolesAllowed</code> annotation
+implicitly declares a role that will be referenced in the application;
+therefore, no <code>@DeclareRoles</code> annotation is required. The presence of
+the <code>@RolesAllowed</code> annotation also implicitly declares that
+authentication will be required for a user to access these methods. If
+no authentication method is specified in the deployment descriptor, the
+type of authentication will be user name/password authentication.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-cart-secure-example-using-netbeans-ide">To Run the cart-secure Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="security-webtier004.html#GJJLK">To Set Up
+Your System for Running the Security Examples</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>cart-secure</code> folder.</p>
+</li>
+<li>
+<p>Select the Open Required Projects check box.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>cart-secure</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This step builds and packages the application into <code>cart-secure.ear</code>,
+located in the <code>cart-secure-ear/target/</code> directory, and deploys this EAR
+file to your GlassFish Server instance, retrieves the client stubs, and
+runs the client.</p>
+</div>
+</li>
+<li>
+<p>In the Login for user: dialog box, enter the user name and password
+of a <code>file</code> realm user created in GlassFish Server and assigned to the
+group <code>TutorialUser</code>; then click OK.</p>
+<div class="paragraph">
+<p>If the user name and password you enter are authenticated, the output of
+the application client appears in the Output tab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+Retrieving book title from cart: Infinite Jest
+Retrieving book title from cart: Bel Canto
+Retrieving book title from cart: Kafka on the Shore
+Removing "Gravity's Rainbow" from cart.
+Caught a BookException: "Gravity's Rainbow" not in cart.
+Java Result: 1
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the user name and password are not authenticated, the dialog box
+reappears until you enter correct values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-cart-secure-example-using-maven">To Run the cart-secure Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="security-webtier004.html#GJJLK">To Set Up
+Your System for Running the Security Examples</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/cart-secure/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To build the application, package it into an EAR file in the
+<code>cart-secure-ear/target</code> subdirectory, deploy it, and run it, enter the
+following command at the terminal window or command prompt:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the Login for user: dialog box, enter the user name and password
+of a <code>file</code> realm user created in GlassFish Server and assigned to the
+group <code>TutorialUser</code>; then click OK.</p>
+<div class="paragraph">
+<p>If the user name and password you enter are authenticated, the output of
+the application client appears in the Output tab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+Retrieving book title from cart: Infinite Jest
+Retrieving book title from cart: Bel Canto
+Retrieving book title from cart: Kafka on the Shore
+Removing "Gravity's Rainbow" from cart.
+Caught a BookException: "Gravity's Rainbow" not in cart.
+Java Result: 1
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the user name and password are not authenticated, the dialog box
+reappears until you enter correct values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security">The converter-secure Example: Securing an Enterprise Bean with Programmatic Security</h3>
+<div class="paragraph">
+<p>This example demonstrates how to use the <code>getCallerPrincipal</code> and
+<code>isCallerInRole</code> methods with an enterprise bean. This example starts
+with a very simple EJB application, <code>converter</code>, and modifies the
+methods of the <code>ConverterBean</code> so that currency conversion will occur
+only when the requester is in the role of <code>TutorialUser</code>.</p>
+</div>
+<div class="paragraph">
+<p>This example can be found in the
+tut-install`/``examples/security/converter-secure` directory. This
+example is based on the unsecured enterprise bean application,
+<code>converter</code>, which is discussed in
+<a href="ejb-gettingstarted.html#GIJRE">Chapter 34, "Getting Started with
+Enterprise Beans"</a> and is found in the
+tut-install`/examples/ejb/converter/` directory. This section builds on
+the example by adding the necessary elements to secure the application
+by using the <code>getCallerPrincipal</code> and <code>isCallerInRole</code> methods, which
+are discussed in more detail in
+<a href="security-javaee002.html#GJGCR">Accessing an Enterprise Bean Caller&#8217;s
+Security Context</a>.</p>
+</div>
+<div class="paragraph">
+<p>In general, the following steps are necessary when using the
+<code>getCallerPrincipal</code> and <code>isCallerInRole</code> methods with an enterprise
+bean. In the example application included with this tutorial, many of
+these steps have been completed for you and are listed here simply to
+show what needs to be done should you wish to create a similar
+application.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a simple enterprise bean application.</p>
+</li>
+<li>
+<p>Set up a user on GlassFish Server in the <code>file</code> realm, in the group
+<code>TutorialUser</code>, and set up default principal to role mapping. To do
+this, follow the steps in <a href="security-webtier004.html#GJJLK">To Set Up
+Your System for Running the Security Examples</a>.</p>
+</li>
+<li>
+<p>Modify the bean to add the <code>getCallerPrincipal</code> and <code>isCallerInRole</code>
+methods.</p>
+</li>
+<li>
+<p>If the application contains a web client that is a servlet, specify
+security for the servlet, as described in
+<a href="security-webtier004.html#GJRMH">Specifying Security for Basic
+Authentication Using Annotations</a>.</p>
+</li>
+<li>
+<p>Build, package, deploy, and run the application.</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="modifying-converterbean">Modifying ConverterBean</h4>
+<div class="paragraph">
+<p>The source code for the original <code>ConverterBean</code> class was modified to
+add the <code>if..else</code> clause that tests whether the caller is in the role
+of <code>TutorialUser</code>. If the user is in the correct role, the currency
+conversion is computed and displayed. If the user is not in the correct
+role, the computation is not performed, and the application displays the
+result as <code>0</code>. The code example can be found in
+tut-install`/examples/security/converter-secure/converter-secure-ejb/src/main/java/javaeetutorial/converter/ejb/ConverterBean.java`.</p>
+</div>
+<div class="paragraph">
+<p>The code snippet (with modifications shown in bold) is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.convertersecure.ejb;
+
+import java.math.BigDecimal;
+import java.security.Principal;
+import javax.ejb.Stateless;
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
+
+@Stateless()
+@DeclareRoles("TutorialUser")
+public class ConverterBean{
+
+    @Resource SessionContext ctx;
+    private final BigDecimal yenRate = new BigDecimal("104.34");
+    private final BigDecimal euroRate = new BigDecimal("0.007");
+
+    @RolesAllowed("TutorialUser")
+     public BigDecimal dollarToYen(BigDecimal dollars) {
+        BigDecimal result = new BigDecimal("0.0");
+        Principal callerPrincipal = ctx.getCallerPrincipal();
+        if (ctx.isCallerInRole("TutorialUser")) {
+            result = dollars.multiply(yenRate);
+            return result.setScale(2, BigDecimal.ROUND_UP);
+        } else {
+            return result.setScale(2, BigDecimal.ROUND_UP);
+        }
+    }
+
+    @RolesAllowed("TutorialUser")
+    public BigDecimal yenToEuro(BigDecimal yen) {
+        BigDecimal result = new BigDecimal("0.0");
+        Principal callerPrincipal = ctx.getCallerPrincipal();
+        if (ctx.isCallerInRole("TutorialUser")) {
+             result = yen.multiply(euroRate);
+             return result.setScale(2, BigDecimal.ROUND_UP);
+        } else {
+             return result.setScale(2, BigDecimal.ROUND_UP);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="modifying-converterservlet">Modifying ConverterServlet</h4>
+<div class="paragraph">
+<p>The following annotations specify security for the <code>converter</code> web
+client, <code>ConverterServlet</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns = {"/"})
+@ServletSecurity(
+@HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL,
+    rolesAllowed = {"TutorialUser"}))</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-converter-secure-example-using-netbeans-ide">To Run the converter-secure Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="security-webtier004.html#GJJLK">To Set Up
+Your System for Running the Security Examples</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>converter-secure</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>Right-click the <code>converter-secure</code> project and select Build.</p>
+<div class="paragraph">
+<p>This command builds and deploys the example application to your
+GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-converter-secure-example-using-maven">To Run the converter-secure Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="security-webtier004.html#GJJLK">To Set Up
+Your System for Running the Security Examples</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/converter-secure/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>converter-secure.war</code>, that is located in the <code>target</code> directory, and
+deploys the WAR file.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-converter-secure-example">To Run the converter-secure Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a web browser to the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/converter-secure</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An Authentication Required dialog box appears.</p>
+</div>
+</li>
+<li>
+<p>Enter a user name and password combination that corresponds to a
+user who has already been created in the <code>file</code> realm of GlassFish
+Server and has been assigned to the group <code>TutorialUser</code>; then click OK.</p>
+</li>
+<li>
+<p>Enter <code>100</code> in the input field and click Submit.</p>
+<div class="paragraph">
+<p>A second page appears, showing the converted values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-javaee002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

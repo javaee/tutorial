@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Registering a Custom Validator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="registering-a-custom-validator">Registering a Custom Validator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the application developer provides an implementation of the
+<code>javax.faces.validator.Validator</code> interface to perform validation, you
+must register this custom validator either by using the
+<code>@FacesValidator</code> annotation, as described in
+<a href="jsf-custom012.html#BNAUX">Implementing the Validator Interface</a>, or
+by using the <code>validator</code> XML element in the application configuration
+resource file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;validator&gt;
+    ...
+    &lt;validator-id&gt;FormatValidator&lt;/validator-id&gt;
+    &lt;validator-class&gt;
+        myapplication.validators.FormatValidator
+    &lt;/validator-class&gt;
+    &lt;attribute&gt;
+        ...
+        &lt;attribute-name&gt;formatPatterns&lt;/attribute-name&gt;
+        &lt;attribute-class&gt;java.lang.String&lt;/attribute-class&gt;
+    &lt;/attribute&gt;
+&lt;/validator&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Attributes specified in a <code>validator</code> tag override any settings in the
+<code>@FacesValidator</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>The <code>validator-id</code> and <code>validator-class</code> elements are required
+subelements. The <code>validator-id</code> element represents the identifier under
+which the <code>Validator</code> class should be registered. This ID is used by the
+tag class corresponding to the custom <code>validator</code> tag.</p>
+</div>
+<div class="paragraph">
+<p>The <code>validator-class</code> element represents the fully qualified class name
+of the <code>Validator</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>attribute</code> element identifies an attribute associated with the
+<code>Validator</code> implementation. It has required <code>attribute-name</code> and
+<code>attribute-class</code> subelements. The <code>attribute-name</code> element refers to
+the name of the attribute as it appears in the <code>validator</code> tag. The
+<code>attribute-class</code> element identifies the Java type of the value
+associated with the attribute.</p>
+</div>
+<div class="paragraph">
+<p><a href="jsf-custom012.html#BNAUW">Creating and Using a Custom Validator</a>
+explains how to implement the <code>Validator</code> interface.</p>
+</div>
+<div class="paragraph">
+<p><a href="jsf-custom012.html#BNATV">Using a Custom Validator</a> explains how to
+reference the validator from the page.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Basic JMS API Concepts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-concepts001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-concepts003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="basic-jms-api-concepts">Basic JMS API Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section introduces the most basic JMS API concepts, the ones you
+must know to get started writing simple application clients that use the
+JMS API.</p>
+</div>
+<div class="paragraph">
+<p>The next section introduces the JMS API programming model. Later
+sections cover more advanced concepts, including the ones you need in
+order to write applications that use message-driven beans.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCDY">JMS API Architecture</a></p>
+</li>
+<li>
+<p><a href="#BNCEA">Messaging Styles</a></p>
+</li>
+<li>
+<p><a href="#BNCEG">Message Consumption</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="jms-api-architecture">JMS API Architecture</h3>
+<div class="paragraph">
+<p>A JMS application is composed of the following parts.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A JMS provider is a messaging system that implements the JMS
+interfaces and provides administrative and control features. An
+implementation of the Java EE platform that supports the full profile
+includes a JMS provider.</p>
+</li>
+<li>
+<p>JMS clients are the programs or components, written in the Java
+programming language, that produce and consume messages. Any Java EE
+application component can act as a JMS client.</p>
+<div class="paragraph">
+<p>Java SE applications can also act as JMS clients; the Message Queue
+Developer&#8217;s Guide for Java Clients in the GlassFish Server documentation
+(<code>https://glassfish.java.net/docs/</code>) explains how to make this work.</p>
+</div>
+</li>
+<li>
+<p>Messages are the objects that communicate information between JMS
+clients.</p>
+</li>
+<li>
+<p>Administered objects are JMS objects configured for the use of
+clients. The two kinds of JMS administered objects are destinations and
+connection factories, described in <a href="jms-concepts003.html#BNCEJ">JMS
+Administered Objects</a>. An administrator can create objects that are
+available to all applications that use a particular installation of
+GlassFish Server; alternatively, a developer can use annotations to
+create objects that are specific to a particular application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#BNCDZ">Figure 46-2</a> illustrates the way these parts interact.
+Administrative tools or annotations allow you to bind destinations and
+connection factories into a JNDI namespace. A JMS client can then use
+resource injection to access the administered objects in the namespace
+and then establish a logical connection to the same objects through the
+JMS provider.</p>
+</div>
+<div id="BNCDZ" class="paragraph">
+<div class="title"><strong>Figure 46-2 JMS API Architecture</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_027.png" alt="Diagram of JMS API architecture, showing administrative tool, JMS client, JNDI namespace, and JMS provider"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="messaging-styles">Messaging Styles</h3>
+<div class="paragraph">
+<p>Before the JMS API existed, most messaging products supported either the
+point-to-point or the publish/subscribe style of messaging. The JMS
+specification defines compliance for each style. A JMS provider must
+implement both styles, and the JMS API provides interfaces that are
+specific to each. The following subsections describe these messaging
+styles.</p>
+</div>
+<div class="paragraph">
+<p>The JMS API, however, makes it unnecessary to use only one of the two
+styles. It allows you to use the same code to send and receive messages
+using either the PTP or the pub/sub style. The destinations you use
+remain specific to one style, and the behavior of the application will
+depend in part on whether you are using a queue or a topic. However, the
+code itself can be common to both styles, making your applications
+flexible and reusable. This tutorial describes and illustrates this
+coding approach, using the greatly simplified API provided by JMS 2.0.</p>
+</div>
+<div class="sect3">
+<h4 id="point-to-point-messaging-style">Point-to-Point Messaging Style</h4>
+<div class="paragraph">
+<p>A point-to-point (PTP) product or application is built on the concept of
+message queues, senders, and receivers. Each message is addressed to a
+specific queue, and receiving clients extract messages from the queues
+established to hold their messages. Queues retain all messages sent to
+them until the messages are consumed or expire.</p>
+</div>
+<div class="paragraph">
+<p>PTP messaging, illustrated in <a href="#BNCEC">Figure 46-3</a>, has the
+following characteristics.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each message has only one consumer.</p>
+</li>
+<li>
+<p>The receiver can fetch the message whether or not it was running when
+the client sent the message.</p>
+</li>
+</ul>
+</div>
+<div id="BNCEC" class="paragraph">
+<div class="title"><strong>Figure 46-3 Point-to-Point Messaging</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_028.png" alt="Diagram of point-to-point messaging, showing Client 1 sending a message to a queue, and Client 2 consuming and acknowledging the message"></span></p>
+</div>
+<div class="paragraph">
+<p>Use PTP messaging when every message you send must be processed
+successfully by one consumer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="publishsubscribe-messaging-style">Publish/Subscribe Messaging Style</h4>
+<div class="paragraph">
+<p>In a publish/subscribe (pub/sub) product or application, clients address
+messages to a topic, which functions somewhat like a bulletin board.
+Publishers and subscribers can dynamically publish or subscribe to the
+topic. The system takes care of distributing the messages arriving from
+a topic&#8217;s multiple publishers to its multiple subscribers. Topics retain
+messages only as long as it takes to distribute them to subscribers.</p>
+</div>
+<div class="paragraph">
+<p>With pub/sub messaging, it is important to distinguish between the
+consumer that subscribes to a topic (the subscriber) and the
+subscription that is created. The consumer is a JMS object within an
+application, while the subscription is an entity within the JMS
+provider. Normally, a topic can have many consumers, but a subscription
+has only one subscriber. It is possible, however, to create shared
+subscriptions; see <a href="jms-concepts003.html#BABJCIGJ">Creating Shared
+Subscriptions</a> for details. See
+<a href="jms-concepts003.html#BABEEJJJ">Consuming Messages from Topics</a> for
+details on the semantics of pub/sub messaging.</p>
+</div>
+<div class="paragraph">
+<p>Pub/sub messaging has the following characteristics.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each message can have multiple consumers.</p>
+</li>
+<li>
+<p>A client that subscribes to a topic can consume only messages sent
+after the client has created a subscription, and the consumer must
+continue to be active in order for it to consume messages.</p>
+<div class="paragraph">
+<p>The JMS API relaxes this requirement to some extent by allowing
+applications to create durable subscriptions, which receive messages
+sent while the consumers are not active. Durable subscriptions provide
+the flexibility and reliability of queues but still allow clients to
+send messages to many recipients. For more information about durable
+subscriptions, see <a href="jms-concepts003.html#BNCGD">Creating Durable
+Subscriptions</a>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use pub/sub messaging when each message can be processed by any number
+of consumers (or none). <a href="#BNCEE">Figure 46-4</a> illustrates pub/sub
+messaging.</p>
+</div>
+<div id="BNCEE" class="paragraph">
+<div class="title"><strong>Figure 46-4 Publish/Subscribe Messaging</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_029.png" alt="Diagram of pub/sub messaging, showing Client 1 sending a message to a topic, and the message being delivered to two consumers to the topic"></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-consumption">Message Consumption</h3>
+<div class="paragraph">
+<p>Messaging products are inherently asynchronous: There is no fundamental
+timing dependency between the production and the consumption of a
+message. However, the JMS specification uses this term in a more precise
+sense. Messages can be consumed in either of two ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Synchronously: A consumer explicitly fetches the message from the
+destination by calling the <code>receive</code> method. The <code>receive</code> method can
+block until a message arrives or can time out if a message does not
+arrive within a specified time limit.</p>
+</li>
+<li>
+<p>Asynchronously: An application client or a Java SE client can register
+a message listener with a consumer. A message listener is similar to an
+event listener. Whenever a message arrives at the destination, the JMS
+provider delivers the message by calling the listener&#8217;s <code>onMessage</code>
+method, which acts on the contents of the message. In a Java EE
+application, a message-driven bean serves as a message listener (it too
+has an <code>onMessage</code> method), but a client does not need to register it
+with a consumer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-concepts001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-concepts003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

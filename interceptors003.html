@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The interceptor Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="interceptors002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-interceptor-example-application">The interceptor Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>interceptor</code> example demonstrates how to use an interceptor class,
+containing an <code>@AroundInvoke</code> interceptor method, with a stateless
+session bean.</p>
+</div>
+<div class="paragraph">
+<p>The <code>HelloBean</code> stateless session bean is a simple enterprise bean with
+two business methods, <code>getName</code> and <code>setName</code>, to retrieve and modify a
+string. The <code>setName</code> business method has an <code>@Interceptors</code> annotation
+that specifies an interceptor class, <code>HelloInterceptor</code>, for that
+method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Interceptors(HelloInterceptor.class)
+public void setName(String name) {
+    this.name = name;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>HelloInterceptor</code> class defines an <code>@AroundInvoke</code> interceptor
+method, <code>modifyGreeting</code>, that converts the string passed to
+<code>HelloBean.setName</code> to lowercase:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@AroundInvoke
+public Object modifyGreeting(InvocationContext ctx) throws Exception {
+    Object[] parameters = ctx.getParameters();
+    String param = (String) parameters[0];
+    param = param.toLowerCase();
+    parameters[0] = param;
+    ctx.setParameters(parameters);
+    try {
+        return ctx.proceed();
+    } catch (Exception e) {
+        logger.warning("Error calling ctx.proceed in modifyGreeting()");
+        return null;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The parameters to <code>HelloBean.setName</code> are retrieved and stored in an
+<code>Object</code> array by calling the <code>InvocationContext.getParameters</code> method.
+Because <code>setName</code> only has one parameter, it is the first and only
+element in the array. The string is set to lowercase and stored in the
+<code>parameters</code> array, then passed to <code>InvocationContext.setParameters</code>. To
+return control to the session bean, <code>InvocationContext.proceed</code> is
+called.</p>
+</div>
+<div class="paragraph">
+<p>The user interface of <code>interceptor</code> is a JavaServer Faces web
+application that consists of two Facelets views: <code>index.xhtml</code>, which
+contains a form for entering the name, and <code>response.xhtml</code>, which
+displays the final name.</p>
+</div>
+<div class="sect2">
+<h3 id="running-the-interceptor-example">Running the interceptor Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>interceptor</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKEDF">To Run the interceptor Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKECT">To Run the interceptor Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-interceptor-example-using-netbeans-ide">To Run the interceptor Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>interceptor</code> folder and click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>interceptor</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>This will compile, deploy, and run the <code>interceptor</code> example, opening a
+web browser to the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/interceptor/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter a name into the form and click Submit.</p>
+<div class="paragraph">
+<p>The name will be converted to lowercase by the method interceptor
+defined in the <code>HelloInterceptor</code> class.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-interceptor-example-using-maven">To Run the interceptor Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>Go to the following directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb/interceptor/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To compile the source files and package the application, use the
+following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>interceptor.war</code>, located in the <code>target</code> directory. The WAR file is
+then deployed to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/interceptor/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter a name into the form and click Submit.</p>
+<div class="paragraph">
+<p>The name will be converted to lowercase by the method interceptor
+defined in the <code>HelloInterceptor</code> class.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="interceptors002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

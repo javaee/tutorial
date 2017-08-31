@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Subresources and Runtime Resource Resolution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-advanced002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="subresources-and-runtime-resource-resolution">Subresources and Runtime Resource Resolution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use a resource class to process only a part of the URI request.
+A root resource can then implement subresources that can process the
+remainder of the URI path.</p>
+</div>
+<div class="paragraph">
+<p>A resource class method that is annotated with <code>@Path</code> is either a
+subresource method or a subresource locator.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A subresource method is used to handle requests on a subresource of
+the corresponding resource.</p>
+</li>
+<li>
+<p>A subresource locator is used to locate subresources of the
+corresponding resource.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKLAG">Subresource Methods</a></p>
+</li>
+<li>
+<p><a href="#GKRHR">Subresource Locators</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="subresource-methods">Subresource Methods</h3>
+<div class="paragraph">
+<p>A subresource method handles an HTTP request directly. The method must
+be annotated with a request method designator, such as <code>@GET</code> or
+<code>@POST</code>, in addition to <code>@Path</code>. The method is invoked for request URIs
+that match a URI template created by concatenating the URI template of
+the resource class with the URI template of the method.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows how a subresource method can be used to
+extract the last name of an employee when the employee&#8217;s email address
+is provided:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/employeeinfo")
+public class EmployeeInfo {
+
+    public employeeinfo() {}
+
+    @GET
+    @Path("/employees/{firstname}.{lastname}@{domain}.com")
+    @Produces("text/xml")
+    public String getEmployeeLastName(@PathParam("lastname") String lastName) {
+       ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>getEmployeeLastName</code> method returns <code>doe</code> for the following <code>GET</code>
+request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">GET /employeeinfo/employees/john.doe@example.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="subresource-locators">Subresource Locators</h3>
+<div class="paragraph">
+<p>A subresource locator returns an object that will handle an HTTP
+request. The method must not be annotated with a request method
+designator. You must declare a subresource locator within a subresource
+class, and only subresource locators are used for runtime resource
+resolution.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows a subresource locator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">// Root resource class
+@Path("/employeeinfo")
+public class EmployeeInfo {
+
+    // Subresource locator: obtains the subresource Employee
+    // from the path /employeeinfo/employees/{empid}
+    @Path("/employees/{empid}")
+    public Employee getEmployee(@PathParam("empid") String id) {
+        // Find the Employee based on the id path parameter
+        Employee emp = ...;
+        ...
+        return emp;
+    }
+}
+
+// Subresource class
+public class Employee {
+
+    // Subresource method: returns the employee's last name
+    @GET
+    @Path("/lastname")
+    public String getEmployeeLastName() {
+        ...
+        return lastName;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this code snippet, the <code>getEmployee</code> method is the subresource
+locator that provides the <code>Employee</code> object, which services requests for
+<code>lastname</code>.</p>
+</div>
+<div class="paragraph">
+<p>If your HTTP request is <code>GET /employeeinfo/employees/as209/</code>, the
+<code>getEmployee</code> method returns an <code>Employee</code> object whose id is <code>as209</code>.
+At runtime, JAX-RS sends a <code>GET /employeeinfo/employees/as209/lastname</code>
+request to the <code>getEmployeeLastName</code> method. The <code>getEmployeeLastName</code>
+method retrieves and returns the last name of the employee whose id is
+<code>as209</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-advanced002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

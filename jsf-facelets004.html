@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Facelets Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-facelets-templates">Using Facelets Templates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JavaServer Faces technology provides the tools to implement user
+interfaces that are easy to extend and reuse. Templating is a useful
+Facelets feature that allows you to create a page that will act as the
+base, or template, for the other pages in an application. By using
+templates, you can reuse code and avoid recreating similarly constructed
+pages. Templating also helps in maintaining a standard look and feel in
+an application with a large number of pages.</p>
+</div>
+<div class="paragraph">
+<p><a href="#GJBFP">Table 8-2</a> lists Facelets tags that are used for templating
+and their respective functionality.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref30"></a><a id="GJBFP"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 8-2 Facelets Templating Tags</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 22%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:component</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a component that is created and added to the
+component tree.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:composition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a page composition that optionally uses a
+template. Content outside of this tag is ignored.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:debug</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a debug component that is created and added to the
+component tree.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:decorate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Similar to the composition tag but does not disregard
+content outside this tag.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:define</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines content that is inserted into a page by a
+template.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:fragment</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Similar to the component tag but does not disregard
+content outside this tag.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:include</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encapsulates and reuses content for multiple pages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:insert</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inserts content into a template.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:param</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to pass parameters to an included file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:repeat</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used as an alternative for loop tags, such as <code>c:forEach</code>
+or <code>h:dataTable.</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:remove</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes content from a page.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For more information on Facelets templating tags, see the
+o<a href="JSFTL">JavaServer Faces Facelets Tag Library documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Facelets tag library includes the main templating tag <code>ui:insert</code>. A
+template page that is created with this tag allows you to define a
+default structure for a page. A template page is used as a template for
+other pages, usually referred to as client pages.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of a template saved as <code>template.xhtml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+
+    &lt;h:head&gt;
+        &lt;meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8" /&gt;
+        &lt;h:outputStylesheet library="css" name="default.css"/&gt;
+        &lt;h:outputStylesheet library="css" name="cssLayout.css"/&gt;
+        &lt;title&gt;Facelets Template&lt;/title&gt;
+    &lt;/h:head&gt;
+
+    &lt;h:body&gt;
+        &lt;div id="top" class="top"&gt;
+            &lt;ui:insert name="top"&gt;Top Section&lt;/ui:insert&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+        &lt;div id="left"&gt;
+             &lt;ui:insert name="left"&gt;Left Section&lt;/ui:insert&gt;
+        &lt;/div&gt;
+        &lt;div id="content" class="left_content"&gt;
+             &lt;ui:insert name="content"&gt;Main Content&lt;/ui:insert&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example page defines an XHTML page that is divided into three
+sections: a top section, a left section, and a main section. The
+sections have style sheets associated with them. The same structure can
+be reused for the other pages of the application.</p>
+</div>
+<div class="paragraph">
+<p>The client page invokes the template by using the <code>ui:composition</code> tag.
+In the following example, a client page named <code>templateclient.xhtml</code>
+invokes the template page named <code>template.xhtml</code> from the preceding
+example. A client page allows content to be inserted with the help of
+the <code>ui:define</code> tag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+
+    &lt;h:body&gt;
+        &lt;ui:composition template="./template.xhtml"&gt;
+            &lt;ui:define name="top"&gt;
+                Welcome to Template Client Page
+            &lt;/ui:define&gt;
+
+            &lt;ui:define name="left"&gt;
+                &lt;h:outputLabel value="You are in the Left Section"/&gt;
+            &lt;/ui:define&gt;
+
+            &lt;ui:define name="content"&gt;
+                &lt;h:graphicImage value="#{resource['images:wave.med.gif']}"/&gt;
+                &lt;h:outputText value="You are in the Main Content Section"/&gt;
+            &lt;/ui:define&gt;
+        &lt;/ui:composition&gt;
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can use NetBeans IDE to create Facelets template and client pages.
+For more information on creating these pages, see
+<code>https://netbeans.org/kb/docs/web/jsf20-intro.html</code>.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Is Facelets?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-facelets.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="what-is-facelets">What Is Facelets?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Facelets is a powerful but lightweight page declaration language that is
+used to build JavaServer Faces views using HTML style templates and to
+build component trees. Facelets features include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use of XHTML for creating web pages</p>
+</li>
+<li>
+<p>Support for Facelets tag libraries in addition to JavaServer Faces and
+JSTL tag libraries</p>
+</li>
+<li>
+<p>Support for the Expression Language (EL)</p>
+</li>
+<li>
+<p>Templating for components and pages</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The advantages of Facelets for large-scale development projects include
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Support for code reuse through templating and composite components</p>
+</li>
+<li>
+<p>Functional extensibility of components and other server-side objects
+through customization</p>
+</li>
+<li>
+<p>Faster compilation time</p>
+</li>
+<li>
+<p>Compile-time EL validation</p>
+</li>
+<li>
+<p>High-performance rendering</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In short, the use of Facelets reduces the time and effort that needs to
+be spent on development and deployment.</p>
+</div>
+<div class="paragraph">
+<p>Facelets views are usually created as XHTML pages. JavaServer Faces
+implementations support XHTML pages created in conformance with the
+XHTML Transitional Document Type Definition (DTD), as listed at
+<code>http://www.w3.org/TR/xhtml1/#a_dtd_XHTML-1.0-Transitional</code>. By
+convention, web pages built with XHTML have an <code>.xhtml</code> extension.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces technology supports various tag libraries to add
+components to a web page. To support the JavaServer Faces tag library
+mechanism, Facelets uses XML namespace declarations. <a href="#GJBOX">Table
+8-1</a> lists the tag libraries supported by Facelets.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref29"></a><a id="GJBOX"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 8-1 Tag Libraries Supported by Facelets</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 21.7821%;">
+<col style="width: 0.99%;">
+<col style="width: 19.8019%;">
+<col style="width: 29.7029%;">
+<col style="width: 27.7231%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag Library</th>
+<th class="tableblock halign-left valign-top">URI</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaServer Faces Facelets Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsf/facelets</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui:</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>ui:component</code></p>
+</div>
+<div class="paragraph">
+<p><code>ui:insert</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags for templating</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaServer Faces HTML Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsf/html</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h:</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>h:head</code></p>
+</div>
+<div class="paragraph">
+<p><code>h:body</code></p>
+</div>
+<div class="paragraph">
+<p><code>h:outputText</code></p>
+</div>
+<div class="paragraph">
+<p><code>h:inputText</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaServer Faces component tags for all <code>UIComponent</code> objects</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaServer Faces Core Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsf/core</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>f:</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>f:actionListener</code></p>
+</div>
+<div class="paragraph">
+<p><code>f:attribute</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags for JavaServer Faces custom actions that are independent of any
+particular render kit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pass-through Elements Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jsf:id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags to support HTML5-friendly markup</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pass-through Attributes Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsf/passthrough</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>p:</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>p:type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags to support
+HTML5-friendly markup</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Composite Component Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsf/composite</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cc:</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cc:interface</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags to support composite components</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSTL Core Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsp/jstl/core</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c:</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>c:forEach</code></p>
+</div>
+<div class="paragraph">
+<p><code>c:catch</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSTL 1.2 Core Tags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSTL Functions Tag Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://xmlns.jcp.org/jsp/jstl/functions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fn:</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>fn:toUpperCase</code></p>
+</div>
+<div class="paragraph">
+<p><code>fn:toLowerCase</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSTL 1.2 Functions Tags</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Facelets provides two namespaces to support HTML5-friendly markup. For
+details, see <a href="jsf-facelets009.html#BABGECCJ">HTML5-Friendly Markup</a>.</p>
+</div>
+<div class="paragraph">
+<p>Facelets supports tags for composite components, for which you can
+declare custom prefixes. For more information on composite components,
+see <a href="jsf-facelets005.html#GIQZR">Composite Components</a>.</p>
+</div>
+<div class="paragraph">
+<p>The namespace prefixes shown in the table are conventional, not
+mandatory. As is always the case when you declare an XML namespace, you
+can specify any prefix in your Facelets page. For example, you can
+declare the prefix for the composite component tag library as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">xmlns:composite="http://java.sun.com/jsf/composite"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>instead of as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">xmlns:cc="http://java.sun.com/jsf/composite"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Based on the JavaServer Faces support for Expression Language (EL)
+syntax, Facelets uses EL expressions to reference properties and methods
+of managed beans. EL expressions can be used to bind component objects
+or values to methods or properties of managed beans that are used as
+backing beans. For more information on using EL expressions, see
+<a href="jsf-develop001.html#BNAQP">Using the EL to Reference Managed Beans</a>.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-facelets.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-facelets002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

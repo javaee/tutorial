@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Handling Exceptions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-basicexamples005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-embedded.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="handling-exceptions">Handling Exceptions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The exceptions thrown by enterprise beans fall into two categories:
+system and application.</p>
+</div>
+<div class="paragraph">
+<p>A system exception indicates a problem with the services that support an
+application. For example, a connection to an external resource cannot be
+obtained, or an injected resource cannot be found. If it encounters a
+system-level problem, your enterprise bean should throw a
+<code>javax.ejb.EJBException</code>. Because the <code>EJBException</code> is a subclass of
+<code>RuntimeException</code>, you do not have to specify it in the <code>throws</code> clause
+of the method declaration. If a system exception is thrown, the EJB
+container might destroy the bean instance. Therefore, a system exception
+cannot be handled by the bean&#8217;s client program, but instead requires
+intervention by a system administrator.</p>
+</div>
+<div class="paragraph">
+<p>An application exception signals an error in the business logic of an
+enterprise bean. Application exceptions are typically exceptions that
+you&#8217;ve coded yourself, such as the <code>BookException</code> thrown by the
+business methods of the <code>CartBean</code> example. When an enterprise bean
+throws an application exception, the container does not wrap it in
+another exception. The client should be able to handle any application
+exception it receives.</p>
+</div>
+<div class="paragraph">
+<p>If a system exception occurs within a transaction, the EJB container
+rolls back the transaction. However, if an application exception is
+thrown within a transaction, the container does not roll back the
+transaction.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-basicexamples005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-embedded.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

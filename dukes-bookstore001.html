@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Design and Architecture of Duke&apos;s Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="dukes-bookstore.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="dukes-bookstore002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="design-and-architecture-of-dukes-bookstore">Design and Architecture of Duke&#8217;s Bookstore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Duke&#8217;s Bookstore is a simple web application that uses many features of
+JavaServer Faces technology, in addition to other Java EE 7 features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JavaServer Faces technology, as well as Contexts and Dependency
+Injection for Java EE (CDI)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A set of Facelets pages, along with a template, provides the user
+interface to the application.</p>
+</li>
+<li>
+<p>CDI managed beans are associated with each of the Facelets pages.</p>
+</li>
+<li>
+<p>A custom image map component on the front page allows you to select a
+book to enter the store. Each area of the map is represented by a
+JavaServer Faces managed bean. Text hyperlinks are also provided for
+accessibility.</p>
+</li>
+<li>
+<p>Action listeners are registered on the image map and the text links.
+These listeners retrieve the ID value for the selected book and store it
+in the session map so it can be retrieved by the managed bean for the
+next page.</p>
+</li>
+<li>
+<p>The <code>h:dataTable</code> tag is used to render the book catalog and shopping
+cart contents dynamically.</p>
+</li>
+<li>
+<p>A custom converter is registered on the credit card field on the
+checkout page, <code>bookcashier.xhtml</code>, which also uses an <code>f:validateRegEx</code>
+tag to ensure that the input is correctly formatted.</p>
+</li>
+<li>
+<p>A value-change listener is registered on the name field on
+<code>bookcashier.xhtml</code>. This listener saves the name in a parameter so the
+following page, <code>bookreceipt.xhtml</code>, can access it.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enterprise beans: Local, no-interface-view stateless session bean and
+singleton bean</p>
+</li>
+<li>
+<p>A Java Persistence API entity</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The packages of the Duke&#8217;s Bookstore application, located in the
+tut-install`/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/`
+directory, are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>components</code>: Includes the custom UI component classes, <code>MapComponent</code>
+and <code>AreaComponent</code></p>
+</li>
+<li>
+<p><code>converters</code>: Includes the custom converter class,
+<code>CreditCardConverter</code></p>
+</li>
+<li>
+<p><code>ejb</code>: Includes two enterprise beans:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A singleton bean, <code>ConfigBean</code>, that initializes the data in the
+database</p>
+</li>
+<li>
+<p>A stateless session bean, <code>BookRequestBean</code>, that contains the
+business logic to manage the entity</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>entity</code>: Includes the <code>Book</code> entity class</p>
+</li>
+<li>
+<p><code>exceptions</code>: Includes three exception classes</p>
+</li>
+<li>
+<p><code>listeners</code>: Includes the event handler and event listener classes</p>
+</li>
+<li>
+<p><code>model</code>: Includes a model JavaBeans class</p>
+</li>
+<li>
+<p><code>renderers</code>: Includes the custom renderers for the custom UI component
+classes</p>
+</li>
+<li>
+<p><code>web.managedbeans</code>: Includes the managed beans for the Facelets pages</p>
+</li>
+<li>
+<p><code>web.messages</code>: Includes the resource bundle files for localized
+messages</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="dukes-bookstore.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="dukes-bookstore002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

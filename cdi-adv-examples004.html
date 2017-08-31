@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The producerfields Example: Using Producer Fields to Generate Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv-examples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-producerfields-example-using-producer-fields-to-generate-resources">The producerfields Example: Using Producer Fields to Generate Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>producerfields</code> example, which allows you to create a to-do list,
+shows how to use a producer field to generate objects that can then be
+managed by the container. This example generates an <code>EntityManager</code>
+object, but resources such as JDBC connections and datasources can also
+be generated this way.</p>
+</div>
+<div class="paragraph">
+<p>The <code>producerfields</code> example is the simplest possible entity example. It
+also contains a qualifier and a class that generates the entity manager.
+It also contains a single entity, a stateful session bean, a Facelets
+page, and a managed bean.</p>
+</div>
+<div class="paragraph">
+<p>The source files are located in the
+tut-install`/examples/cdi/producerfields/src/main/java/javaeetutorial/producerfields/`
+directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHPP">The Producer Field for the producerfields Example</a></p>
+</li>
+<li>
+<p><a href="#GKHPD">The producerfields Entity and Session Bean</a></p>
+</li>
+<li>
+<p><a href="#GKHPF">The producerfields Facelets Pages and Managed Bean</a></p>
+</li>
+<li>
+<p><a href="#GKHRH">Running the producerfields Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-producer-field-for-the-producerfields-example">The Producer Field for the producerfields Example</h3>
+<div class="paragraph">
+<p>The most important component of the <code>producerfields</code> example is the
+smallest, the <code>db.UserDatabaseEntityManager</code> class, which isolates the
+generation of the <code>EntityManager</code> object so it can easily be used by
+other components in the application. The class uses a producer field to
+inject an <code>EntityManager</code> annotated with the <code>@UserDatabase</code> qualifier,
+also defined in the <code>db</code> package:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Singleton
+public class UserDatabaseEntityManager {
+
+    @Produces
+    @PersistenceContext
+    @UserDatabase
+    private EntityManager em;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The class does not explicitly produce a persistence unit field, but the
+application has a <code>persistence.xml</code> file that specifies a persistence
+unit. The class is annotated <code>javax.inject.Singleton</code> to specify that
+the injector should instantiate it only once.</p>
+</div>
+<div class="paragraph">
+<p>The <code>db.UserDatabaseEntityManager</code> class also contains commented-out
+code that uses <code>create</code> and <code>close</code> methods to generate and remove the
+producer field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn"> /* @PersistenceContext
+    private EntityManager em;
+
+    @Produces
+    @UserDatabase
+    public EntityManager create() {
+        return em;
+    } */
+
+    public void close(@Disposes @UserDatabase EntityManager em) {
+        em.close();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can remove the comment indicators from this code and place them
+around the field declaration to test how the methods work. The behavior
+of the application is the same with either mechanism.</p>
+</div>
+<div class="paragraph">
+<p>The advantage of producing the <code>EntityManager</code> in a separate class
+rather than simply injecting it into an enterprise bean is that the
+object can easily be reused in a typesafe way. Also, a more complex
+application can create multiple entity managers using multiple
+persistence units, and this mechanism isolates this code for easy
+maintenance, as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Singleton
+public class JPAResourceProducer {
+    @Produces
+    @PersistenceUnit(unitName="pu3")
+    @TestDatabase
+    EntityManagerFactory customerDatabasePersistenceUnit;
+
+    @Produces
+    @PersistenceContext(unitName="pu3")
+    @TestDatabase
+    EntityManager customerDatabasePersistenceContext;
+
+    @Produces
+    @PersistenceUnit(unitName="pu4")
+    @Documents
+    EntityManagerFactory customerDatabasePersistenceUnit;
+
+    @Produces
+    @PersistenceContext(unitName="pu4")
+    @Documents
+    EntityManager docDatabaseEntityManager;"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>EntityManagerFactory</code> declarations also allow applications to use
+an application-managed entity manager.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-producerfields-entity-and-session-bean">The producerfields Entity and Session Bean</h3>
+<div class="paragraph">
+<p>The <code>producerfields</code> example contains a simple entity class,
+<code>entity.ToDo</code>, and a stateful session bean, <code>ejb.RequestBean</code>, that uses
+it.</p>
+</div>
+<div class="paragraph">
+<p>The entity class contains three fields: an autogenerated <code>id</code> field, a
+string specifying the task, and a timestamp. The timestamp field,
+<code>timeCreated</code>, is annotated with <code>@Temporal</code>, which is required for
+persistent <code>Date</code> fields.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class ToDo implements Serializable {
+
+    ...
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    protected String taskText;
+    @Temporal(TIMESTAMP)
+    protected Date timeCreated;
+
+    public ToDo() {
+    }
+
+    public ToDo(Long id, String taskText, Date timeCreated) {
+        this.id = id;
+        this.taskText = taskText;
+        this.timeCreated = timeCreated;
+    }
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The remainder of the <code>ToDo</code> class contains the usual getters, setters,
+and other entity methods.</p>
+</div>
+<div class="paragraph">
+<p>The <code>RequestBean</code> class injects the <code>EntityManager</code> generated by the
+producer method, annotated with the <code>@UserDatabase</code> qualifier:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ConversationScoped
+@Stateful
+public class RequestBean {
+
+    @Inject
+    @UserDatabase
+    EntityManager em;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It then defines two methods, one that creates and persists a single
+<code>ToDo</code> list item, and another that retrieves all the <code>ToDo</code> items
+created so far by creating a query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    public ToDo createToDo(String inputString) {
+        ToDo toDo = null;
+        Date currentTime = Calendar.getInstance().getTime();
+
+        try {
+            toDo = new ToDo();
+            toDo.setTaskText(inputString);
+            toDo.setTimeCreated(currentTime);
+            em.persist(toDo);
+            return toDo;
+        } catch (Exception e) {
+            throw new EJBException(e.getMessage());
+        }
+    }
+
+    public List&lt;ToDo&gt; getToDos() {
+        try {
+             List&lt;ToDo&gt; toDos =
+                    (List&lt;ToDo&gt;) em.createQuery(
+                    "SELECT t FROM ToDo t ORDER BY t.timeCreated")
+                    .getResultList();
+            return toDos;
+        } catch (Exception e) {
+            throw new EJBException(e.getMessage());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-producerfields-facelets-pages-and-managed-bean">The producerfields Facelets Pages and Managed Bean</h3>
+<div class="paragraph">
+<p>The <code>producerfields</code> example has two Facelets pages, <code>index.xhtml</code> and
+<code>todolist.xhtml</code>. The simple form on the <code>index.xhtml</code> page asks the
+user only for the task. When the user clicks the Submit button, the
+<code>listBean.createTask</code> method is called. When the user clicks the Show
+Items button, the action specifies that the <code>todolist.xhtml</code> file should
+be displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;h:body&gt;
+        &lt;h2&gt;To Do List&lt;/h2&gt;
+        &lt;p&gt;Enter a task to be completed.&lt;/p&gt;
+        &lt;h:form id="todolist"&gt;
+            &lt;p&gt;&lt;h:outputLabel value="Enter a string: " for="inputString"/&gt;
+                &lt;h:inputText id="inputString"
+                             value="#{listBean.inputString}"/&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;h:commandButton value="Submit"
+                                action="#{listBean.createTask()}"/&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;h:commandButton value="Show Items"
+                                action="todolist"/&gt;&lt;/p&gt;
+        &lt;/h:form&gt;
+        ...
+    &lt;/h:body&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The managed bean, <code>web.ListBean</code>, injects the <code>ejb.RequestBean</code> session
+bean. It declares the <code>entity.ToDo</code> entity and a list of the entity
+along with the input string that it passes to the session bean. The
+<code>inputString</code> is annotated with the <code>@NotNull</code> Bean Validation
+constraint, so an attempt to submit an empty string results in an error.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@ConversationScoped
+public class ListBean implements Serializable {
+
+    ...
+    @EJB
+    private RequestBean request;
+    @NotNull
+    private String inputString;
+    private ToDo toDo;
+    private List&lt;ToDo&gt; toDos;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>createTask</code> method called by the Submit button calls the
+<code>createToDo</code> method of <code>RequestBean</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    public void createTask() {
+        this.toDo = request.createToDo(inputString);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>getToDos</code> method, which is called by the <code>todolist.xhtml</code> page,
+calls the <code>getToDos</code> method of <code>RequestBean</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public List&lt;ToDo&gt; getToDos() {
+        return request.getToDos();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To force the Facelets page to recognize an empty string as a null value
+and return an error, the <code>web.xml</code> file sets the context parameter
+<code>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</code> to <code>true</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;context-param&gt;
+  &lt;param-name&gt;javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL&lt;/param-name&gt;
+  &lt;param-value&gt;true&lt;/param-value&gt;
+&lt;/context-param&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>todolist.xhtml</code> page is a little more complicated than the
+<code>index.html</code> page. It contains a <code>dataTable</code> element that displays the
+contents of the <code>ToDo</code> list. The body of the page looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;body&gt;
+        &lt;h2&gt;To Do List&lt;/h2&gt;
+        &lt;h:form id="showlist"&gt;
+            &lt;h:dataTable var="toDo"
+                         value="#{listBean.toDos}"
+                         rules="all"
+                         border="1"
+                         cellpadding="5"&gt;
+                &lt;h:column&gt;
+                    &lt;f:facet name="header"&gt;
+                        &lt;h:outputText value="Time Stamp" /&gt;
+                    &lt;/f:facet&gt;
+                    &lt;h:outputText value="#{toDo.timeCreated}" /&gt;
+                &lt;/h:column&gt;
+                &lt;h:column&gt;
+                    &lt;f:facet name="header"&gt;
+                        &lt;h:outputText value="Task" /&gt;
+                    &lt;/f:facet&gt;
+                    &lt;h:outputText value="#{toDo.taskText}" /&gt;
+                &lt;/h:column&gt;
+            &lt;/h:dataTable&gt;
+            &lt;p&gt;&lt;h:commandButton id="back" value="Back" action="index" /&gt;&lt;/p&gt;
+        &lt;/h:form&gt;
+    &lt;/body&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value of the <code>dataTable</code> is <code>listBean.toDos</code>, the list returned by
+the managed bean&#8217;s <code>getToDos</code> method, which in turn calls the session
+bean&#8217;s <code>getToDos</code> method. Each row of the table displays the
+<code>timeCreated</code> and <code>taskText</code> fields of the individual task. Finally, a
+Back button returns the user to the <code>index.xhtml</code> page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-producerfields-example">Running the producerfields Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>producerfields</code> application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHPB">To Build, Package, and Deploy the producerfields Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKHRM">To Build, Package, and Deploy the producerfields Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#GKHRR">To Run the producerfields Example</a></p>
+</li>
+</ul>
+</div>
+<div id="to-build-package-and-deploy-the-producerfields-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the producerfields Example Using NetBeans
+IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>producerfields</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>producerfields</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>producerfields.war</code>, located in the <code>target</code> directory, and then
+deploys it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-producerfields-example-using-maven">To Build, Package, and Deploy the producerfields Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>If the database server is not already running, start it by following
+the instructions in <a href="usingexamples004.html#BNADK">Starting and
+Stopping the Java DB Server</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi/producerfields/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>producerfields.war</code>, located in the <code>target</code> directory, and then
+deploys it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-producerfields-example">To Run the producerfields Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/producerfields</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the Create To Do List page, enter a string in the field and click
+Submit.</p>
+<div class="paragraph">
+<p>You can enter additional strings and click Submit to create a task list
+with multiple items.</p>
+</div>
+</li>
+<li>
+<p>Click Show Items.</p>
+<div class="paragraph">
+<p>The To Do List page opens, showing the timestamp and text for each item
+you created.</p>
+</div>
+</li>
+<li>
+<p>Click Back to return to the Create To Do List page.</p>
+<div class="paragraph">
+<p>On this page, you can enter more items in the list.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv-examples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

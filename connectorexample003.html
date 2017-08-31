@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The traffic Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="connectorexample002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="interceptors.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-traffic-example">The traffic Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>traffic</code> example demonstrates how to implement and use a simple
+inbound resource adapter that receives data from a legacy EIS using a
+TCP socket.</p>
+</div>
+<div class="paragraph">
+<p>The example is in the tut-install`/examples/connectors/traffic`
+directory. See <a href="usingexamples.html#GFIUD">Chapter 2, "Using the
+Tutorial Examples,"</a> for basic information on building and running
+sample applications.</p>
+</div>
+<div class="paragraph">
+<p>The example demonstrates the scenario in <a href="#CHDGFGHB">Figure 54-3</a> and
+consists of the following modules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>traffic-eis</code>: A Java SE program that simulates an EIS</p>
+</li>
+<li>
+<p><code>traffic-rar</code>: The inbound resource adapter implementation</p>
+</li>
+<li>
+<p><code>traffic-ejb</code>: A message-driven bean that is the endpoint for incoming
+messages</p>
+</li>
+<li>
+<p><code>traffic-war</code>: A web application that displays information from the
+message-driven bean</p>
+</li>
+<li>
+<p><code>traffic-ear</code>: An enterprise archive that contains the resource
+adapter, the message-driven bean, and the web application</p>
+</li>
+</ul>
+</div>
+<div id="CHDGFGHB" class="paragraph">
+<div class="title"><strong>Figure 54-3 The traffic Example</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_056.png" alt="This figure shows the components of the traffic example: a WAR communicating with an enterprise bean using a JMS topic, and a RAR communicating with an EIS over a TCP socket."></span></p>
+</div>
+<div class="paragraph">
+<p>The <code>traffic-eis</code> module is an auxiliary project that resembles a legacy
+traffic information system. It contains a Java SE program that sends
+traffic status updates for several cities to any subscribed client. The
+program sends the updates in JSON format over a TCP socket. For example,
+a traffic update looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">{"report":[
+    {"city":"City1", "access":"AccessA", "status":"GOOD"},
+    {"city":"City1", "access":"AccessB", "status":"CONGESTED"},
+    ...
+    {"city":"City5", "access":"AccessE", "status":"SLOW"}
+ ]}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>traffic-rar</code> module implements the inbound contract of the Java EE
+Connector Architecture. This module subscribes to the traffic
+information system using the TCP port indicated by the configuration
+provided by the MDB and invokes the methods of the MDB to process
+traffic information updates.</p>
+</div>
+<div class="paragraph">
+<p>The <code>traffic-ejb</code> module contains a message-driven bean that activates
+the resource adapter with a configuration parameter (the TCP port to
+subscribe to the traffic information system). The MDB contains a method
+to process the traffic information updates. This method filters the
+updates for a particular city and publishes the results to a Java
+Message Service (JMS) topic.</p>
+</div>
+<div class="paragraph">
+<p>The <code>traffic-war</code> module contains a message-driven bean that receives
+filtered traffic information updates from the JMS topic asynchronously
+and sends them to the clients using a WebSocket endpoint.</p>
+</div>
+<div class="sect2">
+<h3 id="using-the-inbound-resource-adapter">Using the Inbound Resource Adapter</h3>
+<div class="paragraph">
+<p>In most cases, Java EE application developers use inbound resource
+adapters developed by a third party. To use an inbound resource adapter,
+a Java EE application includes a message-driven bean with the following
+characteristics.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The MDB implements the business interface defined by the resource
+adapter.</p>
+</li>
+<li>
+<p>The MDB specifies configuration parameters to activate the resource
+adapter.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The business interface defined by the resource adapter is not specified
+in the Java EE Connector Architecture; it is specific to the EIS.</p>
+</div>
+<div class="paragraph">
+<p>The MDB in this example is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@MessageDriven(
+    activationConfig = {
+      @ActivationConfigProperty(propertyName = "port",
+                                propertyValue = "4008")
+    }
+)
+public class TrafficMdb implements TrafficListener { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>TrafficListener</code> interface is defined in the API package of the
+resource adapter. The resource adapter requires the MDB to provide the
+<code>port</code> property.</p>
+</div>
+<div class="paragraph">
+<p>When the MDB is deployed, it activates the <code>traffic-rar</code> resource
+adapter, which invokes the methods of the MDB to process traffic
+information updates. Then the MDB filters the updates for a particular
+city and publishes the results to a JMS topic.</p>
+</div>
+<div class="paragraph">
+<p>In this particular example, the <code>TrafficListener</code> interface is empty. In
+addition to this interface, the resource adapter provides the
+<code>TrafficCommand</code> annotation and uses reflection to discover which
+methods in the MDB are decorated with this annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@MessageDriven(...)
+public class TrafficMdb implements TrafficListener {
+
+    @TrafficCommand(name="report", info="Process report")
+    public void processReport(String jsonReport) { ... }
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This approach enables you to adapt the MDB to support new features in
+the EIS without having to modify the <code>TrafficListener</code> interface or the
+resource adapter module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="implementing-the-inbound-resource-adapter">Implementing the Inbound Resource Adapter</h3>
+<div class="paragraph">
+<p>The <code>traffic-rar</code> module implements the inbound resource adapter
+contract from the Java EE Connector Architecture for the simple traffic
+information system (EIS) used in this example. The architecture of the
+inbound resource adapter is shown in <a href="#CHDHADDC">Figure 54-4</a>.</p>
+</div>
+<div id="CHDHADDC" class="paragraph">
+<div class="title"><strong>Figure 54-4 Architecture of the traffic Example</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_057.png" alt="This figure shows the classes in each of the components of the traffic example."></span></p>
+</div>
+<div class="paragraph">
+<p>The <code>traffic-rar</code> module implements the interfaces listed in
+<a href="#CHDEDEAF">Table 54-3</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref251"></a><a id="CHDEDEAF"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 54-3 Interfaces Implemented in the traffic-rar Module</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 49%;">
+<colgroup>
+<col style="width: 53.4653%;">
+<col style="width: 45.5445%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.resource.spi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ResourceAdapter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the lifecycle methods
+of the resource adapter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.resource.spi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ActivationSpec</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the configuration
+parameters that the MDB provides to activate the inbound resource
+adapter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.resource.spi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Work</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The traffic service subscriber implements
+this interface from the work management contract to wait for traffic
+updates on a separate thread.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When an MDB activates the inbound resource adapter, the container
+invokes the <code>endpointActivation</code> method in the <code>TrafficResourceAdapter</code>
+class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Connector(...)
+public class TrafficResourceAdapter implements ResourceAdapter, Serializable {
+    ...
+    @Override
+    public void endpointActivation(MessageEndpointFactory endpointFactory,
+                                   ActivationSpec spec)
+                                   throws ResourceException {
+        Class endpointClass = endpointFactory.getEndpointClass();
+        /* this method is called from a new thread in the example:
+        MessageEndpoint endpoint = endpointFactory.createEndpoint(null); */
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>getEndpointClass</code> method returns the <code>Class</code> type of the MDB
+performing the activation, which enables the resource adapter to use
+reflection to find methods annotated with <code>@TrafficCommand</code> in the MDB.</p>
+</div>
+<div class="paragraph">
+<p>The <code>createEndpoint</code> method returns an instance of the MDB. The resource
+adapter uses this instance to invoke the methods of the MDB when it
+receives requests from the EIS.</p>
+</div>
+<div class="paragraph">
+<p>After obtaining the message endpoint instance (MDB), the resource
+adapter uses the work management contract to create the traffic service
+subscriber thread that receives traffic updates from the EIS. The
+resource adapter obtains the <code>WorkManager</code> instance from the bootstrap
+context as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">WorkManager workManager;
+...
+@Override
+public void start(BootstrapContext ctx) ... {
+    workManager = ctx.getWorkManager();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resource adapter schedules the traffic service subscriber thread
+using the work manager:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tSubscriber = new TrafficServiceSubscriber(tSpec, endpoint);
+workManager.scheduleWork(tSubscriber);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>TrafficServiceSubscriber</code> class implements the
+<code>javax.resource.spi.Work</code> interface from the work management contract.</p>
+</div>
+<div class="paragraph">
+<p>The traffic service subscriber thread uses reflection to invoke the
+methods in the MDB:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private String callMdb(MessageEndpoint mdb, Method command,
+                       String... params) ... {
+    String resp;
+    /* this code contains proper exception handling in the sources */
+    mdb.beforeDelivery(command);
+    Object ret = command.invoke(mdb, (Object[]) params);
+    resp = (String) ret;
+    mdb.afterDelivery();
+    return resp;
+}
+
+For more details, see the code and the comments in the traffic-rar module.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-traffic-example">Running the traffic Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>traffic</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABIJJEH">To Run the traffic Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#BABBBGBA">To Run the traffic Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-traffic-example-using-netbeans-ide">To Run the traffic Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/connectors</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>traffic</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, expand the <code>traffic</code> node.</p>
+</li>
+<li>
+<p>Right-click the <code>traffic-eis</code> module and select Open Project.</p>
+</li>
+<li>
+<p>Right-click the <code>traffic-eis</code> project and select Run.</p>
+<div class="paragraph">
+<p>The messages from the EIS appear on the Output tab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Traffic EIS accepting connections on port 4008</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>traffic</code> project and select
+Clean and Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the resource adapter, the MDB, and the
+web application into an EAR archive and deploys it. The server log shows
+the call sequence that activates the resource adapter and the filtered
+traffic updates for City1.</p>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/traffic/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web interface shows filtered traffic updates for City1 every few
+seconds.</p>
+</div>
+</li>
+<li>
+<p>After undeploying the <code>traffic-ear</code> application, close the
+<code>traffic-eis</code> application from the status bar.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-traffic-example-using-maven">To Run the traffic Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/connectors/traffic/traffic-eis/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command in the terminal window:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the traffic EIS.</p>
+</div>
+</li>
+<li>
+<p>Enter the following command in the terminal window:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn exec:java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The messages from the EIS appear in the terminal window:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Traffic EIS accepting connections on port 4008</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Leave this terminal window open.</p>
+</div>
+</li>
+<li>
+<p>Open a new terminal window and go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/connectors/traffic/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the resource adapter, the MDB, and the
+web application into an EAR archive and deploys it. The server log shows
+the call sequence that activates the resource adapter and the filtered
+traffic updates for City1.</p>
+</div>
+</li>
+<li>
+<p>Open the following URL in a web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/traffic/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web interface shows the filtered traffic updates for City1 every few
+seconds.</p>
+</div>
+</li>
+<li>
+<p>After undeploying the <code>traffic-ear</code> application, press Ctrl+C in the
+first terminal window to close the <code>traffic-eis</code> application.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="connectorexample002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="interceptors.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

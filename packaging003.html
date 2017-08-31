@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Packaging Web Archives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="packaging002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="packaging004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="packaging-web-archives">Packaging Web Archives</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the Java EE architecture, a web module is the smallest deployable and
+usable unit of web resources. A web module contains web components and
+static web content files, such as images, which are called web
+resources. A Java EE web module corresponds to a web application as
+defined in the Java Servlet specification.</p>
+</div>
+<div class="paragraph">
+<p>In addition to web components and web resources, a web module can
+contain other files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Server-side utility classes, such as shopping carts</p>
+</li>
+<li>
+<p>Client-side classes, such as utility classes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A web module has a specific structure. The top-level directory of a web
+module is the document root of the application. The document root is
+where XHTML pages, client-side classes and archives, and static web
+resources, such as images, are stored.</p>
+</div>
+<div class="paragraph">
+<p>The document root contains a subdirectory named <code>WEB-INF</code>, which can
+contain the following files and directories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>classes</code>, a directory that contains server-side classes: servlets,
+enterprise bean class files, utility classes, and JavaBeans components</p>
+</li>
+<li>
+<p><code>lib</code>, a directory that contains JAR files that contain enterprise
+beans, and JAR archives of libraries called by server-side classes</p>
+</li>
+<li>
+<p>Deployment descriptors, such as <code>web.xml</code> (the web application
+deployment descriptor) and <code>ejb-jar.xml</code> (an EJB deployment descriptor)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A web module needs a <code>web.xml</code> file if it uses JavaServer Faces
+technology, if it must specify certain kinds of security information, or
+if you want to override information specified by web component
+annotations.</p>
+</div>
+<div class="paragraph">
+<p>You can also create application-specific subdirectories (that is,
+package directories) in either the document root or the
+<code>WEB-INF/classes/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>A web module can be deployed as an unpacked file structure or can be
+packaged in a JAR file known as a Web Archive (WAR) file. Because the
+contents and use of WAR files differ from those of JAR files, WAR file
+names use a <code>.war</code> extension. The web module just described is portable;
+you can deploy it into any web container that conforms to the Java
+Servlet specification.</p>
+</div>
+<div class="paragraph">
+<p>You can provide a runtime deployment descriptor (DD) when you deploy a
+WAR on GlassFish Server, but it is not required under most
+circumstances. The runtime DD is an XML file that may contain such
+information as the context root of the web application, the mapping of
+the portable names of an application&#8217;s resources to GlassFish Server
+resources, and the mapping of an application&#8217;s security roles to users,
+groups, and principals defined in GlassFish Server. The GlassFish Server
+web application runtime DD, if used, is named <code>glassfish-web.xml</code> and is
+located in the <code>WEB-INF</code> directory. The structure of a web module that
+can be deployed on GlassFish Server is shown in <a href="#BCGGCCHE">Figure
+5-3</a>.</p>
+</div>
+<div id="BCGGCCHE" class="paragraph">
+<div class="title"><strong>Figure 5-3 Web Module Structure</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_012.png" alt="Diagram of web module structure. WEB-INF and web pages are under the root. Under WEB-INF are descriptors and the lib and classes directories."></span></p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="packaging002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="packaging004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

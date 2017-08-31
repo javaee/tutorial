@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Attributes of a Composite Component</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-advanced-cc.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-advanced-cc002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="attributes-of-a-composite-component">Attributes of a Composite Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A composite component is a special type of JavaServer Faces template
+that acts as a component. If you are new to composite components, see
+<a href="jsf-facelets005.html#GIQZR">Composite Components</a> before you proceed
+with this chapter.</p>
+</div>
+<div class="paragraph">
+<p>You define an attribute of a composite component by using the
+<code>composite:attribute</code> tag. <a href="#GKHVF">Table 14-1</a> lists the commonly
+used attributes of this tag.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref74"></a><a id="GKHVF"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 14-1 Commonly Used Attributes of the composite:attribute Tag</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 26%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the name of the composite component attribute to be
+used in the using page. Alternatively, the <code>name</code> attribute can specify
+standard event handlers such as <code>action</code>, <code>actionListener</code>, and managed
+bean.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>default</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the default value of the composite component
+attribute.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>required</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether it is mandatory to provide a value for
+the attribute.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>method-signature</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Specifies a subclass of <code>java.lang.Object</code> as the type of the composite
+component&#8217;s attribute. The <code>method-signature</code> element declares that the
+composite component attribute is a method expression. The <code>type</code>
+attribute and the <code>method-signature</code> attribute are mutually exclusive.
+If you specify both, <code>method-signature</code> is ignored. The default type of
+an attribute is <code>java.lang.Object.</code></p>
+</div>
+<div class="paragraph">
+<p>Note: Method expressions are similar to value expressions, but rather
+than supporting the dynamic retrieval and setting of properties, method
+expressions support the invocation of a method of an arbitrary object,
+passing a specified set of parameters and returning the result from the
+called method (if any).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies a fully qualified class name as the type of the
+attribute. The <code>type</code> attribute and the <code>method-signature</code> attribute are
+mutually exclusive. If you specify both, <code>method-signature</code> is ignored.
+The default type of an attribute is <code>java.lang.Object.</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following code snippet defines a composite component attribute and
+assigns it a default value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;composite:attribute name="username" default="admin"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code snippet uses the <code>method-signature</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;composite:attribute name="myaction"
+                     method-signature="java.lang.String action()"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code snippet uses the <code>type</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;composite:attribute name="dateofjoining" type="java.util.Date"/&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-advanced-cc.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-advanced-cc002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

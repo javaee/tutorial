@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Simplified Query Language Syntax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-querylanguage003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-querylanguage005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="simplified-query-language-syntax">Simplified Query Language Syntax</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section briefly describes the syntax of the query language so that
+you can quickly move on to
+<a href="persistence-querylanguage005.html#BNBTL">Example Queries</a>. When you
+are ready to learn about the syntax in more detail, see
+<a href="persistence-querylanguage006.html#BNBUF">Full Query Language Syntax</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBTJ">Select Statements</a></p>
+</li>
+<li>
+<p><a href="#BNBTK">Update and Delete Statements</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="select-statements">Select Statements</h3>
+<div class="paragraph">
+<p>A select query has six clauses: <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>,
+<code>HAVING</code>, and <code>ORDER BY</code>. The <code>SELECT</code> and <code>FROM</code> clauses are required,
+but the <code>WHERE</code>, <code>GROUP BY</code>, <code>HAVING</code>, and <code>ORDER BY</code> clauses are
+optional. Here is the high-level BNF syntax of a query language select
+query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">QL_statement ::= select_clause from_clause
+  [where_clause][groupby_clause][having_clause][orderby_clause]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The BNF syntax defines the following clauses.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>SELECT</code> clause defines the types of the objects or values
+returned by the query.</p>
+</li>
+<li>
+<p>The <code>FROM</code> clause defines the scope of the query by declaring one or
+more identification variables, which can be referenced in the <code>SELECT</code>
+and <code>WHERE</code> clauses. An identification variable represents one of the
+following elements:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The abstract schema name of an entity</p>
+</li>
+<li>
+<p>An element of a collection relationship</p>
+</li>
+<li>
+<p>An element of a single-valued relationship</p>
+</li>
+<li>
+<p>A member of a collection that is the multiple side of a one-to-many
+relationship</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>WHERE</code> clause is a conditional expression that restricts the
+objects or values retrieved by the query. Although the clause is
+optional, most queries have a <code>WHERE</code> clause.</p>
+</li>
+<li>
+<p>The <code>GROUP BY</code> clause groups query results according to a set of
+properties.</p>
+</li>
+<li>
+<p>The <code>HAVING</code> clause is used with the <code>GROUP BY</code> clause to further
+restrict the query results according to a conditional expression.</p>
+</li>
+<li>
+<p>The <code>ORDER BY</code> clause sorts the objects or values returned by the
+query into a specified order.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="update-and-delete-statements">Update and Delete Statements</h3>
+<div class="paragraph">
+<p>Update and delete statements provide bulk operations over sets of
+entities. These statements have the following syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">update_statement :: = update_clause [where_clause]
+delete_statement :: = delete_clause [where_clause]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The update and delete clauses determine the type of the entities to be
+updated or deleted. The <code>WHERE</code> clause may be used to restrict the scope
+of the update or delete operation.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-querylanguage003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-querylanguage005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

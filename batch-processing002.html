@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Batch Processing in Java EE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="batch-processing001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="batch-processing-in-java-ee">Batch Processing in Java EE</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section lists the components of the batch processing framework in
+Java EE and provides an overview of the steps you have to follow to
+create a batch application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABEAFJI">The Batch Processing Framework</a></p>
+</li>
+<li>
+<p><a href="#BABCGDHJ">Creating Batch Applications</a></p>
+</li>
+<li>
+<p><a href="#BABDGDJB">Elements of a Batch Job</a></p>
+</li>
+<li>
+<p><a href="#BABHJEJC">Properties and Parameters</a></p>
+</li>
+<li>
+<p><a href="#BABHJGDH">Job Instances and Job Executions</a></p>
+</li>
+<li>
+<p><a href="#BABBFGEF">Batch and Exit Status</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-batch-processing-framework">The Batch Processing Framework</h3>
+<div class="paragraph">
+<p>Java EE includes a batch processing framework that consists of the
+following elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A batch runtime that manages the execution of jobs</p>
+</li>
+<li>
+<p>A job specification language based on XML</p>
+</li>
+<li>
+<p>A Java API to interact with the batch runtime</p>
+</li>
+<li>
+<p>A Java API to implement steps, decision elements, and other batch
+artifacts</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Batch applications in Java EE contain XML files and Java classes. The
+XML files define the structure of a job in terms of batch artifacts and
+the relationships between them. (A batch artifact is a part of a
+chunk-oriented step, a task-oriented step, a decision element, or
+another component of a batch application). The Java classes implement
+the application logic of the batch artifacts defined in the XML files.
+The batch runtime parses the XML files and loads the batch artifacts as
+Java classes to run the jobs in a batch application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-batch-applications">Creating Batch Applications</h3>
+<div class="paragraph">
+<p>The process for creating a batch application in Java EE is the
+following.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Design the batch application.</p>
+</li>
+<li>
+<p>Identify the input sources, the format of the input data, the
+desired final result, and the required processing phases.</p>
+</li>
+<li>
+<p>Organize the application as a job with chunk-oriented steps,
+task-oriented steps, and decision elements. Determine the dependencies
+between them.</p>
+</li>
+<li>
+<p>Determine the order of execution in terms of transitions between
+steps.</p>
+</li>
+<li>
+<p>Identify steps that can run in parallel and steps that can run in
+more than one thread.</p>
+</li>
+<li>
+<p>Create the batch artifacts as Java classes by implementing the
+interfaces specified by the framework for steps, decision elements, and
+so on. These Java classes contain the code to read data from input
+sources, format items, process items, and store results. Batch artifacts
+can access context objects from the batch runtime using dependency
+injection.</p>
+</li>
+<li>
+<p>Define jobs, steps, and their execution flow in XML files using the
+Job Specification Language. The elements in the XML files reference
+batch artifacts implemented as Java classes. The batch artifacts can
+access properties declared in the XML files, such as names of files and
+databases.</p>
+</li>
+<li>
+<p>Use the Java API provided by the batch runtime to launch the batch
+application.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sections describe in detail how to use the components of
+the batch processing framework in Java EE to create batch applications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="elements-of-a-batch-job">Elements of a Batch Job</h3>
+<div class="paragraph">
+<p>A batch job can contain one or more of the following elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps</p>
+</li>
+<li>
+<p>Flows</p>
+</li>
+<li>
+<p>Splits</p>
+</li>
+<li>
+<p>Decision elements</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Steps are described in
+<a href="batch-processing001.html#BCGJDEEH">Introduction to Batch Processing</a>,
+and can be chunk-oriented or task-oriented. Chunk-oriented steps can be
+partitioned steps. In a partitioned chunk step, the processing of one
+item does not depend on other items, so these steps can run in more than
+one thread.</p>
+</div>
+<div class="paragraph">
+<p>A flow is a sequence of steps that execute as a unit. A sequence of
+related steps can be grouped together into a flow. The steps in a flow
+cannot transition to steps outside the flow. The flow transitions to the
+next element when its last step completes.</p>
+</div>
+<div class="paragraph">
+<p>A split is a set of flows that execute in parallel; each flow runs on a
+separate thread. The split transitions to the next element when all its
+flows complete.</p>
+</div>
+<div class="paragraph">
+<p>Decision elements use the exit status of the previous step to determine
+the next step or to terminate the batch job.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="properties-and-parameters">Properties and Parameters</h3>
+<div class="paragraph">
+<p>Jobs and steps can have a number of properties associated with them. You
+define properties in the job definition file, and batch artifacts access
+these properties using context objects from the batch runtime. Using
+properties in this manner enables you to decouple static parameters of
+the job from the business logic and to reuse batch artifacts in
+different job definition files.</p>
+</div>
+<div class="paragraph">
+<p>Specifying properties is described in
+<a href="batch-processing004.html#BCGDDBBG">Using the Job Specification
+Language</a>, and accessing properties in batch artifacts is described in
+<a href="batch-processing005.html#BCGHDHGH">Creating Batch Artifacts</a>.</p>
+</div>
+<div class="paragraph">
+<p>Java EE applications can also pass parameters to a job when they submit
+it to the batch runtime. This enables you to specify dynamic parameters
+that are only known at runtime. Parameters are also necessary for
+partitioned steps, since each partition needs to know, for example, what
+range of items to process.</p>
+</div>
+<div class="paragraph">
+<p>Specifying parameters when submitting jobs is described in
+<a href="batch-processing006.html#BCGCAHCB">Submitting Jobs to the Batch
+Runtime</a>. Specifying parameters for partitioned steps and accessing them
+in batch artifacts is demonstrated in
+<a href="batch-processing009.html#BCGFCACD">The phonebilling Example
+Application</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="job-instances-and-job-executions">Job Instances and Job Executions</h3>
+<div class="paragraph">
+<p>A job definition can have multiple instances, each with different
+parameters. A job execution is an attempt to run a job instance. The
+batch runtime maintains information about job instances and job
+executions, as described in
+<a href="batch-processing006.html#BCGIBGFC">Checking the Status of a Job</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="batch-and-exit-status">Batch and Exit Status</h3>
+<div class="paragraph">
+<p>The state of jobs, steps, splits, and flows is represented in the batch
+runtime as a batch status value. Batch status values are listed
+<a href="#BCGJBGDF">Table 56-1</a>. They are represented as strings.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref267"></a><a id="BCGJBGDF"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 56-1 Batch Status Values</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 28%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STARTING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job has been submitted to the batch runtime.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STARTED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job is running.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STOPPING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job has been requested to stop.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STOPPED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job has stopped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FAILED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job finished executing because of an error.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>COMPLETED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job finished executing successfully.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ABANDONED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The job was marked abandoned.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Java EE applications can submit jobs and access the batch status of a
+job using the <code>JobOperator</code> interface, as described in
+<a href="batch-processing006.html#BCGCAHCB">Submitting Jobs to the Batch
+Runtime</a>. Job definition files can refer to batch status values using
+the Job Specification Language (JSL), as described in
+<a href="batch-processing004.html#BCGDDBBG">Using the Job Specification
+Language</a>. Batch artifacts can access batch status values using context
+objects, as described in <a href="batch-processing005.html#BCGCJEEF">Using the
+Context Objects from the Batch Runtime</a>.</p>
+</div>
+<div class="paragraph">
+<p>For flows, the batch status is that of its last step. For splits, the
+batch status is the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>COMPLETED</code>: If all its flows have a batch status of <code>COMPLETED</code></p>
+</li>
+<li>
+<p><code>FAILED</code>: If any flow has a batch status of <code>FAILED</code></p>
+</li>
+<li>
+<p><code>STOPPED</code>: If any flow has a batch status of <code>STOPPED</code>, and no flows
+have a batch status of <code>FAILED</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The batch status for jobs, steps, splits, and flows is set by the batch
+runtime. Jobs, steps, splits, and flows also have an exit status, which
+is a user-defined value based on the batch status. You can set the exit
+status inside batch artifacts or in the job definition file. You can
+access the exit status in the same manner as the batch status, described
+above. The default value for the exit status is the same as the batch
+status.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="batch-processing001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

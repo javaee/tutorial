@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The jsonpstreaming Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsonp006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-jsonpstreaming-example-application">The jsonpstreaming Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes how to build and run the <code>jsonpstreaming</code> example
+application. This example is a web application that demonstrates how to
+create JSON data from form data, how to parse JSON data, and how to
+write JSON output using the streaming API.</p>
+</div>
+<div class="paragraph">
+<p>The <code>jsonpstreaming</code> example application is in the
+tut-install`/examples/web/jsonp/jsonpstreaming` directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CEGDBIID">Components of the jsonpstreaming Example Application</a></p>
+</li>
+<li>
+<p><a href="#CEGGHFIG">Running the jsonpstreaming Example Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="components-of-the-jsonpstreaming-example-application">Components of the jsonpstreaming Example Application</h3>
+<div class="paragraph">
+<p>The <code>jsonpstreaming</code> example application contains the following files.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Three JavaServer Faces pages.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>index.xhtml</code> page contains a form to collect information.</p>
+</li>
+<li>
+<p>The <code>filewritten.xhtml</code> page contains a text area that displays JSON
+data.</p>
+</li>
+<li>
+<p>The <code>parsed.xhtml</code> page contains a table that lists the events from
+the parser.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>StreamingBean.java</code> managed bean, a session-scoped managed bean
+that stores the data from the form and directs the navigation between
+the Facelets pages. This file also contains code that uses the JSON
+streaming API.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The code used in <code>StreamingBean.java</code> to write JSON data to a file is
+similar to the example in <a href="jsonp004.html#BABGJEEF">Writing JSON Data
+Using a Generator</a>. The code to parse JSON data from a file is similar
+to the example in <a href="jsonp004.html#BABGCHIG">Reading JSON Data Using a
+Parser</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-jsonpstreaming-example-application">Running the jsonpstreaming Example Application</h3>
+<div class="paragraph">
+<p>This section describes how to run the <code>jsonpstreaming</code> example
+application using NetBeans IDE and from the command line.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CEGJCBCG">To Run the jsonpstreaming Example Application Using
+NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CEGCGDDJ">To Run the jsonpstreaming Example Application Using
+Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-jsonpstreaming-example-application-using-netbeans-ide">To Run the jsonpstreaming Example Application Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsonp</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>jsonpstreaming</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>jsonpstreaming</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file
+(<code>jsonpstreaming.war</code>) located in the <code>target</code> directory, deploys it to
+the server, and opens a web browser window with the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/jsonpstreaming/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit the data on the page and click Write a JSON Object to a File to
+submit the form and write a JSON object to a text file. The following
+page shows the contents of the text file.</p>
+</li>
+<li>
+<p>Click Parse JSON from File. The following page contains a table that
+lists the parser events for the JSON data in the text file.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-jsonpstreaming-example-application-using-maven">To Run the jsonpstreaming Example Application Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsonp/jsonpstreaming/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open a web browser window and enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/jsonpstreaming/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit the data on the page and click Write a JSON Object to a File to
+submit the form and write a JSON object to a text file. The following
+page shows the contents of the text file.</p>
+</li>
+<li>
+<p>Click Parse JSON from File. The following page contains a table that
+lists the parser events for the JSON data in the text file.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsonp006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

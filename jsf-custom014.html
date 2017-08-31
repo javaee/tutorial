@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Binding Converters, Listeners, and Validators to Managed Bean Properties</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom013.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="binding-converters-listeners-and-validators-to-managed-bean-properties">Binding Converters, Listeners, and Validators to Managed Bean Properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As described in <a href="jsf-page002.html#BNARF">Adding Components to a Page
+Using HTML Tag Library Tags</a>, a page author can bind converter,
+listener, and validator implementations to managed bean properties using
+the <code>binding</code> attributes of the tags that are used to register the
+implementations on components.</p>
+</div>
+<div class="paragraph">
+<p>This technique has similar advantages to binding component instances to
+managed bean properties, as described in
+<a href="jsf-custom013.html#BNATG">Binding Component Values and Instances to
+Managed Bean Properties</a>. In particular, binding a converter, listener,
+or validator implementation to a managed bean property yields the
+following benefits.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The managed bean can instantiate the implementation instead of
+allowing the page author to do so.</p>
+</li>
+<li>
+<p>The managed bean can programmatically modify the attributes of the
+implementation. In the case of a custom implementation, the only other
+way to modify the attributes outside of the implementation class would
+be to create a custom tag for it and require the page author to set the
+attribute values from the page.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Whether you are binding a converter, listener, or validator to a managed
+bean property, the process is the same for any of the implementations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nest the converter, listener, or validator tag within an appropriate
+component tag.</p>
+</li>
+<li>
+<p>Make sure that the managed bean has a property that accepts and
+returns the converter, listener, or validator implementation class that
+you want to bind to the property.</p>
+</li>
+<li>
+<p>Reference the managed bean property using a value expression from the
+<code>binding</code> attribute of the converter, listener, or validator tag.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, say that you want to bind the standard <code>DateTime</code> converter
+to a managed bean property because you want to set the formatting
+pattern of the user&#8217;s input in the managed bean rather than on the
+Facelets page. First, the page registers the converter onto the
+component by nesting the <code>f:convertDateTime</code> tag within the component
+tag. Then, the page references the property with the <code>binding</code> attribute
+of the <code>f:convertDateTime</code> tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText value="#{loginBean.birthDate}"&gt;
+    &lt;f:convertDateTime binding="#{loginBean.convertDate}" /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>convertDate</code> property would look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private DateTimeConverter convertDate;
+public DateTimeConverter getConvertDate() {
+    ...
+    return convertDate;
+}
+public void setConvertDate(DateTimeConverter convertDate) {
+    convertDate.setPattern("EEEEEEEE, MMM dd, yyyy");
+    this.convertDate = convertDate;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-develop002.html#BNAUL">Writing Properties Bound to
+Converters, Listeners, or Validators</a> for more information on writing
+managed bean properties for converter, listener, and validator
+implementations.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom013.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

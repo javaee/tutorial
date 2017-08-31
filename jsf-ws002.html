@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Configuring WebSockets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ws001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ws003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="configuring-websockets">Configuring WebSockets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To configure WebSockets for use in JSF web applications, first enable the
+WebSocket endpoint using the context parameter in <code>web.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;context-param&gt;
+&lt;param-name&gt;javax.faces.ENABLE_WEBSOCKET_ENDPOINT&lt;/param-name&gt;
+&lt;param-value&gt;true&lt;/param-value&gt;
+&lt;/context-param&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If your server is configured to run a WebSocket container on a different TCP
+port than the HTTP container, you can use the optional
+<code>javax.faces.WEBSOCKET_ENDPOINT_PORT</code> integer context parameter
+to explicitly specify the port:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;context-param&gt;
+&lt;param-name&gt;javax.faces.WEBSOCKET_ENDPOINT_PORT&lt;/param-name&gt;
+&lt;param-value&gt;8000&lt;/param-value&gt;
+&lt;/context-param&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket-usage-client-side">WebSocket Usage: Client Side</h3>
+<div class="paragraph">
+<p>Declare the <code>f:websocket tag</code> in the JSF view with a channel name and
+an <code>onmessage</code> JavaScript listener function.</p>
+</div>
+<div class="paragraph">
+<p>The following example refers to an existing JavaScript listener function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:websocket channel="someChannel"
+onmessage="someWebsocketListener" /&gt;
+
+function someWebsocketListener(message, channel, event) { console.log(message);
+
+}
+&lt;f:websocket channel="someChannel"
+onmessage="</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example declares an inline JavaScript listener function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:websocket channel="someChannel"
+onmessage="function(m){console.log(m);}" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>onmessage</code> JavaScript listener function is invoked with three arguments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>message</code>: The push message as a JSON object</p>
+</li>
+<li>
+<p><code>channel</code>: The channel name</p>
+</li>
+<li>
+<p><code>event</code>: The <code>MessageEvent</code> instance</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When successfully connected, the WebSocket is open by default for as long as
+the document is open, and it will auto-reconnect, at increasing intervals,
+when the connection is closed, or aborted, as a result of events such as a
+network error or server restart. It will not auto-reconnect when the very
+first connection attempt fails. The WebSocket will be implicitly closed after
+the document is unloaded.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket-usage-server-side">WebSocket Usage: Server Side</h3>
+<div class="paragraph">
+<p>On the Java programming side, inject a <code>PushContext</code> using the <code>@Push</code> annotation
+on the given channel in any CDI or container managed artifact, such as <code>@Named</code>,
+or <code>@WebServlet</code>, where you want to send a push message. Then invoke
+<code>PushContext.send(Object)</code> with any Java object representing the push message.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Inject @Push
+private PushContext someChannel;
+public void sendMessage(Object message) {
+someChannel.send(message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, the name of the channel is taken from the name of the variable
+into which the injection takes place.</p>
+</div>
+<div class="paragraph">
+<p>Optionally, the channel name can be specified using the <code>channel</code> attribute.
+The following example injects the push context for channel name <code>foo</code> into a
+variable named <code>bar</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>@Inject @Push(channel="foo")private PushContext bar;</code></p>
+</div>
+<div class="paragraph">
+<p>The message object will be encoded as JSON and delivered as a message argument
+of the <code>onmessage</code> JavaScript listener function associated with the channel name.
+It can be a String, but it can also be a collection, map, or a JavaBean.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ws001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ws003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

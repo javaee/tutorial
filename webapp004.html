@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>A Web Module That Uses Java Servlet Technology: The hello2 Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="webapp003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webapp005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="a-web-module-that-uses-java-servlet-technology-the-hello2-example">A Web Module That Uses Java Servlet Technology: The hello2 Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>hello2</code> application is a web module that uses Java Servlet
+technology to display a greeting and response. You can use a text editor
+to view the application files, or you can use NetBeans IDE.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+<code>_tut-install_/examples/web/servlet/hello2/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAEP">Mapping URLs to Web Components</a></p>
+</li>
+<li>
+<p><a href="#GJWWG">Examining the hello2 Web Module</a></p>
+</li>
+<li>
+<p><a href="#GKBLH">Running the hello2 Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="mapping-urls-to-web-components">Mapping URLs to Web Components</h3>
+<div class="paragraph">
+<p>When it receives a request, the web container must determine which web
+component should handle the request. The web container does so by
+mapping the URL path contained in the request to a web application and a
+web component. A URL path contains the context root and, optionally, a
+URL pattern:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://host:port/context-root[/url-pattern]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You set the URL pattern for a servlet by using the <code>@WebServlet</code>
+annotation in the servlet source file. For example, the
+<code>GreetingServlet.java</code> file in the <code>hello2</code> application contains the
+following annotation, specifying the URL pattern as <code>/greeting</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/greeting")
+public class GreetingServlet extends HttpServlet {
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This annotation indicates that the URL pattern <code>/greeting</code> follows the
+context root. Therefore, when the servlet is deployed locally, it is
+accessed with the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/hello2/greeting</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To access the servlet by using only the context root, specify <code>"/"</code> as
+the URL pattern.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="examining-the-hello2-web-module">Examining the hello2 Web Module</h3>
+<div class="paragraph">
+<p>The <code>hello2</code> application behaves almost identically to the <code>hello1</code>
+application, but it is implemented using Java Servlet technology instead
+of JavaServer Faces technology. You can use a text editor to view the
+application files, or you can use NetBeans IDE.</p>
+</div>
+<div class="sect3">
+<h4 id="to-view-the-hello2-web-module-using-netbeans-ide">To View the hello2 Web Module Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To view the <code>hello2</code> web module using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello2</code> folder and click Open Project.</p>
+</li>
+<li>
+<p>Expand the Source Packages node, then expand the
+<code>javaeetutorial.hello2</code> node.</p>
+</li>
+<li>
+<p>Double-click the <code>GreetingServlet.java</code> file to view it.</p>
+<div class="paragraph">
+<p>This servlet overrides the <code>doGet</code> method, implementing the <code>GET</code> method
+of HTTP. The servlet displays a simple HTML greeting form whose Submit
+button, like that of <code>hello1</code>, specifies a response page for its action.
+The following excerpt begins with the <code>@WebServlet</code> annotation, which
+specifies the URL pattern relative to the context root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/greeting")
+public class GreetingServlet extends HttpServlet {
+
+    @Override
+    public void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        response.setBufferSize(8192);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("&lt;html lang=\"en\"&gt;"
+                    + "&lt;head&gt;&lt;title&gt;Servlet Hello&lt;/title&gt;&lt;/head&gt;");
+
+            // then write the data of the response
+            out.println("&lt;body  bgcolor=\"#ffffff\"&gt;"
+                + "&lt;img src=\"duke.waving.gif\" "
+                + "alt=\"Duke waving his hand\"&gt;"
+                + "&lt;form method=\"get\"&gt;"
+                + "&lt;h2&gt;Hello, my name is Duke. What's yours?&lt;/h2&gt;"
+                + "&lt;input title=\"My name is: \"type=\"text\" "
+                + "name=\"username\" size=\"25\"&gt;"
+                + "&lt;p&gt;&lt;/p&gt;"
+                + "&lt;input type=\"submit\" value=\"Submit\"&gt;"
+                + "&lt;input type=\"reset\" value=\"Reset\"&gt;"
+                + "&lt;/form&gt;");
+
+            String username = request.getParameter("username");
+            if (username != null &amp;&amp; username.length()&gt; 0) {
+                RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher("/response");
+
+                if (dispatcher != null) {
+                    dispatcher.include(request, response);
+                }
+            }
+            out.println("&lt;/body&gt;&lt;/html&gt;");
+        }
+    }
+    ...</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Double-click the <code>ResponseServlet.java</code> file to view it.</p>
+<div class="paragraph">
+<p>This servlet also overrides the <code>doGet</code> method, displaying only the
+response. The following excerpt begins with the <code>@WebServlet</code>
+annotation, which specifies the URL pattern relative to the context
+root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/response")
+public class ResponseServlet extends HttpServlet {
+
+    @Override
+    public void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        try (PrintWriter out = response.getWriter()) {
+
+            // then write the data of the response
+            String username = request.getParameter("username");
+            if (username != null &amp;&amp; username.length()&gt; 0) {
+                out.println("&lt;h2&gt;Hello, " + username + "!&lt;/h2&gt;");
+            }
+        }
+    }
+    ...</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-hello2-example">Running the hello2 Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>hello2</code> example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJSED">To Run the hello2 Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GJSHX">To Run the hello2 Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-hello2-example-using-netbeans-ide">To Run the hello2 Example Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To run the <code>hello2</code> example using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start GlassFish Server as described in
+<a href="usingexamples002.html#CHDCACDI">To Start GlassFish Server Using
+NetBeans IDE</a>, if you have not already done so.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello2</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>hello2</code> project and select
+Build to package and deploy the project.</p>
+</li>
+<li>
+<p>In a web browser, open the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/hello2/greeting</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The URL specifies the context root, followed by the URL pattern.</p>
+</div>
+<div class="paragraph">
+<p>The application looks much like the <code>hello1</code> application. The major
+difference is that after you click Submit the response appears below the
+greeting, not on a separate page.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-hello2-example-using-maven">To Run the hello2 Example Using Maven</h4>
+<div class="paragraph">
+<p>To run the <code>hello2</code> example using Maven:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start GlassFish Server as described in
+<a href="usingexamples002.html#CHDBDDAF">To Start GlassFish Server Using the
+Command Line</a>, if you have not already done so.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/servlet/hello2/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This target builds the WAR file, copies it to the
+<code>_tut-install_/examples/web/hello2/target/</code> directory, and deploys it.</p>
+</div>
+</li>
+<li>
+<p>In a web browser, open the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/hello2/greeting</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The URL specifies the context root, followed by the URL pattern.</p>
+</div>
+<div class="paragraph">
+<p>The application looks much like the <code>hello1</code> application. The major
+difference is that after you click Submit the response appears below the
+greeting, not on a separate page.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="webapp003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webapp005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

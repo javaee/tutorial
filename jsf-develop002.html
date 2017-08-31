@@ -1,0 +1,770 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Writing Bean Properties</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-develop001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-develop003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<h1 id="writing-bean-properties" class="sect0">Writing Bean Properties</h1>
+<div class="paragraph">
+<p>As explained in <a href="jsf-develop001.html#BNAQM">Managed Beans in
+JavaServer Faces Technology</a>, a managed bean property can be bound to
+one of the following items:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A component value</p>
+</li>
+<li>
+<p>A component instance</p>
+</li>
+<li>
+<p>A converter implementation</p>
+</li>
+<li>
+<p>A listener implementation</p>
+</li>
+<li>
+<p>A validator implementation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These properties follow the conventions of JavaBeans components (also
+called beans). For more information on JavaBeans components, see the
+JavaBeans Tutorial at
+<code>http://docs.oracle.com/javase/tutorial/javabeans/index.html</code>.</p>
+</div>
+<div class="paragraph">
+<p>The component&#8217;s tag binds the component&#8217;s value to a managed bean
+property by using its <code>value</code> attribute and binds the component&#8217;s
+instance to a managed bean property by using its <code>binding</code> attribute.
+Likewise, all the converter, listener, and validator tags use their
+<code>binding</code> attributes to bind their associated implementations to managed
+bean properties. See <a href="jsf-custom013.html#BNATG">Binding Component
+Values and Instances to Managed Bean Properties</a> and
+<a href="jsf-custom014.html#BNATM">Binding Converters, Listeners, and
+Validators to Managed Bean Properties</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>To bind a component&#8217;s value to a managed bean property, the type of the
+property must match the type of the component&#8217;s value to which it is
+bound. For example, if a managed bean property is bound to a
+<code>UISelectBoolean</code> component&#8217;s value, the property should accept and
+return a <code>boolean</code> value or a <code>Boolean</code> wrapper <code>Object</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>To bind a component instance to a managed bean property, the property
+must match the type of component. For example, if a managed bean
+property is bound to a <code>UISelectBoolean</code> instance, the property should
+accept and return a <code>UISelectBoolean</code> value.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, to bind a converter, listener, or validator implementation to
+a managed bean property, the property must accept and return the same
+type of converter, listener, or validator object. For example, if you
+are using the <code>convertDateTime</code> tag to bind a
+<code>javax.faces.convert.DateTimeConverter</code> to a property, that property
+must accept and return a <code>DateTimeConverter</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>The rest of this section explains how to write properties that can be
+bound to component values, to component instances for the component
+objects described in <a href="jsf-page002.html#BNARF">Adding Components to a
+Page Using HTML Tag Library Tags</a>, and to converter, listener, and
+validator implementations.</p>
+</div>
+<div class="sect2">
+<h3 id="writing-properties-bound-to-component-values">Writing Properties Bound to Component Values</h3>
+<div class="paragraph">
+<p>To write a managed bean property that is bound to a component&#8217;s value,
+you must match the property type to the component&#8217;s value.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNAUA">Table 12-1</a> lists the <code>javax.faces.component</code> classes and
+the acceptable types of their values.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref67"></a><a id="BNAUA"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 12-1 Acceptable Types of Component Values</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 32%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component Class</th>
+<th class="tableblock halign-left valign-top">Acceptable Types of Component Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UIInput</code>, <code>UIOutput</code>, <code>UISelectItem</code>, <code>UISelectOne</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any of the basic
+primitive and numeric types or any Java programming language object type
+for which an appropriate <code>javax.faces.convert.Converter</code> implementation
+is available</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UIData</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>array</code> of beans, <code>List</code> of beans, single bean,
+<code>java.sql.ResultSet</code>, <code>javax.servlet.jsp.jstl.sql.Result</code>,
+<code>javax.sql.RowSet</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UISelectBoolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code> or <code>Boolean</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UISelectItems</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code>, <code>Collection</code>, <code>Array</code>, <code>Map</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UISelectMany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>array</code> or <code>List</code>, although elements of the <code>array</code> or
+<code>List</code> can be any of the standard types</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When they bind components to properties by using the <code>value</code> attributes
+of the component tags, page authors need to ensure that the
+corresponding properties match the types of the components' values.</p>
+</div>
+<div class="sect3">
+<h4 id="uiinput-and-uioutput-properties">UIInput and UIOutput Properties</h4>
+<div class="paragraph">
+<p>The <code>UIInput</code> and <code>UIOutput</code> component classes are represented by the
+component tags that begin with <code>h:input</code> and <code>h:output</code>, respectively
+(for example, <code>h:inputText</code> and <code>h:outputText</code>).</p>
+</div>
+<div class="paragraph">
+<p>In the following example, an <code>h:inputText</code> tag binds the <code>name</code>
+component to the <code>name</code> property of a managed bean called <code>CashierBean</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="name"
+             size="30"
+             value="#{cashierBean.name}"
+    ...&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code snippet from the managed bean <code>CashierBean</code> shows the
+bean property type bound by the preceding component tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">protected String name = null;
+
+public void setName(String name) {
+    this.name = name;
+}
+public String getName() {
+    return this.name;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As described in <a href="jsf-page-core001.html#BNAST">Using the Standard
+Converters</a>, to convert the value of an input or output component you
+can either apply a converter or create the bean property bound to the
+component with the matching type. Here is the example tag, from
+<a href="jsf-page-core001.html#BNASV">Using DateTimeConverter</a>, that displays
+the date on which items will be shipped.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:outputText value="#{cashierBean.shipDate}"&gt;
+    &lt;f:convertDateTime type="date" dateStyle="full" /&gt;
+&lt;/h:outputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The bean property represented by this tag must have a type of
+<code>java.util.Date</code>. The following code snippet shows the <code>shipDate</code>
+property, from the managed bean <code>CashierBean</code>, that is bound by the
+tag&#8217;s value in the preceding example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private Date shipDate;
+
+public Date getShipDate() {
+    return this.shipDate;
+}
+public void setShipDate(Date shipDate) {
+    this.shipDate = shipDate;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uidata-properties">UIData Properties</h4>
+<div class="paragraph">
+<p>The <code>UIData</code> component class is represented by the <code>h:dataTable</code>
+component tag.</p>
+</div>
+<div class="paragraph">
+<p><code>UIData</code> components must be bound to one of the managed bean property
+types listed in <a href="#BNAUA">Table 12-1</a>. Data components are discussed
+in <a href="jsf-page002.html#BNARZ">Using Data-Bound Table Components</a>. Here
+is part of the start tag of <code>dataTable</code> from that section:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:dataTable id="items"
+    ...
+    value="#{cart.items}"
+    ...
+    var="item"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value expression points to the <code>items</code> property of a shopping cart
+bean named <code>cart</code>. The <code>cart</code> bean maintains a map of <code>ShoppingCartItem</code>
+beans.</p>
+</div>
+<div class="paragraph">
+<p>The <code>getItems</code> method from the <code>cart</code> bean populates a <code>List</code> with
+<code>ShoppingCartItem</code> instances that are saved in the <code>items</code> map when the
+customer adds books to the cart, as shown in the following code segment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public synchronized List&lt;ShoppingCartItem&gt; getItems() {
+    List&lt;ShoppingCartItem&gt; results = new ArrayList&lt;ShoppingCartItem&gt;();
+    results.addAll(this.items.values());
+    return results;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All the components contained in the <code>UIData</code> component are bound to the
+properties of the <code>cart</code> bean that is bound to the entire <code>UIData</code>
+component. For example, here is the <code>h:outputText</code> tag that displays the
+book title in the table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandLink action="#{showcart.details}"&gt;
+    &lt;h:outputText value="#{item.item.title}"/&gt;
+&lt;/h:commandLink&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The title is actually a link to the <code>bookdetails.xhtml</code> page. The
+<code>h:outputText</code> tag uses the value expression <code>#{item.item.title}</code> to
+bind its <code>UIOutput</code> component to the <code>title</code> property of the <code>Book</code>
+entity. The first item in the expression is the <code>ShoppingCartItem</code>
+instance that the <code>h:dataTable</code> tag is referencing while rendering the
+current row. The second item in expression refers to the <code>item</code> property
+of <code>ShoppingCartItem</code>, which returns an <code>Object</code> (in this case, a
+<code>Book</code>). The <code>title</code> part of the expression refers to the <code>title</code>
+property of <code>Book</code>. The value of the <code>UIOutput</code> component corresponding
+to this tag is bound to the <code>title</code> property of the <code>Book</code> entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private String title;
+...
+public String getTitle() {
+    return title;
+}
+
+public void setTitle(String title) {
+    this.title = title;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The UIData component (and UIRepeat) supports the Map and Iterable
+interfaces, as well as custom types.</p>
+</div>
+<div class="paragraph">
+<p>For UIData and UIRepeat, the supported types are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>null</code> (becomes empty list)</p>
+</li>
+<li>
+<p><code>javax.faces.model.DataMode</code></p>
+</li>
+<li>
+<p><code>java.util.List</code></p>
+</li>
+<li>
+<p><code>java.lang.Object</code>[]</p>
+</li>
+<li>
+<p><code>java.sql.ResultSet</code></p>
+</li>
+<li>
+<p><code>javax.servlet.jsp.jstl.sql.Result</code></p>
+</li>
+<li>
+<p><code>java.util.Collection</code></p>
+</li>
+<li>
+<p><code>java.lang.Iterable</code></p>
+</li>
+<li>
+<p><code>java.util.Map</code></p>
+</li>
+<li>
+<p><code>java.lang.Object</code> (becomes ScalarDataModel)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uiselectboolean-properties">UISelectBoolean Properties</h4>
+<div class="paragraph">
+<p>The <code>UISelectBoolean</code> component class is represented by the component
+tag <code>h:selectBooleanCheckbox</code>.</p>
+</div>
+<div class="paragraph">
+<p>Managed bean properties that hold a <code>UISelectBoolean</code> component&#8217;s data
+must be of <code>boolean</code> or <code>Boolean</code> type. The example
+<code>selectBooleanCheckbox</code> tag from the section
+<a href="jsf-page002.html#BNASE">Displaying Components for Selecting One
+Value</a> binds a component to a property. The following example shows a
+tag that binds a component value to a <code>boolean</code> property:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:selectBooleanCheckbox title="#{bundle.receiveEmails}"
+                         value="#{custFormBean.receiveEmails}"&gt;
+&lt;/h:selectBooleanCheckbox&gt;
+&lt;h:outputText value="#{bundle.receiveEmails}"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example property that can be bound to the component
+represented by the example tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private boolean receiveEmails = false;
+...
+public void setReceiveEmails(boolean receiveEmails) {
+    this.receiveEmails = receiveEmails;
+}
+public boolean getReceiveEmails() {
+    return receiveEmails;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uiselectmany-properties">UISelectMany Properties</h4>
+<div class="paragraph">
+<p>The <code>UISelectMany</code> component class is represented by the component tags
+that begin with <code>h:selectMany</code> (for example, <code>h:selectManyCheckbox</code> and
+<code>h:selectManyListbox</code>).</p>
+</div>
+<div class="paragraph">
+<p>Because a <code>UISelectMany</code> component allows a user to select one or more
+items from a list of items, this component must map to a bean property
+of type <code>List</code> or <code>array</code>. This bean property represents the set of
+currently selected items from the list of available items.</p>
+</div>
+<div class="paragraph">
+<p>The following example of the <code>selectManyCheckbox</code> tag comes from
+<a href="jsf-page002.html#BNASI">Displaying Components for Selecting Multiple
+Values</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:selectManyCheckbox id="newslettercheckbox"
+                      layout="pageDirection"
+                      value="#{cashierBean.newsletters}"&gt;
+    &lt;f:selectItems value="#{cashierBean.newsletterItems}"/&gt;
+&lt;/h:selectManyCheckbox&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the bean property that maps to the <code>value</code> of the
+<code>selectManyCheckbox</code> tag from the preceding example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private String[] newsletters;
+
+public void setNewsletters(String[] newsletters) {
+    this.newsletters = newsletters;
+}
+public String[] getNewsletters() {
+    return this.newsletters;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>UISelectItem</code> and <code>UISelectItems</code> components are used to represent
+all the values in a <code>UISelectMany</code> component. See
+<a href="#BNAUG">UISelectItem Properties</a> and <a href="#BNAUH">UISelectItems
+Properties</a> for information on writing the bean properties for the
+<code>UISelectItem</code> and <code>UISelectItems</code> components.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uiselectone-properties">UISelectOne Properties</h4>
+<div class="paragraph">
+<p>The <code>UISelectOne</code> component class is represented by the component tags
+that begin with <code>h:selectOne</code> (for example, <code>h:selectOneRadio</code> and
+<code>h:selectOneListbox</code>).</p>
+</div>
+<div class="paragraph">
+<p><code>UISelectOne</code> properties accept the same types as <code>UIInput</code> and
+<code>UIOutput</code> properties, because a <code>UISelectOne</code> component represents the
+single selected item from a set of items. This item can be any of the
+primitive types and anything else for which you can apply a converter.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of the <code>h:selectOneMenu</code> tag from
+<a href="jsf-page002.html#BNASH">Displaying a Menu Using the h:selectOneMenu
+Tag</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:selectOneMenu id="shippingOption"
+                 required="true"
+                 value="#{cashierBean.shippingOption}"&gt;
+    &lt;f:selectItem itemValue="2"
+                  itemLabel="#{bundle.QuickShip}"/&gt;
+    &lt;f:selectItem itemValue="5"
+                  itemLabel="#{bundle.NormalShip}"/&gt;
+    &lt;f:selectItem itemValue="7"
+                  itemLabel="#{bundle.SaverShip}"/&gt;
+ &lt;/h:selectOneMenu&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the bean property corresponding to this tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private String shippingOption = "2";
+
+public void setShippingOption(String shippingOption) {
+    this.shippingOption = shippingOption;
+}
+public String getShippingOption() {
+    return this.shippingOption;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that <code>shippingOption</code> represents the currently selected item from
+the list of items in the <code>UISelectOne</code> component.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UISelectItem</code> and <code>UISelectItems</code> components are used to represent
+all the values in a <code>UISelectOne</code> component. This is explained in
+<a href="jsf-page002.html#BNASH">Displaying a Menu Using the h:selectOneMenu
+Tag</a>.</p>
+</div>
+<div class="paragraph">
+<p>For information on how to write the managed bean properties for the
+<code>UISelectItem</code> and <code>UISelectItems</code> components, see
+<a href="#BNAUG">UISelectItem Properties</a> and <a href="#BNAUH">UISelectItems
+Properties</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uiselectitem-properties">UISelectItem Properties</h4>
+<div class="paragraph">
+<p>A <code>UISelectItem</code> component represents a single value in a set of values
+in a <code>UISelectMany</code> or a <code>UISelectOne</code> component. A <code>UISelectItem</code>
+component must be bound to a managed bean property of type
+<code>javax.faces.model.SelectItem</code>. A <code>SelectItem</code> object is composed of an
+<code>Object</code> representing the value along with two <code>Strings</code> representing
+the label and the description of the <code>UISelectItem</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The example <code>selectOneMenu</code> tag from <a href="#BNAUF">UISelectOne Properties</a>
+contains <code>selectItem</code> tags that set the values of the list of items in
+the page. Here is an example of a bean property that can set the values
+for this list in the bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SelectItem itemOne = null;
+
+SelectItem getItemOne(){
+    return itemOne;
+}
+void setItemOne(SelectItem item) {
+    itemOne = item;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uiselectitems-properties">UISelectItems Properties</h4>
+<div class="paragraph">
+<p><code>UISelectItems</code> components are children of <code>UISelectMany</code> and
+<code>UISelectOne</code> components. Each <code>UISelectItems</code> component is composed of
+a set of either <code>UISelectItem</code> instances or any collection of objects,
+such as an array, a list, or even POJOs.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet from <code>CashierBean</code> shows how to write the
+properties for <code>selectItems</code> tags containing <code>SelectItem</code> instances.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private String[] newsletters;
+private static final SelectItem[] newsletterItems = {
+    new SelectItem("Duke's Quarterly"),
+    new SelectItem("Innovator's Almanac"),
+    new SelectItem("Duke's Diet and Exercise Journal"),
+    new SelectItem("Random Ramblings")
+};
+...
+public void setNewsletters(String[] newsletters) {
+    this.newsletters = newsletters;
+}
+
+public String[] getNewsletters() {
+    return this.newsletters;
+}
+
+public SelectItem[] getNewsletterItems() {
+    return newsletterItems;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the <code>newsletters</code> property represents the <code>SelectItems</code> object,
+whereas the <code>newsletterItems</code> property represents a static array of
+<code>SelectItem</code> objects. The <code>SelectItem</code> class has several constructors;
+in this example, the first argument is an <code>Object</code> representing the
+value of the item, whereas the second argument is a <code>String</code>
+representing the label that appears in the <code>UISelectMany</code> component on
+the page.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="writing-properties-bound-to-component-instances">Writing Properties Bound to Component Instances</h3>
+<div class="paragraph">
+<p>A property bound to a component instance returns and accepts a component
+instance rather than a component value. The following components bind a
+component instance to a managed bean property:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:selectBooleanCheckbox id="fanClub"
+                         rendered="false"
+                         binding="#{cashierBean.specialOffer}" /&gt;
+&lt;h:outputLabel for="fanClub"
+               rendered="false"
+               binding="#{cashierBean.specialOfferText}"
+               value="#{bundle.DukeFanClub}" /&gt;
+&lt;/h:outputLabel&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>selectBooleanCheckbox</code> tag renders a check box and binds the
+<code>fanClub</code> <code>UISelectBoolean</code> component to the <code>specialOffer</code> property of
+<code>CashierBean</code>. The <code>outputLabel</code> tag binds the value of the <code>value</code>
+attribute, which represents the check box&#8217;s label, to the
+<code>specialOfferText</code> property of <code>CashierBean</code>. If the user orders more
+than $100 worth of books and clicks the Submit button, the <code>submit</code>
+method of <code>CashierBean</code> sets both components' <code>rendered</code> properties to
+<code>true</code>, causing the check box and label to display when the page is
+re-rendered.</p>
+</div>
+<div class="paragraph">
+<p>Because the components corresponding to the example tags are bound to
+the managed bean properties, these properties must match the components'
+types. This means that the <code>specialOfferText</code> property must be of type
+<code>UIOutput</code>, and the <code>specialOffer</code> property must be of type
+<code>UISelectBoolean</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">UIOutput specialOfferText = null;
+UISelectBoolean specialOffer = null;
+
+public UIOutput getSpecialOfferText() {
+    return this.specialOfferText;
+}
+public void setSpecialOfferText(UIOutput specialOfferText) {
+    this.specialOfferText = specialOfferText;
+}
+
+public UISelectBoolean getSpecialOffer() {
+    return this.specialOffer;
+}
+public void setSpecialOffer(UISelectBoolean specialOffer) {
+    this.specialOffer = specialOffer;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more general information on component binding, see
+<a href="jsf-develop001.html#BNAQM">Managed Beans in JavaServer Faces
+Technology</a>.</p>
+</div>
+<div class="paragraph">
+<p>For information on how to reference a managed bean method that performs
+navigation when a button is clicked, see
+<a href="jsf-page-core004.html#BNATP">Referencing a Method That Performs
+Navigation</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more information on writing managed bean methods that handle
+navigation, see <a href="jsf-develop003.html#BNAVC">Writing a Method to Handle
+Navigation</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="writing-properties-bound-to-converters-listeners-or-validators">Writing Properties Bound to Converters, Listeners, or Validators</h3>
+<div class="paragraph">
+<p>All the standard converter, listener, and validator tags included with
+JavaServer Faces technology support binding attributes that allow you to
+bind converter, listener, or validator implementations to managed bean
+properties.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows a standard <code>convertDateTime</code> tag using a
+value expression with its <code>binding</code> attribute to bind the
+<code>javax.faces.convert.DateTimeConverter</code> instance to the <code>convertDate</code>
+property of <code>LoginBean</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText value="#{loginBean.birthDate}"&gt;
+    &lt;f:convertDateTime binding="#{loginBean.convertDate}" /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>convertDate</code> property must therefore accept and return a
+<code>DateTimeConverter</code> object, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">private DateTimeConverter convertDate;
+public DateTimeConverter getConvertDate() {
+       ...
+    return convertDate;
+}
+public void setConvertDate(DateTimeConverter convertDate) {
+    convertDate.setPattern("EEEEEEEE, MMM dd, yyyy");
+    this.convertDate = convertDate;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because the converter is bound to a managed bean property, the managed
+bean property can modify the attributes of the converter or add new
+functionality to it. In the case of the preceding example, the property
+sets the date pattern that the converter uses to parse the user&#8217;s input
+into a <code>Date</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The managed bean properties that are bound to validator or listener
+implementations are written in the same way and have the same general
+purpose.</p>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-develop001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-develop003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

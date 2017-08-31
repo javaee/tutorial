@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Are RESTful Web Services?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="_what_are_restful_web_services">What Are RESTful Web Services?</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-are-restful-web-services">What Are RESTful Web Services?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RESTful web services are loosely coupled, lightweight web services that
+are particularly well suited for creating APIs for clients spread out
+across the internet. Representational State Transfer (REST) is an
+architectural style of client-server application centered around the
+transfer of representations of resources through requests and responses.
+In the REST architectural style, data and functionality are considered
+resources and are accessed using Uniform Resource Identifiers (URIs),
+typically links on the Web. The resources are represented by documents
+and are acted upon by using a set of simple, well-defined operations.</p>
+</div>
+<div class="paragraph">
+<p>For example, a REST resource might be the current weather conditions for
+a city. The representation of that resource might be an XML document, an
+image file, or an HTML page. A client might retrieve a particular
+representation, modify the resource by updating its data, or delete the
+resource entirely.</p>
+</div>
+<div class="paragraph">
+<p>The REST architectural style is designed to use a stateless
+communication protocol, typically HTTP. In the REST architecture style,
+clients and servers exchange representations of resources by using a
+standardized interface and protocol.</p>
+</div>
+<div class="paragraph">
+<p>The following principles encourage RESTful applications to be simple,
+lightweight, and fast:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Resource identification through URI: A RESTful web service exposes a
+set of resources that identify the targets of the interaction with its
+clients. Resources are identified by URIs, which provide a global
+addressing space for resource and service discovery. See
+<a href="jaxrs002.html#GINPW">The @Path Annotation and URI Path Templates</a> for
+more information.</p>
+</li>
+<li>
+<p>Uniform interface: Resources are manipulated using a fixed set of four
+create, read, update, delete operations: PUT, GET, POST, and DELETE. PUT
+creates a new resource, which can be then deleted by using DELETE. GET
+retrieves the current state of a resource in some representation. POST
+transfers a new state onto a resource. See
+<a href="jaxrs002.html#GIPYS">Responding to HTTP Methods and Requests</a> for
+more information.</p>
+</li>
+<li>
+<p>Self-descriptive messages: Resources are decoupled from their
+representation so that their content can be accessed in a variety of
+formats, such as HTML, XML, plain text, PDF, JPEG, JSON, and other
+document formats. Metadata about the resource is available and used, for
+example, to control caching, detect transmission errors, negotiate the
+appropriate representation format, and perform authentication or access
+control. See <a href="jaxrs002.html#GIPYS">Responding to HTTP Methods and
+Requests</a> and <a href="jaxrs002.html#GIPZE">Using Entity Providers to Map HTTP
+Response and Request Entity Bodies</a> for more information.</p>
+</li>
+<li>
+<p>Stateful interactions through links: Every interaction with a resource
+is stateless; that is, request messages are self-contained. Stateful
+interactions are based on the concept of explicit state transfer.
+Several techniques exist to exchange state, such as URI rewriting,
+cookies, and hidden form fields. State can be embedded in response
+messages to point to valid future states of the interaction. See
+<a href="jaxrs002.html#GIPZE">Using Entity Providers to Map HTTP Response and
+Request Entity Bodies</a> and <a href="jaxrs002.html#GIPZE">Extracting Request Parameters</a> in the JAX-RS Overview
+document for more information.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

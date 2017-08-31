@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Specifying the Cache Mode Settings to Improve Performance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-cache001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partmessaging.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="specifying-the-cache-mode-settings-to-improve-performance">Specifying the Cache Mode Settings to Improve Performance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To adjust the cache mode settings for a persistence unit, specify one of
+the cache modes as the value of the <code>shared-cache-mode</code> element in the
+<code>persistence.xml</code> deployment descriptor (shown in bold):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;persistence-unit name="examplePU" transaction-type="JTA"&gt;
+    &lt;provider&gt;org.eclipse.persistence.jpa.PersistenceProvider&lt;/provider&gt;
+    &lt;jta-data-source&gt;java:comp/DefaultDataSource&lt;/jta-data-source&gt;
+    &lt;shared-cache-mode&gt;DISABLE_SELECTIVE&lt;/shared-cache-mode&gt;
+&lt;/persistence-unit&gt;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Because support for a second-level cache is not required by the Java
+Persistence API specification, setting the second-level cache mode in
+<code>persistence.xml</code> will have no effect when you use a persistence
+provider that does not implement a second-level cache.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Alternatively, you can specify the shared cache mode by setting the
+<code>javax.persistence.sharedCache.mode</code> property to one of the shared cache
+mode settings:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManagerFactory emf =
+    Persistence.createEntityManagerFactory(
+        "myExamplePU", new Properties().add(
+            "javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE"));</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-the-cache-retrieval-and-store-modes">Setting the Cache Retrieval and Store Modes</h3>
+<div class="paragraph">
+<p>If you have enabled the second-level cache for a persistence unit by
+setting the shared cache mode, you can further modify the behavior of
+the second-level cache by setting the
+<code>javax.persistence.cache.retrieveMode</code> and
+<code>javax.persistence.cache.storeMode</code> properties. You can set these
+properties at the persistence context level by passing the property name
+and value to the <code>EntityManager.setProperty</code> method, or you can set them
+on a per-<code>EntityManager</code> operation (<code>EntityManager.find</code> or
+<code>EntityManager.refresh</code>) or on a per-query level.</p>
+</div>
+<div class="sect3">
+<h4 id="cache-retrieval-mode">Cache Retrieval Mode</h4>
+<div class="paragraph">
+<p>The cache retrieval mode, set by the <code>javax.persistence.retrieveMode</code>
+property, controls how data is read from the cache for calls to the
+<code>EntityManager.find</code> method and from queries.</p>
+</div>
+<div class="paragraph">
+<p>You can set the <code>retrieveMode</code> property to one of the constants defined
+by the <code>javax.persistence.CacheRetrieveMode</code> enumerated type, either
+<code>USE</code> (the default) or <code>BYPASS</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the property is set to <code>USE</code>, data is retrieved from the
+second-level cache, if available. If the data is not in the cache, the
+persistence provider will read it from the database.</p>
+</div>
+<div class="paragraph">
+<p>When the property is set to <code>BYPASS</code>, the second-level cache is bypassed
+and a call to the database is made to retrieve the data.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="cache-store-mode">Cache Store Mode</h4>
+<div class="paragraph">
+<p>The cache store mode, set by the <code>javax.persistence.storeMode</code> property,
+controls how data is stored in the cache.</p>
+</div>
+<div class="paragraph">
+<p>The <code>storeMode</code> property can be set to one of the constants defined by
+the <code>javax.persistence.CacheStoreMode</code> enumerated type: either <code>USE</code>
+(the default), <code>BYPASS</code>, or <code>REFRESH</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the property is set to <code>USE</code>, the cache data is created or updated
+when data is read from or committed to the database. If data is already
+in the cache, setting the store mode to <code>USE</code> will not force a refresh
+when data is read from the database.</p>
+</div>
+<div class="paragraph">
+<p>When the property is set to <code>BYPASS</code>, data read from or committed to the
+database is not inserted or updated in the cache. That is, the cache is
+unchanged.</p>
+</div>
+<div class="paragraph">
+<p>When the property is set to <code>REFRESH</code>, the cache data is created or
+updated when data is read from or committed to the database, and a
+refresh is forced on data in the cache upon database reads.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-the-cache-retrieval-or-store-mode">Setting the Cache Retrieval or Store Mode</h4>
+<div class="paragraph">
+<p>To set the cache retrieval or store mode for the persistence context,
+call the <code>EntityManager.setProperty</code> method with the property name and
+value pair:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+em.setProperty("javax.persistence.cache.storeMode", "BYPASS");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To set the cache retrieval or store mode when calling the
+<code>EntityManager.find</code> or <code>EntityManager.refresh</code> methods, first create a
+<code>Map&lt;String, Object&gt;</code> instance and add a name/value pair as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Map&lt;String, Object&gt; props = new HashMap&lt;String, Object&gt;();
+props.put("javax.persistence.cache.retrieveMode", "BYPASS");
+String personPK = ...;
+Person person = em.find(Person.class, personPK, props);</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>The cache retrieval mode is ignored when calling the
+<code>EntityManager.refresh</code> method, as calls to <code>refresh</code> always result in
+data being read from the database, not the cache.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To set the retrieval or store mode when using queries, call the
+<code>Query.setHint</code> or <code>TypedQuery.setHint</code> methods, depending on the type
+of query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+CriteriaQuery&lt;Person&gt; cq = ...;
+TypedQuery&lt;Person&gt; q = em.createQuery(cq);
+q.setHint("javax.persistence.cache.storeMode", "REFRESH");
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Setting the store or retrieve mode in a query or when calling the
+<code>EntityManager.find</code> or <code>EntityManager.refresh</code> method overrides the
+setting of the entity manager.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="controlling-the-second-level-cache-programmatically">Controlling the Second-Level Cache Programmatically</h3>
+<div class="paragraph">
+<p>The <code>javax.persistence.Cache</code> interface defines methods for interacting
+with the second-level cache programmatically.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDEECCF">Overview of the javax.persistence.Cache Interface</a></p>
+</li>
+<li>
+<p><a href="#GKJDZ">Checking whether an Entity&#8217;s Data Is Cached</a></p>
+</li>
+<li>
+<p><a href="#GKJDQ">Removing an Entity from the Cache</a></p>
+</li>
+<li>
+<p><a href="#GKJDA">Removing All Data from the Cache</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="overview-of-the-javax.persistence.cache-interface">Overview of the javax.persistence.Cache Interface</h4>
+<div class="paragraph">
+<p>The <code>Cache</code> interface defines methods to do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Check whether a particular entity has cached data</p>
+</li>
+<li>
+<p>Remove a particular entity from the cache</p>
+</li>
+<li>
+<p>Remove all instances (and instances of subclasses) of an entity class
+from the cache</p>
+</li>
+<li>
+<p>Clear the cache of all entity data</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>If the second-level cache has been disabled, calls to the <code>Cache</code>
+interface&#8217;s methods have no effect, except for <code>contains</code>, which will
+always return <code>false</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="checking-whether-an-entitys-data-is-cached">Checking whether an Entity&#8217;s Data Is Cached</h4>
+<div class="paragraph">
+<p>To find out whether a given entity is currently in the second-level
+cache:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Call the <code>Cache.contains</code> method . The <code>contains</code> method returns
+<code>true</code> if the entity&#8217;s data is cached, and <code>false</code> if the data is not in
+the cache:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+String personPK = ...;
+if (cache.contains(Person.class, personPK)) {
+  // the data is cached
+} else {
+  // the data is NOT cached
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-an-entity-from-the-cache">Removing an Entity from the Cache</h4>
+<div class="paragraph">
+<p>To remove a particular entity or all entities of a given type from the
+second-level cache:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Call one of the <code>Cache.evict</code> methods .</p>
+</li>
+<li>
+<p>To remove a particular entity from the cache, call the <code>evict</code>
+method and pass in the entity class and the primary key of the entity:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+String personPK = ...;
+cache.evict(Person.class, personPK);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To remove all instances of a particular entity class, including
+subclasses, call the <code>evict</code> method and specify the entity class:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+cache.evict(Person.class);</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>All instances of the <code>Person</code> entity class will be removed from the
+cache. If the <code>Person</code> entity has a subclass, <code>Student</code>, calls to the
+above method will remove all instances of <code>Student</code> from the cache as
+well.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-all-data-from-the-cache">Removing All Data from the Cache</h4>
+<div class="paragraph">
+<p>To completely clear the second-level cache:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Call the <code>Cache.evictAll</code> method.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Cache cache = em.getEntityManagerFactory().getCache();
+cache.evictAll();</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-cache001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partmessaging.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

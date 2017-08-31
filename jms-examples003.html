@@ -1,0 +1,1620 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Writing Simple JMS Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-examples002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-examples004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="writing-simple-jms-applications">Writing Simple JMS Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows how to create, package, and run simple JMS clients
+that are packaged as application clients.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDCEFGA">Overview of Writing Simple JMS Application</a></p>
+</li>
+<li>
+<p><a href="#BNCFD">Starting the JMS Provider</a></p>
+</li>
+<li>
+<p><a href="#GKTJS">Creating JMS Administered Objects</a></p>
+</li>
+<li>
+<p><a href="#BABEEABE">Building All the Simple Examples</a></p>
+</li>
+<li>
+<p><a href="#BABIHCAE">Sending Messages</a></p>
+</li>
+<li>
+<p><a href="#BNCFB">Receiving Messages Synchronously</a></p>
+</li>
+<li>
+<p><a href="#BNCFH">Using a Message Listener for Asynchronous Message
+Delivery</a></p>
+</li>
+<li>
+<p><a href="#BNCFL">Browsing Messages on a Queue</a></p>
+</li>
+<li>
+<p><a href="#BABDDHHC">Running Multiple Consumers on the Same Destination</a></p>
+</li>
+<li>
+<p><a href="#BNCFX">Acknowledging Messages</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-writing-simple-jms-application">Overview of Writing Simple JMS Application</h3>
+<div class="paragraph">
+<p>The clients demonstrate the basic tasks a JMS application must perform:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Creating a <code>JMSContext</code></p>
+</li>
+<li>
+<p>Creating message producers and consumers</p>
+</li>
+<li>
+<p>Sending and receiving messages</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each example uses two clients: one that sends messages and one that
+receives them. You can run the clients in two terminal windows.</p>
+</div>
+<div class="paragraph">
+<p>When you write a JMS client to run in an enterprise bean application,
+you use many of the same methods in much the same sequence as for an
+application client. However, there are some significant differences.
+<a href="jms-concepts005.html#BNCGL">Using the JMS API in Java EE
+Applications</a> describes these differences, and this chapter provides
+examples that illustrate them.</p>
+</div>
+<div class="paragraph">
+<p>The examples for this section are in the
+tut-install`/examples/jms/simple/` directory, under the following
+subdirectories:</p>
+</div>
+<div class="paragraph">
+<p><code>producer/</code><br>
+<code>synchconsumer/</code><br>
+<code>asynchconsumer/</code><br>
+<code>messagebrowser/</code><br>
+<code>clientackconsumer/</code><br></p>
+</div>
+<div class="paragraph">
+<p>Before running the examples, you need to start GlassFish Server and
+create administered objects.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="starting-the-jms-provider">Starting the JMS Provider</h3>
+<div class="paragraph">
+<p>When you use GlassFish Server, your JMS provider is GlassFish Server.
+Start the server as described in
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish Server</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-jms-administered-objects">Creating JMS Administered Objects</h3>
+<div class="paragraph">
+<p>This example uses the following JMS administered objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A connection factory</p>
+</li>
+<li>
+<p>Two destination resources: a topic and a queue</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Before you run the applications, you can use the <code>asadmin add-resources</code>
+command to create needed JMS resources, specifying as the argument a
+file named <code>glassfish-resources.xml</code>. This file can be created in any
+project using NetBeans IDE, although you can also create it by hand. A
+file for the needed resources is present in the
+<code>jms/simple/producer/src/main/setup/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The JMS examples use a connection factory with the logical JNDI lookup
+name <code>java:comp/DefaultJMSConnectionFactory</code>, which is preconfigured in
+GlassFish Server.</p>
+</div>
+<div class="paragraph">
+<p>You can also use the <code>asadmin create-jms-resource</code> command to create
+resources, the <code>asadmin list-jms-resources</code> command to display their
+names, and the <code>asadmin delete-jms-resource</code> command to remove them.</p>
+</div>
+<div class="sect3">
+<h4 id="to-create-resources-for-the-simple-examples">To Create Resources for the Simple Examples</h4>
+<div class="paragraph">
+<p>A <code>glassfish-resources.xml</code> file in one of the Maven projects can create
+all the resources needed for the simple examples.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a command window, go to the <code>Producer</code> example.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd tut-install/jms/simple/producer</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the resources using the <code>asadmin add-resources</code> command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">asadmin add-resources src/main/setup/glassfish-resources.xml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify the creation of the resources:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">asadmin list-jms-resources</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command lists the two destinations and connection factory specified
+in the <code>glassfish-resources.xml</code> file in addition to the platform
+default connection factory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">jms/MyQueue
+jms/MyTopic
+jms/__defaultConnectionFactory
+Command list-jms-resources executed successfully.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In GlassFish Server, the Java EE <code>java:comp/DefaultJMSConnectionFactory</code>
+resource is mapped to a connection factory named
+<code>jms/__defaultConnectionFactory</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="building-all-the-simple-examples">Building All the Simple Examples</h3>
+<div class="paragraph">
+<p>To run the simple examples using GlassFish Server, package each example
+in an application client JAR file. The application client JAR file
+requires a manifest file, located in the <code>src/main/java/META-INF/</code>
+directory for each example, along with the <code>.class</code> file.</p>
+</div>
+<div class="paragraph">
+<p>The <code>pom.xml</code> file for each example specifies a plugin that creates an
+application client JAR file. You can build the examples using either
+NetBeans IDE or Maven.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDJEJCD">To Build All the Simple Examples Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#CHDGHJAA">To Build All the Simple Examples Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-all-the-simple-examples-using-netbeans-ide">To Build All the Simple Examples Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jms</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Expand the <code>jms</code> node and select the <code>simple</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project to open all the simple examples.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>simple</code> project and select
+Build to build all the examples.</p>
+<div class="paragraph">
+<p>This command places the application client JAR files in the <code>target</code>
+directories for the examples.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-all-the-simple-examples-using-maven">To Build All the Simple Examples Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a terminal window, go to the <code>simple</code> directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd tut-install/jms/simple/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to build all the projects:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command places the application client JAR files in the <code>target</code>
+directories for the examples.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sending-messages">Sending Messages</h3>
+<div class="paragraph">
+<p>This section describes how to use a client to send messages. The
+<code>Producer.java</code> client will send messages in all of these examples.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDGHJHH">General Steps Performed in the Example</a></p>
+</li>
+<li>
+<p><a href="#CHDFBABB">The Producer.java Client</a></p>
+</li>
+<li>
+<p><a href="#CHDHIIHE">To Run the Producer Client</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="general-steps-performed-in-the-example">General Steps Performed in the Example</h4>
+<div class="paragraph">
+<p>General steps this example performs are as follows.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Inject resources for the administered objects used by the example.</p>
+</li>
+<li>
+<p>Accept and verify command-line arguments. You can use this example
+to send any number of messages to either a queue or a topic, so you
+specify the destination type and the number of messages on the command
+line when you run the program.</p>
+</li>
+<li>
+<p>Create a <code>JMSContext</code>, then send the specified number of text
+messages in the form of strings, as described in
+<a href="jms-concepts003.html#BNCEW">Message Bodies</a>.</p>
+</li>
+<li>
+<p>Send a final message of type <code>Message</code> to indicate that the consumer
+should expect no more messages.</p>
+</li>
+<li>
+<p>Catch any exceptions.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-producer.java-client">The Producer.java Client</h4>
+<div class="paragraph">
+<p>The sending client, <code>Producer.java</code>, performs the following steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Injects resources for a connection factory, queue, and topic:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Resource(lookup = "java:comp/DefaultJMSConnectionFactory")
+private static ConnectionFactory connectionFactory;
+@Resource(lookup = "jms/MyQueue")
+private static Queue queue;
+@Resource(lookup = "jms/MyTopic")
+private static Topic topic;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Retrieves and verifies command-line arguments that specify the
+destination type and the number of arguments:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">final int NUM_MSGS;
+String destType = args[0];
+System.out.println("Destination type is " + destType);
+if ( ! ( destType.equals("queue") || destType.equals("topic") ) ) {
+    System.err.println("Argument must be \"queue\" or " + "\"topic\"");
+    System.exit(1);
+}
+if (args.length == 2){
+    NUM_MSGS = (new Integer(args[1])).intValue();
+} else {
+    NUM_MSGS = 1;
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Assigns either the queue or the topic to a destination object, based
+on the specified destination type:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination dest = null;
+try {
+    if (destType.equals("queue")) {
+        dest = (Destination) queue;
+    } else {
+        dest = (Destination) topic;
+    }
+} catch (Exception e) {
+    System.err.println("Error setting destination: " + e.toString());
+    System.exit(1);
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Within a <code>try</code>-with-resources block, creates a <code>JMSContext</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">try (JMSContext context = connectionFactory.createContext();) {</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Sets the message count to zero, then creates a <code>JMSProducer</code> and
+sends one or more messages to the destination and increments the count.
+Messages in the form of strings are of the <code>TextMessage</code> message type:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    int count = 0;
+    for (int i = 0; i &lt; NUM_MSGS; i++) {
+        String message = "This is message " + (i + 1)
+                + " from producer";
+        // Comment out the following line to send many messages
+        System.out.println("Sending message: " + message);
+        context.createProducer().send(dest, message);
+        count += 1;
+    }
+    System.out.println("Text messages sent: " + count);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Sends an empty control message to indicate the end of the message
+stream:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    context.createProducer().send(dest, context.createMessage());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sending an empty message of no specified type is a convenient way for an
+application to indicate to the consumer that the final message has
+arrived.</p>
+</div>
+</li>
+<li>
+<p>Catches and handles any exceptions. The end of the
+<code>try</code>-with-resources block automatically causes the <code>JMSContext</code> to be
+closed:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">} catch (Exception e) {
+    System.err.println("Exception occurred: " + e.toString());
+    System.exit(1);
+}
+System.exit(0);</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-producer-client">To Run the Producer Client</h4>
+<div class="paragraph">
+<p>You can run the client using the <code>appclient</code> command. The <code>Producer</code>
+client takes one or two command-line arguments: a destination type and,
+optionally, a number of messages. If you do not specify a number of
+messages, the client sends one message.</p>
+</div>
+<div class="paragraph">
+<p>You will use the client to send three messages to a queue.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish Server</a>)
+and that you have created resources and built the simple JMS examples
+(see <a href="#GKTJS">Creating JMS Administered Objects</a> and
+<a href="#BABEEABE">Building All the Simple Examples</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to the <code>producer</code> directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd producer</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>Producer</code> program, sending three messages to the queue:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar queue 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the program looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is queue
+Sending message: This is message 1 from producer
+Sending message: This is message 2 from producer
+Sending message: This is message 3 from producer
+Text messages sent: 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The messages are now in the queue, waiting to be received.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>When you run an application client, the command may take a long time to
+complete.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="receiving-messages-synchronously">Receiving Messages Synchronously</h3>
+<div class="paragraph">
+<p>This section describes the receiving client, which uses the <code>receive</code>
+method to consume messages synchronously. This section then explains how
+to run the clients using GlassFish Server.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCFC">The SynchConsumer.java Client</a></p>
+</li>
+<li>
+<p><a href="#BNCFG">To Run the SynchConsumer and Producer Clients</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-synchconsumer.java-client">The SynchConsumer.java Client</h4>
+<div class="paragraph">
+<p>The receiving client, <code>SynchConsumer.java</code>, performs the following
+steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Injects resources for a connection factory, queue, and topic.</p>
+</li>
+<li>
+<p>Assigns either the queue or the topic to a destination object, based
+on the specified destination type.</p>
+</li>
+<li>
+<p>Within a <code>try</code>-with-resources block, creates a <code>JMSContext</code>.</p>
+</li>
+<li>
+<p>Creates a <code>JMSConsumer</code>, starting message delivery:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">consumer = context.createConsumer(dest);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Receives the messages sent to the destination until the
+end-of-message-stream control message is received:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">int count = 0;
+while (true) {
+    Message m = consumer.receive(1000);
+    if (m != null) {
+        if (m instanceof TextMessage) {
+            System.out.println(
+                    "Reading message: " + m.getBody(String.class));
+            count += 1;
+        } else {
+            break;
+        }
+    }
+}
+System.out.println("Messages received: " + count);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because the control message is not a <code>TextMessage</code>, the receiving client
+terminates the <code>while</code> loop and stops receiving messages after the
+control message arrives.</p>
+</div>
+</li>
+<li>
+<p>Catches and handles any exceptions. The end of the
+<code>try</code>-with-resources block automatically causes the <code>JMSContext</code> to be
+closed.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>SynchConsumer</code> client uses an indefinite <code>while</code> loop to receive
+messages, calling <code>receive</code> with a timeout argument.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-synchconsumer-and-producer-clients">To Run the SynchConsumer and Producer Clients</h4>
+<div class="paragraph">
+<p>You can run the client using the <code>appclient</code> command. The
+<code>SynchConsumer</code> client takes one command-line argument, the destination
+type.</p>
+</div>
+<div class="paragraph">
+<p>These steps show how to receive and send messages synchronously using
+both a queue and a topic. The steps assume you already ran the
+<code>Producer</code> client and have three messages waiting in the queue.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the same terminal window where you ran <code>Producer</code>, go to the
+<code>synchconsumer</code> directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd ../synchconsumer</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>SynchConsumer</code> client, specifying the queue:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/synchconsumer.jar queue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is queue
+Reading message: This is message 1 from producer
+Reading message: This is message 2 from producer
+Reading message: This is message 3 from producer
+Messages received: 3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now try running the clients in the opposite order. Run the
+<code>SynchConsumer</code> client:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/synchconsumer.jar queue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The client displays the destination type and then waits for messages.</p>
+</div>
+</li>
+<li>
+<p>Open a new terminal window and run the <code>Producer</code> client:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd tut-install/jms/simple/producer
+appclient -client target/producer.jar queue 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the messages have been sent, the <code>SynchConsumer</code> client receives
+them and exits.</p>
+</div>
+</li>
+<li>
+<p>Now run the <code>Producer</code> client using a topic instead of a queue:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar topic 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is topic
+Sending message: This is message 1 from producer
+Sending message: This is message 2 from producer
+Sending message: This is message 3 from producer
+Text messages sent: 3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now, in the other terminal window, run the <code>SynchConsumer</code> client
+using the topic:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/synchconsumer.jar topic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The result, however, is different. Because you are using a subscription
+on a topic, messages that were sent before you created the subscription
+on the topic will not be added to the subscription and delivered to the
+consumer. (See <a href="jms-concepts002.html#BNCED">Publish/Subscribe
+Messaging Style</a> and <a href="jms-concepts003.html#BABEEJJJ">Consuming
+Messages from Topics</a> for details.) Instead of receiving the messages,
+the client waits for messages to arrive.</p>
+</div>
+</li>
+<li>
+<p>Leave the <code>SynchConsumer</code> client running and run the <code>Producer</code>
+client again:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar topic 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now the <code>SynchConsumer</code> client receives the messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is topic
+Reading message: This is message 1 from producer
+Reading message: This is message 2 from producer
+Reading message: This is message 3 from producer
+Messages received: 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because these messages were sent after the consumer was started, the
+client receives them.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-a-message-listener-for-asynchronous-message-delivery">Using a Message Listener for Asynchronous Message Delivery</h3>
+<div class="paragraph">
+<p>This section describes the receiving clients in an example that uses a
+message listener for asynchronous message delivery. This section then
+explains how to compile and run the clients using GlassFish Server.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE platform, message listeners can be used only in
+application clients, as in this example. To allow asynchronous message
+delivery in a web or enterprise bean application, you use a
+message-driven bean, shown in later examples in this chapter.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCFI">Writing the AsynchConsumer.java and TextListener.java
+Clients</a></p>
+</li>
+<li>
+<p><a href="#BNCFK">To Run the AsynchConsumer and Producer Clients</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="writing-the-asynchconsumer.java-and-textlistener.java-clients">Writing the AsynchConsumer.java and TextListener.java Clients</h4>
+<div class="paragraph">
+<p>The sending client is <code>Producer.java</code>, the same client used in
+<a href="#BABIHCAE">Sending Messages</a> and <a href="#BNCFB">Receiving Messages
+Synchronously</a>.</p>
+</div>
+<div class="paragraph">
+<p>An asynchronous consumer normally runs indefinitely. This one runs until
+the user types the character <code>q</code> or <code>Q</code> to stop the client.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The client, <code>AsynchConsumer.java</code>, performs the following steps.</p>
+</li>
+<li>
+<p>Injects resources for a connection factory, queue, and topic.</p>
+</li>
+<li>
+<p>Assigns either the queue or the topic to a destination object, based
+on the specified destination type.</p>
+</li>
+<li>
+<p>In a <code>try</code>-with-resources block, creates a <code>JMSContext</code>.</p>
+</li>
+<li>
+<p>Creates a <code>JMSConsumer</code>.</p>
+</li>
+<li>
+<p>Creates an instance of the <code>TextListener</code> class and registers it as
+the message listener for the <code>JMSConsumer</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">listener = new TextListener();
+consumer.setMessageListener(listener);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Listens for the messages sent to the destination, stopping when the
+user types the character <code>q</code> or <code>Q</code> (it uses a
+<code>java.io.InputStreamReader</code> to do this).</p>
+</li>
+<li>
+<p>Catches and handles any exceptions. The end of the
+<code>try</code>-with-resources block automatically causes the <code>JMSContext</code> to be
+closed, thus stopping delivery of messages to the message listener.</p>
+</li>
+<li>
+<p>The message listener, <code>TextListener.java</code>, follows these steps:</p>
+</li>
+<li>
+<p>When a message arrives, the <code>onMessage</code> method is called
+automatically.</p>
+</li>
+<li>
+<p>If the message is a <code>TextMessage</code>, the <code>onMessage</code> method displays
+its content as a string value. If the message is not a text message, it
+reports this fact:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public void onMessage(Message m) {
+    try {
+        if (m instanceof TextMessage) {
+            System.out.println(
+                    "Reading message: " + m.getBody(String.class));
+        } else {
+             System.out.println("Message is not a TextMessage");
+        }
+    } catch (JMSException | JMSRuntimeException e) {
+        System.err.println("JMSException in onMessage(): " + e.toString());
+    }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For this example, you will use the same connection factory and
+destinations you created in <a href="#BABHEFCB">To Create Resources for the
+Simple Examples</a>.</p>
+</div>
+<div class="paragraph">
+<p>The steps assume that you have already built and packaged all the
+examples using NetBeans IDE or Maven.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-asynchconsumer-and-producer-clients">To Run the AsynchConsumer and Producer Clients</h4>
+<div class="paragraph">
+<p>You will need two terminal windows, as you did in <a href="#BNCFB">Receiving
+Messages Synchronously</a>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the terminal window where you ran the <code>SynchConsumer</code> client, go
+to the <code>asynchconsumer</code> example directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd tut-install/jms/simple/asynchconsumer</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>AsynchConsumer</code> client, specifying the <code>topic</code> destination
+type:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/asynchconsumer.jar topic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The client displays the following lines (along with some additional
+output) and then waits for messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is topic
+To end program, enter Q or q, then &lt;return&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal window where you ran the <code>Producer</code> client
+previously, run the client again, sending three messages:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar topic 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is topic
+Sending message: This is message 1 from producer
+Sending message: This is message 2 from producer
+Sending message: This is message 3 from producer
+Text messages sent: 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the other window, the <code>AsynchConsumer</code> client displays the following
+(along with some additional output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is topic
+To end program, enter Q or q, then &lt;return&gt;
+Reading message: This is message 1 from producer
+Reading message: This is message 2 from producer
+Reading message: This is message 3 from producer
+Message is not a TextMessage</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last line appears because the client has received the non-text
+control message sent by the <code>Producer</code> client.</p>
+</div>
+</li>
+<li>
+<p>Enter <code>Q</code> or <code>q</code> and press Return to stop the <code>AsynchConsumer</code>
+client.</p>
+</li>
+<li>
+<p>Now run the clients using a queue.</p>
+<div class="paragraph">
+<p>In this case, as with the synchronous example, you can run the
+<code>Producer</code> client first, because there is no timing dependency between
+the sender and receiver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar queue 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is queue
+Sending message: This is message 1 from producer
+Sending message: This is message 2 from producer
+Sending message: This is message 3 from producer
+Text messages sent: 3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the other window, run the <code>AsynchConsumer</code> client:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/asynchconsumer.jar queue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is queue
+To end program, enter Q or q, then &lt;return&gt;
+Reading message: This is message 1 from producer
+Reading message: This is message 2 from producer
+Reading message: This is message 3 from producer
+Message is not a TextMessage</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter <code>Q</code> or <code>q</code> and press Return to stop the client.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="browsing-messages-on-a-queue">Browsing Messages on a Queue</h3>
+<div class="paragraph">
+<p>This section describes an example that creates a <code>QueueBrowser</code> object
+to examine messages on a queue, as described in
+<a href="jms-concepts003.html#BNCEY">JMS Queue Browsers</a>. This section then
+explains how to compile, package, and run the example using GlassFish
+Server.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCFM">The MessageBrowser.java Client</a></p>
+</li>
+<li>
+<p><a href="#BNCFN">To Run the QueueBrowser Client</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-messagebrowser.java-client">The MessageBrowser.java Client</h4>
+<div class="paragraph">
+<p>To create a <code>QueueBrowser</code> for a queue, you call the
+<code>JMSContext.createBrowser</code> method with the queue as the argument. You
+obtain the messages in the queue as an <code>Enumeration</code> object. You can
+then iterate through the <code>Enumeration</code> object and display the contents
+of each message.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MessageBrowser.java</code> client performs the following steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Injects resources for a connection factory and a queue.</p>
+</li>
+<li>
+<p>In a <code>try</code>-with-resources block, creates a <code>JMSContext</code>.</p>
+</li>
+<li>
+<p>Creates a <code>QueueBrowser</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">QueueBrowser browser = context.createBrowser(queue);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Retrieves the <code>Enumeration</code> that contains the messages:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Enumeration msgs = browser.getEnumeration();</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verifies that the <code>Enumeration</code> contains messages, then displays the
+contents of the messages:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">if ( !msgs.hasMoreElements() ) {
+    System.out.println("No messages in queue");
+} else {
+    while (msgs.hasMoreElements()) {
+        Message tempMsg = (Message)msgs.nextElement();
+        System.out.println("Message: " + tempMsg);
+    }
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Catches and handles any exceptions. The end of the
+<code>try</code>-with-resources block automatically causes the <code>JMSContext</code> to be
+closed.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Dumping the message contents to standard output retrieves the message
+body and properties in a format that depends on the implementation of
+the <code>toString</code> method. In GlassFish Server, the message format looks
+something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Text:   This is message 3 from producer
+Class:                  com.sun.messaging.jmq.jmsclient.TextMessageImpl
+getJMSMessageID():      ID:8-10.152.23.26(bf:27:4:e:e7:ec)-55645-1363100335526
+getJMSTimestamp():      1129061034355
+getJMSCorrelationID():  null
+JMSReplyTo:             null
+JMSDestination:         PhysicalQueue
+getJMSDeliveryMode():   PERSISTENT
+getJMSRedelivered():    false
+getJMSType():           null
+getJMSExpiration():     0
+getJMSPriority():       4
+Properties:             {JMSXDeliveryCount=0}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of displaying the message contents this way, you can call some
+of the <code>Message</code> interface&#8217;s getter methods to retrieve the parts of the
+message you want to see.</p>
+</div>
+<div class="paragraph">
+<p>For this example, you will use the connection factory and queue you
+created for <a href="#BNCFB">Receiving Messages Synchronously</a>. It is assumed
+that you have already built and packaged all the examples.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-queuebrowser-client">To Run the QueueBrowser Client</h4>
+<div class="paragraph">
+<p>To run the <code>MessageBrowser</code> example using the <code>appclient</code> command,
+follow these steps.</p>
+</div>
+<div class="paragraph">
+<p>You also need the <code>Producer</code> example to send the message to the queue,
+and one of the consumer clients to consume the messages after you
+inspect them.</p>
+</div>
+<div class="paragraph">
+<p>To run the clients, you need two terminal windows.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a terminal window, go to the <code>producer</code> directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd tut-install/examples/jms/simple/producer/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>Producer</code> client, sending one message to the queue, along
+with the non-text control message:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar queue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is queue
+Sending message: This is message 1 from producer
+Text messages sent: 1</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In another terminal window, go to the <code>messagebrowser</code> directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">cd tut-install/jms/simple/messagebrowser</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>MessageBrowser</code> client using the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/messagebrowser.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks something like this (along with some
+additional output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Message:
+Text:   This is message 1 from producer
+Class:                  com.sun.messaging.jmq.jmsclient.TextMessageImpl
+getJMSMessageID():      ID:9-10.152.23.26(bf:27:4:e:e7:ec)-55645-1363100335526
+getJMSTimestamp():      1363100335526
+getJMSCorrelationID():  null
+JMSReplyTo:             null
+JMSDestination:         PhysicalQueue
+getJMSDeliveryMode():   PERSISTENT
+getJMSRedelivered():    false
+getJMSType():           null
+getJMSExpiration():     0
+getJMSPriority():       4
+Properties:             {JMSXDeliveryCount=0}
+
+Message:
+Class:                  com.sun.messaging.jmq.jmsclient.MessageImpl
+getJMSMessageID():      ID:10-10.152.23.26(bf:27:4:e:e7:ec)-55645-1363100335526
+getJMSTimestamp():      1363100335526
+getJMSCorrelationID():  null
+JMSReplyTo:             null
+JMSDestination:         PhysicalQueue
+getJMSDeliveryMode():   PERSISTENT
+getJMSRedelivered():    false
+getJMSType():           null
+getJMSExpiration():     0
+getJMSPriority():       4
+Properties:             {JMSXDeliveryCount=0}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first message is the <code>TextMessage</code>, and the second is the non-text
+control message.</p>
+</div>
+</li>
+<li>
+<p>Go to the <code>synchconsumer</code> directory.</p>
+</li>
+<li>
+<p>Run the <code>SynchConsumer</code> client to consume the messages:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/synchconsumer.jar queue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of the client looks like this (along with some additional
+output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Destination type is queue
+Reading message: This is message 1 from producer
+Messages received: 1</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-multiple-consumers-on-the-same-destination">Running Multiple Consumers on the Same Destination</h3>
+<div class="paragraph">
+<p>To illustrate further the way point-to-point and publish/subscribe
+messaging works, you can use the <code>Producer</code> and <code>SynchConsumer</code> examples
+to send messages that are then consumed by two clients running
+simultaneously.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open three command windows. In one, go to the <code>producer</code> directory.
+In the other two, go to the <code>synchconsumer</code> directory.</p>
+</li>
+<li>
+<p>In each of the <code>synchconsumer</code> windows, start running the client,
+receiving messages from a queue:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/synchconsumer.jar queue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait until you see the "Destination type is queue" message in both
+windows.</p>
+</div>
+</li>
+<li>
+<p>In the <code>producer</code> window, run the client, sending 20 or so messages
+to the queue:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar queue 20</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Look at the output in the <code>synchconsumer</code> windows. In point-to-point
+messaging, each message can have only one consumer. Therefore, each of
+the clients receives some of the messages. One of the clients receives
+the non-text control message, reports the number of messages received,
+and exits.</p>
+</li>
+<li>
+<p>In the window of the client that did not receive the non-text
+control message, enter Control-C to exit the program.</p>
+</li>
+<li>
+<p>Next, run the <code>synchconsumer</code> clients using a topic. In each window,
+run the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/synchconsumer.jar topic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait until you see the "Destination type is topic" message in both
+windows.</p>
+</div>
+</li>
+<li>
+<p>In the <code>producer</code> window, run the client, sending 20 or so messages
+to the topic:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar topic 20</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Again, look at the output in the <code>synchconsumer</code> windows. In
+publish/subscribe messaging, a copy of every message is sent to each
+subscription on the topic. Therefore, each of the clients receives all
+20 text messages as well as the non-text control message.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="acknowledging-messages">Acknowledging Messages</h3>
+<div class="paragraph">
+<p>JMS provides two alternative ways for a consuming client to ensure that
+a message is not acknowledged until the application has finished
+processing the message:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using a synchronous consumer in a <code>JMSContext</code> that has been
+configured to use the <code>CLIENT_ACKNOWLEDGE</code> setting</p>
+</li>
+<li>
+<p>Using a message listener for asynchronous message delivery in a
+<code>JMSContext</code> that has been configured to use the default
+<code>AUTO_ACKNOWLEDGE</code> setting</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE platform, <code>CLIENT_ACKNOWLEDGE</code> sessions can be used only
+in application clients, as in this example.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>clientackconsumer</code> example demonstrates the first alternative, in
+which a synchronous consumer uses client acknowledgment. The
+<code>asynchconsumer</code> example described in <a href="#BNCFH">Using a Message
+Listener for Asynchronous Message Delivery</a> demonstrates the second
+alternative.</p>
+</div>
+<div class="paragraph">
+<p>For information about message acknowledgment, see
+<a href="jms-concepts004.html#BNCFW">Controlling Message Acknowledgment</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following table describes four possible interactions between types
+of consumers and types of acknowledgment.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref204"></a><a id="sthref205"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 47-3 Message Acknowledgment with Synchronous and Asynchronous
+Consumers</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 42.5742%;">
+<col style="width: 56.4356%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Consumer Type</th>
+<th class="tableblock halign-left valign-top">Acknowledgment Type</th>
+<th class="tableblock halign-left valign-top">Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Synchronous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client acknowledges message after processing is
+complete</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asynchronous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client acknowledges message after processing is
+complete</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Synchronous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acknowledgment happens immediately after <code>receive</code>
+call; message cannot be redelivered if any subsequent processing steps
+fail</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asynchronous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message is automatically acknowledged when
+<code>onMessage</code> method returns</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The example is under the
+tut-install`/examples/jms/simple/clientackconsumer/` directory.</p>
+</div>
+<div class="paragraph">
+<p>The example client, <code>ClientAckConsumer.java</code>, creates a <code>JMSContext</code>
+that specifies client acknowledgment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">try (JMSContext context =
+      connectionFactory.createContext(JMSContext.CLIENT_ACKNOWLEDGE);) {
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The client uses a <code>while</code> loop almost identical to that used by
+<code>SynchConsumer.java</code>, with the exception that after processing each
+message, it calls the <code>acknowledge</code> method on the <code>JMSContext</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.acknowledge();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example uses the following objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>jms/MyQueue</code> resource that you created for <a href="#BNCFB">Receiving
+Messages Synchronously</a>.</p>
+</li>
+<li>
+<p><code>java:comp/DefaultJMSConnectionFactory</code>, the platform default
+connection factory preconfigured with GlassFish Server</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-clientackconsumer-client">To Run the ClientAckConsumer Client</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a terminal window, go to the following directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jms/simple/producer/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the <code>Producer</code> client, sending some messages to the queue:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/producer.jar queue 3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In another terminal window, go to the following directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jms/simple/clientackconsumer/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To run the client, use the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">appclient -client target/clientackconsumer.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The client output looks like this (along with some additional output):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Created client-acknowledge JMSContext
+Reading message: This is message 1 from producer
+Acknowledging TextMessage
+Reading message: This is message 2 from producer
+Acknowledging TextMessage
+Reading message: This is message 3 from producer
+Acknowledging TextMessage
+Acknowledging non-text control message</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The client acknowledges each message explicitly after processing it,
+just as a <code>JMSContext</code> configured to use <code>AUTO_ACKNOWLEDGE</code> does
+automatically after a <code>MessageListener</code> returns successfully from
+processing a message received asynchronously.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-examples002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-examples004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

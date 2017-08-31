@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Bean Validation Constraints</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="bean-validation001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="bean-validation003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-bean-validation-constraints">Using Bean Validation Constraints</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Bean Validation model is supported by constraints in the form of
+annotations placed on a field, method, or class of a JavaBeans
+component, such as a managed bean.</p>
+</div>
+<div class="paragraph">
+<p>Constraints can be built in or user defined. User-defined constraints
+are called custom constraints. Several built-in constraints are
+available in the <code>javax.validation.constraints</code> package.
+<a href="#GKAGK">Table 22-1</a> lists all the built-in constraints. See
+<a href="bean-validation-advanced001.html#GKFGX">Creating Custom Constraints</a>
+for information on creating custom constraints.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref121"></a><a id="GKAGK"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 22-1 Built-In Bean Validation Constraints</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 44%;">
+<colgroup>
+<col style="width: 35.6435%;">
+<col style="width: 63.3663%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@AssertFalse</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be <code>false</code>.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@AssertFalse
+boolean isUnsupported;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@AssertTrue</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be <code>true</code>.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@AssertTrue
+boolean isActive;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DecimalMax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a decimal
+value lower than or equal to the number in the value element.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@DecimalMax("30.00")
+BigDecimal discount;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DecimalMin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a decimal
+value greater than or equal to the number in the value element.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@DecimalMin("5.00")
+BigDecimal discount;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Digits</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a number within a
+specified range. The <code>integer</code> element specifies the maximum integral
+digits for the number, and the <code>fraction</code> element specifies the maximum
+fractional digits for the number.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Digits(integer=6, fraction=2)
+BigDecimal price;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a valid email address.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Email
+String emailaddress;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Future</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a date in the
+future.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Future
+Date eventDate;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@FutureOrPresent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TThe value of the field or property must be a date or time in present or future.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@FutureOrPresent
+Time travelTime;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Max</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be an integer value
+lower than or equal to the number in the value element.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Max(10)
+int quantity;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Min</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be an integer value
+greater than or equal to the number in the value element.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Min(5)
+int quantity;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Negative</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a negative number.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Negative
+int basementFloor;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@NegativeOrZero</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be negative or zero.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NegativeOrZero
+int debtValue;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@NotBlank</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must contain atleast one non-white space character.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NotBlank
+String message;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@NotEmpty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must not be empty. The length of the characters or array, and the size of a collection or map are evaluated.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NotEmpty
+String message;;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@NotNull</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must not be null.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NotNull
+String username;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be null.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Null
+String unusedString;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Past</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a date in the past.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Past
+Date birthday;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PastOrPresent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a date or time in the past or present.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PastOrPresent
+Date travelDate;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Pattern</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must match the regular
+expression defined in the <code>regexp</code> element.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Pattern(regexp="\\(\\d{3}\\)\\d{3}-\\d{4}")
+String phoneNumber;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Positive</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a positive number.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Positive
+BigDecimal area;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PositiveOrZero</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the field or property must be a positive number or zero. .</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PositiveOrZero
+int totalGoals;</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the field or property is evaluated and must match
+the specified boundaries. If the field or property is a <code>String</code>, the
+size of the string is evaluated. If the field or property is a
+<code>Collection</code>, the size of the <code>Collection</code> is evaluated. If the field or
+property is a <code>Map</code>, the size of the <code>Map</code> is evaluated. If the field or
+property is an array, the size of the array is evaluated. Use one of the
+optional <code>max</code> or <code>min</code> elements to specify the boundaries.</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Size(min=2, max=240)
+String briefMessage;</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In the following example, a constraint is placed on a field using the
+built-in <code>@NotNull</code> constraint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class Name {
+    @NotNull
+    private String firstname;
+
+    @NotNull
+    private String lastname;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also place more than one constraint on a single JavaBeans
+component object. For example, you can place an additional constraint
+for size of field on the <code>firstname</code> and the <code>lastname</code> fields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class Name {
+    @NotNull
+    @Size(min=1, max=16)
+    private String firstname;
+
+    @NotNull
+    @Size(min=1, max=16)
+    private String lastname;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows a method with a user-defined constraint that
+checks user-defined constraint that checks for a predefined phone number pattern, such as a country specific phone number:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@USPhoneNumber
+public String getPhone() {
+    return phone;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a built-in constraint, a default implementation is available. A
+user-defined or custom constraint needs a validation implementation. In
+the preceding example, the <code>@USPhoneNumber</code> custom constraint needs an
+implementation class.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_repeating_annotations">Repeating Annotations</h2>
+<div class="sectionbody">
+<div id="repeating_annotations" class="paragraph">
+<p>In Bean Validation 2.0, you can specify the same constraint several times on a validation target using repeating annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class Account {
+
+    @Max (value = 2000, groups = Default.class, message = "max.value")
+    @Max (value = 5000, groups = GoldCustomer.class, message = "max.value")
+    private long withdrawalAmount;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All in-built constraints from <code>javax .validation.constraints</code> package support repeatable annotations. Similarly, custom constraints can use <code>@Repeatable</code> annotation. In the following sample, depending on whether the group is <code>PeakHour</code> or <code>NonPeakHour</code>, the car instance is validated as either two passengers or three passengers based car, and then listed as eligible in the car pool lane:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">/**
+ * Validate whether a car is eligible for car pool lane
+ */
+@Documented
+@Constraint(validatedBy = CarPoolValidator.class)
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Retention(RUNTIME)
+@Repeatable(List.class)
+public @interface CarPool {
+
+    String message() default "{CarPool.message}";
+
+    Class&lt;?&gt;[] groups() default {};
+
+    int value();
+
+    Class&lt;? extends Payload&gt;[] payload() default {};
+
+    /**
+     * Defines several @CarPool annotations on the same element
+     * @see (@link CarPool}
+     */
+    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+    @Retention(RUNTIME)
+    @Documented
+    @interface List {
+        CarPool[] value();
+    }
+}
+public class Car{
+
+  private String registrationNumber;
+
+  @CarPool(value = 2, group = NonPeakHour.class)
+  @CarPool(value = 3, group = {Default.class, PeakHour.class})
+  private int totalPassengers;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Any validation failures are gracefully handled and can be displayed by
+the <code>h:messages</code> tag.</p>
+</div>
+<div class="paragraph">
+<p>Any managed bean that contains Bean Validation annotations automatically
+gets validation constraints placed on the fields on a JavaServer Faces
+application&#8217;s web pages.</p>
+</div>
+<div class="paragraph">
+<p>For more information on using validation constraints, see the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="bean-validation-advanced.html#GKAHP">Chapter 23, "Bean Validation:
+Advanced Topics"</a></p>
+</li>
+<li>
+<p><a href="jaxrs-advanced002.html#BABCJEDF">Validating Resource Data with Bean
+Validation</a></p>
+</li>
+<li>
+<p><a href="persistence-intro002.html#GKAHQ">Validating Persistent Fields and
+Properties</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="bean-validation001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="bean-validation003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

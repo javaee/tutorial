@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Entity Inheritance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-intro002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="entity-inheritance">Entity Inheritance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Entities support class inheritance, polymorphic associations, and
+polymorphic queries. Entity classes can extend non-entity classes, and
+non-entity classes can extend entity classes. Entity classes can be both
+abstract and concrete.</p>
+</div>
+<div class="paragraph">
+<p>The <code>roster</code> example application demonstrates entity inheritance, as
+described in <a href="persistence-basicexamples003.html#GIQRF">Entity
+Inheritance in the roster Application</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBQO">Abstract Entities</a></p>
+</li>
+<li>
+<p><a href="#BNBQP">Mapped Superclasses</a></p>
+</li>
+<li>
+<p><a href="#BNBQQ">Non-Entity Superclasses</a></p>
+</li>
+<li>
+<p><a href="#BNBQR">Entity Inheritance Mapping Strategies</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="abstract-entities">Abstract Entities</h3>
+<div class="paragraph">
+<p>An abstract class may be declared an entity by decorating the class with
+<code>@Entity</code>. Abstract entities are like concrete entities but cannot be
+instantiated.</p>
+</div>
+<div class="paragraph">
+<p>Abstract entities can be queried just like concrete entities. If an
+abstract entity is the target of a query, the query operates on all the
+concrete subclasses of the abstract entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public abstract class Employee {
+    @Id
+    protected Integer employeeId;
+    ...
+}
+@Entity
+public class FullTimeEmployee extends Employee {
+    protected Integer salary;
+    ...
+}
+@Entity
+public class PartTimeEmployee extends Employee {
+    protected Float hourlyWage;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mapped-superclasses">Mapped Superclasses</h3>
+<div class="paragraph">
+<p>Entities may inherit from superclasses that contain persistent state and
+mapping information but are not entities. That is, the superclass is not
+decorated with the <code>@Entity</code> annotation and is not mapped as an entity
+by the Java Persistence provider. These superclasses are most often used
+when you have state and mapping information common to multiple entity
+classes.</p>
+</div>
+<div class="paragraph">
+<p>Mapped superclasses are specified by decorating the class with the
+annotation <code>javax.persistence.MappedSuperclass</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@MappedSuperclass
+public class Employee {
+    @Id
+    protected Integer employeeId;
+    ...
+}
+@Entity
+public class FullTimeEmployee extends Employee {
+    protected Integer salary;
+    ...
+}
+@Entity
+public class PartTimeEmployee extends Employee {
+    protected Float hourlyWage;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mapped superclasses cannot be queried and cannot be used in
+<code>EntityManager</code> or <code>Query</code> operations. You must use entity subclasses of
+the mapped superclass in <code>EntityManager</code> or <code>Query</code> operations. Mapped
+superclasses can&#8217;t be targets of entity relationships. Mapped
+superclasses can be abstract or concrete.</p>
+</div>
+<div class="paragraph">
+<p>Mapped superclasses do not have any corresponding tables in the
+underlying datastore. Entities that inherit from the mapped superclass
+define the table mappings. For instance, in the preceding code sample,
+the underlying tables would be <code>FULLTIMEEMPLOYEE</code> and
+<code>PARTTIMEEMPLOYEE</code>, but there is no <code>EMPLOYEE</code> table.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="non-entity-superclasses">Non-Entity Superclasses</h3>
+<div class="paragraph">
+<p>Entities may have non-entity superclasses, and these superclasses can be
+either abstract or concrete. The state of non-entity superclasses is
+nonpersistent, and any state inherited from the non-entity superclass by
+an entity class is nonpersistent. Non-entity superclasses may not be
+used in <code>EntityManager</code> or <code>Query</code> operations. Any mapping or
+relationship annotations in non-entity superclasses are ignored.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="entity-inheritance-mapping-strategies">Entity Inheritance Mapping Strategies</h3>
+<div class="paragraph">
+<p>You can configure how the Java Persistence provider maps inherited
+entities to the underlying datastore by decorating the root class of the
+hierarchy with the annotation <code>javax.persistence.Inheritance</code>. The
+following mapping strategies are used to map the entity data to the
+underlying database:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A single table per class hierarchy</p>
+</li>
+<li>
+<p>A table per concrete entity class</p>
+</li>
+<li>
+<p>A "join" strategy, whereby fields or properties that are specific to a
+subclass are mapped to a different table than the fields or properties
+that are common to the parent class</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The strategy is configured by setting the <code>strategy</code> element of
+<code>@Inheritance</code> to one of the options defined in the
+<code>javax.persistence.InheritanceType</code> enumerated type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public enum InheritanceType {
+    SINGLE_TABLE,
+    JOINED,
+    TABLE_PER_CLASS
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default strategy, <code>InheritanceType.SINGLE_TABLE</code>, is used if the
+<code>@Inheritance</code> annotation is not specified on the root class of the
+entity hierarchy.</p>
+</div>
+<div class="sect3">
+<h4 id="the-single-table-per-class-hierarchy-strategy">The Single Table per Class Hierarchy Strategy</h4>
+<div class="paragraph">
+<p>With this strategy, which corresponds to the default
+<code>InheritanceType.SINGLE_TABLE</code>, all classes in the hierarchy are mapped
+to a single table in the database. This table has a discriminator column
+containing a value that identifies the subclass to which the instance
+represented by the row belongs.</p>
+</div>
+<div class="paragraph">
+<p>The discriminator column, whose elements are shown in <a href="#BNBQT">Table
+38-2</a>, can be specified by using the
+<code>javax.persistence.DiscriminatorColumn</code> annotation on the root of the
+entity class hierarchy.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref160"></a><a id="BNBQT"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 38-2 @DiscriminatorColumn Elements</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 45%;">
+<colgroup>
+<col style="width: 51.4851%;">
+<col style="width: 47.5247%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the column to be used as the
+discriminator column. The default is <code>DTYPE</code>. This element is optional.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DiscriminatorType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>discriminatorType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the column to be
+used as a discriminator column. The default is
+<code>DiscriminatorType.STRING</code>. This element is optional.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columnDefinition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SQL fragment to use when creating the
+discriminator column. The default is generated by the Persistence
+provider and is implementation-specific. This element is optional.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>length</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The column length for <code>String</code>-based discriminator
+types. This element is ignored for non-<code>String</code> discriminator types. The
+default is 31. This element is optional.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>javax.persistence.DiscriminatorType</code> enumerated type is used to set
+the type of the discriminator column in the database by setting the
+<code>discriminatorType</code> element of <code>@DiscriminatorColumn</code> to one of the
+defined types. <code>DiscriminatorType</code> is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public enum DiscriminatorType {
+    STRING,
+    CHAR,
+    INTEGER
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>@DiscriminatorColumn</code> is not specified on the root of the entity
+hierarchy and a discriminator column is required, the Persistence
+provider assumes a default column name of <code>DTYPE</code> and column type of
+<code>DiscriminatorType.STRING</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>javax.persistence.DiscriminatorValue</code> annotation may be used to set
+the value entered into the discriminator column for each entity in a
+class hierarchy. You may decorate only concrete entity classes with
+<code>@DiscriminatorValue</code>.</p>
+</div>
+<div class="paragraph">
+<p>If <code>@DiscriminatorValue</code> is not specified on an entity in a class
+hierarchy that uses a discriminator column, the Persistence provider
+will provide a default, implementation-specific value. If the
+<code>discriminatorType</code> element of <code>@DiscriminatorColumn</code> is
+<code>DiscriminatorType.STRING</code>, the default value is the name of the entity.</p>
+</div>
+<div class="paragraph">
+<p>This strategy provides good support for polymorphic relationships
+between entities and queries that cover the entire entity class
+hierarchy. However, this strategy requires the columns that contain the
+state of subclasses to be nullable.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-table-per-concrete-class-strategy">The Table per Concrete Class Strategy</h4>
+<div class="paragraph">
+<p>In this strategy, which corresponds to
+<code>InheritanceType.TABLE_PER_CLASS</code>, each concrete class is mapped to a
+separate table in the database. All fields or properties in the class,
+including inherited fields or properties, are mapped to columns in the
+class&#8217;s table in the database.</p>
+</div>
+<div class="paragraph">
+<p>This strategy provides poor support for polymorphic relationships and
+usually requires either SQL <code>UNION</code> queries or separate SQL queries for
+each subclass for queries that cover the entire entity class hierarchy.</p>
+</div>
+<div class="paragraph">
+<p>Support for this strategy is optional and may not be supported by all
+Java Persistence API providers. The default Java Persistence API
+provider in GlassFish Server does not support this strategy.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-joined-subclass-strategy">The Joined Subclass Strategy</h4>
+<div class="paragraph">
+<p>In this strategy, which corresponds to <code>InheritanceType.JOINED</code>, the
+root of the class hierarchy is represented by a single table, and each
+subclass has a separate table that contains only those fields specific
+to that subclass. That is, the subclass table does not contain columns
+for inherited fields or properties. The subclass table also has a column
+or columns that represent its primary key, which is a foreign key to the
+primary key of the superclass table.</p>
+</div>
+<div class="paragraph">
+<p>This strategy provides good support for polymorphic relationships but
+requires one or more join operations to be performed when instantiating
+entity subclasses. This may result in poor performance for extensive
+class hierarchies. Similarly, queries that cover the entire class
+hierarchy require join operations between the subclass tables, resulting
+in decreased performance.</p>
+</div>
+<div class="paragraph">
+<p>Some Java Persistence API providers, including the default provider in
+GlassFish Server, require a discriminator column that corresponds to the
+root entity when using the joined subclass strategy. If you are not
+using automatic table creation in your application, make sure that the
+database table is set up correctly for the discriminator column
+defaults, or use the <code>@DiscriminatorColumn</code> annotation to match your
+database schema. For information on discriminator columns, see
+<a href="#BNBQS">The Single Table per Class Hierarchy Strategy</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-intro002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

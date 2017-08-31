@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Advanced Features of the Client API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-client002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="advanced-features-of-the-client-api">Advanced Features of the Client API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes some of the advanced features of the JAX-RS
+Client API.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDGBBCC">Configuring the Client Request</a></p>
+</li>
+<li>
+<p><a href="#CHDEBIGG">Asynchronous Invocations in the Client API</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="configuring-the-client-request">Configuring the Client Request</h3>
+<div class="paragraph">
+<p>Additional configuration options may be added to the client request
+after it is created but before it is invoked.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDHAFBG">Setting Message Headers in the Client Request</a></p>
+</li>
+<li>
+<p><a href="#CHDHFFDJ">Setting Cookies in the Client Request</a></p>
+</li>
+<li>
+<p><a href="#CHDJEFID">Adding Filters to the Client</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="setting-message-headers-in-the-client-request">Setting Message Headers in the Client Request</h4>
+<div class="paragraph">
+<p>You can set HTTP headers on the request by calling the
+<code>Invocation.Builder.header</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .header("myHeader", "The header value")
+        .get(String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you need to set multiple headers on the request, call the
+<code>Invocation.Builder.headers</code> method and pass in a
+<code>javax.ws.rs.core.MultivaluedMap</code> instance with the name-value pairs of
+the HTTP headers. Calling the <code>headers</code> method replaces all the existing
+headers with the headers supplied in the <code>MultivaluedMap</code> instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+MultivaluedMap&lt;String, Object&gt; myHeaders =
+    new MultivaluedMap&lt;&gt;("myHeader", "The header value");
+myHeaders.add(...);
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .headers(myHeaders)
+        .get(String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>MultivaluedMap</code> interface allows you to specify multiple values for
+a given key.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">MultivaluedMap&lt;String, Object&gt; myHeaders =
+    new MultivaluedMap&lt;String, Object&gt;();
+List&lt;String&gt; values = new ArrayList&lt;&gt;();
+values.add(...)
+myHeaders.add("myHeader", values</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-cookies-in-the-client-request">Setting Cookies in the Client Request</h4>
+<div class="paragraph">
+<p>You can add HTTP cookies to the request by calling the
+<code>Invocation.Builder.cookie</code> method, which takes a name-value pair as
+parameters.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .cookie("myCookie", "The cookie value")
+        .get(String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>javax.ws.rs.core.Cookie</code> class encapsulates the attributes of an
+HTTP cookie, including the name, value, path, domain, and RFC
+specification version of the cookie. In the following example, the
+<code>Cookie</code> object is configured with a name-value pair, a path, and a
+domain.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Cookie myCookie = new Cookie("myCookie", "The cookie value",
+    "/webapi/read", "example.com");
+String response = myResource.request(MediaType.TEXT_PLAIN)
+        .cookie(myCookie)
+        .get(String.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-filters-to-the-client">Adding Filters to the Client</h4>
+<div class="paragraph">
+<p>You can register custom filters with the client request or the response
+received from the target resource. To register filter classes when the
+<code>Client</code> instance is created, call the <code>Client.register</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient().register(MyLoggingFilter.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, all invocations that use this <code>Client</code>
+instance have the <code>MyLoggingFilter</code> filter registered with them.</p>
+</div>
+<div class="paragraph">
+<p>You can also register the filter classes on the target by calling
+<code>WebTarget.register</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient().register(MyLoggingFilter.class);
+WebTarget target = client.target("http://example.com/webapi/secure")
+        .register(MyAuthenticationFilter.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, both the <code>MyLoggingFilter</code> and
+<code>MyAuthenticationFilter</code> filters are attached to the invocation.</p>
+</div>
+<div class="paragraph">
+<p>Request and response filter classes implement the
+<code>javax.ws.rs.client.ClientRequestFilter</code> and
+<code>javax.ws.rs.client.ClientResponseFilter</code> interfaces, respectively. Both
+of these interfaces define a single method, <code>filter</code>. All filters must
+be annotated with <code>javax.ws.rs.ext.Provider</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following class is a logging filter for both client requests and
+client responses.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Provider
+public class MyLoggingFilter implements ClientRequestFilter,
+        ClientResponseFilter {
+    static final Logger logger = Logger.getLogger(...);
+
+    // implement the ClientRequestFilter.filter method
+    @Override
+    public void filter(ClientRequestContext requestContext)
+            throws IOException {
+        logger.log(...);
+        ...
+    }
+
+    // implement the ClientResponseFilter.filter method
+    @Override
+    public void filter(ClientRequestContext requestContext,
+           ClientResponseContext responseContext) throws IOException {
+        logger.log(...);
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the invocation must be stopped while the filter is active, call the
+context object&#8217;s <code>abortWith</code> method, and pass in a
+<code>javax.ws.rs.core.Response</code> instance from within the filter.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void filter(ClientRequestContext requestContext) throws IOException {
+    ...
+    Response response = new Response();
+    response.status(500);
+    requestContext.abortWith(response);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="asynchronous-invocations-in-the-client-api">Asynchronous Invocations in the Client API</h3>
+<div class="paragraph">
+<p>In networked applications, network issues can affect the perceived
+performance of the application, particularly in long-running or
+complicated network calls. Asynchronous processing helps prevent
+blocking and makes better use of an application&#8217;s resources.</p>
+</div>
+<div class="paragraph">
+<p>In the JAX-RS Client API, the <code>Invocation.Builder.async</code> method is used
+when constructing a client request to indicate that the call to the
+service should be performed asynchronously. An asynchronous invocation
+returns control to the caller immediately, with a return type of
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html?is-external=true"><code>java.util.concurrent.Future&lt;T&gt;</code></a>
+(part of the Java SE concurrency API) and with the type set to the
+return type of the service call. <code>Future&lt;T&gt;</code> objects have methods to
+check if the asynchronous call has been completed, to retrieve the final
+result, to cancel the invocation, and to check if the invocation has
+been cancelled.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to invoke an asynchronous request on a
+resource.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Future&lt;String&gt; response = myResource.request(MediaType.TEXT_PLAIN)
+        .async()
+        .get(String.class);</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-custom-callbacks-in-asynchronous-invocations">Using Custom Callbacks in Asynchronous Invocations</h4>
+<div class="paragraph">
+<p>The <code>InvocationCallback</code> interface defines two methods, <code>completed</code> and
+<code>failed</code>, that are called when an asynchronous invocation either
+completes successfully or fails, respectively. You may register an
+<code>InvocationCallback</code> instance on your request by creating a new instance
+when specifying the request method.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to register a callback object on an
+asynchronous invocation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Client client = ClientBuilder.newClient();
+WebTarget myResource = client.target("http://example.com/webapi/read");
+Future&lt;Customer&gt; fCustomer = myResource.request(MediaType.TEXT_PLAIN)
+        .async()
+        .get(new InvocationCallback&lt;Customer&gt;() {
+            @Override
+            public void completed(Customer customer) {
+            // Do something with the customer object
+            }
+            @Override
+             public void failed(Throwable throwable) {
+            // handle the error
+            }
+    });</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-reactive-approach-in-asynchronous-invocations">Using Reactive Approach in Asynchronous Invocations</h4>
+<div class="paragraph">
+<p>Using custom callbacks in asynchronous invocations is easy in simple
+cases and when there are many independent calls to make. In nested
+calls, using custom callbacks becomes very difficult to implement,
+debug, and maintain.</p>
+</div>
+<div class="paragraph">
+<p>JAX-RS defines a new type of invoker called as <code>RxInvoker</code> and a default
+implementation of this type is <code>CompletionStageRxInvoker</code>. The new <code>rx</code>
+method is used as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CompletionStage&lt;String&gt; csf = client.target("forecast/{destination}") resolveTemplate("destination", "mars").request().rx().get(String.class);
+csf.thenAccept(System.out::println);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example, an asynchronous processing of the interface
+<code>CompletionStage&lt;String&gt;</code> is created and waits till it is completed and
+the result is displayed. The <code>CompletionStage</code> that is returned can then be used only to retrieve the result as shown in the above example or can be combined with other completion stages to ease and improve the processing of asynchronous tasks.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-server-sent-events">Using Server-Sent Events</h3>
+<div class="paragraph">
+<p>Server-sent Events (SSE) technology is used to asynchronously push
+notifications to the client over standard HTTP or HTTPS protocol.
+Clients can subscribe to event notifications that originate on a server.
+Server generates events and sends these events back to the clients
+that are subscribed to receive the notifications. The one-way
+communication channel connection is established by the client. Once the
+connection is established, the server sends events to the client
+whenever new data is available.</p>
+</div>
+<div class="paragraph">
+<p>The communication channel established by the client lasts till the
+client closes the connection and it is also re-used by the server to
+send multiple events from the server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-sse-api">Overview of the SSE API</h3>
+<div class="paragraph">
+<p>The SSE API is defined in the <code>javax.ws.rs.sse</code> package that includes
+the interfaces <code>SseEventSink</code>, <code>SseEvent</code>, <code>Sse</code>, and <code>SseEventSource</code>.
+To accept connections and send events to one or more clients, inject an
+<code>SseEventSink</code> in the resource method that produces the media type
+<code>text/event-stream</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to accept the SSE connections and to
+send events to the clients:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+@Path("eventStream")
+@Produces(MediaType.SERVER_SENT_EVENTS)
+public void eventStream(@Context SseEventSink eventSink,
+@Context Sse sse) {
+executor.execute(() -&gt; {
+try (SseEventSink sink = eventSink) {
+eventSink.send(sse.newEvent("event1"));
+eventSink.send(sse.newEvent("event2"));
+eventSink.send(sse.newEvent("event3"));
+}
+});
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>SseEventsink</code> is injected into the resource method and the
+underlying client connection is kept open and used to send events. The
+connection persists until the client disconnects from the server. The
+method <code>send</code> returns an instance of <code>CompletionStage&lt;T&gt;</code> which
+indicates the action of asynchronously sending a message to a client is
+enabled.</p>
+</div>
+<div class="paragraph">
+<p>The events that are streamed to the clients can be defined with the
+details such as <code>event</code>, <code>data</code>, <code>id</code>, <code>retry</code>, and <code>comment</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="broadcasting-using-sse">Broadcasting Using SSE</h3>
+<div class="paragraph">
+<p>Broadcasting is the action of sending events to multiple clients
+simultaneously. JAX-RS SSE API provides <code>SseBroadcaster</code> to register all
+<code>SseEventSink</code> instances and send events to all registered event
+outputs. The life-cycle and scope of an <code>SseBroadcaster</code> is fully
+controlled by applications and not the JAX-RS runtime. The following
+example show the use of broadcasters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/")
+@Singleton
+public class SseResource {
+@Context
+private Sse sse;
+private volatile SseBroadcaster sseBroadcaster;
+@PostConstruct
+public init() {
+this.sseBroadcaster = sse.newBroadcaster();
+}
+
+@GET
+@Path("register")
+@Produces(MediaType.SERVER_SENT_EVENTS)
+public void register(@Context SseEventSink eventSink) {
+eventSink.send(sse.newEvent("welcome!"));
+sseBroadcaster.register(eventSink);
+}
+
+@POST
+@Path("broadcast")
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public void broadcast(@FormParam("event") String event) {
+sseBroadcaster.broadcast(sse.newEvent(event));
+}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>@Singleton</code> annotation is defined for the resource class restricting
+the creation of multiple instances of the class. The <code>register</code> method
+on a broadcaster is used to add a new <code>SseEventSink</code>; the <code>broadcast</code>
+method is used to send an SSE event to all registered clients.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listening-and-receiving-events">Listening and Receiving Events</h3>
+<div class="paragraph">
+<p>JAX-RS SSE provides the <code>SseEventSource</code> interface for the client to
+subscribe to notifications. The client can get asynchronously notified
+about incoming events by invoking one of the <code>subscribe</code> methods in
+<code>javax.ws.rs.sse.SseEventSource</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to use the <code>SseEventSource</code> API to open
+an SSE connection and read some of the messages for a period:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">WebTarget target = client.target("http://...");
+try (SseEventSource source = SseEventSource.target(target).build()) {
+source.register(System.out::println);
+source.open();
+Thread.sleep(500); // Consume events for just 500 ms
+source.close();
+} catch (InterruptedException e) {
+// falls through
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-client002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs-advanced.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

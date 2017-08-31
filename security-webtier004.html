@@ -1,0 +1,786 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Examples: Securing Web Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-webtier003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-javaee.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="examples-securing-web-applications">Examples: Securing Web Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some basic setup is required before any of the example applications will
+run correctly.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDEBCHG">Overview of Examples of Securing Web Applications</a></p>
+</li>
+<li>
+<p><a href="#GJJLK">To Set Up Your System for Running the Security Examples</a></p>
+</li>
+<li>
+<p><a href="#BNCCK">The hello2-basicauth Example: Basic Authentication with a
+Servlet</a></p>
+</li>
+<li>
+<p><a href="#BNCBY">The hello1-formauth Example: Form-Based Authentication
+with a JavaServer Faces Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-examples-of-securing-web-applications">Overview of Examples of Securing Web Applications</h3>
+<div class="paragraph">
+<p>The examples use annotations, programmatic security, and/or declarative
+security to demonstrate adding security to existing web applications.</p>
+</div>
+<div class="paragraph">
+<p>Here are some other locations where you will find examples of securing
+various types of applications:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="security-javaee003.html#BNBZK">The cart-secure Example: Securing an
+Enterprise Bean with Declarative Security</a></p>
+</li>
+<li>
+<p><a href="security-javaee003.html#BNCAA">The converter-secure Example:
+Securing an Enterprise Bean with Programmatic Security</a></p>
+</li>
+<li>
+<p>GlassFish samples: <code>https://glassfish-samples.java.net/</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="to-set-up-your-system-for-running-the-security-examples">To Set Up Your System for Running the Security Examples</h3>
+<div class="paragraph">
+<p>To set up your system for running the security examples, you need to
+configure a user database that the application can use for
+authenticating users. Before continuing, follow these steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>Add an authorized user to GlassFish Server. For the examples in this
+chapter and in <a href="security-javaee.html#BNBYK">Chapter 50, "Getting
+Started Securing Enterprise Applications"</a>, add a user to the <code>file</code>
+realm of GlassFish Server, and assign the user to the group
+<code>TutorialUser</code>.</p>
+</li>
+<li>
+<p>From the Administration Console, expand the Configurations node,
+then expand the server-config node.</p>
+</li>
+<li>
+<p>Expand the Security node.</p>
+</li>
+<li>
+<p>Expand the Realms node.</p>
+</li>
+<li>
+<p>Select the File node.</p>
+</li>
+<li>
+<p>On the Edit Realm page, click Manage Users.</p>
+</li>
+<li>
+<p>On the File Users page, click New.</p>
+</li>
+<li>
+<p>In the User ID field, enter a user ID.</p>
+</li>
+<li>
+<p>In the Group List field, enter <code>TutorialUser</code>.</p>
+</li>
+<li>
+<p>In the New Password and Confirm New Password fields, enter a
+password.</p>
+</li>
+<li>
+<p>Click OK.</p>
+<div class="paragraph">
+<p>Be sure to write down the user name and password for the user you create
+so that you can use it for testing the example applications.
+Authentication is case sensitive for both the user name and password, so
+write down the user name and password exactly. This topic is discussed
+more in <a href="security-intro005.html#BNBXR">Managing Users and Groups in
+GlassFish Server</a>.</p>
+</div>
+</li>
+<li>
+<p>Set up Default Principal to Role Mapping in GlassFish Server.</p>
+</li>
+<li>
+<p>From the Administration Console, expand the Configurations node,
+then expand the server-config node.</p>
+</li>
+<li>
+<p>Select the Security node.</p>
+</li>
+<li>
+<p>Select the Default Principal to Role Mapping Enabled check box.</p>
+</li>
+<li>
+<p>Click Save.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-hello2-basicauth-example-basic-authentication-with-a-servlet">The hello2-basicauth Example: Basic Authentication with a Servlet</h3>
+<div class="paragraph">
+<p>This example explains how to use basic authentication with a servlet.
+With basic authentication of a servlet, the web browser presents a
+standard login dialog box that is not customizable. When a user submits
+his or her name and password, the server determines whether the user
+name and password are those of an authorized user and sends the
+requested web resource if the user is authorized to view it.</p>
+</div>
+<div class="paragraph">
+<p>In general, the following steps are necessary for adding basic
+authentication to an unsecured servlet, such as the ones described in
+<a href="webapp.html#BNADR">Chapter 6, "Getting Started with Web
+Applications"</a>. In the example application included with this tutorial,
+many of these steps have been completed for you and are listed here
+simply to show what needs to be done should you wish to create a similar
+application. This application can be found in the
+tut-install`/examples/security/hello2-basicauth/` directory.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="#GJJLK">To Set Up Your System for Running
+the Security Examples</a>.</p>
+</li>
+<li>
+<p>Create a web module for the servlet example, <code>hello2</code>, as described
+in <a href="webapp.html#BNADR">Chapter 6, "Getting Started with Web
+Applications"</a>.</p>
+</li>
+<li>
+<p>Add the appropriate security annotations to the servlet. The
+security annotations are described in <a href="#GJRMH">Specifying Security
+for Basic Authentication Using Annotations</a>.</p>
+</li>
+<li>
+<p>Build, package, and deploy the web application by following the
+steps in <a href="#GJQYS">To Build, Package, and Deploy the hello2-basicauth
+Example Using NetBeans IDE</a> or <a href="#GJQZH">To Build, Package, and Deploy
+the hello2-basicauth Example Using Maven</a>.</p>
+</li>
+<li>
+<p>Run the web application by following the steps described in
+<a href="#GJQZF">To Run the hello2-basicauth Example</a>.</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="specifying-security-for-basic-authentication-using-annotations">Specifying Security for Basic Authentication Using Annotations</h4>
+<div class="paragraph">
+<p>The default authentication mechanism used by GlassFish Server is basic
+authentication. With basic authentication, GlassFish Server spawns a
+standard login dialog box to collect user name and password data for a
+protected resource. Once the user is authenticated, access to the
+protected resource is permitted.</p>
+</div>
+<div class="paragraph">
+<p>To specify security for a servlet, use the <code>@ServletSecurity</code>
+annotation. This annotation allows you to specify both specific
+constraints on HTTP methods and more general constraints that apply to
+all HTTP methods for which no specific constraint is specified. Within
+the <code>@ServletSecurity</code> annotation, you can specify the following
+annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>@HttpMethodConstraint</code> annotation, which applies to a specific
+HTTP method</p>
+</li>
+<li>
+<p>The more general <code>@HttpConstraint</code> annotation, which applies to all
+HTTP methods for which there is no corresponding <code>@HttpMethodConstraint</code>
+annotation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both the <code>@HttpMethodConstraint</code> and <code>@HttpConstraint</code> annotations
+within the <code>@ServletSecurity</code> annotation can specify the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>transportGuarantee</code> element that specifies the data protection
+requirements (that is, whether or not SSL/TLS is required) that must be
+satisfied by the connections on which requests arrive. Valid values for
+this element are <code>NONE</code> and <code>CONFIDENTIAL</code>.</p>
+</li>
+<li>
+<p>A <code>rolesAllowed</code> element that specifies the names of the authorized
+roles.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the <code>hello2-basicauth</code> application, the <code>GreetingServlet</code> has the
+following annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(name = "GreetingServlet", urlPatterns = {"/greeting"})
+@ServletSecurity(
+@HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL,
+    rolesAllowed = {"TutorialUser"}))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These annotations specify that the request URI <code>/greeting</code> can be
+accessed only by users who have been authorized to access this URL
+because they have been verified to be in the role <code>TutorialUser</code>. The
+data will be sent over a protected transport in order to keep the user
+name and password data from being read in transit.</p>
+</div>
+<div class="paragraph">
+<p>If you use the <code>@ServletSecurity</code> annotation, you do not need to specify
+security settings in the deployment descriptor. Use the deployment
+descriptor to specify settings for nondefault authentication mechanisms,
+for which you cannot use the <code>@ServletSecurity</code> annotation.</p>
+</div>
+<div id="to-build-package-and-deploy-the-hello2-basicauth-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the hello2-basicauth Example Using
+NetBeans IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="#GJJLK">To Set Up Your System for Running
+the Security Examples</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello2-basicauth</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>hello2-basicauth</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and deploys the example application to your
+GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-hello2-basicauth-example-using-maven">To Build, Package, and Deploy the hello2-basicauth Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="#GJJLK">To Set Up Your System for Running
+the Security Examples</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/hello2-basicauth/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>hello2-basicauth.war</code>, that is located in the <code>target</code> directory, then
+deploys the WAR file.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-hello2-basicauth-example">To Run the hello2-basicauth Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">https://localhost:8181/hello2-basicauth/greeting</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may be prompted to accept the security certificate for the server.
+If so, accept the security certificate. If the browser warns that the
+certificate is invalid because it is self-signed, add a security
+exception for the application.</p>
+</div>
+<div class="paragraph">
+<p>An Authentication Required dialog box appears. Its appearance varies,
+depending on the browser you use.</p>
+</div>
+</li>
+<li>
+<p>Enter a user name and password combination that corresponds to a
+user who has already been created in the <code>file</code> realm of GlassFish
+Server and has been assigned to the group <code>TutorialUser</code>; then click OK.</p>
+<div class="paragraph">
+<p>Basic authentication is case sensitive for both the user name and
+password, so enter the user name and password exactly as defined for
+GlassFish Server.</p>
+</div>
+<div class="paragraph">
+<p>The server returns the requested resource if all the following
+conditions are met.
+* A user with the user name you entered is defined for GlassFish Server.
+* The user with the user name you entered has the password you entered.
+* The user name and password combination you entered is assigned to the
+group <code>TutorialUser</code> in GlassFish Server.
+* The role of <code>TutorialUser</code>, as defined for the application, is mapped
+to the group <code>TutorialUser</code>, as defined for GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Enter a name in the field and click Submit.</p>
+<div class="paragraph">
+<p>Because you have already been authorized, the name you enter in this
+step does not have any limitations. You have unlimited access to the
+application now.</p>
+</div>
+<div class="paragraph">
+<p>The application responds by saying "Hello" to the name you entered.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-hello1-formauth-example-form-based-authentication-with-a-javaserver-faces-application">The hello1-formauth Example: Form-Based Authentication with a JavaServer Faces Application</h3>
+<div class="paragraph">
+<p>This example explains how to use form-based authentication with a
+JavaServer Faces application. With form-based authentication, you can
+customize the login screen and error pages that are presented to the web
+client for authentication of the user name and password. When a user
+submits his or her name and password, the server determines whether the
+user name and password are those of an authorized user and, if
+authorized, sends the requested web resource.</p>
+</div>
+<div class="paragraph">
+<p>This example, <code>hello1-formauth</code>, adds security to the basic JavaServer
+Faces application shown in <a href="webapp003.html#BNADX">A Web Module That
+Uses JavaServer Faces Technology: The hello1 Example</a>.</p>
+</div>
+<div class="paragraph">
+<p>In general, the steps necessary for adding form-based authentication to
+an unsecured JavaServer Faces application are similar to those described
+in <a href="#BNCCK">The hello2-basicauth Example: Basic Authentication with a
+Servlet</a>. The major difference is that you must use a deployment
+descriptor to specify the use of form-based authentication, as described
+in <a href="#BNCCB">Specifying Security for the Form-Based Authentication
+Example</a>. In addition, you must create a login form page and a login
+error page, as described in <a href="#BNCCA">Creating the Login Form and the
+Error Page</a>.</p>
+</div>
+<div class="paragraph">
+<p>This application can be found in the
+tut-install`/examples/security/hello1-formauth/` directory.</p>
+</div>
+<div class="sect3">
+<h4 id="creating-the-login-form-and-the-error-page">Creating the Login Form and the Error Page</h4>
+<div class="paragraph">
+<p>When using form-based login mechanisms, you must specify a page that
+contains the form you want to use to obtain the user name and password,
+as well as a page to display if login authentication fails. This section
+discusses the login form and the error page used in this example.
+<a href="#BNCCB">Specifying Security for the Form-Based Authentication
+Example</a> shows how you specify these pages in the deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>The login page can be an HTML page or a servlet, and it must return an
+HTML page containing a form that conforms to specific naming conventions
+(see the Java Servlet 4.0 specification for more information on these
+requirements). To do this, include the elements that accept user name
+and password information between <code>&lt;form&gt;&lt;/form&gt;</code> tags in your login
+page. The content of an HTML page or servlet for a login page should be
+coded as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;form method="post" action="j_security_check"&gt;
+    &lt;input type="text" name="j_username"&gt;
+    &lt;input type="password" name= "j_password"&gt;
+&lt;/form&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The full code for the login page used in this example can be found at
+tut-install`/examples/security/hello1-formauth/src/main/webapp/login.html`.
+Here is the code for this page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;Login Form&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h2&gt;Hello, please log in:&lt;/h2&gt;
+        &lt;form method="post" action="j_security_check"&gt;
+            &lt;table role="presentation"&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Please type your user name: &lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" name="j_username"
+                               size="20"/&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Please type your password: &lt;/td&gt;
+                    &lt;td&gt;&lt;input type="password" name="j_password"
+                               size="20"/&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;p&gt;&lt;/p&gt;
+            &lt;input type="submit" value="Submit"/&gt;
+            &amp;nbsp;
+            &lt;input type="reset" value="Reset"/&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The login error page is displayed if the user enters a user name and
+password combination that is not authorized to access the protected URI.
+For this example, the login error page can be found at
+tut-install`/examples/security/hello1-formauth/``src/main/webapp/error.html`.
+For this example, the login error page explains the reason for receiving
+the error page and provides a link that will allow the user to try
+again. Here is the code for this page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;Login Error&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h2&gt;Invalid user name or password.&lt;/h2&gt;
+
+        &lt;p&gt;Please enter a user name or password that is authorized to access
+           this application. For this application, this means a user that
+           has been created in the &lt;code&gt;file&lt;/code&gt; realm and has been
+           assigned to the &lt;em&gt;group&lt;/em&gt; of &lt;code&gt;TutorialUser&lt;/code&gt;.&lt;/p&gt;
+        &lt;p&gt;&lt;a href="login.html"&gt;Return to login page&lt;/a&gt;&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="specifying-security-for-the-form-based-authentication-example">Specifying Security for the Form-Based Authentication Example</h4>
+<div class="paragraph">
+<p>This example takes a very simple servlet-based web application and adds
+form-based security. To specify form-based instead of basic
+authentication for a JavaServer Faces example, you must use the
+deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>The following sample code shows the security elements added to the
+deployment descriptor for this example, which can be found in
+tut-install`/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml`:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;security-constraint&gt;
+        &lt;display-name&gt;Constraint1&lt;/display-name&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;wrcoll&lt;/web-resource-name&gt;
+            &lt;description/&gt;
+            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;auth-constraint&gt;
+            &lt;description/&gt;
+            &lt;role-name&gt;TutorialUser&lt;/role-name&gt;
+        &lt;/auth-constraint&gt;
+    &lt;/security-constraint&gt;
+
+    &lt;login-config&gt;
+        &lt;auth-method&gt;FORM&lt;/auth-method&gt;
+        &lt;realm-name&gt;file&lt;/realm-name&gt;
+        &lt;form-login-config&gt;
+            &lt;form-login-page&gt;/login.xhtml&lt;/form-login-page&gt;
+            &lt;form-error-page&gt;/error.xhtml&lt;/form-error-page&gt;
+        &lt;/form-login-config&gt;
+    &lt;/login-config&gt;
+
+    &lt;security-role&gt;
+        &lt;description/&gt;
+        &lt;role-name&gt;TutorialUser&lt;/role-name&gt;
+    &lt;/security-role&gt;</code></pre>
+</div>
+</div>
+<div id="to-build-package-and-deploy-the-hello1-formauth-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the hello1-formauth Example Using NetBeans
+IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="#GJJLK">To Set Up Your System for Running
+the Security Examples</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello1-formauth</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>hello1-formauth</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>This command builds and deploys the example application to your
+GlassFish Server instance, then opens it in a browser.</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="to-build-package-and-deploy-the-hello1-formauth-example-using-maven-and-the-asadmin-command" class="paragraph">
+<p>To Build, Package, and Deploy the hello1-formauth Example Using Maven
+and the asadmin Command
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the steps in <a href="#GJJLK">To Set Up Your System for Running
+the Security Examples</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/hello1-formauth/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command at the terminal window or command
+prompt:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>hello1-formauth.war</code>, that is located in the <code>target</code> directory, then
+deploys the WAR file to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-hello1-formauth-example">To Run the hello1-formauth Example</h4>
+<div class="paragraph">
+<p>To run the web client for <code>hello1-formauth</code>, follow these steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a web browser to the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/hello1-formauth/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the login form, enter a user name and password combination that
+corresponds to a user who has already been created in the <code>file</code> realm
+of GlassFish Server and has been assigned to the group <code>TutorialUser</code>.</p>
+<div class="paragraph">
+<p>Form-based authentication is case sensitive for both the user name and
+password, so enter the user name and password exactly as defined for
+GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Click Submit.</p>
+<div class="paragraph">
+<p>If you entered <code>My_Name</code> as the name and <code>My_Pwd</code> for the password, the
+server returns the requested resource if all the following conditions
+are met.
+* A user with the user name <code>My_Name</code> is defined for GlassFish Server.
+* The user with the user name <code>My_Name</code> has a password <code>My_Pwd</code> defined
+for GlassFish Server.
+* The user <code>My_Name</code> with the password <code>My_Pwd</code> is assigned to the group
+<code>TutorialUser</code> on GlassFish Server.
+* The role <code>TutorialUser</code>, as defined for the application, is mapped to
+the group <code>TutorialUser</code>, as defined for GlassFish Server.</p>
+</div>
+<div class="paragraph">
+<p>+
+When these conditions are met and the server has authenticated the user,
+the application appears.</p>
+</div>
+</li>
+<li>
+<p>Enter your name and click Submit.</p>
+<div class="paragraph">
+<p>Because you have already been authorized, the name you enter in this
+step does not have any limitations. You have unlimited access to the
+application now.</p>
+</div>
+<div class="paragraph">
+<p>The application responds by saying "Hello" to you.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Next Steps</p>
+</div>
+<div class="paragraph">
+<p>For additional testing and to see the login error page generated, close
+and reopen your browser, enter the application URL, and enter a user
+name and password that are not authorized.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-webtier003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-javaee.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

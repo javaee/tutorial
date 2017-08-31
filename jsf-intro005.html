@@ -1,0 +1,605 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>User Interface Component Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-intro004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="user-interface-component-model">User Interface Component Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to the lifecycle description, an overview of JavaServer
+Faces architecture provides better understanding of the technology.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces components are the building blocks of a JavaServer
+Faces view. A component can be a user interface (UI) component or a
+non-UI component.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces UI components are configurable, reusable elements that
+compose the user interfaces of JavaServer Faces applications. A
+component can be simple, such as a button, or can be compound, such as a
+table composed of multiple components.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces technology provides a rich, flexible component
+architecture that includes the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A set of <code>javax.faces.component.UIComponent</code> classes for specifying
+the state and behavior of UI components</p>
+</li>
+<li>
+<p>A rendering model that defines how to render the components in various
+ways</p>
+</li>
+<li>
+<p>A conversion model that defines how to register data converters onto a
+component</p>
+</li>
+<li>
+<p>An event and listener model that defines how to handle component
+events</p>
+</li>
+<li>
+<p>A validation model that defines how to register validators onto a
+component</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This section briefly describes each of these pieces of the component
+architecture.</p>
+</div>
+<div class="sect2">
+<h3 id="user-interface-component-classes">User Interface Component Classes</h3>
+<div class="paragraph">
+<p>JavaServer Faces technology provides a set of UI component classes and
+associated behavioral interfaces that specify all the UI component
+functionality, such as holding component state, maintaining a reference
+to objects, and driving event handling and rendering for a set of
+standard components.</p>
+</div>
+<div class="paragraph">
+<p>The component classes are completely extensible, allowing component
+writers to create their own custom components. See
+<a href="jsf-custom.html#BNAVG">Chapter 15, "Creating Custom UI Components and
+Other Custom Objects"</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>The abstract base class for all components is
+<code>javax.faces.component.UIComponent</code>. JavaServer Faces UI component
+classes extend the <code>UIComponentBase</code> class (a subclass of
+<code>UIComponent</code>), which defines the default state and behavior of a
+component. The following set of component classes is included with
+JavaServer Faces technology.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UIColumn</code>: Represents a single column of data in a <code>UIData</code>
+component.</p>
+</li>
+<li>
+<p><code>UICommand</code>: Represents a control that fires actions when activated.</p>
+</li>
+<li>
+<p><code>UIData</code>: Represents a data binding to a collection of data
+represented by a <code>javax.faces.model.DataModel</code> instance.</p>
+</li>
+<li>
+<p><code>UIForm</code>: Represents an input form to be presented to the user. Its
+child components represent (among other things) the input fields to be
+included when the form is submitted. This component is analogous to the
+<code>form</code> tag in HTML.</p>
+</li>
+<li>
+<p><code>UIGraphic</code>: Displays an image.</p>
+</li>
+<li>
+<p><code>UIInput</code>: Takes data input from a user. This class is a subclass of
+<code>UIOutput</code>.</p>
+</li>
+<li>
+<p><code>UIMessage</code>: Displays a localized error message.</p>
+</li>
+<li>
+<p><code>UIMessages</code>: Displays a set of localized error messages.</p>
+</li>
+<li>
+<p><code>UIOutcomeTarget</code>: Displays a link in the form of a link or a button.</p>
+</li>
+<li>
+<p><code>UIOutput</code>: Displays data output on a page.</p>
+</li>
+<li>
+<p><code>UIPanel</code>: Manages the layout of its child components.</p>
+</li>
+<li>
+<p><code>UIParameter</code>: Represents substitution parameters.</p>
+</li>
+<li>
+<p><code>UISelectBoolean</code>: Allows a user to set a <code>boolean</code> value on a control
+by selecting or deselecting it. This class is a subclass of the
+<code>UIInput</code> class.</p>
+</li>
+<li>
+<p><code>UISelectItem</code>: Represents a single item in a set of items.</p>
+</li>
+<li>
+<p><code>UISelectItems</code>: Represents an entire set of items.</p>
+</li>
+<li>
+<p><code>UISelectMany</code>: Allows a user to select multiple items from a group of
+items. This class is a subclass of the <code>UIInput</code> class.</p>
+</li>
+<li>
+<p><code>UISelectOne</code>: Allows a user to select one item from a group of items.
+This class is a subclass of the <code>UIInput</code> class.</p>
+</li>
+<li>
+<p><code>UIViewParameter</code>: Represents the query parameters in a request. This
+class is a subclass of the <code>UIInput</code> class.</p>
+</li>
+<li>
+<p><code>UIViewRoot</code>: Represents the root of the component tree.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to extending <code>UIComponentBase</code>, the component classes also
+implement one or more behavioral interfaces, each of which defines
+certain behavior for a set of components whose classes implement the
+interface.</p>
+</div>
+<div class="paragraph">
+<p>These behavioral interfaces, all defined in the <code>javax.faces.component</code>
+package unless otherwise stated, are as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ActionSource</code>: Indicates that the component can fire an action event.
+This interface is intended for use with components based on JavaServer
+Faces technology 1.1_01 and earlier versions. This interface is
+deprecated in JavaServer Faces 2.</p>
+</li>
+<li>
+<p><code>ActionSource2</code>: Extends <code>ActionSource</code> and therefore provides the
+same functionality. However, it allows components to use the Expression
+Language (EL) when they are referencing methods that handle action
+events.</p>
+</li>
+<li>
+<p><code>EditableValueHolder</code>: Extends <code>ValueHolder</code> and specifies additional
+features for editable components, such as validation and emitting
+value-change events.</p>
+</li>
+<li>
+<p><code>NamingContainer</code>: Mandates that each component rooted at this
+component have a unique ID.</p>
+</li>
+<li>
+<p><code>StateHolder</code>: Denotes that a component has state that must be saved
+between requests.</p>
+</li>
+<li>
+<p><code>ValueHolder</code>: Indicates that the component maintains a local value as
+well as the option of accessing data in the model tier.</p>
+</li>
+<li>
+<p><code>javax.faces.event.SystemEventListenerHolder</code>: Maintains a list of
+<code>javax.faces.event.SystemEventListener</code> instances for each type of
+<code>javax.faces.event.SystemEvent</code> defined by that class.</p>
+</li>
+<li>
+<p><code>javax.faces.component.behavior.ClientBehaviorHolder</code>: Adds the
+ability to attach <code>javax.faces.component.behavior.ClientBehavior</code>
+instances, such as a reusable script.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>UICommand</code> implements <code>ActionSource2</code> and <code>StateHolder</code>. <code>UIOutput</code> and
+component classes that extend <code>UIOutput</code> implement <code>StateHolder</code> and
+<code>ValueHolder</code>. <code>UIInput</code> and component classes that extend <code>UIInput</code>
+implement <code>EditableValueHolder</code>, <code>StateHolder</code>, and <code>ValueHolder</code>.
+<code>UIComponentBase</code> implements <code>StateHolder</code>.</p>
+</div>
+<div class="paragraph">
+<p>Only component writers will need to use the component classes and
+behavioral interfaces directly. Page authors and application developers
+will use a standard component by including a tag that represents it on a
+page. Most of the components can be rendered in different ways on a
+page. For example, a <code>UICommand</code> component can be rendered as a button
+or a link.</p>
+</div>
+<div class="paragraph">
+<p>The next section explains how the rendering model works and how page
+authors can choose to render the components by selecting the appropriate
+tags.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="component-rendering-model">Component Rendering Model</h3>
+<div class="paragraph">
+<p>The JavaServer Faces component architecture is designed such that the
+functionality of the components is defined by the component classes,
+whereas the component rendering can be defined by a separate renderer
+class. This design has several benefits, including the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Component writers can define the behavior of a component once but
+create multiple renderers, each of which defines a different way to
+render the component to the same client or to different clients.</p>
+</li>
+<li>
+<p>Page authors and application developers can change the appearance of a
+component on the page by selecting the tag that represents the
+appropriate combination of component and renderer.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A render kit defines how component classes map to component tags that
+are appropriate for a particular client. The JavaServer Faces
+implementation includes a standard HTML render kit for rendering to an
+HTML client.</p>
+</div>
+<div class="paragraph">
+<p>The render kit defines a set of <code>javax.faces.render.Renderer</code> classes
+for each component that it supports. Each <code>Renderer</code> class defines a
+different way to render the particular component to the output defined
+by the render kit. For example, a <code>UISelectOne</code> component has three
+different renderers. One of them renders the component as a group of
+options. Another renders the component as a combo box. The third one
+renders the component as a list box. Similarly, a <code>UICommand</code> component
+can be rendered as a button or a link, using the <code>h:commandButton</code> or
+<code>h:commandLink</code> tag. The <code>command</code> part of each tag corresponds to the
+<code>UICommand</code> class, specifying the functionality, which is to fire an
+action. The <code>Button</code> or <code>Link</code> part of each tag corresponds to a
+separate <code>Renderer</code> class that defines how the component appears on the
+page.</p>
+</div>
+<div class="paragraph">
+<p>Each custom tag defined in the standard HTML render kit is composed of
+the component functionality (defined in the <code>UIComponent</code> class) and the
+rendering attributes (defined by the <code>Renderer</code> class).</p>
+</div>
+<div class="paragraph">
+<p>The section <a href="jsf-page002.html#BNARF">Adding Components to a Page Using
+HTML Tag Library Tags</a> lists all supported component tags and
+illustrates how to use the tags in an example.</p>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces implementation provides a custom tag library for
+rendering components in HTML.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="conversion-model">Conversion Model</h3>
+<div class="paragraph">
+<p>A JavaServer Faces application can optionally associate a component with
+server-side object data. This object is a JavaBeans component, such as a
+managed bean. An application gets and sets the object data for a
+component by calling the appropriate object properties for that
+component.</p>
+</div>
+<div class="paragraph">
+<p>When a component is bound to an object, the application has two views of
+the component&#8217;s data.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The model view, in which data is represented as data types, such as
+<code>int</code> or <code>long</code>.</p>
+</li>
+<li>
+<p>The presentation view, in which data is represented in a manner that
+can be read or modified by the user. For example, a <code>java.util.Date</code>
+might be represented as a text string in the format <code>mm/dd/yy</code> or as a
+set of three text strings.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces implementation automatically converts component
+data between these two views when the bean property associated with the
+component is of one of the types supported by the component&#8217;s data. For
+example, if a <code>UISelectBoolean</code> component is associated with a bean
+property of type <code>java.lang.Boolean</code>, the JavaServer Faces
+implementation will automatically convert the component&#8217;s data from
+<code>String</code> to <code>Boolean</code>. In addition, some component data must be bound to
+properties of a particular type. For example, a <code>UISelectBoolean</code>
+component must be bound to a property of type <code>boolean</code> or
+<code>java.lang.Boolean</code>.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes you might want to convert a component&#8217;s data to a type other
+than a standard type, or you might want to convert the format of the
+data. To facilitate this, JavaServer Faces technology allows you to
+register a <code>javax.faces.convert.Converter</code> implementation on <code>UIOutput</code>
+components and components whose classes subclass <code>UIOutput</code>. If you
+register the <code>Converter</code> implementation on a component, the <code>Converter</code>
+implementation converts the component&#8217;s data between the two views.</p>
+</div>
+<div class="paragraph">
+<p>You can either use the standard converters supplied with the JavaServer
+Faces implementation or create your own custom converter. Custom
+converter creation is covered in <a href="jsf-custom.html#BNAVG">Chapter 15,
+"Creating Custom UI Components and Other Custom Objects"</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="event-and-listener-model">Event and Listener Model</h3>
+<div class="paragraph">
+<p>The JavaServer Faces event and listener model is similar to the
+JavaBeans event model in that it has strongly typed event classes and
+listener interfaces that an application can use to handle events
+generated by components.</p>
+</div>
+<div class="paragraph">
+<p>The JavaServer Faces specification defines three types of events:
+application events, system events, and data-model events.</p>
+</div>
+<div class="paragraph">
+<p>Application events are tied to a particular application and are
+generated by a <code>UIComponent</code>. They represent the standard events
+available in previous versions of JavaServer Faces technology.</p>
+</div>
+<div class="paragraph">
+<p>An event object identifies the component that generated the event and
+stores information about the event. To be notified of an event, an
+application must provide an implementation of the listener class and
+must register it on the component that generates the event. When the
+user activates a component, such as by clicking a button, an event is
+fired. This causes the JavaServer Faces implementation to invoke the
+listener method that processes the event.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces supports two kinds of application events: action events
+and value-change events.</p>
+</div>
+<div class="paragraph">
+<p>An action event (class <code>javax.faces.event.ActionEvent</code>) occurs when the
+user activates a component that implements <code>ActionSource</code>. These
+components include buttons and links.</p>
+</div>
+<div class="paragraph">
+<p>A value-change event (class <code>javax.faces.event.ValueChangeEvent</code>) occurs
+when the user changes the value of a component represented by <code>UIInput</code>
+or one of its subclasses. An example is selecting a check box, an action
+that results in the component&#8217;s value changing to <code>true</code>. The component
+types that can generate these types of events are the <code>UIInput</code>,
+<code>UISelectOne</code>, <code>UISelectMany</code>, and <code>UISelectBoolean</code> components.
+Value-change events are fired only if no validation errors are detected.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the value of the <code>immediate</code> property (see
+<a href="jsf-page002.html#BNARI">The immediate Attribute</a>) of the component
+emitting the event, action events can be processed during the Invoke
+Application phase or the Apply Request Values phase, and value-change
+events can be processed during the Process Validations phase or the
+Apply Request Values phase.</p>
+</div>
+<div class="paragraph">
+<p>System events are generated by an <code>Object</code> rather than a <code>UIComponent</code>.
+They are generated during the execution of an application at predefined
+times. They are applicable to the entire application rather than to a
+specific component.</p>
+</div>
+<div class="paragraph">
+<p>A data-model event occurs when a new row of a <code>UIData</code> component is
+selected.</p>
+</div>
+<div class="paragraph">
+<p>There are two ways to cause your application to react to action events
+or value-change events that are emitted by a standard component:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Implement an event listener class to handle the event, and register
+the listener on the component by nesting either an
+<code>f:valueChangeListener</code> tag or an <code>f:actionListener</code> tag inside the
+component tag.</p>
+</li>
+<li>
+<p>Implement a method of a managed bean to handle the event, and refer to
+the method with a method expression from the appropriate attribute of
+the component&#8217;s tag.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-custom007.html#BNAUT">Implementing an Event Listener</a> for
+information on how to implement an event listener. See
+<a href="jsf-page-core002.html#BNASZ">Registering Listeners on Components</a> for
+information on how to register the listener on a component.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-develop003.html#BNAVD">Writing a Method to Handle an Action
+Event</a> and <a href="jsf-develop003.html#BNAVF">Writing a Method to Handle a
+Value-Change Event</a> for information on how to implement managed bean
+methods that handle these events.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="jsf-page-core004.html#BNATN">Referencing a Managed Bean Method</a>
+for information on how to refer to the managed bean method from the
+component tag.</p>
+</div>
+<div class="paragraph">
+<p>When emitting events from custom components, you must implement the
+appropriate event class and manually queue the event on the component in
+addition to implementing an event listener class or a managed bean
+method that handles the event. <a href="jsf-custom008.html#BNAWD">Handling
+Events for Custom Components</a> explains how to do this.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="validation-model">Validation Model</h3>
+<div class="paragraph">
+<p>JavaServer Faces technology supports a mechanism for validating the
+local data of editable components (such as text fields). This validation
+occurs before the corresponding model data is updated to match the local
+value.</p>
+</div>
+<div class="paragraph">
+<p>Like the conversion model, the validation model defines a set of
+standard classes for performing common data validation checks. The
+JavaServer Faces core tag library also defines a set of tags that
+correspond to the standard <code>javax.faces.validator.Validator</code>
+implementations. See <a href="jsf-page-core003.html#BNATC">Using the Standard
+Validators</a> for a list of all the standard validation classes and
+corresponding tags.</p>
+</div>
+<div class="paragraph">
+<p>Most of the tags have a set of attributes for configuring the
+validator&#8217;s properties, such as the minimum and maximum allowable values
+for the component&#8217;s data. The page author registers the validator on a
+component by nesting the validator&#8217;s tag within the component&#8217;s tag.</p>
+</div>
+<div class="paragraph">
+<p>In addition to validators that are registered on the component, you can
+declare a default validator that is registered on all <code>UIInput</code>
+components in the application. For more information on default
+validators, see <a href="jsf-configure007.html#GIREB">Using Default
+Validators</a>.</p>
+</div>
+<div class="paragraph">
+<p>The validation model also allows you to create your own custom validator
+and corresponding tag to perform custom validation. The validation model
+provides two ways to implement custom validation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Implement a <code>Validator</code> interface that performs the validation.</p>
+</li>
+<li>
+<p>Implement a managed bean method that performs the validation.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you are implementing a <code>Validator</code> interface, you must also do the
+following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Register the <code>Validator</code> implementation with the application.</p>
+</li>
+<li>
+<p>Create a custom tag or use an <code>f:validator</code> tag to register the
+validator on the component.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the previously described standard validation model, the validator is
+defined for each input component on a page. The Bean Validation model
+allows the validator to be applied to all fields in a page. See
+<a href="bean-validation.html#CHDGJIIA">Chapter 22, "Introduction to Bean
+Validation"</a> and <a href="bean-validation-advanced.html#GKAHP">Chapter 23,
+"Bean Validation: Advanced Topics"</a> for more information on Bean
+Validation.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-intro004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-intro006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

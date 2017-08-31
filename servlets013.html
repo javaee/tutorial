@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Nonblocking I/O</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets012.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets014.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="nonblocking-io">Nonblocking I/O</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web containers in application servers normally use a server thread per
+client request. To develop scalable web applications, you must ensure
+that threads associated with client requests are never sitting idle
+waiting for a blocking operation to complete.
+<a href="servlets012.html#BEIGCFDF">Asynchronous Processing</a> provides a
+mechanism to execute application-specific blocking operations in a new
+thread, returning the thread associated with the request immediately to
+the container. Even if you use asynchronous processing for all the
+application-specific blocking operations inside your service methods,
+threads associated with client requests can be momentarily sitting idle
+because of input/output considerations.</p>
+</div>
+<div class="paragraph">
+<p>For example, if a client is submitting a large HTTP POST request over a
+slow network connection, the server can read the request faster than the
+client can provide it. Using traditional I/O, the container thread
+associated with this request would be sometimes sitting idle waiting for
+the rest of the request.</p>
+</div>
+<div class="paragraph">
+<p>Java EE provides nonblocking I/O support for servlets and filters when
+processing requests in asynchronous mode. The following steps summarize
+how to use nonblocking I/O to process requests and write responses
+inside service methods.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Put the request in asynchronous mode as described in
+<a href="servlets012.html#BEIGCFDF">Asynchronous Processing</a>.</p>
+</li>
+<li>
+<p>Obtain an input stream and/or an output stream from the request and
+response objects in the service method.</p>
+</li>
+<li>
+<p>Assign a read listener to the input stream and/or a write listener
+to the output stream.</p>
+</li>
+<li>
+<p>Process the request and the response inside the listener&#8217;s callback
+methods.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="#BEIFDICJ">Table 17-4</a> and <a href="#BEIFIIIH">Table 17-5</a> describe the
+methods available in the servlet input and output streams for
+nonblocking I/O support. <a href="#BEIFGJCG">Table 17-6</a> describes the
+interfaces for read listeners and write listeners.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref106"></a><a id="BEIFDICJ"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 17-4 Nonblocking I/O Support in javax.servlet.ServletInputStream</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void setReadListener(ReadListener rl)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Associates this input stream
+with a listener object that contains callback methods to read data
+asynchronously. You provide the listener object as an anonymous class or
+use another mechanism to pass the input stream to the read listener
+object.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean isReady()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns true if data can be read without blocking.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean isFinished()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns true when all the data has been read.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref107"></a><a id="BEIFIIIH"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 17-5 Nonblocking I/O Support in javax.servlet.ServletOutputStream</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void setWriteListener(WriteListener wl)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Associates this output
+stream with a listener object that contains callback methods to write
+data asynchronously. You provide the write listener object as an
+anonymous class or use another mechanism to pass the output stream to
+the write listener object.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean isReady()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns true if data can be written without
+blocking.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref108"></a><a id="BEIFGJCG"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 17-6 Listener Interfaces for Nonblocking I/O Support</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 52%;">
+<colgroup>
+<col style="width: 36.6336%;">
+<col style="width: 62.3762%;">
+<col style="width: 0.9902%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">Methods</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ReadListener</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>void onDataAvailable()</code></p>
+</div>
+<div class="paragraph">
+<p><code>void onAllDataRead()</code></p>
+</div>
+<div class="paragraph">
+<p><code>void onError(Throwable t)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>ServletInputStream</code> instance calls these methods on its listener
+when there is data available to read, when all the data has been read,
+or when there is an error.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WriteListener</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>void onWritePossible()</code></p>
+</div>
+<div class="paragraph">
+<p><code>void onError(Throwable t)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>ServletOutputStream</code> instance calls these methods on its listener
+when it is possible to write data without blocking or when there is an
+error.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="reading-a-large-http-post-request-using-nonblocking-io">Reading a Large HTTP POST Request Using Nonblocking I/O</h3>
+<div class="paragraph">
+<p>The code in this section shows how to read a large HTTP POST request
+inside a servlet by putting the request in asynchronous mode (as
+described in <a href="servlets012.html#BEIGCFDF">Asynchronous Processing</a>) and
+using the nonblocking I/O functionality from <a href="#BEIFDICJ">Table 17-4</a>
+and <a href="#BEIFGJCG">Table 17-6</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns={"/asyncioservlet"}, asyncSupported=true)
+public class AsyncIOServlet extends HttpServlet {
+   @Override
+   public void doPost(HttpServletRequest request,
+                      HttpServletResponse response)
+                      throws IOException {
+      final AsyncContext acontext = request.startAsync();
+      final ServletInputStream input = request.getInputStream();
+
+      input.setReadListener(new ReadListener() {
+         byte buffer[] = new byte[4*1024];
+         StringBuilder sbuilder = new StringBuilder();
+         @Override
+         public void onDataAvailable() {
+            try {
+               do {
+                  int length = input.read(buffer);
+                  sbuilder.append(new String(buffer, 0, length));
+               } while(input.isReady());
+            } catch (IOException ex) { ... }
+         }
+         @Override
+         public void onAllDataRead() {
+            try {
+               acontext.getResponse().getWriter()
+                                     .write("...the response...");
+            } catch (IOException ex) { ... }
+            acontext.complete();
+         }
+         @Override
+         public void onError(Throwable t) { ... }
+      });
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example declares the web servlet with asynchronous support using
+the <code>@WebServlet</code> annotation parameter <code>asyncSupported=true</code>. The
+service method first puts the request in asynchronous mode by calling
+the <code>startAsync()</code> method of the request object, which is required in
+order to use nonblocking I/O. Then, the service method obtains an input
+stream associated with the request and assigns a read listener defined
+as an inner class. The listener reads parts of the request as they
+become available and then writes some response to the client when it
+finishes reading the request.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets012.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets014.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

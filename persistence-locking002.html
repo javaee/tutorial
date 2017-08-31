@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Lock Modes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-locking001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-entitygraphs.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="lock-modes">Lock Modes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The application may increase the level of locking for an entity by
+specifying the use of lock modes. Lock modes may be specified to
+increase the level of optimistic locking or to request the use of
+pessimistic locks.</p>
+</div>
+<div class="paragraph">
+<p>The use of optimistic lock modes causes the persistence provider to
+check the version attributes for entities that were read (but not
+modified) during a transaction as well as for entities that were
+updated.</p>
+</div>
+<div class="paragraph">
+<p>The use of pessimistic lock modes specifies that the persistence
+provider is to immediately acquire long-term read or write locks for the
+database data corresponding to entity state.</p>
+</div>
+<div class="paragraph">
+<p>You can set the lock mode for an entity operation by specifying one of
+the lock modes defined in the <code>javax.persistence.LockModeType</code>
+enumerated type, listed in <a href="#GKJIE">Table 43-1</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref183"></a><a id="GKJIE"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 43-1 Lock Modes for Concurrent Entity Access</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 38%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Lock Mode</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OPTIMISTIC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Obtain an optimistic read lock for all entities with
+version attributes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OPTIMISTIC_FORCE_INCREMENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Obtain an optimistic read lock for all
+entities with version attributes, and increment the version attribute
+value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PESSIMISTIC_READ</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Immediately obtain a long-term read lock on the data to prevent the data
+from being modified or deleted. Other transactions may read the data
+while the lock is maintained, but may not modify or delete the data.</p>
+</div>
+<div class="paragraph">
+<p>The persistence provider is permitted to obtain a database write lock
+when a read lock was requested, but not vice versa.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PESSIMISTIC_WRITE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Immediately obtain a long-term write lock on the
+data to prevent the data from being read, modified, or deleted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PESSIMISTIC_FORCE_INCREMENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Immediately obtain a long-term lock on
+the data to prevent the data from being modified or deleted, and
+increment the version attribute of versioned entities.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A synonym for <code>OPTIMISTIC</code>. Use of <code>LockModeType.OPTIMISTIC</code> is
+to be preferred for new applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WRITE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A synonym for <code>OPTIMISTIC_FORCE_INCREMENT</code>. Use of
+<code>LockModeType.OPTIMISTIC_FORCE_INCREMENT</code> is to be preferred for new
+applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NONE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No additional locking will occur on the data in the database.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="setting-the-lock-mode">Setting the Lock Mode</h3>
+<div class="paragraph">
+<p>To specify the lock mode, use one of the following techniques:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Call the <code>EntityManager.lock</code> method, passing in one of the lock
+modes:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+Person person = ...;
+em.lock(person, LockModeType.OPTIMISTIC);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Call one of the <code>EntityManager.find</code> methods that take the lock mode
+as a parameter:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+String personPK = ...;
+Person person = em.find(Person.class, personPK,
+    LockModeType.PESSIMISTIC_WRITE);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Call one of the <code>EntityManager.refresh</code> methods that take the lock
+mode as a parameter:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">EntityManager em = ...;
+String personPK = ...;
+Person person = em.find(Person.class, personPK);
+...
+em.refresh(person, LockModeType.OPTIMISTIC_FORCE_INCREMENT);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Call the <code>Query.setLockMode</code> or <code>TypedQuery.setLockMode</code> method,
+passing the lock mode as the parameter:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Query q = em.createQuery(...);
+q.setLockMode(LockModeType.PESSIMISTIC_FORCE_INCREMENT);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add a <code>lockMode</code> element to the <code>@NamedQuery</code> annotation:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@NamedQuery(name="lockPersonQuery",
+  query="SELECT p FROM Person p WHERE p.name LIKE :name",
+  lockMode=PESSIMISTIC_READ)</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-pessimistic-locking">Using Pessimistic Locking</h3>
+<div class="paragraph">
+<p>Versioned entities, as well as entities that do not have version
+attributes, can be locked pessimistically.</p>
+</div>
+<div class="paragraph">
+<p>To lock entities pessimistically, set the lock mode to
+<code>PESSIMISTIC_READ</code>, <code>PESSIMISTIC_WRITE</code>, or
+<code>PESSIMISTIC_FORCE_INCREMENT</code>.</p>
+</div>
+<div class="paragraph">
+<p>If a pessimistic lock cannot be obtained on the database rows, and the
+failure to lock the data results in a transaction rollback, a
+<code>PessimisticLockException</code> is thrown. If a pessimistic lock cannot be
+obtained, but the locking failure doesn&#8217;t result in a transaction
+rollback, a <code>LockTimeoutException</code> is thrown.</p>
+</div>
+<div class="paragraph">
+<p>Pessimistically locking a versioned entity with
+<code>PESSIMISTIC_FORCE_INCREMENT</code> results in the version attribute being
+incremented even if the entity data is unmodified. When pessimistically
+locking a versioned entity, the persistence provider will perform the
+version checks that occur during optimistic locking, and if the version
+check fails, an <code>OptimisticLockException</code> will be thrown. An attempt to
+lock a non-versioned entity with <code>PESSIMISTIC_FORCE_INCREMENT</code> is not
+portable and may result in a <code>PersistenceException</code> if the persistence
+provider does not support optimistic locks for non-versioned entities.
+Locking a versioned entity with <code>PESSIMISTIC_WRITE</code> results in the
+version attribute being incremented if the transaction was successfully
+committed.</p>
+</div>
+<div class="sect3">
+<h4 id="pessimistic-locking-timeouts">Pessimistic Locking Timeouts</h4>
+<div class="paragraph">
+<p>Use the <code>javax.persistence.lock.timeout</code> property to specify the length
+of time in milliseconds the persistence provider should wait to obtain a
+lock on the database tables. If the time it takes to obtain a lock
+exceeds the value of this property, a <code>LockTimeoutException</code> will be
+thrown, but the current transaction will not be marked for rollback. If
+you set this property to <code>0</code>, the persistence provider should throw a
+<code>LockTimeoutException</code> if it cannot immediately obtain a lock.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Portable applications should not rely on the setting of
+<code>javax.persistence.lock.timeout</code>, because the locking strategy and
+underlying database may mean that the timeout value cannot be used. The
+value of <code>javax.persistence.lock.timeout</code> is a hint, not a contract.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This property may be set programmatically by passing it to the
+<code>EntityManager</code> methods that allow lock modes to be specified, the
+<code>Query.setLockMode</code> and <code>TypedQuery.setLockMode</code> methods, the
+<code>@NamedQuery</code> annotation, and the
+<code>Persistence.createEntityManagerFactory</code> method. It may also be set as a
+property in the <code>persistence.xml</code> deployment descriptor.</p>
+</div>
+<div class="paragraph">
+<p>If <code>javax.persistence.lock.timeout</code> is set in multiple places, the value
+will be determined in the following order:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The argument to one of the <code>EntityManager</code> or <code>Query</code> methods</p>
+</li>
+<li>
+<p>The setting in the <code>@NamedQuery</code> annotation</p>
+</li>
+<li>
+<p>The argument to the <code>Persistence.createEntityManagerFactory</code> method</p>
+</li>
+<li>
+<p>The value in the <code>persistence.xml</code> deployment descriptor</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-locking001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-entitygraphs.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

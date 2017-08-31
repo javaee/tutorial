@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Creating WebSocket Applications in the Java EE Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="websocket001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="websocket003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="creating-websocket-applications-in-the-java-ee-platform">Creating WebSocket Applications in the Java EE Platform</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Java EE platform includes the Java API for WebSocket (JSR 356),
+which enables you to create, configure, and deploy WebSocket endpoints
+in web applications. The WebSocket client API specified in JSR 356 also
+enables you to access remote WebSocket endpoints from any Java
+application.</p>
+</div>
+<div class="paragraph">
+<p>The Java API for WebSocket consists of the following packages.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>javax.websocket.server</code> package contains annotations, classes,
+and interfaces to create and configure server endpoints.</p>
+</li>
+<li>
+<p>The <code>javax.websocket</code> package contains annotations, classes,
+interfaces, and exceptions that are common to client and server
+endpoints.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>WebSocket endpoints are instances of the <code>javax.websocket.Endpoint</code>
+class. The Java API for WebSocket enables you to create two kinds of
+endpoints: programmatic endpoints and annotated endpoints. To create a
+programmatic endpoint, you extend the <code>Endpoint</code> class and override its
+lifecycle methods. To create an annotated endpoint, you decorate a Java
+class and some of its methods with the annotations provided by the
+packages mentioned previously. After you have created an endpoint, you
+deploy it to an specific URI in the application so that remote clients
+can connect to it.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In most cases, it is easier to create and deploy an annotated endpoint
+than a programmatic endpoint. This chapter provides a simple example of
+a programmatic endpoint, but it focuses on annotated endpoints.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="creating-and-deploying-a-websocket-endpoint">Creating and Deploying a WebSocket Endpoint</h3>
+<div class="paragraph">
+<p>The process for creating and deploying a WebSocket endpoint:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an endpoint class.</p>
+</li>
+<li>
+<p>Implement the lifecycle methods of the endpoint.</p>
+</li>
+<li>
+<p>Add your business logic to the endpoint.</p>
+</li>
+<li>
+<p>Deploy the endpoint inside a web application.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The process is slightly different for programmatic endpoints and
+annotated endpoints, and it is covered in detail in the following
+sections.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>As opposed to servlets, WebSocket endpoints are instantiated multiple
+times. The container creates an instance of an endpoint per connection
+to its deployment URI. Each instance is associated with one and only one
+connection. This facilitates keeping user state for each connection and
+makes development easier, because there is only one thread executing the
+code of an endpoint instance at any given time.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="websocket001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="websocket003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

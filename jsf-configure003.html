@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Application Configuration Resource File</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="application-configuration-resource-file">Application Configuration Resource File</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JavaServer Faces technology provides a portable configuration format (as
+an XML document) for configuring application resources. One or more XML
+documents, called application configuration resource files, may use this
+format to register and configure objects and resources and to define
+navigation rules for applications. An application configuration resource
+file is usually named <code>faces-config.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>You need an application configuration resource file in the following
+cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To specify configuration elements for your application that are not
+available through managed bean annotations, such as localized messages
+and navigation rules</p>
+</li>
+<li>
+<p>To override managed bean annotations when the application is deployed</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The application configuration resource file must be valid against the
+XML schema located at
+<code>http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd</code>.</p>
+</div>
+<div class="paragraph">
+<p>In addition, each file must include the following information, in the
+following order:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The XML version number, usually with an <code>encoding</code> attribute:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;?xml version="1.0" encoding='UTF-8'?&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>A <code>faces-config</code> tag enclosing all the other declarations:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"&gt;
+    ...
+&lt;/faces-config&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can have more than one application configuration resource file for
+an application. The JavaServer Faces implementation finds the
+configuration file or files by looking for the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A resource named <code>/META-INF/faces-config.xml</code> in any of the JAR files
+in the web application&#8217;s <code>/WEB-INF/lib/</code> directory and in parent class
+loaders. If a resource with this name exists, it is loaded as a
+configuration resource. This method is practical for a packaged library
+containing some components and renderers. In addition, any file with a
+name that ends in <code>faces-config.xml</code> is also considered a configuration
+resource and is loaded as such.</p>
+</li>
+<li>
+<p>A context initialization parameter,
+<code>javax.faces.application.CONFIG_FILES</code>, in your web deployment
+descriptor file that specifies one or more (comma-delimited) paths to
+multiple configuration files for your web application. This method is
+most often used for enterprise-scale applications that delegate to
+separate groups the responsibility for maintaining the file for each
+portion of a big application.</p>
+</li>
+<li>
+<p>A resource named <code>faces-config.xml</code> in the <code>/WEB-INF/</code> directory of
+your application. Simple web applications make their configuration files
+available in this way.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To access the resources registered with the application, an application
+developer can use an instance of the
+<code>javax.faces.application.Application</code> class, which is automatically
+created for each application. The <code>Application</code> instance acts as a
+centralized factory for resources that are defined in the XML file.</p>
+</div>
+<div class="paragraph">
+<p>When an application starts up, the JavaServer Faces implementation
+creates a single instance of the <code>Application</code> class and configures it
+with the information you provided in the application configuration
+resource file.</p>
+</div>
+<div class="sect2">
+<h3 id="configuring-eager-application-scoped-managed-beans">Configuring Eager Application-Scoped Managed Beans</h3>
+<div class="paragraph">
+<p>JavaServer Faces managed beans (either specified in the
+f`aces-config.xml` file or annotated with
+<code>javax.faces.bean.ManagedBean</code>) are lazily instantiated. That is, that
+they are instantiated when a request is made from the application.</p>
+</div>
+<div class="paragraph">
+<p>To force an application-scoped bean to be instantiated and placed in the
+application scope as soon as the application is started and before any
+request is made, the <code>eager</code> attribute of the managed bean should be set
+to <code>true</code>, as shown in the following examples.</p>
+</div>
+<div class="paragraph">
+<p>The <code>faces-config.xml</code> file declaration is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;managed-bean eager="true"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The annotation is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ManagedBean(eager=true)
+@ApplicationScoped</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ordering-of-application-configuration-resource-files">Ordering of Application Configuration Resource Files</h3>
+<div class="paragraph">
+<p>Because JavaServer Faces technology allows the use of multiple
+application configuration resource files stored in different locations,
+the order in which they are loaded by the implementation becomes
+important in certain situations (for example, when using
+application-level objects). This order can be defined through an
+<code>ordering</code> element and its subelements in the application configuration
+resource file itself. The ordering of application configuration resource
+files can be absolute or relative.</p>
+</div>
+<div class="paragraph">
+<p>Absolute ordering is defined by an <code>absolute-ordering</code> element in the
+file. With absolute ordering, the user specifies the order in which
+application configuration resource files will be loaded. The following
+example shows an entry for absolute ordering.</p>
+</div>
+<div class="paragraph">
+<p>File <code>my-faces-config.xml</code> contains the following elements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;faces-config&gt;
+    &lt;name&gt;myJSF&lt;/name&gt;
+    &lt;absolute-ordering&gt;
+        &lt;name&gt;A&lt;/name&gt;
+        &lt;name&gt;B&lt;/name&gt;
+        &lt;name&gt;C&lt;/name&gt;
+    &lt;/absolute-ordering&gt;
+&lt;/faces-config&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, A, B, and C are different application configuration
+resource files and are to be loaded in the listed order.</p>
+</div>
+<div class="paragraph">
+<p>If there is an <code>absolute-ordering</code> element in the file, only the files
+listed by the subelement <code>name</code> are processed. To process any other
+application configuration resource files, an <code>others</code> subelement is
+required. In the absence of the <code>others</code> subelement, all other unlisted
+files will be ignored at load time.</p>
+</div>
+<div class="paragraph">
+<p>Relative ordering is defined by an <code>ordering</code> element and its
+subelements <code>before</code> and <code>after</code>. With relative ordering, the order in
+which application configuration resource files will be loaded is
+calculated by considering ordering entries from the different files. The
+following example shows some of these considerations. In the following
+example, <code>config-A</code>, <code>config-B</code>, and <code>config-C</code> are different
+application configuration resource files.</p>
+</div>
+<div class="paragraph">
+<p>File <code>config-A</code> contains the following elements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;faces-config&gt;
+    &lt;name&gt;config-A&lt;/name&gt;
+    &lt;ordering&gt;
+        &lt;before&gt;
+            &lt;name&gt;config-B&lt;/name&gt;
+        &lt;/before&gt;
+    &lt;/ordering&gt;
+&lt;/faces-config&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>File <code>config-B</code> (not shown here) does not contain any <code>ordering</code>
+elements.</p>
+</div>
+<div class="paragraph">
+<p>File <code>config-C</code> contains the following elements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;faces-config&gt;
+    &lt;name&gt;config-C&lt;/name&gt;
+    &lt;ordering&gt;
+        &lt;after&gt;
+            &lt;name&gt;config-B&lt;/name&gt;
+        &lt;/after&gt;
+    &lt;/ordering&gt;
+&lt;/faces-config&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Based on the <code>before</code> subelement entry, file <code>config-A</code> will be loaded
+before the <code>config-B</code> file. Based on the <code>after</code> subelement entry, file
+<code>config-C</code> will be loaded after the <code>config-B</code> file.</p>
+</div>
+<div class="paragraph">
+<p>In addition, a subelement <code>others</code> can also be nested within the
+<code>before</code> and <code>after</code> subelements. If the <code>others</code> element is present,
+the specified file may receive highest or lowest preference among both
+listed and unlisted configuration files.</p>
+</div>
+<div class="paragraph">
+<p>If an <code>ordering</code> element is not present in an application configuration
+file, then that file will be loaded after all the files that contain
+<code>ordering</code> elements.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

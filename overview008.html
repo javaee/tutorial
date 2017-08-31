@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Java EE APIs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="overview007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="java-ee-apis">Java EE APIs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#BNACK">Figure 1-6</a> shows the relationships among the Java EE
+containers.</p>
+</div>
+<div id="BNACK" class="paragraph">
+<div class="title"><strong>Figure 1-6 Java EE Containers</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_006.png" alt="Diagram of Java EE containers and their relationships"></span></p>
+</div>
+<div class="paragraph">
+<p><a href="#GJQMG">Figure 1-7</a> shows the availability of the Java EE APIs in
+the web container.</p>
+</div>
+<div id="GJQMG" class="paragraph">
+<div class="title"><strong>Figure 1-7 Java EE APIs in the Web Container</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_007.png" alt="Diagram of Java EE APIs in the web container"></span></p>
+</div>
+<div class="paragraph">
+<p><a href="#GJQMN">Figure 1-8</a> shows the availability of the Java EE APIs in
+the EJB container.</p>
+</div>
+<div id="GJQMN" class="paragraph">
+<div class="title"><strong>Figure 1-8 Java EE APIs in the EJB Container</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_008.png" alt="Diagram of Java EE APIs in the EJB container"></span></p>
+</div>
+<div class="paragraph">
+<p><a href="#GJQNH">Figure 1-9</a> shows the availability of the Java EE APIs in
+the application client container.</p>
+</div>
+<div id="GJQNH" class="paragraph">
+<div class="title"><strong>Figure 1-9 Java EE APIs in the Application Client Container</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_009.png" alt="Diagram of Java EE APIs in the application client container"></span></p>
+</div>
+<div class="paragraph">
+<p>The following sections give a brief summary of the technologies required
+by the Java EE platform and the APIs used in Java EE applications.</p>
+</div>
+<div class="sect2">
+<h3 id="enterprise-javabeans-technology">Enterprise JavaBeans Technology</h3>
+<div class="paragraph">
+<p>An Enterprise JavaBeans (EJB) component, or enterprise bean, is a body
+of code that has fields and methods to implement modules of business
+logic. You can think of an enterprise bean as a building block that can
+be used alone or with other enterprise beans to execute business logic
+on the Java EE server.</p>
+</div>
+<div class="paragraph">
+<p>Enterprise beans are either session beans or message-driven beans.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A session bean represents a transient conversation with a client. When
+the client finishes executing, the session bean and its data are gone.</p>
+</li>
+<li>
+<p>A message-driven bean combines features of a session bean and a
+message listener, allowing a business component to receive messages
+asynchronously. Commonly, these are Java Message Service (JMS) messages.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Enterprise JavaBeans 3.2 and
+Interceptors 1.2. The Interceptors specification is part of the EJB
+specification.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-servlet-technology">Java Servlet Technology</h3>
+<div class="paragraph">
+<p>Java Servlet technology lets you define HTTP-specific servlet classes. A
+servlet class extends the capabilities of servers that host applications
+accessed by way of a request-response programming model. Although
+servlets can respond to any type of request, they are commonly used to
+extend the applications hosted by web servers.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE 8 platform, new Java Servlet technology features include
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Server Push</p>
+</li>
+<li>
+<p>HTTP Trailer</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Servlet 4.0</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="javaserver-faces-technology">JavaServer Faces Technology</h3>
+<div class="paragraph">
+<p>JavaServer Faces technology is a user interface framework for building
+web applications. The main components of JavaServer Faces technology are
+as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A GUI component framework.</p>
+</li>
+<li>
+<p>A flexible model for rendering components in different kinds of HTML
+or different markup languages and technologies. A <code>Renderer</code> object
+generates the markup to render the component and converts the data
+stored in a model object to types that can be represented in a view.</p>
+</li>
+<li>
+<p>A standard <code>RenderKit</code> for generating HTML 4.01 markup.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following features support the GUI components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Input validation</p>
+</li>
+<li>
+<p>Event handling</p>
+</li>
+<li>
+<p>Data conversion between model objects and components</p>
+</li>
+<li>
+<p>Managed model object creation</p>
+</li>
+<li>
+<p>Page navigation configuration</p>
+</li>
+<li>
+<p>Expression Language (EL)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All this functionality is available using standard Java APIs and
+XML-based configuration files.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE 8 platform, new features of JavaServer Faces technology
+include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Direct support for WebSockets via the new <code>&lt;f:websocket&gt;</code> tag</p>
+</li>
+<li>
+<p>Class-level bean validation via the new <code>&lt;f:validateWholeBean&gt;</code> tag</p>
+</li>
+<li>
+<p>A CDI-compatible <code>@ManagedProperty</code> annotation</p>
+</li>
+<li>
+<p>Enhanced component search expression framework</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JavaServer Faces 2.3 and Expression
+Language 3.0.</p>
+</div>
+<div class="paragraph">
+<p>For an excellent summary of what&#8217;s new in JSF 2.3,
+see <code><a href="https://javaserverfaces.github.io/users.html" class="bare">https://javaserverfaces.github.io/users.html</a></code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="javaserver-pages-technology">JavaServer Pages Technology</h3>
+<div class="paragraph">
+<p>JavaServer Pages (JSP) technology lets you put snippets of servlet code
+directly into a text-based document. A JSP page is a text-based document
+that contains two types of text:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Static data, which can be expressed in any text-based format, such as
+HTML or XML</p>
+</li>
+<li>
+<p>JSP elements, which determine how the page constructs dynamic content</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For information about JSP technology, see <em>The Java EE 5 Tutorial</em> at
+<code><a href="http://docs.oracle.com/javaee/5/tutorial/doc/" class="bare">http://docs.oracle.com/javaee/5/tutorial/doc/</a></code>.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JavaServer Pages 2.3 for compatibility
+with earlier releases but recommends the use of Facelets as the display
+technology in new applications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="javaserver-pages-standard-tag-library">JavaServer Pages Standard Tag Library</h3>
+<div class="paragraph">
+<p>The JavaServer Pages Standard Tag Library (JSTL) encapsulates core
+functionality common to many JSP applications. Instead of mixing tags
+from numerous vendors in your JSP applications, you use a single,
+standard set of tags. This standardization allows you to deploy your
+applications on any JSP container that supports JSTL and makes it more
+likely that the implementation of the tags is optimized.</p>
+</div>
+<div class="paragraph">
+<p>JSTL has iterator and conditional tags for handling flow control, tags
+for manipulating XML documents, internationalization tags, tags for
+accessing databases using SQL, and tags for commonly used functions.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JSTL 1.2.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-persistence-api">Java Persistence API</h3>
+<div class="paragraph">
+<p>The Java Persistence API (JPA) is a Java standards–based solution for
+persistence. Persistence uses an object/relational mapping approach to
+bridge the gap between an object-oriented model and a relational
+database. The Java Persistence API can also be used in Java SE
+applications outside of the Java EE environment. Java Persistence
+consists of the following areas:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Java Persistence API</p>
+</li>
+<li>
+<p>The query language</p>
+</li>
+<li>
+<p>Object/relational mapping metadata</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Java Persistence API 2.1.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-transaction-api">Java Transaction API</h3>
+<div class="paragraph">
+<p>The Java Transaction API (JTA) provides a standard interface for
+demarcating transactions. The Java EE architecture provides a default
+auto commit to handle transaction commits and rollbacks. An auto commit
+means that any other applications that are viewing data will see the
+updated data after each database read or write operation. However, if
+your application performs two separate database access operations that
+depend on each other, you will want to use the JTA API to demarcate
+where the entire transaction, including both operations, begins, rolls
+back, and commits.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Java Transaction API 1.2.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-api-for-restful-web-services">Java API for RESTful Web Services</h3>
+<div class="paragraph">
+<p>The Java API for RESTful Web Services (JAX-RS) defines APIs for the
+development of web services built according to the Representational
+State Transfer (REST) architectural style. A JAX-RS application is a web
+application that consists of classes packaged as a servlet in a WAR file
+along with required libraries.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE 8 platform, new RESTful web services features include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reactive Client API</p>
+<div class="paragraph">
+<p>When the results of an invocation on a target resource are received, enhancements to the completion stage APIs in Java SE allow the sequence of those results to be specified, prioritized, combined, or concatenated, and how exceptions can be handled.</p>
+</div>
+</li>
+<li>
+<p>Enhancements in support for server-sent events</p>
+<div class="paragraph">
+<p>Clients may subscribe to server-issued event notifications using a long-running connection. Support for a new media type, text/event-stream, has been added.</p>
+</div>
+</li>
+<li>
+<p>Support for  JSON-B objects, and improved integration with CDI, Servlet, and Bean Validation technologies</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JAX-RS 2.1.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managed-beans">Managed Beans</h3>
+<div class="paragraph">
+<p>Managed Beans, lightweight container-managed objects (POJOs) with
+minimal requirements, support a small set of basic services, such as
+resource injection, lifecycle callbacks, and interceptors. Managed Beans
+represent a generalization of the managed beans specified by JavaServer
+Faces technology and can be used anywhere in a Java EE application, not
+just in web modules.</p>
+</div>
+<div class="paragraph">
+<p>The Managed Beans specification is part of the Java EE 8 platform
+specification (JSR 342). The Java EE 8 platform requires Managed Beans
+1.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="contexts-and-dependency-injection-for-java-ee">Contexts and Dependency Injection for Java EE</h3>
+<div class="paragraph">
+<p>Contexts and Dependency Injection for Java EE (CDI) defines a set of
+contextual services, provided by Java EE containers, that make it easy
+for developers to use enterprise beans along with JavaServer Faces
+technology in web applications. Designed for use with stateful objects,
+CDI also has many broader uses, allowing developers a great deal of
+flexibility to integrate different kinds of components in a loosely
+coupled but typesafe way.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE 8 platform, new CDI features include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An API for bootstrapping a CDI container in Java SE 8</p>
+</li>
+<li>
+<p>Support for observer ordering, which determines the order in which the observer methods for a particular event are invoked, and support for firing events asynchronously</p>
+</li>
+<li>
+<p>Configurators interfaces, which are used for dynamically defining and modifying CDI objects</p>
+</li>
+<li>
+<p>Built-in annotation literals, a convenience feature for creating instances of annotations, and more</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires CDI 2.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dependency-injection-for-java">Dependency Injection for Java</h3>
+<div class="paragraph">
+<p>Dependency Injection for Java defines a standard set of annotations (and
+one interface) for use on injectable classes.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE platform, CDI provides support for Dependency Injection.
+Specifically, you can use injection points only in a CDI-enabled
+application.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Dependency Injection for Java 1.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bean-validation">Bean Validation</h3>
+<div class="paragraph">
+<p>The Bean Validation specification defines a metadata model and API for
+validating data in JavaBeans components. Instead of distributing
+validation of data over several layers, such as the browser and the
+server side, you can define the validation constraints in one place and
+share them across the different layers.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE 8 platform, new Bean Validation features include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Support for new features in Java SE 8, such as the Date-Time API</p>
+</li>
+<li>
+<p>Addition of new built-in Bean Validation constraints</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Bean Validation 2.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-message-service-api">Java Message Service API</h3>
+<div class="paragraph">
+<p>The Java Message Service (JMS) API is a messaging standard that allows
+Java EE application components to create, send, receive, and read
+messages. It enables distributed communication that is loosely coupled,
+reliable, and asynchronous.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JMS 2.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-ee-connector-architecture">Java EE Connector Architecture</h3>
+<div class="paragraph">
+<p>The Java EE Connector Architecture is used by tools vendors and system
+integrators to create resource adapters that support access to
+enterprise information systems that can be plugged in to any Java EE
+product. A resource adapter is a software component that allows Java EE
+application components to access and interact with the underlying
+resource manager of the EIS. Because a resource adapter is specific to
+its resource manager, a different resource adapter typically exists for
+each type of database or enterprise information system.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE Connector Architecture also provides a performance-oriented,
+secure, scalable, and message-based transactional integration of Java EE
+platform–based web services with existing EISs that can be either
+synchronous or asynchronous. Existing applications and EISs integrated
+through the Java EE Connector Architecture into the Java EE platform can
+be exposed as XML-based web services by using JAX-WS and Java EE
+component models. Thus JAX-WS and the Java EE Connector Architecture are
+complementary technologies for enterprise application integration (EAI)
+and end-to-end business integration.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Java EE Connector Architecture 1.7.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="javamail-api">JavaMail API</h3>
+<div class="paragraph">
+<p>Java EE applications use the JavaMail API to send email notifications.
+The JavaMail API has two parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application-level interface used by the application components to
+send mail</p>
+</li>
+<li>
+<p>A service provider interface</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE platform includes the JavaMail API with a service provider
+that allows application components to send Internet mail.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JavaMail 1.5.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-authorization-contract-for-containers">Java Authorization Contract for Containers</h3>
+<div class="paragraph">
+<p>The Java Authorization Contract for Containers (JACC) specification
+defines a contract between a Java EE application server and an
+authorization policy provider. All Java EE containers support this
+contract.</p>
+</div>
+<div class="paragraph">
+<p>The JACC specification defines <code>java.security.Permission</code> classes that
+satisfy the Java EE authorization model. The specification defines the
+binding of container-access decisions to operations on instances of
+these permission classes. It defines the semantics of policy providers
+that use the new permission classes to address the authorization
+requirements of the Java EE platform, including the definition and use
+of roles.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JACC 1.5.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-authentication-service-provider-interface-for-containers">Java Authentication Service Provider Interface for Containers</h3>
+<div class="paragraph">
+<p>The Java Authentication Service Provider Interface for Containers
+(JASPIC) specification defines a service provider interface (SPI) by
+which authentication providers that implement message authentication
+mechanisms may be integrated in client or server message-processing
+containers or runtimes. Authentication providers integrated through this
+interface operate on network messages provided to them by their calling
+containers. The authentication providers transform outgoing messages so
+that the source of each message can be authenticated by the receiving
+container, and the recipient of the message can be authenticated by the
+message sender. Authentication providers authenticate each incoming
+message and return to their calling containers the identity established
+as a result of the message authentication.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JASPIC 1.1.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-api-for-websocket">Java API for WebSocket</h3>
+<div class="paragraph">
+<p>WebSocket is an application protocol that provides full-duplex
+communications between two peers over TCP. The Java API for WebSocket
+enables Java EE applications to create endpoints using annotations that
+specify the configuration parameters of the endpoint and designate its
+lifecycle callback methods.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Java API for WebSocket 1.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-api-for-json-processing">Java API for JSON Processing</h3>
+<div class="paragraph">
+<p>JavaScript Object Notation (JSON) is a text-based data exchange format derived from JavaScript that
+is used in web services and other connected applications. The Java API
+for JSON Processing (JSON-P) enables Java EE applications to parse,
+transform, and query JSON data using the object model or the streaming
+model.</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE 8 platform, new features of JSON-P include support for the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JSON Pointer</p>
+<div class="paragraph">
+<p>Defines a string syntax for referencing a specific value within a JSON document. JSON Pointer includes APIs for extracting values from a target document and transforming them to create a new JSON document.</p>
+</div>
+</li>
+<li>
+<p>JSON Patch</p>
+<div class="paragraph">
+<p>Defines a format for expressing a sequence of operations to be applied to a JSON document.</p>
+</div>
+</li>
+<li>
+<p>JSON Merge Patch</p>
+<div class="paragraph">
+<p>Defines a format and processing rules for applying operations to a JSON document that are based upon specific content of the target document.</p>
+</div>
+</li>
+<li>
+<p>The addition of editing and transformation functions to basic JSON document processing.</p>
+</li>
+<li>
+<p>Helper classes and methods, called JSON Collectors, which leverage features of the Stream API that was introduced in Java SE 8.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires JSON-P 1.1.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-ee-security-api">Java EE Security API</h3>
+<div class="paragraph">
+<p>The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
+Java EE Security introduces the following APIs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SecurityContext</code> interface</p>
+<div class="paragraph">
+<p>Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.</p>
+</div>
+</li>
+<li>
+<p><code>HttpAuthenticationMechanism</code> interface</p>
+<div class="paragraph">
+<p>Authenticates callers of a web application, and is specified only for use in the servlet container.</p>
+</div>
+</li>
+<li>
+<p><code>IdentityStore</code> interface</p>
+<div class="paragraph">
+<p>Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Java EE Security API 1.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="java-api-for-json-binding">Java API for JSON Binding</h3>
+<div class="paragraph">
+<p>The Java API for JSON Binding (JSON-B) provides a binding layer for converting Java objects to and from JSON messages. JSON-B also supports the ability to customize the default mapping process used in this binding layer through the use of Java annotations for a given field, JavaBean property, type or package, or by providing an implementation of a property naming strategy.</p>
+</div>
+<div class="paragraph">
+<p>JSON-B is new to the Java EE 8 platform. The Java EE 8 platform requires JSON-B 1.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="concurrency-utilities-for-java-ee">Concurrency Utilities for Java EE</h3>
+<div class="paragraph">
+<p>Concurrency Utilities for Java EE is a standard API for providing
+asynchronous capabilities to Java EE application components through the
+following types of objects: managed executor service, managed scheduled
+executor service, managed thread factory, and context service.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Concurrency Utilities for Java EE 1.0.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="batch-applications-for-the-java-platform">Batch Applications for the Java Platform</h3>
+<div class="paragraph">
+<p>Batch jobs are tasks that can be executed without user interaction. The
+Batch Applications for the Java Platform specification is a batch
+framework that provides support for creating and running batch jobs in
+Java applications. The batch framework consists of a batch runtime, a
+job specification language based on XML, a Java API to interact with the
+batch runtime, and a Java API to implement batch artifacts.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Batch Applications for the
+Java Platform 1.0.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="overview007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

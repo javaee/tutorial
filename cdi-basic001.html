@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Getting Started</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-basic.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="getting-started">Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Contexts and Dependency Injection (CDI) enables your objects to have
+their dependencies provided to them automatically, instead of creating
+them or receiving them as parameters. CDI also manages the lifecycle of
+those dependencies for you.</p>
+</div>
+<div class="paragraph">
+<p>For example, consider the following servlet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/cdiservlet")
+public class NewServlet extends HttpServlet {
+    private Message message;
+
+    @Override
+    public void init() {
+        message = new MessageB();
+    }
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+                  throws IOException {
+        response.getWriter().write(message.get());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This servlet needs an instance of an object that implements the
+<code>Message</code> interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public interface Message {
+    public String get();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The servlet creates itself an instance of the following object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class MessageB implements Message {
+    public MessageB() { }
+
+    @Override
+    public String get() {
+        return "message B";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using CDI, this servlet can declare its dependency on a <code>Message</code>
+instance and have it injected automatically by the CDI runtime. The new
+servlet code is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/cdiservlet")
+public class NewServlet extends HttpServlet {
+    @Inject private Message message;
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+                  throws IOException {
+        response.getWriter().write(message.get());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The CDI runtime looks for classes that implement the <code>Message</code>
+interface, finds the <code>MessageB</code> class, creates a new instance of it, and
+injects it into the servlet at runtime. To manage the lifecycle of the
+new instance, the CDI runtime needs to know what the scope of the
+instance should be. In this example, the servlet only needs the instance
+to process an HTTP request; the instance can then be garbage collected.
+This is specified using the <code>javax.enterprise.context.RequestScoped</code>
+annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@RequestScoped
+public class MessageB implements Message { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information on scopes, see <a href="cdi-basic008.html#GJBBK">Using
+Scopes</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MessageB</code> class is a CDI bean. CDI beans are classes that CDI can
+instantiate, manage, and inject automatically to satisfy the
+dependencies of other objects. Almost any Java class can be managed and
+injected by CDI. For more information on beans, see
+<a href="cdi-basic003.html#GJEBJ">About Beans</a>. A JAR or WAR file that
+contains a CDI bean is a bean archive. For more information on packaging
+bean archives, see <a href="cdi-basic013.html#GJBNZ">Configuring a CDI
+Application</a> in this chapter and <a href="cdi-adv001.html#CACDCFDE">Packaging
+CDI Applications</a> in <a href="cdi-adv.html#GJEHI">Chapter 26, "Contexts and
+Dependency Injection for Java EE: Advanced Topics"</a>.</p>
+</div>
+<div class="paragraph">
+<p>In this example, <code>MessageB</code> is the only class that implements the
+<code>Message</code> interface. If an application has more than one implementation
+of an interface, CDI provides mechanisms that you can use to select
+which implementation to inject. For more information, see
+<a href="cdi-basic006.html#GJBCK">Using Qualifiers</a> in this chapter and
+<a href="cdi-adv002.html#GJSDF">Using Alternatives in CDI Applications</a> in
+<a href="cdi-adv.html#GJEHI">Chapter 26, "Contexts and Dependency Injection
+for Java EE: Advanced Topics"</a>.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-basic.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

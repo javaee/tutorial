@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Bean-Managed Transactions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="transactions004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="transactions006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="bean-managed-transactions">Bean-Managed Transactions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In bean-managed transaction demarcation, the code in the session or
+message-driven bean explicitly marks the boundaries of the transaction.
+Although beans with container-managed transactions require less coding,
+they have one limitation: When a method is executing, it can be
+associated with either a single transaction or no transaction at all. If
+this limitation will make coding your bean difficult, you should
+consider using bean-managed transactions.</p>
+</div>
+<div class="paragraph">
+<p>The following pseudocode illustrates the kind of fine-grained control
+you can obtain with application-managed transactions. By checking
+various conditions, the pseudocode decides whether to start or stop
+certain transactions within the business method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">begin transaction
+...
+    update table-a
+...
+    if (condition-x)
+   commit transaction
+    else if (condition-y)
+   update table-b
+   commit transaction
+    else
+   rollback transaction
+   begin transaction
+   update table-c
+   commit transaction</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When coding an application-managed transaction for session or
+message-driven beans, you must decide whether to use Java Database
+Connectivity or JTA transactions. The sections that follow discuss both
+types of transactions.</p>
+</div>
+<div class="sect2">
+<h3 id="jta-transactions">JTA Transactions</h3>
+<div class="paragraph">
+<p>JTA, or the Java Transaction API, allows you to demarcate transactions
+in a manner that is independent of the transaction manager
+implementation. GlassFish Server implements the transaction manager with
+the Java Transaction Service (JTS). However, your code doesn&#8217;t call the
+JTS methods directly but instead invokes the JTA methods, which then
+call the lower-level JTS routines.</p>
+</div>
+<div class="paragraph">
+<p>A JTA transaction is controlled by the Java EE transaction manager. You
+may want to use a JTA transaction because it can span updates to
+multiple databases from different vendors. A particular DBMS&#8217;s
+transaction manager may not work with heterogeneous databases. However,
+the Java EE transaction manager does have one limitation: It does not
+support nested transactions. In other words, it cannot start a
+transaction for an instance until the preceding transaction has ended.</p>
+</div>
+<div class="paragraph">
+<p>To demarcate a JTA transaction, you invoke the <code>begin</code>, <code>commit</code>, and
+<code>rollback</code> methods of the <code>javax.transaction.UserTransaction</code> interface.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="returning-without-committing">Returning without Committing</h3>
+<div class="paragraph">
+<p>In a stateless session bean with bean-managed transactions, a business
+method must commit or roll back a transaction before returning. However,
+a stateful session bean does not have this restriction.</p>
+</div>
+<div class="paragraph">
+<p>In a stateful session bean with a JTA transaction, the association
+between the bean instance and the transaction is retained across
+multiple client calls. Even if each business method called by the client
+opens and closes the database connection, the association is retained
+until the instance completes the transaction.</p>
+</div>
+<div class="paragraph">
+<p>In a stateful session bean with a JDBC transaction, the JDBC connection
+retains the association between the bean instance and the transaction
+across multiple calls. If the connection is closed, the association is
+not retained.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="methods-not-allowed-in-bean-managed-transactions">Methods Not Allowed in Bean-Managed Transactions</h3>
+<div class="paragraph">
+<p>Do not invoke the <code>getRollbackOnly</code> and <code>setRollbackOnly</code> methods of the
+<code>EJBContext</code> interface in bean-managed transactions. These methods
+should be used only in container-managed transactions. For bean-managed
+transactions, invoke the <code>getStatus</code> and <code>rollback</code> methods of the
+<code>UserTransaction</code> interface.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="transactions004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="transactions006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

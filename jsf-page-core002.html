@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Registering Listeners on Components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-page-core001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page-core003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="registering-listeners-on-components">Registering Listeners on Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An application developer can implement listeners as classes or as
+managed bean methods. If a listener is a managed bean method, the page
+author references the method from either the component&#8217;s
+<code>valueChangeListener</code> attribute or its <code>actionListener</code> attribute. If
+the listener is a class, the page author can reference the listener from
+either an <code>f:valueChangeListener</code> tag or an <code>f:actionListener</code> tag and
+nest the tag inside the component tag to register the listener on the
+component.</p>
+</div>
+<div class="paragraph">
+<p><a href="jsf-page-core004.html#BNATQ">Referencing a Method That Handles an
+Action Event</a> and <a href="jsf-page-core004.html#BNATS">Referencing a Method
+That Handles a Value-Change Event</a> explain how a page author uses the
+<code>valueChangeListener</code> and <code>actionListener</code> attributes to reference
+managed bean methods that handle events.</p>
+</div>
+<div class="paragraph">
+<p>This section explains how to register a <code>NameChanged</code> value-change
+listener and a <code>BookChange</code> action listener implementation on
+components. The Duke&#8217;s Bookstore case study includes both of these
+listeners.</p>
+</div>
+<div class="sect2">
+<h3 id="registering-a-value-change-listener-on-a-component">Registering a Value-Change Listener on a Component</h3>
+<div class="paragraph">
+<p>A page author can register a <code>ValueChangeListener</code> implementation on a
+component that implements <code>EditableValueHolder</code> by nesting an
+<code>f:valueChangeListener</code> tag within the component&#8217;s tag on the page. The
+<code>f:valueChangeListener</code> tag supports the attributes shown in
+<a href="#GKCLY">Table 11-5</a>, one of which must be used.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref64"></a><a id="GKCLY"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 11-5 Attributes for the f:valueChangeListener Tag</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 21%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">References the fully qualified class name of a
+<code>ValueChangeListener</code> implementation. Can accept a literal or a value
+expression.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>binding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">References an object that implements <code>ValueChangeListener</code>.
+Can accept only a value expression, which must point to a managed bean
+property that accepts and returns a <code>ValueChangeListener</code>
+implementation.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following example shows a value-change listener registered on a
+component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText id="name"
+             size="30"
+             value="#{cashierBean.name}"
+             required="true"
+             requiredMessage="#{bundle.ReqCustomerName}"&gt;
+    &lt;f:valueChangeListener
+        type="javaeetutorial.dukesbookstore.listeners.NameChanged" /&gt;
+&lt;/h:inputText&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example, the core tag <code>type</code> attribute specifies the custom
+<code>NameChanged</code> listener as the <code>ValueChangeListener</code> implementation
+registered on the <code>name</code> component.</p>
+</div>
+<div class="paragraph">
+<p>After this component tag is processed and local values have been
+validated, its corresponding component instance will queue the
+<code>ValueChangeEvent</code> associated with the specified <code>ValueChangeListener</code>
+to the component.</p>
+</div>
+<div class="paragraph">
+<p>The <code>binding</code> attribute is used to bind a <code>ValueChangeListener</code>
+implementation to a managed bean property. This attribute works in a
+similar way to the <code>binding</code> attribute supported by the standard
+converter tags. See <a href="jsf-custom013.html#BNATG">Binding Component
+Values and Instances to Managed Bean Properties</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="registering-an-action-listener-on-a-component">Registering an Action Listener on a Component</h3>
+<div class="paragraph">
+<p>A page author can register an <code>ActionListener</code> implementation on a
+command component by nesting an <code>f:actionListener</code> tag within the
+component&#8217;s tag on the page. Similarly to the <code>f:valueChangeListener</code>
+tag, the <code>f:actionListener</code> tag supports both the <code>type</code> and <code>binding</code>
+attributes. One of these attributes must be used to reference the action
+listener.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of an <code>h:commandLink</code> tag that references an
+<code>ActionListener</code> implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandLink id="Duke" action="bookstore"&gt;
+    &lt;f:actionListener
+        type="javaeetutorial.dukesbookstore.listeners.LinkBookChangeListener" /&gt;
+    &lt;h:outputText value="#{bundle.Book201}"/&gt;
+&lt;/h:commandLink&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>type</code> attribute of the <code>f:actionListener</code> tag specifies the fully
+qualified class name of the <code>ActionListener</code> implementation. Similarly
+to the <code>f:valueChangeListener</code> tag, the <code>f:actionListener</code> tag also
+supports the <code>binding</code> attribute. See
+<a href="jsf-custom014.html#BNATM">Binding Converters, Listeners, and
+Validators to Managed Bean Properties</a> for more information about
+binding listeners to managed bean properties.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the <code>actionListener</code> tag that allows you register a
+custom listener onto a component, the core tag library includes the
+<code>f:setPropertyActionListener</code> tag. You use this tag to register a
+special action listener onto the <code>ActionSource</code> instance associated with
+a component. When the component is activated, the listener will store
+the object referenced by the tag&#8217;s <code>value</code> attribute into the object
+referenced by the tag&#8217;s <code>target</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>The <code>bookcatalog.xhtml</code> page of the Duke&#8217;s Bookstore application uses
+<code>f:setPropertyActionListener</code> with two components: the <code>h:commandLink</code>
+component used to link to the <code>bookdetails.xhtml</code> page and the
+<code>h:commandButton</code> component used to add a book to the cart:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:dataTable id="books"
+    value="#{store.books}"
+    var="book"
+    headerClass="list-header"
+    styleClass="list-background"
+    rowClasses="list-row-even, list-row-odd"
+    border="1"
+    summary="#{bundle.BookCatalog}" &gt;
+    ...
+    &lt;h:column&gt;
+        &lt;f:facet name="header"&gt;
+            &lt;h:outputText value="#{bundle.ItemTitle}"/&gt;
+        &lt;/f:facet&gt;
+        &lt;h:commandLink action="#{catalog.details}"
+                       value="#{book.title}"&gt;
+            &lt;f:setPropertyActionListener target="#{requestScope.book}"
+                                         value="#{book}"/&gt;
+        &lt;/h:commandLink&gt;
+    &lt;/h:column&gt;
+    ...
+    &lt;h:column&gt;
+        &lt;f:facet name="header"&gt;
+            &lt;h:outputText value="#{bundle.CartAdd}"/&gt;
+        &lt;/f:facet&gt;
+        &lt;h:commandButton id="add"
+                         action="#{catalog.add}"
+                         value="#{bundle.CartAdd}"&gt;
+            &lt;f:setPropertyActionListener target="#{requestScope.book}"
+                                         value="#{book}"/&gt;
+        &lt;/h:commandButton&gt;
+    &lt;/h:column&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>h:commandLink</code> and <code>h:commandButton</code> tags are within an
+<code>h:dataTable</code> tag, which iterates over the list of books. The <code>var</code>
+attribute refers to a single book in the list of books.</p>
+</div>
+<div class="paragraph">
+<p>The object referenced by the <code>var</code> attribute of an <code>h:dataTable</code> tag is
+in page scope. However, in this case you need to put this object into
+request scope so that when the user activates the <code>commandLink</code>
+component to go to <code>bookdetails.xhtml</code> or activates the <code>commandButton</code>
+component to go to <code>bookcatalog.xhtml</code>, the book data is available to
+those pages. Therefore, the <code>f:setPropertyActionListener</code> tag is used to
+set the current book object into request scope when the <code>commandLink</code> or
+<code>commandButton</code> component is activated.</p>
+</div>
+<div class="paragraph">
+<p>In the preceding example, the <code>f:setPropertyActionListener</code> tag&#8217;s
+<code>value</code> attribute references the <code>book</code> object. The
+<code>f:setPropertyActionListener</code> tag&#8217;s <code>target</code> attribute references the
+value expression <code>requestScope.book</code>, which is where the <code>book</code> object
+referenced by the <code>value</code> attribute is stored when the <code>commandLink</code> or
+the <code>commandButton</code> component is activated.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-page-core001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-page-core003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

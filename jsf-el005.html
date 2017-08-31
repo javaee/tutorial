@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Operators</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-el004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="operators">Operators</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to the <code>.</code> and <code>[]</code> operators discussed in
+<a href="jsf-el003.html#BNAHU">Value and Method Expressions</a>, the EL provides
+the following operators, which can be used in rvalue expressions only.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Arithmetic: <code>+</code>, <code>-</code> (binary), <code>*</code>, <code>/</code> and <code>div</code>, <code>%</code> and <code>mod</code>, <code>-</code>
+(unary).</p>
+</li>
+<li>
+<p>String concatenation: <code>+=</code>.</p>
+</li>
+<li>
+<p>Logical: <code>and</code>, <code>&amp;&amp;</code>, <code>or</code>, <code>||</code>, <code>not</code>, <code>!</code>.</p>
+</li>
+<li>
+<p>Relational: <code>==</code>, <code>eq</code>, <code>!=</code>, <code>ne</code>, <code>&lt;</code>, <code>lt</code>, <code>&gt;</code>, <code>gt</code>, <code>&lt;=</code>, <code>ge</code>,
+<code>&gt;=</code>, <code>le</code>. Comparisons can be made against other values or against
+Boolean, string, integer, or floating-point literals.</p>
+</li>
+<li>
+<p>Empty: The <code>empty</code> operator is a prefix operation that can be used to
+determine whether a value is <code>null</code> or empty.</p>
+</li>
+<li>
+<p>Conditional: <code>A ? B : C</code>. Evaluate <code>B</code> or <code>C</code>, depending on the result
+of the evaluation of <code>A</code>.</p>
+</li>
+<li>
+<p>Lambda expression: <code>-&gt;</code>, the arrow token.</p>
+</li>
+<li>
+<p>Assignment: <code>=</code>.</p>
+</li>
+<li>
+<p>Semicolon: <code>;</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The precedence of operators, highest to lowest, left to right, is as
+follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>[] .</code></p>
+</li>
+<li>
+<p><code>()</code> (used to change the precedence of operators)</p>
+</li>
+<li>
+<p><code>-</code> (unary) <code>not ! empty</code></p>
+</li>
+<li>
+<p><code>* / div % mod</code></p>
+</li>
+<li>
+<p><code>+ -</code> (binary)</p>
+</li>
+<li>
+<p><code>+=</code></p>
+</li>
+<li>
+<p><code>&lt;&gt; &lt;= &gt;= lt gt le ge</code></p>
+</li>
+<li>
+<p><code>== != eq ne</code></p>
+</li>
+<li>
+<p><code>&amp;&amp; and</code></p>
+</li>
+<li>
+<p><code>|| or</code></p>
+</li>
+<li>
+<p><code>? :</code></p>
+</li>
+<li>
+<p><code>-&gt;</code></p>
+</li>
+<li>
+<p><code>=</code></p>
+</li>
+<li>
+<p><code>;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-el004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

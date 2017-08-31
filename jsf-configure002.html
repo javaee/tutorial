@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Annotations to Configure Managed Beans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-annotations-to-configure-managed-beans">Using Annotations to Configure Managed Beans</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph lead">
+<p><strong>Note</strong>:</p>
+</div>
+<div class="paragraph">
+<p>In JSF 2.3, managed bean annotations are deprecated; CDI is now the
+preferred approach.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>JavaServer Faces support for bean annotations is introduced in
+<a href="jsf-intro.html#BNAPH">Chapter 7, "JavaServer Faces Technology"</a>. Bean
+annotations can be used for configuring JavaServer Faces applications.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Named</code> (<code>javax.inject.Named</code>) annotation in a class, along with a
+scope annotation, automatically registers that class as a resource with
+the JavaServer Faces implementation. A bean that uses these annotations
+is a CDI managed bean.</p>
+</div>
+<div class="paragraph">
+<p>The following shows the use of the <code>@Named</code> and <code>@SessionScoped</code>
+annotations in a class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named("cart")
+@SessionScoped
+public class ShoppingCart ... { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above code snippet shows a bean that is managed by the JavaServer
+Faces implementation and is available for the length of the session.</p>
+</div>
+<div class="paragraph">
+<p>You can annotate beans with any of the scopes listed in the next
+section, <a href="#GIRCR">Using Managed Bean Scopes</a>.</p>
+</div>
+<div class="paragraph">
+<p>All classes will be scanned for annotations at startup unless the
+<code>faces-config</code> element in the <code>faces-config.xml</code> file has the
+<code>metadata-complete</code> attribute set to <code>true</code>.</p>
+</div>
+<div class="paragraph">
+<p>Annotations are also available for other artifacts, such as components,
+converters, validators, and renderers, to be used in place of
+application configuration resource file entries. These are discussed,
+along with registration of custom listeners, custom validators, and
+custom converters, in <a href="jsf-custom.html#BNAVG">Chapter 15, "Creating
+Custom UI Components and Other Custom Objects"</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="using-managed-bean-scopes">Using Managed Bean Scopes</h3>
+<div class="paragraph">
+<p>You can use annotations to define the scope in which the bean will be
+stored. You can specify one of the following scopes for a bean class.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Application (<code>javax.enterprise.context.ApplicationScoped</code>):
+Application scope persists across all users' interactions with a web
+application.</p>
+</li>
+<li>
+<p>Session (<code>javax.enterprise.context.SessionScoped</code>): Session scope
+persists across multiple HTTP requests in a web application.</p>
+</li>
+<li>
+<p>Flow (<code>javax.faces.flows.FlowScoped</code>): Flow scope persists during a
+user&#8217;s interaction with a specific flow of a web application. See
+<a href="jsf-configure004.html#CHDGFCJF">Using Faces Flows</a> for more
+information.</p>
+</li>
+<li>
+<p>Request (<code>javax.enterprise.context.RequestScoped</code>): Request scope
+persists during a single HTTP request in a web application.</p>
+</li>
+<li>
+<p>Dependent (<code>javax.enterprise.context.Dependent</code>): Indicates that the
+bean depends on some other bean.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You may want to use <code>@Dependent</code> when a managed bean references another
+managed bean. The second bean should not be in a scope (<code>@Dependent</code>) if
+it is supposed to be created only when it is referenced. If you define a
+bean as <code>@Dependent</code>, the bean is instantiated anew each time it is
+referenced, so it does not get saved in any scope.</p>
+</div>
+<div class="paragraph">
+<p>If your managed bean is referenced by the <code>binding</code> attribute of a
+component tag, you should define the bean with a request scope. If you
+placed the bean in session or application scope instead, the bean would
+need to take precautions to ensure thread safety, because
+<code>javax.faces.component.UIComponent</code> instances each depend on running
+inside of a single thread.</p>
+</div>
+<div class="paragraph">
+<p>If you are configuring a bean that allows attributes to be associated
+with the view, you can use the view scope. The attributes persist until
+the user has navigated to the next view.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

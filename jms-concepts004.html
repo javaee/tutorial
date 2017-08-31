@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Advanced JMS Features</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-concepts003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-concepts005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-advanced-jms-features">Using Advanced JMS Features</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section explains how to use features of the JMS API to achieve the
+level of reliability and performance your application requires. Many
+people use JMS in their applications because they cannot tolerate
+dropped or duplicate messages and because they require that every
+message be received once and only once. The JMS API provides this
+functionality.</p>
+</div>
+<div class="paragraph">
+<p>The most reliable way to produce a message is to send a <code>PERSISTENT</code>
+message, and to do so within a transaction.</p>
+</div>
+<div class="paragraph">
+<p>JMS messages are <code>PERSISTENT</code> by default; <code>PERSISTENT</code> messages will not
+be lost in the event of JMS provider failure. For details, see
+<a href="#BNCFY">Specifying Message Persistence</a>.</p>
+</div>
+<div class="paragraph">
+<p>Transactions allow multiple messages to be sent or received in an atomic
+operation. In the Java EE platform they also allow message sends and
+receives to be combined with database reads and writes in an atomic
+transaction. A transaction is a unit of work into which you can group a
+series of operations, such as message sends and receives, so that the
+operations either all succeed or all fail. For details, see
+<a href="#BNCGH">Using JMS Local Transactions</a>.</p>
+</div>
+<div class="paragraph">
+<p>The most reliable way to consume a message is to do so within a
+transaction, either from a queue or from a durable subscription to a
+topic. For details, see <a href="jms-concepts003.html#BNCGD">Creating Durable
+Subscriptions</a>, <a href="#BNCGB">Creating Temporary Destinations</a>, and
+<a href="#BNCGH">Using JMS Local Transactions</a>.</p>
+</div>
+<div class="paragraph">
+<p>Some features primarily allow an application to improve performance. For
+example, you can set messages to expire after a certain length of time
+(see <a href="#BNCGA">Allowing Messages to Expire</a>), so that consumers do not
+receive unnecessary outdated information. You can send messages
+asynchronously; see <a href="#BABFIFAJ">Sending Messages Asynchronously</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can also specify various levels of control over message
+acknowledgment; see <a href="#BNCFW">Controlling Message Acknowledgment</a>.</p>
+</div>
+<div class="paragraph">
+<p>Other features can provide useful capabilities unrelated to reliability.
+For example, you can create temporary destinations that last only for
+the duration of the connection in which they are created. See
+<a href="#BNCGB">Creating Temporary Destinations</a> for details.</p>
+</div>
+<div class="paragraph">
+<p>The following sections describe these features as they apply to
+application clients or Java SE clients. Some of the features work
+differently in the Java EE web or EJB container; in these cases, the
+differences are noted here and are explained in detail in
+<a href="jms-concepts005.html#BNCGL">Using the JMS API in Java EE
+Applications</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="controlling-message-acknowledgment">Controlling Message Acknowledgment</h3>
+<div class="paragraph">
+<p>Until a JMS message has been acknowledged, it is not considered to be
+successfully consumed. The successful consumption of a message
+ordinarily takes place in three stages.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The client receives the message.</p>
+</li>
+<li>
+<p>The client processes the message.</p>
+</li>
+<li>
+<p>The message is acknowledged. Acknowledgment is initiated either by
+the JMS provider or by the client, depending on the session
+acknowledgment mode.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In locally transacted sessions (see <a href="#BNCGH">Using JMS Local
+Transactions</a>), a message is acknowledged when the session is committed.
+If a transaction is rolled back, all consumed messages are redelivered.</p>
+</div>
+<div class="paragraph">
+<p>In a JTA transaction (in the Java EE web or EJB container) a message is
+acknowledged when the transaction is committed.</p>
+</div>
+<div class="paragraph">
+<p>In nontransacted sessions, when and how a message is acknowledged depend
+on a value that may be specified as an argument of the <code>createContext</code>
+method. The possible argument values are as follows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>JMSContext.AUTO_ACKNOWLEDGE</code>: This setting is the default for
+application clients and Java SE clients. The <code>JMSContext</code> automatically
+acknowledges a client&#8217;s receipt of a message either when the client has
+successfully returned from a call to <code>receive</code> or when the
+<code>MessageListener</code> it has called to process the message returns
+successfully.</p>
+<div class="paragraph">
+<p>A synchronous receive in a <code>JMSContext</code> that is configured to use
+auto-acknowledgment is the one exception to the rule that message
+consumption is a three-stage process as described earlier. In this case,
+the receipt and acknowledgment take place in one step, followed by the
+processing of the message.</p>
+</div>
+</li>
+<li>
+<p><code>JMSContext.CLIENT_ACKNOWLEDGE</code>: A client acknowledges a message by
+calling the message&#8217;s <code>acknowledge</code> method. In this mode, acknowledgment
+takes place on the session level: Acknowledging a consumed message
+automatically acknowledges the receipt of all messages that have been
+consumed by its session. For example, if a message consumer consumes ten
+messages and then acknowledges the fifth message delivered, all ten
+messages are acknowledged.</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE platform, the <code>JMSContext.CLIENT_ACKNOWLEDGE</code> setting can
+be used only in an application client, not in a web component or
+enterprise bean.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><code>JMSContext.DUPS_OK_ACKNOWLEDGE</code>: This option instructs the
+<code>JMSContext</code> to lazily acknowledge the delivery of messages. This is
+likely to result in the delivery of some duplicate messages if the JMS
+provider fails, so it should be used only by consumers that can tolerate
+duplicate messages. (If the JMS provider redelivers a message, it must
+set the value of the <code>JMSRedelivered</code> message header to <code>true</code>.) This
+option can reduce session overhead by minimizing the work the session
+does to prevent duplicates.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If messages have been received from a queue but not acknowledged when a
+<code>JMSContext</code> is closed, the JMS provider retains them and redelivers
+them when a consumer next accesses the queue. The provider also retains
+unacknowledged messages if an application closes a <code>JMSContext</code> that has
+been consuming messages from a durable subscription. (See
+<a href="jms-concepts003.html#BNCGD">Creating Durable Subscriptions</a>.)
+Unacknowledged messages that have been received from a nondurable
+subscription will be dropped when the <code>JMSContext</code> is closed.</p>
+</div>
+<div class="paragraph">
+<p>If you use a queue or a durable subscription, you can use the
+<code>JMSContext.recover</code> method to stop a nontransacted <code>JMSContext</code> and
+restart it with its first unacknowledged message. In effect, the
+<code>JMSContext</code>'s series of delivered messages is reset to the point after
+its last acknowledged message. The messages it now delivers may be
+different from those that were originally delivered, if messages have
+expired or if higher-priority messages have arrived. For a consumer on a
+nondurable subscription, the provider may drop unacknowledged messages
+when the <code>JMSContext.recover</code> method is called.</p>
+</div>
+<div class="paragraph">
+<p>The sample program in <a href="jms-examples003.html#BNCFX">Acknowledging
+Messages</a> demonstrates two ways to ensure that a message will not be
+acknowledged until processing of the message is complete.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specifying-options-for-sending-messages">Specifying Options for Sending Messages</h3>
+<div class="paragraph">
+<p>You can set a number of options when you send a message. These options
+enable you to perform the tasks described in the following topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCFY">Specifying Message Persistence</a> – Specify that messages
+are persistent, meaning they must not be lost in the event of a provider
+failure.</p>
+</li>
+<li>
+<p><a href="#BNCFZ">Setting Message Priority Levels</a> – Set priority levels for
+messages, which can affect the order in which the messages are
+delivered.</p>
+</li>
+<li>
+<p><a href="#BNCGA">Allowing Messages to Expire</a> – Specify an expiration time
+for messages so they will not be delivered if they are obsolete.</p>
+</li>
+<li>
+<p><a href="#BABGEADH">Specifying a Delivery Delay</a>– Specify a delivery delay
+for messages so that they will not be delivered until a specified amount
+of time has expired.</p>
+</li>
+<li>
+<p><a href="#BABJFIAD">Using JMSProducer Method Chaining</a> – Method chaining
+allows you to specify more than one of these options when you create a
+producer and call the <code>send</code> method.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="specifying-message-persistence">Specifying Message Persistence</h4>
+<div class="paragraph">
+<p>The JMS API supports two delivery modes specifying whether messages are
+lost if the JMS provider fails. These delivery modes are fields of the
+<code>DeliveryMode</code> interface.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The default delivery mode, <code>PERSISTENT</code>, instructs the JMS provider to
+take extra care to ensure that a message is not lost in transit in case
+of a JMS provider failure. A message sent with this delivery mode is
+logged to stable storage when it is sent.</p>
+</li>
+<li>
+<p>The <code>NON_PERSISTENT</code> delivery mode does not require the JMS provider
+to store the message or otherwise guarantee that it is not lost if the
+provider fails.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To specify the delivery mode, use the <code>setDeliveryMode</code> method of the
+<code>JMSProducer</code> interface to set the delivery mode for all messages sent
+by that producer.</p>
+</div>
+<div class="paragraph">
+<p>You can use method chaining to set the delivery mode when you create a
+producer and send a message. The following call creates a producer with
+a <code>NON_PERSISTENT</code> delivery mode and uses it to send a message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer()
+       .setDeliveryMode(DeliveryMode.NON_PERSISTENT).send(dest, msg);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you do not specify a delivery mode, the default is <code>PERSISTENT</code>.
+Using the <code>NON_PERSISTENT</code> delivery mode may improve performance and
+reduce storage overhead, but you should use it only if your application
+can afford to miss messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-message-priority-levels">Setting Message Priority Levels</h4>
+<div class="paragraph">
+<p>You can use message priority levels to instruct the JMS provider to
+deliver urgent messages first. Use the <code>setPriority</code> method of the
+<code>JMSProducer</code> interface to set the priority level for all messages sent
+by that producer.</p>
+</div>
+<div class="paragraph">
+<p>You can use method chaining to set the priority level when you create a
+producer and send a message. For example, the following call sets a
+priority level of 7 for a producer and then sends a message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer().setPriority(7).send(dest, msg);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The ten levels of priority range from 0 (lowest) to 9 (highest). If you
+do not specify a priority level, the default level is 4. A JMS provider
+tries to deliver higher-priority messages before lower-priority ones,
+but does not have to deliver messages in exact order of priority.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="allowing-messages-to-expire">Allowing Messages to Expire</h4>
+<div class="paragraph">
+<p>By default, a message never expires. If a message will become obsolete
+after a certain period, however, you may want to set an expiration time.
+Use the <code>setTimeToLive</code> method of the <code>JMSProducer</code> interface to set a
+default expiration time for all messages sent by that producer.</p>
+</div>
+<div class="paragraph">
+<p>For example, a message that contains rapidly changing data such as a
+stock price will become obsolete after a few minutes, so you might
+configure messages to expire after that time.</p>
+</div>
+<div class="paragraph">
+<p>You can use method chaining to set the time to live when you create a
+producer and send a message. For example, the following call sets a time
+to live of five minutes for a producer and then sends a message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer().setTimeToLive(300000).send(dest, msg);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the specified <code>timeToLive</code> value is <code>0</code>, the message never expires.</p>
+</div>
+<div class="paragraph">
+<p>When the message is sent, the specified <code>timeToLive</code> is added to the
+current time to give the expiration time. Any message not delivered
+before the specified expiration time is destroyed. The destruction of
+obsolete messages conserves storage and computing resources.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="specifying-a-delivery-delay">Specifying a Delivery Delay</h4>
+<div class="paragraph">
+<p>You can specify a length of time that must elapse after a message is
+sent before the JMS provider delivers the message. Use the
+<code>setDeliveryDelay</code> method of the <code>JMSProducer</code> interface to set a
+delivery delay for all messages sent by that producer.</p>
+</div>
+<div class="paragraph">
+<p>You can use method chaining to set the delivery delay when you create a
+producer and send a message. For example, the following call sets a
+delivery delay of 3 seconds for a producer and then sends a message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer().setDeliveryDelay(3000).send(dest, msg);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-jmsproducer-method-chaining">Using JMSProducer Method Chaining</h4>
+<div class="paragraph">
+<p>The setter methods on the <code>JMSProducer</code> interface return <code>JMSProducer</code>
+objects, so you can use method chaining to create a producer, set
+multiple properties, and send a message. For example, the following
+chained method calls create a producer, set a user-defined property, set
+the expiration, delivery mode, and priority for the message, and then
+send a message to a queue:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer()
+        .setProperty("MyProperty", "MyValue")
+        .setTimeToLive(10000)
+        .setDeliveryMode(NON_PERSISTENT)
+        .setPriority(2)
+        .send(queue, body);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also call the <code>JMSProducer</code> methods to set properties on a
+message and then send the message in a separate <code>send</code> method call. You
+can also set message properties directly on a message.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-temporary-destinations">Creating Temporary Destinations</h3>
+<div class="paragraph">
+<p>Normally, you create JMS destinations (queues and topics)
+administratively rather than programmatically. Your JMS provider
+includes a tool to create and remove destinations, and it is common for
+destinations to be long-lasting.</p>
+</div>
+<div class="paragraph">
+<p>The JMS API also enables you to create destinations (<code>TemporaryQueue</code>
+and <code>TemporaryTopic</code> objects) that last only for the duration of the
+connection in which they are created. You create these destinations
+dynamically using the <code>JMSContext.createTemporaryQueue</code> and the
+<code>JMSContext.createTemporaryTopic</code> methods, as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">TemporaryTopic replyTopic = context.createTemporaryTopic();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The only message consumers that can consume from a temporary destination
+are those created by the same connection that created the destination.
+Any message producer can send to the temporary destination. If you close
+the connection to which a temporary destination belongs, the destination
+is closed and its contents are lost.</p>
+</div>
+<div class="paragraph">
+<p>You can use temporary destinations to implement a simple request/reply
+mechanism. If you create a temporary destination and specify it as the
+value of the <code>JMSReplyTo</code> message header field when you send a message,
+then the consumer of the message can use the value of the <code>JMSReplyTo</code>
+field as the destination to which it sends a reply. The consumer can
+also reference the original request by setting the <code>JMSCorrelationID</code>
+header field of the reply message to the value of the <code>JMSMessageID</code>
+header field of the request. For example, an <code>onMessage</code> method can
+create a <code>JMSContext</code> so that it can send a reply to the message it
+receives. It can use code such as the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">replyMsg = context.createTextMessage("Consumer processed message: "
+        + msg.getText());
+replyMsg.setJMSCorrelationID(msg.getJMSMessageID());
+context.createProducer().send((Topic) msg.getJMSReplyTo(), replyMsg);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For an example, see <a href="jms-examples009.html#BNCHF">Using an Entity to
+Join Messages from Two MDBs</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-jms-local-transactions">Using JMS Local Transactions</h3>
+<div class="paragraph">
+<p>A transaction groups a series of operations into an atomic unit of work.
+If any one of the operations fails, the transaction can be rolled back,
+and the operations can be attempted again from the beginning. If all the
+operations succeed, the transaction can be committed.</p>
+</div>
+<div class="paragraph">
+<p>In an application client or a Java SE client, you can use local
+transactions to group message sends and receives. You use the
+<code>JMSContext.commit</code> method to commit a transaction. You can send
+multiple messages in a transaction, and the messages will not be added
+to the queue or topic until the transaction is committed. If you receive
+multiple messages in a transaction, they will not be acknowledged until
+the transaction is committed.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>JMSContext.rollback</code> method to roll back a transaction.
+A transaction rollback means that all produced messages are destroyed
+and all consumed messages are recovered and redelivered unless they have
+expired (see <a href="#BNCGA">Allowing Messages to Expire</a>).</p>
+</div>
+<div class="paragraph">
+<p>A transacted session is always involved in a transaction. To create a
+transacted session, call the <code>createContext</code> method as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">JMSContext context =
+        connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As soon as the <code>commit</code> or the <code>rollback</code> method is called, one
+transaction ends and another transaction begins. Closing a transacted
+session rolls back its transaction in progress, including any pending
+sends and receives.</p>
+</div>
+<div class="paragraph">
+<p>In an application running in the Java EE web or EJB container, you
+cannot use local transactions. Instead, you use JTA transactions,
+described in <a href="jms-concepts005.html#BNCGL">Using the JMS API in Java EE
+Applications</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can combine several sends and receives in a single JMS local
+transaction, so long as they are all performed using the same
+<code>JMSContext</code>.</p>
+</div>
+<div class="paragraph">
+<p>Do not use a single transaction if you use a request/reply mechanism, in
+which you send a message and then receive a reply to that message. If
+you try to use a single transaction, the program will hang, because the
+send cannot take place until the transaction is committed. The following
+code fragment illustrates the problem:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">// Don't do this!
+outMsg.setJMSReplyTo(replyQueue);
+context.createProducer().send(outQueue, outMsg);
+consumer = context.createConsumer(replyQueue);
+inMsg = consumer.receive();
+context.commit();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because a message sent during a transaction is not actually sent until
+the transaction is committed, the transaction cannot contain any
+receives that depend on that message&#8217;s having been sent.</p>
+</div>
+<div class="paragraph">
+<p>The production and the consumption of a message cannot both be part of
+the same transaction. The reason is that the transactions take place
+between the clients and the JMS provider, which intervenes between the
+production and the consumption of the message. <a href="#BNCGI">Figure 46-8</a>
+illustrates this interaction.</p>
+</div>
+<div id="BNCGI" class="paragraph">
+<div class="title"><strong>Figure 46-8 Using JMS Local Transactions</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_033.png" alt="Diagram of local transactions, showing separate transactions for sending and consuming a message"></span></p>
+</div>
+<div class="paragraph">
+<p>The sending of one or more messages to one or more destinations by
+Client 1 can form a single transaction, because it forms a single set of
+interactions with the JMS provider using a single <code>JMSContext</code>.
+Similarly, the receiving of one or more messages from one or more
+destinations by Client 2 also forms a single transaction using a single
+<code>JMSContext</code>. But because the two clients have no direct interaction and
+are using two different <code>JMSContext</code> objects, no transactions can take
+place between them.</p>
+</div>
+<div class="paragraph">
+<p>Another way of putting this is that a transaction is a contract between
+a client and a JMS provider that defines whether a message is sent to a
+destination or whether a message is received from the destination. It is
+not a contract between the sending client and the receiving client.</p>
+</div>
+<div class="paragraph">
+<p>This is the fundamental difference between messaging and synchronized
+processing. Instead of tightly coupling the sender and the receiver of a
+message, JMS couples the sender of a message with the destination, and
+it separately couples the destination with the receiver of the message.
+Therefore, while the sends and receives each have a tight coupling with
+the JMS provider, they do not have any coupling with each other.</p>
+</div>
+<div class="paragraph">
+<p>When you create a <code>JMSContext</code>, you can specify whether it is transacted
+by using the <code>JMSContext.SESSION_TRANSACTED</code> argument to the
+<code>createContext</code> method. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">try (JMSContext context = connectionFactory.createContext(
+        JMSContext.SESSION_TRANSACTED);) {
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>commit</code> and the <code>rollback</code> methods for local transactions are
+associated with the session that underlies the <code>JMSContext</code>. You can
+combine operations on more than one queue or topic, or on a combination
+of queues and topics, in a single transaction if you use the same
+session to perform the operations. For example, you can use the same
+<code>JMSContext</code> to receive a message from a queue and send a message to a
+topic in the same transaction.</p>
+</div>
+<div class="paragraph">
+<p>The example in <a href="jms-examples004.html#BNCGJ">Using Local Transactions</a>
+shows how to use JMS local transactions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sending-messages-asynchronously">Sending Messages Asynchronously</h3>
+<div class="paragraph">
+<p>Normally, when you send a persistent message, the <code>send</code> method blocks
+until the JMS provider confirms that the message was sent successfully.
+The asynchronous send mechanism allows your application to send a
+message and continue work while waiting to learn whether the send
+completed.</p>
+</div>
+<div class="paragraph">
+<p>This feature is currently available only in application clients and Java
+SE clients.</p>
+</div>
+<div class="paragraph">
+<p>Sending a message asynchronously involves supplying a callback object.
+You specify a <code>CompletionListener</code> with an <code>onCompletion</code> method. For
+example, the following code instantiates a <code>CompletionListener</code> named
+<code>SendListener</code>. It then calls the <code>setAsync</code> method to specify that
+sends from this producer should be asynchronous and should use the
+specified listener:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CompletionListener listener = new SendListener();
+context.createProducer().setAsync(listener).send(dest, message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>CompletionListener</code> class must implement two methods,
+<code>onCompletion</code> and <code>onException</code>. The <code>onCompletion</code> method is called if
+the send succeeds, and the <code>onException</code> method is called if it fails. A
+simple implementation of these methods might look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void onCompletion(Message message) {
+    System.out.println("onCompletion method: Send has completed.");
+}
+
+@Override
+public void onException(Message message, Exception e) {
+    System.out.println("onException method: send failed: " + e.toString());
+    System.out.println("Unsent message is: \n" + message);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-concepts003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-concepts005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

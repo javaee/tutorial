@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Asynchronous Processing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets011.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets013.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="asynchronous-processing">Asynchronous Processing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web containers in application servers normally use a server thread per
+client request. Under heavy load conditions, containers need a large
+amount of threads to serve all the client requests. Scalability
+limitations include running out of memory or exhausting the pool of
+container threads. To create scalable web applications, you must ensure
+that no threads associated with a request are sitting idle, so the
+container can use them to process new requests.</p>
+</div>
+<div class="paragraph">
+<p>There are two common scenarios in which a thread associated with a
+request can be sitting idle.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The thread needs to wait for a resource to become available or process
+data before building the response. For example, an application may need
+to query a database or access data from a remote web service before
+generating the response.</p>
+</li>
+<li>
+<p>The thread needs to wait for an event before generating the response.
+For example, an application may have to wait for a JMS message, new
+information from another client, or new data available in a queue before
+generating the response.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These scenarios represent blocking operations that limit the scalability
+of web applications. Asynchronous processing refers to assigning these
+blocking operations to a new thread and retuning the thread associated
+with the request immediately to the container.</p>
+</div>
+<div class="sect2">
+<h3 id="asynchronous-processing-in-servlets">Asynchronous Processing in Servlets</h3>
+<div class="paragraph">
+<p>Java EE provides asynchronous processing support for servlets and
+filters. If a servlet or a filter reaches a potentially blocking
+operation when processing a request, it can assign the operation to an
+asynchronous execution context and return the thread associated with the
+request immediately to the container without generating a response. The
+blocking operation completes in the asynchronous execution context in a
+different thread, which can generate a response or dispatch the request
+to another servlet.</p>
+</div>
+<div class="paragraph">
+<p>To enable asynchronous processing on a servlet, set the parameter
+<code>asyncSupported</code> to <code>true</code> on the <code>@WebServlet</code> annotation as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns={"/asyncservlet"}, asyncSupported=true)
+public class AsyncServlet extends HttpServlet { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>javax.servlet.AsyncContext</code> class provides the functionality that
+you need to perform asynchronous processing inside service methods. To
+obtain an instance of <code>AsyncContext</code>, call the <code>startAsync()</code> method on
+the request object of your service method; for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+   ...
+   AsyncContext acontext = req.startAsync();
+   ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This call puts the request into asynchronous mode and ensures that the
+response is not committed after exiting the service method. You have to
+generate the response in the asynchronous context after the blocking
+operation completes or dispatch the request to another servlet.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BEICFIEC">Table 17-3</a> describes the basic functionality provided by
+the <code>AsyncContext</code> class.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref104"></a><a id="BEICFIEC"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 17-3 Functionality Provided by the AsyncContext Class</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 38%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method Signature</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void start(Runnable run)</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The container provides a different thread in which the blocking
+operation can be processed.</p>
+</div>
+<div class="paragraph">
+<p>You provide code for the blocking operation as a class that implements
+the <code>Runnable</code> interface. You can provide this class as an inner class
+when calling the <code>start</code> method or use another mechanism to pass the
+<code>AsyncContext</code> instance to your class.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ServletRequest getRequest()</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Returns the request used to initialize this asynchronous context. In the
+example above, the request is the same as in the service method.</p>
+</div>
+<div class="paragraph">
+<p>You can use this method inside the asynchronous context to obtain
+parameters from the request.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ServletResponse getResponse()</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Returns the response used to initialize this asynchronous context. In
+the example above, the response is the same as in the service method.</p>
+</div>
+<div class="paragraph">
+<p>You can use this method inside the asynchronous context to write to the
+response with the results of the blocking operation.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void complete()</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Completes the asynchronous operation and closes the response associated
+with this asynchronous context.</p>
+</div>
+<div class="paragraph">
+<p>You call this method after writing to the response object inside the
+asynchronous context.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void dispatch(String path)</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Dispatches the request and response objects to the given path.</p>
+</div>
+<div class="paragraph">
+<p>You use this method to have another servlet write to the response after
+the blocking operation completes.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="waiting-for-a-resource">Waiting for a Resource</h3>
+<div class="paragraph">
+<p>This section demonstrates how to use the functionality provided by the
+<code>AsyncContext</code> class for the following use case:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A servlet receives a parameter from a GET request.</p>
+</li>
+<li>
+<p>The servlet uses a resource, such as a database or a web service, to
+retrieve information based on the value of the parameter. The resource
+can be slow at times, so this may be a blocking operation.</p>
+</li>
+<li>
+<p>The servlet generates a response using the result from the resource.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following code shows a basic servlet that does not use asynchronous
+processing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns={"/syncservlet"})
+public class SyncServlet extends HttpServlet {
+   private MyRemoteResource resource;
+   @Override
+   public void init(ServletConfig config) {
+      resource = MyRemoteResource.create("config1=x,config2=y");
+   }
+
+   @Override
+   public void doGet(HttpServletRequest request,
+                     HttpServletResponse response) {
+      response.setContentType("text/html;charset=UTF-8");
+      String param = request.getParameter("param");
+      String result = resource.process(param);
+      /* ... print to the response ... */
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code shows the same servlet using asynchronous processing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns={"/asyncservlet"}, asyncSupported=true)
+public class AsyncServlet extends HttpServlet {
+   /* ... Same variables and init method as in SyncServlet ... */
+
+   @Override
+   public void doGet(HttpServletRequest request,
+                     HttpServletResponse response) {
+      response.setContentType("text/html;charset=UTF-8");
+      final AsyncContext acontext = request.startAsync();
+      acontext.start(new Runnable() {
+         public void run() {
+            String param = acontext.getRequest().getParameter("param");
+            String result = resource.process(param);
+            HttpServletResponse response = acontext.getResponse();
+            /* ... print to the response ... */
+            acontext.complete();
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>AsyncServlet</code> adds <code>asyncSupported=true</code> to the <code>@WebServlet</code>
+annotation. The rest of the differences are inside the service method.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>request.startAsync()</code> causes the request to be processed
+asynchronously; the response is not sent to the client at the end of the
+service method.</p>
+</li>
+<li>
+<p><code>acontext.start(new Runnable() {...})</code> gets a new thread from the
+container.</p>
+</li>
+<li>
+<p>The code inside the <code>run()</code> method of the inner class executes in the
+new thread. The inner class has access to the asynchronous context to
+read parameters from the request and write to the response. Calling the
+<code>complete()</code> method of the asynchronous context commits the response and
+sends it to the client.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The service method of <code>AsyncServlet</code> returns immediately, and the
+request is processed in the asynchronous context.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets011.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets013.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,1377 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Creating a RESTful Root Resource Class</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="creating-a-restful-root-resource-class">Creating a RESTful Root Resource Class</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Root resource classes are "plain old Java objects" (POJOs) that are
+either annotated with <code>@Path</code> or have at least one method annotated with
+<code>@Path</code> or a request method designator, such as <code>@GET</code>, <code>@PUT</code>, <code>@POST</code>,
+or <code>@DELETE</code>. Resource methods are methods of a resource class annotated
+with a request method designator. This section explains how to use
+JAX-RS to annotate Java classes to create RESTful web services.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GILRU">Developing RESTful Web Services with JAX-RS</a></p>
+</li>
+<li>
+<p><a href="#GILQB">Overview of a JAX-RS Application</a></p>
+</li>
+<li>
+<p><a href="#GINPW">The @Path Annotation and URI Path Templates</a></p>
+</li>
+<li>
+<p><a href="#GIPYS">Responding to HTTP Methods and Requests</a></p>
+</li>
+<li>
+<p><a href="#GIPZH">Using @Consumes and @Produces to Customize Requests and
+Responses</a></p>
+</li>
+<li>
+<p><a href="#GIPYW">Extracting Request Parameters</a></p>
+</li>
+<li>
+<p><a href="#CIHEGAGI">Configuring JAX-RS Applications</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="developing-restful-web-services-with-jax-rs">Developing RESTful Web Services with JAX-RS</h3>
+<div class="paragraph">
+<p>JAX-RS is a Java programming language API designed to make it easy to
+develop applications that use the REST architecture.</p>
+</div>
+<div class="paragraph">
+<p>The JAX-RS API uses Java programming language annotations to simplify
+the development of RESTful web services. Developers decorate Java
+programming language class files with JAX-RS annotations to define
+resources and the actions that can be performed on those resources.
+JAX-RS annotations are runtime annotations; therefore, runtime
+reflection will generate the helper classes and artifacts for the
+resource. A Java EE application archive containing JAX-RS resource
+classes will have the resources configured, the helper classes and
+artifacts generated, and the resource exposed to clients by deploying
+the archive to a Java EE server.</p>
+</div>
+<div class="paragraph">
+<p><a href="#GINNA">Table 30-1</a> lists some of the Java programming annotations
+that are defined by JAX-RS, with a brief description of how each is
+used. Further information on the JAX-RS APIs can be viewed at
+<code>http://docs.oracle.com/javaee/7/api/</code>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref137"></a><a id="GINNA"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 30-1 Summary of JAX-RS Annotations</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 22%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@Path</code> annotation&#8217;s value is a relative URI path
+indicating where the Java class will be hosted: for example,
+<code>/helloworld</code>. You can also embed variables in the URIs to make a URI
+path template. For example, you could ask for the name of a user and
+pass it to the application as a variable in the URI:
+<code>/helloworld/{username}</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@GET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@GET</code> annotation is a request method designator and
+corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP GET
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@POST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@POST</code> annotation is a request method designator and
+corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP POST
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PUT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@PUT</code> annotation is a request method designator and
+corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP PUT
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DELETE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@DELETE</code> annotation is a request method designator and
+corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP DELETE
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HEAD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@HEAD</code> annotation is a request method designator and
+corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP HEAD
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@OPTIONS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@OPTIONS</code> annotation is a request method designator
+and corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP OPTIONS
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PATCH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@PATCH</code> annotation is a request method designator and
+corresponds to the similarly named HTTP method. The Java method
+annotated with this request method designator will process HTTP PATCH
+requests. The behavior of a resource is determined by the HTTP method to
+which the resource is responding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PathParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@PathParam</code> annotation is a type of parameter that
+you can extract for use in your resource class. URI path parameters are
+extracted from the request URI, and the parameter names correspond to
+the URI path template variable names specified in the <code>@Path</code>
+class-level annotation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@QueryParam</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@QueryParam</code> annotation is a type of parameter that
+you can extract for use in your resource class. Query parameters are
+extracted from the request URI query parameters.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Consumes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@Consumes</code> annotation is used to specify the MIME
+media types of representations a resource can consume that were sent by
+the client.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Produces</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@Produces</code> annotation is used to specify the MIME
+media types of representations a resource can produce and send back to
+the client: for example, <code>"text/plain"</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Provider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@Provider</code> annotation is used for anything that is of
+interest to the JAX-RS runtime, such as <code>MessageBodyReader</code> and
+<code>MessageBodyWriter</code>. For HTTP requests, the <code>MessageBodyReader</code> is used
+to map an HTTP request entity body to method parameters. On the response
+side, a return value is mapped to an HTTP response entity body by using
+a <code>MessageBodyWriter</code>. If the application needs to supply additional
+metadata, such as HTTP headers or a different status code, a method can
+return a <code>Response</code> that wraps the entity and that can be built using
+<code>Response.ResponseBuilder</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ApplicationPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@ApplicationPath</code> annotation is used to define
+the URL mapping for the application. The path specified by
+<code>@ApplicationPath</code> is the base URI for all resource URIs specified by
+<code>@Path</code> annotations in the resource class. You may only apply
+<code>@ApplicationPath</code> to a subclass of <code>javax.ws.rs.core.Application</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="overview-of-a-jax-rs-application">Overview of a JAX-RS Application</h3>
+<div class="paragraph">
+<p>The following code sample is a very simple example of a root resource
+class that uses JAX-RS annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.hello;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
+
+/**
+ * Root resource (exposed at "helloworld" path)
+ */
+@Path("helloworld")
+public class HelloWorld {
+    @Context
+    private UriInfo context;
+
+    /** Creates a new instance of HelloWorld */
+    public HelloWorld() {
+    }
+
+    /**
+     * Retrieves representation of an instance of helloWorld.HelloWorld
+     * @return an instance of java.lang.String
+     */
+    @GET
+    @Produces("text/html")
+    public String getHtml() {
+        return "&lt;html lang=\"en\"&gt;&lt;body&gt;&lt;h1&gt;Hello, World!!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following sections describe the annotations used in this example.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>@Path</code> annotation&#8217;s value is a relative URI path. In the
+preceding example, the Java class will be hosted at the URI path
+<code>/helloworld</code>. This is an extremely simple use of the <code>@Path</code>
+annotation, with a static URI path. Variables can be embedded in the
+URIs. URI path templates are URIs with variables embedded within the URI
+syntax.</p>
+</li>
+<li>
+<p>The <code>@GET</code> annotation is a request method designator, along with
+<code>@POST</code>, <code>@PUT</code>, <code>@DELETE</code>, and <code>@HEAD</code>, defined by JAX-RS and
+corresponding to the similarly named HTTP methods. In the example, the
+annotated Java method will process HTTP GET requests. The behavior of a
+resource is determined by the HTTP method to which the resource is
+responding.</p>
+</li>
+<li>
+<p>The <code>@Produces</code> annotation is used to specify the MIME media types a
+resource can produce and send back to the client. In this example, the
+Java method will produce representations identified by the MIME media
+type <code>"text/html"</code>.</p>
+</li>
+<li>
+<p>The <code>@Consumes</code> annotation is used to specify the MIME media types a
+resource can consume that were sent by the client. The example could be
+modified to set the message returned by the <code>getHtml</code> method, as shown
+in this code example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@POST
+@Consumes("text/plain")
+public void postHtml(String message) {
+    // Store the message
+}</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-path-annotation-and-uri-path-templates">The @Path Annotation and URI Path Templates</h3>
+<div class="paragraph">
+<p>The <code>@Path</code> annotation identifies the URI path template to which the
+resource responds and is specified at the class or method level of a
+resource. The <code>@Path</code> annotation&#8217;s value is a partial URI path template
+relative to the base URI of the server on which the resource is
+deployed, the context root of the application, and the URL pattern to
+which the JAX-RS runtime responds.</p>
+</div>
+<div class="paragraph">
+<p>URI path templates are URIs with variables embedded within the URI
+syntax. These variables are substituted at runtime in order for a
+resource to respond to a request based on the substituted URI. Variables
+are denoted by braces (<code>{</code> and <code>}</code>). For example, look at the following
+<code>@Path</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/users/{username}")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this kind of example, a user is prompted to type his or her name, and
+then a JAX-RS web service configured to respond to requests to this URI
+path template responds. For example, if the user types the user name
+"Galileo," the web service responds to the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://example.com/users/Galileo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain the value of the user name, the <code>@PathParam</code> annotation may be
+used on the method parameter of a request method, as shown in the
+following code example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/users/{username}")
+public class UserResource {
+
+    @GET
+    @Produces("text/xml")
+    public String getUser(@PathParam("username") String userName) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, the URI variable must match the regular expression
+<code>"[^/]+?"</code>. This variable may be customized by specifying a different
+regular expression after the variable name. For example, if a user name
+must consist only of lowercase and uppercase alphanumeric characters,
+override the default regular expression in the variable definition:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("users/{username: [a-zA-Z][a-zA-Z_0-9]*}")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>username</code> variable will match only user names that
+begin with one uppercase or lowercase letter and zero or more
+alphanumeric characters and the underscore character. If a user name
+does not match that template, a 404 (Not Found) response will be sent to
+the client.</p>
+</div>
+<div class="paragraph">
+<p>A <code>@Path</code> value isn&#8217;t required to have leading or trailing slashes (/).
+The JAX-RS runtime parses URI path templates the same way, whether or
+not they have leading or trailing slashes.</p>
+</div>
+<div class="paragraph">
+<p>A URI path template has one or more variables, with each variable name
+surrounded by braces: <code>{</code> to begin the variable name and <code>}</code> to end it.
+In the preceding example, <code>username</code> is the variable name. At runtime, a
+resource configured to respond to the preceding URI path template will
+attempt to process the URI data that corresponds to the location of
+<code>{username}</code> in the URI as the variable data for <code>username</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you want to deploy a resource that responds to the URI
+path template
+<code>http://example.com/myContextRoot/resources/{name1}/{name2}/</code>, you must
+first deploy the application to a Java EE server that responds to
+requests to the <code>http://example.com/myContextRoot</code> URI and then decorate
+your resource with the following <code>@Path</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/{name1}/{name2}/")
+public class SomeResource {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the URL pattern for the JAX-RS helper servlet,
+specified in <code>web.xml</code>, is the default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;servlet-mapping&gt;
+      &lt;servlet-name&gt;javax.ws.rs.core.Application&lt;/servlet-name&gt;
+      &lt;url-pattern&gt;/resources/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A variable name can be used more than once in the URI path template.</p>
+</div>
+<div class="paragraph">
+<p>If a character in the value of a variable would conflict with the
+reserved characters of a URI, the conflicting character should be
+substituted with percent encoding. For example, spaces in the value of a
+variable should be substituted with <code>%20</code>.</p>
+</div>
+<div class="paragraph">
+<p>When defining URI path templates, be careful that the resulting URI
+after substitution is valid.</p>
+</div>
+<div class="paragraph">
+<p><a href="#GIPYM">Table 30-2</a> lists some examples of URI path template
+variables and how the URIs are resolved after substitution. The
+following variable names and values are used in the examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>name1</code>: <code>james</code></p>
+</li>
+<li>
+<p><code>name2</code>: <code>gatz</code></p>
+</li>
+<li>
+<p><code>name3</code>:</p>
+</li>
+<li>
+<p><code>location</code>: <code>Main%20Street</code></p>
+</li>
+<li>
+<p><code>question</code>: <code>why</code></p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>The value of the <code>name3</code> variable is an empty string.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref138"></a><a id="GIPYM"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 30-2 Examples of URI Path Templates</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 45%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">URI Path Template</th>
+<th class="tableblock halign-left valign-top">URI After Substitution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/{name1}/{name2}/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/james/gatz/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/{question}/`</code>{question}/{question}/`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/why/why/why/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/maps/{location}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/maps/Main%20Street</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/{name3}/home/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com//home/</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="responding-to-http-methods-and-requests">Responding to HTTP Methods and Requests</h3>
+<div class="paragraph">
+<p>The behavior of a resource is determined by the HTTP methods (typically,
+GET, POST, PUT, or DELETE) to which the resource is responding.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPXS">The Request Method Designator Annotations</a></p>
+</li>
+<li>
+<p><a href="#GIPZE">Using Entity Providers to Map HTTP Response and Request
+Entity Bodies</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-request-method-designator-annotations">The Request Method Designator Annotations</h4>
+<div class="paragraph">
+<p>Request method designator annotations are runtime annotations, defined
+by JAX-RS, that correspond to the similarly named HTTP methods. Within a
+resource class file, HTTP methods are mapped to Java programming
+language methods by using the request method designator annotations. The
+behavior of a resource is determined by which HTTP method the resource
+is responding to. JAX-RS defines a set of request method designators for
+the common HTTP methods GET, POST, PUT, DELETE, and HEAD; you can also
+create your own custom request method designators. Creating custom
+request method designators is outside the scope of this document.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows the use of the PUT method to create or
+update a storage container:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@PUT
+public Response putContainer() {
+    System.out.println("PUT CONTAINER " + container);
+
+    URI uri =  uriInfo.getAbsolutePath();
+    Container c = new Container(container, uri.toString());
+
+    Response r;
+    if (!MemoryStore.MS.hasContainer(c)) {
+        r = Response.created(uri).build();
+    } else {
+        r = Response.noContent().build();
+    }
+
+    MemoryStore.MS.createContainer(c);
+    return r;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, the JAX-RS runtime will automatically support the methods
+HEAD and OPTIONS if not explicitly implemented. For HEAD, the runtime
+will invoke the implemented GET method, if present, and ignore the
+response entity, if set. For OPTIONS, the <code>Allow</code> response header will
+be set to the set of HTTP methods supported by the resource. In
+addition, the JAX-RS runtime will return a Web Application Definition
+Language (WADL) document describing the resource; see
+<code>http://www.w3.org/Submission/wadl/</code> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Methods decorated with request method designators must return <code>void</code>, a
+Java programming language type, or a <code>javax.ws.rs.core.Response</code> object.
+Multiple parameters may be extracted from the URI by using the
+<code>@PathParam</code> or <code>@QueryParam</code> annotations, as described in
+<a href="#GIPYW">Extracting Request Parameters</a>. Conversion between Java
+types and an entity body is the responsibility of an entity provider,
+such as <code>MessageBodyReader</code> or <code>MessageBodyWriter</code>. Methods that need to
+provide additional metadata with a response should return an instance of
+the <code>Response</code> class. The <code>ResponseBuilder</code> class provides a convenient
+way to create a <code>Response</code> instance using a builder pattern. The HTTP
+PUT and POST methods expect an HTTP request body, so you should use a
+<code>MessageBodyReader</code> for methods that respond to PUT and POST requests.</p>
+</div>
+<div class="paragraph">
+<p>Both <code>@PUT</code> and <code>@POST</code> can be used to create or update a resource. POST
+can mean anything, so when using POST, it is up to the application to
+define the semantics. PUT has well-defined semantics. When using PUT for
+creation, the client declares the URI for the newly created resource.</p>
+</div>
+<div class="paragraph">
+<p>PUT has very clear semantics for creating and updating a resource. The
+representation the client sends must be the same representation that is
+received using a GET, given the same media type. PUT does not allow a
+resource to be partially updated, a common mistake when attempting to
+use the PUT method. A common application pattern is to use POST to
+create a resource and return a <code>201</code> response with a location header
+whose value is the URI to the newly created resource. In this pattern,
+the web service declares the URI for the newly created resource.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-entity-providers-to-map-http-response-and-request-entity-bodies">Using Entity Providers to Map HTTP Response and Request Entity Bodies</h4>
+<div class="paragraph">
+<p>Entity providers supply mapping services between representations and
+their associated Java types. The two types of entity providers are
+<code>MessageBodyReader</code> and <code>MessageBodyWriter</code>. For HTTP requests, the
+<code>MessageBodyReader</code> is used to map an HTTP request entity body to method
+parameters. On the response side, a return value is mapped to an HTTP
+response entity body by using a <code>MessageBodyWriter</code>. If the application
+needs to supply additional metadata, such as HTTP headers or a different
+status code, a method can return a <code>Response</code> that wraps the entity and
+that can be built by using <code>Response.ResponseBuilder</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#GKCCG">Table 30-3</a> shows the standard types that are supported
+automatically for HTTP request and response entity bodies. You need to
+write an entity provider only if you are not choosing one of these
+standard types.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref139"></a><a id="GKCCG"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 30-3 Types Supported for HTTP Request and Response Entity Bodies</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Supported Media Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All text media types (<code>text/*</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.InputStream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.Reader</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.activation.DataSource</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.transform.Source</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML media types (<code>text/xml</code>,
+<code>application/xml</code>, and <code>application/*+xml</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.bind.JAXBElement</code> and application-supplied JAXB classes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML
+media types (<code>text/xml</code>, <code>application/xml</code>, and <code>application/*+xml</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MultivaluedMap&lt;String, String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Form content
+(<code>application/x-www-form-urlencoded</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>StreamingOutput</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>), <code>MessageBodyWriter</code> only</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following example shows how to use <code>MessageBodyReader</code> with the
+<code>@Consumes</code> and <code>@Provider</code> annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Consumes("application/x-www-form-urlencoded")
+@Provider
+public class FormReader implements MessageBodyReader&lt;NameValuePair&gt; {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows how to use <code>MessageBodyWriter</code> with the
+<code>@Produces</code> and <code>@Provider</code> annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Produces("text/html")
+@Provider
+public class FormWriter implements
+        MessageBodyWriter&lt;Hashtable&lt;String, String&gt;&gt; {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows how to use <code>ResponseBuilder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+public Response getItem() {
+    System.out.println("GET ITEM " + container + " " + item);
+
+    Item i = MemoryStore.MS.getItem(container, item);
+    if (i == null)
+        throw new NotFoundException("Item not found");
+    Date lastModified = i.getLastModified().getTime();
+    EntityTag et = new EntityTag(i.getDigest());
+    ResponseBuilder rb = request.evaluatePreconditions(lastModified, et);
+    if (rb != null)
+        return rb.build();
+
+    byte[] b = MemoryStore.MS.getItemData(container, item);
+    return Response.ok(b, i.getMimeType()).
+            lastModified(lastModified).tag(et).build();
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-consumes-and-produces-to-customize-requests-and-responses">Using @Consumes and @Produces to Customize Requests and Responses</h3>
+<div class="paragraph">
+<p>The information sent to a resource and then passed back to the client is
+specified as a MIME media type in the headers of an HTTP request or
+response. You can specify which MIME media types of representations a
+resource can respond to or produce by using the following annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>javax.ws.rs.Consumes</code></p>
+</li>
+<li>
+<p><code>javax.ws.rs.Produces</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By default, a resource class can respond to and produce all MIME media
+types of representations specified in the HTTP request and response
+headers.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPXF">The @Produces Annotation</a></p>
+</li>
+<li>
+<p><a href="#GIPYT">The @Consumes Annotation</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-produces-annotation">The @Produces Annotation</h4>
+<div class="paragraph">
+<p>The <code>@Produces</code> annotation is used to specify the MIME media types or
+representations a resource can produce and send back to the client. If
+<code>@Produces</code> is applied at the class level, all the methods in a resource
+can produce the specified MIME types by default. If applied at the
+method level, the annotation overrides any <code>@Produces</code> annotations
+applied at the class level.</p>
+</div>
+<div class="paragraph">
+<p>If no methods in a resource are able to produce the MIME type in a
+client request, the JAX-RS runtime sends back an HTTP "406 Not
+Acceptable" error.</p>
+</div>
+<div class="paragraph">
+<p>The value of <code>@Produces</code> is an array of <code>String</code> of MIME types or a
+comma-separated list of <code>MediaType</code> constants. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Produces({"image/jpeg,image/png"})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows how to apply <code>@Produces</code> at both the class
+and method levels:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/myResource")
+@Produces("text/plain")
+public class SomeResource {
+    @GET
+    public String doGetAsPlainText() {
+        ...
+    }
+
+    @GET
+    @Produces("text/html")
+    public String doGetAsHtml() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>doGetAsPlainText</code> method defaults to the MIME media type of the
+<code>@Produces</code> annotation at the class level. The <code>doGetAsHtml</code> method&#8217;s
+<code>@Produces</code> annotation overrides the class-level <code>@Produces</code> setting and
+specifies that the method can produce HTML rather than plain text.</p>
+</div>
+<div class="paragraph">
+<p><code>@Produces</code> can also use the constants defined in the
+<code>javax.ws.rs.core.MediaType</code> class to specify the media type. For
+example, specifying <code>MediaType.APPLICATION_XML</code> is equivalent to
+specifying <code>"application/xml"</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Produces(MediaType.APPLICATION_XML)
+@GET
+public Customer getCustomer() { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a resource class is capable of producing more than one MIME media
+type, the resource method chosen will correspond to the most acceptable
+media type as declared by the client. More specifically, the <code>Accept</code>
+header of the HTTP request declares what is most acceptable. For
+example, if the <code>Accept</code> header is <code>Accept: text/plain</code>, the
+<code>doGetAsPlainText</code> method will be invoked. Alternatively, if the
+<code>Accept</code> header is <code>Accept: text/plain;q=0.9, text/html</code>, which declares
+that the client can accept media types of <code>text/plain</code> and <code>text/html</code>
+but prefers the latter, the <code>doGetAsHtml</code> method will be invoked.</p>
+</div>
+<div class="paragraph">
+<p>More than one media type may be declared in the same <code>@Produces</code>
+declaration. The following code example shows how this is done:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Produces({"application/xml", "application/json"})
+public String doGetAsXmlOrJson() {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>doGetAsXmlOrJson</code> method will get invoked if either of the media
+types <code>application/xml</code> or <code>application/json</code> is acceptable. If both are
+equally acceptable, the former will be chosen because it occurs first.
+The preceding examples refer explicitly to MIME media types for clarity.
+It is possible to refer to constant values, which may reduce
+typographical errors. For more information, see the API documentation
+for the constant field values of <code>javax.ws.rs.core.MediaType</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-consumes-annotation">The @Consumes Annotation</h4>
+<div class="paragraph">
+<p>The <code>@Consumes</code> annotation is used to specify which MIME media types of
+representations a resource can accept, or consume, from the client. If
+<code>@Consumes</code> is applied at the class level, all the response methods
+accept the specified MIME types by default. If applied at the method
+level, <code>@Consumes</code> overrides any <code>@Consumes</code> annotations applied at the
+class level.</p>
+</div>
+<div class="paragraph">
+<p>If a resource is unable to consume the MIME type of a client request,
+the JAX-RS runtime sends back an HTTP 415 ("Unsupported Media Type")
+error.</p>
+</div>
+<div class="paragraph">
+<p>The value of <code>@Consumes</code> is an array of <code>String</code> of acceptable MIME
+types, or a comma-separated list of <code>MediaType</code> constants. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Consumes({"text/plain,text/html"})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the equivalent of:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Consumes({MediaType.TEXT_PLAIN,MediaType.TEXT_HTML})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows how to apply <code>@Consumes</code> at both the class
+and method levels:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/myResource")
+@Consumes("multipart/related")
+public class SomeResource {
+    @POST
+    public String doPost(MimeMultipart mimeMultipartData) {
+        ...
+    }
+
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    public String doPost2(FormURLEncodedProperties formData) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>doPost</code> method defaults to the MIME media type of the <code>@Consumes</code>
+annotation at the class level. The <code>doPost2</code> method overrides the class
+level <code>@Consumes</code> annotation to specify that it can accept URL-encoded
+form data.</p>
+</div>
+<div class="paragraph">
+<p>If no resource methods can respond to the requested MIME type, an HTTP
+415 ("Unsupported Media Type") error is returned to the client.</p>
+</div>
+<div class="paragraph">
+<p>The <code>HelloWorld</code> example discussed previously in this section can be
+modified to set the message by using <code>@Consumes</code>, as shown in the
+following code example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@POST
+@Consumes("text/html")
+public void postHtml(String message) {
+    // Store the message
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the Java method will consume representations identified
+by the MIME media type <code>text/plain</code>. Note that the resource method
+returns <code>void</code>. This means that no representation is returned and that a
+response with a status code of HTTP 204 ("No Content") will be returned.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="extracting-request-parameters">Extracting Request Parameters</h3>
+<div class="paragraph">
+<p>Parameters of a resource method may be annotated with parameter-based
+annotations to extract information from a request. A previous example
+presented the use of the <code>@PathParam</code> parameter to extract a path
+parameter from the path component of the request URL that matched the
+path declared in <code>@Path</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can extract the following types of parameters for use in your
+resource class:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Query</p>
+</li>
+<li>
+<p>URI path</p>
+</li>
+<li>
+<p>Form</p>
+</li>
+<li>
+<p>Cookie</p>
+</li>
+<li>
+<p>Header</p>
+</li>
+<li>
+<p>Matrix</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Query parameters are extracted from the request URI query parameters and
+are specified by using the <code>javax.ws.rs.QueryParam</code> annotation in the
+method parameter arguments. The following example demonstrates using
+<code>@QueryParam</code> to extract query parameters from the <code>Query</code> component of
+the request URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("smooth")
+@GET
+public Response smooth(
+        @DefaultValue("2") @QueryParam("step") int step,
+        @DefaultValue("true") @QueryParam("min-m") boolean hasMin,
+        @DefaultValue("true") @QueryParam("max-m") boolean hasMax,
+        @DefaultValue("true") @QueryParam("last-m") boolean hasLast,
+        @DefaultValue("blue") @QueryParam("min-color") ColorParam minColor,
+        @DefaultValue("green") @QueryParam("max-color") ColorParam maxColor,
+        @DefaultValue("red") @QueryParam("last-color") ColorParam lastColor
+        ) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the query parameter <code>step</code> exists in the query component of the
+request URI, the value of <code>step</code> will be extracted and parsed as a
+32-bit signed integer and assigned to the <code>step</code> method parameter. If
+<code>step</code> does not exist, a default value of 2, as declared in the
+<code>@DefaultValue</code> annotation, will be assigned to the <code>step</code> method
+parameter. If the <code>step</code> value cannot be parsed as a 32-bit signed
+integer, an HTTP 400 ("Client Error") response is returned.</p>
+</div>
+<div class="paragraph">
+<p>User-defined Java programming language types may be used as query
+parameters. The following code example shows the <code>ColorParam</code> class used
+in the preceding query parameter example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class ColorParam extends Color {
+    public ColorParam(String s) {
+        super(getRGB(s));
+    }
+
+    private static int getRGB(String s) {
+        if (s.charAt(0) == '#') {
+            try {
+                Color c = Color.decode("0x" + s.substring(1));
+                return c.getRGB();
+            } catch (NumberFormatException e) {
+                throw new WebApplicationException(400);
+            }
+        } else {
+            try {
+                Field f = Color.class.getField(s);
+                return ((Color)f.get(null)).getRGB();
+            } catch (Exception e) {
+                throw new WebApplicationException(400);
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The constructor for <code>ColorParam</code> takes a single <code>String</code> parameter.</p>
+</div>
+<div class="paragraph">
+<p>Both <code>@QueryParam</code> and <code>@PathParam</code> can be used only on the following
+Java types.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All primitive types except <code>char</code>.</p>
+</li>
+<li>
+<p>All wrapper classes of primitive types except <code>Character</code>.</p>
+</li>
+<li>
+<p>Any class with a constructor that accepts a single <code>String</code> argument.</p>
+</li>
+<li>
+<p>Any class with the static method named <code>valueOf(String)</code> that accepts
+a single <code>String</code> argument.</p>
+</li>
+<li>
+<p><code>List&lt;T&gt;</code>, <code>Set&lt;T&gt;</code>, or <code>SortedSet&lt;T&gt;</code>, where T matches the already
+listed criteria. Sometimes, parameters may contain more than one value
+for the same name. If this is the case, these types may be used to
+obtain all values.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If <code>@DefaultValue</code> is not used in conjunction with <code>@QueryParam</code>, and
+the query parameter is not present in the request, the value will be an
+empty collection for <code>List</code>, <code>Set</code>, or <code>SortedSet</code>; null for other
+object types; and the default for primitive types.</p>
+</div>
+<div class="paragraph">
+<p>URI path parameters are extracted from the request URI, and the
+parameter names correspond to the URI path template variable names
+specified in the <code>@Path</code> class-level annotation. URI parameters are
+specified using the <code>javax.ws.rs.PathParam</code> annotation in the method
+parameter arguments. The following example shows how to use <code>@Path</code>
+variables and the <code>@PathParam</code> annotation in a method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Path("/{username}")
+public class MyResourceBean {
+    ...
+    @GET
+    public String printUsername(@PathParam("username") String userId) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding snippet, the URI path template variable name <code>username</code>
+is specified as a parameter to the <code>printUsername</code> method. The
+<code>@PathParam</code> annotation is set to the variable name <code>username</code>. At
+runtime, before <code>printUsername</code> is called, the value of <code>username</code> is
+extracted from the URI and cast to a <code>String</code>. The resulting <code>String</code> is
+then available to the method as the <code>userId</code> variable.</p>
+</div>
+<div class="paragraph">
+<p>If the URI path template variable cannot be cast to the specified type,
+the JAX-RS runtime returns an HTTP 400 ("Bad Request") error to the
+client. If the <code>@PathParam</code> annotation cannot be cast to the specified
+type, the JAX-RS runtime returns an HTTP 404 ("Not Found") error to the
+client.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@PathParam</code> parameter and the other parameter-based annotations
+(<code>@MatrixParam</code>, <code>@HeaderParam</code>, <code>@CookieParam</code>, and <code>@FormParam</code>) obey
+the same rules as <code>@QueryParam</code>.</p>
+</div>
+<div class="paragraph">
+<p>Cookie parameters, indicated by decorating the parameter with
+<code>javax.ws.rs.CookieParam</code>, extract information from the cookies declared
+in cookie-related HTTP headers. Header parameters, indicated by
+decorating the parameter with <code>javax.ws.rs.HeaderParam</code>, extract
+information from the HTTP headers. Matrix parameters, indicated by
+decorating the parameter with <code>javax.ws.rs.MatrixParam</code>, extract
+information from URL path segments.</p>
+</div>
+<div class="paragraph">
+<p>Form parameters, indicated by decorating the parameter with
+<code>javax.ws.rs.FormParam</code>, extract information from a request
+representation that is of the MIME media type
+<code>application/x-www-form-urlencoded</code> and conforms to the encoding
+specified by HTML forms, as described in
+<code>http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1</code>. This
+parameter is very useful for extracting information sent by POST in HTML
+forms.</p>
+</div>
+<div class="paragraph">
+<p>The following example extracts the <code>name</code> form parameter from the POST
+form data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@POST
+@Consumes("application/x-www-form-urlencoded")
+public void post(@FormParam("name") String name) {
+    // Store the message
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To obtain a general map of parameter names and values for query and path
+parameters, use the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+public String get(@Context UriInfo ui) {
+    MultivaluedMap&lt;String, String&gt; queryParams = ui.getQueryParameters();
+    MultivaluedMap&lt;String, String&gt; pathParams = ui.getPathParameters();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following method extracts header and cookie parameter names and
+values into a map:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@GET
+public String get(@Context HttpHeaders hh) {
+    MultivaluedMap&lt;String, String&gt; headerParams = hh.getRequestHeaders();
+    Map&lt;String, Cookie&gt; pathParams = hh.getCookies();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In general, <code>@Context</code> can be used to obtain contextual Java types
+related to the request or response.</p>
+</div>
+<div class="paragraph">
+<p>For form parameters, it is possible to do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@POST
+@Consumes("application/x-www-form-urlencoded")
+public void post(MultivaluedMap&lt;String, String&gt; formParams) {
+    // Store the message
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-jax-rs-applications">Configuring JAX-RS Applications</h3>
+<div class="paragraph">
+<p>A JAX-RS application consists of at least one resource class packaged
+within a WAR file. The base URI from which an application&#8217;s resources
+respond to requests can be set one of two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using the <code>@ApplicationPath</code> annotation in a subclass of
+<code>javax.ws.rs.core.Application</code> packaged within the WAR</p>
+</li>
+<li>
+<p>Using the <code>servlet-mapping</code> tag within the WAR&#8217;s <code>web.xml</code> deployment
+descriptor</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CIHFEBJF">Configuring a JAX-RS Application Using a Subclass of
+Application</a></p>
+</li>
+<li>
+<p><a href="#CIHDHAIJ">Configuring the Base URI in web.xml</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="configuring-a-jax-rs-application-using-a-subclass-of-application">Configuring a JAX-RS Application Using a Subclass of Application</h4>
+<div class="paragraph">
+<p>Create a subclass of <code>javax.ws.rs.core.Application</code> to manually
+configure the environment in which the REST resources defined in your
+resource classes are run, including the base URI. Add a class-level
+<code>@ApplicationPath</code> annotation to set the base URI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ApplicationPath("/webapi")
+public class MyApplication extends Application { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, the base URI is set to <code>/webapi</code>, which means
+that all resources defined within the application are relative to
+<code>/webapi</code>.</p>
+</div>
+<div class="paragraph">
+<p>By default, all the resources in an archive will be processed for
+resources. Override the <code>getClasses</code> method to manually register the
+resource classes in the application with the JAX-RS runtime.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public Set&lt;Class&lt;?&gt;&gt; getClasses() {
+    final Set&lt;Class&lt;?&gt;&gt; classes = new HashSet&lt;&gt;();
+    // register root resource
+    classes.add(MyResource.class);
+    return classes;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configuring-the-base-uri-in-web.xml">Configuring the Base URI in web.xml</h4>
+<div class="paragraph">
+<p>The base URI for a JAX-RS application can be set using a
+<code>servlet-mapping</code> tag in the <code>web.xml</code> deployment descriptor, using the
+<code>Application</code> class name as the servlet.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;javax.ws.rs.core.Application&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/webapi/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This setting will also override the path set by <code>@ApplicationPath</code> when
+using an <code>Application</code> subclass.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;com.example.rest.MyApplication&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/services/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxrs003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

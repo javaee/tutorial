@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Value and Method Expressions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-el002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="value-and-method-expressions">Value and Method Expressions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The EL defines two kinds of expressions: value expressions and method
+expressions. Value expressions can be evaluated to yield a value, and
+method expressions are used to reference a method.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAHV">Value Expressions</a></p>
+</li>
+<li>
+<p><a href="#BNAHZ">Method Expressions</a></p>
+</li>
+<li>
+<p><a href="#BEIHCBAH">Lambda Expressions</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="value-expressions">Value Expressions</h3>
+<div class="paragraph">
+<p>Value expressions can be further categorized into rvalue and lvalue
+expressions. An lvalue expression can specify a target, such as an
+object, a bean property, or elements of a collection, that can be
+assigned a value. An rvalue expression cannot specify such a target.</p>
+</div>
+<div class="paragraph">
+<p>All expressions that are evaluated immediately use the <code>${}</code> delimiters,
+and although the expression can be an lvalue expression, no assignments
+will ever happen. Expressions whose evaluation can be deferred use the
+<code>#{}</code> delimiters and can act as both rvalue and lvalue expressions; if
+the expression is an lvalue expression, it can be assigned a new value.
+Consider the following two value expressions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${customer.name}
+
+#{customer.name}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The former uses immediate evaluation syntax, whereas the latter uses
+deferred evaluation syntax. The first expression accesses the <code>name</code>
+property, gets its value, and passes the value to the tag handler. With
+the second expression, the tag handler can defer the expression
+evaluation to a later time in the page lifecycle if the technology using
+this tag allows.</p>
+</div>
+<div class="paragraph">
+<p>In the case of JavaServer Faces technology, the latter tag&#8217;s expression
+is evaluated immediately during an initial request for the page. During
+a postback request, this expression can be used to set the value of the
+<code>name</code> property with user input.</p>
+</div>
+<div class="sect3">
+<h4 id="referencing-objects">Referencing Objects</h4>
+<div class="paragraph">
+<p>A top-level identifier (such as <code>customer</code> in the expression
+<code>customer.name</code>) can refer to the following objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Lambda parameters</p>
+</li>
+<li>
+<p>EL variables</p>
+</li>
+<li>
+<p>Managed beans</p>
+</li>
+<li>
+<p>Implicit objects</p>
+</li>
+<li>
+<p>Classes of static fields and methods</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To refer to these objects, you write an expression using a variable that
+is the name of the object. The following expression references a managed
+bean called <code>customer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${customer}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can use a custom EL resolver to alter the way variables are
+resolved. For instance, you can provide an EL resolver that intercepts
+objects with the name <code>customer</code>, so that <code>${customer}</code> returns a value
+in the EL resolver instead. (JavaServer Faces technology uses an EL
+resolver to handle managed beans.)</p>
+</div>
+<div class="paragraph">
+<p>An <code>enum</code> constant is a special case of a static field, and you can
+reference such a constant directly. For example, consider this <code>enum</code>
+class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public enum Suit {hearts, spades, diamonds, clubs}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following expression, in which <code>mySuit</code> is an instance of <code>Suit</code>,
+you can compare <code>suit.hearts</code> to the instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${mySuit == suit.hearts}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="referencing-object-properties-or-collection-elements">Referencing Object Properties or Collection Elements</h4>
+<div class="paragraph">
+<p>To refer to properties of a bean, static fields or methods of a class,
+or items of a collection, you use the <code>.</code> or <code>[]</code> notation. The same
+syntax can be used for attributes of an implicit object, because
+attributes are placed in a map.</p>
+</div>
+<div class="paragraph">
+<p>To reference the <code>name</code> property of the <code>customer</code> bean, use either the
+expression <code>${customer.name}</code> or the expression <code>${customer["name"]}</code>.
+Here, the part inside the brackets is a <code>String</code> literal that is the
+name of the property to reference. The <code>[]</code> syntax is more general than
+the <code>.</code> syntax, because the part inside the brackets can be any <code>String</code>
+expression, not just literals.</p>
+</div>
+<div class="paragraph">
+<p>You can use double or single quotes for the <code>String</code> literal. You can
+also combine the <code>[]</code> and <code>.</code> notations, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${customer.address["street"]}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can reference a static field or method using the syntax
+classname.field, as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Boolean.FALSE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The classname is the name of the class without the package name. By
+default, all the <code>java.lang</code> packages are imported. You can import other
+packages, classes, and static fields as needed.</p>
+</div>
+<div class="paragraph">
+<p>If you are accessing an item in an array or list, you must use the <code>[]</code>
+notation and specify an index in the array or list. The index is an
+expression that can be converted to <code>int</code>. The following example
+references the first of the customer orders, assuming that
+<code>customer.orders</code> is a <code>List</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${customer.orders[1]}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you are accessing an item in a <code>Map</code>, you must specify the key for
+the <code>Map</code>. If the key is a <code>String</code> literal, the dot (<code>.)</code> notation can
+be used. Assuming that <code>customer.orders</code> is a <code>Map</code> with a <code>String</code> key,
+the following examples reference the item with the key <code>"socks"</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${customer.orders["socks"]}
+
+${customer.orders.socks}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="referencing-literals">Referencing Literals</h4>
+<div class="paragraph">
+<p>The EL defines the following literals:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Boolean: <code>true</code> and <code>false</code></p>
+</li>
+<li>
+<p>Integer: As in Java</p>
+</li>
+<li>
+<p>Floating-point: As in Java</p>
+</li>
+<li>
+<p>String: With single and double quotes; <code>"</code> is escaped as <code>\"</code>, <code>'</code> is
+escaped as <code>\'</code>, and <code>\</code> is escaped as <code>\\</code></p>
+</li>
+<li>
+<p>Null: <code>null</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here are some examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>${"literal"}</code></p>
+</li>
+<li>
+<p><code>${true}</code></p>
+</li>
+<li>
+<p><code>${57}</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="parameterized-method-calls">Parameterized Method Calls</h4>
+<div class="paragraph">
+<p>The EL offers support for parameterized method calls.</p>
+</div>
+<div class="paragraph">
+<p>Both the <code>.</code> and <code>[]</code> operators can be used for invoking method calls
+with parameters, as shown in the following expression syntax:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>expr-a`[<code>expr-b</code>](<code>parameters</code>)`</p>
+</li>
+<li>
+<p>expr-a`.<code>identifier-b</code>(<code>parameters</code>)`</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the first expression syntax, expr-a is evaluated to represent a bean
+object. The expression expr-b is evaluated and cast to a string that
+represents a method in the bean represented by expr-a. In the second
+expression syntax, expr-a is evaluated to represent a bean object, and
+identifier-b is a string that represents a method in the bean object.
+The parameters in parentheses are the arguments for the method
+invocation. Parameters can be zero or more values of expressions,
+separated by commas.</p>
+</div>
+<div class="paragraph">
+<p>Parameters are supported for both value expressions and method
+expressions. In the following example, which is a modified tag from the
+<code>guessnumber</code> application, a random number is provided as an argument
+rather than from user input to the method call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:inputText value="#{userNumberBean.userNumber('5')}"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The preceding example uses a value expression.</p>
+</div>
+<div class="paragraph">
+<p>Consider the following example of a JavaServer Faces component tag that
+uses a method expression:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton action="#{trader.buy}" value="buy"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The EL expression <code>trader.buy</code> calls the <code>trader</code> bean&#8217;s <code>buy</code> method.
+You can modify the tag to pass on a parameter. Here is the revised tag
+in which a parameter is passed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:commandButton action="#{trader.buy('SOMESTOCK')}" value="buy"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, you are passing the string <code>'SOMESTOCK'</code> (a
+stock symbol) as a parameter to the <code>buy</code> method.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="where-value-expressions-can-be-used">Where Value Expressions Can Be Used</h4>
+<div class="paragraph">
+<p>Value expressions using the <code>${}</code> delimiters can be used</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In static text</p>
+</li>
+<li>
+<p>In any standard or custom tag attribute that can accept an expression</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The value of an expression in static text is computed and inserted into
+the current output. Here is an example of an expression embedded in
+static text:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag&gt;
+    some text ${expr} some text
+&lt;/some:tag&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A tag attribute can be set in the following ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With a single expression construct:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="${expr}"/&gt;
+
+&lt;another:tag value="#{expr}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These expressions are evaluated, and the result is converted to the
+attribute&#8217;s expected type.</p>
+</div>
+</li>
+<li>
+<p>With one or more expressions separated or surrounded by text:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="some${expr}${expr}text${expr}"/&gt;
+
+&lt;another:tag value="some#{expr}#{expr}text#{expr}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These kinds of expression, called composite expressions, are evaluated
+from left to right. Each expression embedded in the composite expression
+is converted to a <code>String</code> and then concatenated with any intervening
+text. The resulting <code>String</code> is then converted to the attribute&#8217;s
+expected type.</p>
+</div>
+</li>
+<li>
+<p>With text only:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="sometext"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The attribute&#8217;s <code>String</code> value is converted to the attribute&#8217;s expected
+type.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can use the string concatenation operator += to create a single
+expression from what would otherwise be a composite expression. For
+example, you could change the composite expression</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="sometext ${expr} moretext"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="${sometext += expr += moretext}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All expressions used to set attribute values are evaluated in the
+context of an expected type. If the result of the expression evaluation
+does not match the expected type exactly, a type conversion will be
+performed. For example, the expression <code>${1.2E4}</code> provided as the value
+of an attribute of type <code>float</code> will result in the following conversion:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Float.valueOf("1.2E4").floatValue()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="method-expressions">Method Expressions</h3>
+<div class="paragraph">
+<p>Another feature of the EL is its support of deferred method expressions.
+A method expression is used to refer to a public method of a bean and
+has the same syntax as an lvalue expression.</p>
+</div>
+<div class="paragraph">
+<p>In JavaServer Faces technology, a component tag represents a component
+on a page. The component tag uses method expressions to specify methods
+that can be invoked to perform some processing for the component. These
+methods are necessary for handling events that the components generate
+and for validating component data, as shown in this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:form&gt;
+    &lt;h:inputText id="name"
+                 value="#{customer.name}"
+                 validator="#{customer.validateName}"/&gt;
+    &lt;h:commandButton id="submit"
+                     action="#{customer.submit}" /&gt;
+&lt;/h:form&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>h:inputText</code> tag displays as a field. The <code>validator</code> attribute of
+this <code>h:inputText</code> tag references a method, called <code>validateName</code>, in
+the bean, called <code>customer</code>.</p>
+</div>
+<div class="paragraph">
+<p>Because a method can be invoked during different phases of the
+lifecycle, method expressions must always use the deferred evaluation
+syntax.</p>
+</div>
+<div class="paragraph">
+<p>Like lvalue expressions, method expressions can use the <code>.</code> and the <code>[]</code>
+operators. For example, <code>#{object.method}</code> is equivalent to
+<code>#{object["method"]}</code>. The literal inside the <code>[]</code> is converted to
+<code>String</code> and is used to find the name of the method that matches it.</p>
+</div>
+<div class="paragraph">
+<p>Method expressions can be used only in tag attributes and only in the
+following ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With a single expression construct, where bean refers to a JavaBeans
+component and method refers to a method of the JavaBeans component:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="#{bean.method}"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The expression is evaluated to a method expression, which is passed to
+the tag handler. The method represented by the method expression can
+then be invoked later.</p>
+</div>
+</li>
+<li>
+<p>With text only:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;some:tag value="sometext"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Method expressions support literals primarily to support <code>action</code>
+attributes in JavaServer Faces technology. When the method referenced by
+this method expression is invoked, the method returns the <code>String</code>
+literal, which is then converted to the expected return type, as defined
+in the tag&#8217;s tag library descriptor.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lambda-expressions">Lambda Expressions</h3>
+<div class="paragraph">
+<p>A lambda expression is a value expression with parameters. The syntax is
+similar to that of the lambda expression in the Java programming
+language, except that in the EL, the body of the lambda expression is an
+EL expression.</p>
+</div>
+<div class="paragraph">
+<p>For basic information on lambda expressions, see
+<code>http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Lambda expressions are part of Java SE 8, but you can use them in EL
+expressions with Java SE 7, the Java version associated with the Java EE
+7 platform.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A lambda expression uses the arrow token (<code>-&gt;)</code> operator. The
+identifiers to the left of the operator are called lambda parameters.
+The body, to the right of the operator, must be an EL expression. The
+lambda parameters are enclosed in parentheses; the parentheses can be
+omitted if there is only one parameter. Here are some examples:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">x -&gt; x+1
+(x, y) -&gt; x + y
+() -&gt; 64</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A lambda expression behaves like a function. It can be invoked
+immediately. For example, the following invocation evaluates to 7:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">((x, y) -&gt; x + y)(3, 4)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can use a lambda expression in conjunction with the assignment and
+semicolon operators. For example, the following code assigns the
+previous lambda expression to a variable and then invokes it. The result
+is again 7:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">v = (x, y) -&gt; x + y; v(3, 4)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A lambda expression can also be passed as an argument to a method and be
+invoked in the method. It can also be nested in another lambda
+expression.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-el002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

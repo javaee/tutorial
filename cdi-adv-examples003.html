@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The producermethods Example: Using a Producer Method to Choose a Bean Implementation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv-examples002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-producermethods-example-using-a-producer-method-to-choose-a-bean-implementation">The producermethods Example: Using a Producer Method to Choose a Bean Implementation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>producermethods</code> example shows how to use a producer method to
+choose between two beans at runtime, as described in
+<a href="cdi-adv003.html#GKGKV">Using Producer Methods, Producer Fields, and
+Disposer Methods in CDI Applications</a>. It is very similar to the
+<code>encoder</code> example described in <a href="cdi-adv-examples002.html#GKHPU">The
+encoder Example: Using Alternatives</a>. The example includes the same
+interface and two implementations of it, a managed bean, a Facelets
+page, and configuration files. It also contains a qualifier type. When
+you run it, you do not need to edit the <code>beans.xml</code> file and redeploy
+the application to change its behavior.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHRO">Components of the producermethods Example</a></p>
+</li>
+<li>
+<p><a href="#GKHQE">Running the producermethods Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="components-of-the-producermethods-example">Components of the producermethods Example</h3>
+<div class="paragraph">
+<p>The components of <code>producermethods</code> are very much like those for
+<code>encoder</code>, with some significant differences.</p>
+</div>
+<div class="paragraph">
+<p>Neither implementation of the <code>Coder</code> bean is annotated <code>@Alternative</code>,
+and there is no <code>beans.xml</code> file, because it is not needed.</p>
+</div>
+<div class="paragraph">
+<p>The Facelets page and the managed bean, <code>CoderBean</code>, have an additional
+property, <code>coderType</code>, that allows the user to specify at runtime which
+implementation to use. In addition, the managed bean has a producer
+method that selects the implementation using a qualifier type,
+<code>@Chosen</code>.</p>
+</div>
+<div class="paragraph">
+<p>The bean declares two constants that specify whether the coder type is
+the test implementation or the implementation that actually shifts
+letters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    private final static int TEST = 1;
+    private final static int SHIFT = 2;
+    private int coderType = SHIFT; // default value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The producer method, annotated with <code>@Produces</code> and <code>@Chosen</code> as well as
+<code>@RequestScoped</code> (so that it lasts only for the duration of a single
+request and response), returns one of the two implementations based on
+the <code>coderType</code> supplied by the user.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    @Produces
+    @Chosen
+    @RequestScoped
+    public Coder getCoder() {
+
+        switch (coderType) {
+            case TEST:
+                return new TestCoderImpl();
+            case SHIFT:
+                return new CoderImpl();
+            default:
+                return null;
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, the managed bean injects the chosen implementation, specifying
+the same qualifier as that returned by the producer method to resolve
+ambiguities:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    @Inject
+    @Chosen
+    @RequestScoped
+    Coder coder;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Facelets page contains modified instructions and a pair of options
+whose selected value is assigned to the property <code>coderBean.coderType</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;h2&gt;String Encoder&lt;/h2&gt;
+        &lt;p&gt;Select Test or Shift, type a string and an integer, then click
+            Encode.&lt;/p&gt;
+        &lt;p&gt;If you select Test, the TestCoderImpl bean will display the
+            argument values.&lt;/p&gt;
+        &lt;p&gt;If you select Shift, the CoderImpl bean will return a string that
+            shifts the letters in the original string by the value you specify.
+            The value must be between 0 and 26.&lt;/p&gt;
+        &lt;h:form id="encodeit"&gt;
+            &lt;h:selectOneRadio id="coderType"
+                              required="true"
+                              value="#{coderBean.coderType}"&gt;
+                &lt;f:selectItem
+                    itemValue="1"
+                    itemLabel="Test"/&gt;
+                &lt;f:selectItem
+                    itemValue="2"
+                    itemLabel="Shift Letters"/&gt;
+            &lt;/h:selectOneRadio&gt;
+            ...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-producermethods-example">Running the producermethods Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>producermethods</code> application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHPE">To Build, Package, and Deploy the producermethods Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKHPS">To Build, Package, and Deploy the producermethods Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#GKHQG">To Run the producermethods Example</a></p>
+</li>
+</ul>
+</div>
+<div id="to-build-package-and-deploy-the-producermethods-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the producermethods Example Using NetBeans
+IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>producermethods</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>producermethods</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>producermethods.war</code>, located in the <code>target</code> directory, and then
+deploys it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-producermethods-example-using-maven">To Build, Package, and Deploy the producermethods Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi/producermethods/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>producermethods.war</code>, located in the <code>target</code> directory, and then
+deploys it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-producermethods-example">To Run the producermethods Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/producermethods</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the String Encoder page, select either the Test or Shift Letters
+option, enter a string and the number of letters to shift by, and then
+click Encode.</p>
+<div class="paragraph">
+<p>Depending on your selection, the Result line displays either the encoded
+string or the input values you specified.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv-examples002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

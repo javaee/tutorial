@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of the JMS Examples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-examples001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-examples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-the-jms-examples">Overview of the JMS Examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following tables list the examples used in this chapter, describe
+what they do, and link to the section that describes them fully. The
+example directory for each example is relative to the
+tut-install`/examples/jms/` directory.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref200"></a><a id="sthref201"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 47-1 JMS Examples That Show the Use of Java EE Application Clients</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 37%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Example Directory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simple/producer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to send messages; see
+<a href="jms-examples003.html#BABIHCAE">Sending Messages</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simple/synchconsumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to receive messages
+synchronously; see <a href="jms-examples003.html#BNCFB">Receiving Messages
+Synchronously</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simple/asynchconsumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to receive
+messages asynchronously; see <a href="jms-examples003.html#BNCFH">Using a
+Message Listener for Asynchronous Message Delivery</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simple/messagebrowser</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to use a
+<code>QueueBrowser</code> to browse a queue; see
+<a href="jms-examples003.html#BNCFL">Browsing Messages on a Queue</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simple/clientackconsumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to acknowledge
+messages received synchronously; see
+<a href="jms-examples003.html#BNCFX">Acknowledging Messages</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>durablesubscriptionexample</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to create a
+durable subscription on a topic; see
+<a href="jms-examples004.html#BNCGG">Using Durable Subscriptions</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transactedexample</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to send and receive
+messages in local transactions (also uses request-reply messaging); see
+<a href="jms-examples004.html#BNCGJ">Using Local Transactions</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>shared/sharedconsumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to create shared
+nondurable topic subscriptions; see
+<a href="jms-examples005.html#BABIBEAC">Using Shared Nondurable Subscriptions</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>shared/shareddurableconsumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to create
+shared durable topic subscriptions; see
+<a href="jms-examples005.html#BABEJBHA">Using Shared Durable Subscriptions</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref202"></a><a id="sthref203"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 47-2 JMS Examples That Show the Use of Java EE Web and EJB
+Components</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 27%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Example Directory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>websimplemessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using managed beans to send messages and to receive
+messages synchronously; see <a href="jms-examples006.html#BABBABFC">Sending
+and Receiving Messages Using a Simple Web Application</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simplemessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client to send messages, and
+using a message-driven bean to receive messages asynchronously; see
+<a href="jms-examples007.html#BNBPK">Receiving Messages Asynchronously Using a
+Message-Driven Bean</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clientsessionmdb</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using a session bean to send messages, and using a
+message-driven bean to receive messages; see
+<a href="jms-examples008.html#BNCGW">Sending Messages from a Session Bean to
+an MDB</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clientmdbentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using an application client, two message-driven
+beans, and JPA persistence to create a simple HR application; see
+<a href="jms-examples009.html#BNCHF">Using an Entity to Join Messages from Two
+MDBs</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-examples001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-examples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The billpayment Example: Using Events and Interceptors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-adv-examples004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-billpayment-example-using-events-and-interceptors">The billpayment Example: Using Events and Interceptors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>billpayment</code> example shows how to use both events and interceptors.</p>
+</div>
+<div class="paragraph">
+<p>The source files are located in the
+tut-install`/examples/cdi/billpayment/src/main/java/javaeetutorial/billpayment/`
+directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#CHDIBGDF">Overview of the billpayment Example</a></p>
+</li>
+<li>
+<p><a href="#GKHOK">The PaymentEvent Event Class</a></p>
+</li>
+<li>
+<p><a href="#GKHRB">The PaymentHandler Event Listener</a></p>
+</li>
+<li>
+<p><a href="#GKHRJ">The billpayment Facelets Pages and Managed Bean</a></p>
+</li>
+<li>
+<p><a href="#GKHRQ">The LoggedInterceptor Interceptor Class</a></p>
+</li>
+<li>
+<p><a href="#GKHPK">Running the billpayment Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-billpayment-example">Overview of the billpayment Example</h3>
+<div class="paragraph">
+<p>The example simulates paying an amount using a debit card or credit
+card. When the user chooses a payment method, the managed bean creates
+an appropriate event, supplies its payload, and fires it. A simple event
+listener handles the event using observer methods.</p>
+</div>
+<div class="paragraph">
+<p>The example also defines an interceptor that is set on a class and on
+two methods of another class.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-paymentevent-event-class">The PaymentEvent Event Class</h3>
+<div class="paragraph">
+<p>The event class, <code>event.PaymentEvent</code>, is a simple bean class that
+contains a no-argument constructor. It also has a <code>toString</code> method and
+getter and setter methods for the payload components: a <code>String</code> for the
+payment type, a <code>BigDecimal</code> for the payment amount, and a <code>Date</code> for
+the timestamp.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class PaymentEvent implements Serializable {
+
+    ...
+    public String paymentType;
+    public BigDecimal value;
+    public Date datetime;
+
+    public PaymentEvent() {
+    }
+
+    @Override
+    public String toString() {
+        return this.paymentType
+                + " = $" + this.value.toString()
+                + " at " + this.datetime.toString();
+    }
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The event class is a simple bean that is instantiated by the managed
+bean using <code>new</code> and then populated. For this reason, the CDI container
+cannot intercept the creation of the bean, and hence it cannot allow
+interception of its getter and setter methods.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-paymenthandler-event-listener">The PaymentHandler Event Listener</h3>
+<div class="paragraph">
+<p>The event listener, <code>listener.PaymentHandler</code>, contains two observer
+methods, one for each of the two event types:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Logged
+@SessionScoped
+public class PaymentHandler implements Serializable {
+
+    ...
+    public void creditPayment(@Observes @Credit PaymentEvent event) {
+        logger.log(Level.INFO, "PaymentHandler - Credit Handler: {0}",
+                event.toString());
+
+        // call a specific Credit handler class...
+    }
+
+    public void debitPayment(@Observes @Debit PaymentEvent event) {
+        logger.log(Level.INFO, "PaymentHandler - Debit Handler: {0}",
+                event.toString());
+
+        // call a specific Debit handler class...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each observer method takes as an argument the event, annotated with
+<code>@Observes</code> and with the qualifier for the type of payment. In a real
+application, the observer methods would pass the event information on to
+another component that would perform business logic on the payment.</p>
+</div>
+<div class="paragraph">
+<p>The qualifiers are defined in the <code>payment</code> package, described in
+<a href="#GKHRJ">The billpayment Facelets Pages and Managed Bean</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PaymentHandler</code> bean is annotated <code>@Logged</code> so that all its methods
+can be intercepted.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-billpayment-facelets-pages-and-managed-bean">The billpayment Facelets Pages and Managed Bean</h3>
+<div class="paragraph">
+<p>The <code>billpayment</code> example contains two Facelets pages, <code>index.xhtml</code> and
+the very simple <code>response.xhtml</code>. The body of <code>index.xhtml</code> looks like
+this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;h:body&gt;
+        &lt;h3&gt;Bill Payment Options&lt;/h3&gt;
+        &lt;p&gt;Enter an amount, select Debit Card or Credit Card,
+            then click Pay.&lt;/p&gt;
+        &lt;h:form&gt;
+            &lt;p&gt;
+            &lt;h:outputLabel value="Amount: $" for="amt"/&gt;
+            &lt;h:inputText id="amt" value="#{paymentBean.value}"
+                         required="true"
+                         requiredMessage="An amount is required."
+                         maxlength="15" /&gt;
+            &lt;/p&gt;
+            &lt;h:outputLabel value="Options:" for="opt"/&gt;
+            &lt;h:selectOneRadio id="opt" value="#{paymentBean.paymentOption}"&gt;
+                &lt;f:selectItem id="debit" itemLabel="Debit Card"
+                              itemValue="1"/&gt;
+                &lt;f:selectItem id="credit" itemLabel="Credit Card"
+                              itemValue="2" /&gt;
+            &lt;/h:selectOneRadio&gt;
+            &lt;p&gt;&lt;h:commandButton id="submit" value="Pay"
+                                action="#{paymentBean.pay}" /&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;h:commandButton value="Reset"
+                                action="#{paymentBean.reset}" /&gt;&lt;/p&gt;
+        &lt;/h:form&gt;
+        ...
+    &lt;/h:body&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The input field takes a payment amount, passed to <code>paymentBean.value</code>.
+Two options ask the user to select a Debit Card or Credit Card payment,
+passing the integer value to <code>paymentBean.paymentOption</code>. Finally, the
+Pay command button&#8217;s action is set to the method <code>paymentBean.pay</code>, and
+the Reset button&#8217;s action is set to the <code>paymentBean.reset</code> method.</p>
+</div>
+<div class="paragraph">
+<p>The <code>payment.PaymentBean</code> managed bean uses qualifiers to differentiate
+between the two kinds of payment event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@SessionScoped
+public class PaymentBean implements Serializable {
+
+   ...
+    @Inject
+    @Credit
+    Event&lt;PaymentEvent&gt; creditEvent;
+
+    @Inject
+    @Debit
+    Event&lt;PaymentEvent&gt; debitEvent;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The qualifiers, <code>@Credit</code> and <code>@Debit</code>, are defined in the <code>payment</code>
+package along with <code>PaymentBean</code>.</p>
+</div>
+<div class="paragraph">
+<p>Next, the <code>PaymentBean</code> defines the properties it obtains from the
+Facelets page and will pass on to the event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    public static final int DEBIT = 1;
+    public static final int CREDIT = 2;
+    private int paymentOption = DEBIT;
+
+    @Digits(integer = 10, fraction = 2, message = "Invalid value")
+    private BigDecimal value;
+
+    private Date datetime;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>paymentOption</code> value is an integer passed in from the option
+component; the default value is <code>DEBIT</code>. The <code>value</code> is a <code>BigDecimal</code>
+with a Bean Validation constraint that enforces a currency value with a
+maximum number of digits. The timestamp for the event, <code>datetime</code>, is a
+<code>Date</code> object initialized when the <code>pay</code> method is called.</p>
+</div>
+<div class="paragraph">
+<p>The <code>pay</code> method of the bean first sets the timestamp for this payment
+event. It then creates and populates the event payload, using the
+constructor for the <code>PaymentEvent</code> and calling the event&#8217;s setter
+methods, using the bean properties as arguments. It then fires the
+event.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    @Logged
+    public String pay() {
+        this.setDatetime(Calendar.getInstance().getTime());
+        switch (paymentOption) {
+            case DEBIT:
+                PaymentEvent debitPayload = new PaymentEvent();
+                debitPayload.setPaymentType("Debit");
+                debitPayload.setValue(value);
+                debitPayload.setDatetime(datetime);
+                debitEvent.fire(debitPayload);
+                break;
+            case CREDIT:
+                PaymentEvent creditPayload = new PaymentEvent();
+                creditPayload.setPaymentType("Credit");
+                creditPayload.setValue(value);
+                creditPayload.setDatetime(datetime);
+                creditEvent.fire(creditPayload);
+                break;
+            default:
+                logger.severe("Invalid payment option!");
+        }
+        return "response";
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>pay</code> method returns the page to which the action is redirected,
+<code>response.xhtml</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PaymentBean</code> class also contains a <code>reset</code> method that empties the
+value field on the <code>index.xhtml</code> page and sets the payment option to the
+default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    @Logged
+    public void reset() {
+        setPaymentOption(DEBIT);
+        setValue(BigDecimal.ZERO);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this bean, only the <code>pay</code> and <code>reset</code> methods are intercepted.</p>
+</div>
+<div class="paragraph">
+<p>The <code>response.xhtml</code> page displays the amount paid. It uses a <code>rendered</code>
+expression to display the payment method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;h:body&gt;
+        &lt;h:form&gt;
+            &lt;h2&gt;Bill Payment: Result&lt;/h2&gt;
+            &lt;h3&gt;Amount Paid with
+                &lt;h:outputText id="debit" value="Debit Card: "
+                              rendered="#{paymentBean.paymentOption eq 1}" /&gt;
+                &lt;h:outputText id="credit" value="Credit Card: "
+                              rendered="#{paymentBean.paymentOption eq 2}" /&gt;
+                &lt;h:outputText id="result" value="#{paymentBean.value}"&gt;
+                    &lt;f:convertNumber type="currency"/&gt;
+                &lt;/h:outputText&gt;
+            &lt;/h3&gt;
+            &lt;p&gt;&lt;h:commandButton id="back" value="Back" action="index" /&gt;&lt;/p&gt;
+        &lt;/h:form&gt;
+    &lt;/h:body&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-loggedinterceptor-interceptor-class">The LoggedInterceptor Interceptor Class</h3>
+<div class="paragraph">
+<p>The interceptor class, <code>LoggedInterceptor</code>, and its interceptor binding,
+<code>Logged</code>, are both defined in the <code>interceptor</code> package. The <code>Logged</code>
+interceptor binding is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Inherited
+@InterceptorBinding
+@Retention(RUNTIME)
+@Target({METHOD, TYPE})
+public @interface Logged {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>LoggedInterceptor</code> class looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Logged
+@Interceptor
+public class LoggedInterceptor implements Serializable {
+
+    ...
+
+    public LoggedInterceptor() {
+    }
+
+    @AroundInvoke
+    public Object logMethodEntry(InvocationContext invocationContext)
+            throws Exception {
+        System.out.println("Entering method: "
+                + invocationContext.getMethod().getName() + " in class "
+                + invocationContext.getMethod().getDeclaringClass().getName());
+
+        return invocationContext.proceed();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The class is annotated with both the <code>@Logged</code> and the <code>@Interceptor</code>
+annotations. The <code>@AroundInvoke</code> method, <code>logMethodEntry</code>, takes the
+required <code>InvocationContext</code> argument and calls the required <code>proceed</code>
+method. When a method is intercepted, <code>logMethodEntry</code> displays the name
+of the method being invoked as well as its class.</p>
+</div>
+<div class="paragraph">
+<p>To enable the interceptor, the <code>beans.xml</code> file defines it as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;interceptors&gt;
+    &lt;class&gt;javaeetutorial.billpayment.interceptor.LoggedInterceptor&lt;/class&gt;
+&lt;/interceptors&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this application, the <code>PaymentEvent</code> and <code>PaymentHandler</code> classes are
+annotated <code>@Logged</code>, so all their methods are intercepted. In
+<code>PaymentBean</code>, only the <code>pay</code> and <code>reset</code> methods are annotated
+<code>@Logged</code>, so only those methods are intercepted.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-billpayment-example">Running the billpayment Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>billpayment</code> application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKHQS">To Build, Package, and Deploy the billpayment Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKHPX">To Build, Package, and Deploy the billpayment Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#GKHPT">To Run the billpayment Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-billpayment-example-using-netbeans-ide">To Build, Package, and Deploy the billpayment Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>billpayment</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>billpayment</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>billpayment.war</code>, located in the <code>target</code> directory, and then deploys
+it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-billpayment-example-using-maven">To Build, Package, and Deploy the billpayment Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/cdi/billpayment/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>billpayment.war</code>, located in the <code>target</code> directory, and then deploys
+it to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-billpayment-example">To Run the billpayment Example</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser, enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/billpayment</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the Bill Payment Options page, enter a value in the Amount field.</p>
+<div class="paragraph">
+<p>The amount can contain up to 10 digits and include up to two decimal
+places. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">9876.54</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select Debit Card or Credit Card and click Pay.</p>
+<div class="paragraph">
+<p>The Bill Payment: Result page opens, displaying the amount paid and the
+method of payment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Amount Paid with Credit Card: $9,876.34</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click Back to return to the Bill Payment Options page.</p>
+<div class="paragraph">
+<p>You can also click Reset to return to the initial page values.</p>
+</div>
+</li>
+<li>
+<p>Examine the server log output.</p>
+<div class="paragraph">
+<p>In NetBeans IDE, the output is visible in the GlassFish Server Output
+tab. Otherwise, view domain-dir`/logs/server.log`.</p>
+</div>
+<div class="paragraph">
+<p>The output from each interceptor appears in the log, followed by the
+additional logger output defined by the constructor and methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">INFO: Entering method: pay in class billpayment.payment.PaymentBean
+INFO: PaymentHandler created.
+INFO: Entering method: debitPayment in class billpayment.listener.PaymentHandler
+INFO: PaymentHandler - Debit Handler: Debit = $1234.56 at Tue Dec 14 14:50:28 EST 2010</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-adv-examples004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-adv-examples006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

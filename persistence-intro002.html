@@ -1,0 +1,954 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Entities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-intro001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="entities">Entities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An entity is a lightweight persistence domain object. Typically, an
+entity represents a table in a relational database, and each entity
+instance corresponds to a row in that table. The primary programming
+artifact of an entity is the entity class, although entities can use
+helper classes.</p>
+</div>
+<div class="paragraph">
+<p>The persistent state of an entity is represented through either
+persistent fields or persistent properties. These fields or properties
+use object/relational mapping annotations to map the entities and entity
+relationships to the relational data in the underlying data store.</p>
+</div>
+<div class="sect2">
+<h3 id="requirements-for-entity-classes">Requirements for Entity Classes</h3>
+<div class="paragraph">
+<p>An entity class must follow these requirements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The class must be annotated with the <code>javax.persistence.Entity</code>
+annotation.</p>
+</li>
+<li>
+<p>The class must have a public or protected, no-argument constructor.
+The class may have other constructors.</p>
+</li>
+<li>
+<p>The class must not be declared <code>final</code>. No methods or persistent
+instance variables must be declared <code>final</code>.</p>
+</li>
+<li>
+<p>If an entity instance is passed by value as a detached object, such as
+through a session bean&#8217;s remote business interface, the class must
+implement the <code>Serializable</code> interface.</p>
+</li>
+<li>
+<p>Entities may extend both entity and non-entity classes, and non-entity
+classes may extend entity classes.</p>
+</li>
+<li>
+<p>Persistent instance variables must be declared private, protected, or
+package-private and can be accessed directly only by the entity class&#8217;s
+methods. Clients must access the entity&#8217;s state through accessor or
+business methods.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="persistent-fields-and-properties-in-entity-classes">Persistent Fields and Properties in Entity Classes</h3>
+<div class="paragraph">
+<p>The persistent state of an entity can be accessed through either the
+entity&#8217;s instance variables or properties. The fields or properties must
+be of the following Java language types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java primitive types</p>
+</li>
+<li>
+<p><code>java.lang.String</code></p>
+</li>
+<li>
+<p>Other serializable types, including:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrappers of Java primitive types</p>
+</li>
+<li>
+<p><code>java.math.BigInteger</code></p>
+</li>
+<li>
+<p><code>java.math.BigDecimal</code></p>
+</li>
+<li>
+<p><code>java.util.Date</code></p>
+</li>
+<li>
+<p><code>java.util.Calendar</code></p>
+</li>
+<li>
+<p><code>java.sql.Date</code></p>
+</li>
+<li>
+<p><code>java.sql.Time</code></p>
+</li>
+<li>
+<p><code>java.sql.TimeStamp</code></p>
+</li>
+<li>
+<p>User-defined serializable types</p>
+</li>
+<li>
+<p><code>byte[]</code></p>
+</li>
+<li>
+<p><code>Byte[]</code></p>
+</li>
+<li>
+<p><code>char[]</code></p>
+</li>
+<li>
+<p><code>Character[]</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enumerated types</p>
+</li>
+<li>
+<p>Other entities and/or collections of entities</p>
+</li>
+<li>
+<p>Embeddable classes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Entities may use persistent fields, persistent properties, or a
+combination of both. If the mapping annotations are applied to the
+entity&#8217;s instance variables, the entity uses persistent fields. If the
+mapping annotations are applied to the entity&#8217;s getter methods for
+JavaBeans-style properties, the entity uses persistent properties.</p>
+</div>
+<div class="sect3">
+<h4 id="persistent-fields">Persistent Fields</h4>
+<div class="paragraph">
+<p>If the entity class uses persistent fields, the Persistence runtime
+accesses entity-class instance variables directly. All fields not
+annotated <code>javax.persistence.Transient</code> or not marked as Java
+<code>transient</code> will be persisted to the data store. The object/relational
+mapping annotations must be applied to the instance variables.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="persistent-properties">Persistent Properties</h4>
+<div class="paragraph">
+<p>If the entity uses persistent properties, the entity must follow the
+method conventions of JavaBeans components. JavaBeans-style properties
+use getter and setter methods that are typically named after the entity
+class&#8217;s instance variable names. For every persistent property property
+of type Type of the entity, there is a getter method <code>get`Property and
+setter method `set`Property. If the property is a Boolean, you may use
+`is`Property instead of `get`Property. For example, if a `Customer</code>
+entity uses persistent properties and has a private instance variable
+called <code>firstName</code>, the class defines a <code>getFirstName</code> and
+<code>setFirstName</code> method for retrieving and setting the state of the
+<code>firstName</code> instance variable.</p>
+</div>
+<div class="paragraph">
+<p>The method signatures for single-valued persistent properties are as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Type getProperty()
+void setProperty(Type type)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The object/relational mapping annotations for persistent properties must
+be applied to the getter methods. Mapping annotations cannot be applied
+to fields or properties annotated <code>@Transient</code> or marked <code>transient</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-collections-in-entity-fields-and-properties">Using Collections in Entity Fields and Properties</h4>
+<div class="paragraph">
+<p>Collection-valued persistent fields and properties must use the
+supported Java collection interfaces regardless of whether the entity
+uses persistent fields or properties. The following collection
+interfaces may be used:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>java.util.Collection</code></p>
+</li>
+<li>
+<p><code>java.util.Set</code></p>
+</li>
+<li>
+<p><code>java.util.List</code></p>
+</li>
+<li>
+<p><code>java.util.Map</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the entity class uses persistent fields, the type in the preceding
+method signatures must be one of these collection types. Generic
+variants of these collection types may also be used. For example, if it
+has a persistent property that contains a set of phone numbers, the
+<code>Customer</code> entity would have the following methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Set&lt;PhoneNumber&gt; getPhoneNumbers() { ... }
+void setPhoneNumbers(Set&lt;PhoneNumber&gt;) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a field or property of an entity consists of a collection of basic
+types or embeddable classes, use the
+<code>javax.persistence.ElementCollection</code> annotation on the field or
+property.</p>
+</div>
+<div class="paragraph">
+<p>The two attributes of <code>@ElementCollection</code> are <code>targetClass</code> and
+<code>fetch</code>. The <code>targetClass</code> attribute specifies the class name of the
+basic or embeddable class and is optional if the field or property is
+defined using Java programming language generics. The optional <code>fetch</code>
+attribute is used to specify whether the collection should be retrieved
+lazily or eagerly, using the <code>javax.persistence.FetchType</code> constants of
+either <code>LAZY</code> or <code>EAGER</code>, respectively. By default, the collection will
+be fetched lazily.</p>
+</div>
+<div class="paragraph">
+<p>The following entity, <code>Person</code>, has a persistent field, <code>nicknames</code>,
+which is a collection of <code>String</code> classes that will be fetched eagerly.
+The <code>targetClass</code> element is not required, because it uses generics to
+define the field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class Person {
+    ...
+    @ElementCollection(fetch=EAGER)
+    protected Set&lt;String&gt; nickname = new HashSet();
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Collections of entity elements and relationships may be represented by
+<code>java.util.Map</code> collections. A <code>Map</code> consists of a key and a value.</p>
+</div>
+<div class="paragraph">
+<p>When using <code>Map</code> elements or relationships, the following rules apply.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>Map</code> key or value may be a basic Java programming language type,
+an embeddable class, or an entity.</p>
+</li>
+<li>
+<p>When the <code>Map</code> value is an embeddable class or basic type, use the
+<code>@ElementCollection</code> annotation.</p>
+</li>
+<li>
+<p>When the <code>Map</code> value is an entity, use the <code>@OneToMany</code> or
+<code>@ManyToMany</code> annotation.</p>
+</li>
+<li>
+<p>Use the <code>Map</code> type on only one side of a bidirectional relationship.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the key type of a <code>Map</code> is a Java programming language basic type,
+use the annotation <code>javax.persistence.MapKeyColumn</code> to set the column
+mapping for the key. By default, the <code>name</code> attribute of <code>@MapKeyColumn</code>
+is of the form RELATIONSHIP-FIELD/PROPERTY-NAME`_KEY`. For example, if
+the referencing relationship field name is <code>image</code>, the default <code>name</code>
+attribute is <code>IMAGE_KEY</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the key type of a <code>Map</code> is an entity, use the
+<code>javax.persistence.MapKeyJoinColumn</code> annotation. If the multiple columns
+are needed to set the mapping, use the annotation
+<code>javax.persistence.MapKeyJoinColumns</code> to include multiple
+<code>@MapKeyJoinColumn</code> annotations. If no <code>@MapKeyJoinColumn</code> is present,
+the mapping column name is by default set to
+RELATIONSHIP-FIELD/PROPERTY-NAME`_KEY`. For example, if the relationship
+field name is <code>employee</code>, the default <code>name</code> attribute is
+<code>EMPLOYEE_KEY</code>.</p>
+</div>
+<div class="paragraph">
+<p>If Java programming language generic types are not used in the
+relationship field or property, the key class must be explicitly set
+using the <code>javax.persistence.MapKeyClass</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>If the <code>Map</code> key is the primary key or a persistent field or property of
+the entity that is the <code>Map</code> value, use the <code>javax.persistence.MapKey</code>
+annotation. The <code>@MapKeyClass</code> and <code>@MapKey</code> annotations cannot be used
+on the same field or property.</p>
+</div>
+<div class="paragraph">
+<p>If the <code>Map</code> value is a Java programming language basic type or an
+embeddable class, it will be mapped as a collection table in the
+underlying database. If generic types are not used, the
+<code>@ElementCollection</code> annotation&#8217;s <code>targetClass</code> attribute must be set to
+the type of the <code>Map</code> value.</p>
+</div>
+<div class="paragraph">
+<p>If the <code>Map</code> value is an entity and part of a many-to-many or
+one-to-many unidirectional relationship, it will be mapped as a join
+table in the underlying database. A unidirectional one-to-many
+relationship that uses a <code>Map</code> may also be mapped using the
+<code>@JoinColumn</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>If the entity is part of a one-to-many/many-to-one bidirectional
+relationship, it will be mapped in the table of the entity that
+represents the value of the <code>Map</code>. If generic types are not used, the
+<code>targetEntity</code> attribute of the <code>@OneToMany</code> and <code>@ManyToMany</code>
+annotations must be set to the type of the <code>Map</code> value.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="validating-persistent-fields-and-properties">Validating Persistent Fields and Properties</h4>
+<div class="paragraph">
+<p>The Java API for JavaBeans Validation (Bean Validation) provides a
+mechanism for validating application data. Bean Validation is integrated
+into the Java EE containers, allowing the same validation logic to be
+used in any of the tiers of an enterprise application.</p>
+</div>
+<div class="paragraph">
+<p>Bean Validation constraints may be applied to persistent entity classes,
+embeddable classes, and mapped superclasses. By default, the Persistence
+provider will automatically perform validation on entities with
+persistent fields or properties annotated with Bean Validation
+constraints immediately after the <code>PrePersist</code>, <code>PreUpdate</code>, and
+<code>PreRemove</code> lifecycle events.</p>
+</div>
+<div class="paragraph">
+<p>Bean Validation constraints are annotations applied to the fields or
+properties of Java programming language classes. Bean Validation
+provides a set of constraints as well as an API for defining custom
+constraints. Custom constraints can be specific combinations of the
+default constraints, or new constraints that don&#8217;t use the default
+constraints. Each constraint is associated with at least one validator
+class that validates the value of the constrained field or property.
+Custom constraint developers must also provide a validator class for the
+constraint.</p>
+</div>
+<div class="paragraph">
+<p>Bean Validation constraints are applied to the persistent fields or
+properties of persistent classes. When adding Bean Validation
+constraints, use the same access strategy as the persistent class. That
+is, if the persistent class uses field access, apply the Bean Validation
+constraint annotations on the class&#8217;s fields. If the class uses property
+access, apply the constraints on the getter methods.</p>
+</div>
+<div class="paragraph">
+<p><a href="bean-validation002.html#GKAGK">Table 22-1</a> lists Bean Validation&#8217;s
+built-in constraints, defined in the <code>javax.validation.constraints</code>
+package.</p>
+</div>
+<div class="paragraph">
+<p>All the built-in constraints listed in
+<a href="bean-validation002.html#GKAGK">Table 22-1</a> have a corresponding
+annotation, ConstraintName`.List`, for grouping multiple constraints of
+the same type on the same field or property. For example, the following
+persistent field has two <code>@Pattern</code> constraints:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Pattern.List({
+    @Pattern(regexp="..."),
+    @Pattern(regexp="...")
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following entity class, <code>Contact</code>, has Bean Validation constraints
+applied to its persistent fields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class Contact implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
+    protected String firstName;
+    @NotNull
+    protected String lastName;
+    @Pattern(regexp = "[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\\."
+            + "[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9]"
+            + "(?:[a-z0-9-]*[a-z0-9])?",
+            message = "{invalid.email}")
+    protected String email;
+    @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+            message = "{invalid.phonenumber}")
+    protected String mobilePhone;
+    @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+            message = "{invalid.phonenumber}")
+    protected String homePhone;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Past
+    protected Date birthday;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@NotNull</code> annotation on the <code>firstName</code> and <code>lastName</code> fields
+specifies that those fields are now required. If a new <code>Contact</code>
+instance is created where <code>firstName</code> or <code>lastName</code> have not been
+initialized, Bean Validation will throw a validation error. Similarly,
+if a previously created instance of <code>Contact</code> has been modified so that
+<code>firstName</code> or <code>lastName</code> are null, a validation error will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>The <code>email</code> field has a <code>@Pattern</code> constraint applied to it, with a
+complicated regular expression that matches most valid email addresses.
+If the value of <code>email</code> doesn&#8217;t match this regular expression, a
+validation error will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>The <code>homePhone</code> and <code>mobilePhone</code> fields have the same <code>@Pattern</code>
+constraints. The regular expression matches 10 digit telephone numbers
+in the United States and Canada of the form <code>(`xxx</code>)` xxx`-`xxxx.</p>
+</div>
+<div class="paragraph">
+<p>The <code>birthday</code> field is annotated with the <code>@Past</code> constraint, which
+ensures that the value of <code>birthday</code> must be in the past.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="primary-keys-in-entities">Primary Keys in Entities</h3>
+<div class="paragraph">
+<p>Each entity has a unique object identifier. A customer entity, for
+example, might be identified by a customer number. The unique
+identifier, or primary key, enables clients to locate a particular
+entity instance. Every entity must have a primary key. An entity may
+have either a simple or a composite primary key.</p>
+</div>
+<div class="paragraph">
+<p>Simple primary keys use the <code>javax.persistence.Id</code> annotation to denote
+the primary key property or field.</p>
+</div>
+<div class="paragraph">
+<p>Composite primary keys are used when a primary key consists of more than
+one attribute, which corresponds to a set of single persistent
+properties or fields. Composite primary keys must be defined in a
+primary key class. Composite primary keys are denoted using the
+<code>javax.persistence.EmbeddedId</code> and <code>javax.persistence.IdClass</code>
+annotations.</p>
+</div>
+<div class="paragraph">
+<p>The primary key, or the property or field of a composite primary key,
+must be one of the following Java language types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java primitive types</p>
+</li>
+<li>
+<p>Java primitive wrapper types</p>
+</li>
+<li>
+<p><code>java.lang.String</code></p>
+</li>
+<li>
+<p><code>java.util.Date</code> (the temporal type should be <code>DATE</code>)</p>
+</li>
+<li>
+<p><code>java.sql.Date</code></p>
+</li>
+<li>
+<p><code>java.math.BigDecimal</code></p>
+</li>
+<li>
+<p><code>java.math.BigInteger</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Floating-point types should never be used in primary keys. If you use a
+generated primary key, only integral types will be portable.</p>
+</div>
+<div class="paragraph">
+<p>A primary key class must meet these requirements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The access control modifier of the class must be <code>public</code>.</p>
+</li>
+<li>
+<p>The properties of the primary key class must be <code>public</code> or
+<code>protected</code> if property-based access is used.</p>
+</li>
+<li>
+<p>The class must have a public default constructor.</p>
+</li>
+<li>
+<p>The class must implement the <code>hashCode()</code> and <code>equals(Object other)</code>
+methods.</p>
+</li>
+<li>
+<p>The class must be serializable.</p>
+</li>
+<li>
+<p>A composite primary key must be represented and mapped to multiple
+fields or properties of the entity class or must be represented and
+mapped as an embeddable class.</p>
+</li>
+<li>
+<p>If the class is mapped to multiple fields or properties of the entity
+class, the names and types of the primary key fields or properties in
+the primary key class must match those of the entity class.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following primary key class is a composite key, and the
+<code>customerOrder</code> and <code>itemId</code> fields together uniquely identify an
+entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public final class LineItemKey implements Serializable {
+    private Integer customerOrder;
+    private int itemId;
+
+    public LineItemKey() {}
+
+    public LineItemKey(Integer order, int itemId) {
+        this.setCustomerOrder(order);
+        this.setItemId(itemId);
+    }
+
+    @Override
+    public int hashCode() {
+        return ((this.getCustomerOrder() == null
+                ? 0 : this.getCustomerOrder().hashCode())
+                ^ ((int) this.getItemId()));
+    }
+
+    @Override
+    public boolean equals(Object otherOb) {
+        if (this == otherOb) {
+            return true;
+        }
+        if (!(otherOb instanceof LineItemKey)) {
+            return false;
+        }
+        LineItemKey other = (LineItemKey) otherOb;
+        return ((this.getCustomerOrder() == null
+                ? other.getCustomerOrder() == null : this.getCustomerOrder()
+                .equals(other.getCustomerOrder()))
+                &amp;&amp; (this.getItemId() == other.getItemId()));
+    }
+
+    @Override
+    public String toString() {
+        return "" + getCustomerOrder() + "-" + getItemId();
+    }
+    /* Getters and setters */
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="multiplicity-in-entity-relationships">Multiplicity in Entity Relationships</h3>
+<div class="paragraph">
+<p>Multiplicities are of the following types.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One-to-one: Each entity instance is related to a single instance of
+another entity. For example, to model a physical warehouse in which each
+storage bin contains a single widget, <code>StorageBin</code> and <code>Widget</code> would
+have a one-to-one relationship. One-to-one relationships use the
+<code>javax.persistence.OneToOne</code> annotation on the corresponding persistent
+property or field.</p>
+</li>
+<li>
+<p>One-to-many: An entity instance can be related to multiple instances
+of the other entities. A sales order, for example, can have multiple
+line items. In the order application, <code>CustomerOrder</code> would have a
+one-to-many relationship with <code>LineItem</code>. One-to-many relationships use
+the <code>javax.persistence.OneToMany</code> annotation on the corresponding
+persistent property or field.</p>
+</li>
+<li>
+<p>Many-to-one: Multiple instances of an entity can be related to a
+single instance of the other entity. This multiplicity is the opposite
+of a one-to-many relationship. In the example just mentioned, the
+relationship to <code>CustomerOrder</code> from the perspective of <code>LineItem</code> is
+many-to-one. Many-to-one relationships use the
+<code>javax.persistence.ManyToOne</code> annotation on the corresponding persistent
+property or field.</p>
+</li>
+<li>
+<p>Many-to-many: The entity instances can be related to multiple
+instances of each other. For example, each college course has many
+students, and every student may take several courses. Therefore, in an
+enrollment application, <code>Course</code> and <code>Student</code> would have a many-to-many
+relationship. Many-to-many relationships use the
+<code>javax.persistence.ManyToMany</code> annotation on the corresponding
+persistent property or field.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="direction-in-entity-relationships">Direction in Entity Relationships</h3>
+<div class="paragraph">
+<p>The direction of a relationship can be either bidirectional or
+unidirectional. A bidirectional relationship has both an owning side and
+an inverse side. A unidirectional relationship has only an owning side.
+The owning side of a relationship determines how the Persistence runtime
+makes updates to the relationship in the database.</p>
+</div>
+<div class="sect3">
+<h4 id="bidirectional-relationships">Bidirectional Relationships</h4>
+<div class="paragraph">
+<p>In a bidirectional relationship, each entity has a relationship field or
+property that refers to the other entity. Through the relationship field
+or property, an entity class&#8217;s code can access its related object. If an
+entity has a related field, the entity is said to "know" about its
+related object. For example, if <code>CustomerOrder</code> knows what <code>LineItem</code>
+instances it has and if <code>LineItem</code> knows what <code>CustomerOrder</code> it belongs
+to, they have a bidirectional relationship.</p>
+</div>
+<div class="paragraph">
+<p>Bidirectional relationships must follow these rules.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The inverse side of a bidirectional relationship must refer to its
+owning side by using the <code>mappedBy</code> element of the <code>@OneToOne</code>,
+<code>@OneToMany</code>, or <code>@ManyToMany</code> annotation. The <code>mappedBy</code> element
+designates the property or field in the entity that is the owner of the
+relationship.</p>
+</li>
+<li>
+<p>The many side of many-to-one bidirectional relationships must not
+define the <code>mappedBy</code> element. The many side is always the owning side
+of the relationship.</p>
+</li>
+<li>
+<p>For one-to-one bidirectional relationships, the owning side
+corresponds to the side that contains the corresponding foreign key.</p>
+</li>
+<li>
+<p>For many-to-many bidirectional relationships, either side may be the
+owning side.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="unidirectional-relationships">Unidirectional Relationships</h4>
+<div class="paragraph">
+<p>In a unidirectional relationship, only one entity has a relationship
+field or property that refers to the other. For example, <code>LineItem</code>
+would have a relationship field that identifies <code>Product</code>, but <code>Product</code>
+would not have a relationship field or property for <code>LineItem</code>. In other
+words, <code>LineItem</code> knows about <code>Product</code>, but <code>Product</code> doesn&#8217;t know
+which <code>LineItem</code> instances refer to it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="queries-and-relationship-direction">Queries and Relationship Direction</h4>
+<div class="paragraph">
+<p>Java Persistence query language and Criteria API queries often navigate
+across relationships. The direction of a relationship determines whether
+a query can navigate from one entity to another. For example, a query
+can navigate from <code>LineItem</code> to <code>Product</code> but cannot navigate in the
+opposite direction. For <code>CustomerOrder</code> and <code>LineItem</code>, a query could
+navigate in both directions because these two entities have a
+bidirectional relationship.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="cascade-operations-and-relationships">Cascade Operations and Relationships</h4>
+<div class="paragraph">
+<p>Entities that use relationships often have dependencies on the existence
+of the other entity in the relationship. For example, a line item is
+part of an order; if the order is deleted, the line item also should be
+deleted. This is called a cascade delete relationship.</p>
+</div>
+<div class="paragraph">
+<p>The <code>javax.persistence.CascadeType</code> enumerated type defines the cascade
+operations that are applied in the <code>cascade</code> element of the relationship
+annotations. <a href="#GJJNJ">Table 38-1</a> lists the cascade operations for
+entities.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref159"></a><a id="GJJNJ"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 38-1 Cascade Operations for Entities</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 18%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Cascade Operation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ALL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All cascade operations will be applied to the parent entity&#8217;s
+related entity. <code>All</code> is equivalent to specifying
+<code>cascade={DETACH, MERGE, PERSIST, REFRESH, REMOVE}</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DETACH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the parent entity is detached from the persistence
+context, the related entity will also be detached.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MERGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the parent entity is merged into the persistence context,
+the related entity will also be merged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PERSIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the parent entity is persisted into the persistence
+context, the related entity will also be persisted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>REFRESH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the parent entity is refreshed in the current persistence
+context, the related entity will also be refreshed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>REMOVE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the parent entity is removed from the current persistence
+context, the related entity will also be removed.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Cascade delete relationships are specified using the <code>cascade=REMOVE</code>
+element specification for <code>@OneToOne</code> and <code>@OneToMany</code> relationships.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToMany(cascade=REMOVE, mappedBy="customer")
+public Set&lt;CustomerOrder&gt; getOrders() { return orders; }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="orphan-removal-in-relationships">Orphan Removal in Relationships</h4>
+<div class="paragraph">
+<p>When a target entity in a one-to-one or one-to-many relationship is
+removed from the relationship, it is often desirable to cascade the
+remove operation to the target entity. Such target entities are
+considered "orphans," and the <code>orphanRemoval</code> attribute can be used to
+specify that orphaned entities should be removed. For example, if an
+order has many line items and one of them is removed from the order, the
+removed line item is considered an orphan. If <code>orphanRemoval</code> is set to
+<code>true</code>, the line item entity will be deleted when the line item is
+removed from the order.</p>
+</div>
+<div class="paragraph">
+<p>The <code>orphanRemoval</code> attribute in <code>@OneToMany</code> and <code>@oneToOne</code> takes a
+Boolean value and is by default false.</p>
+</div>
+<div class="paragraph">
+<p>The following example will cascade the remove operation to the orphaned
+<code>order</code> entity when the <code>customer</code> entity is deleted:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@OneToMany(mappedBy="customer", orphanRemoval="true")
+public List&lt;CustomerOrder&gt; getOrders() { ... }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="embeddable-classes-in-entities">Embeddable Classes in Entities</h3>
+<div class="paragraph">
+<p>Embeddable classes are used to represent the state of an entity but
+don&#8217;t have a persistent identity of their own, unlike entity classes.
+Instances of an embeddable class share the identity of the entity that
+owns it. Embeddable classes exist only as the state of another entity.
+An entity may have single-valued or collection-valued embeddable class
+attributes.</p>
+</div>
+<div class="paragraph">
+<p>Embeddable classes have the same rules as entity classes but are
+annotated with the <code>javax.persistence.Embeddable</code> annotation instead of
+<code>@Entity</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following embeddable class, <code>ZipCode</code>, has the fields <code>zip</code> and
+<code>plusFour</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Embeddable
+public class ZipCode {
+    String zip;
+    String plusFour;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This embeddable class is used by the <code>Address</code> entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+public class Address {
+    @Id
+    protected long id
+    String street1;
+    String street2;
+    String city;
+    String province;
+    @Embedded
+    ZipCode zipCode;
+    String country;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Entities that own embeddable classes as part of their persistent state
+may annotate the field or property with the <code>javax.persistence.Embedded</code>
+annotation but are not required to do so.</p>
+</div>
+<div class="paragraph">
+<p>Embeddable classes may themselves use other embeddable classes to
+represent their state. They may also contain collections of basic Java
+programming language types or other embeddable classes. Embeddable
+classes may also contain relationships to other entities or collections
+of entities. If the embeddable class has such a relationship, the
+relationship is from the target entity or collection of entities to the
+entity that owns the embeddable class.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-intro001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

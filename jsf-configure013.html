@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Basic Requirements of a JavaServer Faces Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure012.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ws.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="basic-requirements-of-a-javaserver-faces-application">Basic Requirements of a JavaServer Faces Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to configuring your application, you must satisfy other
+requirements of JavaServer Faces applications, including properly
+packaging all the necessary files and providing a deployment descriptor.
+This section describes how to perform these administrative tasks.</p>
+</div>
+<div class="paragraph">
+<p>JavaServer Faces applications can be packaged in a WAR file, which must
+conform to specific requirements to execute across different containers.
+At a minimum, a WAR file for a JavaServer Faces application may contain
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A web application deployment descriptor, called <code>web.xml</code>, to
+configure resources required by a web application (required)</p>
+</li>
+<li>
+<p>A specific set of JAR files containing essential classes (optional)</p>
+</li>
+<li>
+<p>A set of application classes, JavaServer Faces pages, and other
+required resources, such as image files</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A WAR file may also contain:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application configuration resource file, which configures
+application resources</p>
+</li>
+<li>
+<p>A set of tag library descriptor files</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, a Java Server Faces web application WAR file using Facelets
+typically has the following directory structure:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">$PROJECT_DIR
+[Web Pages]
++- /[xhtml or html documents]
++- /resources
++- /WEB-INF
+   +- /web.xml
+   +- /beans.xml (optional)
+   +- /classes (optional)
+   +- /lib (optional)
+   +- /faces-config.xml (optional)
+   +- /*.taglib.xml (optional)
+   +- /glassfish-web.xml (optional)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>web.xml</code> file (or web deployment descriptor), the set of JAR files,
+and the set of application files must be contained in the <code>WEB-INF</code>
+directory of the WAR file.</p>
+</div>
+<div class="sect2">
+<h3 id="configuring-an-application-with-a-web-deployment-descriptor">Configuring an Application with a Web Deployment Descriptor</h3>
+<div class="paragraph">
+<p>Web applications are commonly configured using elements contained in the
+web application deployment descriptor, <code>web.xml</code>. The deployment
+descriptor for a JavaServer Faces application must specify certain
+configurations, including the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The servlet used to process JavaServer Faces requests</p>
+</li>
+<li>
+<p>The servlet mapping for the processing servlet</p>
+</li>
+<li>
+<p>The path to the configuration resource file, if it exists and is not
+located in a default location</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The deployment descriptor can also include other, optional
+configurations, such as those that</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Specify where component state is saved</p>
+</li>
+<li>
+<p>Encrypt state saved on the client</p>
+</li>
+<li>
+<p>Compress state saved on the client</p>
+</li>
+<li>
+<p>Restrict access to pages containing JavaServer Faces tags</p>
+</li>
+<li>
+<p>Turn on XML validation</p>
+</li>
+<li>
+<p>Specify the Project Stage</p>
+</li>
+<li>
+<p>Verify custom objects</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This section gives more details on these configurations. Where
+appropriate, it also describes how you can make these configurations
+using NetBeans IDE.</p>
+</div>
+<div class="sect3">
+<h4 id="identifying-the-servlet-for-lifecycle-processing">Identifying the Servlet for Lifecycle Processing</h4>
+<div class="paragraph">
+<p>A requirement of a JavaServer Faces application is that all requests to
+the application that reference previously saved JavaServer Faces
+components must go through <code>javax.faces.webapp.FacesServlet</code>. A
+<code>FacesServlet</code> instance manages the request-processing lifecycle for web
+applications and initializes the resources required by JavaServer Faces
+technology.</p>
+</div>
+<div class="paragraph">
+<p>Before a JavaServer Faces application can launch its first web page, the
+web container must invoke the <code>FacesServlet</code> instance in order for the
+application lifecycle process to start. See
+<a href="jsf-intro007.html#BNAQQ">The Lifecycle of a JavaServer Faces
+Application</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows the default configuration of the
+<code>FacesServlet</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;servlet&gt;
+    &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;javax.faces.webapp.FacesServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will provide a mapping configuration entry to make sure that the
+<code>FacesServlet</code> instance is invoked. The mapping to <code>FacesServlet</code> can be
+a prefix mapping, such as <code>/faces/<strong></code>, or an extension mapping, such as
+<code></strong>.xhtml</code>. The mapping is used to identify a page as having JavaServer
+Faces content. Because of this, the URL to the first page of the
+application must include the URL pattern mapping.</p>
+</div>
+<div class="paragraph">
+<p>The following elements specify a prefix mapping:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/faces/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+...
+&lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;faces/greeting.xhtml&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following elements, used in the tutorial examples, specify an
+extension mapping:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.xhtml&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+...
+&lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index.xhtml&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you use this mechanism, users access the application as shown in
+the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/guessNumber</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of extension mapping, if a request comes to the server for a
+page with an <code>.xhtml</code> extension, the container will send the request to
+the <code>FacesServlet</code> instance, which will expect a corresponding page of
+the same name containing the content to exist.</p>
+</div>
+<div class="paragraph">
+<p>To minimize clutter and allow simple, friendly URLs, you can have
+extensionless URLs by manually exact mapping the <code>FacesServlet</code> to the
+existing prefix and suffix mapping options in <code>web.xml</code>, one or more
+times.</p>
+</div>
+<div class="paragraph">
+<p>If you are using NetBeans IDE to create your application, a web
+deployment descriptor is automatically created for you with default
+configurations. If you created your application without an IDE, you can
+create a web deployment descriptor.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-specify-a-path-to-an-application-configuration-resource-file">To Specify a Path to an Application Configuration Resource File</h4>
+<div class="paragraph">
+<p>As explained in <a href="jsf-configure003.html#BNAWP">Application
+Configuration Resource File</a>, an application can have multiple
+application configuration resource files. If these files are not located
+in the directories that the implementation searches by default or the
+files are not named <code>faces-config.xml</code>, you need to specify paths to
+these files.</p>
+</div>
+<div class="paragraph">
+<p>To specify these paths using NetBeans IDE, do the following.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Expand the node of your project in the Projects tab.</p>
+</li>
+<li>
+<p>Expand the Web Pages and WEB-INF nodes that are under the project
+node.</p>
+</li>
+<li>
+<p>Double-click <code>web.xml</code>.</p>
+</li>
+<li>
+<p>After the <code>web.xml</code> file appears in the editor, click General at the
+top of the editor window.</p>
+</li>
+<li>
+<p>Expand the Context Parameters node.</p>
+</li>
+<li>
+<p>Click Add.</p>
+</li>
+<li>
+<p>In the Add Context Parameter dialog box:</p>
+</li>
+<li>
+<p>Enter <code>javax.faces.CONFIG_FILES</code> in the Parameter Name field.</p>
+</li>
+<li>
+<p>Enter the path to your configuration file in the Parameter Value
+field.</p>
+</li>
+<li>
+<p>Click OK.</p>
+</li>
+<li>
+<p>Repeat steps 1 through 7 for each configuration file.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-specify-where-state-is-saved">To Specify Where State Is Saved</h4>
+<div class="paragraph">
+<p>For all the components in a web application, you can specify in your
+deployment descriptor where you want the state to be saved, on either
+client or server. You do this by setting a context parameter in your
+deployment descriptor. By default, state is saved on the server, so you
+need to specify this context parameter only if you want to save state on
+the client. See <a href="jsf-custom005.html#BNAVZ">Saving and Restoring State</a>
+for information on the advantages and disadvantages of each location.</p>
+</div>
+<div class="paragraph">
+<p>To specify where state is saved using NetBeans IDE, do the following.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Expand the node of your project in the Projects tab.</p>
+</li>
+<li>
+<p>Expand the Web Pages and WEB-INF nodes under the project node.</p>
+</li>
+<li>
+<p>Double-click <code>web.xml</code>.</p>
+</li>
+<li>
+<p>After the <code>web.xml</code> file appears in the editor window, click General
+at the top of the editor window.</p>
+</li>
+<li>
+<p>Expand the Context Parameters node.</p>
+</li>
+<li>
+<p>Click Add.</p>
+</li>
+<li>
+<p>In the Add Context Parameter dialog box:</p>
+</li>
+<li>
+<p>Enter <code>javax.faces.STATE_SAVING_METHOD</code> in the Parameter Name field.</p>
+</li>
+<li>
+<p>Enter <code>client</code> or <code>server</code> in the Parameter Value field.</p>
+</li>
+<li>
+<p>Click OK.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If state is saved on the client, the state of the entire view is
+rendered to a hidden field on the page. The JavaServer Faces
+implementation saves the state on the server by default. Duke&#8217;s Forest
+saves its state on the client.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-project-stage">Configuring Project Stage</h3>
+<div class="paragraph">
+<p>Project Stage is a context parameter identifying the status of a
+JavaServer Faces application in the software lifecycle. The stage of an
+application can affect the behavior of the application. For example,
+error messages can be displayed during the Development stage but
+suppressed during the Production stage.</p>
+</div>
+<div class="paragraph">
+<p>The possible Project Stage values are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Development</code></p>
+</li>
+<li>
+<p><code>UnitTest</code></p>
+</li>
+<li>
+<p><code>SystemTest</code></p>
+</li>
+<li>
+<p><code>Production</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Project Stage is configured through a context parameter in the web
+deployment descriptor file. Here is an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;context-param&gt;
+    &lt;param-name&gt;javax.faces.PROJECT_STAGE&lt;/param-name&gt;
+    &lt;param-value&gt;Development&lt;/param-value&gt;
+&lt;/context-param&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If no Project Stage is defined, the default stage is <code>Production</code>. You
+can also add custom stages according to your requirements.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="including-the-classes-pages-and-other-resources">Including the Classes, Pages, and Other Resources</h3>
+<div class="paragraph">
+<p>When packaging web applications using the included build scripts, you&#8217;ll
+notice that the scripts package resources in the following ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All web pages are placed at the top level of the WAR file.</p>
+</li>
+<li>
+<p>The <code>faces-config.xml</code> file and the <code>web.xml</code> file are packaged in the
+<code>WEB-INF</code> directory.</p>
+</li>
+<li>
+<p>All packages are stored in the <code>WEB-INF/classes/</code> directory.</p>
+</li>
+<li>
+<p>All application JAR files are packaged in the <code>WEB-INF/lib/</code>
+directory.</p>
+</li>
+<li>
+<p>All resource files are either under the root of the web application
+<code>/resources</code> directory or in the web application&#8217;s classpath, the
+`META-INF/resources/`resourceIdentifier directory. For more information
+on resources, see <a href="jsf-facelets006.html#GIRGM">Web Resources</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When packaging your own applications, you can use NetBeans IDE or you
+can use XML files such as those created for Maven. You can modify the
+XML files to fit your situation. However, you can continue to package
+your WAR files by using the directory structure described in this
+section, because this technique complies with the commonly accepted
+practice for packaging web applications.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure012.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ws.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

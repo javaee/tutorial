@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Character Sets and Encodings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="webi18n003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partbeanvalidation.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="character-sets-and-encodings">Character Sets and Encodings</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following sections describe character sets and character encodings.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAYC">Character Sets</a></p>
+</li>
+<li>
+<p><a href="#BNAYD">Character Encoding</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="character-sets">Character Sets</h3>
+<div class="paragraph">
+<p>A character set is a set of textual and graphic symbols, each of which
+is mapped to a set of nonnegative integers.</p>
+</div>
+<div class="paragraph">
+<p>The first character set used in computing was US-ASCII. It is limited in
+that it can represent only American English. US-ASCII contains uppercase
+and lowercase Latin alphabets, numerals, punctuation, a set of control
+codes, and a few miscellaneous symbols.</p>
+</div>
+<div class="paragraph">
+<p>Unicode defines a standardized, universal character set that can be
+extended to accommodate additions. When the Java program source file
+encoding doesn&#8217;t support Unicode, you can represent Unicode characters
+as escape sequences by using the notation `\u`XXXX, where XXXX is the
+character&#8217;s 16-bit representation in hexadecimal. For example, the
+Spanish version of a message file could use Unicode for non-ASCII
+characters, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">admin.nav.main=P\u00e1gina principal de administraci\u00f3n</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="character-encoding">Character Encoding</h3>
+<div class="paragraph">
+<p>A character encoding maps a character set to units of a specific width
+and defines byte serialization and ordering rules. Many character sets
+have more than one encoding. For example, Java programs can represent
+Japanese character sets using the <code>EUC-JP</code> or <code>Shift-JIS</code> encodings,
+among others. Each encoding has rules for representing and serializing a
+character set.</p>
+</div>
+<div class="paragraph">
+<p>The ISO 8859 series defines 13 character encodings that can represent
+texts in dozens of languages. Each ISO 8859 character encoding can have
+up to 256 characters. ISO-8859-1 (Latin-1) comprises the ASCII character
+set, characters with diacritics (accents, diaereses, cedillas,
+circumflexes, and so on), and additional symbols.</p>
+</div>
+<div class="paragraph">
+<p>UTF-8 (Unicode Transformation Format, 8-bit form) is a variable-width
+character encoding that encodes 16-bit Unicode characters as one to four
+bytes. A byte in UTF-8 is equivalent to 7-bit ASCII if its high-order
+bit is zero; otherwise, the character comprises a variable number of
+bytes.</p>
+</div>
+<div class="paragraph">
+<p>UTF-8 is compatible with the majority of existing web content and
+provides access to the Unicode character set. Current versions of
+browsers and email clients support UTF-8. In addition, many web
+standards specify UTF-8 as their character encoding. For example, UTF-8
+is one of the two required encodings for XML documents (the other is
+UTF-16).</p>
+</div>
+<div class="paragraph">
+<p>Web components usually use <code>PrintWriter</code> to produce responses;
+<code>PrintWriter</code> automatically encodes using ISO-8859-1. Servlets can also
+output binary data using <code>OutputStream</code> classes, which perform no
+encoding. An application that uses a character set that cannot use the
+default encoding must explicitly set a different encoding.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="webi18n003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partbeanvalidation.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

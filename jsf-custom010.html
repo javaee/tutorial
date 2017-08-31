@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using a Custom Component</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-custom009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom011.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-a-custom-component">Using a Custom Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To use a custom component in a page, you add the custom tag associated
+with the component to the page.</p>
+</div>
+<div class="paragraph">
+<p>As explained in <a href="jsf-custom009.html#BNAWN">Defining the Custom
+Component Tag in a Tag Library Descriptor</a>, you must ensure that the TLD
+that defines any custom tags is packaged in the application if you
+intend to use the tags in your pages. TLD files are stored in the
+<code>WEB-INF/</code> directory or subdirectory of the WAR file or in the
+<code>META-INF/</code> directory or subdirectory of a tag library packaged in a JAR
+file.</p>
+</div>
+<div class="paragraph">
+<p>You also need to include a namespace declaration in the page so that the
+page has access to the tags. The custom tags for the Duke&#8217;s Bookstore
+case study are defined in <code>bookstore.taglib.xml</code>. The <code>ui:composition</code>
+tag on the <code>index.xhtml</code> page declares the namespace defined in the tag
+library:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:bookstore="http://dukesbookstore"
+                template="./bookstoreTemplate.xhtml"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, to use a custom component in a page, you add the component&#8217;s
+tag to the page.</p>
+</div>
+<div class="paragraph">
+<p>The Duke&#8217;s Bookstore case study includes a custom image map component on
+the <code>index.xhtml</code> page. This component allows you to select a book by
+clicking on a region of the image map:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+&lt;h:graphicImage id="mapImage"
+                name="book_all.jpg"
+                library="images
+                alt="#{bundle.chooseLocale}"
+                usemap="#bookMap" /&gt;
+&lt;bookstore:map id="bookMap"
+               current="map1"
+               immediate="true"
+               action="bookstore"&gt;
+    &lt;f:actionListener
+        type="javaeetutorial.dukesbookstore.listeners.MapBookChangeListener" /&gt;
+    &lt;bookstore:area id="map1" value="#{Book201}"
+                    onmouseover="resources/images/book_201.jpg"
+                    onmouseout="resources/images/book_all.jpg"
+                    targetImage="mapImage" /&gt;
+    ...
+    &lt;bookstore:area id="map6" value="#{Book207}"
+                    onmouseover="resources/images/book_207.jpg"
+                    onmouseout="resources/images//book_all.jpg"
+                    targetImage="mapImage" /&gt;
+&lt;/bookstore:map&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The standard <code>h:graphicImage</code> tag associates an image (<code>book_all.jpg</code>)
+with an image map that is referenced in the <code>usemap</code> attribute value.</p>
+</div>
+<div class="paragraph">
+<p>The custom <code>bookstore:map</code> tag that represents the custom component,
+<code>MapComponent</code>, specifies the image map and contains a set of
+<code>bookstore:area</code> tags. Each custom <code>bookstore:area</code> tag represents a
+custom <code>AreaComponent</code> and specifies a region of the image map.</p>
+</div>
+<div class="paragraph">
+<p>On the page, the <code>onmouseover</code> and <code>onmouseout</code> attributes specify the
+image that is displayed when the user performs the actions described by
+the attributes. The custom renderer also renders an <code>onclick</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>In the rendered HTML page, the <code>onmouseover</code>, <code>onmouseout</code>, and
+<code>onclick</code> attributes define which JavaScript code is executed when these
+events occur. When the user moves the mouse over a region, the
+<code>onmouseover</code> function associated with the region displays the map with
+that region highlighted. When the user moves the mouse out of a region,
+the <code>onmouseout</code> function redisplays the original image. When the user
+clicks a region, the <code>onclick</code> function sets the value of a hidden
+<code>input</code> tag to the ID of the selected area and submits the page.</p>
+</div>
+<div class="paragraph">
+<p>When the custom renderer renders these attributes in HTML, it also
+renders the JavaScript code. The custom renderer also renders the entire
+<code>onclick</code> attribute rather than letting the page author set it.</p>
+</div>
+<div class="paragraph">
+<p>The custom renderer that renders the HTML <code>map</code> tag also renders a
+hidden <code>input</code> component that holds the current area. The server-side
+objects retrieve the value of the hidden <code>input</code> field and set the
+locale in the <code>FacesContext</code> instance according to which region was
+selected.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-custom009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-custom011.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

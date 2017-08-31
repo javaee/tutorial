@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Resources and JNDI Naming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="resource-creation.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resource-creation002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="resources-and-jndi-naming">Resources and JNDI Naming</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In a distributed application, components need to access other components
+and resources, such as databases. For example, a servlet might invoke
+remote methods on an enterprise bean that retrieves information from a
+database. In the Java EE platform, the Java Naming and Directory
+Interface (JNDI) naming service enables components to locate other
+components and resources.</p>
+</div>
+<div class="paragraph">
+<p>A resource is a program object that provides connections to systems,
+such as database servers and messaging systems. (A Java Database
+Connectivity resource is sometimes referred to as a data source.) Each
+resource object is identified by a unique, people-friendly name, called
+the JNDI name. For example, the JNDI name of the preconfigured JDBC
+resource for the Java DB database that is shipped with GlassFish Server
+is <code>java:comp/DefaultDataSource</code>.</p>
+</div>
+<div class="paragraph">
+<p>An administrator creates resources in a JNDI namespace. In GlassFish
+Server, you can use either the Administration Console or the <code>asadmin</code>
+command to create resources. Applications then use annotations to inject
+the resources. If an application uses resource injection, GlassFish
+Server invokes the JNDI API, and the application is not required to do
+so. However, it is also possible for an application to locate resources
+by making direct calls to the JNDI API.</p>
+</div>
+<div class="paragraph">
+<p>A resource object and its JNDI name are bound together by the naming and
+directory service. To create a new resource, a new name/object binding
+is entered into the JNDI namespace. You inject resources by using the
+<code>@Resource</code> annotation in an application.</p>
+</div>
+<div class="paragraph">
+<p>You can use a deployment descriptor to override the resource mapping
+that you specify in an annotation. Using a deployment descriptor allows
+you to change an application by repackaging it rather than by both
+recompiling the source files and repackaging. However, for most
+applications a deployment descriptor is not necessary.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="resource-creation.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resource-creation002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

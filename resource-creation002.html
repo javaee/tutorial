@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>DataSource Objects and Connection Pools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="resource-creation001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resource-creation003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="datasource-objects-and-connection-pools">DataSource Objects and Connection Pools</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To store, organize, and retrieve data, most applications use a
+relational database. Java EE components may access relational
+databases through the JDBC API. For information on this API, see
+<a href="http://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/"><code>http://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>In the JDBC API, databases are accessed by using <code>DataSource</code> objects. A
+<code>DataSource</code> has a set of properties that identify and describe the
+real-world data source that it represents. These properties include such
+information as the location of the database server, the name of the
+database, the network protocol to use to communicate with the server,
+and so on. In GlassFish Server, a data source is called a JDBC resource.</p>
+</div>
+<div class="paragraph">
+<p>Applications access a data source by using a connection, and a
+<code>DataSource</code> object can be thought of as a factory for connections to
+the particular data source that the <code>DataSource</code> instance represents. In
+a basic <code>DataSource</code> implementation, a call to the <code>getConnection</code>
+method returns a connection object that is a physical connection to the
+data source.</p>
+</div>
+<div class="paragraph">
+<p>A <code>DataSource</code> object may be registered with a JNDI naming service. If
+so, an application can use the JNDI API to access that <code>DataSource</code>
+object, which can then be used to connect to the data source it
+represents.</p>
+</div>
+<div class="paragraph">
+<p><code>DataSource</code> objects that implement connection pooling also produce a
+connection to the particular data source that the <code>DataSource</code> class
+represents. The connection object that the <code>getConnection</code> method
+returns is a handle to a <code>PooledConnection</code> object rather than a
+physical connection. An application uses the connection object in the
+same way that it uses a connection. Connection pooling has no effect on
+application code except that a pooled connection, like all connections,
+should always be explicitly closed. When an application closes a
+connection that is pooled, the connection is returned to a pool of
+reusable connections. The next time <code>getConnection</code> is called, a handle
+to one of these pooled connections will be returned if one is available.
+Because connection pooling avoids creating a new physical connection
+every time one is requested, applications can run significantly faster.</p>
+</div>
+<div class="paragraph">
+<p>A JDBC connection pool is a group of reusable connections for a
+particular database. Because creating each new physical connection is
+time consuming, the server maintains a pool of available connections to
+increase performance. When it requests a connection, an application
+obtains one from the pool. When an application closes a connection, the
+connection is returned to the pool.</p>
+</div>
+<div class="paragraph">
+<p>Applications that use the Persistence API specify the <code>DataSource</code>
+object they are using in the <code>jta-data-source</code> element of the
+<code>persistence.xml</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;jta-data-source&gt;jdbc/MyOrderDB&lt;/jta-data-source&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is typically the only reference to a JDBC object for a persistence
+unit. The application code does not refer to any JDBC objects.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="resource-creation001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resource-creation003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

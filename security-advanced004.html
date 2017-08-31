@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Securing HTTP Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-advanced003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="securing-http-resources">Securing HTTP Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a request URI is matched by multiple constrained URL patterns, the
+constraints that apply to the request are those that are associated with
+the best matching URL pattern. The servlet matching rules defined in
+Chapter 12, "Mapping Requests To Servlets," in the Java Servlet 4.0
+Specification, are used to determine the best matching URL pattern to
+the request URI. No protection requirements apply to a request URI that
+is not matched by a constrained URL pattern. The HTTP method of the
+request plays no role in selecting the best matching URL pattern for a
+request.</p>
+</div>
+<div class="paragraph">
+<p>When HTTP methods are listed within a constraint definition, the
+protections defined by the constraint are applied to the listed methods
+only.</p>
+</div>
+<div class="paragraph">
+<p>When HTTP methods are not listed within a constraint definition, the
+protections defined by the constraint apply to the complete set of HTTP
+methods, including HTTP extension methods.</p>
+</div>
+<div class="paragraph">
+<p>When constraints with different protection requirements apply to the
+same combination of URL patterns and HTTP methods, the rules for
+combining the protection requirements are as defined in Section 13.8.1,
+"Combining Constraints," in the Java Servlet 4.0 Specification.</p>
+</div>
+<div class="paragraph">
+<p>Follow these guidelines to properly secure a web application.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do not list HTTP methods within constraint definitions. This is the
+simplest way to ensure that you are not leaving HTTP methods
+unprotected. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!-- SECURITY CONSTRAINT #1 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;Do not enumerate Http Methods&lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/company/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;sales&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you list methods in a constraint, all non-listed methods of the
+effectively infinite set of possible HTTP methods, including extension
+methods, will be unprotected. Use such a constraint only if you are
+certain that this is the protection scheme you intend to define. The
+following example shows a constraint that lists the GET method and thus
+defines no protection on any of the other possible HTTP methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!-- SECURITY CONSTRAINT #2 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;
+        Protect GET only, leave all other methods unprotected
+    &lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/company/*&lt;/url-pattern&gt;
+        &lt;http-method&gt;GET&lt;/http-method&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;sales&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you need to apply specific types of protection to specific HTTP
+methods, make sure that you define constraints to cover every method
+that you want to permit, with or without constraint, at the
+corresponding URL patterns. If there are any methods that you do not
+want to permit, you must also create a constraint that denies access to
+those methods at the same patterns; for an example, see security
+constraint #5 in the next bullet.</p>
+<div class="paragraph">
+<p>For example, to permit GET and POST, where POST requires authentication
+and GET is permitted without constraint, you could define the following
+constraints:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!-- SECURITY CONSTRAINT #3 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;Allow unprotected GET&lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/company/*&lt;/url-pattern&gt;
+        &lt;http-method&gt;GET&lt;/http-method&gt;
+    &lt;/web-resource-collection&gt;
+&lt;/security-constraint&gt;
+
+&lt;!-- SECURITY CONSTRAINT #4 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;Require authentication for POST&lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/company/*&lt;/url-pattern&gt;
+        &lt;http-method&gt;POST&lt;/http-method&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;sales&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The simplest way to ensure that you deny all HTTP methods except those
+that you want to be permitted is to use <code>http-method-omission</code> elements
+to omit those HTTP methods from the security constraint, and also to
+define an <code>auth-constraint</code> that names no roles. The security constraint
+will apply to all methods except those that were named in the omissions,
+and the constraint will apply only to the resources matched by the
+patterns in the constraint.</p>
+<div class="paragraph">
+<p>For example, the following constraint excludes access to all methods
+except GET and POST at the resources matched by the pattern
+<code>/company/*</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!-- SECURITY CONSTRAINT #5 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;Deny all HTTP methods except GET and POST&lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/company/*&lt;/url-pattern&gt;
+        &lt;http-method-omission&gt;GET&lt;/http-method-omission&gt;
+        &lt;http-method-omission&gt;POST&lt;/http-method-omission&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint/&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to extend these exclusions to the unconstrained parts of
+your application, also include the URL pattern <code>/</code> (forward slash):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!-- SECURITY CONSTRAINT #6 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;Deny all HTTP methods except GET and POST&lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/company/*&lt;/url-pattern&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+        &lt;http-method-omission&gt;GET&lt;/http-method-omission&gt;
+        &lt;http-method-omission&gt;POST&lt;/http-method-omission&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint/&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If, for your web application, you do not want any resource to be
+accessible unless you explicitly define a constraint that permits access
+to it, you can define an <code>auth-constraint</code> that names no roles and
+associate it with the URL pattern <code>/</code>. The URL pattern <code>/</code> is the
+weakest matching pattern. Do not list any HTTP methods in this
+constraint:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!-- SECURITY CONSTRAINT #7 --&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;
+        Switch from Constraint to Permission model
+        (where everything is denied by default)
+    &lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint/&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-advanced003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

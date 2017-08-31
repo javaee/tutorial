@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>About Beans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="cdi-basic002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="about-beans">About Beans</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CDI redefines the concept of a bean beyond its use in other Java
+technologies, such as the JavaBeans and Enterprise JavaBeans (EJB)
+technologies. In CDI, a bean is a source of contextual objects that
+define application state or logic. A Java EE component is a bean if
+the lifecycle of its instances may be managed by the container according
+to the lifecycle context model defined in the CDI specification.</p>
+</div>
+<div class="paragraph">
+<p>More specifically, a bean has the following attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A (nonempty) set of bean types</p>
+</li>
+<li>
+<p>A (nonempty) set of qualifiers (see <a href="cdi-basic006.html#GJBCK">Using
+Qualifiers</a>)</p>
+</li>
+<li>
+<p>A scope (see <a href="cdi-basic008.html#GJBBK">Using Scopes</a>)</p>
+</li>
+<li>
+<p>Optionally, a bean EL name (see <a href="cdi-basic009.html#GJBAK">Giving
+Beans EL Names</a>)</p>
+</li>
+<li>
+<p>A set of interceptor bindings</p>
+</li>
+<li>
+<p>A bean implementation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A bean type defines a client-visible type of the bean. Almost any Java
+type may be a bean type of a bean.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A bean type may be an interface, a concrete class, or an abstract
+class and may be declared final or have final methods.</p>
+</li>
+<li>
+<p>A bean type may be a parameterized type with type parameters and type
+variables.</p>
+</li>
+<li>
+<p>A bean type may be an array type. Two array types are considered
+identical only if the element type is identical.</p>
+</li>
+<li>
+<p>A bean type may be a primitive type. Primitive types are considered to
+be identical to their corresponding wrapper types in <code>java.lang</code>.</p>
+</li>
+<li>
+<p>A bean type may be a raw type.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="cdi-basic002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="cdi-basic004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

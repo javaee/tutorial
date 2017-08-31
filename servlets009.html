@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Maintaining Client State</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="servlets008.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets010.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="maintaining-client-state">Maintaining Client State</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many applications require that a series of requests from a client be
+associated with one another. For example, a web application can save the
+state of a user&#8217;s shopping cart across requests. Web-based applications
+are responsible for maintaining such state, called a session, because
+HTTP is stateless. To support applications that need to maintain state,
+Java Servlet technology provides an API for managing sessions and allows
+several mechanisms for implementing sessions.</p>
+</div>
+<div class="sect2">
+<h3 id="accessing-a-session">Accessing a Session</h3>
+<div class="paragraph">
+<p>Sessions are represented by an <code>HttpSession</code> object. You access a
+session by calling the <code>getSession</code> method of a request object. This
+method returns the current session associated with this request; or, if
+the request does not have a session, this method creates one.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="associating-objects-with-a-session">Associating Objects with a Session</h3>
+<div class="paragraph">
+<p>You can associate object-valued attributes with a session by name. Such
+attributes are accessible by any web component that belongs to the same
+web context and is handling a request that is part of the same session.</p>
+</div>
+<div class="paragraph">
+<p>Recall that your application can notify web context and session listener
+objects of servlet lifecycle events (<a href="servlets002.html#BNAFJ">Handling
+Servlet Lifecycle Events</a>). You can also notify objects of certain
+events related to their association with a session, such as the
+following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When the object is added to or removed from a session. To receive this
+notification, your object must implement the
+<code>javax.servlet.http.HttpSessionBindingListener</code> interface.</p>
+</li>
+<li>
+<p>When the session to which the object is attached will be passivated or
+activated. A session will be passivated or activated when it is moved
+between virtual machines or saved to and restored from persistent
+storage. To receive this notification, your object must implement the
+<code>javax.servlet.http.HttpSessionActivationListener</code> interface.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="session-management">Session Management</h3>
+<div class="paragraph">
+<p>Because an HTTP client has no way to signal that it no longer needs a
+session, each session has an associated timeout so that its resources
+can be reclaimed. The timeout period can be accessed by using a
+session&#8217;s <code>getMaxInactiveInterval</code> and <code>setMaxInactiveInterval</code> methods.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To ensure that an active session is not timed out, you should
+periodically access the session by using service methods because this
+resets the session&#8217;s time-to-live counter.</p>
+</li>
+<li>
+<p>When a particular client interaction is finished, you use the
+session&#8217;s <code>invalidate</code> method to invalidate a session on the server side
+and remove any session data.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-set-the-timeout-period-using-netbeans-ide">To Set the Timeout Period Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To set the timeout period in the deployment descriptor using NetBeans
+IDE, follow these steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the project if you haven&#8217;t already.</p>
+</li>
+<li>
+<p>Expand the node of your project in the Projects tab.</p>
+</li>
+<li>
+<p>Expand the Web Pages and WEB-INF nodes that are under the project
+node.</p>
+</li>
+<li>
+<p>Double-click <code>web.xml</code>.</p>
+</li>
+<li>
+<p>Click General at the top of the editor.</p>
+</li>
+<li>
+<p>In the Session Timeout field, enter an integer value.</p>
+<div class="paragraph">
+<p>The integer value represents the number of minutes of inactivity that
+must pass before the session times out.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="session-tracking">Session Tracking</h3>
+<div class="paragraph">
+<p>To associate a session with a user, a web container can use several
+methods, all of which involve passing an identifier between the client
+and the server. The identifier can be maintained on the client as a
+cookie, or the web component can include the identifier in every URL
+that is returned to the client.</p>
+</div>
+<div class="paragraph">
+<p>If your application uses session objects, you must ensure that session
+tracking is enabled by having the application rewrite URLs whenever the
+client turns off cookies. You do this by calling the response&#8217;s
+<code>encodeURL(URL)</code> method on all URLs returned by a servlet. This method
+includes the session ID in the URL only if cookies are disabled;
+otherwise, the method returns the URL unchanged.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="servlets008.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="servlets010.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

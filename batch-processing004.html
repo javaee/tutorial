@@ -1,0 +1,824 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using the Job Specification Language</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="batch-processing003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-the-job-specification-language">Using the Job Specification Language</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Job Specification Language (JSL) enables you to define the steps in
+a job and their execution order using an XML file. The following example
+shows how to define a simple job that contains one chunk step and one
+task step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;job id="loganalysis" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+                      version="1.0"&gt;
+  &lt;properties&gt;
+    &lt;property name="input_file" value="input1.txt"/&gt;
+    &lt;property name="output_file" value="output2.txt"/&gt;
+  &lt;/properties&gt;
+
+  &lt;step id="logprocessor" next="cleanup"&gt;
+    &lt;chunk checkpoint-policy="item" item-count="10"&gt;
+      &lt;reader ref="com.example.pkg.LogItemReader"&gt;&lt;/reader&gt;
+      &lt;processor ref="com.example.pkg.LogItemProcessor"&gt;&lt;/processor&gt;
+      &lt;writer ref="com.example.pkg.LogItemWriter"&gt;&lt;/writer&gt;
+    &lt;/chunk&gt;
+  &lt;/step&gt;
+
+  &lt;step id="cleanup"&gt;
+    &lt;batchlet ref="com.example.pkg.CleanUp"&gt;&lt;/batchlet&gt;
+    &lt;end on="COMPLETED"/&gt;
+  &lt;/step&gt;
+&lt;/job&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example defines the <code>loganalysis</code> batch job, which consists of the
+<code>logprocessor</code> chunk step and the <code>cleanup</code> task step. The
+<code>logprocessor</code> step transitions to the <code>cleanup</code> step, which terminates
+the job when completed.</p>
+</div>
+<div class="paragraph">
+<p>The <code>job</code> element defines two properties, <code>input_file</code> and
+<code>output_file</code>. Specifying properties in this manner enables you to run a
+batch job with different configuration parameters without having to
+recompile its Java batch artifacts. The batch artifacts can access these
+properties using the context objects from the batch runtime.</p>
+</div>
+<div class="paragraph">
+<p>The <code>logprocessor</code> step is a chunk step that specifies batch artifacts
+for the reader (<code>LogItemReader</code>), the processor (<code>LogItemProcessor</code>),
+and the writer (<code>LogItemWriter</code>). This step creates a checkpoint for
+every ten items processed.</p>
+</div>
+<div class="paragraph">
+<p>The <code>cleanup</code> step is a task step that specifies the <code>CleanUp</code> class as
+its batch artifact. The job terminates when this step completes.</p>
+</div>
+<div class="paragraph">
+<p>The following sections describe the elements of the Job Specification
+Language (JSL) in more detail and show the most common attributes and
+child elements.</p>
+</div>
+<div class="sect2">
+<h3 id="the-job-element">The job Element</h3>
+<div class="paragraph">
+<p>The <code>job</code> element is always the top-level element in a job definition
+file. Its main attributes are <code>id</code> and <code>restartable</code>. The <code>job</code> element
+can contain one <code>properties</code> element and zero or more of each of the
+following elements: <code>listener</code>, <code>step</code>, <code>flow</code>, and <code>split</code>. For
+example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;job id="jobname" restartable="true"&gt;
+  &lt;listeners&gt;
+    &lt;listener ref="com.example.pkg.ListenerBatchArtifact"/&gt;
+  &lt;/listeners&gt;
+  &lt;properties&gt;
+    &lt;property name="propertyName1" value="propertyValue1"/&gt;
+    &lt;property name="propertyName2" value="propertyValue2"/&gt;
+  &lt;/properties&gt;
+  &lt;step ...&gt; ... &lt;/step&gt;
+  &lt;step ...&gt; ... &lt;/step&gt;
+  &lt;decision ...&gt; ... &lt;/decision&gt;
+  &lt;flow ...&gt; ... &lt;/flow&gt;
+  &lt;split ...&gt; ... &lt;/split&gt;
+&lt;/job&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>listener</code> element specifies a batch artifact whose methods are
+invoked before and after the execution of the job. The batch artifact is
+an implementation of the <code>javax.batch.api.listener.JobListener</code>
+interface. See <a href="batch-processing008.html#BCGCCFAC">The Listener Batch
+Artifacts</a> for an example of a job listener implementation.</p>
+</div>
+<div class="paragraph">
+<p>The first <code>step</code>, <code>flow</code>, or <code>split</code> element inside the <code>job</code> element
+executes first.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-step-element">The step Element</h3>
+<div class="paragraph">
+<p>The <code>step</code> element can be a child of the <code>job</code> and <code>flow</code> elements. Its
+main attributes are <code>id</code> and <code>next</code>. The <code>step</code> element can contain the
+following elements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One <code>chunk</code> element for chunk-oriented steps or one <code>batchlet</code> element
+for task-oriented steps.</p>
+</li>
+<li>
+<p>One <code>properties</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a set of properties that batch artifacts can
+access using batch context objects.</p>
+</div>
+</li>
+<li>
+<p>One <code>listener</code> element (optional); one <code>listeners</code> element if more
+than one listener is specified.</p>
+<div class="paragraph">
+<p>This element specifies listener artifacts that intercept various phases
+of step execution.</p>
+</div>
+<div class="paragraph">
+<p>For chunk steps, the batch artifacts for these listeners can be
+implementations of the following interfaces: <code>StepListener</code>,
+<code>ItemReadListener</code>, <code>ItemProcessListener</code>, <code>ItemWriteListener</code>,
+<code>ChunkListener</code>, <code>RetryReadListener</code>, <code>RetryProcessListener</code>,
+<code>RetryWriteListener</code>, <code>SkipReadListener</code>, <code>SkipProcessListener</code>, and
+<code>SkipWriteListener</code>.</p>
+</div>
+<div class="paragraph">
+<p>For task steps, the batch artifact for these listeners must be an
+implementation of the <code>StepListener</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="batch-processing008.html#BCGCCFAC">The Listener Batch Artifacts</a>
+for an example of an item processor listener implementation.</p>
+</div>
+</li>
+<li>
+<p>One <code>partition</code> element (optional).</p>
+<div class="paragraph">
+<p>This element is used in partitioned steps which execute in more than one
+thread.</p>
+</div>
+</li>
+<li>
+<p>One <code>end</code> element if this is the last step in a job.</p>
+<div class="paragraph">
+<p>This element sets the batch status to <code>COMPLETED</code>.</p>
+</div>
+</li>
+<li>
+<p>One <code>stop</code> element (optional) to stop a job at this step.</p>
+<div class="paragraph">
+<p>This element sets the batch status to <code>STOPPED</code>.</p>
+</div>
+</li>
+<li>
+<p>One <code>fail</code> element (optional) to terminate a job at this step.</p>
+<div class="paragraph">
+<p>This element sets the batch status to <code>FAILED</code>.</p>
+</div>
+</li>
+<li>
+<p>One or more <code>next</code> elements if the <code>next</code> attribute is not specified.</p>
+<div class="paragraph">
+<p>This element is associated with an exit status and refers to another
+step, a flow, a split, or a decision element.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following is an example of a chunk step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepA" next="stepB"&gt;
+  &lt;properties&gt; ... &lt;/properties&gt;
+  &lt;listeners&gt;
+    &lt;listener ref="MyItemReadListenerImpl"/&gt;
+    ...
+  &lt;/listeners&gt;
+  &lt;chunk ...&gt; ... &lt;/chunk&gt;
+  &lt;partition&gt; ... &lt;/partition&gt;
+  &lt;end on="COMPLETED" exit-status="MY_COMPLETED_EXIT_STATUS"/&gt;
+  &lt;stop on="MY_TEMP_ISSUE_EXIST_STATUS" restart="step0"/&gt;
+  &lt;fail on="MY_ERROR_EXIT_STATUS" exit-status="MY_ERROR_EXIT_STATUS"/&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following is an example of a task step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepB" next="stepC"&gt;
+  &lt;batchlet ...&gt; ... &lt;/batchlet&gt;
+  &lt;properties&gt; ... &lt;/properties&gt;
+  &lt;listener ref="MyStepListenerImpl"/&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-chunk-element">The chunk Element</h4>
+<div class="paragraph">
+<p>The <code>chunk</code> element is a child of the <code>step</code> element for chunk-oriented
+steps. The attributes of this element are listed in <a href="#BCGJCIEI">Table
+56-2</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref273"></a><a id="BCGJCIEI"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 56-2 Attributes of the chunk Element</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 34%;">
+<colgroup>
+<col style="width: 55.4455%;">
+<col style="width: 0.99%;">
+<col style="width: 43.5645%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>checkpoint-policy</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Specifies how to commit the results of processing each chunk:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"item"</code>: the chunk is committed after processing <code>item-count</code> items</p>
+</li>
+<li>
+<p><code>"custom"</code>: the chunk is committed according to a checkpoint algorithm
+specified with the <code>checkpoint-algorithm</code> element</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The checkpoint is updated when the results of a chunk are committed.</p>
+</div>
+<div class="paragraph">
+<p>Every chunk is processed in a global Java EE transaction. If the
+processing of one item in the chunk fails, the transaction is rolled
+back and no processed items from this chunk are stored.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>"item"</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>item-count</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the number of items to process before
+committing the chunk and taking a checkpoint.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>time-limit</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Specifies the number of seconds before committing the chunk and taking a
+checkpoint when <code>checkpoint-policy="item"</code>.</p>
+</div>
+<div class="paragraph">
+<p>If <code>item-count</code> items have not been processed by <code>time-limit</code> seconds,
+the chunk is committed and a checkpoint is taken.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (no limit)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>buffer-items</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies if processed items are buffered until it is
+time to take a checkpoint. If true, a single call to the item writer is
+made with a list of the buffered items before committing the chunk and
+taking a checkpoint.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>skip-limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the number of skippable exceptions to skip in
+this step during chunk processing. Skippable exception classes are
+specified with the <code>skippable-exception-classes</code> element.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No limit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>retry-limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the number of attempts to execute this step if
+retryable exceptions occur. Retryable exception classes are specified
+with the <code>retryable-exception-classes</code> element.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No limit</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>chunk</code> element can contain the following elements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One <code>reader</code> element.</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that implements the <code>ItemReader</code>
+interface.</p>
+</div>
+</li>
+<li>
+<p>One <code>processor</code> element.</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that implements the
+<code>ItemProcessor</code> interface.</p>
+</div>
+</li>
+<li>
+<p>One <code>writer</code> element.</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that implements the <code>ItemWriter</code>
+interface.</p>
+</div>
+</li>
+<li>
+<p>One <code>checkpoint-algorithm</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that implements the
+<code>CheckpointAlgorithm</code> interface and provides a custom checkpoint policy.</p>
+</div>
+</li>
+<li>
+<p>One <code>skippable-exception-classes</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a set of exceptions thrown from the reader,
+writer, and processor batch artifacts that chunk processing should skip.
+The <code>skip-limit</code> attribute from the <code>chunk</code> element specifies the
+maximum number of skipped exceptions.</p>
+</div>
+</li>
+<li>
+<p>One <code>retryable-exception-classes</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a set of exceptions thrown from the reader,
+writer, and processor batch artifacts that chunk processing will retry.
+The <code>retry-limit</code> attribute from the <code>chunk</code> element specifies the
+maximum number of attempts.</p>
+</div>
+</li>
+<li>
+<p>One <code>no-rollback-exception-classes</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a set of exceptions thrown from the reader,
+writer, and processor batch artifacts that should not cause the batch
+runtime to roll back the current chunk, but to retry the current
+operation without a rollback instead.</p>
+</div>
+<div class="paragraph">
+<p>For exception types not specified in this element, the current chunk is
+rolled back by default when an exception occurs.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following is an example of a chunk-oriented step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepC" next="stepD"&gt;
+  &lt;chunk checkpoint-policy="item" item-count="5" time-limit="180"
+         buffer-items="true" skip-limit="10" retry-limit="3"&gt;
+    &lt;reader ref="pkg.MyItemReaderImpl"&gt;&lt;/reader&gt;
+    &lt;processor ref="pkg.MyItemProcessorImpl"&gt;&lt;/processor&gt;
+    &lt;writer ref="pkg.MyItemWriterImpl"&gt;&lt;/writer&gt;
+    &lt;skippable-exception-classes&gt;
+      &lt;include class="pkg.MyItemException"/&gt;
+      &lt;exclude class="pkg.MyItemSeriousSubException"/&gt;
+    &lt;/skippable-exception-classes&gt;
+    &lt;retryable-exception-classes&gt;
+      &lt;include class="pkg.MyResourceTempUnavailable"/&gt;
+    &lt;/retryable-exception-classes&gt;
+  &lt;/chunk&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example defines a chunk step and specifies its reader, processor,
+and writer artifacts. The step updates a checkpoint and commits each
+chunk after processing five items. It skips all <code>MyItemException</code>
+exceptions and all its subtypes, except for <code>MyItemSeriousSubException</code>,
+up to a maximum of ten skipped exceptions. The step retries a chunk when
+a <code>MyResourceTempUnavailable</code> exception occurs, up to a maximum of three
+attempts.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-batchlet-element">The batchlet Element</h4>
+<div class="paragraph">
+<p>The <code>batchlet</code> element is a child of the <code>step</code> element for
+task-oriented steps. This element only has the <code>ref</code> attribute, which
+specifies a batch artifact that implements the <code>Batchlet</code> interface. The
+<code>batch</code> element can contain a <code>properties</code> element.</p>
+</div>
+<div class="paragraph">
+<p>The following is an example of a task-oriented step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepD" next="stepE"&gt;
+  &lt;batchlet ref="pkg.MyBatchletImpl"&gt;
+    &lt;properties&gt;
+      &lt;property name="pname" value="pvalue"/&gt;
+    &lt;/properties&gt;
+  &lt;/batchlet&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example defines a batch step and specifies its batch artifact.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-partition-element">The partition Element</h4>
+<div class="paragraph">
+<p>The <code>partition</code> element is a child of the <code>step</code> element. It indicates
+that a step is partitioned. Most partitioned steps are chunk steps where
+the processing of each item does not depend on the results of processing
+previous items. You specify the number of partitions in a step and
+provide each partition with specific information on which items to
+process, such as the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A range of items. For example, partition 1 processes items 1 through
+500, and partition 2 processes items 501 through 1000.</p>
+</li>
+<li>
+<p>An input source. For example, partition 1 processes the items in
+<code>input1.txt</code> and partition 2 processes the items in <code>input2.txt</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When the number of partitions, the number of items, and the input
+sources for a partitioned step are known at development or deployment
+time, you can use partition properties in the job definition file to
+specify partition-specific information and access these properties from
+the step batch artifacts. The runtime creates as many instances of the
+step batch artifacts (reader, processor, and writer) as partitions, and
+each artifact instance receives the properties specific to its
+partition.</p>
+</div>
+<div class="paragraph">
+<p>In most cases, the number of partitions, the number of items, or the
+input sources for a partitioned step can only be determined at runtime.
+Instead of specifying partition-specific properties statically in the
+job definition file, you provide a batch artifact that can access your
+data sources at runtime and determine how many partitions are needed and
+what range of items each partition should process. This batch artifact
+is an implementation of the <code>PartitionMapper</code> interface. The batch
+runtime invokes this artifact and then uses the information it provides
+to instantiate the step batch artifacts (reader, writer, and processor)
+for each partition and to pass them partition-specific data as
+parameters.</p>
+</div>
+<div class="paragraph">
+<p>The rest of this section describes the <code>partition</code> element in detail and
+shows two examples of job definition files: one that uses partition
+properties to specify a range of items for each partition, and one that
+relies on a <code>PartitionMapper</code> implementation to determine
+partition-specific information.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="batch-processing009.html#BCGGGAHB">The Phone Billing Chunk Step</a>
+in <a href="batch-processing009.html#BCGFCACD">The phonebilling Example
+Application</a> for a complete example of a partitioned chunk step.</p>
+</div>
+<div class="paragraph">
+<p>The <code>partition</code> element can contain the following elements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One <code>plan</code> element, if the <code>mapper</code> element is not specified.</p>
+<div class="paragraph">
+<p>This element defines the number of partitions, the number of threads,
+and the properties for each partition in the job definition file. The
+<code>plan</code> element is useful when this information is known at development
+or deployment time.</p>
+</div>
+</li>
+<li>
+<p>One <code>mapper</code> element, if the <code>plan</code> element is not specified.</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that provides the number of
+partitions, the number of threads, and the properties for each
+partition. The batch artifact is an implementation of the
+<code>PartitionMapper</code> interface. You use this option when the information
+required for each partition is only known at runtime.</p>
+</div>
+</li>
+<li>
+<p>One <code>reducer</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that receives control when a
+partitioned step begins, ends, or rolls back. The batch artifact enables
+you to merge results from different partitions and perform other related
+operations. The batch artifact is an implementation of the
+<code>PartitionReducer</code> interface.</p>
+</div>
+</li>
+<li>
+<p>One <code>collector</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that sends intermediary results
+from each partition to a partition analyzer. The batch artifact sends
+the intermediary results after each checkpoint for chunk steps and at
+the end of the step for task steps. The batch artifact is an
+implementation of the <code>PartitionCollector</code> interface.</p>
+</div>
+</li>
+<li>
+<p>One <code>analyzer</code> element (optional).</p>
+<div class="paragraph">
+<p>This element specifies a batch artifact that analyzes the intermediary
+results from the partition collector instances. The batch artifact is an
+implementation of the <code>PartitionAnalyzer</code> interface.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following is an example of a partitioned step using the <code>plan</code>
+element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepE" next="stepF"&gt;
+  &lt;chunk&gt;
+    &lt;reader ...&gt;&lt;/reader&gt;
+    &lt;processor ...&gt;&lt;/processor&gt;
+    &lt;writer ...&gt;&lt;/writer&gt;
+  &lt;/chunk&gt;
+  &lt;partition&gt;
+    &lt;plan partitions="2" threads="2"&gt;
+      &lt;properties partition="0"&gt;
+        &lt;property name="firstItem" value="0"/&gt;
+        &lt;property name="lastItem" value="500"/&gt;
+      &lt;/properties&gt;
+      &lt;properties partition="1"&gt;
+        &lt;property name="firstItem" value="501"/&gt;
+        &lt;property name="lastItem" value="999"/&gt;
+      &lt;/properties&gt;
+    &lt;/plan&gt;
+  &lt;/partition&gt;
+  &lt;reducer ref="MyPartitionReducerImpl"/&gt;
+  &lt;collector ref="MyPartitionCollectorImpl"/&gt;
+  &lt;analyzer ref="MyPartitionAnalyzerImpl"/&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>plan</code> element specifies the properties for each
+partition in the job definition file.</p>
+</div>
+<div class="paragraph">
+<p>The following example uses a <code>mapper</code> element instead of a <code>plan</code>
+element. The <code>PartitionMapper</code> implementation dynamically provides the
+same information as the <code>plan</code> element provides in the job definition
+file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="stepE" next="stepF"&gt;
+  &lt;chunk&gt;
+    &lt;reader ...&gt;&lt;/reader&gt;
+    &lt;processor ...&gt;&lt;/processor&gt;
+    &lt;writer ...&gt;&lt;/writer&gt;
+  &lt;/chunk&gt;
+  &lt;partition&gt;
+    &lt;mapper ref="MyPartitionMapperImpl"/&gt;
+    &lt;reducer ref="MyPartitionReducerImpl"/&gt;
+    &lt;collector ref="MyPartitionCollectorImpl"/&gt;
+    &lt;analyzer ref="MyPartitionAnalyzerImpl"/&gt;
+  &lt;/partition&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer to <a href="batch-processing009.html#BCGFCACD">The phonebilling Example
+Application</a> for an example implementation of the <code>PartitionMapper</code>
+interface.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-flow-element">The flow Element</h3>
+<div class="paragraph">
+<p>The <code>flow</code> element can be a child of the <code>job</code>, <code>flow</code>, and <code>split</code>
+elements. Its attributes are <code>id</code> and <code>next</code>. Flows can transition to
+flows, steps, splits, and decision elements. The <code>flow</code> element can
+contain the following elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One or more <code>step</code> elements</p>
+</li>
+<li>
+<p>One or more <code>flow</code> elements (optional)</p>
+</li>
+<li>
+<p>One or more <code>split</code> elements (optional)</p>
+</li>
+<li>
+<p>One or more <code>decision</code> elements (optional)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The last <code>step</code> in a flow is the one with no <code>next</code> attribute or <code>next</code>
+element. Steps and other elements in a flow cannot transition to
+elements outside the flow.</p>
+</div>
+<div class="paragraph">
+<p>The following is an example of the <code>flow</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;flow id="flowA" next="stepE"&gt;
+  &lt;step id="flowAstepA" next="flowAstepB"&gt;...&lt;/step&gt;
+  &lt;step id="flowAstepB" next="flowAflowC"&gt;...&lt;/step&gt;
+  &lt;flow id="flowAflowC" next="flowAsplitD"&gt;...&lt;/flow&gt;
+  &lt;split id="flowAsplitD" next="flowAstepE"&gt;...&lt;/split&gt;
+  &lt;step id="flowAstepE"&gt;...&lt;/step&gt;
+&lt;/flow&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example flow contains three steps, one flow, and one split. The
+last step does not have the <code>next</code> attribute. The flow transitions to
+<code>stepE</code> when its last step completes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-split-element">The split Element</h3>
+<div class="paragraph">
+<p>The <code>split</code> element can be a child of the <code>job</code> and <code>flow</code> elements. Its
+attributes are <code>id</code> and <code>next</code>. Splits can transition to splits, steps,
+flows, and decision elements. The <code>split</code> element can only contain one
+or more <code>flow</code> elements that can only transition to other <code>flow</code>
+elements in the split.</p>
+</div>
+<div class="paragraph">
+<p>The following is an example of a split with three flows that execute
+concurrently:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;split id="splitA" next="stepB"&gt;
+  &lt;flow id="splitAflowA"&gt;...&lt;/flow&gt;
+  &lt;flow id="splitAflowB"&gt;...&lt;/flow&gt;
+  &lt;flow id="splitAflowC"&gt;...&lt;/flow&gt;
+&lt;/split&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-decision-element">The decision Element</h3>
+<div class="paragraph">
+<p>The <code>decision</code> element can be a child of the <code>job</code> and <code>flow</code> elements.
+Its attributes are <code>id</code> and <code>next</code>. Steps, flows, and splits can
+transition to a <code>decision</code> element. This element specifies a batch
+artifact that decides the next step, flow, or split to execute based on
+information from the execution of the previous step, flow, or split. The
+batch artifact implements the <code>Decider</code> interface. The <code>decision</code>
+element can contain the following elements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One or more <code>end</code> elements (optional).</p>
+<div class="paragraph">
+<p>This element sets the batch status to <code>COMPLETED</code>.</p>
+</div>
+</li>
+<li>
+<p>One or more <code>stop</code> elements (optional).</p>
+<div class="paragraph">
+<p>This element sets the batch status to <code>STOPPED</code>.</p>
+</div>
+</li>
+<li>
+<p>One or more <code>fail</code> elements (optional).</p>
+<div class="paragraph">
+<p>This element sets the batch status to <code>FAILED</code>.</p>
+</div>
+</li>
+<li>
+<p>One or more <code>next</code> elements (optional).</p>
+</li>
+<li>
+<p>One <code>properties</code> element (optional).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following is an example of the <code>decider</code> element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;decision id="decisionA" ref="MyDeciderImpl"&gt;
+  &lt;fail on="FAILED" exit-status="FAILED_AT_DECIDER"/&gt;
+  &lt;end on="COMPLETED" exit-status="COMPLETED_AT_DECIDER"/&gt;
+  &lt;stop on="MY_TEMP_ISSUE_EXIST_STATUS" restart="step2"/&gt;
+&lt;/decision&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="batch-processing003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

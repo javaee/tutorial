@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Querying Entities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="persistence-intro004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="querying-entities">Querying Entities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Java Persistence API provides the following methods for querying
+entities.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Java Persistence query language (JPQL) is a simple, string-based
+language similar to SQL used to query entities and their relationships.
+See <a href="persistence-querylanguage.html#BNBTG">Chapter 40, "The Java
+Persistence Query Language"</a> for more information.</p>
+</li>
+<li>
+<p>The Criteria API is used to create typesafe queries using Java
+programming language APIs to query for entities and their relationships.
+See <a href="persistence-criteria.html#GJITV">Chapter 41, "Using the Criteria
+API to Create Queries"</a> for more information.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both JPQL and the Criteria API have advantages and disadvantages.</p>
+</div>
+<div class="paragraph">
+<p>Just a few lines long, JPQL queries are typically more concise and more
+readable than Criteria queries. Developers familiar with SQL will find
+it easy to learn the syntax of JPQL. JPQL named queries can be defined
+in the entity class using a Java programming language annotation or in
+the application&#8217;s deployment descriptor. JPQL queries are not typesafe,
+however, and require a cast when retrieving the query result from the
+entity manager. This means that type-casting errors may not be caught at
+compile time. JPQL queries don&#8217;t support open-ended parameters.</p>
+</div>
+<div class="paragraph">
+<p>Criteria queries allow you to define the query in the business tier of
+the application. Although this is also possible using JPQL dynamic
+queries, Criteria queries provide better performance because JPQL
+dynamic queries must be parsed each time they are called. Criteria
+queries are typesafe and therefore don&#8217;t require casting, as JPQL
+queries do. The Criteria API is just another Java programming language
+API and doesn&#8217;t require developers to learn the syntax of another query
+language. Criteria queries are typically more verbose than JPQL queries
+and require the developer to create several objects and perform
+operations on those objects before submitting the query to the entity
+manager.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="persistence-intro004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="persistence-intro006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

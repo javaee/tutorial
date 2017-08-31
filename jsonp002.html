@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JSON Processing in the Java EE Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsonp001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="json-processing-in-the-java-ee-platform">JSON Processing in the Java EE Platform</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java EE includes support for JSR 374, which provides an API to parse,
+transform, and query JSON data using the object model or the streaming
+model described in <a href="jsonp001.html#BABJJACI">Generating and Parsing
+JSON Data</a>. The Java API for JSON Processing contains the following
+packages:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>javax.json</code> package contains a reader interface, a writer
+interface, a model builder interface for the object model, and utility
+classes and Java types for JSON elements. This package also includes
+several classes that implement other JSON-related standards: <a href="http://tools.ietf.org/html/rfc6901">JSON Pointer</a>,
+<a href="http://tools.ietf.org/html/rfc6902">JSON Patch</a>, and <a href="http://tools.ietf.org/html/rfc7396">JSON Merge Patch</a>.
+These standards are used to retrieve, transform or manipulate values
+in an object model. <a href="#CHDJJCBE">Table 19-1</a> lists the main classes
+and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.json.stream</code> package contains a parser interface and a
+generator interface for the streaming model. <a href="#CHDIHCEG">Table 19-2</a>
+lists the main classes and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.json.spi</code> package contains a Service Provider Interface (SPI)
+to plug in implementations for JSON processing objects. This package
+contains the <code>JsonProvider</code> class, which contains the methods that a service
+provider implements.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a id="sthref118"></a><a id="CHDJJCBE"></a></p>
+</div>
+<div class="paragraph">
+<p><strong>Table 19-1 Main Classes and Interfaces in javax.json</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Json</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains static methods to create instances of JSON parsers,
+builders, and generators. This class also contains methods to create
+parser, builder, and generator factory objects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonReader</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reads JSON data from a stream and creates an object model
+in memory.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonObjectBuilder</code>, <code>JsonArrayBuilder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create an object model or an array model in memory by adding elements
+from application code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonWriter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Writes an object model from memory to a stream.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonValue</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents an element (such as an object, an array, or a
+value) in JSON data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonStructure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents an object or an array in JSON data. This
+interface is a subtype of <code>JsonValue</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonObject</code>, <code>JsonArray</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represent an object or an array in JSON data. These two interfaces are
+subtypes of <code>JsonStructure</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonPointer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains methods for operating on specific targets within JSON documents. The targets can be <code>JsonValue</code>,
+<code>JsonObject</code>, or <code>JsonArray</code> objects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonPatch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An interface for supporting a sequence of operations to be applied to a target JSON resource. The
+operations are defined within a JSON patch document.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonMergePatch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An interface for supporting updates to target JSON resources. A JSON patch document is compared with
+the target resource to determine the specific set of change operations to be applied.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonString</code>, <code>JsonNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represent data types for elements in JSON data. These two interfaces
+are subtypes of <code>JsonValue</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonException</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that a problem occurred during JSON
+processing.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a id="sthref119"></a><a id="CHDIHCEG"></a></p>
+</div>
+<div class="paragraph">
+<p><strong>Table 19-2 Main Classes and Interfaces in javax.json.stream</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonParser</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents an event-based parser that can read JSON data
+from a stream or from an object model.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonGenerator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Writes JSON data to a stream one element at a time.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsonp001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonp003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

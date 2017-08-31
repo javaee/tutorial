@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>A Web Service Example: helloservice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-basicexamples003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-basicexamples005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="a-web-service-example-helloservice">A Web Service Example: helloservice</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example demonstrates a simple web service that generates a response
+based on information received from the client. <code>HelloServiceBean</code> is a
+stateless session bean that implements a single method: <code>sayHello</code>. This
+method matches the <code>sayHello</code> method invoked by the client described in
+<a href="jaxws002.html#BNAYX">A Simple JAX-WS Application Client</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBOS">The Web Service Endpoint Implementation Class</a></p>
+</li>
+<li>
+<p><a href="#BNBOT">Stateless Session Bean Implementation Class</a></p>
+</li>
+<li>
+<p><a href="#BNBOU">Running the helloservice Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-web-service-endpoint-implementation-class">The Web Service Endpoint Implementation Class</h3>
+<div class="paragraph">
+<p><code>HelloServiceBean</code> is the endpoint implementation class, typically the
+primary programming artifact for enterprise bean web service endpoints.
+The web service endpoint implementation class has the following
+requirements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The class must be annotated with either the <code>javax.jws.WebService</code> or
+the <code>javax.jws.WebServiceProvider</code> annotation.</p>
+</li>
+<li>
+<p>The implementing class may explicitly reference an SEI through the
+<code>endpointInterface</code> element of the <code>@WebService</code> annotation but is not
+required to do so. If no <code>endpointInterface</code> is specified in
+<code>@WebService</code>, an SEI is implicitly defined for the implementing class.</p>
+</li>
+<li>
+<p>The business methods of the implementing class must be public and must
+not be declared <code>static</code> or <code>final</code>.</p>
+</li>
+<li>
+<p>Business methods that are exposed to web service clients must be
+annotated with <code>javax.jws.WebMethod</code>.</p>
+</li>
+<li>
+<p>Business methods that are exposed to web service clients must have
+JAXB-compatible parameters and return types. See the list of JAXB
+default data type bindings at <a href="jaxws003.html#BNAZC">Types Supported by
+JAX-WS</a>.</p>
+</li>
+<li>
+<p>The implementing class must not be declared <code>final</code> and must not be
+<code>abstract</code>.</p>
+</li>
+<li>
+<p>The implementing class must have a default public constructor.</p>
+</li>
+<li>
+<p>The endpoint class must be annotated <code>@Stateless</code>.</p>
+</li>
+<li>
+<p>The implementing class must not define the <code>finalize</code> method.</p>
+</li>
+<li>
+<p>The implementing class may use the <code>javax.annotation.PostConstruct</code> or
+<code>javax.annotation.PreDestroy</code> annotations on its methods for lifecycle
+event callbacks.</p>
+<div class="paragraph">
+<p>The <code>@PostConstruct</code> method is called by the container before the
+implementing class begins responding to web service clients.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@PreDestroy</code> method is called by the container before the endpoint
+is removed from operation.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="stateless-session-bean-implementation-class">Stateless Session Bean Implementation Class</h3>
+<div class="paragraph">
+<p>The <code>HelloServiceBean</code> class implements the <code>sayHello</code> method, which is
+annotated <code>@WebMethod</code>. The source code for the <code>HelloServiceBean</code> class
+is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.helloservice.ejb;
+
+import javax.ejb.Stateless;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
+@Stateless
+@WebService
+public class HelloServiceBean {
+    private final String message = "Hello, ";
+
+    public void HelloServiceBean() {}
+
+    @WebMethod
+    public String sayHello(String name) {
+        return message + name + ".";
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-helloservice-example">Running the helloservice Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, and deploy
+the <code>helloservice</code> example. You can then use the Administration Console
+to test the web service endpoint methods.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNBOV">To Build, Package, and Deploy the helloservice Example
+Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#BNBOW">To Build, Package, and Deploy the helloservice Example
+Using Maven</a></p>
+</li>
+<li>
+<p><a href="#BNBOX">To Test the Service without a Client</a></p>
+</li>
+</ul>
+</div>
+<div id="to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide" class="paragraph">
+<p>To Build, Package, and Deploy the helloservice Example Using NetBeans
+IDE
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>helloservice</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>helloservice</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This builds and packages the application into <code>helloservice.ear</code>,
+located in tut-install`/examples/ejb/helloservice/target/`, and deploys
+this EAR file to GlassFish Server.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-helloservice-example-using-maven">To Build, Package, and Deploy the helloservice Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb/helloservice/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This compiles the source files and packages the application into an EJB
+JAR file located at
+tut-install`/examples/ejb/helloservice/target/helloservice.jar`. Then
+the EJB JAR file is deployed to GlassFish Server.</p>
+</div>
+<div class="paragraph">
+<p>Upon deployment, GlassFish Server generates additional artifacts
+required for web service invocation, including the WSDL file.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-test-the-service-without-a-client">To Test the Service without a Client</h4>
+<div class="paragraph">
+<p>The GlassFish Server Administration Console allows you to test the
+methods of a web service endpoint. To test the <code>sayHello</code> method of
+<code>HelloServiceBean</code>, follow these steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the Administration Console by opening the following URL in a
+web browser:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:4848/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the navigation tree, select the Applications node.</p>
+</li>
+<li>
+<p>In the Applications table, click the <code>helloservice</code> link.</p>
+</li>
+<li>
+<p>In the Modules and Components table, click the View Endpoint link.</p>
+</li>
+<li>
+<p>On the Web Service Endpoint Information page, click the Tester link:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">/HelloServiceBeanService/HelloServiceBean?Tester</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the Web Service Test Links page, click the non-secure link (the
+one that specifies port 8080).</p>
+</li>
+<li>
+<p>On the HelloServiceBeanService Web Service Tester page, under
+Methods, enter a name as the parameter to the <code>sayHello</code> method.</p>
+</li>
+<li>
+<p>Click sayHello.</p>
+<div class="paragraph">
+<p>The sayHello Method invocation page opens. Under Method returned, you&#8217;ll
+see the response from the endpoint.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-basicexamples003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-basicexamples005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The webserverlog Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="batch-processing007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-webserverlog-example-application">The webserverlog Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>webserverlog</code> example application, located in the
+tut-install`/examples/batch/webserverlog/` directory, demonstrates how
+to use the batch framework in Java EE to analyze the log file from a web
+server. This example application reads a log file and finds what
+percentage of page views from tablet devices are product sales.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABCHDFB">Architecture of the webserverlog Example Application</a></p>
+</li>
+<li>
+<p><a href="#BABFIHJA">Running the webserverlog Example Application</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="architecture-of-the-webserverlog-example-application">Architecture of the webserverlog Example Application</h3>
+<div class="paragraph">
+<p>The <code>webserverlog</code> example application consists of the following
+elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A job definition file (<code>webserverlog.xml</code>) that uses the Job
+Specification Language (JSL) to define a batch job with a chunk step and
+a task step. The chunk step acts as a filter, and the task step
+calculates statistics on the remaining entries.</p>
+</li>
+<li>
+<p>A log file (<code>log1.txt</code>) that serves as input data to the batch job.</p>
+</li>
+<li>
+<p>Two Java classes (<code>LogLine</code> and <code>LogFilteredLine</code>) that represent
+input items and output items for the chunk step.</p>
+</li>
+<li>
+<p>Three batch artifacts (<code>LogLineReader</code>, <code>LogLineProcessor</code>, and
+<code>LogFilteredLineWriter</code>) that implement the chunk step of the
+application. This step reads items from the web server log file, filters
+them by the web browser used by the client, and writes the results to a
+text file.</p>
+</li>
+<li>
+<p>Two batch artifacts (<code>InfoJobListener</code> and <code>InfoItemProcessListener</code>)
+that implement two simple listeners.</p>
+</li>
+<li>
+<p>A batch artifact (<code>MobileBatchlet.java</code>) that calculates statistics on
+the filtered items.</p>
+</li>
+<li>
+<p>Two Facelets pages (<code>index.xhtml</code> and <code>jobstarted.xhtml</code>) that provide
+the front end of the batch application. The first page shows the log
+file that will be processed by the batch job, and the second page
+enables the user to check on the status of the job and shows the
+results.</p>
+</li>
+<li>
+<p>A managed bean (<code>JsfBean</code>) that is accessed from the Facelets pages.
+The bean submits the job to the batch runtime, checks on the status of
+the job, and reads the results from a text file.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="the-job-definition-file">The Job Definition File</h4>
+<div class="paragraph">
+<p>The <code>webserverlog.xml</code> job definition file is located in the
+<code>WEB-INF/classes/META-INF/batch-jobs/</code> directory. The file specifies
+seven job-level properties and two steps:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;job id="webserverlog" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     version="1.0"&gt;
+    &lt;properties&gt;
+        &lt;property name="log_file_name" value="log1.txt"/&gt;
+        &lt;property name="filtered_file_name" value="filtered1.txt"/&gt;
+        &lt;property name="num_browsers" value="2"/&gt;
+        &lt;property name="browser_1" value="Tablet Browser D"/&gt;
+        &lt;property name="browser_2" value="Tablet Browser E"/&gt;
+        &lt;property name="buy_page" value="/auth/buy.html"/&gt;
+        &lt;property name="out_file_name" value="result1.txt"/&gt;
+    &lt;/properties&gt;
+    &lt;listeners&gt;
+        &lt;listener ref="InfoJobListener"/&gt;
+    &lt;/listeners&gt;
+    &lt;step id="mobilefilter" next="mobileanalyzer"&gt; ... &lt;/step&gt;
+    &lt;step id="mobileanalyzer"&gt; ... &lt;/step&gt;
+&lt;/job&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first step is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="mobilefilter" next="mobileanalyzer"&gt;
+    &lt;listeners&gt;
+        &lt;listener ref="InfoItemProcessListeners"/&gt;
+    &lt;/listeners&gt;
+    &lt;chunk checkpoint-policy="item" item-count="10"&gt;
+        &lt;reader ref="LogLineReader"&gt;&lt;/reader&gt;
+        &lt;processor ref="LogLineProcessor"&gt;&lt;/processor&gt;
+        &lt;writer ref="LogFilteredLineWriter"&gt;&lt;/writer&gt;
+    &lt;/chunk&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This step is a normal chunk step that specifies the batch artifacts that
+implement each phase of the step. The batch artifact names are not fully
+qualified class names, so the batch artifacts are CDI beans annotated
+with <code>@Named</code>.</p>
+</div>
+<div class="paragraph">
+<p>The second step is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;step id="mobileanalyzer"&gt;
+    &lt;batchlet ref="MobileBatchlet"&gt;&lt;/batchlet&gt;
+    &lt;end on="COMPLETED"/&gt;
+&lt;/step&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This step is a task step that specifies the batch artifact that
+implements it. This is the last step of the job.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-logline-and-logfilteredline-items">The LogLine and LogFilteredLine Items</h4>
+<div class="paragraph">
+<p>The <code>LogLine</code> class represents entries in the web server log file and it
+is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class LogLine {
+    private final String datetime;
+    private final String ipaddr;
+    private final String browser;
+    private final String url;
+
+    /* ... Constructor, getters, and setters ... */
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>LogFileteredLine</code> class is similar to this class but only has two
+fields: the IP address of the client and the URL.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-chunk-step-batch-artifacts">The Chunk Step Batch Artifacts</h4>
+<div class="paragraph">
+<p>The first step is composed of the <code>LogLineReader</code>, <code>LogLineProcessor</code>,
+and <code>LogFilteredLineWriter</code> batch artifacts.</p>
+</div>
+<div class="paragraph">
+<p>The <code>LogLineReader</code> artifact reads records from the web server log file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("LogLineReader")
+public class LogLineReader implements ItemReader {
+    private ItemNumberCheckpoint checkpoint;
+    private String fileName;
+    private BufferedReader breader;
+    @Inject
+    private JobContext jobCtx;
+
+    public LogLineReader() { }
+
+    /* ... Override the open, close, readItem, and
+     *     checkpointInfo methods ... */
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>open</code> method reads the <code>log_file_name</code> property and opens the log
+file with a buffered reader. In this example, the log file has been
+included with the application under
+<code>webserverlog/WEB-INF/classes/log1.txt</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">fileName = jobCtx.getProperties().getProperty("log_file_name");
+ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+InputStream iStream = classLoader.getResourceAsStream(fileName);
+breader = new BufferedReader(new InputStreamReader(iStream));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a checkpoint object is provided, the <code>open</code> method advances the
+reader up to the last checkpoint. Otherwise, this method creates a new
+checkpoint object. The checkpoint object keeps track of the line number
+from the last committed chunk.</p>
+</div>
+<div class="paragraph">
+<p>The <code>readItem</code> method returns a new <code>LogLine</code> object or null at the end
+of the log file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public Object readItem() throws Exception {
+    String entry = breader.readLine();
+    if (entry != null) {
+        checkpoint.nextLine();
+        return new LogLine(entry);
+    } else {
+        return null;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>LogLineProcessor</code> artifact obtains a list of browsers from the job
+properties and filters the log entries according to the list:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public Object processItem(Object item) {
+    /* Obtain a list of browsers we are interested in */
+    if (nbrowsers == 0) {
+        Properties props = jobCtx.getProperties();
+        nbrowsers = Integer.parseInt(props.getProperty("num_browsers"));
+        browsers = new String[nbrowsers];
+        for (int i = 1; i &lt; nbrowsers + 1; i++)
+            browsers[i - 1] = props.getProperty("browser_" + i);
+    }
+
+    LogLine logline = (LogLine) item;
+    /* Filter for only the mobile/tablet browsers as specified */
+    for (int i = 0; i &lt; nbrowsers; i++) {
+        if (logline.getBrowser().equals(browsers[i])) {
+            return new LogFilteredLine(logline);
+        }
+    }
+    return null;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>LogFilteredLineWriter</code> artifact reads the name of the output file
+from the job properties. The <code>open</code> method opens the file for writing.
+If a checkpoint object is provided, the artifact continues writing at
+the end of the file; otherwise, it overwrites the file if it exists. The
+<code>writeItems</code> method writes filtered items to the output file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public void writeItems(List&lt;Object&gt; items) throws Exception {
+    /* Write the filtered lines to the output file */
+    for (int i = 0; i &lt; items.size(); i++) {
+        LogFilteredLine filtLine = (LogFilteredLine) items.get(i);
+        bwriter.write(filtLine.toString());
+        bwriter.newLine();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-listener-batch-artifacts">The Listener Batch Artifacts</h4>
+<div class="paragraph">
+<p>The <code>InfoJobListener</code> batch artifact implements a simple listener that
+writes log messages when the job starts and when it ends:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("InfoJobListener")
+public class InfoJobListener implements JobListener {
+    ...
+    @Override
+    public void beforeJob() throws Exception {
+        logger.log(Level.INFO, "The job is starting");
+    }
+
+    @Override
+    public void afterJob() throws Exception { ... }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>InfoItemProcessListener</code> batch artifact implements the
+<code>ItemProcessListener</code> interface for chunk steps:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Dependent
+@Named("InfoItemProcessListener")
+public class InfoItemProcessListener implements ItemProcessListener {
+    ...
+    @Override
+    public void beforeProcess(Object o) throws Exception {
+        LogLine logline = (LogLine) o;
+        llogger.log(Level.INFO, "Processing entry {0}", logline);
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-task-step-batch-artifact">The Task Step Batch Artifact</h4>
+<div class="paragraph">
+<p>The task step is implemented by the <code>MobileBatchlet</code> artifact, which
+computes what percentage of the filtered log entries are purchases:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Override
+public String process() throws Exception {
+    /* Get properties from the job definition file */
+    ...
+    /* Count from the output of the previous chunk step */
+    breader = new BufferedReader(new FileReader(fileName));
+    String line = breader.readLine();
+    while (line != null) {
+        String[] lineSplit = line.split(", ");
+        if (buyPage.compareTo(lineSplit[1]) == 0)
+            pageVisits++;
+        totalVisits++;
+        line = breader.readLine();
+    }
+    breader.close();
+    /* Write the result */
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-javaserver-faces-pages">The JavaServer Faces Pages</h4>
+<div class="paragraph">
+<p>The <code>index.xhtml</code> page contains a text area that shows the web server
+log. The page provides a button for the user to submit the batch job and
+navigate to the next page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;body&gt;
+    ...
+    &lt;textarea cols="90" rows="25"
+              readonly="true"&gt;#{jsfBean.getInputLog()}&lt;/textarea&gt;
+    &lt;p&gt; &lt;/p&gt;
+    &lt;h:form&gt;
+        &lt;h:commandButton value="Start Batch Job"
+                         action="#{jsfBean.startBatchJob()}" /&gt;
+    &lt;/h:form&gt;
+&lt;/body&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This page calls the methods of the managed bean to show the log file and
+submit the batch job.</p>
+</div>
+<div class="paragraph">
+<p>The <code>jobstarted.xhtml</code> page provides a button to check the current
+status of the batch job and displays the results when the job finishes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;p&gt;Current Status of the Job: &lt;b&gt;#{jsfBean.jobStatus}&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;#{jsfBean.showResults()}&lt;/p&gt;
+&lt;h:form&gt;
+    &lt;h:commandButton value="Check Status"
+                     action="jobstarted"
+                     rendered="#{jsfBean.completed==false}" /&gt;
+&lt;/h:form&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-managed-bean">The Managed Bean</h4>
+<div class="paragraph">
+<p>The <code>JsfBean</code> managed bean submits the job to the batch runtime, checks
+on the status of the job, and reads the results from a text file.</p>
+</div>
+<div class="paragraph">
+<p>The <code>startBatchJob</code> method submits the job to the batch runtime:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">/* Submit the batch job to the batch runtime.
+ * JSF Navigation method (return the name of the next page) */
+public String startBatchJob() {
+    jobOperator = BatchRuntime.getJobOperator();
+    execID = jobOperator.start("webserverlog", null);
+    return "jobstarted";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>getJobStatus</code> method checks the status of the job:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">/* Get the status of the job from the batch runtime */
+public String getJobStatus() {
+    return jobOperator.getJobExecution(execID).getBatchStatus().toString();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>showResults</code> method reads the results from a text file.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-webserverlog-example-application">Running the webserverlog Example Application</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>webserverlog</code> example application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABHIJBE">To Run the webserverlog Example Application Using
+NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#BABGACCD">To Run the webserverlog Example Application Using
+Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-webserverlog-example-application-using-netbeans-ide">To Run the webserverlog Example Application Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/batch</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>webserverlog</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>webserverlog</code> project and
+select Run.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>webserverlog.war</code>, located in the <code>target/</code> directory; deploys it to
+the server; and launches a web browser window at the following URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/webserverlog/</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-webserverlog-example-application-using-maven">To Run the webserverlog Example Application Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/batch/webserverlog/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command to deploy the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open a web browser window at the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/webserverlog/</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="batch-processing007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="batch-processing009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

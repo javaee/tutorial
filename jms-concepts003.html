@@ -1,0 +1,1289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The JMS API Programming Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jms-concepts002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-concepts004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-jms-api-programming-model">The JMS API Programming Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The basic building blocks of a JMS application are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Administered objects: connection factories and destinations</p>
+</li>
+<li>
+<p>Connections</p>
+</li>
+<li>
+<p>Sessions</p>
+</li>
+<li>
+<p><code>JMSContext</code> objects, which combine a connection and a session in one
+object</p>
+</li>
+<li>
+<p>Message producers</p>
+</li>
+<li>
+<p>Message consumers</p>
+</li>
+<li>
+<p>Messages</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#BNCEI">Figure 46-5</a> shows how all these objects fit together in a
+JMS client application.</p>
+</div>
+<div id="BNCEI" class="paragraph">
+<div class="title"><strong>Figure 46-5 The JMS API Programming Model</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_030.png" alt="Diagram of the JMS API programming model: connection factory, JMSContext, connection, session, message producer, message consumer, messages, and destinations"></span></p>
+</div>
+<div class="paragraph">
+<p>JMS also provides queue browsers, objects that allow an application to
+browse messages on a queue.</p>
+</div>
+<div class="paragraph">
+<p>This section describes all these objects briefly and provides sample
+commands and code snippets that show how to create and use the objects.
+The last subsection briefly describes JMS API exception handling.</p>
+</div>
+<div class="paragraph">
+<p>Examples that show how to combine all these objects in applications
+appear in <a href="jms-examples.html#BNCGV">Chapter 47, "Java Message Service
+Examples,"</a> beginning with <a href="jms-examples003.html#BNCFA">Writing Simple
+JMS Applications</a>. For more detail, see the JMS API documentation, part
+of the Java EE API documentation.</p>
+</div>
+<div class="sect2">
+<h3 id="jms-administered-objects">JMS Administered Objects</h3>
+<div class="paragraph">
+<p>Two parts of a JMS application, destinations and connection factories,
+are commonly maintained administratively rather than programmatically.
+The technology underlying these objects is likely to be very different
+from one implementation of the JMS API to another. Therefore, the
+management of these objects belongs with other administrative tasks that
+vary from provider to provider.</p>
+</div>
+<div class="paragraph">
+<p>JMS clients access administered objects through interfaces that are
+portable, so a client application can run with little or no change on
+more than one implementation of the JMS API. Ordinarily, an
+administrator configures administered objects in a JNDI namespace, and
+JMS clients then access them by using resource injection.</p>
+</div>
+<div class="paragraph">
+<p>With GlassFish Server, you can use the <code>asadmin create-jms-resource</code>
+command or the Administration Console to create JMS administered objects
+in the form of connector resources. You can also specify the resources
+in a file named <code>glassfish-resources.xml</code> that you can bundle with an
+application.</p>
+</div>
+<div class="paragraph">
+<p>NetBeans IDE provides a wizard that allows you to create JMS resources
+for GlassFish Server. See <a href="jms-examples003.html#GKTJS">Creating JMS
+Administered Objects</a> for details.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE platform specification allows a developer to create
+administered objects using annotations or deployment descriptor
+elements. Objects created in this way are specific to the application
+for which they are created. See
+<a href="jms-concepts005.html#BABHFBDH">Creating Resources for Java EE
+Applications</a> for details. Definitions in a deployment descriptor
+override those specified by annotations.</p>
+</div>
+<div class="sect3">
+<h4 id="jms-connection-factories">JMS Connection Factories</h4>
+<div class="paragraph">
+<p>A connection factory is the object a client uses to create a connection
+to a provider. A connection factory encapsulates a set of connection
+configuration parameters that has been defined by an administrator. Each
+connection factory is an instance of the <code>ConnectionFactory</code>,
+<code>QueueConnectionFactory</code>, or <code>TopicConnectionFactory</code> interface. To
+learn how to create connection factories, see
+<a href="jms-examples003.html#GKTJS">Creating JMS Administered Objects</a>.</p>
+</div>
+<div class="paragraph">
+<p>At the beginning of a JMS client program, you usually inject a
+connection factory resource into a <code>ConnectionFactory</code> object. A Java EE
+server must provide a JMS connection factory with the logical JNDI name
+<code>java:comp/DefaultJMSConnectionFactory</code>. The actual JNDI name will be
+implementation-specific.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following code fragment looks up the default JMS
+connection factory and assigns it to a <code>ConnectionFactory</code> object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Resource(lookup = "java:comp/DefaultJMSConnectionFactory")
+private static ConnectionFactory connectionFactory;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="jms-destinations">JMS Destinations</h4>
+<div class="paragraph">
+<p>A destination is the object a client uses to specify the target of
+messages it produces and the source of messages it consumes. In the PTP
+messaging style, destinations are called queues. In the pub/sub
+messaging style, destinations are called topics. A JMS application can
+use multiple queues or topics (or both). To learn how to create
+destination resources, see <a href="jms-examples003.html#GKTJS">Creating JMS
+Administered Objects</a>.</p>
+</div>
+<div class="paragraph">
+<p>To create a destination using GlassFish Server, you create a JMS
+destination resource that specifies a JNDI name for the destination.</p>
+</div>
+<div class="paragraph">
+<p>In the GlassFish Server implementation of JMS, each destination resource
+refers to a physical destination. You can create a physical destination
+explicitly, but if you do not, the Application Server creates it when it
+is needed and deletes it when you delete the destination resource.</p>
+</div>
+<div class="paragraph">
+<p>In addition to injecting a connection factory resource into a client
+program, you usually inject a destination resource. Unlike connection
+factories, destinations are specific to either the PTP or pub/sub
+messaging style. To create an application that allows you to use the
+same code for both topics and queues, you assign the destination to a
+<code>Destination</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The following code specifies two resources, a queue and a topic. The
+resource names are mapped to destination resources created in the JNDI
+namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Resource(lookup = "jms/MyQueue")
+private static Queue queue;
+
+@Resource(lookup = "jms/MyTopic")
+private static Topic topic;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In a Java EE application, JMS administered objects are normally placed
+in the <code>jms</code> naming subcontext.</p>
+</div>
+<div class="paragraph">
+<p>With the common interfaces, you can mix or match connection factories
+and destinations. That is, in addition to using the <code>ConnectionFactory</code>
+interface, you can inject a <code>QueueConnectionFactory</code> resource and use it
+with a <code>Topic</code>, and you can inject a <code>TopicConnectionFactory</code> resource
+and use it with a <code>Queue</code>. The behavior of the application will depend
+on the kind of destination you use and not on the kind of connection
+factory you use.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connections">Connections</h3>
+<div class="paragraph">
+<p>A connection encapsulates a virtual connection with a JMS provider. For
+example, a connection could represent an open TCP/IP socket between a
+client and a provider service daemon. You use a connection to create one
+or more sessions.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE platform, the ability to create multiple sessions from a
+single connection is limited to application clients. In web and
+enterprise bean components, a connection can create no more than one
+session.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You normally create a connection by creating a <code>JMSContext</code> object. See
+<a href="#BABGDFEA">JMSContext Objects</a> for details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sessions">Sessions</h3>
+<div class="paragraph">
+<p>A session is a single-threaded context for producing and consuming
+messages.</p>
+</div>
+<div class="paragraph">
+<p>You normally create a session (as well as a connection) by creating a
+<code>JMSContext</code> object. See <a href="#BABGDFEA">JMSContext Objects</a> for details.
+You use sessions to create message producers, message consumers,
+messages, queue browsers, and temporary destinations.</p>
+</div>
+<div class="paragraph">
+<p>Sessions serialize the execution of message listeners; for details, see
+<a href="#BNCEQ">JMS Message Listeners</a>.</p>
+</div>
+<div class="paragraph">
+<p>A session provides a transactional context with which to group a set of
+sends and receives into an atomic unit of work. For details, see
+<a href="jms-concepts004.html#BNCGH">Using JMS Local Transactions</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jmscontext-objects">JMSContext Objects</h3>
+<div class="paragraph">
+<p>A <code>JMSContext</code> object combines a connection and a session in a single
+object. That is, it provides both an active connection to a JMS provider
+and a single-threaded context for sending and receiving messages.</p>
+</div>
+<div class="paragraph">
+<p>You use the <code>JMSContext</code> to create the following objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Message producers</p>
+</li>
+<li>
+<p>Message consumers</p>
+</li>
+<li>
+<p>Messages</p>
+</li>
+<li>
+<p>Queue browsers</p>
+</li>
+<li>
+<p>Temporary queues and topics (see
+<a href="jms-concepts004.html#BNCGB">Creating Temporary Destinations</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can create a <code>JMSContext</code> in a <code>try</code>-with-resources block.</p>
+</div>
+<div class="paragraph">
+<p>To create a <code>JMSContext</code>, call the <code>createContext</code> method on the
+connection factory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">JMSContext context = connectionFactory.createContext();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When called with no arguments from an application client or a Java SE
+client, or from the Java EE web or EJB container when there is no active
+JTA transaction in progress, the <code>createContext</code> method creates a
+non-transacted session with an acknowledgment mode of
+<code>JMSContext.AUTO_ACKNOWLEDGE</code>. When called with no arguments from the
+web or EJB container when there is an active JTA transaction in
+progress, the <code>createContext</code> method creates a transacted session. For
+information about the way JMS transactions work in Java EE applications,
+see <a href="jms-concepts005.html#BNCGL">Using the JMS API in Java EE
+Applications</a>.</p>
+</div>
+<div class="paragraph">
+<p>From an application client or a Java SE client, you can also call the
+<code>createContext</code> method with the argument <code>JMSContext.SESSION_TRANSACTED</code>
+to create a transacted session:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">JMSContext context =
+        connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The session uses local transactions; see
+<a href="jms-concepts004.html#BNCGH">Using JMS Local Transactions</a> for
+details.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can specify a non-default acknowledgment mode; see
+<a href="jms-concepts004.html#BNCFW">Controlling Message Acknowledgment</a> for
+more information.</p>
+</div>
+<div class="paragraph">
+<p>When you use a <code>JMSContext</code>, message delivery normally begins as soon as
+you create a consumer. See <a href="#BNCEP">JMS Message Consumers</a> for more
+information.</p>
+</div>
+<div class="paragraph">
+<p>If you create a <code>JMSContext</code> in a <code>try</code>-with-resources block, you do not
+need to close it explicitly. It will be closed when the <code>try</code> block
+comes to an end. Make sure that your application completes all its JMS
+activity within the <code>try</code>-with-resources block. If you do not use a
+<code>try</code>-with-resources block, you must call the <code>close</code> method on the
+<code>JMSContext</code> to close the connection when the application has finished
+its work.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jms-message-producers">JMS Message Producers</h3>
+<div class="paragraph">
+<p>A message producer is an object that is created by a <code>JMSContext</code> or a
+session and used for sending messages to a destination. A message
+producer created by a <code>JMSContext</code> implements the <code>JMSProducer</code>
+interface. You could create it this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">try (JMSContext context = connectionFactory.createContext();) {
+    JMSProducer producer = context.createProducer();
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, a <code>JMSProducer</code> is a lightweight object that does not consume
+significant resources. For this reason, you do not need to save the
+<code>JMSProducer</code> in a variable; you can create a new one each time you send
+a message. You send messages to a specific destination by using the
+<code>send</code> method. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer().send(dest, message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can create the message in a variable before sending it, as shown
+here, or you can create it within the <code>send</code> call. See <a href="#BNCES">JMS
+Messages</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jms-message-consumers">JMS Message Consumers</h3>
+<div class="paragraph">
+<p>A message consumer is an object that is created by a <code>JMSContext</code> or a
+session and used for receiving messages sent to a destination. A message
+producer created by a <code>JMSContext</code> implements the <code>JMSConsumer</code>
+interface. The simplest way to create a message consumer is to use the
+<code>JMSContext.createConsumer</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">try (JMSContext context = connectionFactory.createContext();) {
+    JMSConsumer consumer = context.createConsumer(dest);
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A message consumer allows a JMS client to register interest in a
+destination with a JMS provider. The JMS provider manages the delivery
+of messages from a destination to the registered consumers of the
+destination.</p>
+</div>
+<div class="paragraph">
+<p>When you use a <code>JMSContext</code> to create a message consumer, message
+delivery begins as soon as you have created the consumer. You can
+disable this behavior by calling <code>setAutoStart(false)</code> when you create
+the <code>JMSContext</code> and then calling the <code>start</code> method explicitly to start
+message delivery. If you want to stop message delivery temporarily
+without closing the connection, you can call the <code>stop</code> method; to
+restart message delivery, call <code>start</code>.</p>
+</div>
+<div class="paragraph">
+<p>You use the <code>receive</code> method to consume a message synchronously. You can
+use this method at any time after you create the consumer.</p>
+</div>
+<div class="paragraph">
+<p>If you specify no arguments or an argument of <code>0</code>, the method blocks
+indefinitely until a message arrives:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Message m = consumer.receive();
+Message m = consumer.receive(0);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a simple client, this may not matter. But if it is possible that a
+message might not be available, use a synchronous receive with a
+timeout: Call the <code>receive</code> method with a timeout argument greater than
+<code>0</code>. One second is a recommended timeout value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Message m = consumer.receive(1000); // time out after a second</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable asynchronous message delivery from an application client or a
+Java SE client, you use a message listener, as described in the next
+section.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>JMSContext.createDurableConsumer</code> method to create a
+durable topic subscription. This method is valid only if you are using a
+topic. For details, see <a href="#BNCGD">Creating Durable Subscriptions</a>. For
+topics, you can also create shared consumers; see
+<a href="#BABJCIGJ">Creating Shared Subscriptions</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="jms-message-listeners">JMS Message Listeners</h4>
+<div class="paragraph">
+<p>A message listener is an object that acts as an asynchronous event
+handler for messages. This object implements the <code>MessageListener</code>
+interface, which contains one method, <code>onMessage</code>. In the <code>onMessage</code>
+method, you define the actions to be taken when a message arrives.</p>
+</div>
+<div class="paragraph">
+<p>From an application client or a Java SE client, you register the message
+listener with a specific message consumer by using the
+<code>setMessageListener</code> method. For example, if you define a class named
+<code>Listener</code> that implements the <code>MessageListener</code> interface, you can
+register the message listener as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Listener myListener = new Listener();
+consumer.setMessageListener(myListener);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When message delivery begins, the JMS provider automatically calls the
+message listener&#8217;s <code>onMessage</code> method whenever a message is delivered.
+The <code>onMessage</code> method takes one argument of type <code>Message</code>, which your
+implementation of the method can cast to another message subtype as
+needed (see <a href="#BNCEW">Message Bodies</a>).</p>
+</div>
+<div class="paragraph">
+<p>In the Java EE web or EJB container, you use message-driven beans for
+asynchronous message delivery. A message-driven bean also implements the
+<code>MessageListener</code> interface and contains an <code>onMessage</code> method. For
+details, see <a href="jms-concepts005.html#BNCGQ">Using Message-Driven Beans
+to Receive Messages Asynchronously</a>.</p>
+</div>
+<div class="paragraph">
+<p>Your <code>onMessage</code> method should handle all exceptions. Throwing a
+<code>RuntimeException</code> is considered a programming error.</p>
+</div>
+<div class="paragraph">
+<p>For a simple example of the use of a message listener, see
+<a href="jms-examples003.html#BNCFH">Using a Message Listener for Asynchronous
+Message Delivery</a>. <a href="jms-examples.html#BNCGV">Chapter 47, "Java Message
+Service Examples,"</a> contains several more examples of message listeners
+and message-driven beans.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="jms-message-selectors">JMS Message Selectors</h4>
+<div class="paragraph">
+<p>If your messaging application needs to filter the messages it receives,
+you can use a JMS message selector, which allows a message consumer for
+a destination to specify the messages that interest it. Message
+selectors assign the work of filtering messages to the JMS provider
+rather than to the application. For an example of an application that
+uses a message selector, see <a href="jms-examples008.html#BNCGW">Sending
+Messages from a Session Bean to an MDB</a>.</p>
+</div>
+<div class="paragraph">
+<p>A message selector is a <code>String</code> that contains an expression. The syntax
+of the expression is based on a subset of the SQL92 conditional
+expression syntax. The message selector in the example selects any
+message that has a <code>NewsType</code> property that is set to the value
+<code>'Sports'</code> or <code>'Opinion'</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">NewsType = 'Sports' OR NewsType = 'Opinion'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>createConsumer</code> and <code>createDurableConsumer</code> methods, as well as the
+methods for creating shared consumers, allow you to specify a message
+selector as an argument when you create a message consumer.</p>
+</div>
+<div class="paragraph">
+<p>The message consumer then receives only messages whose headers and
+properties match the selector. (See <a href="#BNCET">Message Headers</a> and
+<a href="#BNCEV">Message Properties</a>.) A message selector cannot select
+messages on the basis of the content of the message body.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="consuming-messages-from-topics">Consuming Messages from Topics</h4>
+<div class="paragraph">
+<p>The semantics of consuming messages from topics are more complex than
+the semantics of consuming messages from queues.</p>
+</div>
+<div class="paragraph">
+<p>An application consumes messages from a topic by creating a subscription
+on that topic and creating a consumer on that subscription.
+Subscriptions may be durable or nondurable, and they may be shared or
+unshared.</p>
+</div>
+<div class="paragraph">
+<p>A subscription may be thought of as an entity within the JMS provider
+itself, whereas a consumer is a JMS object within the application.</p>
+</div>
+<div class="paragraph">
+<p>A subscription will receive a copy of every message that is sent to the
+topic after the subscription is created, unless a message selector is
+specified. If a message selector is specified, only those messages whose
+properties match the message selector will be added to the subscription.</p>
+</div>
+<div class="paragraph">
+<p>Unshared subscriptions are restricted to a single consumer. In this
+case, all the messages in the subscription are delivered to that
+consumer. Shared subscriptions allow multiple consumers. In this case,
+each message in the subscription is delivered to only one consumer. JMS
+does not define how messages are distributed between multiple consumers
+on the same subscription.</p>
+</div>
+<div class="paragraph">
+<p>Subscriptions may be durable or nondurable.</p>
+</div>
+<div class="paragraph">
+<p>A nondurable subscription exists only as long as there is an active
+consumer on the subscription. This means that any messages sent to the
+topic will be added to the subscription only while a consumer exists and
+is not closed.</p>
+</div>
+<div class="paragraph">
+<p>A nondurable subscription may be either unshared or shared.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An unshared nondurable subscription does not have a name and may have
+only a single consumer object associated with it. It is created
+automatically when the consumer object is created. It is not persisted
+and is deleted automatically when the consumer object is closed.</p>
+<div class="paragraph">
+<p>The <code>JMSContext.createConsumer</code> method creates a consumer on an unshared
+nondurable subscription if a topic is specified as the destination.</p>
+</div>
+</li>
+<li>
+<p>A shared nondurable subscription is identified by name and an optional
+client identifier, and may have several consumer objects consuming
+messages from it. It is created automatically when the first consumer
+object is created. It is not persisted and is deleted automatically when
+the last consumer object is closed. See <a href="#BABJCIGJ">Creating Shared
+Subscriptions</a> for more information.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>At the cost of higher overhead, a subscription may be durable. A durable
+subscription is persisted and continues to accumulate messages until
+explicitly deleted, even if there are no consumer objects consuming
+messages from it. See <a href="#BNCGD">Creating Durable Subscriptions</a> for
+details.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-durable-subscriptions">Creating Durable Subscriptions</h4>
+<div class="paragraph">
+<p>To ensure that a pub/sub application receives all sent messages, use
+durable subscriptions for the consumers on the topic.</p>
+</div>
+<div class="paragraph">
+<p>Like a nondurable subscription, a durable subscription may be either
+unshared or shared.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An unshared durable subscription is identified by name and client
+identifier (which must be set) and may have only a single consumer
+object associated with it.</p>
+</li>
+<li>
+<p>A shared durable subscription is identified by name and an optional
+client identifier, and may have several consumer objects consuming
+messages from it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A durable subscription that exists but that does not currently have a
+non-closed consumer object associated with it is described as being
+inactive.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>JMSContext.createDurableConsumer</code> method to create a
+consumer on an unshared durable subscription. An unshared durable
+subscription can have only one active consumer at a time.</p>
+</div>
+<div class="paragraph">
+<p>A consumer identifies the durable subscription from which it consumes
+messages by specifying a unique identity that is retained by the JMS
+provider. Subsequent consumer objects that have the same identity resume
+the subscription in the state in which it was left by the preceding
+consumer. If a durable subscription has no active consumer, the JMS
+provider retains the subscription&#8217;s messages until they are received by
+the subscription or until they expire.</p>
+</div>
+<div class="paragraph">
+<p>You establish the unique identity of an unshared durable subscription by
+setting the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A client ID for the connection</p>
+</li>
+<li>
+<p>A topic and a subscription name for the subscription</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can set the client ID administratively for a client-specific
+connection factory using either the command line or the Administration
+Console. (In an application client or a Java SE client, you can instead
+call <code>JMSContext.setClientID</code>.)</p>
+</div>
+<div class="paragraph">
+<p>After using this connection factory to create the <code>JMSContext</code>, you call
+the <code>createDurableConsumer</code> method with two arguments: the topic and a
+string that specifies the name of the subscription:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">String subName = "MySub";
+JMSConsumer consumer = context.createDurableConsumer(myTopic, subName);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The subscription becomes active after you create the consumer. Later,
+you might close the consumer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">consumer.close();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JMS provider stores the messages sent to the topic, as it would
+store messages sent to a queue. If the program or another application
+calls <code>createDurableConsumer</code> using the same connection factory and its
+client ID, the same topic, and the same subscription name, then the
+subscription is reactivated and the JMS provider delivers the messages
+that were sent while the subscription was inactive.</p>
+</div>
+<div class="paragraph">
+<p>To delete a durable subscription, first close the consumer, then call
+the <code>unsubscribe</code> method with the subscription name as the argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">consumer.close();
+context.unsubscribe(subName);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>unsubscribe</code> method deletes the state the provider maintains for
+the subscription.</p>
+</div>
+<div class="paragraph">
+<p><a href="#BNCGE">Figure 46-6</a> and <a href="#BNCGF">Figure 46-7</a> show the
+difference between a nondurable and a durable subscription. With an
+ordinary, nondurable subscription, the consumer and the subscription
+begin and end at the same point and are, in effect, identical. When the
+consumer is closed, the subscription also ends. Here, <code>create</code> stands
+for a call to <code>JMSContext.createConsumer</code> with a <code>Topic</code> argument, and
+<code>close</code> stands for a call to <code>JMSConsumer.close</code>. Any messages sent to
+the topic between the time of the first <code>close</code> and the time of the
+second <code>create</code> are not added to either subscription. In
+<a href="#BNCGE">Figure 46-6</a>, the consumers receive messages M1, M2, M5, and
+M6, but they do not receive messages M3 and M4.</p>
+</div>
+<div id="BNCGE" class="paragraph">
+<div class="title"><strong>Figure 46-6 Nondurable Subscriptions and Consumers</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_031.png" alt="Diagram showing messages being lost when nondurable subscriptions are used"></span></p>
+</div>
+<div class="paragraph">
+<p>With a durable subscription, the consumer can be closed and re-created,
+but the subscription continues to exist and to hold messages until the
+application calls the <code>unsubscribe</code> method. In <a href="#BNCGF">Figure 46-7</a>,
+<code>create</code> stands for a call to <code>JMSContext.createDurableConsumer</code>,
+<code>close</code> stands for a call to <code>JMSConsumer.close</code>, and <code>unsubscribe</code>
+stands for a call to <code>JMSContext.unsubscribe</code>. Messages sent after the
+first consumer is closed are received when the second consumer is
+created (on the same durable subscription), so even though messages M2,
+M4, and M5 arrive while there is no consumer, they are not lost.</p>
+</div>
+<div id="BNCGF" class="paragraph">
+<div class="title"><strong>Figure 46-7 Consumers on a Durable Subscription</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_032.png" alt="Diagram showing messages being preserved when durable subscriptions are used"></span></p>
+</div>
+<div class="paragraph">
+<p>A shared durable subscription allows you to use multiple consumers to
+receive messages from a durable subscription. If you use a shared
+durable subscription, the connection factory you use does not need to
+have a client identifier. To create a shared durable subscription, call
+the <code>JMSContext.createSharedDurableConsumer</code> method, specifying the
+topic and subscription name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">JMSConsumer consumer =
+        context.createSharedDurableConsumer(topic, "MakeItLast");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="jms-examples003.html#BNCFX">Acknowledging Messages</a>,
+<a href="jms-examples004.html#BNCGG">Using Durable Subscriptions</a>,
+<a href="jms-examples005.html#BABEJBHA">Using Shared Durable Subscriptions</a>,
+and <a href="jms-examples008.html#BNCGW">Sending Messages from a Session Bean
+to an MDB</a> for examples of Java EE applications that use durable
+subscriptions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-shared-subscriptions">Creating Shared Subscriptions</h4>
+<div class="paragraph">
+<p>A topic subscription created by the <code>createConsumer</code> or
+<code>createDurableConsumer</code> method can have only one consumer (although a
+topic can have many). Multiple clients consuming from the same topic
+have, by definition, multiple subscriptions to the topic, and all the
+clients receive all the messages sent to the topic (unless they filter
+them with message selectors).</p>
+</div>
+<div class="paragraph">
+<p>It is, however, possible to create a nondurable shared subscription to a
+topic by using the <code>createSharedConsumer</code> method and specifying not only
+a destination but a subscription name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">consumer = context.createSharedConsumer(topicName, "SubName");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With a shared subscription, messages will be distributed among multiple
+clients that use the same topic and subscription name. Each message sent
+to the topic will be added to every subscription (subject to any message
+selectors), but each message added to a subscription will be delivered
+to only one of the consumers on that subscription, so it will be
+received by only one of the clients. A shared subscription can be useful
+if you want to share the message load among several consumers on the
+subscription rather than having just one consumer on the subscription
+receive each message. This feature can improve the scalability of Java
+EE application client applications and Java SE applications.
+(Message-driven beans share the work of processing messages from a topic
+among multiple threads.)</p>
+</div>
+<div class="paragraph">
+<p>See <a href="jms-examples005.html#BABIBEAC">Using Shared Nondurable
+Subscriptions</a> for a simple example of using shared nondurable
+consumers.</p>
+</div>
+<div class="paragraph">
+<p>You can also create shared durable subscriptions by using the
+<code>JMSContext.createSharedDurableConsumer</code> method. For details, see
+<a href="#BNCGD">Creating Durable Subscriptions</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jms-messages">JMS Messages</h3>
+<div class="paragraph">
+<p>The ultimate purpose of a JMS application is to produce and consume
+messages that can then be used by other software applications. JMS
+messages have a basic format that is simple but highly flexible,
+allowing you to create messages that match formats used by non-JMS
+applications on heterogeneous platforms.</p>
+</div>
+<div class="paragraph">
+<p>A JMS message can have three parts: a header, properties, and a body.
+Only the header is required. The following sections describe these
+parts.</p>
+</div>
+<div class="paragraph">
+<p>For complete documentation of message headers, properties, and bodies,
+see the documentation of the <code>Message</code> interface in the API
+documentation. For a list of possible message types, see
+<a href="#BNCEW">Message Bodies</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNCET">Message Headers</a></p>
+</li>
+<li>
+<p><a href="#BNCEV">Message Properties</a></p>
+</li>
+<li>
+<p><a href="#BNCEW">Message Bodies</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="message-headers">Message Headers</h4>
+<div class="paragraph">
+<p>A JMS message header contains a number of predefined fields that contain
+values used by both clients and providers to identify and route
+messages. <a href="#BNCEU">Table 46-1</a> lists and describes the JMS message
+header fields and indicates how their values are set. For example, every
+message has a unique identifier, which is represented in the header
+field <code>JMSMessageID</code>. The value of another header field,
+<code>JMSDestination</code>, represents the queue or the topic to which the message
+is sent. Other fields include a timestamp and a priority level.</p>
+</div>
+<div class="paragraph">
+<p>Each header field has associated setter and getter methods, which are
+documented in the description of the <code>Message</code> interface. Some header
+fields are intended to be set by a client, but many are set
+automatically by the <code>send</code> method, which overrides any client-set
+values.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref196"></a><a id="BNCEU"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 46-1 How JMS Message Header Field Values Are Set</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 56%;">
+<colgroup>
+<col style="width: 38.6138%;">
+<col style="width: 0.99%;">
+<col style="width: 60.3962%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Set By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSDestination</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination to which the message is being sent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS
+provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSDeliveryMode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delivery mode specified when the message was sent
+(see <a href="jms-concepts004.html#BNCFY">Specifying Message Persistence</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSDeliveryTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time the message was sent plus the delivery
+delay specified when the message was sent (see
+<a href="jms-concepts004.html#BABGEADH">Specifying a Delivery Delay</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS
+provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSExpiration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expiration time of the message (see
+<a href="jms-concepts004.html#BNCGA">Allowing Messages to Expire</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS
+provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSPriority</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The priority of the message (see
+<a href="jms-concepts004.html#BNCFZ">Setting Message Priority Levels</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS
+provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSMessageID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value that uniquely identifies each message sent by a
+provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSTimestamp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time the message was handed off to a provider to be
+sent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS provider <code>send</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSCorrelationID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value that links one message to another; commonly
+the <code>JMSMessageID</code> value is used</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSReplyTo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination where replies to the message should be sent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type identifier supplied by client application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client
+application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JMSRedelivered</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the message is being redelivered</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMS
+provider prior to delivery</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="message-properties">Message Properties</h4>
+<div class="paragraph">
+<p>You can create and set properties for messages if you need values in
+addition to those provided by the header fields. You can use properties
+to provide compatibility with other messaging systems, or you can use
+them to create message selectors (see <a href="#BNCER">JMS Message
+Selectors</a>). For an example of setting a property to be used as a
+message selector, see <a href="jms-examples008.html#BNCGW">Sending Messages
+from a Session Bean to an MDB</a>.</p>
+</div>
+<div class="paragraph">
+<p>The JMS API provides some predefined property names that begin with
+<code>JMSX</code>. A JMS provider is required to implement only one of these,
+<code>JMSXDeliveryCount</code> (which specifies the number of times a message has
+been delivered); the rest are optional. The use of these predefined
+properties or of user-defined properties in applications is optional.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="message-bodies">Message Bodies</h4>
+<div class="paragraph">
+<p>The JMS API defines six different types of messages. Each message type
+corresponds to a different message body. These message types allow you
+to send and receive data in many different forms. <a href="#BNCEX">Table
+46-2</a> describes these message types.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref197"></a><a id="BNCEX"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 46-2 JMS Message Types</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 25%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Message Type</th>
+<th class="tableblock halign-left valign-top">Body Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TextMessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>java.lang.String</code> object (for example, the contents
+of an XML file).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MapMessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A set of name-value pairs, with names as <code>String</code> objects
+and values as primitive types in the Java programming language. The
+entries can be accessed sequentially by enumerator or randomly by name.
+The order of the entries is undefined.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BytesMessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A stream of uninterpreted bytes. This message type is
+for literally encoding a body to match an existing message format.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>StreamMessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A stream of primitive values in the Java programming
+language, filled and read sequentially.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ObjectMessage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>Serializable</code> object in the Java programming
+language.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nothing. Composed of header fields and properties only. This
+message type is useful when a message body is not required.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The JMS API provides methods for creating messages of each type and for
+filling in their contents. For example, to create and send a
+<code>TextMessage</code>, you might use the following statements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">TextMessage message = context.createTextMessage();
+message.setText(msg_text);     // msg_text is a String
+context.createProducer().send(message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At the consuming end, a message arrives as a generic <code>Message</code> object.
+You can then cast the object to the appropriate message type and use
+more specific methods to access the body and extract the message
+contents (and its headers and properties if needed). For example, you
+might use the stream-oriented read methods of <code>BytesMessage</code>. You must
+always cast to the appropriate message type to retrieve the body of a
+<code>StreamMessage</code>.</p>
+</div>
+<div class="paragraph">
+<p>Instead of casting the message to a message type, you can call the
+<code>getBody</code> method on the <code>Message</code>, specifying the type of the message as
+an argument. For example, you can retrieve a <code>TextMessage</code> as a
+<code>String</code>. The following code fragment uses the <code>getBody</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Message m = consumer.receive();
+if (m instanceof TextMessage) {
+    String message = m.getBody(String.class);
+    System.out.println("Reading message: " + message);
+} else {
+    // Handle error or process another message type
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JMS API provides shortcuts for creating and receiving a
+<code>TextMessage</code>, <code>BytesMessage</code>, <code>MapMessage</code>, or <code>ObjectMessage</code>. For
+example, you do not have to wrap a string in a <code>TextMessage</code>; instead,
+you can send and receive the string directly. For example, you can send
+a string as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">String message = "This is a message";
+context.createProducer().send(dest, message);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can receive the message by using the <code>receiveBody</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">String message = receiver.receiveBody(String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can use the <code>receiveBody</code> method to receive any type of message
+except <code>StreamMessage</code> and <code>Message</code>, as long as the body of the message
+can be assigned to a particular type.</p>
+</div>
+<div class="paragraph">
+<p>An empty <code>Message</code> can be useful if you want to send a message that is
+simply a signal to the application. Some of the examples in
+<a href="jms-examples.html#BNCGV">Chapter 47, "Java Message Service
+Examples,"</a> send an empty message after sending a series of text
+messages. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer().send(dest, context.createMessage());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The consumer code can then interpret a non-text message as a signal that
+all the messages sent have now been received.</p>
+</div>
+<div class="paragraph">
+<p>The examples in <a href="jms-examples.html#BNCGV">Chapter 47, "Java Message
+Service Examples,"</a> use messages of type <code>TextMessage</code>, <code>MapMessage</code>,
+and <code>Message</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jms-queue-browsers">JMS Queue Browsers</h3>
+<div class="paragraph">
+<p>Messages sent to a queue remain in the queue until the message consumer
+for that queue consumes them. The JMS API provides a <code>QueueBrowser</code>
+object that allows you to browse the messages in the queue and display
+the header values for each message. To create a <code>QueueBrowser</code> object,
+use the <code>JMSContext.createBrowser</code> method. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">QueueBrowser browser = context.createBrowser(queue);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="jms-examples003.html#BNCFL">Browsing Messages on a Queue</a> for an
+example of using a <code>QueueBrowser</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The <code>createBrowser</code> method allows you to specify a message selector as a
+second argument when you create a <code>QueueBrowser</code>. For information on
+message selectors, see <a href="#BNCER">JMS Message Selectors</a>.</p>
+</div>
+<div class="paragraph">
+<p>The JMS API provides no mechanism for browsing a topic. Messages usually
+disappear from a topic as soon as they appear: If there are no message
+consumers to consume them, the JMS provider removes them. Although
+durable subscriptions allow messages to remain on a topic while the
+message consumer is not active, JMS does not define any facility for
+examining them.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jms-exception-handling">JMS Exception Handling</h3>
+<div class="paragraph">
+<p>The root class for all checked exceptions in the JMS API is
+<code>JMSException</code>. The root cause for all unchecked exceptions in the JMS
+API is <code>JMSRuntimeException</code>.</p>
+</div>
+<div class="paragraph">
+<p>Catching <code>JMSException</code> and <code>JMSRuntimeException</code> provides a generic way
+of handling all exceptions related to the JMS API.</p>
+</div>
+<div class="paragraph">
+<p>The <code>JMSException</code> and <code>JMSRuntimeException</code> classes include the
+following subclasses, described in the API documentation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>IllegalStateException</code>, <code>IllegalStateRuntimeException</code></p>
+</li>
+<li>
+<p><code>InvalidClientIDException</code>, <code>InvalidClientIDRuntimeException</code></p>
+</li>
+<li>
+<p><code>InvalidDestinationException</code>, <code>InvalidDestinationRuntimeException</code></p>
+</li>
+<li>
+<p><code>InvalidSelectorException</code>, <code>InvalidSelectorRuntimeException</code></p>
+</li>
+<li>
+<p><code>JMSSecurityException</code>, <code>JMSSecurityRuntimeException</code></p>
+</li>
+<li>
+<p><code>MessageEOFException</code></p>
+</li>
+<li>
+<p><code>MessageFormatException</code>, <code>MessageFormatRuntimeException</code></p>
+</li>
+<li>
+<p><code>MessageNotReadableException</code></p>
+</li>
+<li>
+<p><code>MessageNotWriteableException</code>, <code>MessageNotWriteableRuntimeException</code></p>
+</li>
+<li>
+<p><code>ResourceAllocationException</code>, <code>ResourceAllocationRuntimeException</code></p>
+</li>
+<li>
+<p><code>TransactionInProgressException</code>,
+<code>TransactionInProgressRuntimeException</code></p>
+</li>
+<li>
+<p><code>TransactionRolledBackException</code>,
+<code>TransactionRolledBackRuntimeException</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All the examples in the tutorial catch and handle <code>JMSException</code> or
+<code>JMSRuntimeException</code> when it is appropriate to do so.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jms-concepts002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jms-concepts004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Creating the Enterprise Bean</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-gettingstarted001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-gettingstarted003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="creating-the-enterprise-bean">Creating the Enterprise Bean</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The enterprise bean in our example is a stateless session bean called
+<code>ConverterBean</code>. The source code for <code>ConverterBean</code> is in the
+tut-install`/examples/ejb/converter/src/main/java/` directory.</p>
+</div>
+<div class="paragraph">
+<p>Creating <code>ConverterBean</code> requires these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Coding the bean&#8217;s implementation class (the source code is provided)</p>
+</li>
+<li>
+<p>Compiling the source code</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="coding-the-enterprise-bean-class">Coding the Enterprise Bean Class</h3>
+<div class="paragraph">
+<p>The enterprise bean class for this example is called <code>ConverterBean</code>.
+This class implements two business methods: <code>dollarToYen</code> and
+<code>yenToEuro</code>. Because the enterprise bean class doesn&#8217;t implement a
+business interface, the enterprise bean exposes a local, no-interface
+view. The public methods in the enterprise bean class are available to
+clients that obtain a reference to <code>ConverterBean</code>. The source code for
+the <code>ConverterBean</code> class is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.converter.ejb;
+
+import java.math.BigDecimal;
+import javax.ejb.*;
+
+@Stateless
+public class ConverterBean {
+    private BigDecimal yenRate = new BigDecimal("83.0602");
+    private BigDecimal euroRate = new BigDecimal("0.0093016");
+
+    public BigDecimal dollarToYen(BigDecimal dollars) {
+        BigDecimal result = dollars.multiply(yenRate);
+        return result.setScale(2, BigDecimal.ROUND_UP);
+    }
+
+    public BigDecimal yenToEuro(BigDecimal yen) {
+        BigDecimal result = yen.multiply(euroRate);
+        return result.setScale(2, BigDecimal.ROUND_UP);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the <code>@Stateless</code> annotation decorating the enterprise bean class.
+This annotation lets the container know that <code>ConverterBean</code> is a
+stateless session bean.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-the-converter-web-client">Creating the converter Web Client</h3>
+<div class="paragraph">
+<p>The web client is contained in the following servlet class under the
+tut-install`/examples/ejb/converter/src/main/java/` directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">converter/web/ConverterServlet.java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A Java servlet is a web component that responds to HTTP requests.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ConverterServlet</code> class uses dependency injection to obtain a
+reference to <code>ConverterBean</code>. The <code>javax.ejb.EJB</code> annotation is added to
+the declaration of the private member variable <code>converter</code>, which is of
+type <code>ConverterBean</code>. <code>ConverterBean</code> exposes a local, no-interface
+view, so the enterprise bean implementation class is the variable type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet(urlPatterns="/")
+public class ConverterServlet extends HttpServlet {
+  @EJB
+  ConverterBean converter;
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the user enters an amount to be converted to yen and euro, the
+amount is retrieved from the request parameters; then the
+<code>ConverterBean.dollarToYen</code> and the <code>ConverterBean.yenToEuro</code> methods
+are called:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">...
+try {
+  String amount = request.getParameter("amount");
+  if (amount != null &amp;&amp; amount.length()&gt; 0) {
+    // convert the amount to a BigDecimal from the request parameter
+    BigDecimal d = new BigDecimal(amount);
+    // call the ConverterBean.dollarToYen() method to get the amount
+    // in Yen
+    BigDecimal yenAmount = converter.dollarToYen(d);
+
+    // call the ConverterBean.yenToEuro() method to get the amount
+    // in Euros
+    BigDecimal euroAmount = converter.yenToEuro(yenAmount);
+    ...
+  }
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The results are displayed to the user.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-converter-example">Running the converter Example</h3>
+<div class="paragraph">
+<p>Now you are ready to compile the enterprise bean class
+(<code>ConverterBean.java</code>) and the servlet class (<code>ConverterServlet.java</code>)
+and to package the compiled classes into a WAR file. You can use either
+NetBeans IDE or Maven to build, package, deploy, and run the <code>converter</code>
+example.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPUM">To Run the converter Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GIPVQ">To Run the converter Example Using Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-converter-example-using-netbeans-ide">To Run the converter Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>converter</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>converter</code> project and select
+Build.</p>
+</li>
+<li>
+<p>Open a web browser to the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/converter</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the Servlet ConverterServlet page, enter <code>100</code> in the field and
+click Submit.</p>
+<div class="paragraph">
+<p>A second page opens, showing the converted values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-converter-example-using-maven">To Run the converter Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/ejb/converter/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command compiles the source files for the enterprise bean and the
+servlet, packages the project into a WAR module (<code>converter.war</code>), and
+deploys the WAR to the server. For more information about Maven, see
+<a href="usingexamples005.html#BNAAN">Building the Examples</a>.</p>
+</div>
+</li>
+<li>
+<p>Open a web browser to the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/converter</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the Servlet ConverterServlet page, enter <code>100</code> in the field and
+click Submit.</p>
+<div class="paragraph">
+<p>A second page opens, showing the converted values.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-gettingstarted001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-gettingstarted003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

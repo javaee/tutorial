@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>The customer Example Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxrs-advanced007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partentbeans.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="the-customer-example-application">The customer Example Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes how to build and run the <code>customer</code> example
+application. This application is a RESTful web service that uses JAXB to
+perform the create, read, update, delete (CRUD) operations for a
+specific entity.</p>
+</div>
+<div class="paragraph">
+<p>The <code>customer</code> sample application is in the
+tut-install`/examples/jaxrs/customer/` directory. See
+<a href="usingexamples.html#GFIUD">Chapter 2, "Using the Tutorial Examples,"</a>
+for basic information on building and running sample applications.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKOFO">Overview of the customer Example Application</a></p>
+</li>
+<li>
+<p><a href="#CIHJFEJI">The Customer and Address Entity Classes</a></p>
+</li>
+<li>
+<p><a href="#GKLGT">The CustomerService Class</a></p>
+</li>
+<li>
+<p><a href="#GKQJQ">Using the JAX-RS Client in the CustomerBean Classes</a></p>
+</li>
+<li>
+<p><a href="#GKQKV">Running the customer Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-customer-example-application">Overview of the customer Example Application</h3>
+<div class="paragraph">
+<p>The source files of this application are at
+tut-install`/examples/jaxrs/customer/src/main/java/`. The application
+has three parts.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>Customer</code> and <code>Address</code> entity classes. These classes model the
+data of the application and contain JAXB annotations.</p>
+</li>
+<li>
+<p>The <code>CustomerService</code> resource class. This class contains JAX-RS
+resource methods that perform operations on <code>Customer</code> instances
+represented as XML or JSON data using JAXB. See <a href="#GKLGT">The
+CustomerService Class</a> for details.</p>
+</li>
+<li>
+<p>The <code>CustomerBean</code> session bean that acts as a backing bean for the
+web client. <code>CustomerBean</code> uses the JAX-RS client API to call the
+methods of <code>CustomerService</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>customer</code> example application shows you how to model your data
+entities as Java classes with JAXB annotations.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-customer-and-address-entity-classes">The Customer and Address Entity Classes</h3>
+<div class="paragraph">
+<p>The following class represents a customer&#8217;s address:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+@Table(name="CUSTOMER_ADDRESS")
+@XmlRootElement(name="address")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @XmlElement(required=true)
+    protected int number;
+
+    @XmlElement(required=true)
+    protected String street;
+
+    @XmlElement(required=true)
+    protected String city;
+
+    @XmlElement(required=true)
+    protected String province;
+
+    @XmlElement(required=true)
+    protected String zip;
+
+    @XmlElement(required=true)
+    protected String country;
+
+    public Address() { }
+
+    // Getter and setter methods
+    // ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@XmlRootElement(name="address")</code> annotation maps this class to the
+<code>address</code> XML element. The <code>@XmlAccessorType(XmlAccessType.FIELD)</code>
+annotation specifies that all the fields of this class are bound to XML
+by default. The <code>@XmlElement(required=true)</code> annotation specifies that
+an element must be present in the XML representation.</p>
+</div>
+<div class="paragraph">
+<p>The following class represents a customer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Entity
+@Table(name="CUSTOMER_CUSTOMER")
+@NamedQuery(
+    name="findAllCustomers",
+    query="SELECT c FROM Customer c " +
+          "ORDER BY c.id"
+)
+@XmlRootElement(name="customer")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlAttribute(required=true)
+    protected int id;
+
+    @XmlElement(required=true)
+    protected String firstname;
+
+    @XmlElement(required=true)
+    protected String lastname;
+
+    @XmlElement(required=true)
+    @OneToOne
+    protected Address address;
+
+    @XmlElement(required=true)
+    protected String email;
+
+    @XmlElement (required=true)
+    protected String phone;
+
+    public Customer() {...}
+
+    // Getter and setter methods
+    // ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Customer</code> class contains the same JAXB annotations as the previous
+class, except for the <code>@XmlAttribute(required=true)</code> annotation, which
+maps a property to an attribute of the XML element representing the
+class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Customer</code> class contains a property whose type is another entity,
+the <code>Address</code> class. This mechanism allows you to define in Java code
+the hierarchical relationships between entities without having to write
+an <code>.xsd</code> file yourself.</p>
+</div>
+<div class="paragraph">
+<p>JAXB generates the following XML schema definition for the two preceding
+classes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+
+  &lt;xs:element name="address" type="address"/&gt;
+  &lt;xs:element name="customer" type="customer"/&gt;
+
+  &lt;xs:complexType name="address"&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element name="id" type="xs:long" minOccurs="0"/&gt;
+      &lt;xs:element name="number" type="xs:int"/&gt;
+      &lt;xs:element name="street" type="xs:string"/&gt;
+      &lt;xs:element name="city" type="xs:string"/&gt;
+      &lt;xs:element name="province" type="xs:string"/&gt;
+      &lt;xs:element name="zip" type="xs:string"/&gt;
+      &lt;xs:element name="country" type="xs:string"/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name="customer"&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element name="firstname" type="xs:string"/&gt;
+      &lt;xs:element name="lastname" type="xs:string"/&gt;
+      &lt;xs:element ref="address"/&gt;
+      &lt;xs:element name="email" type="xs:string"/&gt;
+      &lt;xs:element name="phone" type="xs:string"/&gt;
+    &lt;/xs:sequence&gt;
+    &lt;xs:attribute name="id" type="xs:int" use="required"/&gt;
+  &lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-customerservice-class">The CustomerService Class</h3>
+<div class="paragraph">
+<p>The <code>CustomerService</code> class has a <code>createCustomer</code> method that creates a
+customer resource based on the <code>Customer</code> class and returns a URI for
+the new resource.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Stateless
+@Path("/Customer")
+public class CustomerService {
+    public static final Logger logger =
+            Logger.getLogger(CustomerService.class.getCanonicalName());
+    @PersistenceContext
+    private EntityManager em;
+    private CriteriaBuilder cb;
+
+    @PostConstruct
+    private void init() {
+        cb = em.getCriteriaBuilder();
+    }
+    ...
+    @POST
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response createCustomer(Customer customer) {
+
+        try {
+            long customerId = persist(customer);
+            return Response.created(URI.create("/" + customerId)).build();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE,
+                    "Error creating customer for customerId {0}. {1}",
+                    new Object[]{customer.getId(), e.getMessage()});
+            throw new WebApplicationException(e,
+                    Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    ...
+    private long persist(Customer customer) {
+        try {
+            Address address = customer.getAddress();
+            em.persist(address);
+            em.persist(customer);
+        } catch (Exception ex) {
+            logger.warning("Something went wrong when persisting the customer");
+        }
+        return customer.getId();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The response returned to the client has a URI to the newly created
+resource. The return type is an entity body mapped from the property of
+the response with the status code specified by the status property of
+the response. The <code>WebApplicationException</code> is a <code>RuntimeException</code> that
+is used to wrap the appropriate HTTP error status code, such as 404,
+406, 415, or 500.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})</code>
+and <code>@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})</code>
+annotations set the request and response media types to use the
+appropriate MIME client. These annotations can be applied to a resource
+method, a resource class, or even an entity provider. If you do not use
+these annotations, JAX-RS allows the use of any media type (<code>"*/*"</code>).</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows the implementation of the <code>getCustomer</code>
+and <code>findbyId</code> methods. The <code>getCustomer</code> method uses the <code>@Produces</code>
+annotation and returns a <code>Customer</code> object, which is converted to an XML
+or JSON representation depending on the <code>Accept:</code> header specified by
+the client.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Customer getCustomer(@PathParam("id") String customerId) {
+        Customer customer = null;
+
+        try {
+            customer = findById(customerId);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE,
+                    "Error calling findCustomer() for customerId {0}. {1}",
+                    new Object[]{customerId, ex.getMessage()});
+        }
+        return customer;
+    }
+    ...
+    private Customer findById(String customerId) {
+        Customer customer = null;
+        try {
+            customer = em.find(Customer.class, customerId);
+            return customer;
+        } catch (Exception ex) {
+            logger.log(Level.WARNING,
+                    "Couldn't find customer with ID of {0}", customerId);
+        }
+        return customer;
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-the-jax-rs-client-in-the-customerbean-classes">Using the JAX-RS Client in the CustomerBean Classes</h3>
+<div class="paragraph">
+<p>Use the JAX-RS Client API to write a client for the <code>customer</code> example
+application.</p>
+</div>
+<div class="paragraph">
+<p>The <code>CustomerBean</code> enterprise bean class calls the JAX-RS Client API to
+test the <code>CustomerService</code> web service:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Named
+@Stateless
+public class CustomerBean {
+    protected Client client;
+    private static final Logger logger =
+            Logger.getLogger(CustomerBean.class.getName());
+
+    @PostConstruct
+    private void init() {
+        client = ClientBuilder.newClient();
+    }
+
+    @PreDestroy
+    private void clean() {
+        client.close();
+    }
+
+    public String createCustomer(Customer customer) {
+        if (customer == null) {
+            logger.log(Level.WARNING, "customer is null.");
+            return "customerError";
+        }
+        String navigation;
+        Response response =
+                client.target("http://localhost:8080/customer/webapi/Customer")
+                .request(MediaType.APPLICATION_XML)
+                .post(Entity.entity(customer, MediaType.APPLICATION_XML),
+                        Response.class);
+        if (response.getStatus() == Status.CREATED.getStatusCode()) {
+            navigation = "customerCreated";
+        } else {
+            logger.log(Level.WARNING, "couldn''t create customer with " +
+                    "id {0}. Status returned was {1}",
+                    new Object[]{customer.getId(), response.getStatus()});
+            navigation = "customerError";
+        }
+        return navigation;
+    }
+
+    public String retrieveCustomer(String id) {
+        String navigation;
+        Customer customer =
+                client.target("http://localhost:8080/customer/webapi/Customer")
+                .path(id)
+                .request(MediaType.APPLICATION_XML)
+                .get(Customer.class);
+        if (customer == null) {
+            navigation = "customerError";
+        } else {
+            navigation = "customerRetrieved";
+        }
+        return navigation;
+    }
+
+    public List&lt;Customer&gt; retrieveAllCustomers() {
+        List&lt;Customer&gt; customers =
+                client.target("http://localhost:8080/customer/webapi/Customer")
+                .path("all")
+                .request(MediaType.APPLICATION_XML)
+                .get(new GenericType&lt;List&lt;Customer&gt;&gt;() {});
+        return customers;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This client uses the <code>POST</code> and <code>GET</code> methods.</p>
+</div>
+<div class="paragraph">
+<p>All of these HTTP status codes indicate success: 201 for <code>POST</code>, 200 for
+<code>GET</code>, and 204 for <code>DELETE</code>. For details about the meanings of HTTP
+status codes, see
+<code>http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-customer-example">Running the customer Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and
+run the <code>customer</code> application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GKQLY">To Build, Package, and Deploy the customer Example Using
+NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#GKQJV">To Build, Package, and Deploy the customer Example Using
+Maven</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-customer-example-using-netbeans-ide">To Build, Package, and Deploy the customer Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jaxrs</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>customer</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>customer</code> project and select
+Build.</p>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>customer.war</code>, located in the <code>target</code> directory. Then, the WAR file is
+deployed to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Open the web client in a browser at the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/customer/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web client allows you to create and view customers.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-customer-example-using-maven">To Build, Package, and Deploy the customer Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure that GlassFish Server has been started (see
+<a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish
+Server</a>).</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/jaxrs/customer/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>customer.war</code>, located in the <code>target</code> directory. Then, the WAR file is
+deployed to GlassFish Server.</p>
+</div>
+</li>
+<li>
+<p>Open the web client in a browser at the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/customer/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web client allows you to create and view customers.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxrs-advanced007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="partentbeans.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

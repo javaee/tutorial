@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Metadata Annotations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="resources001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resources003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="metadata-annotations">Metadata Annotations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java EE Connector Architecture provides a set of annotations to minimize
+the need for deployment descriptors.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>@Connector</code> annotation can be used by the resource adapter
+developer to specify that the JavaBeans component is a resource adapter
+JavaBeans component. This annotation is used for providing metadata
+about the capabilities of the resource adapter. Optionally, you can
+provide a JavaBeans component implementing the <code>ResourceAdapter</code>
+interface, as in the following example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Connector(
+    displayName = "TrafficResourceAdapter",
+    vendorName = "Java EE Tutorial",
+    version = "7.0"
+)
+public class TrafficResourceAdapter implements ResourceAdapter,
+                                               Serializable {
+    ...
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <code>@ConnectionDefinition</code> annotation defines a set of connection
+interfaces and classes pertaining to a particular connection type, as in
+the following example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ConnectionDefinition(
+    connectionFactory = ConnectionFactory.class,
+    connectionFactoryImpl = TradeConnectionFactory.class,
+    connection = Connection.class,
+    connectionImpl = TradeConnection.class
+)
+public class TradeManagedConnectionFactory ... {
+    ...
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <code>@AdministeredObject</code> annotation designates a JavaBeans component
+as an administered object.</p>
+</li>
+<li>
+<p>The <code>@Activation</code> annotation contains configuration information
+pertaining to inbound connectivity from an EIS instance, as in the
+following example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Activation(
+        messageListeners = { TrafficListener.class }
+)
+public class TrafficActivationSpec implements ActivationSpec,
+                                              Serializable {
+    ...
+    @ConfigProperty()
+    /* port to listen to requests from the EIS */
+    private String port;
+    ...
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <code>@ConfigProperty</code> annotation can be used on JavaBeans components
+to provide additional configuration information that may be used by the
+deployer and resource adapter provider. The preceding example code shows
+several <code>@ConfigProperty</code> annotations.</p>
+</li>
+<li>
+<p>The <code>@ConnectionFactoryDefinition</code> annotation is a resource definition
+annotation that is used to define a connector connection factory and
+register it in JNDI under the name specified in the mandatory <code>name</code>
+annotation element. The mandatory <code>interfaceName</code> annotation element
+specifies the fully qualified name of the connection factory interface
+class. The <code>transactionSupport</code> annotation element specifies the level
+of transaction support the connection factory needs to support. The
+<code>minPoolSize</code> and <code>maxPoolSize</code> annotation elements specify the minimum
+or maximum number of connections that should be allocated for a
+connection pool that backs this connection factory resource. Additional
+properties associated with the connection factory being defined can be
+specified through the <code>properties</code> element.</p>
+<div class="paragraph">
+<p>Since repeated annotations are not allowed, the
+<code>@ConnectionFactoryDefinitions</code> annotation acts as a container for
+multiple connector connection factory definitions. The <code>value</code>
+annotation element contains the multiple connector connection factory
+definitions.</p>
+</div>
+</li>
+<li>
+<p>The <code>@AdministeredObjectDefinition</code> annotation is a resource
+definition annotation that is used to define an administered object and
+register it in JNDI under the name specified in the mandatory <code>name</code>
+annotation element. The mandatory fully qualified name of the
+administered object&#8217;s class must be indicated by the <code>className</code>
+element. Additional properties that must be configured in the
+administered object can be specified through the <code>properties</code> element.</p>
+<div class="paragraph">
+<p>Since repeated annotations are not allowed, the
+<code>@AdministeredObjectDefinitions</code> annotation acts as a container for
+multiple administered object definitions. The <code>value</code> annotation element
+contains the multiple administered object definitions.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The specification allows a resource adapter to be developed in
+mixed-mode form, that is the ability for a resource adapter developer to
+use both metadata annotations and deployment descriptors in
+applications. An application assembler or deployer may use the
+deployment descriptor to override the metadata annotations specified by
+the resource adapter developer.</p>
+</div>
+<div class="paragraph">
+<p>The deployment descriptor for a resource adapter, if present, is named
+<code>ra.xml</code>. The <code>metadata-complete</code> attribute defines whether the
+deployment descriptor for the resource adapter module is complete or
+whether the class files available to the module and packaged with the
+resource adapter need to be examined for annotations that specify
+deployment information.</p>
+</div>
+<div class="paragraph">
+<p>For the complete list of annotations and JavaBeans components provided
+in the Java EE 7 platform, see the Java EE Connector Architecture 1.7
+specification.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="resources001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="resources003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

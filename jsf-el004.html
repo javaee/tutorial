@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Operations on Collection Objects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-el003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="operations-on-collection-objects">Operations on Collection Objects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The EL supports operations on collection objects: sets, lists, and maps.
+It allows the dynamic creation of collection objects, which can then be
+operated on using streams and pipelines.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>Like lambda expressions, operations on collection objects are part of
+Java SE 8, but you can use them in EL expressions with Java SE 7, the
+Java version associated with the Java EE 7 platform.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For example, you can construct a set as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">{1,2,3}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can construct a list as follows; a list can contain various types of
+items:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">[1,2,3]
+[1, "two", [three,four]]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can construct a map by using a colon to define the entries, as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">{"one":1, "two":2, "three":3}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You operate on collection objects using method calls to the stream of
+elements derived from the collection. Some operations return another
+stream, which allows additional operations. Therefore, you can chain
+these operations together in a pipeline.</p>
+</div>
+<div class="paragraph">
+<p>A stream pipeline consists of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A source (the <code>Stream</code> object)</p>
+</li>
+<li>
+<p>Any number of intermediate operations that return a stream (for
+example, <code>filter</code> and <code>map</code>)</p>
+</li>
+<li>
+<p>A terminal operation that does not return a stream (for example,
+<code>toList()</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>stream</code> method obtains a <code>Stream</code> from a <code>java.util.Collection</code> or
+a Java array. The stream operations do not modify the original
+collection object.</p>
+</div>
+<div class="paragraph">
+<p>For example, you might generate a list of titles of history books as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">books.stream().filter(b-&gt;b.category == 'history')
+              .map(b-&gt;b.title)
+              .toList()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following simpler example returns a sorted version of the original
+list:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">[1,3,5,2].stream().sorted().toList()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Streams and stream operations are documented in the Java SE 8 API
+documentation, available at <code>http://docs.oracle.com/javase/8/docs/api/</code>.
+The following subset of operations is supported by the EL:</p>
+</div>
+<div class="paragraph">
+<p><code>allMatch</code><br>
+<code>anyMatch</code><br>
+<code>average</code><br>
+<code>count</code><br>
+<code>distinct</code><br>
+<code>filter</code><br>
+<code>findFirst</code><br>
+<code>flatMap</code><br>
+<code>forEach</code><br>
+<code>iterator</code><br>
+<code>limit</code><br>
+<code>map</code><br>
+<code>max</code><br>
+<code>min</code><br>
+<code>noneMatch</code><br>
+<code>peek</code><br>
+<code>reduce</code><br>
+<code>sorted</code><br>
+<code>substream</code><br>
+<code>sum</code><br>
+<code>toArray</code><br>
+<code>toList</code><br></p>
+</div>
+<div class="paragraph">
+<p>See the EL specification at <code>http://www.jcp.org/en/jsr/detail?id=341</code>
+for details on these operations.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-el003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-el005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

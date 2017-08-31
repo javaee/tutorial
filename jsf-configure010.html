@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Configuring Navigation Rules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-configure009.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure011.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="configuring-navigation-rules">Configuring Navigation Rules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Navigation between different pages of a JavaServer Faces application,
+such as choosing the next page to be displayed after a button or link
+component is clicked, is defined by a set of rules. Navigation rules can
+be implicit, or they can be explicitly defined in the application
+configuration resource file. For more information on implicit navigation
+rules, see <a href="jsf-intro006.html#BNAQL">Navigation Model</a>.</p>
+</div>
+<div class="paragraph">
+<p>Each navigation rule specifies how to navigate from one page to another
+page or set of pages. The JavaServer Faces implementation chooses the
+proper navigation rule according to which page is currently displayed.</p>
+</div>
+<div class="paragraph">
+<p>After the proper navigation rule is selected, the choice of which page
+to access next from the current page depends on two factors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The action method invoked when the component was clicked</p>
+</li>
+<li>
+<p>The logical outcome referenced by the component&#8217;s tag or returned from
+the action method</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The outcome can be anything the developer chooses, but <a href="#BNAXG">Table
+16-3</a> lists some outcomes commonly used in web applications.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref96"></a><a id="BNAXG"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 16-3 Common Outcome Strings</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 17%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Outcome</th>
+<th class="tableblock halign-left valign-top">What It Means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>success</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Everything worked. Go on to the next page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>failure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Something is wrong. Go on to an error page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>login</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user needs to log in first. Go on to the login page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>no results</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The search did not find anything. Go to the search page
+again.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Usually, the action method performs some processing on the form data of
+the current page. For example, the method might check whether the user
+name and password entered in the form match the user name and password
+on file. If they match, the method returns the outcome <code>success</code>.
+Otherwise, it returns the outcome <code>failure</code>. As this example
+demonstrates, both the method used to process the action and the outcome
+returned are necessary to determine the correct page to access.</p>
+</div>
+<div class="paragraph">
+<p>Here is a navigation rule that could be used with the example just
+described:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;navigation-rule&gt;
+    &lt;from-view-id&gt;/login.xhtml&lt;/from-view-id&gt;
+    &lt;navigation-case&gt;
+        &lt;from-action&gt;#{LoginForm.login}&lt;/from-action&gt;
+        &lt;from-outcome&gt;success&lt;/from-outcome&gt;
+        &lt;to-view-id&gt;/storefront.xhtml&lt;/to-view-id&gt;
+    &lt;/navigation-case&gt;
+    &lt;navigation-case&gt;
+        &lt;from-action&gt;#{LoginForm.logon}&lt;/from-action&gt;
+        &lt;from-outcome&gt;failure&lt;/from-outcome&gt;
+        &lt;to-view-id&gt;/logon.xhtml&lt;/to-view-id&gt;
+    &lt;/navigation-case&gt;
+&lt;/navigation-rule&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This navigation rule defines the possible ways to navigate from
+<code>login.xhtml</code>. Each <code>navigation-case</code> element defines one possible
+navigation path from <code>login.xhtml</code>. The first <code>navigation-case</code> says
+that if <code>LoginForm.login</code> returns an outcome of <code>success</code>, then
+<code>storefront.xhtml</code> will be accessed. The second <code>navigation-case</code> says
+that <code>login.xhtml</code> will be re-rendered if <code>LoginForm.login</code> returns
+<code>failure</code>.</p>
+</div>
+<div class="paragraph">
+<p>The configuration of an application&#8217;s page flow consists of a set of
+navigation rules. Each rule is defined by the <code>navigation-rule</code> element
+in the <code>faces-config.xml</code> file.</p>
+</div>
+<div class="paragraph">
+<p>Each <code>navigation-rule</code> element corresponds to one component tree
+identifier defined by the optional <code>from-view-id</code> element. This means
+that each rule defines all the possible ways to navigate from one
+particular page in the application. If there is no <code>from-view-id</code>
+element, the navigation rules defined in the <code>navigation-rule</code> element
+apply to all the pages in the application. The <code>from-view-id</code> element
+also allows wildcard matching patterns. For example, this <code>from-view-id</code>
+element says that the navigation rule applies to all the pages in the
+<code>books</code> directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;from-view-id&gt;/books/*&lt;/from-view-id&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>navigation-rule</code> element can contain zero or more <code>navigation-case</code>
+elements. The <code>navigation-case</code> element defines a set of matching
+criteria. When these criteria are satisfied, the application will
+navigate to the page defined by the <code>to-view-id</code> element contained in
+the same <code>navigation-case</code> element.</p>
+</div>
+<div class="paragraph">
+<p>The navigation criteria are defined by optional <code>from-outcome</code> and
+<code>from-action</code> elements. The <code>from-outcome</code> element defines a logical
+outcome, such as <code>success</code>. The <code>from-action</code> element uses a method
+expression to refer to an action method that returns a <code>String</code>, which
+is the logical outcome. The method performs some logic to determine the
+outcome and returns the outcome.</p>
+</div>
+<div class="paragraph">
+<p>The <code>navigation-case</code> elements are checked against the outcome and the
+method expression in the following order.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Cases specifying both a <code>from-outcome</code> value and a <code>from-action</code>
+value. Both of these elements can be used if the action method returns
+different outcomes depending on the result of the processing it
+performs.</p>
+</li>
+<li>
+<p>Cases specifying only a <code>from-outcome</code> value. The <code>from-outcome</code>
+element must match either the outcome defined by the <code>action</code> attribute
+of the <code>javax.faces.component.UICommand</code> component or the outcome
+returned by the method referred to by the <code>UICommand</code> component.</p>
+</li>
+<li>
+<p>Cases specifying only a <code>from-action</code> value. This value must match
+the <code>action</code> expression specified by the component tag.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When any of these cases is matched, the component tree defined by the
+<code>to-view-id</code> element will be selected for rendering.</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-configure009.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-configure011.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

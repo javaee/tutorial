@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Handling Errors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsf-ajax005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="handling-errors">Handling Errors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JavaServer Faces handles Ajax errors through use of the <code>onerror</code>
+attribute of the <code>f:ajax</code> tag. The value of this attribute is the name
+of a JavaScript function.</p>
+</div>
+<div class="paragraph">
+<p>When there is an error in processing a Ajax request, JavaServer Faces
+calls the defined <code>onerror</code> JavaScript function and passes a data object
+to it. The data object contains all the properties available for the
+<code>onevent</code> attribute and, in addition, the following properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>description</code></p>
+</li>
+<li>
+<p><code>errorName</code></p>
+</li>
+<li>
+<p><code>errorMessage</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>type</code> is <code>error</code>. The <code>status</code> property of the data object contains
+one of the valid error values listed in <a href="#GKGOU">Table 13-4</a>.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref72"></a><a id="GKGOU"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 13-4 Valid Error Values for the Data Object status Property</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 20%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Values</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>emptyResponse</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No Ajax response from server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>httpError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of the valid HTTP errors: <code>request.status==null</code> or
+<code>request.status==undefined</code> or <code>request.status&lt;200</code> or
+<code>request.status&gt;=300</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>malformedXML</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Ajax response is not well formed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serverError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Ajax response contains an <code>error</code> element.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In the following example, any errors that occurred in processing the
+Ajax request are handled by the <code>handlemyajaxerror</code> JavaScript function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;f:ajax event="click" render="errormessage" onerror="handlemyajaxerror"/&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsf-ajax005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsf-ajax007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

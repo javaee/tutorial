@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>What Is an Enterprise Bean?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-intro.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="what-is-an-enterprise-bean">What Is an Enterprise Bean?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Written in the Java programming language, an enterprise bean is a
+server-side component that encapsulates the business logic of an
+application. The business logic is the code that fulfills the purpose of
+the application. In an inventory control application, for example, the
+enterprise beans might implement the business logic in methods called
+<code>checkInventoryLevel</code> and <code>orderProduct</code>. By invoking these methods,
+clients can access the inventory services provided by the application.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GIPLK">Benefits of Enterprise Beans</a></p>
+</li>
+<li>
+<p><a href="#GIPKN">When to Use Enterprise Beans</a></p>
+</li>
+<li>
+<p><a href="#GIPNM">Types of Enterprise Beans</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="benefits-of-enterprise-beans">Benefits of Enterprise Beans</h3>
+<div class="paragraph">
+<p>For several reasons, enterprise beans simplify the development of large,
+distributed applications. First, because the EJB container provides
+system-level services to enterprise beans, the bean developer can
+concentrate on solving business problems. The EJB container, rather than
+the bean developer, is responsible for system-level services, such as
+transaction management and security authorization.</p>
+</div>
+<div class="paragraph">
+<p>Second, because the beans rather than the clients contain the
+application&#8217;s business logic, the client developer can focus on the
+presentation of the client. The client developer does not have to code
+the routines that implement business rules or access databases. As a
+result, the clients are thinner, a benefit that is particularly
+important for clients that run on small devices.</p>
+</div>
+<div class="paragraph">
+<p>Third, because enterprise beans are portable components, the application
+assembler can build new applications from existing beans. Provided that
+they use the standard APIs, these applications can run on any compliant
+Java EE server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="when-to-use-enterprise-beans">When to Use Enterprise Beans</h3>
+<div class="paragraph">
+<p>You should consider using enterprise beans if your application has any
+of the following requirements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The application must be scalable. To accommodate a growing number of
+users, you may need to distribute an application&#8217;s components across
+multiple machines. Not only can the enterprise beans of an application
+run on different machines, but also their location will remain
+transparent to the clients.</p>
+</li>
+<li>
+<p>Transactions must ensure data integrity. Enterprise beans support
+transactions, the mechanisms that manage the concurrent access of shared
+objects.</p>
+</li>
+<li>
+<p>The application will have a variety of clients. With only a few lines
+of code, remote clients can easily locate enterprise beans. These
+clients can be thin, various, and numerous.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="types-of-enterprise-beans">Types of Enterprise Beans</h3>
+<div class="paragraph">
+<p><a href="#GIPLZ">Table 33-1</a> summarizes the two types of enterprise beans.
+The following sections discuss each type in more detail.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref150"></a><a id="GIPLZ"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 33-1 Enterprise Bean Types</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 30%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Enterprise Bean Type</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performs a task for a client; optionally, may implement a web
+service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message-driven</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acts as a listener for a particular messaging type,
+such as the Java Message Service API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-intro.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

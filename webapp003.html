@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>A Web Module That Uses JavaServer Faces Technology: The hello1 Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="webapp002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webapp004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="paragraph">
+<p>+ A Web Module That Uses JavaServer Faces Technology: The hello1 Example</p>
+</div>
+<div class="sect1">
+<h2 id="a-web-module-that-uses-javaserver-faces-technology-the-hello1-example">A Web Module That Uses JavaServer Faces Technology: The hello1 Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>hello1</code> application is a web module that uses JavaServer Faces
+technology to display a greeting and response. You can use a text editor
+to view the application files, or you can use NetBeans IDE.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this application is in the
+<code><em>tut-install</em>/examples/web/jsf/hello1/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#GJWTV">To View the hello1 Web Module Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#BNADZ">Packaging and Deploying the hello1 Web Module</a></p>
+</li>
+<li>
+<p><a href="#BNAEI">Viewing Deployed Web Modules</a></p>
+</li>
+<li>
+<p><a href="#BCEBEGED">Running the Deployed hello1 Web Module</a></p>
+</li>
+<li>
+<p><a href="#BNAEN">Undeploying the hello1 Web Module</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="to-view-the-hello1-web-module-using-netbeans-ide">To View the hello1 Web Module Using NetBeans IDE</h3>
+<div class="paragraph">
+<p>To view the <code>hello1</code> web module using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello1</code> folder and click Open Project.</p>
+</li>
+<li>
+<p>Expand the Web Pages node and double-click the <code>index.xhtml</code> file to
+view it in the editor.</p>
+<div class="paragraph">
+<p>The <code>index.xhtml</code> file is the default landing page for a Facelets
+application. In a typical Facelets application, web pages are created in
+XHTML. For this application, the page uses simple tag markup to display
+a form with a graphic image, a header, a field, and two command buttons:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+    &lt;h:head&gt;
+        &lt;title&gt;Facelets Hello Greeting&lt;/title&gt;
+    &lt;/h:head&gt;
+    &lt;h:body&gt;
+        &lt;h:form&gt;
+            &lt;h:graphicImage url="#{resource['images:duke.waving.gif']}"
+                            alt="Duke waving his hand"/&gt;
+            &lt;h2&gt;Hello, my name is Duke. What's yours?&lt;/h2&gt;
+            &lt;h:inputText id="username"
+                         title="My name is: "
+                         value="#{hello.name}"
+                         required="true"
+                         requiredMessage="Error: A name is required."
+                         maxlength="25" /&gt;
+            &lt;p&gt;&lt;/p&gt;
+            &lt;h:commandButton id="submit" value="Submit" action="response"&gt;
+            &lt;/h:commandButton&gt;
+            &lt;h:commandButton id="reset" value="Reset" type="reset"&gt;
+            &lt;/h:commandButton&gt;
+        &lt;/h:form&gt;
+        ...
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most complex element on the page is the <code>inputText</code> field. The
+<code>maxlength</code> attribute specifies the maximum length of the field. The
+<code>required</code> attribute specifies that the field must be filled out; the
+<code>requiredMessage</code> attribute provides the error message to be displayed
+if the field is left empty. The <code>title</code> attribute provides the text to
+be used by screen readers for the visually disabled. Finally, the
+<code>value</code> attribute contains an expression that will be provided by the
+<code>Hello</code> managed bean.</p>
+</div>
+<div class="paragraph">
+<p>The web page connects to the <code>Hello</code> managed bean through the Expression
+Language (EL) value expression <code>#{hello.name}</code>, which retrieves the
+value of the <code>name</code> property from the managed bean. Note the use of
+<code>hello</code> to reference the managed bean <code>Hello</code>. If no name is specified
+in the <code>@Named</code> annotation of the managed bean, the managed bean is
+always accessed with the first letter of the class name in lowercase.</p>
+</div>
+<div class="paragraph">
+<p>The Submit <code>commandButton</code> element specifies the action as <code>response</code>,
+meaning that when the button is clicked, the <code>response.xhtml</code> page is
+displayed.</p>
+</div>
+</li>
+<li>
+<p>Double-click the <code>response.xhtml</code> file to view it.</p>
+<div class="paragraph">
+<p>The response page appears. Even simpler than the greeting page, the
+response page contains a graphic image, a header that displays the
+expression provided by the managed bean, and a single button whose
+<code>action</code> element transfers you back to the <code>index.xhtml</code> page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+    &lt;h:head&gt;
+        &lt;title&gt;Facelets Hello Response&lt;/title&gt;
+    &lt;/h:head&gt;
+    &lt;h:body&gt;
+        &lt;h:form&gt;
+            &lt;h:graphicImage url="#{resource['images:duke.waving.gif']}"
+                            alt="Duke waving his hand"/&gt;
+            &lt;h2&gt;Hello, #{hello.name}!&lt;/h2&gt;
+            &lt;p&gt;&lt;/p&gt;
+            &lt;h:commandButton id="back" value="Back" action="index" /&gt;
+        &lt;/h:form&gt;
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Expand the Source Packages node, then the <code>javaeetutorial.hello1</code>
+node.</p>
+</li>
+<li>
+<p><a id="CHDCABHC"></a></p>
+<div class="paragraph">
+<p>Double-click the <code>Hello.java</code> file to view it.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Hello</code> class, called a managed bean class, provides getter and
+setter methods for the <code>name</code> property used in the Facelets page
+expressions. By default, the expression language refers to the class
+name, with the first letter in lowercase (<code>hello.name</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">package javaeetutorial.hello1;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+
+@Named
+@RequestScoped
+public class Hello {
+
+    private String name;
+
+    public Hello() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String user_name) {
+        this.name = user_name;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use the default name for the bean class, you can specify <code>@Model</code>
+as the annotation instead of having to specify both <code>@Named</code> and
+<code>@RequestScoped</code>. The <code>@Model</code> annotation is called a stereotype, a term
+for an annotation that encapsulates other annotations. It is described
+later in <a href="cdi-adv008.html#GKHQC">Using Stereotypes in CDI
+Applications</a>. Some examples will use <code>@Model</code> where it is appropriate.</p>
+</div>
+</li>
+<li>
+<p>Under the Web Pages node, expand the WEB-INF node and double-click
+the <code>web.xml</code> file to view it.</p>
+<div class="paragraph">
+<p>The <code>web.xml</code> file contains several elements that are required for a
+Facelets application. All of the following are created automatically
+when you use NetBeans IDE to create an application.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A context parameter specifying the project stage:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;context-param&gt;
+        &lt;param-name&gt;javax.faces.PROJECT_STAGE&lt;/param-name&gt;
+        &lt;param-value&gt;Development&lt;/param-value&gt;
+    &lt;/context-param&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A context parameter provides configuration information needed by a web
+application. An application can define its own context parameters. In
+addition, JavaServer Faces technology and Java Servlet technology define
+context parameters that an application can use.</p>
+</div>
+</li>
+<li>
+<p>A <code>servlet</code> element and its <code>servlet-mapping</code> element specifying the
+<code>FacesServlet</code>. All files with the <code>.xhtml</code> suffix will be matched:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;servlet&gt;
+        &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;javax.faces.webapp.FacesServlet&lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.xhtml&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>A <code>welcome-file-list</code> element specifying the location of the landing
+page:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">    &lt;welcome-file-list&gt;
+        &lt;welcome-file&gt;index.xhtml&lt;/welcome-file&gt;
+    &lt;/welcome-file-list&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="introduction-to-scopes">Introduction to Scopes</h4>
+<div class="paragraph">
+<p>In the <code>Hello.java</code> class, the annotations <code>javax.inject.Named</code> and
+<code>javax.enterprise.context.RequestScoped</code> identify the class as a managed
+bean using request scope. Scope defines how application data persists
+and is shared.</p>
+</div>
+<div class="paragraph">
+<p>The most commonly used scopes in JavaServer Faces applications are the
+following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Request (<code>@RequestScoped</code>): Request scope persists during a single
+HTTP request in a web application. In an application like <code>hello1</code>, in
+which the application consists of a single request and response, the
+bean uses request scope.</p>
+</li>
+<li>
+<p>Session (<code>@SessionScoped</code>): Session scope persists across multiple
+HTTP requests in a web application. When an application consists of
+multiple requests and responses where data needs to be maintained, beans
+use session scope.</p>
+</li>
+<li>
+<p>Application (<code>@ApplicationScoped</code>): Application scope persists across
+all users' interactions with a web application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For more information on scopes in JavaServer Faces technology, see
+<a href="jsf-configure002.html#GIRCR">Using Managed Bean Scopes</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="packaging-and-deploying-the-hello1-web-module">Packaging and Deploying the hello1 Web Module</h3>
+<div class="paragraph">
+<p>A web module must be packaged into a WAR in certain deployment scenarios
+and whenever you want to distribute the web module. You can package a
+web module into a WAR file by using Maven or by using the IDE tool of
+your choice. This tutorial shows you how to use NetBeans IDE or Maven to
+build, package, and deploy the <code>hello1</code> sample application.</p>
+</div>
+<div class="paragraph">
+<p>You can deploy a WAR file to GlassFish Server by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using NetBeans IDE</p>
+</li>
+<li>
+<p>Using the <code>asadmin</code> command</p>
+</li>
+<li>
+<p>Using the Administration Console</p>
+</li>
+<li>
+<p>Copying the WAR file into the <code><em>domain-dir</em>/autodeploy/</code> directory</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Throughout the tutorial, you will use NetBeans IDE or Maven for
+packaging and deploying.</p>
+</div>
+<div class="sect3">
+<h4 id="to-build-and-package-the-hello1-web-module-using-netbeans-ide">To Build and Package the hello1 Web Module Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To build and package the <code>hello1</code> web module using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start GlassFish Server as described in
+<a href="usingexamples002.html#CHDCACDI">To Start GlassFish Server Using
+NetBeans IDE</a>, if you have not already done so.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>hello1</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>hello1</code> project and select
+Build. This command deploys the project to the server.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-and-package-the-hello1-web-module-using-maven">To Build and Package the hello1 Web Module Using Maven</h4>
+<div class="paragraph">
+<p>To build and package the <code>hello1</code> web module using Maven:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start GlassFish Server as described in
+<a href="usingexamples002.html#CHDBDDAF">To Start GlassFish Server Using the
+Command Line</a>, if you have not already done so.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/hello1/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command spawns any necessary compilations and creates the WAR file
+in <code><em>tut-install</em>/examples/web/jsf/hello1/target/</code>. It then deploys the
+project to the server.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-deployed-web-modules">Viewing Deployed Web Modules</h3>
+<div class="paragraph">
+<p>GlassFish Server provides two ways to view the deployed web modules: the
+Administration Console and the <code>asadmin</code> command. You can also use
+NetBeans IDE to view deployed modules.</p>
+</div>
+<div class="sect3">
+<h4 id="to-view-deployed-web-modules-using-the-administration-console">To View Deployed Web Modules Using the Administration Console</h4>
+<div class="paragraph">
+<p>To view deployed web modules using the Administration Console:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the URL <code><a href="http://localhost:4848/" class="bare">http://localhost:4848/</a></code> in a browser.</p>
+</li>
+<li>
+<p>Select the Applications node.</p>
+<div class="paragraph">
+<p>The deployed web modules appear in the Deployed Applications table.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-view-deployed-web-modules-using-the-asadmin-command">To View Deployed Web Modules Using the asadmin Command</h4>
+<div class="paragraph">
+<p>Enter the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">asadmin list-applications</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-view-deployed-web-modules-using-netbeans-ide">To View Deployed Web Modules Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To view deployed web modules using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the Services tab, expand the Servers node, then expand the
+GlassFish Server node.</p>
+</li>
+<li>
+<p>Expand the Applications node to view the deployed modules.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-deployed-hello1-web-module">Running the Deployed hello1 Web Module</h3>
+<div class="paragraph">
+<p>Now that the web module is deployed, you can view it by opening the
+application in a web browser. By default, the application is deployed to
+host <code>localhost</code> on port 8080. The context root of the web application
+is <code>hello1</code>.</p>
+</div>
+<div class="paragraph">
+<p>To run the deployed <code>hello1</code> web module:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a web browser.</p>
+</li>
+<li>
+<p>Enter the following URL:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/hello1/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the field, enter your name and click Submit.</p>
+<div class="paragraph">
+<p>The response page displays the name you submitted. Click Back to try
+again.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="dynamic-reloading-of-deployed-modules">Dynamic Reloading of Deployed Modules</h4>
+<div class="paragraph">
+<p>If dynamic reloading is enabled, you do not have to redeploy an
+application or module when you change its code or deployment
+descriptors. All you have to do is copy the changed pages or class files
+into the deployment directory for the application or module. The
+deployment directory for a web module named context-root is
+<code><em>domain-dir</em>/applications/<em>context-root</em></code>. The server checks for changes
+periodically and redeploys the application, automatically and
+dynamically, with the changes.</p>
+</div>
+<div class="paragraph">
+<p>This capability is useful in a development environment because it allows
+code changes to be tested quickly. Dynamic reloading is not recommended
+for a production environment, however, because it may degrade
+performance. In addition, whenever a reload takes place, the sessions at
+that time become invalid, and the client must restart the session.</p>
+</div>
+<div class="paragraph">
+<p>In GlassFish Server, dynamic reloading is enabled by default.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undeploying-the-hello1-web-module">Undeploying the hello1 Web Module</h3>
+<div class="paragraph">
+<p>You can undeploy web modules and other types of enterprise applications
+by using either NetBeans IDE or Maven.</p>
+</div>
+<div class="sect3">
+<h4 id="to-undeploy-the-hello1-web-module-using-netbeans-ide">To Undeploy the hello1 Web Module Using NetBeans IDE</h4>
+<div class="paragraph">
+<p>To undeploy the <code>hello1</code> web module using NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the Services tab, expand the Servers node, then expand the
+GlassFish Server node.</p>
+</li>
+<li>
+<p>Expand the Applications node.</p>
+</li>
+<li>
+<p>Right-click the <code>hello1</code> module and select Undeploy.</p>
+</li>
+<li>
+<p>To delete the class files and other build artifacts, go back to the
+Projects tab, right-click the project, and select Clean.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-undeploy-the-hello1-web-module-using-maven">To Undeploy the hello1 Web Module Using Maven</h4>
+<div class="paragraph">
+<p>To undeploy the <code>hello1</code> web module using Maven:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/web/jsf/hello1/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn cargo:undeploy</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To delete the class files and other build artifacts, enter the
+following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn clean</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="webapp002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="webapp004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

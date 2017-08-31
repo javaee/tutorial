@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Java EE Containers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="overview004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview006.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="java-ee-containers">Java EE Containers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Normally, thin-client multitiered applications are hard to write because
+they involve many lines of intricate code to handle transaction and
+state management, multithreading, resource pooling, and other complex
+low-level details. The component-based and platform-independent Java EE
+architecture makes applications easy to write because business logic is
+organized into reusable components. In addition, the Java EE server
+provides underlying services in the form of a container for every
+component type. Because you do not have to develop these services
+yourself, you are free to concentrate on solving the business problem at
+hand.</p>
+</div>
+<div class="sect2">
+<h3 id="container-services">Container Services</h3>
+<div class="paragraph">
+<p>Containers are the interface between a component and the low-level,
+platform-specific functionality that supports the component. Before it
+can be executed, a web, enterprise bean, or application client component
+must be assembled into a Java EE module and deployed into its container.</p>
+</div>
+<div class="paragraph">
+<p>The assembly process involves specifying container settings for each
+component in the Java EE application and for the Java EE application
+itself. Container settings customize the underlying support provided by
+the Java EE server, including such services as security, transaction
+management, Java Naming and Directory Interface (JNDI) API lookups, and
+remote connectivity. Here are some of the highlights.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Java EE security model lets you configure a web component or
+enterprise bean so that system resources are accessed only by authorized
+users.</p>
+</li>
+<li>
+<p>The Java EE transaction model lets you specify relationships among
+methods that make up a single transaction so that all methods in one
+transaction are treated as a single unit.</p>
+</li>
+<li>
+<p>JNDI lookup services provide a unified interface to multiple naming
+and directory services in the enterprise so that application components
+can access these services.</p>
+</li>
+<li>
+<p>The Java EE remote connectivity model manages low-level communications
+between clients and enterprise beans. After an enterprise bean is
+created, a client invokes methods on it as if it were in the same
+virtual machine.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Because the Java EE architecture provides configurable services,
+components within the same application can behave differently based on
+where they are deployed. For example, an enterprise bean can have
+security settings that allow it a certain level of access to database
+data in one production environment and another level of database access
+in another production environment.</p>
+</div>
+<div class="paragraph">
+<p>The container also manages nonconfigurable services, such as enterprise
+bean and servlet lifecycles, database connection resource pooling, data
+persistence, and access to the Java EE platform APIs (see
+<a href="overview008.html#BNACJ">Java EE 8 APIs</a>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="container-types">Container Types</h3>
+<div class="paragraph">
+<p>The deployment process installs Java EE application components in the
+Java EE containers, as illustrated in <a href="#BNABR">Figure 1-5</a>.</p>
+</div>
+<div id="BNABR" class="paragraph">
+<div class="title"><strong>Figure 1-5 Java EE Server and Containers</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_005.png" alt="Diagram of client-server communication showing servlets and web pages in the web tier and enterprise beans in the business tier."></span></p>
+</div>
+<div class="paragraph">
+<p>The server and containers are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java EE server: The runtime portion of a Java EE product. A Java EE
+server provides EJB and web containers.</p>
+</li>
+<li>
+<p>EJB container: Manages the execution of enterprise beans for Java EE
+applications. Enterprise beans and their container run on the Java EE
+server.</p>
+</li>
+<li>
+<p>Web container: Manages the execution of web pages, servlets, and some
+EJB components for Java EE applications. Web components and their
+container run on the Java EE server.</p>
+</li>
+<li>
+<p>Application client container: Manages the execution of application
+client components. Application clients and their container run on the
+client.</p>
+</li>
+<li>
+<p>Applet container: Manages the execution of applets. Consists of a web
+browser and a Java Plug-in running on the client together.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="overview004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="overview006.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

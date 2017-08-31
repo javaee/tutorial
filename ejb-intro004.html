@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Accessing Enterprise Beans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="ejb-intro003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="accessing-enterprise-beans">Accessing Enterprise Beans</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="paragraph">
+<p>The material in this section applies only to session beans and not to
+message-driven beans. Because they have a different programming model,
+message-driven beans do not have interfaces or no-interface views that
+define client access.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Clients access enterprise beans either through a no-interface view or
+through a business interface. A no-interface view of an enterprise bean
+exposes the public methods of the enterprise bean implementation class
+to clients. Clients using the no-interface view of an enterprise bean
+may invoke any public methods in the enterprise bean implementation
+class or any superclasses of the implementation class. A business
+interface is a standard Java programming language interface that
+contains the business methods of the enterprise bean.</p>
+</div>
+<div class="paragraph">
+<p>A client can access a session bean only through the methods defined in
+the bean&#8217;s business interface or through the public methods of an
+enterprise bean that has a no-interface view. The business interface or
+no-interface view defines the client&#8217;s view of an enterprise bean. All
+other aspects of the enterprise bean (method implementations and
+deployment settings) are hidden from the client.</p>
+</div>
+<div class="paragraph">
+<p>Well-designed interfaces and no-interface views simplify the development
+and maintenance of Java EE applications. Not only do clean interfaces
+and no-interface views shield the clients from any complexities in the
+EJB tier, but they also allow the enterprise beans to change internally
+without affecting the clients. For example, if you change the
+implementation of a session bean business method, you won&#8217;t have to
+alter the client code. But if you were to change the method definitions
+in the interfaces, you might have to modify the client code as well.
+Therefore, it is important that you design the interfaces and
+no-interface views carefully to isolate your clients from possible
+changes in the enterprise beans.</p>
+</div>
+<div class="paragraph">
+<p>Session beans can have more than one business interface. Session beans
+should, but are not required to, implement their business interface or
+interfaces.</p>
+</div>
+<div class="sect2">
+<h3 id="using-enterprise-beans-in-clients">Using Enterprise Beans in Clients</h3>
+<div class="paragraph">
+<p>The client of an enterprise bean obtains a reference to an instance of
+an enterprise bean through either dependency injection, using Java
+programming language annotations, or JNDI lookup, using the Java Naming
+and Directory Interface syntax to find the enterprise bean instance.</p>
+</div>
+<div class="paragraph">
+<p>Dependency injection is the simplest way of obtaining an enterprise bean
+reference. Clients that run within a Java EE server-managed environment,
+JavaServer Faces web applications, JAX-RS web services, other enterprise
+beans, or Java EE application clients support dependency injection using
+the <code>javax.ejb.EJB</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>Applications that run outside a Java EE server-managed environment, such
+as Java SE applications, must perform an explicit lookup. JNDI supports
+a global syntax for identifying Java EE components to simplify this
+explicit lookup.</p>
+</div>
+<div class="sect3">
+<h4 id="portable-jndi-syntax">Portable JNDI Syntax</h4>
+<div class="paragraph">
+<p>Three JNDI namespaces are used for portable JNDI lookups: <code>java:global</code>,
+<code>java:module</code>, and <code>java:app</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>java:global</code> JNDI namespace is the portable way of finding remote
+enterprise beans using JNDI lookups. JNDI addresses are of the following
+form:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">java:global[/application name]/module name /enterprise bean name[/interface name ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Application name and module name default to the name of the application
+and module minus the file extension. Application names are required only
+if the application is packaged within an EAR. The interface name is
+required only if the enterprise bean implements more than one business
+interface.</p>
+</div>
+</li>
+<li>
+<p>The <code>java:module</code> namespace is used to look up local enterprise beans
+within the same module. JNDI addresses using the <code>java:module</code> namespace
+are of the following form:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">java:module/enterprise bean name/[interface name]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The interface name is required only if the enterprise bean implements
+more than one business interface.</p>
+</div>
+</li>
+<li>
+<p>The <code>java:app</code> namespace is used to look up local enterprise beans
+packaged within the same application. That is, the enterprise bean is
+packaged within an EAR file containing multiple Java EE modules. JNDI
+addresses using the <code>java:app</code> namespace are of the following form:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">java:app[/module name]/enterprise bean name [/interface name]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The module name is optional. The interface name is required only if the
+enterprise bean implements more than one business interface.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if an enterprise bean, <code>MyBean</code>, is packaged within the web
+application archive <code>myApp.war</code>, the module name is <code>myApp</code>. The
+portable JNDI name is <code>java:module/MyBean</code>. An equivalent JNDI name
+using the <code>java:global</code> namespace is <code>java:global/myApp/MyBean</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deciding-on-remote-or-local-access">Deciding on Remote or Local Access</h3>
+<div class="paragraph">
+<p>When you design a Java EE application, one of the first decisions you
+make is the type of client access allowed by the enterprise beans:
+remote, local, or web service.</p>
+</div>
+<div class="paragraph">
+<p>Whether to allow local or remote access depends on the following
+factors.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Tight or loose coupling of related beans: Tightly coupled beans depend
+on one another. For example, if a session bean that processes sales
+orders calls a session bean that emails a confirmation message to the
+customer, these beans are tightly coupled. Tightly coupled beans are
+good candidates for local access. Because they fit together as a logical
+unit, they typically call each other often and would benefit from the
+increased performance that is possible with local access.</p>
+</li>
+<li>
+<p>Type of client: If an enterprise bean is accessed by application
+clients, it should allow remote access. In a production environment,
+these clients almost always run on machines other than those on which
+GlassFish Server is running. If an enterprise bean&#8217;s clients are web
+components or other enterprise beans, the type of access depends on how
+you want to distribute your components.</p>
+</li>
+<li>
+<p>Component distribution: Java EE applications are scalable because
+their server-side components can be distributed across multiple
+machines. In a distributed application, for example, the server that the
+web components run on may not be the one on which the enterprise beans
+they access are deployed. In this distributed scenario, the enterprise
+beans should allow remote access.</p>
+</li>
+<li>
+<p>Performance: Owing to such factors as network latency, remote calls
+may be slower than local calls. On the other hand, if you distribute
+components among different servers, you may improve the application&#8217;s
+overall performance. Both of these statements are generalizations;
+performance can vary in different operational environments.
+Nevertheless, you should keep in mind how your application design might
+affect performance.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you aren&#8217;t sure which type of access an enterprise bean should have,
+choose remote access. This decision gives you more flexibility. In the
+future, you can distribute your components to accommodate the growing
+demands on your application.</p>
+</div>
+<div class="paragraph">
+<p>Although it is uncommon, it is possible for an enterprise bean to allow
+both remote and local access. If this is the case, either the business
+interface of the bean must be explicitly designated as a business
+interface by being decorated with the <code>@Remote</code> or <code>@Local</code> annotations,
+or the bean class must explicitly designate the business interfaces by
+using the <code>@Remote</code> and <code>@Local</code> annotations. The same business
+interface cannot be both a local and a remote business interface.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="local-clients">Local Clients</h3>
+<div class="paragraph">
+<p>A local client has these characteristics.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It must run in the same application as the enterprise bean it
+accesses.</p>
+</li>
+<li>
+<p>It can be a web component or another enterprise bean.</p>
+</li>
+<li>
+<p>To the local client, the location of the enterprise bean it accesses
+is not transparent.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The no-interface view of an enterprise bean is a local view. The public
+methods of the enterprise bean implementation class are exposed to local
+clients that access the no-interface view of the enterprise bean.
+Enterprise beans that use the no-interface view do not implement a
+business interface.</p>
+</div>
+<div class="paragraph">
+<p>The local business interface defines the bean&#8217;s business and lifecycle
+methods. If the bean&#8217;s business interface is not decorated with <code>@Local</code>
+or <code>@Remote</code>, and if the bean class does not specify the interface using
+<code>@Local</code> or <code>@Remote</code>, the business interface is by default a local
+interface.</p>
+</div>
+<div class="paragraph">
+<p>To build an enterprise bean that allows only local access, you may, but
+are not required to, do one of the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create an enterprise bean implementation class that does not implement
+a business interface, indicating that the bean exposes a no-interface
+view to clients. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Session
+public class MyBean { ... }</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Annotate the business interface of the enterprise bean as a <code>@Local</code>
+interface. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Local
+public interface InterfaceName { ... }</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Specify the interface by decorating the bean class with <code>@Local</code> and
+specify the interface name. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Local(InterfaceName.class)
+public class BeanName implements InterfaceName  { ... }</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="accessing-local-enterprise-beans-using-the-no-interface-view">Accessing Local Enterprise Beans Using the No-Interface View</h4>
+<div class="paragraph">
+<p>Client access to an enterprise bean that exposes a local, no-interface
+view is accomplished through either dependency injection or JNDI lookup.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To obtain a reference to the no-interface view of an enterprise bean
+through dependency injection, use the <code>javax.ejb.EJB</code> annotation and
+specify the enterprise bean&#8217;s implementation class:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@EJB
+ExampleBean exampleBean;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To obtain a reference to the no-interface view of an enterprise bean
+through JNDI lookup, use the <code>javax.naming.InitialContext</code> interface&#8217;s
+<code>lookup</code> method:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">ExampleBean exampleBean = (ExampleBean)
+        InitialContext.lookup("java:module/ExampleBean");</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Clients do not use the <code>new</code> operator to obtain a new instance of an
+enterprise bean that uses a no-interface view.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="accessing-local-enterprise-beans-that-implement-business-interfaces">Accessing Local Enterprise Beans That Implement Business Interfaces</h4>
+<div class="paragraph">
+<p>Client access to enterprise beans that implement local business
+interfaces is accomplished through either dependency injection or JNDI
+lookup.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To obtain a reference to the local business interface of an enterprise
+bean through dependency injection, use the <code>javax.ejb.EJB</code> annotation
+and specify the enterprise bean&#8217;s local business interface name:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@EJB
+Example example;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To obtain a reference to a local business interface of an enterprise
+bean through JNDI lookup, use the <code>javax.naming.InitialContext</code>
+interface&#8217;s <code>lookup</code> method:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">ExampleLocal example = (ExampleLocal)
+         InitialContext.lookup("java:module/ExampleLocal");</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remote-clients">Remote Clients</h3>
+<div class="paragraph">
+<p>A remote client of an enterprise bean has the following traits.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It can run on a different machine and a different JVM from the
+enterprise bean it accesses. (It is not required to run on a different
+JVM.)</p>
+</li>
+<li>
+<p>It can be a web component, an application client, or another
+enterprise bean.</p>
+</li>
+<li>
+<p>To a remote client, the location of the enterprise bean is
+transparent.</p>
+</li>
+<li>
+<p>The enterprise bean must implement a business interface. That is,
+remote clients may not access an enterprise bean through a no-interface
+view.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To create an enterprise bean that allows remote access, you must either</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Decorate the business interface of the enterprise bean with the
+<code>@Remote</code> annotation:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Remote
+public interface InterfaceName { ... }</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Or decorate the bean class with <code>@Remote</code>, specifying the business
+interface or interfaces:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Remote(InterfaceName.class)
+public class BeanName implements InterfaceName { ... }</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The remote interface defines the business and lifecycle methods that are
+specific to the bean. For example, the remote interface of a bean named
+<code>BankAccountBean</code> might have business methods named <code>deposit</code> and
+<code>credit</code>. <a href="#GIPNO">Figure 33-1</a> shows how the interface controls the
+client&#8217;s view of an enterprise bean.</p>
+</div>
+<div id="GIPNO" class="paragraph">
+<div class="title"><strong>Figure 33-1 Interfaces for an Enterprise Bean with Remote Access</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_020.png" alt="Diagram showing a remote client accessing an enterprise bean&#8217;s methods through its remote interface."></span></p>
+</div>
+<div class="paragraph">
+<p>Client access to an enterprise bean that implements a remote business
+interface is accomplished through either dependency injection or JNDI
+lookup.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To obtain a reference to the remote business interface of an
+enterprise bean through dependency injection, use the <code>javax.ejb.EJB</code>
+annotation and specify the enterprise bean&#8217;s remote business interface
+name:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@EJB
+Example example;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To obtain a reference to a remote business interface of an enterprise
+bean through JNDI lookup, use the <code>javax.naming.InitialContext</code>
+interface&#8217;s <code>lookup</code> method:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">ExampleRemote example = (ExampleRemote)
+        InitialContext.lookup("java:global/myApp/ExampleRemote");</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="web-service-clients">Web Service Clients</h3>
+<div class="paragraph">
+<p>A web service client can access a Java EE application in two ways.
+First, the client can access a web service created with JAX-WS. (For
+more information on JAX-WS, see <a href="jaxws.html#BNAYL">Chapter 29,
+"Building Web Services with JAX-WS"</a>.) Second, a web service client can
+invoke the business methods of a stateless session bean. Message beans
+cannot be accessed by web service clients.</p>
+</div>
+<div class="paragraph">
+<p>Provided that it uses the correct protocols (SOAP, HTTP, WSDL), any web
+service client can access a stateless session bean, whether or not the
+client is written in the Java programming language. The client doesn&#8217;t
+even "know" what technology implements the service: stateless session
+bean, JAX-WS, or some other technology. In addition, enterprise beans
+and web components can be clients of web services. This flexibility
+enables you to integrate Java EE applications with web services.</p>
+</div>
+<div class="paragraph">
+<p>A web service client accesses a stateless session bean through the
+bean&#8217;s web service endpoint implementation class. By default, all public
+methods in the bean class are accessible to web service clients. The
+<code>@WebMethod</code> annotation may be used to customize the behavior of web
+service methods. If the <code>@WebMethod</code> annotation is used to decorate the
+bean class&#8217;s methods, only those methods decorated with <code>@WebMethod</code> are
+exposed to web service clients.</p>
+</div>
+<div class="paragraph">
+<p>For a code sample, see <a href="ejb-basicexamples004.html#BNBOR">A Web Service
+Example: helloservice</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="method-parameters-and-access">Method Parameters and Access</h3>
+<div class="paragraph">
+<p>The type of access affects the parameters of the bean methods that are
+called by clients. The following sections apply not only to method
+parameters but also to method return values.</p>
+</div>
+<div class="sect3">
+<h4 id="isolation">Isolation</h4>
+<div class="paragraph">
+<p>The parameters of remote calls are more isolated than those of local
+calls. With remote calls, the client and the bean operate on different
+copies of a parameter object. If the client changes the value of the
+object, the value of the copy in the bean does not change. This layer of
+isolation can help protect the bean if the client accidentally modifies
+the data.</p>
+</div>
+<div class="paragraph">
+<p>In a local call, both the client and the bean can modify the same
+parameter object. In general, you should not rely on this side effect of
+local calls. Perhaps someday you will want to distribute your
+components, replacing the local calls with remote ones.</p>
+</div>
+<div class="paragraph">
+<p>As with remote clients, web service clients operate on different copies
+of parameters than does the bean that implements the web service.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="granularity-of-accessed-data">Granularity of Accessed Data</h4>
+<div class="paragraph">
+<p>Because remote calls are likely to be slower than local calls, the
+parameters in remote methods should be relatively coarse-grained. A
+coarse-grained object contains more data than a fine-grained one, so
+fewer access calls are required. For the same reason, the parameters of
+the methods called by web service clients should also be coarse-grained.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="ejb-intro003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="ejb-intro005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

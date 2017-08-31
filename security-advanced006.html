@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Securing Enterprise Information Systems Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-advanced005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced007.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="securing-enterprise-information-systems-applications">Securing Enterprise Information Systems Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In Enterprise Information Systems (EIS) applications, components request
+a connection to an EIS resource.</p>
+</div>
+<div class="paragraph">
+<p>The following topics are addressed here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BABBJHIC">Overview of Securing Enterprise Information Systems
+Applications</a></p>
+</li>
+<li>
+<p><a href="#GLIHL">Container-Managed Sign-On</a></p>
+</li>
+<li>
+<p><a href="#GLIDP">Component-Managed Sign-On</a></p>
+</li>
+<li>
+<p><a href="#GLIGS">Configuring Resource Adapter Security</a></p>
+</li>
+<li>
+<p><a href="#GLIGW">Mapping an Application Principal to EIS Principals</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-securing-enterprise-information-systems-applications">Overview of Securing Enterprise Information Systems Applications</h3>
+<div class="paragraph">
+<p>As part of this connection, the EIS can require a sign-on for the
+requester to access the resource. The application component provider has
+two choices for the design of the EIS sign-on.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Container-managed sign-on: The application component lets the
+container take the responsibility of configuring and managing the EIS
+sign-on. The container determines the user name and password for
+establishing a connection to an EIS instance.</p>
+</li>
+<li>
+<p>Component-managed sign-on: The application component code manages EIS
+sign-on by including code that performs the sign-on process to an EIS.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can also configure security for resource adapters. See
+<a href="#GLIGS">Configuring Resource Adapter Security</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="container-managed-sign-on">Container-Managed Sign-On</h3>
+<div class="paragraph">
+<p>In container-managed sign-on, an application component does not have to
+pass any sign-on security information to the <code>getConnection()</code> method.
+The security information is supplied by the container, as shown in the
+following example (the method call is highlighted in bold):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">// Business method in an application component
+Context initctx = new InitialContext();
+// Perform JNDI lookup to obtain a connection factory
+javax.resource.cci.ConnectionFactory cxf =
+    (javax.resource.cci.ConnectionFactory)initctx.lookup(
+    "java:comp/env/eis/MainframeCxFactory");
+// Invoke factory to obtain a connection. The security
+// information is not passed in the getConnection method
+javax.resource.cci.Connection cx = cxf.getConnection();
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="component-managed-sign-on">Component-Managed Sign-On</h3>
+<div class="paragraph">
+<p>In component-managed sign-on, an application component is responsible
+for passing the needed sign-on security information for the resource to
+the <code>getConnection</code> method. For example, security information might be a
+user name and password, as shown here (the method call is highlighted in
+bold):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">// Method in an application component
+Context initctx = new InitialContext();
+
+// Perform JNDI lookup to obtain a connection factory
+javax.resource.cci.ConnectionFactory cxf =
+    (javax.resource.cci.ConnectionFactory)initctx.lookup(
+    "java:comp/env/eis/MainframeCxFactory");
+
+// Get a new ConnectionSpec
+com.myeis.ConnectionSpecImpl properties = //..
+
+// Invoke factory to obtain a connection
+properties.setUserName("...");
+properties.setPassword("...");
+javax.resource.cci.Connection cx =
+    cxf.getConnection(properties);
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-resource-adapter-security">Configuring Resource Adapter Security</h3>
+<div class="paragraph">
+<p>A resource adapter is a system-level software component that typically
+implements network connectivity to an external resource manager. A
+resource adapter can extend the functionality of the Java EE platform
+either by implementing one of the Java EE standard service APIs, such as
+a JDBC driver, or by defining and implementing a resource adapter for a
+connector to an external application system. Resource adapters can also
+provide services that are entirely local, perhaps interacting with
+native resources. Resource adapters interface with the Java EE platform
+through the Java EE service provider interfaces (Java EE SPI). A
+resource adapter that uses the Java EE SPIs to attach to the Java EE
+platform will be able to work with all Java EE products.</p>
+</div>
+<div class="paragraph">
+<p>To configure the security settings for a resource adapter, you need to
+edit the resource adapter descriptor file, <code>ra.xml</code>. Here is an example
+of the part of an <code>ra.xml</code> file that configures security properties for
+a resource adapter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;authentication-mechanism&gt;
+    &lt;authentication-mechanism-type&gt;
+        BasicPassword
+    &lt;/authentication-mechanism-type&gt;
+    &lt;credential-interface&gt;
+        javax.resource.spi.security.PasswordCredential
+    &lt;/credential-interface&gt;
+&lt;/authentication-mechanism&gt;
+&lt;reauthentication-support&gt;false&lt;/reauthentication-support&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can find out more about the options for configuring resource adapter
+security by reviewing as-install`/lib/schemas/connector_1_7.xsd`. You
+can configure the following elements in the resource adapter deployment
+descriptor file.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication mechanisms: Use the <code>authentication-mechanism</code> element
+to specify an authentication mechanism supported by the resource
+adapter. This support is for the resource adapter, not for the
+underlying EIS instance.</p>
+<div class="paragraph">
+<p>There are two supported mechanism types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>BasicPassword</code>, which supports the following interface:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">javax.resource.spi.security.PasswordCredential</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>Kerbv5</code>, which supports the following interface:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">javax.resource.spi.security.GenericCredential</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>GlassFish Server does not currently support this mechanism type.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Reauthentication support: Use the <code>reauthentication-support</code> element
+to specify whether the resource adapter implementation supports
+reauthentication of existing <code>Managed-Connection</code> instances. Options are
+<code>true</code> or <code>false</code>.</p>
+</li>
+<li>
+<p>Security permissions: Use the <code>security-permission</code> element to specify
+a security permission that is required by the resource adapter code.
+Support for security permissions is optional and is not supported in the
+current release of GlassFish Server. You can, however, manually update
+the <code>server.policy</code> file to add the relevant permissions for the
+resource adapter.</p>
+<div class="paragraph">
+<p>The security permissions listed in the deployment descriptor are
+different from those required by the default permission set as specified
+in the connector specification.</p>
+</div>
+<div class="paragraph">
+<p>For more information on the implementation of the security permission
+specification, see the security policy file documentation listed in
+<a href="security-advanced008.html#BABBGBBF">Further Information about
+Advanced Security Topics</a>.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to specifying resource adapter security in the <code>ra.xml</code>
+file, you can create a security map for a connector connection pool to
+map an application principal or a user group to a back-end EIS
+principal. The security map is usually used if one or more EIS back-end
+principals are used to execute operations (on the EIS) initiated by
+various principals or user groups in the application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mapping-an-application-principal-to-eis-principals">Mapping an Application Principal to EIS Principals</h3>
+<div class="paragraph">
+<p>When using GlassFish Server, you can use security maps to map the caller
+identity of the application (principal or user group) to a suitable EIS
+principal in container-managed transaction-based scenarios. When an
+application principal initiates a request to an EIS, GlassFish Server
+first checks for an exact principal by using the security map defined
+for the connector connection pool to determine the mapped back-end EIS
+principal. If there is no exact match, GlassFish Server uses the
+wildcard character specification, if any, to determine the mapped
+back-end EIS principal. Security maps are used when an application user
+needs to execute an EIS operation that requires execution as a specific
+identity in the EIS.</p>
+</div>
+<div class="paragraph">
+<p>To work with security maps, use the Administration Console. From the
+Administration Console, follow these steps to get to the security maps
+page.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the navigation tree, expand the Resources node.</p>
+</li>
+<li>
+<p>Expand the Connectors node.</p>
+</li>
+<li>
+<p>Select the Connector Connection Pools node.</p>
+</li>
+<li>
+<p>On the Connector Connection Pools page, click the name of the
+connection pool for which you want to create a security map.</p>
+</li>
+<li>
+<p>Click the Security Maps tab.</p>
+</li>
+<li>
+<p>Click New to create a new security map for the connection pool.</p>
+</li>
+<li>
+<p>Enter a name by which you will refer to the security map, as well as
+the other required information.</p>
+<div class="paragraph">
+<p>Click Help for more information on the individual options.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-advanced005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced007.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of Java EE Security</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-intro.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-intro002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-java-ee-security">Overview of Java EE Security</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every enterprise that has either sensitive resources that can be
+accessed by many users or resources that traverse unprotected, open
+networks, such as the Internet, needs to be protected.</p>
+</div>
+<div class="paragraph">
+<p>Enterprise tier and web tier applications are made up of components that
+are deployed into various containers. These components are combined to
+build a multitier enterprise application. Security for components is
+provided by their containers. A container provides two kinds of
+security: declarative and programmatic.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Declarative security expresses an application component&#8217;s security
+requirements by using either deployment descriptors or annotations.</p>
+<div class="paragraph">
+<p>A deployment descriptor is an XML file that is external to the
+application and that expresses an application&#8217;s security structure,
+including security roles, access control, and authentication
+requirements. For more information about deployment descriptors, read
+<a href="security-intro003.html#BNBXF">Using Deployment Descriptors for
+Declarative Security</a>.</p>
+</div>
+<div class="paragraph">
+<p>Annotations, also called metadata, are used to specify information about
+security within a class file. When the application is deployed, this
+information can be either used by or overridden by the application
+deployment descriptor. Annotations save you from having to write
+declarative information inside XML descriptors. Instead, you simply put
+annotations on the code, and the required information gets generated.
+For this tutorial, annotations are used for securing applications
+wherever possible. For more information about annotations, see
+<a href="security-intro003.html#BNBXG">Using Annotations to Specify Security
+Information</a>.</p>
+</div>
+</li>
+<li>
+<p>Programmatic security is embedded in an application and is used to
+make security decisions. Programmatic security is useful when
+declarative security alone is not sufficient to express the security
+model of an application. For more information about programmatic
+security, read <a href="security-intro003.html#BNBXH">Using Programmatic
+Security</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>More information on these concepts and mechanisms can be found in the
+chapter on security in the Java EE 7 specification.</p>
+</div>
+<div class="paragraph">
+<p>Other chapters in this Part discuss security requirements in web tier
+and enterprise tier applications.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="security-webtier.html#BNCAS">Chapter 49, "Getting Started Securing
+Web Applications"</a> explains how to add security to web components, such
+as servlets.</p>
+</li>
+<li>
+<p><a href="security-javaee.html#BNBYK">Chapter 50, "Getting Started Securing
+Enterprise Applications"</a> explains how to add security to Java EE
+components, such as enterprise beans and application clients.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="a-simple-application-security-walkthrough">A Simple Application Security Walkthrough</h3>
+<div class="paragraph">
+<p>The security behavior of a Java EE environment may be better understood
+by examining what happens in a simple application with a web client, a
+user interface, and enterprise bean business logic.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, which is taken from the Java EE 7
+Specification, the web client relies on the web server to act as its
+authentication proxy by collecting user authentication data from the
+client and using it to establish an authenticated session.</p>
+</div>
+<div class="sect3">
+<h4 id="step-1-initial-request">Step 1: Initial Request</h4>
+<div class="paragraph">
+<p>In the first step of this example, the web client requests the main
+application URL. This action is shown in <a href="#BNBWN">Figure 48-1</a>.</p>
+</div>
+<div id="BNBWN" class="paragraph">
+<div class="title"><strong>Figure 48-1 Initial Request</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_039.png" alt="Diagram of initial request from web client to web server for access to a protected resource"></span></p>
+</div>
+<div class="paragraph">
+<p>Since the client has not yet authenticated itself to the application
+environment, the server responsible for delivering the web portion of
+the application, hereafter referred to as the web server, detects this
+and invokes the appropriate authentication mechanism for this resource.
+For more information on these mechanisms, see
+<a href="security-intro002.html#BNBWY">Security Mechanisms</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="step-2-initial-authentication">Step 2: Initial Authentication</h4>
+<div class="paragraph">
+<p>The web server returns a form that the web client uses to collect
+authentication data, such as user name and password, from the user. The
+web client forwards the authentication data to the web server, where it
+is validated by the web server, as shown in <a href="#BNBWP">Figure 48-2</a>.
+The validation mechanism may be local to a server or may leverage the
+underlying security services. On the basis of the validation, the web
+server sets a credential for the user.</p>
+</div>
+<div id="BNBWP" class="paragraph">
+<div class="title"><strong>Figure 48-2 Initial Authentication</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_040.png" alt="Diagram of initial authentication: server sends form to client, which sends authentication data to server for validation"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="step-3-url-authorization">Step 3: URL Authorization</h4>
+<div class="paragraph">
+<p>The credential is used for future determinations of whether the user is
+authorized to access restricted resources it may request. The web server
+consults the security policy associated with the web resource to
+determine the security roles that are permitted access to the resource.
+The security policy is derived from annotations or from the deployment
+descriptor. The web container then tests the user&#8217;s credential against
+each role to determine whether it can map the user to the role.
+<a href="#BNBWR">Figure 48-3</a> shows this process.</p>
+</div>
+<div id="BNBWR" class="paragraph">
+<div class="title"><strong>Figure 48-3 URL Authorization</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_041.png" alt="Diagram of URL authorization"></span></p>
+</div>
+<div class="paragraph">
+<p>The web server&#8217;s evaluation stops with an "is authorized" outcome when
+the web server is able to map the user to a role. A "not authorized"
+outcome is reached if the web server is unable to map the user to any of
+the permitted roles.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="step-4-fulfilling-the-original-request">Step 4: Fulfilling the Original Request</h4>
+<div class="paragraph">
+<p>If the user is authorized, the web server returns the result of the
+original URL request, as shown in <a href="#BNBWT">Figure 48-4</a>.</p>
+</div>
+<div id="BNBWT" class="paragraph">
+<div class="title"><strong>Figure 48-4 Fulfilling the Original Request</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_042.png" alt="Diagram of request fulfillment, showing server returning result to client"></span></p>
+</div>
+<div class="paragraph">
+<p>In our example, the response URL of a web page is returned, enabling the
+user to post form data that needs to be handled by the business-logic
+component of the application. See
+<a href="security-webtier.html#BNCAS">Chapter 49, "Getting Started Securing
+Web Applications"</a> for more information on protecting web applications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="step-5-invoking-enterprise-bean-business-methods">Step 5: Invoking Enterprise Bean Business Methods</h4>
+<div class="paragraph">
+<p>The web page performs the remote method call to the enterprise bean,
+using the user&#8217;s credential to establish a secure association between
+the web page and the enterprise bean, as shown in <a href="#BNBWV">Figure
+48-5</a>. The association is implemented as two related security contexts:
+one in the web server and one in the EJB container.</p>
+</div>
+<div id="BNBWV" class="paragraph">
+<div class="title"><strong>Figure 48-5 Invoking an Enterprise Bean Business Method</strong></div>
+<p><span class="image"><img src="img/javaeett_dt_043.png" alt="Diagram of authorization process between web component and enterprise bean"></span></p>
+</div>
+<div class="paragraph">
+<p>The EJB container is responsible for enforcing access control on the
+enterprise bean method. The container consults the security policy
+associated with the enterprise bean to determine the security roles that
+are permitted access to the method. The security policy is derived from
+annotations or from the deployment descriptor. For each role, the EJB
+container determines whether it can map the caller to the role by using
+the security context associated with the call.</p>
+</div>
+<div class="paragraph">
+<p>The container&#8217;s evaluation stops with an "is authorized" outcome when
+the container is able to map the caller&#8217;s credential to a role. A "not
+authorized" outcome is reached if the container is unable to map the
+caller to any of the permitted roles. A "not authorized" result causes
+an exception to be thrown by the container and propagated back to the
+calling web page.</p>
+</div>
+<div class="paragraph">
+<p>If the call is authorized, the container dispatches control to the
+enterprise bean method. The result of the bean&#8217;s execution of the call
+is returned to the web page and ultimately to the user by the web server
+and the web client.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="features-of-a-security-mechanism">Features of a Security Mechanism</h3>
+<div class="paragraph">
+<p>A properly implemented security mechanism will provide the following
+functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Prevent unauthorized access to application functions and business or
+personal data (authentication)</p>
+</li>
+<li>
+<p>Hold system users accountable for operations they perform
+(non-repudiation)</p>
+</li>
+<li>
+<p>Protect a system from service interruptions and other breaches that
+affect quality of service</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ideally, properly implemented security mechanisms will also be</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to administer</p>
+</li>
+<li>
+<p>Transparent to system users</p>
+</li>
+<li>
+<p>Interoperable across application and enterprise boundaries</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="characteristics-of-application-security">Characteristics of Application Security</h3>
+<div class="paragraph">
+<p>Java EE applications consist of components that can contain both
+protected and unprotected resources. Often, you need to protect
+resources to ensure that only authorized users have access.
+Authorization provides controlled access to protected resources.
+Authorization is based on identification and authentication.
+Identification is a process that enables recognition of an entity by a
+system, and authentication is a process that verifies the identity of a
+user, device, or other entity in a computer system, usually as a
+prerequisite to allowing access to resources in a system.</p>
+</div>
+<div class="paragraph">
+<p>Authorization and authentication are not required for an entity to
+access unprotected resources. Accessing a resource without
+authentication is referred to as unauthenticated, or anonymous, access.</p>
+</div>
+<div class="paragraph">
+<p>The characteristics of application security that, when properly
+addressed, help to minimize the security threats faced by an enterprise
+include the following.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication: The means by which communicating entities, such as
+client and server, prove to each other that they are acting on behalf of
+specific identities that are authorized for access. This ensures that
+users are who they say they are.</p>
+</li>
+<li>
+<p>Authorization, or access control: The means by which interactions with
+resources are limited to collections of users or programs for the
+purpose of enforcing integrity, confidentiality, or availability
+constraints. This ensures that users have permission to perform
+operations or access data.</p>
+</li>
+<li>
+<p>Data integrity: The means used to prove that information has not been
+modified by a third party, an entity other than the source of the
+information. For example, a recipient of data sent over an open network
+must be able to detect and discard messages that were modified after
+they were sent. This ensures that only authorized users can modify data.</p>
+</li>
+<li>
+<p>Confidentiality, or data privacy: The means used to ensure that
+information is made available only to users who are authorized to access
+it. This ensures that only authorized users can view sensitive data.</p>
+</li>
+<li>
+<p>Non-repudiation: The means used to prove that a user who performed
+some action cannot reasonably deny having done so. This ensures that
+transactions can be proved to have happened.</p>
+</li>
+<li>
+<p>Quality of Service: The means used to provide better service to
+selected network traffic over various technologies.</p>
+</li>
+<li>
+<p>Auditing: The means used to capture a tamper-resistant record of
+security-related events for the purpose of being able to evaluate the
+effectiveness of security policies and mechanisms. To enable this, the
+system maintains a record of transactions and security information.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-intro.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-intro002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

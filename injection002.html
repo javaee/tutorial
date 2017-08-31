@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Dependency Injection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="injection001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="injection003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="dependency-injection">Dependency Injection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Dependency injection enables you to turn regular Java classes into
+managed objects and to inject them into any other managed object. Using
+dependency injection, your code can declare dependencies on any managed
+object. The container automatically provides instances of these
+dependencies at the injection points at runtime, and it also manages the
+lifecycle of these instances for you.</p>
+</div>
+<div class="paragraph">
+<p>Dependency injection in Java EE defines scopes, which determine the
+lifecycle of the objects that the container instantiates and injects.
+For example, a managed object that is only needed to respond to a single
+client request (such as a currency converter) has a different scope than
+a managed object that is needed to process multiple client requests
+within a session (such as a shopping cart).</p>
+</div>
+<div class="paragraph">
+<p>You can define managed objects (also called managed beans) that you can
+later inject by assigning a scope to a regular class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@javax.enterprise.context.RequestScoped
+public class CurrencyConverter { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the <code>javax.inject.Inject</code> annotation to inject managed beans; for
+example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">public class MyServlet extends HttpServlet {
+    @Inject CurrencyConverter cc;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As opposed to resource injection, dependency injection is typesafe
+because it resolves by type. To decouple your code from the
+implementation of the managed bean, you can reference the injected
+instances using an interface type and have your managed bean implement
+that interface.</p>
+</div>
+<div class="paragraph">
+<p>For more information about dependency injection, see
+<a href="cdi-basic.html#GIWHB">Chapter 24, "Introduction to Contexts and
+Dependency Injection for Java EE"</a> and JSR 299 (Contexts and Dependency
+Injection for the Java EE Platform).</p>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="injection001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="injection003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>
