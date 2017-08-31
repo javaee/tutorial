@@ -22,7 +22,7 @@ the push message can only be sent by the user and not by the application.
 
 To restrict the push messages to the current view only, you can set the scope
 attribute to `view` . The push message will not show up in other views in the
-same session, even if it has the same URL. This push message can only be sent
+same session, even if it has the same URL. This push message can be sent only
 by the user and not by the application.
 
 `<f:websocket channel="someChannel" scope="view" ... />`
