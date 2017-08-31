@@ -861,6 +861,10 @@ link:jsf-ws.html#using-websockets-with-javaserver-faces-technology[17 Using WebS
 
 * link:jsf-ws001.html#about-websockets-in-jsf[About WebSockets in JSF]
 * link:jsf-ws002.html#configuring-websockets[Configuring WebSockets]
+
+** link:jsf-ws002.html#websocket-usage-client-side[WebSocket Usage: Client Side]
+** link:jsf-ws002.html#websocket-usage-server-side[WebSocket Usage: Server Side]
+
 * link:jsf-ws003.html#using-the-fwebsocket-tag[Using the f:websocket Tag]
 * link:jsf-ws004.html#websocket-scopes-and-users[WebSocket Scopes and Users]
 * link:jsf-ws005.html#conditionally-connecting-websockets[Conditionally Connecting WebSockets]
