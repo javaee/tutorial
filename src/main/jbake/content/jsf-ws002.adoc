@@ -14,7 +14,7 @@ Configuring WebSockets
 To configure WebSockets for use in JSF web applications, first enable the
 WebSocket endpoint using the context parameter in `web.xml`:
 
-[source,xml]
+[source,oac_no_warn]
 ----
 <context-param>
 <param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
@@ -27,7 +27,7 @@ port than the HTTP container, you can use the optional
 `javax.faces.WEBSOCKET_ENDPOINT_PORT` integer context parameter
 to explicitly specify the port:
 
-[source,xml]
+[source,oac_no_warn]
 ----
 <context-param>
 <param-name>javax.faces.WEBSOCKET_ENDPOINT_PORT</param-name>
