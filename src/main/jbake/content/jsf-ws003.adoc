@@ -10,3 +10,36 @@ prev=jsf-ws002.html
 [[using-the-fwebsocket-tag]]
 Using the f:websocket Tag
 -------------------------
+
+link:#attributes-of-the-f:websocket-tag[Table 17-1] describes the attributes of
+the `f:websocket` tag.
+
+
+[[attributes-of-the-f:websocket-tag]]
+
+Table 17-1 Attributes of the `f:websocket` Tag
+
+[width="57%",cols="50%,50%,",options="header",]
+|=====================================================================
+|Name |Type |Description
+
+|`channel` |String | Required. The name of the WebSocket channel. It may not
+be an EL expression and may only contain alphanumeric characters, hyphens,
+underscores, and periods. All open WebSockets on the same channel name will
+receive the same push notification from the server.
+
+|`id` |String |Optional. The identifier of the UIWebSocket component to be created.
+
+|`scope` |String  |Optional. The scope of the WebSocket channel. It may not be
+an EL expression. Allowed values (case insensitive) are: `application`, `session`,
+and `view`.
+
+When the value is `application`, all channels with the same name throughout the
+application receive the same push message. When the value is `session`, only the
+channels with the same name in the current user session receive the same push
+message. When the value is `view`, only the channel in the current view receives
+the push message.
+
+The default scope is `application`. When the `user` attribute is specified,
+then the default scope is `session`.
+|=======================================================================
