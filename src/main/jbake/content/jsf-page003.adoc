@@ -195,5 +195,8 @@ Validators]
 link:jsf-ajax.html#GKIOW[Chapter 13, "Using Ajax with JavaServer Faces
 Technology"]
 
+|`f:websocket` a|
+link:jsf-ws.html#using-websockets-with-javaserver-faces-technology[Chapter 17, "Using WebSockets with JavaServer Faces Technology"]
+
 
 |=======================================================================
