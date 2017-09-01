@@ -139,7 +139,10 @@ Before a certain observer event notification is generated, the container determi
 void afterLogin(@Observes @Priority(javax.interceptor.Interceptor.Priority.APPLICATION) LoggedInEvent event) { ... }
 ----
 
-If the `@Priority` annotation is not specified, the default value is `javax.interceptor.Interceptor.Priority.APPLICATION + 500`.
+Note the following:
+
+* If the `@Priority` annotation is not specified, the default value is `javax.interceptor.Interceptor.Priority.APPLICATION + 500`.
+* If two or more observer methods are assigned the same priority, the order in which they are invoked is undefined and is therefore unpredictable.
 
 [[GKHIH]]
 
@@ -206,4 +209,18 @@ payload. The fired event is then consumed by the observer methods.
 Firing Events Asynchronously
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To activate an event asynchronously, call the `javax.enterprise.event.Event.fireAsync` method. When events are fired asynchronously, observer methods are notified asynchronously; consequently, observer method ordering cannot be guaranteed. Observer method invocation and the firing of asynchronous events occur on separate threads. 
+To activate an event asynchronously, call the `javax.enterprise.event.Event.fireAsync` method. This method calls all resolved asynchronous observers in one or more different threads.
+
+[source,oac_no_warn]
+----
+@Inject Event<LoggedInEvent> loggedInEvent;
+
+public void login() {
+    ...
+    loggedInEvent.fireAsync( new LoggedInEvent(user) );
+}
+----
+
+The invocation of the `fireAsync()` method returns immediately.
+
+When events are fired asynchronously, observer methods are notified asynchronously. Consequently, observer method ordering cannot be guaranteed, because observer method invocation and the firing of asynchronous events occur on separate threads.
