@@ -1,0 +1,110 @@
+type=page
+status=published
+title=JSON Binding
+next=jsonb003.html
+prev=jsonb001.html
+~~~~~~
+
+[[overview-of-the-json-binding-api]]
+Overview of the JSON Binding API
+--------------------------------
+
+This section provides basic instructions for using the JSON-B client API. The instructions provide a
+basis for understanding the link:jsonb003.html[jsonbbasics Example Application].
+Refer to the link:http://json-b.net/index.html[JSON-B] project page for API documentation and a more detailed
+User Guide.
+
+The following topics are addressed here:
+
+* link:#creating-a-jasonb-instance[Creating a jasonb Instance]
+* link:#using-the-default-mapping[Using the Default Mapping]
+* link:#using-customizations[Using Customizations]
+* link:#using-annotations[Using Annotations]
+
+
+[[creating-a-jasonb-nstance]]
+Creating a jasonb Instance
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A `jsonb` instance provides access to methods for binding objects to JSON.
+A single `jsonb` instance is required for most applications. A `jsonb` instance
+is created using the `JsonbBuilder` interface, which is a client's entry point
+to the JSON Binding API. For example:
+
+[source,oac_no_warn]
+----
+Jsonb jsonb = JsonbBuilder.create();
+----
+
+
+[[using-the-default-mapping]]
+Using the Default Mapping
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+JSON-B provides default mappings for serializing and deserializing basic Java and Java SE types as well
+Java date and time classes. To use the default mappings and mapping behavior, create a josnb instance
+and use the `toJson` method to serialize to JSON and the `fromJson` method to deserialize back to an
+object. The following example binds a simple `Person` object that contains a single `name` field.
+
+[source,oac_no_warn]
+----
+Jsonb jsonb = JsonbBuilder.create();
+
+Person person = new Person();
+person.name = "Fred";
+
+Jsonb jsonb = JsonbBuilder.create();
+
+// serialize to JSON
+String result = jsonb.toJson(person);
+
+// deserialize from JSON
+person = jsonb.fromJson("{name:\"joe"\"}", Person.class);
+
+----
+
+[[using-customizations]]
+Using Customizations
+~~~~~~~~~~~~~~~~~~~~
+JSON-B supports many ways to customize the default mapping behavior. For runtime
+customizations, a `JsonbConfig` configuration object is used when creating the `jsonbinstance`. The `JsonbConfig`
+class supports many configuration options and also includes advanced options for binding custom types. For
+advanced options, see the `JsonbAdapter` interface and the `JsonbSerializer` and `JsonbDeserializer` interfaces.
+
+The following example creates a configuration object that sets the `FORMATTING` property to specify
+whether or not the serialized JSON data is formatted with linefeeds and indentation.
+
+
+[source,oac_no_warn]
+----
+JsonbConfig config = new JsonbConfig()
+    .withFormatting(true);
+
+Jsonb jsonb = JsonbBuilder.create(config);
+----
+
+[[using-annotations]]
+Using Annotations
+~~~~~~~~~~~~~~~~~
+JSON-B includes many annotations that can be used at compile time to customize the default mapping behavior.
+The following example uses the `@JsonbProperty` annotation to change the `name` field to `person-name` when
+the object is serialized to JSON.
+
+[source,oac_no_warn]
+----
+public class Person {
+    @JsonbProperty("person-name")
+    private String name;
+}
+----
+
+The resulting JSON document is written as:
+
+[source,oac_no_warn]
+----
+
+
+{
+    "person-name": "Fred",
+}
+----

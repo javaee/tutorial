@@ -1,0 +1,83 @@
+type=page
+status=published
+title=JSON Binding
+next=jsonb004.html
+prev=jsonb002.html
+~~~~~~
+
+[[running-the-jsonbbasics-example-application]]
+Running the jsonbbasics Example Application
+-------------------------------------------
+
+This section describes how to build and run the `jsonbbasics` example
+application. This example is a web application that demonstrates how to
+serialize an object to JSON and how to deserialize JSON to an
+object.
+
+The `jsonbbasics` example application is in the
+`_tut-install_/examples/web/jsonb/jsonbbasics` directory.
+
+The following topics are addressed here:
+
+* link:#components-of-the-jsonbbasics-example-application[Components of the jsonbbasics Example Application]
+* link:#running-the-jsonbbasics-example-application[Running the jsonbbasics Example Application]
+
+
+
+[[components-of-the-jsonbbasics-example-application]]
+Components of the jsonbbasics Example Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `jsonbbasics` example application contains the following files.
+
+* Two JavaServer Faces pages.
+
+** The `index.xhtml` page contains a form to collect data that is used to
+create a `Person` object.
+
+** The `jsongenerated.xhtml` page contains a text area that displays the data
+in JSON format.
+
+* The `jsonbBean.java` managed bean, which is a session-scoped
+managed bean that stores the data from the form and directs the
+navigation between the Facelets pages. This file contains code that
+uses the JSON Binding API.
+
+
+
+[[running-the-jsonbbasics-example-application]]
+Running the jsonbbasics Example Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section describes how to run the `jsonbbasics` example application
+from the command line using Maven.
+
+
+To run the jsonbbasics example application using Maven:
+
+
+1.  Make sure that GlassFish Server has been started (see
+link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
+Server]).
+2.  In a terminal window, go to:
++
+[source,oac_no_warn]
+----
+tut-install/examples/web/jsonb/jsonbbasics
+----
+3.  Enter the following command to deploy the application:
++
+[source,oac_no_warn]
+----
+mvn install
+----
+4.  Open a web browser window and enter the following address:
++
+[source,oac_no_warn]
+----
+http://localhost:8080/jsonbbasics/
+----
+5.  Enter data on form and click Serialize to JSON to submit
+the form. The following page shows the JSON format of the object data.
+6.  Click Deserialize JSON. The index page displays and contains the fields populated from
+the object data.

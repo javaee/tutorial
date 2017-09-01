@@ -2,7 +2,7 @@ type=page
 status=published
 title=Internationalizing and Localizing Web Applications
 next=webi18n001.html
-prev=jsonb.html
+prev=jsonb004.html
 ~~~~~~
 Internationalizing and Localizing Web Applications
 ==================================================
