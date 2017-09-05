@@ -18,7 +18,7 @@ the `f:websocket` tag.
 [[attributes-of-the-f:websocket-tag]]
 
 [cols="1,1,2",options="header",]
-.Table 17-1 Attributes of the `f:websocket` Tag
+Table 17-1 Attributes of the `f:websocket` Tag
 |===
 |Name |Type |Description
 
