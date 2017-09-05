@@ -19,7 +19,6 @@ Using Annotations to Configure Managed Beans
 a|
 [.lead]
 *Note*:
-
 In JSF 2.3, managed bean annotations are deprecated; CDI is now the
 preferred approach.
 
