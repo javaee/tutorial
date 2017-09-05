@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JSON Binding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jsonb.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonb002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="json-binding-in-the-java-ee-platform">JSON Binding in the Java EE Platform</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java EE includes support for JSR 367, which provides an API that can serialize
+Java objects to JSON documents and deserialize JSON documents to Java objects. The
+Java API for JSON Binding contains the following packages:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>javax.json.bind</code> package contains the binding interface, the builder interface, and
+a configuration class. <a href="#main-classes-and-interfaces-in-bind">Table 20-1</a> lists the main classes
+and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.json.bind.adapter</code> package contains the <code>JsonbAdapter</code> interface, which provides
+methods for binding custom Java types by converting them to known types.</p>
+</li>
+<li>
+<p>The <code>javax.json.bind.annotation</code> package defines annotations that can be used to customize default
+binding behavior. Annotations can be used for field, JavaBean property, type, or package
+elements.</p>
+</li>
+<li>
+<p>The <code>javax.json.bind.config</code> package interfaces and classes for customizing default binding behavior.
+<a href="#main-classes-and-interfaces-in-config">Table 20-2</a> lists the main classes
+and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.json.bind.serializer</code> package contains interfaces that are used to create serialization and
+deserialization routines for custom types that cannot be easily mapped using the <code>JsonbAdapter</code> methods.
+<a href="#main-classes-and-interfaces-in-serializer">Table 20-3</a> lists the main interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.json.bind.spi</code> package contains a Service Provider Interface (SPI) for  creating
+JSON Binding implementations. This package contains the <code>JsonbProvider</code> class, which
+contains the methods that a service provider implements.</p>
+</li>
+</ul>
+</div>
+<div id="main-classes-and-interfaces-in-bind" class="paragraph">
+<p><strong>Table 20-1 Main Classes and Interfaces in javax.json.bind</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Jsonb</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the JSON-B methods for serializing Java objects to JSON and deserailizing
+JSON to Java objects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonBuilder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used by clients to create <code>Jsonb</code> instances.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonbConfig</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to set configuration properties on <code>Jsonb</code> instances. Properties include
+binding strategies and properties for configuring custom serializers and deserializers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonbException</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that a problem occurred during JSON binding.</p></td>
+</tr>
+</tbody>
+</table>
+<div id="main-classes-and-interfaces-in-config" class="paragraph">
+<p><strong>Table 20-2 Main Classes and Interfaces in javax.json.bind.config</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PropertyNamingStrategy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to set how property names are translated.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PropertyVisibilityStrategy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to set whether fields and methods should be considered properties
+overriding the default scope and field access behavior.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BinaryDataStrategy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to set binary encoding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PropertyOrderStrategy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to set how properties are ordered during serialization.</p></td>
+</tr>
+</tbody>
+</table>
+<div id="main-classes-and-interfaces-in-serializer" class="paragraph">
+<p><strong>Table 20-3 Main Classes and Interfaces in javax.json.bind.serializer</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonbDeserializer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to create a deserialization routine for a custom type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JsonbSerializer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to create a serialization routine for a custom type.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jsonb.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jsonb002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+
+</body>
+</html>

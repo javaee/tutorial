@@ -54,7 +54,56 @@
 <div class="sect1">
 <h2 id="using-ajax-with-websockets">Using Ajax With WebSockets</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>If you want to perform complex UI updates depending on the received push
+message, you can nest the <code>f:ajax</code> tag inside the <code>f:websocket</code> tag. See the
+following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:panelGroup id="foo"&gt;
+... (some complex UI here) ...
+&lt;/h:panelGroup&gt;
+&lt;h:form&gt;
+&lt;f:websocket channel="someChannel" scope="view"&gt;
+&lt;f:ajax event="someEvent"
+listener="#{bean.pushed}" render=":foo" /&gt;
+&lt;/f:websocket&gt;
+&lt;/h:form&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the push message simply represents the ajax event name. You can use any
+custom event name.</p>
+</div>
+<div class="paragraph">
+<p><code>someChannel.send("someEvent");</code></p>
+</div>
+<div class="paragraph">
+<p>An alternative is to combine the <code>f:websocket</code> tag with the <code>h:commandScript</code> tag.
+The <code>&lt;f:websocket onmessage&gt;</code> references exactly the <code>&lt;h:commandScript name&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;h:panelGroup id="foo"&gt;
+... (some complex UI here) ...
+&lt;/h:panelGroup&gt;
+&lt;f:websocket channel="someChannel" scope="view"
+onmessage="pushed" /&gt;
+&lt;h:form&gt;
+&lt;h:commandScript name="pushed"
+action="#{bean.pushed}" render=":foo" /&gt;
+&lt;/h:form&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you pass a <code>Map&lt;String,V&gt;</code> or a JavaBean as the push message object, then all
+entries or properties will transparently be available as request parameters in
+the command script method <code>#{bean.pushed}</code>.</p>
+</div>
 </div>
 </div>
 

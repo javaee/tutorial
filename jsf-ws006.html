@@ -54,7 +54,67 @@
 <div class="sect1">
 <h2 id="websocket-security-considerations">WebSocket Security Considerations</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>If the WebSocket is declared in a page which is restricted to logged-in users
+only with a specific role, then you might want to add the push handshake request
+URL to the set of restricted URLs.</p>
+</div>
+<div class="paragraph">
+<p>The push handshake request URL is composed of the URI prefix, <code>/javax.faces.push/</code>,
+followed by the channel name. In the example of container managed security,
+which has already restricted an example page, <code>/user/foo.xhtml</code>, to logged-in
+users with the example role, <code>USER</code>, on the example URL pattern, <code>/user/*</code>, in
+<code>web.xml</code>, see below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;security-constraint&gt;
+&lt;web-resource-collection&gt;
+&lt;web-resource-name&gt;Restrict access to role USER.
+&lt;/web-resource-name&gt;
+&lt;url-pattern&gt;/user/*&lt;/url-pattern&gt;
+&lt;/web-resource-collection&gt;
+&lt;auth-constraint&gt;
+&lt;role-name&gt;USER&lt;/role-name&gt;
+&lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the page, <code>/user/foo.xhtml</code>, contains <code>&lt;f:websocket channel="foo"&gt;</code>, then you
+must add a restriction on the push handshake request URL pattern of
+<code>/javax.faces.push/foo</code>, as shown next:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">&lt;security-constraint&gt;
+&lt;web-resource-collection&gt;
+&lt;web-resource-name&gt;Restrict access to role USER.
+&lt;/web-resource-name&gt;
+&lt;url-pattern&gt;/user/*&lt;/url-pattern&gt;
+&lt;url-pattern&gt;/javax.faces.push/foo&lt;/url-pattern&gt;
+&lt;/web-resource-collection&gt;
+&lt;auth-constraint&gt;
+&lt;role-name&gt;USER&lt;/role-name&gt;
+&lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As extra security, particularly for those public channels which cannot be
+restricted by security constraints, the <code>f:websocket</code> tag will register all
+previously declared channels in the current HTTP session, and any incoming
+WebSocket open request will be checked for whether it matches these channels
+in the current HTTP session. If the channel is unknown (for example, randomly
+guessed or spoofed by end users or manually reconnected after the session
+is expired), then the WebSocket will immediately be closed with close reason
+code, <code>CloseCodes.VIOLATED_POLICY (1008)</code>. Also, when the HTTP session gets
+destroyed, all session and view-scoped channels which are still open will
+explicitly be closed from the server side with close reason code,
+<code>CloseCodes.NORMAL_CLOSURE (1000)</code>. Only application-scoped sockets remain open
+and are still reachable from the server even when the session or view associated
+with the page in the client side is expired.</p>
+</div>
 </div>
 </div>
 
