@@ -51,7 +51,7 @@ mechanism, Facelets uses XML namespace declarations. link:#GJBOX[Table
 
 *Table 8-1 Tag Libraries Supported by Facelets*
 
-[width="99%",cols="30%,30%,5%,10%,25%"]
+[width="99%",cols="25%,25%,10%,15%,20%"]
 |=======================================================================
 |*Tag Library*|*URI*|*Prefix*|*Example*|*Contents*
 |JavaServer Faces Facelets Tag Library
