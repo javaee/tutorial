@@ -383,9 +383,7 @@ Web Service Clients
 ~~~~~~~~~~~~~~~~~~~
 
 A web service client can access a Java EE application in two ways.
-First, the client can access a web service created with JAX-WS. (For
-more information on JAX-WS, see link:jaxws.html#BNAYL[Chapter 29,
-"Building Web Services with JAX-WS"].) Second, a web service client can
+First, the client can access a web service created with JAX-WS. Second, a web service client can
 invoke the business methods of a stateless session bean. Message beans
 cannot be accessed by web service clients.
 
@@ -450,5 +448,3 @@ parameters in remote methods should be relatively coarse-grained. A
 coarse-grained object contains more data than a fine-grained one, so
 fewer access calls are required. For the same reason, the parameters of
 the methods called by web service clients should also be coarse-grained.
-
-

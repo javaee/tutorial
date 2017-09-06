@@ -1,7 +1,7 @@
 type=page
 status=published
 title=Deciding Which Type of Web Service to Use
-next=jaxws.html
+next=jaxrs.html
 prev=webservices-intro002.html
 ~~~~~~
 Deciding Which Type of Web Service to Use
@@ -32,5 +32,3 @@ application because it is easier for many types of clients to consume
 RESTful web services while enabling the server side to evolve and scale.
 Clients can choose to consume some or all aspects of the service and
 mash it up with other web-based services.
-
-
