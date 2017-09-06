@@ -4,8 +4,8 @@ title=Preface
 next=partintro.html
 prev=title.html
 ~~~~~~
-Preface
-=======
+= Preface
+
 
 [[GEXAF]]
 
@@ -121,31 +121,31 @@ Conventions
 The following table describes the typographic conventions that are used
 in this book.
 
-[width="55%",cols="28%,72%,",options="header",]
+[width="99%",cols="20%,38%,37%"]
 |=======================================================================
-|Convention |Meaning |Example
-|Boldface |Boldface type indicates graphical user interface elements
+|*Convention* |*Meaning* |*Example*
+|*Boldface* |Boldface type indicates graphical user interface elements
 associated with an action or terms defined in text. a|
-From the File menu, choose Open Project.
+From the *File* menu, choose *Open Project*.
 
-A cache is a copy that is stored locally.
+A *cache* is a copy that is stored locally.
 
 |`Monospace` |Monospace type indicates the names of files and
 directories, commands within a paragraph, URLs, code in examples, text
 that appears on the screen, or text that you enter. a|
 Edit your `.login` file.
 
-Use `ls` `-a` to list all files.
+Use `ls -a` to list all files.
 
-`machine_name% you have mail.`
+`_machine_name_% you have mail.`
 
-|Italic |Italic type indicates book titles, emphasis, or placeholder
+|_Italic_ |Italic type indicates book titles, emphasis, or placeholder
 variables for which you supply particular values. a|
-Read Chapter 6 in the User's Guide.
+Read Chapter 6 in the _User's Guide_.
 
-Do not save the file.
+Do _not_ save the file.
 
-The command to remove a file is `rm` filename.
+The command to remove a file is `rm _filename_`.
 
 |=======================================================================
 
@@ -159,38 +159,35 @@ Default Paths and File Names
 The following table describes the default paths and file names that are
 used in this book.
 
-[width="51%",cols="38%,62%,",options="header",]
+[width="99%",cols="20%,38%,38%"]
 |=======================================================================
-|Placeholder |Description |Default Value
-|as-install |Represents the base installation directory for GlassFish
+|*Placeholder* |*Description* |*Default Value*
+|`_as-install_` |Represents the base installation directory for GlassFish
 Server or the SDK of which GlassFish Server is a part. a|
 Installations on the Solaris operating system, Linux operating system,
 and Mac operating system:
 
-user's-home-directory`/glassfish4/glassfish`
+`_user's-home-directory_/glassfish5/glassfish`
 
 Windows, all installations:
 
-SystemDrive`:\glassfish4\glassfish`
+`_SystemDrive_:\glassfish5\glassfish`
 
-|as-install-parent |Represents the parent of the base installation
+|`_as-install-parent_` |Represents the parent of the base installation
 directory for GlassFish Server. a|
 Installations on the Solaris operating system, Linux operating system,
 and Mac operating system:
 
-user's-home-directory`/glassfish4`
+`_user's-home-directory_/glassfish5`
 
 Windows, all installations:
 
-SystemDrive`:\glassfish4`
+`_SystemDrive_:\glassfish5`
 
-|tut-install |Represents the base installation directory for the Java EE
+|`_tut-install_` |Represents the base installation directory for the Java EE
 Tutorial after you install GlassFish Server or the SDK and run the
-Update Tool. |as-install-parent`/docs/javaee-tutorial`
+Update Tool. |`_as-install-parent_/docs/javaee-tutorial`
 
-|domain-dir |Represents the directory in which a domain's configuration
-is stored. |as-install`/domains/domain1`
+|`_domain-dir_` |Represents the directory in which a domain's configuration
+is stored. |`_as-install_/domains/domain1`
 |=======================================================================
-
-
-

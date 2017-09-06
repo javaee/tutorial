@@ -27,4 +27,4 @@ For more information about CDI, see
 * Managed Beans specification, which is part of the Java Platform,
 Enterprise Edition (Java EE) Specification:
 +
-`http://jcp.org/en/jsr/detail?id=342`
+`http://jcp.org/en/jsr/detail?id=366`

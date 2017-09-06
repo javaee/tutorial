@@ -12,10 +12,10 @@ Using the Configurators Interfaces
 
 The CDI 2.0 specification defines the following Configurators interfaces, which are used for dynamically defining and modifying CDI objects:
 
-[cols="2*[<.^]",options="header"]
+[width="99%",cols="30%,70%"]
 |=======================================================================
-|Interface |Description
-a|
+|*Interface* |*Description*
+|
 
 `AnnotatedTypeConfigurator` SPI
 
