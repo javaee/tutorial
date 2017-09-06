@@ -14,7 +14,8 @@
   <td align="left" valign="top">
   <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
   <b>The Java EE Tutorial</b><br />
-  E63026-01
+  E63026-01<br />
+	  <p class="beta">Beta Draft (Pre-General Availability)</p>
   </td>
   </tr>
 </table>
