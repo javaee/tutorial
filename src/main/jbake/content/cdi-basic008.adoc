@@ -23,9 +23,9 @@ described in link:#GJDBG[Table 24-1], depending on how you are using it.
 
 Table 24-1 Scopes
 
-[width="49%",cols="45%,55%,",options="header",]
+[width="99%",cols="25%,25%,50%"]
 |=======================================================================
-|Scope |Annotation |Duration
+|*Scope* |*Annotation* |*Duration*
 |Request |`@RequestScoped` |A user's interaction with a web application
 in a single HTTP request.
 
