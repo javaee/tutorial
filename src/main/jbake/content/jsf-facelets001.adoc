@@ -4,8 +4,8 @@ title=What Is Facelets?
 next=jsf-facelets002.html
 prev=jsf-facelets.html
 ~~~~~~
-What Is Facelets?
-=================
+= What Is Facelets?
+
 
 [[GIJTU]]
 
@@ -49,11 +49,11 @@ mechanism, Facelets uses XML namespace declarations. link:#GJBOX[Table
 
 [[sthref29]][[GJBOX]]
 
-Table 8-1 Tag Libraries Supported by Facelets
+*Table 8-1 Tag Libraries Supported by Facelets*
 
-[width="60%",cols="22%,,20%,30%,28%",options="header",]
+[width="99%",cols="30%,30%,5%,10%,25%"]
 |=======================================================================
-|Tag Library |URI |Prefix |Example |Contents
+|*Tag Library*|*URI*|*Prefix*|*Example*|*Contents*
 |JavaServer Faces Facelets Tag Library
 |`http://xmlns.jcp.org/jsf/facelets` |`ui:` a|
 `ui:component`
@@ -140,5 +140,3 @@ of managed beans. EL expressions can be used to bind component objects
 or values to methods or properties of managed beans that are used as
 backing beans. For more information on using EL expressions, see
 link:jsf-develop001.html#BNAQP[Using the EL to Reference Managed Beans].
-
-
