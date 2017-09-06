@@ -552,6 +552,38 @@ as a result of the message authentication.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="java-ee-security-api">Java EE Security API</h3>
+<div class="paragraph">
+<p>The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
+Java EE Security introduces the following APIs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SecurityContext</code> interface</p>
+<div class="paragraph">
+<p>Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.</p>
+</div>
+</li>
+<li>
+<p><code>HttpAuthenticationMechanism</code> interface</p>
+<div class="paragraph">
+<p>Authenticates callers of a web application, and is specified only for use in the servlet container.</p>
+</div>
+</li>
+<li>
+<p><code>IdentityStore</code> interface</p>
+<div class="paragraph">
+<p>Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Java EE 8 platform requires Java EE Security API 1.0.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="java-api-for-websocket">Java API for WebSocket</h3>
 <div class="paragraph">
 <p>WebSocket is an application protocol that provides full-duplex
@@ -606,38 +638,6 @@ model.</p>
 </div>
 <div class="paragraph">
 <p>The Java EE 8 platform requires JSON-P 1.1.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="java-ee-security-api">Java EE Security API</h3>
-<div class="paragraph">
-<p>The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
-Java EE Security introduces the following APIs:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SecurityContext</code> interface</p>
-<div class="paragraph">
-<p>Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.</p>
-</div>
-</li>
-<li>
-<p><code>HttpAuthenticationMechanism</code> interface</p>
-<div class="paragraph">
-<p>Authenticates callers of a web application, and is specified only for use in the servlet container.</p>
-</div>
-</li>
-<li>
-<p><code>IdentityStore</code> interface</p>
-<div class="paragraph">
-<p>Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The Java EE 8 platform requires Java EE Security API 1.0.</p>
 </div>
 </div>
 <div class="sect2">
