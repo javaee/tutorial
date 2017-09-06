@@ -14,7 +14,7 @@ JAX-RS: Advanced Topics and an Example
 -----------------------------------------
 
 
-The Java API for RESTful Web Services (JAX-RS, defined in JSR 339) is
+The Java API for RESTful Web Services (JAX-RS, defined in JSR 370) is
 designed to make it easy to develop applications that use the REST
 architecture. This chapter describes advanced features of JAX-RS. If you
 are new to JAX-RS, see link:jaxrs.html#GIEPU[Chapter 30, "Building
@@ -38,5 +38,3 @@ Technology and CDI]
 * link:jaxrs-advanced006.html#GKQBQ[Runtime Content Negotiation]
 * link:jaxrs-advanced007.html#GKKNJ[Using JAX-RS with JAXB]
 * link:jaxrs-advanced008.html#GKOIB[The customer Example Application]
-
-

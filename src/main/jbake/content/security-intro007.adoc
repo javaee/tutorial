@@ -15,9 +15,9 @@ Further Information about Security
 
 For more information about security in Java EE applications, see
 
-* Java EE 7 specification:
+* Java EE 8 specification:
 +
-`http://jcp.org/en/jsr/detail?id=342`
+`http://jcp.org/en/jsr/detail?id=366`
 * Enterprise JavaBeans 3.2 specification:
 +
 `http://jcp.org/en/jsr/detail?id=345`
@@ -26,12 +26,10 @@ For more information about security in Java EE applications, see
 `http://jcp.org/en/jsr/detail?id=109`
 * Java SE security information:
 +
-`http://docs.oracle.com/javase/7/docs/technotes/guides/security/`
+`http://docs.oracle.com/javase/8/docs/technotes/guides/security/`
 * Java Servlet 4.0 specification:
 +
 `http://jcp.org/en/jsr/detail?id=369`
 * Java Authorization Contract for Containers 1.5 specification:
 +
 `http://jcp.org/en/jsr/detail?id=115`
-
-
