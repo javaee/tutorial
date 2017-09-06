@@ -25,7 +25,7 @@ include the following:
 
 * JSR 330, Dependency Injection for Java
 * The Managed Beans specification, an offshoot of the Java EE platform
-specification (JSR 342)
+specification (JSR 366)
 
 The most fundamental services provided by CDI are as follows.
 
