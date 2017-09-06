@@ -14,14 +14,12 @@ Using the f:websocket Tag
 link:#attributes-of-the-f:websocket-tag[Table 17-1] describes the attributes of
 the `f:websocket` tag.
 
-
 [[attributes-of-the-f:websocket-tag]]
 
-[cols="1,1,2",options="header",]
-.Table 17-1 Attributes of the `f:websocket` Tag
-|===
-|Name |Type |Description
-
+*Table 17-1 Attributes of the `f:websocket` Tag*
+[width=99%,cols="20%,20%,60%"]
+|===============================================
+|*Name*|*Type*|*Description*
 |`channel` |String |Required. The name of the WebSocket channel. It may not
 be an EL expression and may only contain alphanumeric characters, hyphens,
 underscores, and periods. All open WebSockets on the same channel name will
@@ -88,4 +86,4 @@ while the WebSocket is already opened, then the WebSocket will implicitly be clo
 bean property bound to the component instance for the `UIComponent` created by
 this tag.
 
-|===
+|===============================================

@@ -34,7 +34,7 @@ link:overview.html#BNAAW[1 Overview]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:overview001.html#A1046550[Introduction to Java EE]
-* link:overview002.html#GIQVH[Java EE 7 Platform Highlights]
+* link:overview002.html#GIQVH[Java EE 8 Platform Highlights]
 * link:overview003.html#BNAAX[Java EE Application Model]
 * link:overview004.html#BNAAY[Distributed Multitiered Applications]
 
@@ -68,7 +68,7 @@ link:overview.html#BNAAW[1 Overview]
 ** link:overview006.html#BNABV[WSDL Standard Format]
 * link:overview007.html#BNABX[Java EE Application Assembly and
 Deployment]
-* link:overview008.html#BNACJ[Java EE 7 APIs]
+* link:overview008.html#BNACJ[Java EE 8 APIs]
 
 ** link:overview008.html#BNACL[Enterprise JavaBeans Technology]
 
@@ -107,9 +107,13 @@ Containers]
 ** link:overview008.html#GIRGP[Java Authentication Service Provider
 Interface for Containers]
 
+** link:overview008.html#java-ee-security-api[Java EE Security API]
+
 ** link:overview008.html#CJAHDJBJ[Java API for WebSocket]
 
 ** link:overview008.html#CJAGIEEI[Java API for JSON Processing]
+
+** link:overview008.html#java-api-for-json-binding[Java API for JSON Binding]
 
 ** link:overview008.html#CJAFGFCJ[Concurrency Utilities for Java EE]
 
@@ -1293,9 +1297,18 @@ Applications]
 * link:cdi-adv006.html#GKHJX[Using Interceptors in CDI Applications]
 * link:cdi-adv007.html#GKHQF[Using Decorators in CDI Applications]
 * link:cdi-adv008.html#GKHQC[Using Stereotypes in CDI Applications]
+* link:cdi-adv009.html#using-the-built-in-annotation-literals[Using the Built-In Annotation Literals]
+* link:cdi-adv009.html#using-the-configurators-interfaces[Using the Configurators Interfaces]
+
+[[bootstrapping-a-cdi-container-in-java-se]]
+link:cdi-bootstrap-se8.html#bootstrapping-a-cdi-container-in-java-se[27 Bootstrapping a CDI Container in Java SE]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* link:cdi-bootstrap-se8001.html#the-bootstrap-api[The Bootstrap API]
+* link:cdi-bootstrap-se8002#configuring-the-cdi-container[Configuring the CDI Container]
 
 [[running-the-advanced-contexts-and-dependency-injection-examples]]
-link:cdi-adv-examples.html#GKHRE[27 Running the Advanced Contexts and Dependency Injection Examples]
+link:cdi-adv-examples.html#GKHRE[28 Running the Advanced Contexts and Dependency Injection Examples]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:cdi-adv-examples001.html#A1251406[Building and Running the CDI

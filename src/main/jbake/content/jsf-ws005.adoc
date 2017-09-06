@@ -93,7 +93,7 @@ function websocketOpenListener(channel) {
 }
 ----
 
-The `onopen` JavaScript listener function is invoked with one argument: channel
+The `onopen` JavaScript listener function is invoked with one argument: `channel`
 (the channel name, particularly useful if you have a global listener).
 
 You can use the optional `onclose` JavaScript listener function to listen for
