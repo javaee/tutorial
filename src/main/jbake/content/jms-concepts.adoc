@@ -4,8 +4,9 @@ title=Java Message Service Concepts
 next=jms-concepts001.html
 prev=partmessaging.html
 ~~~~~~
-Java Message Service Concepts
-=============================
+= Java Message Service Concepts
+:description: Java message service allows applications to create, send, and receive messages.
+:keywords: jms, glassfish
 
 [[BNCDQ]]
 
@@ -28,5 +29,3 @@ The following topics are addressed here:
 * link:jms-concepts005.html#BNCGL[Using the JMS API in Java EE
 Applications]
 * link:jms-concepts006.html#BNCGU[Further Information about JMS]
-
-
