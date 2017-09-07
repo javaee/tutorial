@@ -57,11 +57,11 @@ when no `event` attribute is specified, the default event is
 
 [[sthref69]][[GKDER]]
 
-Table 13-1 Attributes of the f:ajax Tag
+*Table 13-1 Attributes of the f:ajax Tag*
 
-[width="48%",cols="28%,72%,",options="header",]
+[width="99%",cols="15%,25%,60%"]
 |=======================================================================
-|Name |Type |Description
+|*Name* |*Type* |*Description*
 |`disabled` |`javax.el.ValueExpression` that evaluates to a `Boolean` |A
 `Boolean` value that identifies the tag status. A value of `true`
 indicates that the Ajax behavior should not be rendered. A value of
@@ -116,11 +116,11 @@ The keywords listed in link:#GKNLK[Table 13-2] can be used with the
 
 [[sthref70]][[GKNLK]]
 
-Table 13-2 Execute and Render Keywords
+*Table 13-2 Execute and Render Keywords*
 
-[width="14%",cols="100%,",options="header",]
+[width="60%",cols="15%,45%"]
 |===============================================
-|Keyword |Description
+|*Keyword* |*Description*
 |`@all` |All component identifiers
 |`@form` |The form that encloses the component
 |`@none` |No component identifiers

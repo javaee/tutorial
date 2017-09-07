@@ -4,8 +4,8 @@ title=Registering Listeners on Components
 next=jsf-page-core003.html
 prev=jsf-page-core001.html
 ~~~~~~
-Registering Listeners on Components
-===================================
+= Registering Listeners on Components
+
 
 [[BNASZ]]
 
@@ -47,11 +47,11 @@ link:#GKCLY[Table 11-5], one of which must be used.
 
 [[sthref64]][[GKCLY]]
 
-Table 11-5 Attributes for the f:valueChangeListener Tag
+*Table 11-5 Attributes for the f:valueChangeListener Tag*
 
-[width="21%",cols="100%,",options="header",]
+[width="60%",cols="10%,50%"]
 |=======================================================================
-|Attribute |Description
+|*Attribute* |*Description*
 |`type` |References the fully qualified class name of a
 `ValueChangeListener` implementation. Can accept a literal or a value
 expression.
@@ -112,7 +112,7 @@ Here is an example of an `h:commandLink` tag that references an
 [source,oac_no_warn]
 ----
 <h:commandLink id="Duke" action="bookstore">
-    <f:actionListener 
+    <f:actionListener
         type="javaeetutorial.dukesbookstore.listeners.LinkBookChangeListener" />
     <h:outputText value="#{bundle.Book201}"/>
 </h:commandLink>
@@ -193,5 +193,3 @@ In the preceding example, the `f:setPropertyActionListener` tag's
 value expression `requestScope.book`, which is where the `book` object
 referenced by the `value` attribute is stored when the `commandLink` or
 the `commandButton` component is activated.
-
-

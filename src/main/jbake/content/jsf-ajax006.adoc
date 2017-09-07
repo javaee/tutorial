@@ -4,8 +4,8 @@ title=Handling Errors
 next=jsf-ajax007.html
 prev=jsf-ajax005.html
 ~~~~~~
-Handling Errors
-===============
+= Handling Errors
+
 
 [[GKDCB]]
 
@@ -31,11 +31,11 @@ one of the valid error values listed in link:#GKGOU[Table 13-4].
 
 [[sthref72]][[GKGOU]]
 
-Table 13-4 Valid Error Values for the Data Object status Property
+*Table 13-4 Valid Error Values for the Data Object status Property*
 
-[width="20%",cols="100%,",options="header",]
+[width="60%",cols="15%,45%"]
 |=======================================================================
-|Values |Description
+|*Values* |*Description*
 |`emptyResponse` |No Ajax response from server.
 
 |`httpError` |One of the valid HTTP errors: `request.status==null` or
@@ -55,5 +55,3 @@ Ajax request are handled by the `handlemyajaxerror` JavaScript function:
 ----
 <f:ajax event="click" render="errormessage" onerror="handlemyajaxerror"/>
 ----
-
-

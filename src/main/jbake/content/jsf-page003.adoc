@@ -78,11 +78,11 @@ list.
 
 [[sthref56]][[GKVZA]]
 
-Table 10-11 Core Tags That Represent Items in a List
+*Table 10-11 Core Tags That Represent Items in a List*
 
 [width="99%",cols="30%,70%"]
 |======================================================
-|Tag |Function
+|*Tag* |*Function*
 |`f:selectItem` |Represents one item in a list of items
 |`f:selectItems` |Represents a set of items
 |======================================================

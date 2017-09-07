@@ -4,13 +4,14 @@ title=Writing Bean Properties
 next=jsf-develop003.html
 prev=jsf-develop001.html
 ~~~~~~
-Writing Bean Properties
-=======================
+= Writing Bean Properties
+
 
 [[BNATY]]
 
 [[writing-bean-properties]]
-= Writing Bean Properties
+Writing Bean Properties
+-----------------------
 
 
 As explained in link:jsf-develop001.html#BNAQM[Managed Beans in
@@ -76,11 +77,11 @@ the acceptable types of their values.
 
 [[sthref67]][[BNAUA]]
 
-Table 12-1 Acceptable Types of Component Values
+*Table 12-1 Acceptable Types of Component Values*
 
-[width="32%",cols="100%,",options="header",]
+[width="99%",cols="25%,75"]
 |=======================================================================
-|Component Class |Acceptable Types of Component Values
+|*Component Class* |*Acceptable Types of Component Values*
 |`UIInput`, `UIOutput`, `UISelectItem`, `UISelectOne` |Any of the basic
 primitive and numeric types or any Java programming language object type
 for which an appropriate `javax.faces.convert.Converter` implementation

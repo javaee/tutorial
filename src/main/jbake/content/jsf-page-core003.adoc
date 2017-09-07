@@ -4,13 +4,14 @@ title=Using the Standard Validators
 next=jsf-page-core004.html
 prev=jsf-page-core002.html
 ~~~~~~
-Using the Standard Validators
-=============================
+= Using the Standard Validators
+
 
 [[BNATC]]
 
 [[using-the-standard-validators]]
-= Using the Standard Validators
+Using the Standard Validators
+-----------------------------
 
 
 JavaServer Faces technology provides a set of standard classes and
@@ -21,11 +22,11 @@ validators from the page.
 
 [[sthref65]][[BNATD]]
 
-Table 11-6 The Validator Classes
+*Table 11-6 The Validator Classes*
 
-[width="53%",cols="51%,49%,",options="header",]
+[width="99%",cols="15%,15%,60%"]
 |=======================================================================
-|Validator Class |Tag |Function
+|*Validator Class* |*Tag* |*Function*
 |`BeanValidator` |`validateBean` |Registers a bean validator for the
 component.
 
