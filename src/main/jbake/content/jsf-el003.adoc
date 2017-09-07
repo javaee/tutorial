@@ -366,7 +366,7 @@ lifecycle, method expressions must always use the deferred evaluation
 syntax.
 
 Like lvalue expressions, method expressions can use the `.` and the `[]`
-operators. For example, #`{object.method}` is equivalent to
+operators. For example, `#{object.method}` is equivalent to
 #`{object["method"]}`. The literal inside the `[]` is converted to
 `String` and is used to find the name of the method that matches it.
 

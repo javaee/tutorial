@@ -26,7 +26,7 @@ request using some of these attributes.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Behind the scenes, the `jsf.ajax.request()` method of the JavaScript
 resource library collects the data provided by the `f:ajax` tag and
@@ -63,7 +63,7 @@ mouse click:
 
 [source,oac_no_warn]
 ----
-<h:commandButton id="submit" value="Submit"> 
+<h:commandButton id="submit" value="Submit">
     <f:ajax event="click" />
 </h:commandButton>
 <h:outputText id="result" value="#{userNumberBean.response}" />
@@ -109,12 +109,12 @@ The following code specifies that the `h:inputText` component with the
 
 [source,oac_no_warn]
 ----
-<h:inputText id="userNo" 
+<h:inputText id="userNo"
              title="Type a number from 0 to 10:"
              value="#{userNumberBean.userNumber}">
     ...
 </h:inputText>
-<h:commandButton id="submit" value="Submit"> 
+<h:commandButton id="submit" value="Submit">
     <f:ajax event="click" execute="userNo" />
 </h:commandButton>
 ----
@@ -150,12 +150,10 @@ tag, which refers to a method from the bean:
 
 [source,oac_no_warn]
 ----
-<f:ajax event="change" render="total" 
+<f:ajax event="change" render="total"
         listener="#{reservationBean.calculateTotal}"/>
 ----
 
 Whenever either the price or the number of tickets ordered changes, the
 `calculateTotal` method of `ReservationBean` recalculates the total cost
 of the tickets and displays it in the output component named `total`.
-
-

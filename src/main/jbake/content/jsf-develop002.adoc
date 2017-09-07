@@ -248,7 +248,7 @@ public void setTitle(String title) {
 }
 ----
 
-The UIData component (and UIRepeat) supports the Map and Iterable
+The UIData component (and UIRepeat) supports the `Map` and `Iterable`
 interfaces, as well as custom types.
 
 For UIData and UIRepeat, the supported types are:
