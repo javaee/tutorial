@@ -17,7 +17,7 @@ the `f:websocket` tag.
 [[attributes-of-the-f:websocket-tag]]
 
 *Table 17-1 Attributes of the `f:websocket` Tag*
-[width=99%,cols="20%,20%,60%"]
+[width=85%,cols="15%,15%,55%"]
 |===============================================
 |*Name*|*Type*|*Description*
 |`channel` |String |Required. The name of the WebSocket channel. It may not

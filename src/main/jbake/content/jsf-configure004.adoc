@@ -4,8 +4,8 @@ title=Using Faces Flows
 next=jsf-configure005.html
 prev=jsf-configure003.html
 ~~~~~~
-Using Faces Flows
-=================
+= Using Faces Flows
+
 
 [[CHDGFCJF]]
 
@@ -201,7 +201,7 @@ no value outside of the flow, and provides a link that navigates to the
 +
 [source,oac_no_warn]
 ----
-<p>Value (should be empty): 
+<p>Value (should be empty):
     "<h:outputText id="output" value="#{flowScope.value}" />"</p>
 
 <p><h:link outcome="index" value="Back to Start" /></p>
@@ -447,12 +447,12 @@ The configuration file for the join flow looks like this:
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee \
               http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
- 
+
     <flow-definition id="joinFlow">
         <flow-return id="returnFromJoinFlow">
             <from-outcome>#{joinFlowBean.returnValue}</from-outcome>
         </flow-return>
- 
+
         <inbound-parameter>
             <name>param1FromCheckoutFlow</name>
             <value>#{flowScope.param1Value}</value>
@@ -461,7 +461,7 @@ The configuration file for the join flow looks like this:
             <name>param2FromCheckoutFlow</name>
             <value>#{flowScope.param2Value}</value>
         </inbound-parameter>
-        
+
         <flow-call id="callcheckoutFlow">
             <flow-reference>
                 <flow-id>checkoutFlow</flow-id>
@@ -517,31 +517,31 @@ import javax.faces.flow.builder.FlowBuilderParameter;
 import javax.faces.flow.builder.FlowDefinition;
 
 class CheckoutFlow implements Serializable {
- 
+
     private static final long serialVersionUID = 1L;
- 
+
     @Produces
     @FlowDefinition
     public Flow defineFlow(@FlowBuilderParameter FlowBuilder flowBuilder) {
- 
+
         String flowId = "checkoutFlow";
         flowBuilder.id("", flowId);
-        flowBuilder.viewNode(flowId, 
+        flowBuilder.viewNode(flowId,
                 "/" + flowId + "/" + flowId + ".xhtml").
                 markAsStartNode();
- 
+
         flowBuilder.returnNode("returnFromCheckoutFlow").
                 fromOutcome("#{checkoutFlowBean.returnValue}");
- 
-        flowBuilder.inboundParameter("param1FromJoinFlow", 
+
+        flowBuilder.inboundParameter("param1FromJoinFlow",
                 "#{flowScope.param1Value}");
-        flowBuilder.inboundParameter("param2FromJoinFlow", 
+        flowBuilder.inboundParameter("param2FromJoinFlow",
                 "#{flowScope.param2Value}");
- 
+
         flowBuilder.flowCallNode("calljoin").flowReference("", "joinFlow").
-                outboundParameter("param1FromCheckoutFlow", 
+                outboundParameter("param1FromCheckoutFlow",
                     "#{checkoutFlowBean.name}").
-                outboundParameter("param2FromCheckoutFlow", 
+                outboundParameter("param2FromCheckoutFlow",
                     "#{checkoutFlowBean.city}");
         return flowBuilder.getFlow();
     }
@@ -609,8 +609,7 @@ For the `JoinFlowBean`, the return node is the `exithome.xhtml` page.
 [[sthref91]]
 
 [[to-build-package-and-deploy-the-checkout-module-example-using-netbeans-ide]]
-To Build, Package, and Deploy the checkout-module Example Using NetBeans
-IDE
+To Build, Package, and Deploy the checkout-module Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -687,5 +686,3 @@ flow.
 you will return to the first page of the calling flow. (You may see a
 warning, which you can ignore.) Click Exit Flow on that page to go to
 the specified return node.
-
-

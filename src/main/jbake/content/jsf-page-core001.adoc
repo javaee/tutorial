@@ -4,13 +4,14 @@ title=Using the Standard Converters
 next=jsf-page-core002.html
 prev=jsf-page-core.html
 ~~~~~~
-Using the Standard Converters
-=============================
+= Using the Standard Converters
+
 
 [[BNAST]]
 
 [[using-the-standard-converters]]
-= Using the Standard Converters
+Using the Standard Converters
+-----------------------------
 
 
 The JavaServer Faces implementation provides a set of `Converter`
@@ -29,11 +30,11 @@ their associated converter IDs.
 
 [[sthref60]][[CHDIHIIC]]
 
-Table 11-1 Converter Classes and Converter IDs
+*Table 11-1 Converter Classes and Converter IDs*
 
-[width="48%",cols="100%,",options="header",]
+[width="60%",cols="30%,30%"]
 |======================================================
-|Class in the javax.faces.convert Package |Converter ID
+|*Class in the javax.faces.convert Package* |*Converter ID*
 |`BigDecimalConverter` |`javax.faces.BigDecimal`
 |`BigIntegerConverter` |`javax.faces.BigInteger`
 |`BooleanConverter` |`javax.faces.Boolean`
@@ -206,11 +207,11 @@ attribute of the `convertDateTime` tag.
 
 [[sthref61]][[BNASW]]
 
-Table 11-2 Attributes for the f:convertDateTime Tag
+*Table 11-2 Attributes for the f:convertDateTime Tag*
 
-[width="36%",cols="37%,63%,",options="header",]
+[width="99%",cols="25%,25%,50%"]
 |=======================================================================
-|Attribute |Type |Description
+|*Attribute* |*Type* |*Description*
 |`binding` |`DateTimeConverter` |Used to bind a converter to a managed
 bean property.
 
@@ -257,11 +258,11 @@ See link:#CFHEABEI[Table 11-3] for additional information.
 
 [[sthref62]][[CFHEABEI]]
 
-Table 11-3 Type Attribute and Default Pattern Values
+*Table 11-3 Type Attribute and Default Pattern Values*
 
-[width="40%",cols="48%,52%,",options="header",]
+[width="99%",cols="25%,25%,50%"]
 |=======================================================================
-|Type Attribute |Class |Default When Pattern Is Not Specified
+|*Type Attribute* |*Class* |*Default When Pattern Is Not Specified*
 |`both` |`java.util.Date`
 |`DateFormat.getDateTimeInstance(dateStyle, timeStyle)`
 
@@ -339,11 +340,11 @@ attribute of the `convertNumber` tag.
 
 [[sthref63]][[BNASY]]
 
-Table 11-4 Attributes for the f:convertNumber Tag
+*Table 11-4 Attributes for the f:convertNumber Tag*
 
-[width="46%",cols="55%,45%,",options="header",]
+[width="99%",cols="25%,25%,50%"]
 |=======================================================================
-|Attribute |Type |Description
+|*Attribute* |*Type* |*Description*
 |`binding` |`NumberConverter` |Used to bind a converter to a managed
 bean property.
 

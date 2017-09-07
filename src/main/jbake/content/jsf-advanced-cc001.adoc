@@ -4,8 +4,8 @@ title=Attributes of a Composite Component
 next=jsf-advanced-cc002.html
 prev=jsf-advanced-cc.html
 ~~~~~~
-Attributes of a Composite Component
-===================================
+= Attributes of a Composite Component
+
 
 [[GKHWV]]
 
@@ -24,11 +24,11 @@ used attributes of this tag.
 
 [[sthref74]][[GKHVF]]
 
-Table 14-1 Commonly Used Attributes of the composite:attribute Tag
+*Table 14-1 Commonly Used Attributes of the composite:attribute Tag*
 
-[width="26%",cols="100%,",options="header",]
+[width="70%",cols="15%,55%"]
 |=======================================================================
-|Attribute |Description
+|*Attribute* |*Description*
 |`name` |Specifies the name of the composite component attribute to be
 used in the using page. Alternatively, the `name` attribute can specify
 standard event handlers such as `action`, `actionListener`, and managed
@@ -83,5 +83,3 @@ The following code snippet uses the `type` element:
 ----
 <composite:attribute name="dateofjoining" type="java.util.Date"/>
 ----
-
-

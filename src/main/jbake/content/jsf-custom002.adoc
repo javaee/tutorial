@@ -4,8 +4,8 @@ title=Determining Whether You Need a Custom Component or Renderer
 next=jsf-custom003.html
 prev=jsf-custom001.html
 ~~~~~~
-Determining Whether You Need a Custom Component or Renderer
-===========================================================
+= Determining Whether You Need a Custom Component or Renderer
+
 
 [[BNAVH]]
 
@@ -184,12 +184,12 @@ custom component, custom renderer, or custom tag.
 
 [[sthref76]][[BNAVL]]
 
-Table 15-1 Requirements for Custom Components, Custom Renderers, and
-Custom Tags
+*Table 15-1 Requirements for Custom Components, Custom Renderers, and
+Custom Tags*
 
-[width="60%",cols="34%,,66%",options="header",]
+[width="90%",cols="34%,30%,36%"]
 |=======================================================================
-|Custom Item |Must Have |Can Have
+|*Custom Item* |*Must Have* |*Can Have*
 |Custom component |Custom tag |Custom renderer or standard renderer
 
 |Custom renderer |Custom tag |Custom component or standard component
@@ -198,6 +198,3 @@ Custom Tags
 a custom renderer, or custom validator |Custom component or standard
 component associated with a custom renderer
 |=======================================================================
-
-
-
