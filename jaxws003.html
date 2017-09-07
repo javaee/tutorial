@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Types Supported by JAX-WS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b><br />
+  E63026-01<br />
+	  <p class="beta">Beta Draft (Pre-General Availability)</p>
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="jaxws002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxws004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="types-supported-by-jax-ws">Types Supported by JAX-WS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JAX-WS delegates the mapping of Java programming language types to and
+from XML definitions to JAXB. Application developers don&#8217;t need to know
+the details of these mappings but should be aware that not every class
+in the Java language can be used as a method parameter or return type in
+JAX-WS.</p>
+</div>
+<div class="paragraph">
+<p>The following sections explain the default schema-to-Java and
+Java-to-schema data type bindings:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#BNAZT">Schema-to-Java Mapping</a></p>
+</li>
+<li>
+<p><a href="#BNAZW">Java-to-Schema Mapping</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="schema-to-java-mapping">Schema-to-Java Mapping</h3>
+<div class="paragraph">
+<p>The Java language provides a richer set of data types than XML schema.
+<a href="#BNAZU">Table 29-1</a> lists the mapping of XML data types to Java data
+types in JAXB.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref135"></a><a id="BNAZU"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 29-1 Mapping of XML Data Types to Java Data Types in JAXB</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 27%;">
+<colgroup>
+<col style="width: 99.0099%;">
+<col style="width: 0.9901%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">XML Schema Type</th>
+<th class="tableblock halign-left valign-top">Java Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:string</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.math.BigInteger</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd.long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>long</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:short</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>short</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:decimal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.math.BigDecimal</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:float</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>float</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:double</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>double</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:QName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.namespace.QName</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:dateTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.XMLGregorianCalendar</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:base64Binary</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:hexBinary</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:unsignedInt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>long</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:unsignedShort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:unsignedByte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>short</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:time</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.XMLGregorianCalendar</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.XMLGregorianCalendar</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:g</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.XMLGregorianCalendar</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:anySimpleType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.Object</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:anySimpleType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:duration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.Duration</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:NOTATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.namespace.QName</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="java-to-schema-mapping">Java-to-Schema Mapping</h3>
+<div class="paragraph">
+<p><a href="#BNAZX">Table 29-2</a> shows the default mapping of Java classes to XML
+data types.</p>
+</div>
+<div class="paragraph">
+<p><a id="sthref136"></a><a id="BNAZX"></a></p>
+</div>
+<div class="paragraph">
+<p>Table 29-2 Mapping of Java Classes to XML Data Types in JAXB</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 49%;">
+<colgroup>
+<col style="width: 0.99%;">
+<col style="width: 99.01%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Java Class</th>
+<th class="tableblock halign-left valign-top">XML Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:string</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.math.BigInteger</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:integer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.math.BigDecimal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:decimal</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.Calendar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:dateTime</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:dateTime</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.namespace.QName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:QName</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.net.URI</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:string</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.XMLGregorianCalendar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:anySimpleType</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.datatype.Duration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:duration</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:anyType</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.awt.Image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:base64Binary</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.activation.DataHandler</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:base64Binary</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.transform.Source</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:base64Binary</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.UUID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xs:string</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="jaxws002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="jaxws004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<p align="center" class="beta">Beta Draft (Pre-General Availability)</p>
+
+</body>
+</html>
