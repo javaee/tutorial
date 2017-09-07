@@ -4,8 +4,8 @@ title=Servlet Lifecycle
 next=servlets003.html
 prev=servlets001.html
 ~~~~~~
-Servlet Lifecycle
-=================
+= Servlet Lifecycle
+
 
 [[BNAFI]]
 
@@ -58,11 +58,11 @@ contains an `HttpSession`.
 
 [[sthref97]][[BNAFL]]
 
-Table 17-1 Servlet Lifecycle Events
+*Table 17-1 Servlet Lifecycle Events*
 
-[width="40%",cols="46%,54%,",options="header",]
+[width="90%",cols="15%,30%,45%"]
 |=======================================================================
-|Object |Event |Listener Interface and Event Class
+|*Object* |*Event* |*Listener Interface and Event Class*
 |Web context |Initialization and destruction
 |`javax.servlet.ServletContextListener` and `ServletContextEvent`
 
@@ -136,5 +136,3 @@ A Servlet Exception Has Occurred
 
 But you can also specify that the container should return a specific
 error page for a given exception.
-
-
