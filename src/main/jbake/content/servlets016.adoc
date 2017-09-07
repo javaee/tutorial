@@ -24,7 +24,7 @@ uploads an image file and stores its content in a database.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Except where expressly provided otherwise, the site, and all content
 provided on or through the site, are provided on an "as is" and "as
@@ -318,5 +318,3 @@ A message reports that the file was created in the directory that you
 specified.
 6.  Go to the directory that you specified in the Destination field and
 verify that the uploaded file is present.
-
-

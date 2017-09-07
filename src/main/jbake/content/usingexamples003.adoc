@@ -33,12 +33,9 @@ Admin Console.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 NetBeans IDE uses your default web browser to open the Administration
 Console.
 
 |=======================================================================
-
-
-
