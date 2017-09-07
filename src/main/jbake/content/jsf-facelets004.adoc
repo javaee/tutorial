@@ -4,8 +4,8 @@ title=Using Facelets Templates
 next=jsf-facelets005.html
 prev=jsf-facelets003.html
 ~~~~~~
-Using Facelets Templates
-========================
+= Using Facelets Templates
+
 
 [[GIQXP]]
 
@@ -26,11 +26,11 @@ and their respective functionality.
 
 [[sthref30]][[GJBFP]]
 
-Table 8-2 Facelets Templating Tags
+*Table 8-2 Facelets Templating Tags*
 
-[width="22%",cols="100%,",options="header",]
+[width="99%",cols="20%,80%"]
 |=======================================================================
-|Tag |Function
+|*Tag*|*Function*
 |`ui:component` |Defines a component that is created and added to the
 component tree.
 
@@ -74,20 +74,20 @@ Here is an example of a template saved as `template.xhtml`:
 
 [source,oac_no_warn]
 ----
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    
+
     <h:head>
-        <meta http-equiv="Content-Type" 
+        <meta http-equiv="Content-Type"
               content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
         <title>Facelets Template</title>
     </h:head>
-    
+
     <h:body>
         <div id="top" class="top">
             <ui:insert name="top">Top Section</ui:insert>
@@ -117,12 +117,12 @@ the `ui:define` tag.
 
 [source,oac_no_warn]
 ----
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    
+
     <h:body>
         <ui:composition template="./template.xhtml">
             <ui:define name="top">
@@ -145,5 +145,3 @@ the `ui:define` tag.
 You can use NetBeans IDE to create Facelets template and client pages.
 For more information on creating these pages, see
 `https://netbeans.org/kb/docs/web/jsf20-intro.html`.
-
-
