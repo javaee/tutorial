@@ -141,20 +141,18 @@ the <code>AsyncContext</code> class.</p>
 <p><a id="sthref104"></a><a id="BEICFIEC"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 17-3 Functionality Provided by the AsyncContext Class</p>
+<p><strong>Table 17-3 Functionality Provided by the AsyncContext Class</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 38%;">
+<table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
-<col style="width: 99.0099%;">
-<col style="width: 0.9901%;">
+<col style="width: 22.2222%;">
+<col style="width: 77.7778%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Method Signature</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Method Signature</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void start(Runnable run)</code></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -297,7 +295,7 @@ asynchronously; the response is not sent to the client at the end of the
 service method.</p>
 </li>
 <li>
-<p><code>acontext.start(new Runnable() {...})</code> gets a new thread from the
+<p><code>acontext.start(new Runnable() {&#8230;&#8203;})</code> gets a new thread from the
 container.</p>
 </li>
 <li>
