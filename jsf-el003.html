@@ -495,8 +495,8 @@ syntax.</p>
 </div>
 <div class="paragraph">
 <p>Like lvalue expressions, method expressions can use the <code>.</code> and the <code>[]</code>
-operators. For example, <code>#{object.method}</code> is equivalent to
-<code>#{object["method"]}</code>. The literal inside the <code>[]</code> is converted to
+operators. For example, <code><mark>{object.method}</code> is equivalent to
+<code></mark>{object["method"]}</code>. The literal inside the <code>[]</code> is converted to
 <code>String</code> and is used to find the name of the method that matches it.</p>
 </div>
 <div class="paragraph">
@@ -547,7 +547,7 @@ EL expression.</p>
 </div>
 <div class="paragraph">
 <p>For basic information on lambda expressions, see
-<code>http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html</code>.</p>
+<code><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" class="bare">http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html</a></code>.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -556,7 +556,7 @@ EL expression.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Note:</p>
+<p><strong>Note</strong>:</p>
 </div>
 <div class="paragraph">
 <p>Lambda expressions are part of Java SE 8, but you can use them in EL
@@ -567,7 +567,7 @@ expressions with Java SE 7, the Java version associated with the Java EE
 </tbody>
 </table>
 <div class="paragraph">
-<p>A lambda expression uses the arrow token (<code>-&gt;)</code> operator. The
+<p>A lambda expression uses the arrow token (<code>&#8594;)</code> operator. The
 identifiers to the left of the operator are called lambda parameters.
 The body, to the right of the operator, must be an EL expression. The
 lambda parameters are enclosed in parentheses; the parentheses can be
