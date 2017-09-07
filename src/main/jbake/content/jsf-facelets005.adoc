@@ -4,8 +4,8 @@ title=Composite Components
 next=jsf-facelets006.html
 prev=jsf-facelets004.html
 ~~~~~~
-Composite Components
-====================
+= Composite Components
+
 
 [[GIQZR]]
 
@@ -38,11 +38,11 @@ their functions.
 
 [[sthref31]][[GJCWC]]
 
-Table 8-3 Composite Component Tags
+*Table 8-3 Composite Component Tags*
 
-[width="39%",cols="100%,",options="header",]
+[width="99%",cols="20%,80%"]
 |=======================================================================
-|Tag |Function
+|*Tag*|*Function*
 |`composite:interface` |Declares the usage contract for a composite
 component. The composite component can be used as a single component
 whose feature set is the union of the features declared in the usage
@@ -159,5 +159,3 @@ http://localhost:8080/application-name/emuserpage.xhtml
 
 See link:jsf-advanced-cc.html#GKHXA[Chapter 14, "Composite Components:
 Advanced Topics and an Example,"] for more information and an example.
-
-

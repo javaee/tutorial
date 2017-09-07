@@ -4,8 +4,8 @@ title=Further Information about the Expression Language
 next=jsf-page.html
 prev=jsf-el007.html
 ~~~~~~
-Further Information about the Expression Language
-=================================================
+= Further Information about the Expression Language
+
 
 [[CIHGBBHA]]
 
@@ -20,6 +20,4 @@ For more information about the EL, see
 `http://www.jcp.org/en/jsr/detail?id=341`
 * The EL specification website:
 +
-`https://java.net/projects/el-spec/`
-
-
+`https://github.com/javaee/el-spec`
