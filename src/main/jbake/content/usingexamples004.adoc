@@ -53,5 +53,3 @@ Next Steps
 
 To stop the database using NetBeans IDE, right-click Java DB and select
 Stop Server.
-
-

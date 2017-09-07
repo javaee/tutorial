@@ -207,11 +207,11 @@ for more information on resources.
 
 [[sthref25]][[BNAEV]]
 
-Table 6-1 Web Components That Accept Resource Injections
+*Table 6-1 Web Components That Accept Resource Injections*
 
-[width="23%",cols="2*[<.^]",options="header",]
+[width="50%",cols="20%,30%"]
 |================================================
-|Component |Interface/Class
+|*Component* |*Interface/Class*
 |Servlets |`javax.servlet.Servlet`
 |Servlet filters |`javax.servlet.ServletFilter`
 |Event listeners a|

@@ -133,7 +133,7 @@ To load the Ajax resource from the server side:
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 This method is usually used when creating a custom component or a custom
 renderer for a component.
