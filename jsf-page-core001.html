@@ -52,7 +52,9 @@
 </table>
 
 
-<h1 id="using-the-standard-converters" class="sect0">Using the Standard Converters</h1>
+<div class="sect1">
+<h2 id="using-the-standard-converters">Using the Standard Converters</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The JavaServer Faces implementation provides a set of <code>Converter</code>
 implementations that you can use to convert component data. The purpose
@@ -73,20 +75,18 @@ their associated converter IDs.</p>
 <p><a id="sthref60"></a><a id="CHDIHIIC"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 11-1 Converter Classes and Converter IDs</p>
+<p><strong>Table 11-1 Converter Classes and Converter IDs</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 48%;">
+<table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
-<col style="width: 99.0099%;">
-<col style="width: 0.9901%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Class in the javax.faces.convert Package</th>
-<th class="tableblock halign-left valign-top">Converter ID</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class in the javax.faces.convert Package</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Converter ID</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>BigDecimalConverter</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.faces.BigDecimal</code></p></td>
@@ -313,7 +313,7 @@ in which the date format is specified:</p>
 </div>
 <div class="paragraph">
 <p>Refer to the "Customizing Formats" lesson of the Java Tutorial at
-<code>http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html</code>
+<code><a href="http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html" class="bare">http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html</a></code>
 for more information on how to format the output using the <code>pattern</code>
 attribute of the <code>convertDateTime</code> tag.</p>
 </div>
@@ -321,22 +321,20 @@ attribute of the <code>convertDateTime</code> tag.</p>
 <p><a id="sthref61"></a><a id="BNASW"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 11-2 Attributes for the f:convertDateTime Tag</p>
+<p><strong>Table 11-2 Attributes for the f:convertDateTime Tag</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 36%;">
+<table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 36.6336%;">
-<col style="width: 62.3762%;">
-<col style="width: 0.9902%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Attribute</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Attribute</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>binding</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DateTimeConverter</code></p></td>
@@ -412,22 +410,20 @@ no value is specified, <code>date</code> is used.</p>
 <p><a id="sthref62"></a><a id="CFHEABEI"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 11-3 Type Attribute and Default Pattern Values</p>
+<p><strong>Table 11-3 Type Attribute and Default Pattern Values</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 40%;">
+<table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 47.5247%;">
-<col style="width: 51.4851%;">
-<col style="width: 0.9902%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Type Attribute</th>
-<th class="tableblock halign-left valign-top">Class</th>
-<th class="tableblock halign-left valign-top">Default When Pattern Is Not Specified</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Type Attribute</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Default When Pattern Is Not Specified</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>both</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.Date</code></p></td>
@@ -522,7 +518,7 @@ the currency pattern is specified:</p>
 </div>
 <div class="paragraph">
 <p>See the "Customizing Formats" lesson of the Java Tutorial at
-<code>http://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html</code>
+<code><a href="http://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html" class="bare">http://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html</a></code>
 for more information on how to format the output by using the <code>pattern</code>
 attribute of the <code>convertNumber</code> tag.</p>
 </div>
@@ -530,22 +526,20 @@ attribute of the <code>convertNumber</code> tag.</p>
 <p><a id="sthref63"></a><a id="BNASY"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 11-4 Attributes for the f:convertNumber Tag</p>
+<p><strong>Table 11-4 Attributes for the f:convertNumber Tag</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 46%;">
+<table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 54.4554%;">
-<col style="width: 44.5544%;">
-<col style="width: 0.9902%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Attribute</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Attribute</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>binding</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>NumberConverter</code></p></td>
@@ -627,6 +621,8 @@ formatted as a <code>number</code>, <code>currency</code>, or <code>percentage</
 </tr>
 </tbody>
 </table>
+</div>
+</div>
 </div>
 
 <hr />
