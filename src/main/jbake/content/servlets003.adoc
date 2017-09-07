@@ -4,8 +4,8 @@ title=Sharing Information
 next=servlets004.html
 prev=servlets002.html
 ~~~~~~
-Sharing Information
-===================
+= Sharing Information
+
 
 [[BNAFO]]
 
@@ -37,11 +37,11 @@ objects.
 
 [[sthref98]][[BNAFQ]]
 
-Table 17-2 Scope Objects
+*Table 17-2 Scope Objects*
 
-[width="54%",cols="30%,70%,",options="header",]
+[width="90%",cols="15%,25%,50"]
 |=======================================================================
-|Scope Object |Class |Accessible From
+|*Scope Object* |*Class* |*Accessible From*
 |Web context |`javax.servlet.ServletContext` |Web components within a
 web context. See link:servlets008.html#BNAGL[Accessing the Web Context].
 
@@ -89,5 +89,3 @@ When resources can be accessed concurrently, they can be used in an
 inconsistent fashion. You prevent this by controlling the access using
 the synchronization techniques described in the Threads lesson at
 `http://docs.oracle.com/javase/tutorial/essential/concurrency/`.
-
-
