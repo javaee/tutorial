@@ -4,8 +4,8 @@ title=The compositecomponentexample Example Application
 next=jsf-custom.html
 prev=jsf-advanced-cc003.html
 ~~~~~~
-The compositecomponentexample Example Application
-=================================================
+= The compositecomponentexample Example Application
+
 
 [[GKHVN]]
 
@@ -47,7 +47,7 @@ also declares a managed bean, which defines properties for the name.
 [source,oac_no_warn]
 ----
 <composite:interface>
-    <composite:attribute name="namePrompt" 
+    <composite:attribute name="namePrompt"
                          default="Name, word, or phrase: "/>
     <composite:attribute name="calcButtonText" default="Calculate"/>
     <composite:attribute name="calcAction"
@@ -69,24 +69,24 @@ prime or not is rendered only if the input value is validated.
 ----
 <composite:implementation>
     <h:form id="form">
-        <h:outputStylesheet library="css" name="default.css" 
+        <h:outputStylesheet library="css" name="default.css"
                             target="head"/>
         <h:panelGrid columns="2" role="presentation">
             <h:outputLabel for="name"
                            value="#{cc.attrs.namePrompt}"/>
             <h:inputText id="name"
                          size="45"
-                         value="#{cc.attrs.primeBean.name}" 
+                         value="#{cc.attrs.primeBean.name}"
                          required="true"/>
-        </h:panelGrid>        
+        </h:panelGrid>
         <p>
-            <h:commandButton id="calcButton" 
+            <h:commandButton id="calcButton"
                              value="#{cc.attrs.calcButtonText}"
                              action="#{cc.attrs.calcAction}">
                 <f:ajax execute="name" render="outputGroup"/>
             </h:commandButton>
         </p>
-       
+
        <h:panelGroup id="outputGroup" layout="block">
             <p>
                 <h:outputText id="result" style="color:blue"
@@ -97,13 +97,13 @@ prime or not is rendered only if the input value is validated.
                 <h:outputText id="response" style="color:blue"
                               value="#{cc.attrs.primeBean.response}"
                               rendered="#{!facesContext.validationFailed}"/>
-                <h:message id="errors1" 
-                           showSummary="true" 
+                <h:message id="errors1"
+                           showSummary="true"
                            showDetail="false"
                            style="color: #d20005;
                            font-family: 'New Century Schoolbook', serif;
                            font-style: oblique;
-                           text-decoration: overline" 
+                           text-decoration: overline"
                            for="name"/>
             </p>
         </h:panelGroup>
@@ -124,7 +124,7 @@ along with the managed bean. It validates the user's input.
 [source,oac_no_warn]
 ----
 <div id="compositecomponent">
-    <ez:PrimePanel primeBean="#{primeBean}"  
+    <ez:PrimePanel primeBean="#{primeBean}"
                    calcAction="#{primeBean.calculate}">
     </ez:PrimePanel>
 </div>
@@ -186,8 +186,7 @@ compositecomponentexample Example Using Maven]
 [[GKHVC]]
 
 [[to-build-package-and-deploy-the-compositecomponentexample-example-using-netbeans-ide]]
-To Build, Package, and Deploy the compositecomponentexample Example
-Using NetBeans IDE
+To Build, Package, and Deploy the compositecomponentexample Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -210,8 +209,7 @@ This command builds and deploys the application.
 [[GLEAE]]
 
 [[to-build-package-and-deploy-the-compositecomponentexample-example-using-maven]]
-To Build, Package, and Deploy the compositecomponentexample Example
-Using Maven
+To Build, Package, and Deploy the compositecomponentexample Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -248,5 +246,3 @@ phrase field, then click Calculate.
 The page reports the sum of the letters and whether the sum is prime. A
 validation error is reported if no value is entered or if the string
 contains more than 45 characters.
-
-

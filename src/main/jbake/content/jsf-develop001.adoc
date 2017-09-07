@@ -4,8 +4,8 @@ title=Managed Beans in JavaServer Faces Technology
 next=jsf-develop002.html
 prev=jsf-develop.html
 ~~~~~~
-Managed Beans in JavaServer Faces Technology
-============================================
+= Managed Beans in JavaServer Faces Technology
+
 
 [[BNAQM]]
 
@@ -22,7 +22,7 @@ configuring, and using managed beans in an application.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 link:jsf-page.html#BNAQZ[Chapter 10, "Using JavaServer Faces Technology
 in Web Pages"] and link:jsf-page-core.html#GJCUT[Chapter 11, "Using
@@ -139,9 +139,9 @@ references a method that validates user input:
 
 [source,oac_no_warn]
 ----
-<h:inputText id="inputGuess" 
-    value="#{userNumberBean.userNumber}" 
-    required="true" size="3" 
+<h:inputText id="inputGuess"
+    value="#{userNumberBean.userNumber}"
+    required="true" size="3"
     disabled="#{userNumberBean.number eq userNumberBean.userNumber ...}"
     validator="#{userNumberBean.validateNumberRange}">
 </h:inputText>
@@ -182,5 +182,3 @@ For information on the EL, see link:jsf-el.html#GJDDD[Chapter 9,
 
 For information on referencing managed bean methods from component tags,
 see link:jsf-page-core004.html#BNATN[Referencing a Managed Bean Method].
-
-
