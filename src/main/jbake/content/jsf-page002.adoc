@@ -1514,7 +1514,7 @@ link:#GKBUK[Table 10-7] shows the optional attributes for the
 
 *Table 10-7 Optional Attributes for the h:dataTable Tag*
 
-[width="80%",cols="30%,50%"]
+[width="60%",cols="30%,30%"]
 |================================
 |*Attribute* |*Defines Styles For*
 |`captionClass` |Table caption

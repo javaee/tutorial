@@ -75,7 +75,7 @@ interprets the markup that the page author has written.
 
 *Table 8-4 How Facelets Renders HTML5 Elements*
 
-[width="90%",cols="30%,30%,30%" ]
+[width="60%",cols="20%,20%,20%" ]
 |=======================================================
 |*HTML5 Element Name*|*Identifying Attribute*|*Facelets Tag*
 |`a` |`jsf:action` |`h:commandLink`
