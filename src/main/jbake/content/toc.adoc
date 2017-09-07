@@ -1420,6 +1420,48 @@ link:webservices-intro.html#GIJTI[28 Introduction to Web Services]
 * link:webservices-intro003.html#GJBJI[Deciding Which Type of Web Service
 to Use]
 
+[[building-web-services-with-jax-ws]]
+link:jaxws.html#BNAYL[29 Building Web Services with JAX-WS]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* link:jaxws001.html#A1250966[Overview of Java API for XML Web Services]
+* link:jaxws002.html#BNAYN[Creating a Simple Web Service and Clients with
+JAX-WS]
+
+** link:jaxws002.html#sthref133[Basic Steps for Creating a Web Service
+and Client]
+
+** link:jaxws002.html#BNAYP[Requirements of a JAX-WS Endpoint]
+
+** link:jaxws002.html#BNAYQ[Coding the Service Endpoint Implementation
+Class]
+
+** link:jaxws002.html#BNAYR[Building, Packaging, and Deploying the
+Service]
+*** link:jaxws002.html#BNAYS[To Build, Package, and Deploy the Service
+Using NetBeans IDE]
+*** link:jaxws002.html#BNAYT[To Build, Package, and Deploy the Service
+Using Maven]
+
+** link:jaxws002.html#GKAJL[Testing the Methods of a Web Service
+Endpoint]
+*** link:jaxws002.html#BNAYW[To Test the Service without a Client]
+
+** link:jaxws002.html#BNAYX[A Simple JAX-WS Application Client]
+*** link:jaxws002.html#BNAYY[Coding the Application Client]
+*** link:jaxws002.html#BNAYZ[Running the Application Client]
+
+** link:jaxws002.html#GJYGB[A Simple JAX-WS Web Client]
+*** link:jaxws002.html#GJYFL[Coding the Servlet]
+*** link:jaxws002.html#GJYGE[Running the Web Client]
+* link:jaxws003.html#BNAZC[Types Supported by JAX-WS]
+
+** link:jaxws003.html#BNAZT[Schema-to-Java Mapping]
+
+** link:jaxws003.html#BNAZW[Java-to-Schema Mapping]
+* link:jaxws004.html#BNAZD[Web Services Interoperability and JAX-WS]
+* link:jaxws005.html#BNAZE[Further Information about JAX-WS]
+
 [[building-restful-web-services-with-jax-rs]]
 link:jaxrs.html#GIEPU[30 Building RESTful Web Services with JAX-RS]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

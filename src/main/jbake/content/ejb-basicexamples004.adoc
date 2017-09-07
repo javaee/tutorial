@@ -15,7 +15,9 @@ A Web Service Example: helloservice
 
 This example demonstrates a simple web service that generates a response
 based on information received from the client. `HelloServiceBean` is a
-stateless session bean that implements a single method: `sayHello`.
+stateless session bean that implements a single method: `sayHello`. This
+method matches the `sayHello` method invoked by the client described in
+link:jaxws002.html#BNAYX[A Simple JAX-WS Application Client].
 
 The following topics are addressed here:
 
@@ -45,7 +47,9 @@ not be declared `static` or `final`.
 * Business methods that are exposed to web service clients must be
 annotated with `javax.jws.WebMethod`.
 * Business methods that are exposed to web service clients must have
-JAXB-compatible parameters and return types.
+JAXB-compatible parameters and return types. See the list of JAXB
+default data type bindings at link:jaxws003.html#BNAZC[Types Supported by
+JAX-WS].
 * The implementing class must not be declared `final` and must not be
 `abstract`.
 * The implementing class must have a default public constructor.
@@ -201,3 +205,5 @@ Methods, enter a name as the parameter to the `sayHello` method.
 +
 The sayHello Method invocation page opens. Under Method returned, you'll
 see the response from the endpoint.
+
+

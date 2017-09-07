@@ -1,0 +1,26 @@
+type=page
+status=published
+title=Web Services Interoperability and JAX-WS
+next=jaxws005.html
+prev=jaxws003.html
+~~~~~~
+Web Services Interoperability and JAX-WS
+========================================
+
+[[BNAZD]]
+
+[[web-services-interoperability-and-jax-ws]]
+Web Services Interoperability and JAX-WS
+----------------------------------------
+
+JAX-WS supports the Web Services Interoperability (WS-I) Basic Profile
+Version 1.1. The WS-I Basic Profile is a document that clarifies the
+SOAP 1.1 and WSDL 1.1 specifications to promote SOAP interoperability.
+For links related to WS-I, see link:jaxws005.html#BNAZE[Further
+Information about JAX-WS].
+
+To support WS-I Basic Profile Version 1.1, the JAX-WS runtime supports
+doc/literal and rpc/literal encodings for services, static ports,
+dynamic proxies, and the Dynamic Invocation Interface (DII).
+
+

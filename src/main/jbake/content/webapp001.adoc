@@ -27,7 +27,8 @@ Technology."]
 endpoint of a web service. Presentation-oriented applications are often
 clients of service-oriented web applications. Development of
 service-oriented web applications is covered in
-link:jaxrs.html#GIEPU[Chapter 30, "Building RESTful Web Services with
+link:jaxws.html#BNAYL[Chapter 29, "Building Web Services with JAX-WS,"]
+and link:jaxrs.html#GIEPU[Chapter 30, "Building RESTful Web Services with
 JAX-RS,"] in link:partwebsvcs.html#BNAYK[Part III, "Web Services."]
 
 In the Java EE platform, web components provide the dynamic extension
@@ -84,3 +85,5 @@ lifecycle and explains how to package and deploy very simple web
 applications on GlassFish Server. The chapter then moves on to
 configuring web applications and discusses how to specify the most
 commonly used configuration parameters.
+
+
