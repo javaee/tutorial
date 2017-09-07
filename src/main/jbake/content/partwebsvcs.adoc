@@ -22,9 +22,12 @@ chapters:
 
 * link:webservices-intro.html#GIJTI[Chapter 28, "Introduction to Web
 Services"]
+* link:jaxws.html#BNAYL[Chapter 29, "Building Web Services with JAX-WS"]
 * link:jaxrs.html#GIEPU[Chapter 30, "Building RESTful Web Services with
 JAX-RS"]
 * link:jaxrs-client.html#BABEIGIH[Chapter 31, "Accessing REST Resources
 with the JAX-RS Client API"]
 * link:jaxrs-advanced.html#GJJXE[Chapter 32, "JAX-RS: Advanced Topics and
 an Example"]
+
+
