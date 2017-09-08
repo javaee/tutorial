@@ -4,8 +4,8 @@ title=Example Applications for JAX-RS
 next=jaxrs004.html
 prev=jaxrs002.html
 ~~~~~~
-Example Applications for JAX-RS
-===============================
+= Example Applications for JAX-RS
+
 
 [[GIPZZ]]
 
@@ -36,7 +36,7 @@ the application, and you simply need to implement the appropriate
 method.
 
 You can find a version of this application at
-tut-install`/examples/jaxrs/hello/`.
+`_tut-install_` `/examples/jaxrs/hello/`.
 
 The following topics are addressed here:
 
@@ -80,7 +80,7 @@ public String getHtml() {
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Because the MIME type produced is HTML, you can use HTML tags in your
 return statement.
@@ -118,7 +118,7 @@ The rsvp Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `rsvp` example application, located in the
-tut-install`/examples/jaxrs/rsvp/` directory, allows invitees to an
+`_tut-install_` `/examples/jaxrs/rsvp/` directory, allows invitees to an
 event to indicate whether they will attend. The events, people invited
 to the event, and the responses to the invite are stored in a Java DB
 database using the Java Persistence API. The JAX-RS resources in `rsvp`
@@ -336,5 +336,3 @@ REST-like developer interfaces to data include Twitter and Amazon S3
 created, listed, and retrieved using either a REST-style HTTP interface
 or a SOAP interface. The examples that ship with Jersey include a
 storage service example with a RESTful interface.
-
-
