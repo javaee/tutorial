@@ -4,8 +4,8 @@ title=Creating a RESTful Root Resource Class
 next=jaxrs003.html
 prev=jaxrs001.html
 ~~~~~~
-Creating a RESTful Root Resource Class
-======================================
+= Creating a RESTful Root Resource Class
+
 
 [[GILIK]]
 
@@ -58,11 +58,11 @@ used. Further information on the JAX-RS APIs can be viewed at
 
 [[sthref137]][[GINNA]]
 
-Table 30-1 Summary of JAX-RS Annotations
+*Table 30-1 Summary of JAX-RS Annotations*
 
-[width="22%",cols="100%,",options="header",]
+[width=99%,cols="10% 90%"]
 |=======================================================================
-|Annotation |Description
+|*Annotation*|*Description*
 |`@Path` |The `@Path` annotation's value is a relative URI path
 indicating where the Java class will be hosted: for example,
 `/helloworld`. You can also embed variables in the URIs to make a URI
@@ -160,7 +160,7 @@ class that uses JAX-RS annotations:
 [source,oac_no_warn]
 ----
 package javaeetutorial.hello;
- 
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -168,7 +168,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
- 
+
 /**
  * Root resource (exposed at "helloworld" path)
  */
@@ -176,11 +176,11 @@ import javax.ws.rs.core.UriInfo;
 public class HelloWorld {
     @Context
     private UriInfo context;
- 
+
     /** Creates a new instance of HelloWorld */
     public HelloWorld() {
     }
- 
+
     /**
      * Retrieves representation of an instance of helloWorld.HelloWorld
      * @return an instance of java.lang.String
@@ -541,7 +541,7 @@ The following example shows how to use `MessageBodyWriter` with the
 ----
 @Produces("text/html")
 @Provider
-public class FormWriter implements 
+public class FormWriter implements
         MessageBodyWriter<Hashtable<String, String>> {
 ----
 
@@ -552,7 +552,7 @@ The following example shows how to use `ResponseBuilder`:
 @GET
 public Response getItem() {
     System.out.println("GET ITEM " + container + " " + item);
-    
+
     Item i = MemoryStore.MS.getItem(container, item);
     if (i == null)
         throw new NotFoundException("Item not found");
@@ -561,7 +561,7 @@ public Response getItem() {
     ResponseBuilder rb = request.evaluatePreconditions(lastModified, et);
     if (rb != null)
         return rb.build();
-        
+
     byte[] b = MemoryStore.MS.getItemData(container, item);
     return Response.ok(b, i.getMimeType()).
             lastModified(lastModified).tag(et).build();
@@ -798,7 +798,7 @@ public Response smooth(
         @DefaultValue("2") @QueryParam("step") int step,
         @DefaultValue("true") @QueryParam("min-m") boolean hasMin,
         @DefaultValue("true") @QueryParam("max-m") boolean hasMax,
-        @DefaultValue("true") @QueryParam("last-m") boolean hasLast,           
+        @DefaultValue("true") @QueryParam("last-m") boolean hasLast,
         @DefaultValue("blue") @QueryParam("min-color") ColorParam minColor,
         @DefaultValue("green") @QueryParam("max-color") ColorParam maxColor,
         @DefaultValue("red") @QueryParam("last-color") ColorParam lastColor
@@ -1052,5 +1052,3 @@ using an `Application` subclass.
    <url-pattern>/services/*</url-pattern>
 </servlet-mapping>
 ----
-
-
