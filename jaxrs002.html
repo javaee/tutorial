@@ -114,26 +114,24 @@ the archive to a Java EE server.</p>
 <p><a href="#GINNA">Table 30-1</a> lists some of the Java programming annotations
 that are defined by JAX-RS, with a brief description of how each is
 used. Further information on the JAX-RS APIs can be viewed at
-<code>http://docs.oracle.com/javaee/7/api/</code>.</p>
+<code><a href="http://docs.oracle.com/javaee/7/api/" class="bare">http://docs.oracle.com/javaee/7/api/</a></code>.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref137"></a><a id="GINNA"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 30-1 Summary of JAX-RS Annotations</p>
+<p><strong>Table 30-1 Summary of JAX-RS Annotations</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 22%;">
+<table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 99.0099%;">
-<col style="width: 0.9901%;">
+<col style="width: 10%;">
+<col style="width: 90%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Annotation</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Annotation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Path</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@Path</code> annotation&#8217;s value is a relative URI path
@@ -421,9 +419,9 @@ attempt to process the URI data that corresponds to the location of
 <div class="paragraph">
 <p>For example, if you want to deploy a resource that responds to the URI
 path template
-<code>http://example.com/myContextRoot/resources/{name1}/{name2}/</code>, you must
+<code><a href="http://example.com/myContextRoot/resources/{name1}/{name2}/" class="bare">http://example.com/myContextRoot/resources/{name1}/{name2}/</a></code>, you must
 first deploy the application to a Java EE server that responds to
-requests to the <code>http://example.com/myContextRoot</code> URI and then decorate
+requests to the <code><a href="http://example.com/myContextRoot" class="bare">http://example.com/myContextRoot</a></code> URI and then decorate
 your resource with the following <code>@Path</code> annotation:</p>
 </div>
 <div class="listingblock">
@@ -490,7 +488,7 @@ following variable names and values are used in the examples:</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Note:</p>
+<p><strong>Note</strong>:</p>
 </div>
 <div class="paragraph">
 <p>The value of the <code>name3</code> variable is an empty string.</p>
@@ -502,35 +500,33 @@ following variable names and values are used in the examples:</p>
 <p><a id="sthref138"></a><a id="GIPYM"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 30-2 Examples of URI Path Templates</p>
+<p><strong>Table 30-2 Examples of URI Path Templates</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 45%;">
+<table class="tableblock frame-all grid-all" style="width: 80%;">
 <colgroup>
-<col style="width: 0.99%;">
-<col style="width: 99.01%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">URI Path Template</th>
-<th class="tableblock halign-left valign-top">URI After Substitution</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/{name1}/{name2}/</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/james/gatz/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>URI Path Template</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>URI After Substitution</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/{question}/`</code>{question}/{question}/`</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/why/why/why/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/{name1}/{name2}/" class="bare">http://example.com/{name1}/{name2}/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/james/gatz/" class="bare">http://example.com/james/gatz/</a></code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/maps/{location}</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/maps/Main%20Street</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/{question}/{question}/{question}/" class="bare">http://example.com/{question}/{question}/{question}/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/why/why/why/" class="bare">http://example.com/why/why/why/</a></code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/{name3}/home/</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com//home/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/maps/{location}" class="bare">http://example.com/maps/{location}</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/maps/Main%20Street" class="bare">http://example.com/maps/Main%20Street</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/{name3}/home/" class="bare">http://example.com/{name3}/home/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com//home/" class="bare">http://example.com//home/</a></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -601,7 +597,7 @@ response entity, if set. For OPTIONS, the <code>Allow</code> response header wil
 be set to the set of HTTP methods supported by the resource. In
 addition, the JAX-RS runtime will return a Web Application Definition
 Language (WADL) document describing the resource; see
-<code>http://www.w3.org/Submission/wadl/</code> for more information.</p>
+<code><a href="http://www.w3.org/Submission/wadl/" class="bare">http://www.w3.org/Submission/wadl/</a></code> for more information.</p>
 </div>
 <div class="paragraph">
 <p>Methods decorated with request method designators must return <code>void</code>, a
@@ -673,7 +669,7 @@ standard types.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code><strong>/</strong></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.String</code></p></td>
@@ -681,19 +677,19 @@ standard types.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.InputStream</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code><strong>/</strong></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.Reader</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code><strong>/</strong></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.File</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code><strong>/</strong></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.activation.DataSource</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code><strong>/</strong></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.xml.transform.Source</code></p></td>
@@ -712,7 +708,7 @@ media types (<code>text/xml</code>, <code>application/xml</code>, and <code>appl
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>StreamingOutput</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code>*/*</code>), <code>MessageBodyWriter</code> only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All media types (<code><strong>/</strong></code>), <code>MessageBodyWriter</code> only</p></td>
 </tr>
 </tbody>
 </table>
@@ -1174,7 +1170,7 @@ information from URL path segments.</p>
 representation that is of the MIME media type
 <code>application/x-www-form-urlencoded</code> and conforms to the encoding
 specified by HTML forms, as described in
-<code>http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1</code>. This
+<code><a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1" class="bare">http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1</a></code>. This
 parameter is very useful for extracting information sent by POST in HTML
 forms.</p>
 </div>
