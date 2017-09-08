@@ -4,8 +4,8 @@ title=Types Supported by JAX-WS
 next=jaxws004.html
 prev=jaxws002.html
 ~~~~~~
-Types Supported by JAX-WS
-=========================
+= Types Supported by JAX-WS
+
 
 [[BNAZC]]
 
@@ -37,11 +37,11 @@ types in JAXB.
 
 [[sthref135]][[BNAZU]]
 
-Table 29-1 Mapping of XML Data Types to Java Data Types in JAXB
+*Table 29-1 Mapping of XML Data Types to Java Data Types in JAXB*
 
-[width="27%",cols="100%,",options="header",]
+[width="50%",cols="20%,30%"]
 |=========================================================
-|XML Schema Type |Java Data Type
+|*XML Schema Type* |*Java Data Type*
 |`xsd:string` |`java.lang.String`
 |`xsd:integer` |`java.math.BigInteger`
 |`xsd:int` |`int`
@@ -80,11 +80,11 @@ data types.
 
 [[sthref136]][[BNAZX]]
 
-Table 29-2 Mapping of Java Classes to XML Data Types in JAXB
+*Table 29-2 Mapping of Java Classes to XML Data Types in JAXB*
 
-[width="49%",cols=",100%",options="header",]
+[width="50%",cols="30%,20%"]
 |=============================================================
-|Java Class |XML Data Type
+|*Java Class* |*XML Data Type*
 |`java.lang.String` |`xs:string`
 |`java.math.BigInteger` |`xs:integer`
 |`java.math.BigDecimal` |`xs:decimal`
@@ -100,6 +100,3 @@ Table 29-2 Mapping of Java Classes to XML Data Types in JAXB
 |`javax.xml.transform.Source` |`xs:base64Binary`
 |`java.util.UUID` |`xs:string`
 |=============================================================
-
-
-
