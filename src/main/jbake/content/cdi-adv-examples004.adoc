@@ -4,8 +4,8 @@ title=The producerfields Example: Using Producer Fields to Generate Resources
 next=cdi-adv-examples005.html
 prev=cdi-adv-examples003.html
 ~~~~~~
-The producerfields Example: Using Producer Fields to Generate Resources
-=======================================================================
+= The producerfields Example: Using Producer Fields to Generate Resources
+
 
 [[GKHRG]]
 
@@ -25,7 +25,7 @@ It also contains a single entity, a stateful session bean, a Facelets
 page, and a managed bean.
 
 The source files are located in the
-tut-install`/examples/cdi/producerfields/src/main/java/javaeetutorial/producerfields/`
+`_tut-install_` `/examples/cdi/producerfields/src/main/java/javaeetutorial/producerfields/`
 directory.
 
 The following topics are addressed here:
@@ -101,24 +101,24 @@ maintenance, as in the following example:
 ----
 @Singleton
 public class JPAResourceProducer {
-    @Produces 
+    @Produces
     @PersistenceUnit(unitName="pu3")
-    @TestDatabase 
+    @TestDatabase
     EntityManagerFactory customerDatabasePersistenceUnit;
 
-    @Produces 
+    @Produces
     @PersistenceContext(unitName="pu3")
-    @TestDatabase 
+    @TestDatabase
     EntityManager customerDatabasePersistenceContext;
-    
-    @Produces 
+
+    @Produces
     @PersistenceUnit(unitName="pu4")
     @Documents
     EntityManagerFactory customerDatabasePersistenceUnit;
 
-    @Produces 
+    @Produces
     @PersistenceContext(unitName="pu4")
-    @Documents 
+    @Documents
     EntityManager docDatabaseEntityManager;"
 }
 ----
@@ -359,8 +359,7 @@ Using Maven]
 [[GKHPB]]
 
 [[to-build-package-and-deploy-the-producerfields-example-using-netbeans-ide]]
-To Build, Package, and Deploy the producerfields Example Using NetBeans
-IDE
+To Build, Package, and Deploy the producerfields Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -438,5 +437,3 @@ you created.
 4.  Click Back to return to the Create To Do List page.
 +
 On this page, you can enter more items in the list.
-
-
