@@ -4,8 +4,8 @@ title=Building and Running the CDI Advanced Examples
 next=cdi-adv-examples002.html
 prev=cdi-adv-examples.html
 ~~~~~~
-Building and Running the CDI Advanced Examples
-==============================================
+= Building and Running the CDI Advanced Examples
+
 
 [[A1251406]]
 
@@ -13,7 +13,7 @@ Building and Running the CDI Advanced Examples
 Building and Running the CDI Advanced Examples
 ----------------------------------------------
 
-The examples are in the tut-install`/examples/cdi/` directory. To build
+The examples are in the `_tut-install_` `/examples/cdi/` directory. To build
 and run the examples, you will do the following.
 
 1.  Use NetBeans IDE or the Maven tool to compile, package, and deploy
@@ -36,5 +36,3 @@ Producer Fields to Generate Resources]
 Events and Interceptors]
 * link:cdi-adv-examples006.html#GKPAX[The decorators Example: Decorating
 a Bean]
-
-

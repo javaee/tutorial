@@ -4,8 +4,8 @@ title=The producermethods Example: Using a Producer Method to Choose a Bean Impl
 next=cdi-adv-examples004.html
 prev=cdi-adv-examples002.html
 ~~~~~~
-The producermethods Example: Using a Producer Method to Choose a Bean Implementation
-====================================================================================
+= The producermethods Example: Using a Producer Method to Choose a Bean Implementation
+
 
 [[GKHPY]]
 
@@ -140,8 +140,7 @@ Using Maven]
 [[GKHPE]]
 
 [[to-build-package-and-deploy-the-producermethods-example-using-netbeans-ide]]
-To Build, Package, and Deploy the producermethods Example Using NetBeans
-IDE
+To Build, Package, and Deploy the producermethods Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -207,5 +206,3 @@ click Encode.
 +
 Depending on your selection, the Result line displays either the encoded
 string or the input values you specified.
-
-
