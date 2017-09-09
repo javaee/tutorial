@@ -4,9 +4,12 @@ The {{site.title}} Project is the official site for the Java Platform, Enterpris
 Tutorial that is delivered with the Java EE 8 SDK. The {{site.title}} teaches and demonstrates the  
 Java EE features that are used to develope enterprise applications. 
 
+
 The lastest build of the tutorial is automatically published to this site as HTML:
 
+
 [View the Java EE Tutorial](toc.html).
+
 
 The {{site.title}} is written in [AsciiDoc](http://asciidoc.org/). Asciidoc is similar to 
 original markdown but is particularly suited for user documentation. If you are interested in forking 
@@ -33,6 +36,7 @@ that are delivered with the Java EE SDK.
 The easiest way to contribute to the {{site.title}} is by providing feedback and 
 review comments. Open an [issue](https://github.com/javaee/tutorial/issues) so that we can address 
 your comments.
+
 
 Do you have an idea for the {{site.title}}? Do you want to add a section or update and existing section? 
 The {{site.title}} is open for contributions. Review the following links if want to help.
