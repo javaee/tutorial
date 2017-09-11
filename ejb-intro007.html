@@ -89,7 +89,7 @@ first.</p>
 <div class="sect2">
 <h3 id="the-lifecycle-of-a-stateful-session-bean">The Lifecycle of a Stateful Session Bean</h3>
 <div class="paragraph">
-<p><a href="#GIPMI">Figure 33-2</a> illustrates the stages that a stateful session
+<p><a href="#GIPMI">Figure 35-2</a> illustrates the stages that a stateful session
 bean passes through during its lifetime. The client initiates the
 lifecycle by obtaining a reference to a stateful session bean. The
 container performs any dependency injection and then invokes the method
@@ -97,7 +97,7 @@ annotated with <code>@PostConstruct</code>, if any. The bean is now ready to hav
 its business methods invoked by the client.</p>
 </div>
 <div id="GIPMI" class="paragraph">
-<div class="title"><strong>Figure 33-2 Lifecycle of a Stateful Session Bean</strong></div>
+<div class="title"><strong>Figure 35-2 Lifecycle of a Stateful Session Bean</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_021.png" alt="Diagram showing the lifecycle of a stateful session bean."></span></p>
 </div>
 <div class="paragraph">
@@ -119,8 +119,8 @@ collection.</p>
 <div class="paragraph">
 <p>Your code controls the invocation of only one lifecycle method: the
 method annotated <code>@Remove</code>. All other methods in <a href="#GIPMI">Figure
-33-2</a> are invoked by the EJB container. See
-<a href="resources.html#BNCJH">Chapter 53, "Resource Adapters and Contracts"</a>
+35-2</a> are invoked by the EJB container. See
+<a href="resources.html#BNCJH">Chapter 55, "Resource Adapters and Contracts"</a>
 for more information.</p>
 </div>
 </div>
@@ -129,11 +129,11 @@ for more information.</p>
 <div class="paragraph">
 <p>Because a stateless session bean is never passivated, its lifecycle has
 only two stages: nonexistent and ready for the invocation of business
-methods. <a href="#GIPNI">Figure 33-3</a> illustrates the stages of a stateless
+methods. <a href="#GIPNI">Figure 35-3</a> illustrates the stages of a stateless
 session bean.</p>
 </div>
 <div id="GIPNI" class="paragraph">
-<div class="title"><strong>Figure 33-3 Lifecycle of a Stateless or Singleton Session Bean</strong></div>
+<div class="title"><strong>Figure 35-3 Lifecycle of a Stateless or Singleton Session Bean</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_022.png" alt="Diagram showing the lifecycle of a stateless or singleton session bean."></span></p>
 </div>
 <div class="paragraph">
@@ -154,7 +154,7 @@ for garbage collection.</p>
 <div class="paragraph">
 <p>Like a stateless session bean, a singleton session bean is never
 passivated and has only two stages, nonexistent and ready for the
-invocation of business methods, as shown in <a href="#GIPNI">Figure 33-3</a>.</p>
+invocation of business methods, as shown in <a href="#GIPNI">Figure 35-3</a>.</p>
 </div>
 <div class="paragraph">
 <p>The EJB container initiates the singleton session bean lifecycle by
@@ -173,11 +173,11 @@ ready for garbage collection.</p>
 <div class="sect2">
 <h3 id="the-lifecycle-of-a-message-driven-bean">The Lifecycle of a Message-Driven Bean</h3>
 <div class="paragraph">
-<p><a href="#GIPLR">Figure 33-4</a> illustrates the stages in the lifecycle of a
+<p><a href="#GIPLR">Figure 35-4</a> illustrates the stages in the lifecycle of a
 message-driven bean.</p>
 </div>
 <div id="GIPLR" class="paragraph">
-<div class="title"><strong>Figure 33-4 Lifecycle of a Message-Driven Bean</strong></div>
+<div class="title"><strong>Figure 35-4 Lifecycle of a Message-Driven Bean</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_023.png" alt="Diagram showing the lifecycle of a message-driven bean."></span></p>
 </div>
 <div class="paragraph">
