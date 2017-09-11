@@ -56,7 +56,7 @@ available to all applications that use a particular installation of
 GlassFish Server; alternatively, a developer can use annotations to
 create objects that are specific to a particular application.
 
-link:#BNCDZ[Figure 46-2] illustrates the way these parts interact.
+link:#BNCDZ[Figure 48-2] illustrates the way these parts interact.
 Administrative tools or annotations allow you to bind destinations and
 connection factories into a JNDI namespace. A JMS client can then use
 resource injection to access the administered objects in the namespace
@@ -65,7 +65,7 @@ JMS provider.
 
 [[BNCDZ]]
 
-.*Figure 46-2 JMS API Architecture*
+.*Figure 48-2 JMS API Architecture*
 image:img/javaeett_dt_027.png[
 "Diagram of JMS API architecture, showing administrative tool, JMS
 client, JNDI namespace, and JMS provider"]
@@ -104,7 +104,7 @@ specific queue, and receiving clients extract messages from the queues
 established to hold their messages. Queues retain all messages sent to
 them until the messages are consumed or expire.
 
-PTP messaging, illustrated in link:#BNCEC[Figure 46-3], has the
+PTP messaging, illustrated in link:#BNCEC[Figure 48-3], has the
 following characteristics.
 
 * Each message has only one consumer.
@@ -113,7 +113,7 @@ the client sent the message.
 
 [[BNCEC]]
 
-.*Figure 46-3 Point-to-Point Messaging*
+.*Figure 48-3 Point-to-Point Messaging*
 image:img/javaeett_dt_028.png[
 "Diagram of point-to-point messaging, showing Client 1 sending a message
 to a queue, and Client 2 consuming and acknowledging the message"]
@@ -161,12 +161,12 @@ subscriptions, see link:jms-concepts003.html#BNCGD[Creating Durable
 Subscriptions].
 
 Use pub/sub messaging when each message can be processed by any number
-of consumers (or none). link:#BNCEE[Figure 46-4] illustrates pub/sub
+of consumers (or none). link:#BNCEE[Figure 48-4] illustrates pub/sub
 messaging.
 
 [[BNCEE]]
 
-.*Figure 46-4 Publish/Subscribe Messaging*
+.*Figure 48-4 Publish/Subscribe Messaging*
 image:img/javaeett_dt_029.png[
 "Diagram of pub/sub messaging, showing Client 1 sending a message to a
 topic, and the message being delivered to two consumers to the topic"]
@@ -194,5 +194,3 @@ method, which acts on the contents of the message. In a Java EE
 application, a message-driven bean serves as a message listener (it too
 has an `onMessage` method), but a client does not need to register it
 with a consumer.
-
-

@@ -11,7 +11,7 @@ prev=partmessaging.html
 [[BNCDQ]]
 
 [[java-message-service-concepts]]
-46 Java Message Service Concepts
+48 Java Message Service Concepts
 --------------------------------
 
 
