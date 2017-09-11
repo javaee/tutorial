@@ -37,7 +37,7 @@ having to create an additional class for the message handler, this
 example uses the `OnMessage` annotation to designate the method invoked
 to handle messages.
 
-link:#BABDGEJH[Table 18-1] lists the annotations available in the
+link:#BABDGEJH[Table 19-1] lists the annotations available in the
 `javax.websocket` package to designate the methods that handle lifecycle
 events. The examples in the table show the most common parameters for
 these methods. See the API reference for details on what combinations of
@@ -45,7 +45,7 @@ parameters are allowed in each case.
 
 [[sthref115]][[BABDGEJH]]
 
-*Table 18-1 WebSocket Endpoint Lifecycle Annotations*
+*Table 19-1 WebSocket Endpoint Lifecycle Annotations*
 
 [width="80%",cols="20%,20%,60"]
 |========================================
