@@ -10,7 +10,7 @@ Creating and Using String-Based Criteria Queries
 [[GKJIQ]]
 
 [[creating-and-using-string-based-criteria-queries]]
-42 Creating and Using String-Based Criteria Queries
+44 Creating and Using String-Based Criteria Queries
 ---------------------------------------------------
 
 
@@ -25,5 +25,3 @@ Criteria API Queries]
 Queries]
 * link:persistence-string-queries003.html#GKJDB[Executing String-Based
 Queries]
-
-

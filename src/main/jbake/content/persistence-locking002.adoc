@@ -29,11 +29,11 @@ database data corresponding to entity state.
 
 You can set the lock mode for an entity operation by specifying one of
 the lock modes defined in the `javax.persistence.LockModeType`
-enumerated type, listed in link:#GKJIE[Table 43-1].
+enumerated type, listed in link:#GKJIE[Table 45-1].
 
 [[sthref183]][[GKJIE]]
 
-Table 43-1 Lock Modes for Concurrent Entity Access
+Table 45-1 Lock Modes for Concurrent Entity Access
 
 [width="38%",cols="100%,",options="header",]
 |=======================================================================
@@ -95,7 +95,7 @@ as a parameter:
 ----
 EntityManager em = ...;
 String personPK = ...;
-Person person = em.find(Person.class, personPK, 
+Person person = em.find(Person.class, personPK,
     LockModeType.PESSIMISTIC_WRITE);
 ----
 3.  Call one of the `EntityManager.refresh` methods that take the lock
@@ -200,5 +200,3 @@ will be determined in the following order:
 2.  The setting in the `@NamedQuery` annotation
 3.  The argument to the `Persistence.createEntityManagerFactory` method
 4.  The value in the `persistence.xml` deployment descriptor
-
-
