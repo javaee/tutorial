@@ -55,7 +55,7 @@ watch for changes and rebuild incrementally.
 ## Deploy the site to Github Pages
 
 ```
-mvn deploy
+mvn deploy -Ppublish-site
 ```
 
 ## Produce a zip file for download

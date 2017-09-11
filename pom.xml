@@ -42,24 +42,25 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.glassfish</groupId>
+    <parent>
+        <groupId>net.java</groupId>
+        <artifactId>jvnet-parent</artifactId>
+        <version>5</version>
+    </parent>
+    <groupId>org.glassfish.docs</groupId>
     <artifactId>javaee-tutorial</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>8.0-SNAPSHOT</version>
     <name>Java EE Tutorial</name>
-
     <properties>
         <site.output.dir>${project.build.directory}/staging</site.output.dir>
         <maven.site.skip>true</maven.site.skip>
-        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
-
-    <distributionManagement>
-        <site>
-            <url>scm:git:git@github.com:javaee/tutorial.git</url>
-        </site>
-    </distributionManagement>
-
+    <scm>
+      <connection>scm:git:git@github.com:javaee/firstcup.git</connection>
+      <developerConnection>scm:git:git@github.com:javaee/firstcup.git</developerConnection>
+      <url>https://github.com/javaee/firstcup</url>      
+    </scm>
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
@@ -113,26 +114,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-publish-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>deploy-site</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>publish-scm</goal>
-                        </goals>
-                        <configuration>
-                            <scmBranch>gh-pages</scmBranch>
-                            <skipDeletedFiles>false</skipDeletedFiles>
-                            <checkinComment>Update site</checkinComment>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
 	    <!--
 		This is the rule that builds the zip file for download.
 	    -->
@@ -165,4 +146,33 @@
 	    </plugins>
 	</pluginManagement>
     </build>
+  <profiles>
+    <profile>
+      <id>publish-site</id>
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>deploy-site</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>publish-scm</goal>
+                        </goals>
+                        <configuration>
+                            <scmBranch>gh-pages</scmBranch>
+                            <skipDeletedFiles>false</skipDeletedFiles>
+                            <checkinComment>Update site</checkinComment>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
