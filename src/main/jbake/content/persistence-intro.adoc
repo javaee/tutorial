@@ -10,7 +10,7 @@ Introduction to the Java Persistence API
 [[BNBPZ]]
 
 [[introduction-to-the-java-persistence-api]]
-38 Introduction to the Java Persistence API
+40 Introduction to the Java Persistence API
 -------------------------------------------
 
 
@@ -27,5 +27,3 @@ Persistence API]
 * link:persistence-intro006.html#CHDBEGIC[Database Schema Creation]
 * link:persistence-intro007.html#GKCLC[Further Information about
 Persistence]
-
-

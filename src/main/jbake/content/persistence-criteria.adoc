@@ -10,7 +10,7 @@ Using the Criteria API to Create Queries
 [[GJITV]]
 
 [[using-the-criteria-api-to-create-queries]]
-41 Using the Criteria API to Create Queries
+43 Using the Criteria API to Create Queries
 -------------------------------------------
 
 
@@ -27,5 +27,3 @@ Metamodel APIs]
 Model Entity Classes]
 * link:persistence-criteria003.html#GJIVM[Using the Criteria API and
 Metamodel API to Create Basic Typesafe Queries]
-
-

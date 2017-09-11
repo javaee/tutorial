@@ -225,12 +225,12 @@ The Expression Interface Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An `Expression` object is used in a query's `SELECT`, `WHERE`, or
-`HAVING` clause. link:#GJIWW[Table 41-1] shows conditional methods you
+`HAVING` clause. link:#GJIWW[Table 43-1] shows conditional methods you
 can use with `Expression` objects.
 
 [[sthref180]][[GJIWW]]
 
-Table 41-1 Conditional Methods in the Expression Interface
+Table 43-1 Conditional Methods in the Expression Interface
 
 [width="20%",cols="100%,",options="header",]
 |============================================================
@@ -272,12 +272,12 @@ Expression Methods in the CriteriaBuilder Interface
 
 The `CriteriaBuilder` interface defines additional methods for creating
 expressions. These methods correspond to the arithmetic, string, date,
-time, and case operators and functions of JPQL. link:#GJIXL[Table 41-2]
+time, and case operators and functions of JPQL. link:#GJIXL[Table 43-2]
 shows conditional methods you can use with `CriteriaBuilder` objects.
 
 [[sthref181]][[GJIXL]]
 
-Table 41-2 Conditional Methods in the CriteriaBuilder Interface
+Table 43-2 Conditional Methods in the CriteriaBuilder Interface
 
 [width="20%",cols="100%,",options="header",]
 |=======================================================================
@@ -346,11 +346,11 @@ cq.where(cb.like(pet.get(Pet_.name), "*do"));
 
 To specify multiple conditional predicates, use the compound predicate
 methods of the `CriteriaBuilder` interface, as shown in
-link:#GJIWU[Table 41-3].
+link:#GJIWU[Table 43-3].
 
 [[sthref182]][[GJIWU]]
 
-Table 41-3 Compound Predicate Methods in the CriteriaBuilder Interface
+Table 43-3 Compound Predicate Methods in the CriteriaBuilder Interface
 
 [width="20%",cols="100%,",options="header",]
 |=========================================================
@@ -535,5 +535,3 @@ CriteriaQuery<Pet> cq = cb.createQuery(Pet.class);
 TypedQuery<Pet> q = em.createQuery(cq);
 List<Pet> results = q.getResultList();
 ----
-
-

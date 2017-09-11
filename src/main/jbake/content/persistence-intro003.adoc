@@ -171,13 +171,13 @@ containing a value that identifies the subclass to which the instance
 represented by the row belongs.
 
 The discriminator column, whose elements are shown in link:#BNBQT[Table
-38-2], can be specified by using the
+40-2], can be specified by using the
 `javax.persistence.DiscriminatorColumn` annotation on the root of the
 entity class hierarchy.
 
 [[sthref160]][[BNBQT]]
 
-Table 38-2 @DiscriminatorColumn Elements
+Table 40-2 @DiscriminatorColumn Elements
 
 [width="45%",cols="52%,48%,",options="header",]
 |=======================================================================
@@ -283,5 +283,3 @@ database table is set up correctly for the discriminator column
 defaults, or use the `@DiscriminatorColumn` annotation to match your
 database schema. For information on discriminator columns, see
 link:#BNBQS[The Single Table per Class Hierarchy Strategy].
-
-

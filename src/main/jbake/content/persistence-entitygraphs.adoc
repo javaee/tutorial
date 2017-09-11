@@ -10,7 +10,7 @@ Creating Fetch Plans with Entity Graphs
 [[BABIJIAC]]
 
 [[creating-fetch-plans-with-entity-graphs]]
-44 Creating Fetch Plans with Entity Graphs
+46 Creating Fetch Plans with Entity Graphs
 ------------------------------------------
 
 
@@ -26,5 +26,3 @@ Plans and Entity Graphs]
 Graphs]
 * link:persistence-entitygraphs004.html#BABGJDAJ[Using Entity Graphs in
 Query Operations]
-
-

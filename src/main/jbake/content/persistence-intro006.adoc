@@ -64,7 +64,7 @@ provider will not create or drop any database artifacts.
 
 [[sthref162]][[sthref163]]
 
-Table 38-3 Schema Creation Actions
+Table 40-3 Schema Creation Actions
 
 [width="31%",cols="100%,",options="header",]
 |=======================================================================
@@ -102,7 +102,7 @@ the provider will create or delete the database artifacts.
 
 [[sthref164]][[sthref165]]
 
-Table 38-4 Settings for Create and Delete Source Properties
+Table 40-4 Settings for Create and Delete Source Properties
 
 [width="31%",cols="100%,",options="header",]
 |=======================================================================
@@ -168,5 +168,3 @@ In this example, the load script is a file called `data.sql` in the
 <property name="javax.persistence.sql-load-script-source"
           value="META-INF/sql/data.sql" />
 ----
-
-
