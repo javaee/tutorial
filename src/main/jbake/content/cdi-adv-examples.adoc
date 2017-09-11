@@ -10,7 +10,7 @@ prev=cdi-bootstrap-se8002.html
 [[GKHRE]]
 
 [[running-the-advanced-contexts-and-dependency-injection-examples]]
-28 Running the Advanced Contexts and Dependency Injection Examples
+29 Running the Advanced Contexts and Dependency Injection Examples
 ------------------------------------------------------------------
 
 

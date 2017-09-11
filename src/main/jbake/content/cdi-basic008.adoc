@@ -17,11 +17,11 @@ For a web application to use a bean that injects another bean class, the
 bean needs to be able to hold state over the duration of the user's
 interaction with the application. The way to define this state is to
 give the bean a scope. You can give an object any of the scopes
-described in link:#GJDBG[Table 24-1], depending on how you are using it.
+described in link:#GJDBG[Table 25-1], depending on how you are using it.
 
 [[sthref126]][[GJDBG]]
 
-Table 24-1 Scopes
+Table 25-1 Scopes
 
 [width="99%",cols="25%,25%,50%"]
 |=======================================================================

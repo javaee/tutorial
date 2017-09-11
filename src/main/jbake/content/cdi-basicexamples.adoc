@@ -10,7 +10,7 @@ prev=cdi-basic015.html
 [[GJBLS]]
 
 [[running-the-basic-contexts-and-dependency-injection-examples]]
-25 Running the Basic Contexts and Dependency Injection Examples
+26 Running the Basic Contexts and Dependency Injection Examples
 ---------------------------------------------------------------
 
 

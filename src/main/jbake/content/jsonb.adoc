@@ -9,7 +9,7 @@ prev=jsonp008.html
 [[sthref120]]
 
 [[json-binding]]
-20 JSON Binding
+21 JSON Binding
 ---------------
 
 This chapter describes the Java API for JSON Binding (JSON-B). JSON is a data exchange format widely used
@@ -27,5 +27,3 @@ The following topics are addressed here:
 * link:jsonb002.html#overview-of-the-json-binding-api[Overview of the JSON Binding API]
 * link:jsonb003.html#running-the-jsonbbasics-example-application[Running the jsonbbasics Example Application]
 * link:jsonb004.html#further-information-about-the-java-api-for-json-binding[Further Information about the Java API for JSON Binding]
-
-
