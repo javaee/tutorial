@@ -2,10 +2,10 @@
 
 The {{site.title}} Project is the official site for the Java Platform, Enterprise Edition (Java EE) 8
 Tutorial that is delivered with the Java EE 8 SDK. The {{site.title}} teaches and demonstrates the
-Java EE features that are used to develope enterprise applications.
+Java EE features that are used to develop enterprise applications.
 
 
-The lastest build of the tutorial is automatically published to this site as HTML:
+The latest build of the tutorial is automatically published to this site as HTML:
 
 
 [View the Java EE Tutorial](toc.html).
@@ -39,7 +39,7 @@ your comments.
 
 
 Do you have an idea for the {{site.title}}? Do you want to add a section or update an existing section?
-The {{site.title}} is open for contributions. Review the following links if want to help.
+The {{site.title}} is open for contributions. Review the following links if you want to help.
 
 * [How to Contribute to GlassFish and Java EE](https://javaee.github.io/glassfish/how-to-contribute)
 * [Pull Request Acceptance Workflow](https://javaee.github.io/glassfish/pr_workflow)
