@@ -10,7 +10,7 @@ Using the Embedded Enterprise Bean Container
 [[GKCQZ]]
 
 [[using-the-embedded-enterprise-bean-container]]
-36 Using the Embedded Enterprise Bean Container
+38 Using the Embedded Enterprise Bean Container
 -----------------------------------------------
 
 
@@ -25,5 +25,3 @@ Bean Container]
 * link:ejb-embedded002.html#GKCRR[Developing Embeddable Enterprise Bean
 Applications]
 * link:ejb-embedded003.html#GKCPV[The standalone Example Application]
-
-

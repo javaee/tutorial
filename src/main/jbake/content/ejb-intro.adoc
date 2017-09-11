@@ -10,7 +10,7 @@ Enterprise Beans
 [[GIJSZ]]
 
 [[enterprise-beans]]
-33 Enterprise Beans
+35 Enterprise Beans
 -------------------
 
 
@@ -34,5 +34,3 @@ The following topics are addressed here:
 * link:ejb-intro007.html#GIPLJ[The Lifecycles of Enterprise Beans]
 * link:ejb-intro008.html#GIPLG[Further Information about Enterprise
 Beans]
-
-

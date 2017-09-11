@@ -14,11 +14,11 @@ Developing Embeddable Enterprise Bean Applications
 --------------------------------------------------
 
 All embeddable enterprise bean containers support the features listed in
-link:#GKCQC[Table 36-1].
+link:#GKCQC[Table 38-1].
 
 [[sthref157]][[GKCQC]]
 
-Table 36-1 Required Enterprise Bean Features in the Embeddable Container
+Table 38-1 Required Enterprise Bean Features in the Embeddable Container
 
 [width="32%",cols="100%,",options="header",]
 |=======================================================================
@@ -43,7 +43,7 @@ container in Java EE servers.
 Container providers are allowed to support the full set of features in
 enterprise beans, but applications that use the embedded container will
 not be portable if they use enterprise bean features not listed in
-link:#GKCQC[Table 36-1], such as the timer service, session beans as web
+link:#GKCQC[Table 38-1], such as the timer service, session beans as web
 service endpoints, or remote business interfaces.
 
 [[GKCQI]]
@@ -59,7 +59,7 @@ container just like a typical Java SE application, as follows:
 
 [source,oac_no_warn]
 ----
-java -classpath mySessionBean.jar:containerProviderRuntime.jar:myClient.jar \                                                                                            
+java -classpath mySessionBean.jar:containerProviderRuntime.jar:myClient.jar \
 com.example.ejb.client.Main
 ----
 
@@ -186,7 +186,7 @@ bean with a no-interface view, use the following code:
 +
 [source,oac_no_warn]
 ----
-MySessionBean msb = (MySessionBean) 
+MySessionBean msb = (MySessionBean)
             ctx.lookup("java:global/mySessionBean/MySessionBean");
 ----
 
@@ -213,5 +213,3 @@ doing so frees resources consumed by the embedded container. This is
 particularly important when the virtual machine under which the client
 application is running has a longer lifetime than the client
 application.
-
-

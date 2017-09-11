@@ -24,7 +24,7 @@ Before proceeding, make sure that you've done the following:
 
 * Read link:overview.html#BNAAW[Chapter 1, "Overview"]
 * Become familiar with enterprise beans (see
-link:ejb-intro.html#GIJSZ[Chapter 33, "Enterprise Beans"])
+link:ejb-intro.html#GIJSZ[Chapter 35, "Enterprise Beans"])
 * Started the server (see link:usingexamples002.html#BNADI[Starting and
 Stopping GlassFish Server])
 
@@ -33,5 +33,3 @@ The following topics are addressed here:
 * link:ejb-gettingstarted002.html#GIPSS[Creating the Enterprise Bean]
 * link:ejb-gettingstarted003.html#GIPTI[Modifying the Java EE
 Application]
-
-
