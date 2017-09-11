@@ -53,7 +53,7 @@ Applications] describes these differences, and this chapter provides
 examples that illustrate them.
 
 The examples for this section are in the
-tut-install`/examples/jms/simple/` directory, under the following
+`_tut-install_/examples/jms/simple/` directory, under the following
 subdirectories:
 
 `producer/` +
@@ -273,13 +273,13 @@ destination type and the number of arguments:
 final int NUM_MSGS;
 String destType = args[0];
 System.out.println("Destination type is " + destType);
-if ( ! ( destType.equals("queue") || destType.equals("topic") ) ) { 
+if ( ! ( destType.equals("queue") || destType.equals("topic") ) ) {
     System.err.println("Argument must be \"queue\" or " + "\"topic\"");
     System.exit(1);
 }
-if (args.length == 2){ 
+if (args.length == 2){
     NUM_MSGS = (new Integer(args[1])).intValue();
-} else { 
+} else {
     NUM_MSGS = 1;
 }
 ----
@@ -289,14 +289,14 @@ on the specified destination type:
 [source,oac_no_warn]
 ----
 Destination dest = null;
-try { 
-    if (destType.equals("queue")) { 
-        dest = (Destination) queue; 
-    } else { 
-        dest = (Destination) topic; 
+try {
+    if (destType.equals("queue")) {
+        dest = (Destination) queue;
+    } else {
+        dest = (Destination) topic;
     }
 } catch (Exception e) {
-    System.err.println("Error setting destination: " + e.toString()); 
+    System.err.println("Error setting destination: " + e.toString());
     System.exit(1);
 }
 ----
@@ -313,11 +313,11 @@ Messages in the form of strings are of the `TextMessage` message type:
 [source,oac_no_warn]
 ----
     int count = 0;
-    for (int i = 0; i < NUM_MSGS; i++) { 
-        String message = "This is message " + (i + 1) 
+    for (int i = 0; i < NUM_MSGS; i++) {
+        String message = "This is message " + (i + 1)
                 + " from producer";
         // Comment out the following line to send many messages
-        System.out.println("Sending message: " + message); 
+        System.out.println("Sending message: " + message);
         context.createProducer().send(dest, message);
         count += 1;
     }
@@ -445,15 +445,15 @@ end-of-message-stream control message is received:
 ----
 int count = 0;
 while (true) {
-    Message m = consumer.receive(1000); 
-    if (m != null) { 
-        if (m instanceof TextMessage) { 
+    Message m = consumer.receive(1000);
+    if (m != null) {
+        if (m instanceof TextMessage) {
             System.out.println(
                     "Reading message: " + m.getBody(String.class));
-            count += 1; 
-        } else { 
-            break; 
-        } 
+            count += 1;
+        } else {
+            break;
+        }
     }
 }
 System.out.println("Messages received: " + count);
@@ -654,14 +654,14 @@ reports this fact:
 +
 [source,oac_no_warn]
 ----
-public void onMessage(Message m) { 
-    try { 
-        if (m instanceof TextMessage) { 
+public void onMessage(Message m) {
+    try {
+        if (m instanceof TextMessage) {
             System.out.println(
-                    "Reading message: " + m.getBody(String.class)); 
-        } else { 
-             System.out.println("Message is not a TextMessage"); 
-        } 
+                    "Reading message: " + m.getBody(String.class));
+        } else {
+             System.out.println("Message is not a TextMessage");
+        }
     } catch (JMSException | JMSRuntimeException e) {
         System.err.println("JMSException in onMessage(): " + e.toString());
     }
@@ -836,12 +836,12 @@ contents of the messages:
 +
 [source,oac_no_warn]
 ----
-if ( !msgs.hasMoreElements() ) { 
+if ( !msgs.hasMoreElements() ) {
     System.out.println("No messages in queue");
-} else { 
-    while (msgs.hasMoreElements()) { 
-        Message tempMsg = (Message)msgs.nextElement(); 
-        System.out.println("Message: " + tempMsg); 
+} else {
+    while (msgs.hasMoreElements()) {
+        Message tempMsg = (Message)msgs.nextElement();
+        System.out.println("Message: " + tempMsg);
     }
 }
 ----
@@ -935,7 +935,7 @@ additional output):
 +
 [source,oac_no_warn]
 ----
-Message: 
+Message:
 Text:   This is message 1 from producer
 Class:                  com.sun.messaging.jmq.jmsclient.TextMessageImpl
 getJMSMessageID():      ID:9-10.152.23.26(bf:27:4:e:e7:ec)-55645-1363100335526
@@ -950,7 +950,7 @@ getJMSExpiration():     0
 getJMSPriority():       4
 Properties:             {JMSXDeliveryCount=0}
 
-Message: 
+Message:
 Class:                  com.sun.messaging.jmq.jmsclient.MessageImpl
 getJMSMessageID():      ID:10-10.152.23.26(bf:27:4:e:e7:ec)-55645-1363100335526
 getJMSTimestamp():      1363100335526
@@ -1086,7 +1086,7 @@ of consumers and types of acknowledgment.
 
 [[sthref204]][[sthref205]]
 
-Table 47-3 Message Acknowledgment with Synchronous and Asynchronous
+Table 49-3 Message Acknowledgment with Synchronous and Asynchronous
 Consumers
 
 [width="50%",cols="43%,57%,",options="header",]
@@ -1185,5 +1185,3 @@ The client acknowledges each message explicitly after processing it,
 just as a `JMSContext` configured to use `AUTO_ACKNOWLEDGE` does
 automatically after a `MessageListener` returns successfully from
 processing a message received asynchronously.
-
-

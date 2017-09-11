@@ -13,7 +13,7 @@ Building and Running Java Message Service Examples
 Building and Running Java Message Service Examples
 --------------------------------------------------
 
-The examples are in the tut-install`/examples/jms/` directory.
+The examples are in the `_tut-install_/examples/jms/` directory.
 
 To build and run each example:
 
@@ -31,5 +31,3 @@ to create resources for that example and others. You can use the
 To use the `asadmin` and `appclient` commands, you need to put the
 GlassFish Server `bin` directories in your command path, as described in
 link:usingexamples001.html#GEXBC[SDK Installation Tips].
-
-

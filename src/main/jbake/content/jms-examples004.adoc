@@ -42,10 +42,10 @@ For information on durable subscriptions, see
 link:jms-concepts003.html#BNCGD[Creating Durable Subscriptions].
 
 The main client, `DurableConsumer.java`, is under the
-tut-install`/examples/jms/durablesubscriptionexample/durableconsumer`/
+`_tut-install_/examples/jms/durablesubscriptionexample/durableconsumer`/
 directory.
 
-The example uses a connection factory, j`ms/DurableConnectionFactory`,
+The example uses a connection factory, `jms/DurableConnectionFactory`,
 that has a client ID.
 
 The `DurableConsumer` client creates a `JMSContext` using the connection
@@ -285,7 +285,7 @@ removed to keep the sequence simple:
 [source,oac_no_warn]
 ----
 inMessage = vendorOrderReceiver.receive();
-// Process the incoming message and format the outgoing 
+// Process the incoming message and format the outgoing
 // message
 ...
 context.createProducer().send(supplierOrderTopic, orderMessage);
@@ -355,11 +355,11 @@ inMessage = (MapMessage) orderConfirmReceiver.receive();
 The retailer then places a second order for twice as many computers as
 in the first order, so these steps are executed twice.
 
-link:#BNCGK[Figure 47-1] illustrates these steps.
+link:#BNCGK[Figure 49-1] illustrates these steps.
 
 [[BNCGK]]
 
-.*Figure 47-1 Transactions: JMS Client Example*
+.*Figure 49-1 Transactions: JMS Client Example*
 image:img/javaeett_dt_034.png[
 "Diagram of steps in transaction example"]
 
@@ -582,7 +582,7 @@ that causes a rollback:
 +
 [source,oac_no_warn]
 ----
-Vendor: JMSException occurred: javax.jms.JMSException: Simulated 
+Vendor: JMSException occurred: javax.jms.JMSException: Simulated
 database concurrent access exception
   Vendor: Rolled back transaction 1
 ----
@@ -596,5 +596,3 @@ asadmin delete-jms-resource jms/BQueue
 asadmin delete-jms-resource jms/CQueue
 asadmin delete-jms-resource jms/OTopic
 ----
-
-

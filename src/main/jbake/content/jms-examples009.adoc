@@ -4,8 +4,8 @@ title=Using an Entity to Join Messages from Two MDBs
 next=jms-examples010.html
 prev=jms-examples008.html
 ~~~~~~
-Using an Entity to Join Messages from Two MDBs
-==============================================
+= Using an Entity to Join Messages from Two MDBs
+
 
 [[BNCHF]]
 
@@ -86,12 +86,12 @@ reply queue a message (M2) describing the assignments. Then it removes
 the entity. The application client's message listener retrieves the
 information.
 
-link:#BNCHH[Figure 47-5] illustrates the structure of this application.
+link:#BNCHH[Figure 49-5] illustrates the structure of this application.
 Of course, an actual HR application would have more components; other
 beans could set up payroll and benefits records, schedule orientation,
 and so on.
 
-link:#BNCHH[Figure 47-5] assumes that `OfficeMDB` is the first
+link:#BNCHH[Figure 49-5] assumes that `OfficeMDB` is the first
 message-driven bean to consume the message from the client. `OfficeMDB`
 then creates and persists the `SetupOffice` entity and stores the office
 information. `EquipmentMDB` then finds the entity, stores the equipment
@@ -101,7 +101,7 @@ entity.
 
 [[BNCHH]]
 
-.*Figure 47-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity*
+.*Figure 49-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity*
 image:img/javaeett_dt_038.png[
 "Diagram of application showing an application client, two message-driven
 beans, and an entity, as well as the associated topic and queue"]
@@ -226,16 +226,16 @@ settings:
 [source,oac_no_warn]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" 
-             xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
                http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="clientmdbentity-ejbPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
     <properties>
-      <property name="eclipselink.ddl-generation" 
+      <property name="eclipselink.ddl-generation"
                 value="drop-and-create-tables"/>
     </properties>
   </persistence-unit>
@@ -287,12 +287,13 @@ tut-install/examples/jms/clientmdbentity
 select Build.
 +
 This command creates the following:
-* An application client JAR file that contains the client class and
+
+** An application client JAR file that contains the client class and
 listener class files, along with a manifest file that specifies the main
 class
-* An EJB JAR file that contains the message-driven beans and the entity
+** An EJB JAR file that contains the message-driven beans and the entity
 class, along with the `persistence.xml` file
-* An application EAR file that contains the two JAR files along with an
+** An application EAR file that contains the two JAR files along with an
 `application.xml` file
 +
 The `clientmdbentity.ear` file is created in the
@@ -327,12 +328,13 @@ mvn install
 ----
 +
 This command creates the following:
-* An application client JAR file that contains the client class and
+
+** An application client JAR file that contains the client class and
 listener class files, along with a manifest file that specifies the main
 class
-* An EJB JAR file that contains the message-driven beans and the entity
+** An EJB JAR file that contains the message-driven beans and the entity
 class, along with the `persistence.xml` file
-* An application EAR file that contains the two JAR files along with an
+** An application EAR file that contains the two JAR files along with an
 `application.xml` file
 +
 The command then deploys the application, retrieves the client stubs,
@@ -402,5 +404,3 @@ in spite of these errors, with no special programming.
 
 To undeploy the application after you have finished running it, use the
 Services tab or issue the `mvn cargo:undeploy` command.
-
-
