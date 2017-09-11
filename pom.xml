@@ -61,6 +61,11 @@
       <developerConnection>scm:git:git@github.com:javaee/tutorial.git</developerConnection>
       <url>https://github.com/javaee/tutorial</url>      
     </scm>
+    <distributionManagement>
+        <site>
+            <url>scm:git:git@github.com:javaee/tutorial.git</url>
+        </site>
+    </distributionManagement>
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
@@ -165,9 +170,14 @@
     </build>
   <profiles>
     <profile>
-      <id>publish-site</id>
-      <build>
-        <plugins>
+       <id>publish-site</id>
+       <properties>
+         <site.output.dir>${project.build.directory}/staging</site.output.dir>
+         <maven.site.skip>true</maven.site.skip>
+         <maven.deploy.skip>true</maven.deploy.skip>
+       </properties>
+       <build>
+         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-publish-plugin</artifactId>
