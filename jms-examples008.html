@@ -100,14 +100,14 @@ clientsessionmdb Example</a></p>
 bean (in this case, a session bean) rather than from an application
 client, as in the example in <a href="jms-examples007.html#BNBPK">Receiving
 Messages Asynchronously Using a Message-Driven Bean</a>. <a href="#BNCGY">Figure
-47-4</a> illustrates the structure of this application. Sending messages
+49-4</a> illustrates the structure of this application. Sending messages
 from an enterprise bean is very similar to sending messages from a
 managed bean, which was shown in
 <a href="jms-examples006.html#BABBABFC">Sending and Receiving Messages Using a
 Simple Web Application</a>.</p>
 </div>
 <div id="BNCGY" class="paragraph">
-<div class="title"><strong>Figure 47-4 An Enterprise Bean Application: Client to Session Bean to Message-Driven Bean</strong></div>
+<div class="title"><strong>Figure 49-4 An Enterprise Bean Application: Client to Session Bean to Message-Driven Bean</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_037.png" alt="Diagram of application showing an application client calling a session bean, which sends messages that are processed by a message-driven bean"></span></p>
 </div>
 <div class="paragraph">
@@ -299,30 +299,31 @@ then click Open Project.</p>
 select Build. (If NetBeans IDE suggests that you run a priming build,
 click the box to do so.)</p>
 <div class="paragraph">
-<p>This command creates the following:
-* An application client JAR file that contains the client class file and
-the session bean&#8217;s remote interface, along with a manifest file that
-specifies the main class and places the EJB JAR file in its classpath
-* An EJB JAR file that contains both the session bean and the
-message-driven bean
-* An application EAR file that contains the two JAR files</p>
+<p>This command creates the following:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application client JAR file that contains the client class file and
+the session bean&#8217;s remote interface, along with a manifest file that
+specifies the main class and places the EJB JAR file in its classpath</p>
+</li>
+<li>
+<p>An EJB JAR file that contains both the session bean and the
+message-driven bean</p>
+</li>
+<li>
+<p>An application EAR file that contains the two JAR files</p>
 <div class="paragraph">
-<p>+
-The <code>clientsessionmdb.ear</code> file is created in the
+<p>The <code>clientsessionmdb.ear</code> file is created in the
 <code>clientsessionmdb-ear/target/</code> directory.</p>
 </div>
 <div class="paragraph">
-<p>+
-The command then deploys the EAR file, retrieves the client stubs, and
+<p>The command then deploys the EAR file, retrieves the client stubs, and
 runs the client.</p>
 </div>
 <div class="paragraph">
-<p>+
-The client displays these lines:</p>
-</div>
-<div class="paragraph">
-<p>+</p>
+<p>The client displays these lines:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -331,9 +332,11 @@ The client displays these lines:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>+
-The output from the enterprise beans appears in the server log file. The
+<p>The output from the enterprise beans appears in the server log file. The
 Publisher session bean sends two sets of 18 messages numbered 0 through</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -373,30 +376,31 @@ application, enter the following command:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This command creates the following:
-* An application client JAR file that contains the client class file and
-the session bean&#8217;s remote interface, along with a manifest file that
-specifies the main class and places the EJB JAR file in its classpath
-* An EJB JAR file that contains both the session bean and the
-message-driven bean
-* An application EAR file that contains the two JAR files</p>
+<p>This command creates the following:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application client JAR file that contains the client class file and
+the session bean&#8217;s remote interface, along with a manifest file that
+specifies the main class and places the EJB JAR file in its classpath</p>
+</li>
+<li>
+<p>An EJB JAR file that contains both the session bean and the
+message-driven bean</p>
+</li>
+<li>
+<p>An application EAR file that contains the two JAR files</p>
 <div class="paragraph">
-<p>+
-The <code>clientsessionmdb.ear</code> file is created in the
+<p>The <code>clientsessionmdb.ear</code> file is created in the
 <code>clientsessionmdb-ear/target/</code> directory.</p>
 </div>
 <div class="paragraph">
-<p>+
-The command then deploys the EAR file, retrieves the client stubs, and
+<p>The command then deploys the EAR file, retrieves the client stubs, and
 runs the client.</p>
 </div>
 <div class="paragraph">
-<p>+
-The client displays these lines:</p>
-</div>
-<div class="paragraph">
-<p>+</p>
+<p>The client displays these lines:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -405,9 +409,11 @@ The client displays these lines:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>+
-The output from the enterprise beans appears in the server log file. The
+<p>The output from the enterprise beans appears in the server log file. The
 Publisher session bean sends two sets of 18 messages numbered 0 through</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 <li>

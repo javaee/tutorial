@@ -85,11 +85,11 @@ object</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#BNCEI">Figure 46-5</a> shows how all these objects fit together in a
+<p><a href="#BNCEI">Figure 48-5</a> shows how all these objects fit together in a
 JMS client application.</p>
 </div>
 <div id="BNCEI" class="paragraph">
-<div class="title"><strong>Figure 46-5 The JMS API Programming Model</strong></div>
+<div class="title"><strong>Figure 48-5 The JMS API Programming Model</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_030.png" alt="Diagram of the JMS API programming model: connection factory, JMSContext, connection, session, message producer, message consumer, messages, and destinations"></span></p>
 </div>
 <div class="paragraph">
@@ -103,7 +103,7 @@ The last subsection briefly describes JMS API exception handling.</p>
 </div>
 <div class="paragraph">
 <p>Examples that show how to combine all these objects in applications
-appear in <a href="jms-examples.html#BNCGV">Chapter 47, "Java Message Service
+appear in <a href="jms-examples.html#BNCGV">Chapter 49, "Java Message Service
 Examples,"</a> beginning with <a href="jms-examples003.html#BNCFA">Writing Simple
 JMS Applications</a>. For more detail, see the JMS API documentation, part
 of the Java EE API documentation.</p>
@@ -519,7 +519,7 @@ to Receive Messages Asynchronously</a>.</p>
 <div class="paragraph">
 <p>For a simple example of the use of a message listener, see
 <a href="jms-examples003.html#BNCFH">Using a Message Listener for Asynchronous
-Message Delivery</a>. <a href="jms-examples.html#BNCGV">Chapter 47, "Java Message
+Message Delivery</a>. <a href="jms-examples.html#BNCGV">Chapter 49, "Java Message
 Service Examples,"</a> contains several more examples of message listeners
 and message-driven beans.</p>
 </div>
@@ -737,7 +737,7 @@ context.unsubscribe(subName);</code></pre>
 the subscription.</p>
 </div>
 <div class="paragraph">
-<p><a href="#BNCGE">Figure 46-6</a> and <a href="#BNCGF">Figure 46-7</a> show the
+<p><a href="#BNCGE">Figure 48-6</a> and <a href="#BNCGF">Figure 48-7</a> show the
 difference between a nondurable and a durable subscription. With an
 ordinary, nondurable subscription, the consumer and the subscription
 begin and end at the same point and are, in effect, identical. When the
@@ -746,17 +746,17 @@ for a call to <code>JMSContext.createConsumer</code> with a <code>Topic</code> a
 <code>close</code> stands for a call to <code>JMSConsumer.close</code>. Any messages sent to
 the topic between the time of the first <code>close</code> and the time of the
 second <code>create</code> are not added to either subscription. In
-<a href="#BNCGE">Figure 46-6</a>, the consumers receive messages M1, M2, M5, and
+<a href="#BNCGE">Figure 48-6</a>, the consumers receive messages M1, M2, M5, and
 M6, but they do not receive messages M3 and M4.</p>
 </div>
 <div id="BNCGE" class="paragraph">
-<div class="title"><strong>Figure 46-6 Nondurable Subscriptions and Consumers</strong></div>
+<div class="title"><strong>Figure 48-6 Nondurable Subscriptions and Consumers</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_031.png" alt="Diagram showing messages being lost when nondurable subscriptions are used"></span></p>
 </div>
 <div class="paragraph">
 <p>With a durable subscription, the consumer can be closed and re-created,
 but the subscription continues to exist and to hold messages until the
-application calls the <code>unsubscribe</code> method. In <a href="#BNCGF">Figure 46-7</a>,
+application calls the <code>unsubscribe</code> method. In <a href="#BNCGF">Figure 48-7</a>,
 <code>create</code> stands for a call to <code>JMSContext.createDurableConsumer</code>,
 <code>close</code> stands for a call to <code>JMSConsumer.close</code>, and <code>unsubscribe</code>
 stands for a call to <code>JMSContext.unsubscribe</code>. Messages sent after the
@@ -765,7 +765,7 @@ created (on the same durable subscription), so even though messages M2,
 M4, and M5 arrive while there is no consumer, they are not lost.</p>
 </div>
 <div id="BNCGF" class="paragraph">
-<div class="title"><strong>Figure 46-7 Consumers on a Durable Subscription</strong></div>
+<div class="title"><strong>Figure 48-7 Consumers on a Durable Subscription</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_032.png" alt="Diagram showing messages being preserved when durable subscriptions are used"></span></p>
 </div>
 <div class="paragraph">
@@ -878,7 +878,7 @@ documentation. For a list of possible message types, see
 <div class="paragraph">
 <p>A JMS message header contains a number of predefined fields that contain
 values used by both clients and providers to identify and route
-messages. <a href="#BNCEU">Table 46-1</a> lists and describes the JMS message
+messages. <a href="#BNCEU">Table 48-1</a> lists and describes the JMS message
 header fields and indicates how their values are set. For example, every
 message has a unique identifier, which is represented in the header
 field <code>JMSMessageID</code>. The value of another header field,
@@ -896,7 +896,7 @@ values.</p>
 <p><a id="sthref196"></a><a id="BNCEU"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 46-1 How JMS Message Header Field Values Are Set</p>
+<p>Table 41 How JMS Message Header Field Values Are Set</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 56%;">
 <colgroup>
@@ -1009,13 +1009,13 @@ properties or of user-defined properties in applications is optional.</p>
 <p>The JMS API defines six different types of messages. Each message type
 corresponds to a different message body. These message types allow you
 to send and receive data in many different forms. <a href="#BNCEX">Table
-46-2</a> describes these message types.</p>
+48-2</a> describes these message types.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref197"></a><a id="BNCEX"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 46-2 JMS Message Types</p>
+<p>Table 48-2 JMS Message Types</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 25%;">
 <colgroup>
@@ -1130,7 +1130,7 @@ can be assigned to a particular type.</p>
 <div class="paragraph">
 <p>An empty <code>Message</code> can be useful if you want to send a message that is
 simply a signal to the application. Some of the examples in
-<a href="jms-examples.html#BNCGV">Chapter 47, "Java Message Service
+<a href="jms-examples.html#BNCGV">Chapter 49, "Java Message Service
 Examples,"</a> send an empty message after sending a series of text
 messages. For example:</p>
 </div>
@@ -1144,7 +1144,7 @@ messages. For example:</p>
 all the messages sent have now been received.</p>
 </div>
 <div class="paragraph">
-<p>The examples in <a href="jms-examples.html#BNCGV">Chapter 47, "Java Message
+<p>The examples in <a href="jms-examples.html#BNCGV">Chapter 49, "Java Message
 Service Examples,"</a> use messages of type <code>TextMessage</code>, <code>MapMessage</code>,
 and <code>Message</code>.</p>
 </div>

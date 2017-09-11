@@ -159,13 +159,13 @@ information.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><a href="#BNCHH">Figure 47-5</a> illustrates the structure of this application.
+<p><a href="#BNCHH">Figure 49-5</a> illustrates the structure of this application.
 Of course, an actual HR application would have more components; other
 beans could set up payroll and benefits records, schedule orientation,
 and so on.</p>
 </div>
 <div class="paragraph">
-<p><a href="#BNCHH">Figure 47-5</a> assumes that <code>OfficeMDB</code> is the first
+<p><a href="#BNCHH">Figure 49-5</a> assumes that <code>OfficeMDB</code> is the first
 message-driven bean to consume the message from the client. <code>OfficeMDB</code>
 then creates and persists the <code>SetupOffice</code> entity and stores the office
 information. <code>EquipmentMDB</code> then finds the entity, stores the equipment
@@ -174,7 +174,7 @@ information, and learns that the entity has completed its work.
 entity.</p>
 </div>
 <div id="BNCHH" class="paragraph">
-<div class="title"><strong>Figure 47-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity</strong></div>
+<div class="title"><strong>Figure 49-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_038.png" alt="Diagram of application showing an application client, two message-driven beans, and an entity, as well as the associated topic and queue"></span></p>
 </div>
 </div>
@@ -223,7 +223,7 @@ that occurs, based on new-hire events it has published</p>
 </li>
 <li>
 <p>Creates a <code>JMSConsumer</code> for the <code>TemporaryQueue</code>, sets the
-<code>JMSConsumer</code>'s message listener, and starts the connection</p>
+`JMSConsumer&#8217;s message listener, and starts the connection</p>
 </li>
 <li>
 <p>Creates a <code>MapMessage</code></p>
@@ -270,8 +270,8 @@ and a <code>JMSContext</code>.</p>
 </li>
 <li>
 <p>The <code>onMessage</code> method retrieves the information in the message. The
-<code>EquipmentMDB</code>'s <code>onMessage</code> method chooses equipment, based on the new
-hire&#8217;s position; the <code>OfficeMDB</code>'s <code>onMessage</code> method randomly generates
+<code>EquipmentMDB&#8217;s `onMessage</code> method chooses equipment, based on the new
+hire&#8217;s position; the <code>OfficeMDB&#8217;s `onMessage</code> method randomly generates
 an office number.</p>
 </li>
 <li>
@@ -424,24 +424,32 @@ Server</a>).</p>
 <p>In the Projects tab, right-click the <code>clientmdbentity</code> project and
 select Build.</p>
 <div class="paragraph">
-<p>This command creates the following:
-* An application client JAR file that contains the client class and
-listener class files, along with a manifest file that specifies the main
-class
-* An EJB JAR file that contains the message-driven beans and the entity
-class, along with the <code>persistence.xml</code> file
-* An application EAR file that contains the two JAR files along with an
-<code>application.xml</code> file</p>
+<p>This command creates the following:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application client JAR file that contains the client class and
+listener class files, along with a manifest file that specifies the main
+class</p>
+</li>
+<li>
+<p>An EJB JAR file that contains the message-driven beans and the entity
+class, along with the <code>persistence.xml</code> file</p>
+</li>
+<li>
+<p>An application EAR file that contains the two JAR files along with an
+<code>application.xml</code> file</p>
 <div class="paragraph">
-<p>+
-The <code>clientmdbentity.ear</code> file is created in the
+<p>The <code>clientmdbentity.ear</code> file is created in the
 <code>clientmdbentity-ear/target/</code> directory.</p>
 </div>
 <div class="paragraph">
-<p>+
-The command then deploys the EAR file, retrieves the client stubs, and
+<p>The command then deploys the EAR file, retrieves the client stubs, and
 runs the application client.</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ol>
@@ -475,19 +483,28 @@ application, enter the following command:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This command creates the following:
-* An application client JAR file that contains the client class and
-listener class files, along with a manifest file that specifies the main
-class
-* An EJB JAR file that contains the message-driven beans and the entity
-class, along with the <code>persistence.xml</code> file
-* An application EAR file that contains the two JAR files along with an
-<code>application.xml</code> file</p>
+<p>This command creates the following:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>An application client JAR file that contains the client class and
+listener class files, along with a manifest file that specifies the main
+class</p>
+</li>
+<li>
+<p>An EJB JAR file that contains the message-driven beans and the entity
+class, along with the <code>persistence.xml</code> file</p>
+</li>
+<li>
+<p>An application EAR file that contains the two JAR files along with an
+<code>application.xml</code> file</p>
 <div class="paragraph">
-<p>+
-The command then deploys the application, retrieves the client stubs,
+<p>The command then deploys the application, retrieves the client stubs,
 and runs the application client.</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ol>
