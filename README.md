@@ -35,4 +35,4 @@ tutorial and want to add a section or update an existing section, then review th
 
 * [How to Contribute to GlassFish and Java EE](https://javaee.github.io/glassfish/how-to-contribute)
 * [Pull Request Acceptance Workflow](https://javaee.github.io/glassfish/pr_workflow)
-* [Licenses](https://javaee.github.io/glassfish/LICENSE) governing the GlassFish project.
+* [Licenses](https://javaee.github.io/glassfish/LICENSE) governing the GlassFish project
