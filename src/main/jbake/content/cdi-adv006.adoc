@@ -25,7 +25,7 @@ Java EE platform, you can use them with Java EE managed objects of all
 kinds, including managed beans.
 
 For information on Java EE interceptors, see
-link:interceptors.html#GKEED[Chapter 55, "Using Java EE Interceptors"].
+link:interceptors.html#GKEED[Chapter 57, "Using Java EE Interceptors"].
 
 An interceptor class often contains a method annotated `@AroundInvoke`,
 which specifies the tasks the interceptor will perform when intercepted

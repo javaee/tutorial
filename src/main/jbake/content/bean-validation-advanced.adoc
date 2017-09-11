@@ -10,7 +10,7 @@ Bean Validation: Advanced Topics
 [[GKAHP]]
 
 [[bean-validation-advanced-topics]]
-23 Bean Validation: Advanced Topics
+24 Bean Validation: Advanced Topics
 -----------------------------------
 
 
@@ -27,5 +27,3 @@ Messages]
 * link:bean-validation-advanced003.html#GKAGV[Grouping Constraints]
 * link:bean-validation-advanced004.html#CIHGJBGI[Using Method Constraints
 in Type Hierarchies]
-
-

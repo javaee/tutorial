@@ -4,13 +4,13 @@ title=Internationalizing and Localizing Web Applications
 next=webi18n001.html
 prev=jsonb004.html
 ~~~~~~
-Internationalizing and Localizing Web Applications
-==================================================
+= Internationalizing and Localizing Web Applications
+
 
 [[BNAXU]]
 
 [[internationalizing-and-localizing-web-applications]]
-21 Internationalizing and Localizing Web Applications
+22 Internationalizing and Localizing Web Applications
 -----------------------------------------------------
 
 
@@ -29,5 +29,3 @@ The following topics are addressed here:
 * link:webi18n002.html#BNAXW[Providing Localized Messages and Labels]
 * link:webi18n003.html#BNAYA[Date and Number Formatting]
 * link:webi18n004.html#BNAYB[Character Sets and Encodings]
-
-

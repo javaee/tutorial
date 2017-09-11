@@ -15,7 +15,7 @@ Java objects to JSON documents and deserialize JSON documents to Java objects. T
 Java API for JSON Binding contains the following packages:
 
 * The `javax.json.bind` package contains the binding interface, the builder interface, and
-a configuration class. link:#main-classes-and-interfaces-in-bind[Table 20-1] lists the main classes
+a configuration class. link:#main-classes-and-interfaces-in-bind[Table 21-1] lists the main classes
 and interfaces in this package.
 
 * The `javax.json.bind.adapter` package contains the `JsonbAdapter` interface, which provides
@@ -26,12 +26,12 @@ binding behavior. Annotations can be used for field, JavaBean property, type, or
 elements.
 
 * The `javax.json.bind.config` package interfaces and classes for customizing default binding behavior.
-link:#main-classes-and-interfaces-in-config[Table 20-2] lists the main classes
+link:#main-classes-and-interfaces-in-config[Table 21-2] lists the main classes
 and interfaces in this package.
 
 * The `javax.json.bind.serializer` package contains interfaces that are used to create serialization and
  deserialization routines for custom types that cannot be easily mapped using the `JsonbAdapter` methods.
- link:#main-classes-and-interfaces-in-serializer[Table 20-3] lists the main interfaces in this package.
+ link:#main-classes-and-interfaces-in-serializer[Table 21-3] lists the main interfaces in this package.
 
 * The `javax.json.bind.spi` package contains a Service Provider Interface (SPI) for  creating
 JSON Binding implementations. This package contains the `JsonbProvider` class, which
@@ -40,7 +40,7 @@ contains the methods that a service provider implements.
 
 [[main-classes-and-interfaces-in-bind]]
 
-*Table 20-1 Main Classes and Interfaces in javax.json.bind*
+*Table 21-1 Main Classes and Interfaces in javax.json.bind*
 
 [width=99%,cols="25%,75%"]
 |=======================================================================
@@ -58,7 +58,7 @@ binding strategies and properties for configuring custom serializers and deseria
 
 [[main-classes-and-interfaces-in-config]]
 
-*Table 20-2 Main Classes and Interfaces in javax.json.bind.config*
+*Table 21-2 Main Classes and Interfaces in javax.json.bind.config*
 [width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
@@ -75,7 +75,7 @@ overriding the default scope and field access behavior.
 
 [[main-classes-and-interfaces-in-serializer]]
 
-*Table 20-3 Main Classes and Interfaces in javax.json.bind.serializer*
+*Table 21-3 Main Classes and Interfaces in javax.json.bind.serializer*
 [width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
