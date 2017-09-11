@@ -50,7 +50,7 @@ implements.
 
 [[sthref130]][[sthref131]]
 
-*Table 26-1 Injection of Predefined Beans*
+*Table 27-1 Injection of Predefined Beans*
 
 [width="80%",cols="20%,20%,40%"]
 |=====================================================================

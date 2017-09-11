@@ -10,7 +10,7 @@ prev=partbeanvalidation.html
 [[CHDGJIIA]]
 
 [[introduction-to-bean-validation]]
-22 Introduction to Bean Validation
+23 Introduction to Bean Validation
 ----------------------------------
 
 

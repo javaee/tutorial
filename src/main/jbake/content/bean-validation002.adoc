@@ -20,13 +20,13 @@ component, such as a managed bean.
 Constraints can be built in or user defined. User-defined constraints
 are called custom constraints. Several built-in constraints are
 available in the `javax.validation.constraints` package.
-link:#GKAGK[Table 22-1] lists all the built-in constraints. See
+link:#GKAGK[Table 23-1] lists all the built-in constraints. See
 link:bean-validation-advanced001.html#GKFGX[Creating Custom Constraints]
 for information on creating custom constraints.
 
 [[sthref121]][[GKAGK]]
 
-Table 22-1 Built-In Bean Validation Constraints
+Table 23-1 Built-In Bean Validation Constraints
 
 [width="99%",cols="22%,59%,18%",]
 |=======================================================================
