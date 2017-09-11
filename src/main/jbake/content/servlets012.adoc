@@ -81,12 +81,12 @@ response is not committed after exiting the service method. You have to
 generate the response in the asynchronous context after the blocking
 operation completes or dispatch the request to another servlet.
 
-link:#BEICFIEC[Table 17-3] describes the basic functionality provided by
+link:#BEICFIEC[Table 18-3] describes the basic functionality provided by
 the `AsyncContext` class.
 
 [[sthref104]][[BEICFIEC]]
 
-*Table 17-3 Functionality Provided by the AsyncContext Class*
+*Table 18-3 Functionality Provided by the AsyncContext Class*
 
 [width="90%",cols="20%,70"]
 |=======================================================================

@@ -4,13 +4,13 @@ title=Java API for WebSocket
 next=websocket001.html
 prev=servlets018.html
 ~~~~~~
-Java API for WebSocket
-======================
+= Java API for WebSocket
+
 
 [[GKJIQ5]]
 
 [[java-api-for-websocket]]
-18 Java API for WebSocket
+19 Java API for WebSocket
 -------------------------
 
 
@@ -36,5 +36,3 @@ Class]
 * link:websocket011.html#BABGCEHE[The dukeetf2 Example Application]
 * link:websocket012.html#BABCDBBC[The websocketbot Example Application]
 * link:websocket013.html#BABDFIFD[Further Information about WebSocket]
-
-

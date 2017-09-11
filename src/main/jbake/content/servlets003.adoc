@@ -32,12 +32,12 @@ Using Scope Objects
 Collaborating web components share information by means of objects that
 are maintained as attributes of four scope objects. You access these
 attributes by using the `getAttribute` and `setAttribute` methods of the
-class representing the scope. link:#BNAFQ[Table 17-2] lists the scope
+class representing the scope. link:#BNAFQ[Table 18-2] lists the scope
 objects.
 
 [[sthref98]][[BNAFQ]]
 
-*Table 17-2 Scope Objects*
+*Table 18-2 Scope Objects*
 
 [width="90%",cols="15%,25%,50"]
 |=======================================================================
