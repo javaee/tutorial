@@ -36,7 +36,7 @@ The following topics are addressed here:
 The Lifecycle of a Stateful Session Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-link:#GIPMI[Figure 33-2] illustrates the stages that a stateful session
+link:#GIPMI[Figure 35-2] illustrates the stages that a stateful session
 bean passes through during its lifetime. The client initiates the
 lifecycle by obtaining a reference to a stateful session bean. The
 container performs any dependency injection and then invokes the method
@@ -45,7 +45,7 @@ its business methods invoked by the client.
 
 [[GIPMI]]
 
-.*Figure 33-2 Lifecycle of a Stateful Session Bean*
+.*Figure 35-2 Lifecycle of a Stateful Session Bean*
 image:img/javaeett_dt_021.png[
 "Diagram showing the lifecycle of a stateful session bean."]
 
@@ -65,8 +65,8 @@ collection.
 
 Your code controls the invocation of only one lifecycle method: the
 method annotated `@Remove`. All other methods in link:#GIPMI[Figure
-33-2] are invoked by the EJB container. See
-link:resources.html#BNCJH[Chapter 53, "Resource Adapters and Contracts"]
+35-2] are invoked by the EJB container. See
+link:resources.html#BNCJH[Chapter 55, "Resource Adapters and Contracts"]
 for more information.
 
 [[GIPLM]]
@@ -77,12 +77,12 @@ The Lifecycle of a Stateless Session Bean
 
 Because a stateless session bean is never passivated, its lifecycle has
 only two stages: nonexistent and ready for the invocation of business
-methods. link:#GIPNI[Figure 33-3] illustrates the stages of a stateless
+methods. link:#GIPNI[Figure 35-3] illustrates the stages of a stateless
 session bean.
 
 [[GIPNI]]
 
-.*Figure 33-3 Lifecycle of a Stateless or Singleton Session Bean*
+.*Figure 35-3 Lifecycle of a Stateless or Singleton Session Bean*
 image:img/javaeett_dt_022.png[
 "Diagram showing the lifecycle of a stateless or singleton session bean."]
 
@@ -104,7 +104,7 @@ The Lifecycle of a Singleton Session Bean
 
 Like a stateless session bean, a singleton session bean is never
 passivated and has only two stages, nonexistent and ready for the
-invocation of business methods, as shown in link:#GIPNI[Figure 33-3].
+invocation of business methods, as shown in link:#GIPNI[Figure 35-3].
 
 The EJB container initiates the singleton session bean lifecycle by
 creating the singleton instance. This occurs upon application deployment
@@ -123,12 +123,12 @@ ready for garbage collection.
 The Lifecycle of a Message-Driven Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-link:#GIPLR[Figure 33-4] illustrates the stages in the lifecycle of a
+link:#GIPLR[Figure 35-4] illustrates the stages in the lifecycle of a
 message-driven bean.
 
 [[GIPLR]]
 
-.*Figure 33-4 Lifecycle of a Message-Driven Bean*
+.*Figure 35-4 Lifecycle of a Message-Driven Bean*
 image:img/javaeett_dt_023.png[
 "Diagram showing the lifecycle of a message-driven bean."]
 
@@ -145,5 +145,3 @@ and has only two states: nonexistent and ready to receive messages.
 At the end of the lifecycle, the container calls the method annotated
 `@PreDestroy`, if any. The bean's instance is then ready for garbage
 collection.
-
-

@@ -86,7 +86,7 @@ context, so all operations within the `onMessage` method are part of a
 single transaction. If message processing is rolled back, the message
 will be redelivered. For more information, see
 link:jms-examples007.html#BNBPK[Receiving Messages Asynchronously Using a
-Message-Driven Bean] and link:transactions.html#BNCIH[Chapter 52,
+Message-Driven Bean] and link:transactions.html#BNCIH[Chapter 54,
 "Transactions"].
 
 [[GIPJX]]
@@ -101,5 +101,3 @@ resources, do not to use blocking synchronous receives in a server-side
 component; in general, JMS messages should not be sent or received
 synchronously. To receive messages asynchronously, use a message-driven
 bean.
-
-

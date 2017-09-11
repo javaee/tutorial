@@ -38,11 +38,11 @@ Creating Calendar-Based Timer Expressions
 Timers can be set according to a calendar-based schedule, expressed
 using a syntax similar to the UNIX `cron` utility. Both programmatic and
 automatic timers can use calendar-based timer expressions.
-link:#GIQLY[Table 35-1] shows the calendar-based timer attributes.
+link:#GIQLY[Table 37-1] shows the calendar-based timer attributes.
 
 [[sthref156]][[GIQLY]]
 
-Table 35-1 Calendar-Based Timer Attributes
+Table 37-1 Calendar-Based Timer Attributes
 
 [width="51%",cols="30%,45%,25%,",options="header",]
 |=======================================================================
@@ -284,7 +284,7 @@ p.m. on May 1, 2015, specified as a `java.util.Date`:
 
 [source,oac_no_warn]
 ----
-SimpleDateFormatter formatter = 
+SimpleDateFormatter formatter =
     new SimpleDateFormatter("MM/dd/yyyy 'at' HH:mm");
 Date date = formatter.parse("05/01/2015 at 12:05");
 Timer timer = timerService.createSingleActionTimer(date, new TimerConfig());
@@ -504,13 +504,13 @@ expires, in about 8 seconds:
 ----
 ...
     public void setTimer(long intervalDuration) {
-        logger.log(Level.INFO, 
+        logger.log(Level.INFO,
                 "Setting a programmatic timeout for {0} milliseconds from now.",
                 intervalDuration);
-        Timer timer = timerService.createTimer(intervalDuration, 
+        Timer timer = timerService.createTimer(intervalDuration,
                 "Created new programmatic timer");
     }
-    
+
     @Timeout
     public void programmaticTimeout(Timer timer) {
         this.setLastProgrammaticTimeout(new Date());
@@ -565,18 +565,18 @@ public class TimerSessionBean {
 
     private Date lastProgrammaticTimeout;
     private Date lastAutomaticTimeout;
-    
-    private static final Logger logger = 
+
+    private static final Logger logger =
             Logger.getLogger("timersession.ejb.TimerSessionBean");
-    
+
     public void setTimer(long intervalDuration) {
         logger.log(Level.INFO,
                 "Setting a programmatic timeout for {0} milliseconds from now.",
                 intervalDuration);
-        Timer timer = timerService.createTimer(intervalDuration, 
+        Timer timer = timerService.createTimer(intervalDuration,
                 "Created new programmatic timer");
     }
-    
+
     @Timeout
     public void programmaticTimeout(Timer timer) {
         this.setLastProgrammaticTimeout(new Date());
@@ -672,7 +672,7 @@ tut-install/examples/ejb
 6.  From the Run menu, choose Run Project.
 +
 This builds and packages the application into a WAR file located at
-tut-install`/examples/ejb/timersession/target/timersession.war`, deploys
+`_tut-install_/examples/ejb/timersession/target/timersession.war`, deploys
 this WAR file to your GlassFish Server instance, and then runs the web
 client.
 
@@ -699,7 +699,7 @@ mvn install
 ----
 +
 This builds and packages the application into a WAR file located at
-tut-install`/examples/ejb/timersession/target/timersession.war` and
+`_tut-install_/examples/ejb/timersession/target/timersession.war` and
 deploys this WAR file to your GlassFish Server instance.
 
 [[GIQOP]]
@@ -722,5 +722,3 @@ timeouts.
 +
 To see the messages that are logged when a timeout occurs, open the
 `server.log` file located in domain-dir`/logs/`.
-
-

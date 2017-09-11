@@ -4,8 +4,8 @@ title=A Web Service Example: helloservice
 next=ejb-basicexamples005.html
 prev=ejb-basicexamples003.html
 ~~~~~~
-A Web Service Example: helloservice
-===================================
+= A Web Service Example: helloservice
+
 
 [[BNBOR]]
 
@@ -118,8 +118,7 @@ Using Maven]
 [[BNBOV]]
 
 [[to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide]]
-To Build, Package, and Deploy the helloservice Example Using NetBeans
-IDE
+To Build, Package, and Deploy the helloservice Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -138,7 +137,7 @@ tut-install/examples/ejb
 select Build.
 +
 This builds and packages the application into `helloservice.ear`,
-located in tut-install`/examples/ejb/helloservice/target/`, and deploys
+located in `_tut-install_/examples/ejb/helloservice/target/`, and deploys
 this EAR file to GlassFish Server.
 
 [[BNBOW]]
@@ -205,5 +204,3 @@ Methods, enter a name as the parameter to the `sayHello` method.
 +
 The sayHello Method invocation page opens. Under Method returned, you'll
 see the response from the endpoint.
-
-
