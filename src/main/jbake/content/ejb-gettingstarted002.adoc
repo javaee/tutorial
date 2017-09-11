@@ -71,7 +71,7 @@ Creating the converter Web Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The web client is contained in the following servlet class under the
-tut-install`/examples/ejb/converter/src/main/java/` directory:
+`_tut-install_/examples/ejb/converter/src/main/java/` directory:
 
 [source,oac_no_warn]
 ----
@@ -208,5 +208,3 @@ http://localhost:8080/converter
 click Submit.
 +
 A second page opens, showing the converted values.
-
-

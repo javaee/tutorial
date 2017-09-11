@@ -342,12 +342,12 @@ public class BeanName implements InterfaceName { ... }
 The remote interface defines the business and lifecycle methods that are
 specific to the bean. For example, the remote interface of a bean named
 `BankAccountBean` might have business methods named `deposit` and
-`credit`. link:#GIPNO[Figure 33-1] shows how the interface controls the
+`credit`. link:#GIPNO[Figure 35-1] shows how the interface controls the
 client's view of an enterprise bean.
 
 [[GIPNO]]
 
-.*Figure 33-1 Interfaces for an Enterprise Bean with Remote Access*
+.*Figure 35-1 Interfaces for an Enterprise Bean with Remote Access*
 image:img/javaeett_dt_020.png[
 "Diagram showing a remote client accessing an enterprise bean's methods
 through its remote interface."]
@@ -384,7 +384,7 @@ Web Service Clients
 
 A web service client can access a Java EE application in two ways.
 First, the client can access a web service created with JAX-WS. (For
-more information on JAX-WS, see link:jaxws.html#BNAYL[Chapter 29,
+more information on JAX-WS, see link:jaxws.html#BNAYL[Chapter 31,
 "Building Web Services with JAX-WS"].) Second, a web service client can
 invoke the business methods of a stateless session bean. Message beans
 cannot be accessed by web service clients.
@@ -450,5 +450,3 @@ parameters in remote methods should be relatively coarse-grained. A
 coarse-grained object contains more data than a fine-grained one, so
 fewer access calls are required. For the same reason, the parameters of
 the methods called by web service clients should also be coarse-grained.
-
-

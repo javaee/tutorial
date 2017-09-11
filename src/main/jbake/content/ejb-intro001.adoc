@@ -4,8 +4,8 @@ title=What Is an Enterprise Bean?
 next=ejb-intro002.html
 prev=ejb-intro.html
 ~~~~~~
-What Is an Enterprise Bean?
-===========================
+= What Is an Enterprise Bean?
+
 
 [[GIPMB]]
 
@@ -79,22 +79,19 @@ clients can be thin, various, and numerous.
 Types of Enterprise Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-link:#GIPLZ[Table 33-1] summarizes the two types of enterprise beans.
+link:#GIPLZ[Table 35-1] summarizes the two types of enterprise beans.
 The following sections discuss each type in more detail.
 
 [[sthref150]][[GIPLZ]]
 
-Table 33-1 Enterprise Bean Types
+Table 35-1 Enterprise Bean Types
 
-[width="30%",cols="100%,",options="header",]
+[width="75%",cols="35%,65%"]
 |=======================================================================
-|Enterprise Bean Type |Purpose
+|*Enterprise Bean Type* |*Purpose*
 |Session |Performs a task for a client; optionally, may implement a web
 service
 
 |Message-driven |Acts as a listener for a particular messaging type,
 such as the Java Message Service API
 |=======================================================================
-
-
-

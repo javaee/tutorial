@@ -10,7 +10,7 @@ Using Asynchronous Method Invocation in Session Beans
 [[GKIDZ]]
 
 [[using-asynchronous-method-invocation-in-session-beans]]
-37 Using Asynchronous Method Invocation in Session Beans
+39 Using Asynchronous Method Invocation in Session Beans
 --------------------------------------------------------
 
 
@@ -21,5 +21,3 @@ The following topics are addressed here:
 
 * link:ejb-async001.html#GKKQG[Asynchronous Method Invocation]
 * link:ejb-async002.html#GKIEZ[The async Example Application]
-
-
