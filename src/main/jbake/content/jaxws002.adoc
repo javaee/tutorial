@@ -20,12 +20,12 @@ directory, and the clients are in the
 tut-install`/examples/jaxws/hello-appclient/` and
 tut-install`/examples/jaxws/hello-webclient/` directories.
 
-link:#BNAYO[Figure 29-1] illustrates how JAX-WS technology manages
+link:#BNAYO[Figure 31-1] illustrates how JAX-WS technology manages
 communication between a web service and a client.
 
 [[BNAYO]]
 
-.*Figure 29-1 Communication between a JAX-WS Web Service and a Client*
+.*Figure 31-1 Communication between a JAX-WS Web Service and a Client*
 image:img/javaeett_dt_019.png[
 "Diagram showing a client and web service communicating through a SOAP
 message."]
@@ -298,7 +298,7 @@ import javaeetutorial.helloservice.endpoint.HelloService;
 import javax.xml.ws.WebServiceRef;
 
 public class HelloAppClient {
-    @WebServiceRef(wsdlLocation = 
+    @WebServiceRef(wsdlLocation =
       "http://localhost:8080/helloservice-war/HelloService?WSDL")
     private static HelloService service;
 ----
@@ -321,7 +321,7 @@ return port.sayHello(arg0);
 
 Here is the full source of `HelloAppClient.java`, which is located in
 the
-tut-install`/examples/jaxws/hello-appclient/src/main/java/javaeetutorial/hello/appclient/`
+`_tut-install_/examples/jaxws/hello-appclient/src/main/java/javaeetutorial/hello/appclient/`
 directory:
 
 [source,oac_no_warn]
@@ -332,7 +332,7 @@ import javaeetutorial.helloservice.endpoint.HelloService;
 import javax.xml.ws.WebServiceRef;
 
 public class HelloAppClient {
-    @WebServiceRef(wsdlLocation = 
+    @WebServiceRef(wsdlLocation =
       "http://localhost:8080/helloservice-war/HelloService?WSDL")
     private static HelloService service;
 
@@ -344,7 +344,7 @@ public class HelloAppClient {
     }
 
     private static String sayHello(java.lang.String arg0) {
-        javaeetutorial.helloservice.endpoint.Hello port = 
+        javaeetutorial.helloservice.endpoint.Hello port =
                 service.getHelloPort();
         return port.sayHello(arg0);
     }
@@ -459,7 +459,7 @@ location:
 +
 [source,oac_no_warn]
 ----
-@WebServiceRef(wsdlLocation = 
+@WebServiceRef(wsdlLocation =
   "http://localhost:8080/helloservice-war/HelloService?WSDL")
 ----
 3.  It declares the web service, then defines a private method that
@@ -484,7 +484,7 @@ out.println("<p>" + sayHello("world") + "</p>");
 
 The significant parts of the `HelloServlet` code follow. The code is
 located in the
-tut-install`/examples/jaxws/hello-webclient/src/java/javaeetutorial/hello/ webclient/`
+`_tut-install_/examples/jaxws/hello-webclient/src/java/javaeetutorial/hello/ webclient/`
 directory.
 
 [source,oac_no_warn]
@@ -503,42 +503,42 @@ import javax.xml.ws.WebServiceRef;
 
 @WebServlet(name="HelloServlet", urlPatterns={"/HelloServlet"})
 public class HelloServlet extends HttpServlet {
-    @WebServiceRef(wsdlLocation = 
+    @WebServiceRef(wsdlLocation =
       "http://localhost:8080/helloservice-war/HelloService?WSDL")
     private HelloService service;
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> 
+
+    /**
+     * Processes requests for both HTTP <code>GET</code>
      *   and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, 
+    protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             out.println("<html lang=\"en\">");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");  
+            out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HelloServlet at " + 
+            out.println("<h1>Servlet HelloServlet at " +
                 request.getContextPath () + "</h1>");
             out.println("<p>" + sayHello("world") + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
-    
+    }
+
     // doGet and doPost methods, which call processRequest, and
     //   getServletInfo method
-    
+
     private String sayHello(java.lang.String arg0) {
-        javaeetutorial.helloservice.endpoint.Hello port = 
+        javaeetutorial.helloservice.endpoint.Hello port =
                 service.getHelloPort();
         return port.sayHello(arg0);
     }
@@ -621,5 +621,3 @@ http://localhost:8080/hello-webclient/HelloServlet
 ----
 +
 The output of the `sayHello` method appears in the window.
-
-

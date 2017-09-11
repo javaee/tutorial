@@ -29,8 +29,7 @@ The Client API in the rsvp Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `rsvp` application allows users to respond to event invitations
-using JAX-RS resources, as explained in link:jaxrs003.html#GJVBC[Chapter
-30, "The rsvp Example Application"]. The web application uses the Client
+using JAX-RS resources, as explained in link:jaxrs003.html#the-rsvp-example-application[The rsvp Example Application]. The web application uses the Client
 API in CDI backing beans to interact with the service resources, and the
 Facelets web interface displays the results.
 
@@ -80,11 +79,11 @@ response. The body of the request is an XML document.
 
 [source,oac_no_warn]
 ----
-    public String changeStatus(ResponseEnum userResponse, 
+    public String changeStatus(ResponseEnum userResponse,
             Person person, Event event) {
         String navigation;
         try {
-            logger.log(Level.INFO, 
+            logger.log(Level.INFO,
                     "changing status to {0} for {1} {2} for event ID {3}.",
                     new Object[]{userResponse,
                         person.getFirstName(),
@@ -115,8 +114,8 @@ The Client API in the customer Example Application
 
 The `customer` example application stores customer data in a database
 and exposes the resource as XML, as explained in
-link:jaxrs-advanced008.html#GKOIB[Chapter 32, "The customer Example
-Application"]. The service resource exposes methods that create
+link:jaxrs-advanced008.html#GKOIB[The customer Example
+Application]. The service resource exposes methods that create
 customers and retrieve all the customers. A Facelets web application
 acts as a client for the service resource, with a form for creating
 customers and displaying the list of customers in a table.
@@ -142,11 +141,11 @@ public String createCustomer(Customer customer) {
     if (response.getStatus() == Status.CREATED.getStatusCode()) {
         navigation = "customerCreated";
     } else {
-        logger.log(Level.WARNING, 
+        logger.log(Level.WARNING,
                 "couldn''t create customer with id {0}. Status returned was {1}",
                 new Object[]{customer.getId(), response.getStatus()});
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, 
+        context.addMessage(null,
                 new FacesMessage("Could not create customer."));
         navigation = "customerError";
     }
@@ -201,5 +200,3 @@ public List<Customer> retrieveAllCustomers() {
 Because the response type is a collection, the `Invocation.Builder.get`
 method is called by passing in a new instance of
 `GenericType<List<Customer>>`.
-
-

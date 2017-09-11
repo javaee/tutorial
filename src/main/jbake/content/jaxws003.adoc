@@ -32,12 +32,12 @@ Schema-to-Java Mapping
 ~~~~~~~~~~~~~~~~~~~~~~
 
 The Java language provides a richer set of data types than XML schema.
-link:#BNAZU[Table 29-1] lists the mapping of XML data types to Java data
+link:#BNAZU[Table 31-1] lists the mapping of XML data types to Java data
 types in JAXB.
 
 [[sthref135]][[BNAZU]]
 
-*Table 29-1 Mapping of XML Data Types to Java Data Types in JAXB*
+*Table 31-1 Mapping of XML Data Types to Java Data Types in JAXB*
 
 [width="50%",cols="20%,30%"]
 |=========================================================
@@ -75,12 +75,12 @@ types in JAXB.
 Java-to-Schema Mapping
 ~~~~~~~~~~~~~~~~~~~~~~
 
-link:#BNAZX[Table 29-2] shows the default mapping of Java classes to XML
+link:#BNAZX[Table 31-2] shows the default mapping of Java classes to XML
 data types.
 
 [[sthref136]][[BNAZX]]
 
-*Table 29-2 Mapping of Java Classes to XML Data Types in JAXB*
+*Table 31-2 Mapping of Java Classes to XML Data Types in JAXB*
 
 [width="50%",cols="30%,20%"]
 |=============================================================

@@ -10,7 +10,7 @@ Introduction to Web Services
 [[GIJTI]]
 
 [[introduction-to-web-services]]
-28 Introduction to Web Services
+30 Introduction to Web Services
 -------------------------------
 
 
@@ -24,5 +24,3 @@ The following topics are addressed here:
 * link:webservices-intro002.html#GIQSX[Types of Web Services]
 * link:webservices-intro003.html#GJBJI[Deciding Which Type of Web Service
 to Use]
-
-
