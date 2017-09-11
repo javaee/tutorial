@@ -95,13 +95,13 @@ paraphrases or directly quotes the specification.</p>
 <div class="sect2">
 <h3 id="bnf-symbols">BNF Symbols</h3>
 <div class="paragraph">
-<p><a href="#BNBUH">Table 40-1</a> describes the BNF symbols used in this chapter.</p>
+<p><a href="#BNBUH">Table 42-1</a> describes the BNF symbols used in this chapter.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref169"></a><a id="BNBUH"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-1 BNF Symbol Summary</p>
+<p>Table 42-1 BNF Symbol Summary</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 17%;">
 <colgroup>
@@ -1045,14 +1045,14 @@ the order of evaluation by using parentheses.</p>
 <div class="sect3">
 <h4 id="operators-and-their-precedence">Operators and Their Precedence</h4>
 <div class="paragraph">
-<p><a href="#BNBVD">Table 40-2</a> lists the query language operators in order of
+<p><a href="#BNBVD">Table 42-2</a> lists the query language operators in order of
 decreasing precedence.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref170"></a><a id="BNBVD"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-2 Query Language Order Precedence</p>
+<p>Table 42-2 Query Language Order Precedence</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 21%;">
 <colgroup>
@@ -1207,14 +1207,14 @@ value is a string literal that can contain wildcard characters. The
 underscore (<code>_</code>) wildcard character represents any single character. The
 percent (<code>%</code>) wildcard character represents zero or more characters. The
 <code>ESCAPE</code> clause specifies an escape character for the wildcard
-characters in the pattern value. <a href="#BNBVH">Table 40-3</a> shows some
+characters in the pattern value. <a href="#BNBVH">Table 42-3</a> shows some
 sample <code>LIKE</code> expressions.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref171"></a><a id="BNBVH"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-3 LIKE Expression Examples</p>
+<p>Table 42-3 LIKE Expression Examples</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 43%;">
 <colgroup>
@@ -1423,11 +1423,11 @@ WHERE emp.salary &gt; ALL (
 <div class="paragraph">
 <p>The query language includes several string, arithmetic, and date/time
 functions that may be used in the <code>SELECT</code>, <code>WHERE</code>, or <code>HAVING</code> clause
-of a query. The functions are listed in <a href="#BNBVP">Table 40-4</a>,
-<a href="#BNBVQ">Table 40-5</a>, and <a href="#GJJNL">Table 40-6</a>.</p>
+of a query. The functions are listed in <a href="#BNBVP">Table 42-4</a>,
+<a href="#BNBVQ">Table 42-5</a>, and <a href="#GJJNL">Table 42-6</a>.</p>
 </div>
 <div class="paragraph">
-<p>In <a href="#BNBVP">Table 40-4</a>, the <code>start</code> and <code>length</code> arguments are of
+<p>In <a href="#BNBVP">Table 42-4</a>, the <code>start</code> and <code>length</code> arguments are of
 type <code>int</code> and designate positions in the <code>String</code> argument. The first
 position in a string is designated by 1.</p>
 </div>
@@ -1435,7 +1435,7 @@ position in a string is designated by 1.</p>
 <p><a id="sthref172"></a><a id="BNBVP"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-4 String Expressions</p>
+<p>Table 42-4 String Expressions</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 28%;">
 <colgroup>
@@ -1519,14 +1519,14 @@ string.</p>
 uppercase, respectively.</p>
 </div>
 <div class="paragraph">
-<p>In <a href="#BNBVQ">Table 40-5</a>, the <code>number</code> argument can be an <code>int</code>, a
+<p>In <a href="#BNBVQ">Table 42-5</a>, the <code>number</code> argument can be an <code>int</code>, a
 <code>float</code>, or a <code>double</code>.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref173"></a><a id="BNBVQ"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-5 Arithmetic Expressions</p>
+<p>Table 42-5 Arithmetic Expressions</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 38%;">
 <colgroup>
@@ -1574,14 +1574,14 @@ by the second.</p>
 given collection.</p>
 </div>
 <div class="paragraph">
-<p>In <a href="#GJJNL">Table 40-6</a>, the date/time functions return the date,
+<p>In <a href="#GJJNL">Table 42-6</a>, the date/time functions return the date,
 time, or timestamp on the database server.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref174"></a><a id="GJJNL"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-6 Date/Time Expressions</p>
+<p>Table 42-6 Date/Time Expressions</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
 <colgroup>
@@ -1683,7 +1683,7 @@ converts them to <code>FALSE</code>.</p>
 </li>
 <li>
 <p>Boolean operators and conditional tests use the three-valued logic
-defined by <a href="#BNBVS">Table 40-7</a> and <a href="#BNBVT">Table 40-8</a>. (In
+defined by <a href="#BNBVS">Table 42-7</a> and <a href="#BNBVT">Table 42-8</a>. (In
 these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U for unknown.)</p>
 </li>
 </ul>
@@ -1692,7 +1692,7 @@ these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U fo
 <p><a id="sthref175"></a><a id="BNBVS"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-7 AND Operator Logic</p>
+<p>Table 42-7 AND Operator Logic</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
@@ -1734,7 +1734,7 @@ these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U fo
 <p><a id="sthref176"></a><a id="BNBVT"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-8 OR Operator Logic</p>
+<p>Table 42-8 OR Operator Logic</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
@@ -1796,15 +1796,15 @@ characters. Trailing blanks are significant; for example, the strings
 </div>
 <div class="paragraph">
 <p>Two entities of the same abstract schema type are equal only if their
-primary keys have the same value. <a href="#BNBVV">Table 40-9</a> shows the
-operator logic of a negation, and <a href="#BNBVW">Table 40-10</a> shows the
+primary keys have the same value. <a href="#BNBVV">Table 42-9</a> shows the
+operator logic of a negation, and <a href="#BNBVW">Table 42-10</a> shows the
 truth values of conditional tests.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref177"></a><a id="BNBVV"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-9 NOT Operator Logic</p>
+<p>Table 42-9 NOT Operator Logic</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 45%;">
 <colgroup>
@@ -1836,7 +1836,7 @@ truth values of conditional tests.</p>
 <p><a id="sthref178"></a><a id="BNBVW"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-10 Conditional Test</p>
+<p>Table 42-10 Conditional Test</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 36%;">
 <colgroup>
@@ -1937,13 +1937,13 @@ element is a string denoting the name of the customer&#8217;s country.</p>
 </div>
 <div class="paragraph">
 <p>The result of a query may be the result of an aggregate function, listed
-in <a href="#BNBWA">Table 40-11</a>.</p>
+in <a href="#BNBWA">Table 42-11</a>.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref179"></a><a id="BNBWA"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 40-11 Aggregate Functions in Select Statements</p>
+<p>Table 42-11 Aggregate Functions in Select Statements</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 57%;">
 <colgroup>
