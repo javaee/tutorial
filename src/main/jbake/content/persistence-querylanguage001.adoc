@@ -22,9 +22,7 @@ objects or values based on entity abstract schema types and
 relationships among them.
 
 This chapter relies on the material presented in earlier chapters. For
-conceptual information, see link:persistence-intro.html#BNBPZ[Chapter 38,
+conceptual information, see link:persistence-intro.html#BNBPZ[Chapter 40,
 "Introduction to the Java Persistence API"]. For code examples, see
-link:persistence-basicexamples.html#GIJST[Chapter 39, "Running the
+link:persistence-basicexamples.html#GIJST[Chapter 41, "Running the
 Persistence Examples."]
-
-

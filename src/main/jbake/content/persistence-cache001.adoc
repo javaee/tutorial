@@ -41,7 +41,7 @@ are defined by the Java Persistence API.
 
 [[sthref188]][[GKJDG]]
 
-Table 45-1 Cache Mode Settings for the Second-Level Cache
+Table 47-1 Cache Mode Settings for the Second-Level Cache
 
 [width="28%",cols="100%,",options="header",]
 |=======================================================================
@@ -140,5 +140,3 @@ If the cache mode is set to `UNDEFINED`, or is left unset, the behavior
 of entities annotated with `@Cacheable` is undefined. If the cache mode
 is set to `ALL` or `NONE`, the value of the `@Cacheable` annotation is
 ignored by the persistence provider.
-
-

@@ -10,7 +10,7 @@ Using a Second-Level Cache with Java Persistence API Applications
 [[GKJIA]]
 
 [[using-a-second-level-cache-with-java-persistence-api-applications]]
-45 Using a Second-Level Cache with Java Persistence API Applications
+47 Using a Second-Level Cache with Java Persistence API Applications
 --------------------------------------------------------------------
 
 
@@ -24,5 +24,3 @@ The following topics are addressed here:
 Cache]
 * link:persistence-cache002.html#GKJJJ[Specifying the Cache Mode Settings
 to Improve Performance]
-
-

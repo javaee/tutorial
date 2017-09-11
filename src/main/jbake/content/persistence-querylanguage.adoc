@@ -10,7 +10,7 @@ The Java Persistence Query Language
 [[BNBTG]]
 
 [[the-java-persistence-query-language]]
-40 The Java Persistence Query Language
+42 The Java Persistence Query Language
 --------------------------------------
 
 
@@ -32,5 +32,3 @@ Syntax]
 * link:persistence-querylanguage005.html#BNBTL[Example Queries]
 * link:persistence-querylanguage006.html#BNBUF[Full Query Language
 Syntax]
-
-

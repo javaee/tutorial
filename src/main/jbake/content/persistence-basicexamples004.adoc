@@ -120,7 +120,7 @@ protected String homePhone;
 
 The constraints in `Contact`, however, are strings in the resource
 bundle `ValidationMessages.properties`, under
-tut-install`/examples/persistence/address-book/src/java/`. This allows
+`_tut-install_/examples/persistence/address-book/src/java/`. This allows
 the validation messages to be located in one single properties file and
 the messages to be easily localized. Overridden Bean Validation messages
 must be placed in a resource bundle properties file named
@@ -151,19 +151,19 @@ some of the input form for creating new `Contact` instances:
 <h:form>
     <table columns="3" role="presentation">
         <tr>
-            <td><h:outputLabel value="#{bundle.CreateContactLabel_firstName}" 
+            <td><h:outputLabel value="#{bundle.CreateContactLabel_firstName}"
                                for="firstName" /></td>
-            <td><h:inputText id="firstName" 
-                             value="#{contactController.selected.firstName}" 
+            <td><h:inputText id="firstName"
+                             value="#{contactController.selected.firstName}"
                              title="#{bundle.CreateContactTitle_firstName}"/>
             </td>
             <td><h:message for="firstName" /></td>
         </tr>
         <tr>
-            <td><h:outputLabel value="#{bundle.CreateContactLabel_lastName}" 
+            <td><h:outputLabel value="#{bundle.CreateContactLabel_lastName}"
                                for="lastName" /></td>
-            <td><h:inputText id="lastName" 
-                             value="#{contactController.selected.lastName}" 
+            <td><h:inputText id="lastName"
+                             value="#{contactController.selected.lastName}"
                              title="#{bundle.CreateContactTitle_lastName}" />
             </td>
             <td><h:message for="lastName" /></td>
@@ -271,5 +271,3 @@ in the fields; then click Save.
 If any of the values entered violate the constraints in `Contact`, an
 error message will appear in red beside the field with the incorrect
 values.
-
-
