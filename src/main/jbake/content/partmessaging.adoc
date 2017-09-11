@@ -19,9 +19,7 @@ Messaging
 
 Part IX introduces messaging. This part contains the following chapters:
 
-* link:jms-concepts.html#BNCDQ[Chapter 46, "Java Message Service
+* link:jms-concepts.html#BNCDQ[Chapter 48, "Java Message Service
 Concepts"]
-* link:jms-examples.html#BNCGV[Chapter 47, "Java Message Service
+* link:jms-examples.html#BNCGV[Chapter 49, "Java Message Service
 Examples"]
-
-

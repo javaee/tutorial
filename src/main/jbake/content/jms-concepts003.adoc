@@ -24,12 +24,12 @@ object
 * Message consumers
 * Messages
 
-link:#BNCEI[Figure 46-5] shows how all these objects fit together in a
+link:#BNCEI[Figure 48-5] shows how all these objects fit together in a
 JMS client application.
 
 [[BNCEI]]
 
-.*Figure 46-5 The JMS API Programming Model*
+.*Figure 48-5 The JMS API Programming Model*
 image:img/javaeett_dt_030.png[
 "Diagram of the JMS API programming model: connection factory,
 JMSContext, connection, session, message producer, message consumer,
@@ -43,7 +43,7 @@ commands and code snippets that show how to create and use the objects.
 The last subsection briefly describes JMS API exception handling.
 
 Examples that show how to combine all these objects in applications
-appear in link:jms-examples.html#BNCGV[Chapter 47, "Java Message Service
+appear in link:jms-examples.html#BNCGV[Chapter 49, "Java Message Service
 Examples,"] beginning with link:jms-examples003.html#BNCFA[Writing Simple
 JMS Applications]. For more detail, see the JMS API documentation, part
 of the Java EE API documentation.
@@ -262,7 +262,7 @@ to create a transacted session:
 
 [source,oac_no_warn]
 ----
-JMSContext context = 
+JMSContext context =
         connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);
 ----
 
@@ -423,7 +423,7 @@ Your `onMessage` method should handle all exceptions. Throwing a
 
 For a simple example of the use of a message listener, see
 link:jms-examples003.html#BNCFH[Using a Message Listener for Asynchronous
-Message Delivery]. link:jms-examples.html#BNCGV[Chapter 47, "Java Message
+Message Delivery]. link:jms-examples.html#BNCGV[Chapter 49, "Java Message
 Service Examples,"] contains several more examples of message listeners
 and message-driven beans.
 
@@ -602,7 +602,7 @@ context.unsubscribe(subName);
 The `unsubscribe` method deletes the state the provider maintains for
 the subscription.
 
-link:#BNCGE[Figure 46-6] and link:#BNCGF[Figure 46-7] show the
+link:#BNCGE[Figure 48-6] and link:#BNCGF[Figure 48-7] show the
 difference between a nondurable and a durable subscription. With an
 ordinary, nondurable subscription, the consumer and the subscription
 begin and end at the same point and are, in effect, identical. When the
@@ -611,19 +611,19 @@ for a call to `JMSContext.createConsumer` with a `Topic` argument, and
 `close` stands for a call to `JMSConsumer.close`. Any messages sent to
 the topic between the time of the first `close` and the time of the
 second `create` are not added to either subscription. In
-link:#BNCGE[Figure 46-6], the consumers receive messages M1, M2, M5, and
+link:#BNCGE[Figure 48-6], the consumers receive messages M1, M2, M5, and
 M6, but they do not receive messages M3 and M4.
 
 [[BNCGE]]
 
-.*Figure 46-6 Nondurable Subscriptions and Consumers*
+.*Figure 48-6 Nondurable Subscriptions and Consumers*
 image:img/javaeett_dt_031.png[
 "Diagram showing messages being lost when nondurable subscriptions are
 used"]
 
 With a durable subscription, the consumer can be closed and re-created,
 but the subscription continues to exist and to hold messages until the
-application calls the `unsubscribe` method. In link:#BNCGF[Figure 46-7],
+application calls the `unsubscribe` method. In link:#BNCGF[Figure 48-7],
 `create` stands for a call to `JMSContext.createDurableConsumer`,
 `close` stands for a call to `JMSConsumer.close`, and `unsubscribe`
 stands for a call to `JMSContext.unsubscribe`. Messages sent after the
@@ -633,7 +633,7 @@ M4, and M5 arrive while there is no consumer, they are not lost.
 
 [[BNCGF]]
 
-.*Figure 46-7 Consumers on a Durable Subscription*
+.*Figure 48-7 Consumers on a Durable Subscription*
 image:img/javaeett_dt_032.png[
 "Diagram showing messages being preserved when durable subscriptions are
 used"]
@@ -647,7 +647,7 @@ topic and subscription name:
 
 [source,oac_no_warn]
 ----
-JMSConsumer consumer = 
+JMSConsumer consumer =
         context.createSharedDurableConsumer(topic, "MakeItLast");
 ----
 
@@ -736,7 +736,7 @@ Message Headers
 
 A JMS message header contains a number of predefined fields that contain
 values used by both clients and providers to identify and route
-messages. link:#BNCEU[Table 46-1] lists and describes the JMS message
+messages. link:#BNCEU[Table 48-1] lists and describes the JMS message
 header fields and indicates how their values are set. For example, every
 message has a unique identifier, which is represented in the header
 field `JMSMessageID`. The value of another header field,
@@ -751,7 +751,7 @@ values.
 
 [[sthref196]][[BNCEU]]
 
-Table 46-1 How JMS Message Header Field Values Are Set
+Table 41 How JMS Message Header Field Values Are Set
 
 [width="56%",cols="39%,,61%",options="header",]
 |=======================================================================
@@ -825,11 +825,11 @@ Message Bodies
 The JMS API defines six different types of messages. Each message type
 corresponds to a different message body. These message types allow you
 to send and receive data in many different forms. link:#BNCEX[Table
-46-2] describes these message types.
+48-2] describes these message types.
 
 [[sthref197]][[BNCEX]]
 
-Table 46-2 JMS Message Types
+Table 48-2 JMS Message Types
 
 [width="25%",cols="100%,",options="header",]
 |=======================================================================
@@ -916,7 +916,7 @@ can be assigned to a particular type.
 
 An empty `Message` can be useful if you want to send a message that is
 simply a signal to the application. Some of the examples in
-link:jms-examples.html#BNCGV[Chapter 47, "Java Message Service
+link:jms-examples.html#BNCGV[Chapter 49, "Java Message Service
 Examples,"] send an empty message after sending a series of text
 messages. For example:
 
@@ -928,7 +928,7 @@ context.createProducer().send(dest, context.createMessage());
 The consumer code can then interpret a non-text message as a signal that
 all the messages sent have now been received.
 
-The examples in link:jms-examples.html#BNCGV[Chapter 47, "Java Message
+The examples in link:jms-examples.html#BNCGV[Chapter 49, "Java Message
 Service Examples,"] use messages of type `TextMessage`, `MapMessage`,
 and `Message`.
 
@@ -996,5 +996,3 @@ following subclasses, described in the API documentation:
 
 All the examples in the tutorial catch and handle `JMSException` or
 `JMSRuntimeException` when it is appropriate to do so.
-
-

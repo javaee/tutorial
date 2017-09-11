@@ -358,7 +358,7 @@ receives. It can use code such as the following:
 
 [source,oac_no_warn]
 ----
-replyMsg = context.createTextMessage("Consumer processed message: " 
+replyMsg = context.createTextMessage("Consumer processed message: "
         + msg.getText());
 replyMsg.setJMSCorrelationID(msg.getJMSMessageID());
 context.createProducer().send((Topic) msg.getJMSReplyTo(), replyMsg);
@@ -396,7 +396,7 @@ transacted session, call the `createContext` method as follows:
 
 [source,oac_no_warn]
 ----
-JMSContext context = 
+JMSContext context =
         connectionFactory.createContext(JMSContext.SESSION_TRANSACTED);
 ----
 
@@ -437,12 +437,12 @@ receives that depend on that message's having been sent.
 The production and the consumption of a message cannot both be part of
 the same transaction. The reason is that the transactions take place
 between the clients and the JMS provider, which intervenes between the
-production and the consumption of the message. link:#BNCGI[Figure 46-8]
+production and the consumption of the message. link:#BNCGI[Figure 48-8]
 illustrates this interaction.
 
 [[BNCGI]]
 
-.*Figure 46-8 Using JMS Local Transactions*
+.*Figure 48-8 Using JMS Local Transactions*
 image:img/javaeett_dt_033.png[
 "Diagram of local transactions, showing separate transactions for sending
 and consuming a message"]
@@ -536,5 +536,3 @@ public void onException(Message message, Exception e) {
     System.out.println("Unsent message is: \n" + message);
 }
 ----
-
-

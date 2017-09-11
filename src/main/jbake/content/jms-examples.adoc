@@ -10,7 +10,7 @@ Java Message Service Examples
 [[BNCGV]]
 
 [[java-message-service-examples]]
-47 Java Message Service Examples
+49 Java Message Service Examples
 --------------------------------
 
 
@@ -36,5 +36,3 @@ an MDB]
 Two MDBs]
 * link:jms-examples010.html#BABDFDJC[Using NetBeans IDE to Create JMS
 Resources]
-
-
