@@ -49,7 +49,7 @@ Defining the Listener Class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You define a listener class as an implementation of a listener
-interface. link:#BNAFL[Table 17-1] lists the events that can be
+interface. link:#BNAFL[Table 18-1] lists the events that can be
 monitored and the corresponding interface that must be implemented. When
 a listener method is invoked, it is passed an event that contains
 information appropriate to the event. For example, the methods in the
@@ -58,7 +58,7 @@ contains an `HttpSession`.
 
 [[sthref97]][[BNAFL]]
 
-*Table 17-1 Servlet Lifecycle Events*
+*Table 18-1 Servlet Lifecycle Events*
 
 [width="90%",cols="15%,30%,45%"]
 |=======================================================================
