@@ -57,9 +57,9 @@
         <maven.site.skip>true</maven.site.skip>
     </properties>
     <scm>
-      <connection>scm:git:git@github.com:javaee/firstcup.git</connection>
-      <developerConnection>scm:git:git@github.com:javaee/firstcup.git</developerConnection>
-      <url>https://github.com/javaee/firstcup</url>      
+      <connection>scm:git:git@github.com:javaee/tutorial.git</connection>
+      <developerConnection>scm:git:git@github.com:javaee/tutorial.git</developerConnection>
+      <url>https://github.com/javaee/tutorial</url>      
     </scm>
     <build>
         <defaultGoal>package</defaultGoal>
