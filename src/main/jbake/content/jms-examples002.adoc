@@ -16,11 +16,11 @@ Overview of the JMS Examples
 The following tables list the examples used in this chapter, describe
 what they do, and link to the section that describes them fully. The
 example directory for each example is relative to the
-tut-install`/examples/jms/` directory.
+`_tut-install_/examples/jms/` directory.
 
 [[sthref200]][[sthref201]]
 
-Table 47-1 JMS Examples That Show the Use of Java EE Application Clients
+Table 49-1 JMS Examples That Show the Use of Java EE Application Clients
 
 [width="37%",cols="100%,",options="header",]
 |=======================================================================
@@ -64,7 +64,7 @@ link:jms-examples005.html#BABEJBHA[Using Shared Durable Subscriptions]
 
 [[sthref202]][[sthref203]]
 
-Table 47-2 JMS Examples That Show the Use of Java EE Web and EJB
+Table 49-2 JMS Examples That Show the Use of Java EE Web and EJB
 Components
 
 [width="27%",cols="100%,",options="header",]
@@ -89,6 +89,3 @@ beans, and JPA persistence to create a simple HR application; see
 link:jms-examples009.html#BNCHF[Using an Entity to Join Messages from Two
 MDBs]
 |=======================================================================
-
-
-

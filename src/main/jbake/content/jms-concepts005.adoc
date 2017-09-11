@@ -381,12 +381,12 @@ messages than message listeners.
 use bean-managed transactions. The message is consumed in the
 transaction in which the `onMessage` method is invoked.
 
-link:#GJKOH[Table 46-3] lists the activation configuration properties
+link:#GJKOH[Table 48-3] lists the activation configuration properties
 defined by the JMS specification.
 
 [[sthref199]][[GJKOH]]
 
-Table 46-3 @ActivationConfigProperty Settings for Message-Driven Beans
+Table 48-3 @ActivationConfigProperty Settings for Message-Driven Beans
 
 [width="33%",cols="100%,",options="header",]
 |=======================================================================
@@ -611,5 +611,3 @@ message received by the message-driven bean to be acknowledged.
 If the `onMessage` method throws a `RuntimeException`, the container
 does not acknowledge processing the message. In that case, the JMS
 provider will redeliver the unacknowledged message in the future.
-
-
