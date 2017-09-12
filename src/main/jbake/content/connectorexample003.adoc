@@ -22,7 +22,7 @@ directory. See link:usingexamples.html#GFIUD[Chapter 2, "Using the
 Tutorial Examples,"] for basic information on building and running
 sample applications.
 
-The example demonstrates the scenario in link:#CHDGFGHB[Figure 54-3] and
+The example demonstrates the scenario in link:#CHDGFGHB[Figure 56-3] and
 consists of the following modules:
 
 * `traffic-eis`: A Java SE program that simulates an EIS
@@ -36,7 +36,7 @@ adapter, the message-driven bean, and the web application
 
 [[CHDGFGHB]]
 
-.*Figure 54-3 The traffic Example*
+.*Figure 56-3 The traffic Example*
 image:img/javaeett_dt_056.png[
 "This figure shows the components of the traffic example: a WAR
 communicating with an enterprise bean using a JMS topic, and a RAR
@@ -145,21 +145,23 @@ Implementing the Inbound Resource Adapter
 The `traffic-rar` module implements the inbound resource adapter
 contract from the Java EE Connector Architecture for the simple traffic
 information system (EIS) used in this example. The architecture of the
-inbound resource adapter is shown in link:#CHDHADDC[Figure 54-4].
+inbound resource adapter is shown in link:#CHDHADDC[Figure 56-4].
 
 [[CHDHADDC]]
 
-.*Figure 54-4 Architecture of the traffic Example*
+.*Figure 56-4 Architecture of the traffic Example*
 image:img/javaeett_dt_057.png[
 "This figure shows the classes in each of the components of the traffic
 example."]
 
 The `traffic-rar` module implements the interfaces listed in
-link:#CHDEDEAF[Table 54-3].
+link:#CHDEDEAF[Table 56-3].
 
 [[sthref251]][[CHDEDEAF]]
 
-*Table 54-3 Interfaces Implemented in the traffic-rar Module*
+
+Table 56-3 Interfaces Implemented in the traffic-rar Module
+
 
 [width="99%",cols="20%,20%,60%"]
 |=======================================================================

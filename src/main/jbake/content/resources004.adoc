@@ -13,9 +13,9 @@ Using Resource Adapters with Contexts and Dependency Injection for Java EE (CDI)
 Using Resource Adapters with Contexts and Dependency Injection for Java EE (CDI)
 --------------------------------------------------------------------------------
 
-For details about CDI, see link:cdi-basic.html#GIWHB[Chapter 24,
+For details about CDI, see link:cdi-basic.html#GIWHB[Chapter 25,
 "Introduction to Contexts and Dependency Injection for Java EE"] and
-link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+link:cdi-adv.html#GJEHI[Chapter 27, "Contexts and Dependency Injection
 for Java EE: Advanced Topics."]
 
 Do not specify the following classes in the resource adapter as CDI
@@ -39,5 +39,3 @@ declared as corresponding elements in `ra.xml`.
 
 Other types of classes in the resource adapter can be CDI managed beans
 and will behave in a portable manner.
-
-

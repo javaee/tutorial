@@ -10,7 +10,7 @@ Getting Started Securing Web Applications
 [[BNCAS]]
 
 [[getting-started-securing-web-applications]]
-49 Getting Started Securing Web Applications
+51 Getting Started Securing Web Applications
 --------------------------------------------
 
 
@@ -29,5 +29,3 @@ Security]
 Web Applications]
 * link:security-webtier004.html#BNCBX[Examples: Securing Web
 Applications]
-
-

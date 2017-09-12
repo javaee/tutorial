@@ -40,8 +40,8 @@ users in a particular role, instead of enumerating a list of associated
 users. A user name can have any number of roles associated with it.
 
 Two of the tutorial case studies, link:dukes-tutoring.html#GKAEE[Chapter
-59, "Duke's Tutoring Case Study Example,"] and
-link:dukes-forest.html#GLNPW[Chapter 60, "Duke's Forest Case Study
+61, "Duke's Tutoring Case Study Example,"] and
+link:dukes-forest.html#GLNPW[Chapter 62, "Duke's Forest Case Study
 Example,"] use a JDBC realm for user authentication.
 
 [[sthref233]]
@@ -133,5 +133,3 @@ deployment descriptor, in this case `glassfish-web.xml`:
 Since GlassFish Server users are assigned to groups during the user
 creation process, this is more efficient than mapping security roles to
 individual users.
-
-

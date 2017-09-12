@@ -49,11 +49,14 @@ are not portable across Java EE servers.
 
 Interceptor methods within the target class or in an interceptor class
 are annotated with one of the metadata annotations defined in
-link:#GKECC[Table 55-1].
+link:#GKECC[Table 57-1].
 
 [[sthref253]][[GKECC]]
 
-*Table 55-1 Interceptor Metadata Annotations*
+
+=======
+Table 57-1 Interceptor Metadata Annotations
+
 
 [width="80%",cols="20%,60%"]
 |=======================================================================

@@ -10,7 +10,7 @@ The Resource Adapter Examples
 [[GLODB]]
 
 [[the-resource-adapter-examples]]
-54 The Resource Adapter Examples
+56 The Resource Adapter Examples
 --------------------------------
 
 
@@ -24,5 +24,3 @@ The following topics are addressed here:
 Examples]
 * link:connectorexample002.html#CHDFHAID[The trading Example]
 * link:connectorexample003.html#CHDJEADB[The traffic Example]
-
-

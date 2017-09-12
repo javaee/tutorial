@@ -56,10 +56,10 @@ chapter on security in the Java EE 7 specification.
 Other chapters in this Part discuss security requirements in web tier
 and enterprise tier applications.
 
-* link:security-webtier.html#BNCAS[Chapter 49, "Getting Started Securing
+* link:security-webtier.html#BNCAS[Chapter 51, "Getting Started Securing
 Web Applications"] explains how to add security to web components, such
 as servlets.
-* link:security-javaee.html#BNBYK[Chapter 50, "Getting Started Securing
+* link:security-javaee.html#BNBYK[Chapter 52, "Getting Started Securing
 Enterprise Applications"] explains how to add security to Java EE
 components, such as enterprise beans and application clients.
 
@@ -85,11 +85,11 @@ Step 1: Initial Request
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 In the first step of this example, the web client requests the main
-application URL. This action is shown in link:#BNBWN[Figure 48-1].
+application URL. This action is shown in link:#BNBWN[Figure 50-1].
 
 [[BNBWN]]
 
-.*Figure 48-1 Initial Request*
+.*Figure 50-1 Initial Request*
 image:img/javaeett_dt_039.png[
 "Diagram of initial request from web client to web server for access to a
 protected resource"]
@@ -110,14 +110,14 @@ Step 2: Initial Authentication
 The web server returns a form that the web client uses to collect
 authentication data, such as user name and password, from the user. The
 web client forwards the authentication data to the web server, where it
-is validated by the web server, as shown in link:#BNBWP[Figure 48-2].
+is validated by the web server, as shown in link:#BNBWP[Figure 50-2].
 The validation mechanism may be local to a server or may leverage the
 underlying security services. On the basis of the validation, the web
 server sets a credential for the user.
 
 [[BNBWP]]
 
-.*Figure 48-2 Initial Authentication*
+.*Figure 50-2 Initial Authentication*
 image:img/javaeett_dt_040.png[
 "Diagram of initial authentication: server sends form to client, which
 sends authentication data to server for validation"]
@@ -135,11 +135,11 @@ determine the security roles that are permitted access to the resource.
 The security policy is derived from annotations or from the deployment
 descriptor. The web container then tests the user's credential against
 each role to determine whether it can map the user to the role.
-link:#BNBWR[Figure 48-3] shows this process.
+link:#BNBWR[Figure 50-3] shows this process.
 
 [[BNBWR]]
 
-.*Figure 48-3 URL Authorization*
+.*Figure 50-3 URL Authorization*
 image:img/javaeett_dt_041.png[
 "Diagram of URL authorization"]
 
@@ -155,11 +155,11 @@ Step 4: Fulfilling the Original Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If the user is authorized, the web server returns the result of the
-original URL request, as shown in link:#BNBWT[Figure 48-4].
+original URL request, as shown in link:#BNBWT[Figure 50-4].
 
 [[BNBWT]]
 
-.*Figure 48-4 Fulfilling the Original Request*
+.*Figure 50-4 Fulfilling the Original Request*
 image:img/javaeett_dt_042.png[
 "Diagram of request fulfillment, showing server returning result to
 client"]
@@ -167,7 +167,7 @@ client"]
 In our example, the response URL of a web page is returned, enabling the
 user to post form data that needs to be handled by the business-logic
 component of the application. See
-link:security-webtier.html#BNCAS[Chapter 49, "Getting Started Securing
+link:security-webtier.html#BNCAS[Chapter 51, "Getting Started Securing
 Web Applications"] for more information on protecting web applications.
 
 [[BNBWU]]
@@ -179,12 +179,12 @@ Step 5: Invoking Enterprise Bean Business Methods
 The web page performs the remote method call to the enterprise bean,
 using the user's credential to establish a secure association between
 the web page and the enterprise bean, as shown in link:#BNBWV[Figure
-48-5]. The association is implemented as two related security contexts:
+50-5]. The association is implemented as two related security contexts:
 one in the web server and one in the EJB container.
 
 [[BNBWV]]
 
-.*Figure 48-5 Invoking an Enterprise Bean Business Method*
+.*Figure 50-5 Invoking an Enterprise Bean Business Method*
 image:img/javaeett_dt_043.png[
 "Diagram of authorization process between web component and enterprise
 bean"]
@@ -281,5 +281,3 @@ selected network traffic over various technologies.
 security-related events for the purpose of being able to evaluate the
 effectiveness of security policies and mechanisms. To enable this, the
 system maintains a record of transactions and security information.
-
-

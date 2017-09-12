@@ -14,7 +14,7 @@ Using Interceptors
 ------------------
 
 To define an interceptor, use one of the interceptor metadata
-annotations listed in link:interceptors001.html#GKECC[Table 55-1] within
+annotations listed in link:interceptors001.html#GKECC[Table 57-1] within
 the target class, or in a separate interceptor class. The following code
 declares an `@AroundTimeout` interceptor method within a target class:
 
@@ -502,11 +502,15 @@ implementation-specific.
 
 
 The `javax.interceptor.Interceptor.Priority` class defines the priority
-constants listed in link:#BABFBAEF[Table 55-2].
+constants listed in link:#BABFBAEF[Table 57-2].
 
 [[sthref259]][[BABFBAEF]]
 
-*Table 55-2 Interceptor Priority Constants*
+
+
+=======
+Table 57-2 Interceptor Priority Constants
+
 
 [width="99%",cols="15%,15%,70%"]
 |=======================================================================

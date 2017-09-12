@@ -57,7 +57,7 @@ authenticating users. Before continuing, follow these steps.
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
 2.  Add an authorized user to GlassFish Server. For the examples in this
-chapter and in link:security-javaee.html#BNBYK[Chapter 50, "Getting
+chapter and in link:security-javaee.html#BNBYK[Chapter 52, "Getting
 Started Securing Enterprise Applications"], add a user to the `file`
 realm of GlassFish Server, and assign the user to the group
 `TutorialUser`.
@@ -107,7 +107,7 @@ Applications"]. In the example application included with this tutorial,
 many of these steps have been completed for you and are listed here
 simply to show what needs to be done should you wish to create a similar
 application. This application can be found in the
-tut-install`/examples/security/hello2-basicauth/` directory.
+`_tut-install_/examples/security/hello2-basicauth/` directory.
 
 1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
 the Security Examples].
@@ -258,13 +258,15 @@ password, so enter the user name and password exactly as defined for
 GlassFish Server.
 +
 The server returns the requested resource if all the following
-conditions are met.
-* A user with the user name you entered is defined for GlassFish Server.
-* The user with the user name you entered has the password you entered.
-* The user name and password combination you entered is assigned to the
+conditions are met:
+
+** A user with the user name you entered is defined for GlassFish Server.
+** The user with the user name you entered has the password you entered.
+** The user name and password combination you entered is assigned to the
 group `TutorialUser` in GlassFish Server.
-* The role of `TutorialUser`, as defined for the application, is mapped
+** The role of `TutorialUser`, as defined for the application, is mapped
 to the group `TutorialUser`, as defined for GlassFish Server.
+
 3.  Enter a name in the field and click Submit.
 +
 Because you have already been authorized, the name you enter in this
@@ -302,7 +304,7 @@ error page, as described in link:#BNCCA[Creating the Login Form and the
 Error Page].
 
 This application can be found in the
-tut-install`/examples/security/hello1-formauth/` directory.
+`_tut-install_/examples/security/hello1-formauth/` directory.
 
 [[BNCCA]]
 
@@ -334,7 +336,7 @@ coded as follows:
 ----
 
 The full code for the login page used in this example can be found at
-tut-install`/examples/security/hello1-formauth/src/main/webapp/login.html`.
+`_tut-install_/examples/security/hello1-formauth/src/main/webapp/login.html`.
 Here is the code for this page:
 
 [source,oac_no_warn]
@@ -370,7 +372,7 @@ Here is the code for this page:
 The login error page is displayed if the user enters a user name and
 password combination that is not authorized to access the protected URI.
 For this example, the login error page can be found at
-tut-install`/examples/security/hello1-formauth/``src/main/webapp/error.html`.
+`_tut-install_/examples/security/hello1-formauth/src/main/webapp/error.html`.
 For this example, the login error page explains the reason for receiving
 the error page and provides a link that will allow the user to try
 again. Here is the code for this page:
@@ -406,7 +408,7 @@ deployment descriptor.
 
 The following sample code shows the security elements added to the
 deployment descriptor for this example, which can be found in
-tut-install`/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml`:
+`_tut-install_/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml`:
 
 [source,oac_no_warn]
 ----
