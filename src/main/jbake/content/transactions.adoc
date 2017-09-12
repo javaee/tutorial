@@ -10,7 +10,7 @@ Transactions
 [[BNCIH]]
 
 [[transactions]]
-52 Transactions
+54 Transactions
 ---------------
 
 
@@ -28,5 +28,3 @@ The following topics are addressed here:
 * link:transactions007.html#BNCJD[Updating Multiple Databases]
 * link:transactions008.html#BNCJG[Transactions in Web Components]
 * link:transactions009.html#GKCMI[Further Information about Transactions]
-
-

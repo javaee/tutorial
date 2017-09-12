@@ -43,12 +43,12 @@ send information messages to the clients.
 `run` method in this class sends information messages to the web service
 endpoint in `TaskEJB` and sleeps for 1.5 seconds.
 
-link:#CIHHACFF[Figure 57-1] shows the architecture of the `taskcreator`
+link:#CIHHACFF[Figure 59-1] shows the architecture of the `taskcreator`
 example.
 
 [[CIHHACFF]]
 
-.*Figure 57-1 Architecture of the taskcreator Example*
+.*Figure 59-1 Architecture of the taskcreator Example*
 image:img/javaeett_dt_060.png[
 "The figure shows the architecture of the taskcreator example. The
 JavaServer Faces page invokes methods on a CDI-managed bean, which

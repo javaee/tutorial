@@ -10,7 +10,7 @@ Resource Adapters and Contracts
 [[BNCJH]]
 
 [[resource-adapters-and-contracts]]
-53 Resource Adapters and Contracts
+55 Resource Adapters and Contracts
 ----------------------------------
 
 
@@ -26,5 +26,3 @@ The following topics are addressed here:
 and Dependency Injection for Java EE (CDI)]
 * link:resources005.html#BNCJW[Further Information about Resource
 Adapters]
-
-

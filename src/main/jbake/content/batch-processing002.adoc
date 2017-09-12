@@ -169,11 +169,11 @@ Batch and Exit Status
 
 The state of jobs, steps, splits, and flows is represented in the batch
 runtime as a batch status value. Batch status values are listed
-link:#BCGJBGDF[Table 56-1]. They are represented as strings.
+link:#BCGJBGDF[Table 58-1]. They are represented as strings.
 
 [[sthref267]][[BCGJBGDF]]
 
-Table 56-1 Batch Status Values
+Table 58-1 Batch Status Values
 
 [width="28%",cols="100%,",options="header",]
 |============================================================
@@ -213,5 +213,3 @@ status inside batch artifacts or in the job definition file. You can
 access the exit status in the same manner as the batch status, described
 above. The default value for the exit status is the same as the batch
 status.
-
-

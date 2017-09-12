@@ -39,18 +39,18 @@ batch artifacts. The interface implementations are referenced from the
 elements described in link:batch-processing004.html#BCGDDBBG[Using the
 Job Specification Language].
 
-link:#BCGGCIDC[Table 56-3] lists the interfaces to implement batch
+link:#BCGGCIDC[Table 58-3] lists the interfaces to implement batch
 artifacts for chunk steps, task steps, and decision elements.
 
-link:#BCGEAAEA[Table 56-4] lists the interfaces to implement batch
+link:#BCGEAAEA[Table 58-4] lists the interfaces to implement batch
 artifacts for partitioned steps.
 
-link:#BCGCAEDI[Table 56-5] lists the interfaces to implement batch
+link:#BCGCAEDI[Table 58-5] lists the interfaces to implement batch
 artifacts for job and step listeners.
 
 [[sthref279]][[BCGGCIDC]]
 
-Table 56-3 Main Batch Artifact Interfaces
+Table 58-3 Main Batch Artifact Interfaces
 
 [width="56%",cols="52%,48%,",options="header",]
 |=======================================================================
@@ -82,7 +82,7 @@ element.
 
 [[sthref280]][[BCGEAAEA]]
 
-Table 56-4 Partition Batch Artifact Interfaces
+Table 58-4 Partition Batch Artifact Interfaces
 
 [width="58%",cols="57%,43%,",options="header",]
 |=======================================================================
@@ -112,7 +112,7 @@ element inside the `partition` element.
 
 [[sthref281]][[BCGCAEDI]]
 
-Table 56-5 Listener Batch Artifact Interfaces
+Table 58-5 Listener Batch Artifact Interfaces
 
 [width="61%",cols="1%,44%,55%",options="header",]
 |=======================================================================
@@ -235,7 +235,7 @@ public class MyItemReaderImpl implements ItemReader { ... }
 +
 For more information on bean archives, see
 link:cdi-adv001.html#CACDCFDE[Packaging CDI Applications] in
-link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+link:cdi-adv.html#GJEHI[Chapter 27, "Contexts and Dependency Injection
 for Java EE: Advanced Topics"].
 
 
@@ -320,6 +320,3 @@ beans fails and the batch runtime cannot find your batch artifacts when
 your application submits the job.
 
 |=======================================================================
-
-
-

@@ -18,12 +18,12 @@ Connector Architecture for a specific EIS. Examples of EISs include
 enterprise resource planning, mainframe transaction processing, and
 database systems. In a Java EE server, the Java Message Server and
 JavaMail also act as EISs that you access using resource adapters. As
-illustrated in link:#GJTZO[Figure 53-1], the resource adapter
+illustrated in link:#GJTZO[Figure 55-1], the resource adapter
 facilitates communication between a Java EE application and an EIS.
 
 [[GJTZO]]
 
-.*Figure 53-1 Resource Adapters*
+.*Figure 55-1 Resource Adapters*
 image:img/javaeett_dt_053.png[
 "Resource Adapter Contracts"]
 
@@ -184,5 +184,3 @@ Inbound contracts are system contracts between a Java EE server and an
 EIS that enable inbound connectivity from the EIS: pluggability
 contracts for message providers and contracts for importing
 transactions.
-
-
