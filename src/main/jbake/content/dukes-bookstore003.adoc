@@ -71,7 +71,7 @@ mvn install
 ----
 +
 This command builds the application and packages it in a WAR file in the
-tut-install`/examples/case-studies/dukes-bookstore/target/` directory.
+`_tut-install_/examples/case-studies/dukes-bookstore/target/` directory.
 It then deploys the application to GlassFish Server.
 
 [[BABEHDEG]]
@@ -89,5 +89,3 @@ http://localhost:8080/dukes-bookstore/
 2.  On the Duke's Bookstore main page, click a book in the graphic, or
 click one of the links at the bottom of the page.
 3.  Use the pages in the application to view and purchase books.
-
-

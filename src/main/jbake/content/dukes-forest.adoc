@@ -10,13 +10,13 @@ Duke's Forest Case Study Example
 [[GLNPW]]
 
 [[dukes-forest-case-study-example]]
-60 Duke's Forest Case Study Example
+62 Duke's Forest Case Study Example
 -----------------------------------
 
 
 This chapter describes Duke's Forest, a simple e-commerce application
 that contains several web applications and illustrates the use of
-multiple Java EE 7 APIs.
+multiple Java EE APIs.
 
 The following topics are addressed here:
 
@@ -27,5 +27,3 @@ Forest]
 * link:dukes-forest003.html#GLNQP[Building and Deploying the Duke's
 Forest Case Study Application]
 * link:dukes-forest004.html#GLNSX[Running the Duke's Forest Application]
-
-
