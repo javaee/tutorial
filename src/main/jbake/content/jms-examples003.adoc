@@ -4,8 +4,8 @@ title=Writing Simple JMS Applications
 next=jms-examples004.html
 prev=jms-examples002.html
 ~~~~~~
-Writing Simple JMS Applications
-===============================
+= Writing Simple JMS Applications
+
 
 [[BNCFA]]
 
@@ -396,7 +396,7 @@ The messages are now in the queue, waiting to be received.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 When you run an application client, the command may take a long time to
 complete.
@@ -596,7 +596,7 @@ explains how to compile and run the clients using GlassFish Server.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 In the Java EE platform, message listeners can be used only in
 application clients, as in this example. To allow asynchronous message
@@ -1064,7 +1064,7 @@ configured to use the `CLIENT_ACKNOWLEDGE` setting
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 In the Java EE platform, `CLIENT_ACKNOWLEDGE` sessions can be used only
 in application clients, as in this example.
@@ -1086,12 +1086,12 @@ of consumers and types of acknowledgment.
 
 [[sthref204]][[sthref205]]
 
-Table 49-3 Message Acknowledgment with Synchronous and Asynchronous
-Consumers
+*Table 49-3 Message Acknowledgment with Synchronous and Asynchronous
+Consumers*
 
-[width="50%",cols="43%,57%,",options="header",]
+[width="99%",cols="20%,20%,60%"]
 |=======================================================================
-|Consumer Type |Acknowledgment Type |Behavior
+|*Consumer Type* |*Acknowledgment Type* |*Behavior*
 |Synchronous |Client |Client acknowledges message after processing is
 complete
 

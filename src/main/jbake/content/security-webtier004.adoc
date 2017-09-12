@@ -4,8 +4,8 @@ title=Examples: Securing Web Applications
 next=security-javaee.html
 prev=security-webtier003.html
 ~~~~~~
-Examples: Securing Web Applications
-===================================
+= Examples: Securing Web Applications
+
 
 [[BNCBX]]
 
@@ -184,8 +184,7 @@ for which you cannot use the `@ServletSecurity` annotation.
 [[GJQYS]]
 
 [[to-build-package-and-deploy-the-hello2-basicauth-example-using-netbeans-ide]]
-To Build, Package, and Deploy the hello2-basicauth Example Using
-NetBeans IDE
+To Build, Package, and Deploy the hello2-basicauth Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
@@ -349,14 +348,14 @@ Here is the code for this page:
         <form method="post" action="j_security_check">
             <table role="presentation">
                 <tr>
-                    <td>Please type your user name: </td> 
-                    <td><input type="text" name="j_username" 
-                               size="20"/></td> 
+                    <td>Please type your user name: </td>
+                    <td><input type="text" name="j_username"
+                               size="20"/></td>
                 </tr>
                 <tr>
                     <td>Please type your password: </td>
                     <td><input type="password" name="j_password"
-                               size="20"/></td> 
+                               size="20"/></td>
                 </tr>
             </table>
             <p></p>
@@ -385,9 +384,9 @@ again. Here is the code for this page:
     <body>
         <h2>Invalid user name or password.</h2>
 
-        <p>Please enter a user name or password that is authorized to access 
-           this application. For this application, this means a user that 
-           has been created in the <code>file</code> realm and has been 
+        <p>Please enter a user name or password that is authorized to access
+           this application. For this application, this means a user that
+           has been created in the <code>file</code> realm and has been
            assigned to the <em>group</em> of <code>TutorialUser</code>.</p>
         <p><a href="login.html">Return to login page</a></p>
     </body>
@@ -442,8 +441,7 @@ tut-install`/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml`:
 [[GJRBA]]
 
 [[to-build-package-and-deploy-the-hello1-formauth-example-using-netbeans-ide]]
-To Build, Package, and Deploy the hello1-formauth Example Using NetBeans
-IDE
+To Build, Package, and Deploy the hello1-formauth Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
@@ -466,8 +464,7 @@ GlassFish Server instance, then opens it in a browser.
 [[GJRAZ]]
 
 [[to-build-package-and-deploy-the-hello1-formauth-example-using-maven-and-the-asadmin-command]]
-To Build, Package, and Deploy the hello1-formauth Example Using Maven
-and the asadmin Command
+To Build, Package, and Deploy the hello1-formauth Example Using Maven and the asadmin Command
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
@@ -540,5 +537,3 @@ Next Steps
 For additional testing and to see the login error page generated, close
 and reopen your browser, enter the application URL, and enter a user
 name and password that are not authorized.
-
-
