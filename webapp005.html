@@ -169,9 +169,9 @@ Standard Deployment Descriptor under File Types.</p>
 the web container can append to a request for a URL (called a valid
 partial request) that is not mapped to a web component. For example,
 suppose that you define a welcome file <code>welcome.html</code>. When a client
-requests a URL such as host`:`port`/<code>webapp</code>/<code>directory, where directory
+requests a URL such as <code><em>host:port/webapp/directory</em></code>, where <code><em>directory</em></code>
 is not mapped to a servlet or XHTML page, the file
-host</code>:`port`/<code>webapp</code>/<code>directory</code>/welcome.html` is returned to the
+<code><em>host:port/webapp/directory/</em>`welcome.html</code> is returned to the
 client.</p>
 </div>
 <div class="paragraph">
@@ -314,13 +314,13 @@ container; therefore, they can accept resource injections.</p>
 <div class="paragraph">
 <p>This section explains how to use a couple of the annotations supported
 by a web container to inject resources.
-<a href="persistence-basicexamples.html#GIJST">Chapter 39, "Running the
+<a href="persistence-basicexamples.html#GIJST">Chapter 41, "Running the
 Persistence Examples"</a>, explains how web applications use annotations
 supported by the Java Persistence API.
-<a href="security-webtier.html#BNCAS">Chapter 49, "Getting Started Securing
+<a href="security-webtier.html#BNCAS">Chapter 51, "Getting Started Securing
 Web Applications"</a>, explains how to use annotations to specify
 information about securing web applications. See
-<a href="resources.html#BNCJH">Chapter 53, "Resource Adapters and Contracts"</a>,
+<a href="resources.html#BNCJH">Chapter 55, "Resource Adapters and Contracts"</a>,
 for more information on resources.</p>
 </div>
 <div class="paragraph">
@@ -432,7 +432,7 @@ do not use the <code>@Resource</code> annotation to inject a data source. Howeve
 this API supports the <code>@PersistenceUnit</code> and <code>@PersistenceContext</code>
 annotations for injecting <code>EntityManagerFactory</code> and <code>EntityManager</code>
 instances, respectively.
-<a href="persistence-basicexamples.html#GIJST">Chapter 39, "Running the
+<a href="persistence-basicexamples.html#GIJST">Chapter 41, "Running the
 Persistence Examples"</a> describes these annotations and the use of the
 Java Persistence API in web applications.</p>
 </div>
