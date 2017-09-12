@@ -57,13 +57,13 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Duke&#8217;s Forest is a complex application consisting of three main projects
-and three subprojects. <a href="#GLNVM">Figure 60-1</a> shows the architecture
+and three subprojects. <a href="#GLNVM">Figure 62-1</a> shows the architecture
 of the three main projects that you will deploy: Duke&#8217;s Store, Duke&#8217;s
 Shipment, and Duke&#8217;s Payment. It also shows how Duke&#8217;s Store makes use
 of the Events and Entities projects.</p>
 </div>
 <div id="GLNVM" class="paragraph">
-<div class="title"><strong>Figure 60-1 Architecture of the Duke&#8217;s Forest Example Application</strong></div>
+<div class="title"><strong>Figure 62-1 Architecture of the Duke&#8217;s Forest Example Application</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_062.png" alt="This figure shows the architecture of the main Duke&#8217;s Forest projects and how they use the Events and Entities projects."></span></p>
 </div>
 <div class="paragraph">
@@ -200,15 +200,15 @@ such as adding new items to the catalog</p>
 administrators.</p>
 </div>
 <div class="paragraph">
-<p><a href="#CIHCHCAA">Figure 60-2</a> shows how the web applications and the web
+<p><a href="#CIHCHCAA">Figure 62-2</a> shows how the web applications and the web
 service interact.</p>
 </div>
 <div id="CIHCHCAA" class="paragraph">
-<div class="title"><strong>Figure 60-2 Interactions between Duke&#8217;s Forest Components</strong></div>
+<div class="title"><strong>Figure 62-2 Interactions between Duke&#8217;s Forest Components</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_063.png" alt="This figure shows the interactions between the Duke&#8217;s Store and Duke&#8217;s Shipment projects (using REST and HTTP), and between the Duke&#8217;s Store and Duke&#8217;s Payment projects (using REST and HTTP)."></span></p>
 </div>
 <div class="paragraph">
-<p>As illustrated in <a href="#CIHCHCAA">Figure 60-2</a>, the customer interacts
+<p>As illustrated in <a href="#CIHCHCAA">Figure 62-2</a>, the customer interacts
 with the main interface of Duke&#8217;s Store, while the administrator
 interacts with the administration interface. Both interfaces access a
 façade consisting of managed beans and stateless session beans, which in
@@ -289,13 +289,13 @@ separate project within the application.</p>
 <div class="paragraph">
 <p>The <code>entities</code> project is a Java Persistence API (JPA) project used by
 both Duke&#8217;s Store and Duke&#8217;s Shipment. It is generated from the database
-schema shown in <a href="#GLNXD">Figure 60-3</a> and is also used as a base for
+schema shown in <a href="#GLNXD">Figure 62-3</a> and is also used as a base for
 the entities consumed and produced by the web services through JAXB.
 Each entity has validation rules based on business requirements,
 specified using Bean Validation.</p>
 </div>
 <div id="GLNXD" class="paragraph">
-<div class="title"><strong>Figure 60-3 Duke&#8217;s Forest Database Tables and Their Relationships</strong></div>
+<div class="title"><strong>Figure 62-3 Duke&#8217;s Forest Database Tables and Their Relationships</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_064.png" alt="This figure shows the database tables in Duke&#8217;s Forest and their relationships."></span></p>
 </div>
 <div class="paragraph">
