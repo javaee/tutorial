@@ -190,7 +190,6 @@ The following is an example of a task step:
 [[the-chunk-element]]
 The chunk Element
 ^^^^^^^^^^^^^^^^^
-
 The `chunk` element is a child of the `step` element for chunk-oriented
 steps. The attributes of this element are listed in link:#BCGJCIEI[Table
 58-2].
@@ -320,7 +319,6 @@ attempts.
 [[the-batchlet-element]]
 The batchlet Element
 ^^^^^^^^^^^^^^^^^^^^
-
 The `batchlet` element is a child of the `step` element for
 task-oriented steps. This element only has the `ref` attribute, which
 specifies a batch artifact that implements the `Batchlet` interface. The
