@@ -68,10 +68,10 @@ the park while they were at the tutoring center, and when they went to
 and came back from the park.
 
 For information on creating Java Persistence API entities, see
-link:persistence-intro.html#BNBPZ[Chapter 38, "Introduction to the Java
+link:persistence-intro.html#BNBPZ[Chapter 40, "Introduction to the Java
 Persistence API."] For information on validating entity data, see
 link:persistence-intro002.html#GKAHQ[Validating Persistent Fields and
-Properties] and link:bean-validation-advanced.html#GKAHP[Chapter 23,
+Properties] and link:bean-validation-advanced.html#GKAHP[Chapter 24,
 "Bean Validation: Advanced Topics."]
 
 [[GKAFC]]
@@ -98,7 +98,7 @@ from the business methods when the status of a student changes.
 For information on creating and using enterprise beans, see
 link:partentbeans.html#BNBLR[Enterprise Beans]. For information on
 creating strongly typed Criteria API queries, see
-link:persistence-criteria.html#GJITV[Chapter 41, "Using the Criteria API
+link:persistence-criteria.html#GJITV[Chapter 43, "Using the Criteria API
 to Create Queries."] For information on CDI events, see
 link:cdi-adv005.html#GKHIC[Using Events in CDI Applications].
 
@@ -123,7 +123,7 @@ clicks a JavaServer Faces button, which makes an Ajax request to refresh
 the table that shows the current status of the students.
 
 For more information on WebSocket endpoints, see
-link:websocket.html#GKJIQ5[Chapter 18, "Java API for WebSocket."] For
+link:websocket.html#GKJIQ5[Chapter 19, "Java API for WebSocket."] For
 information on CDI events, see link:cdi-adv005.html#GKHIC[Using Events in
 CDI Applications].
 
@@ -137,7 +137,7 @@ The Duke's Tutoring application uses Facelets to display the user
 interface, making extensive use of the templating features of Facelets.
 Facelets, the default display technology for JavaServer Faces
 technology, consists of XHTML files located in the
-tut-install`/examples/case-studies/dukes-tutoring-war/src/main/webapp/`
+`_tut-install_/examples/case-studies/dukes-tutoring-war/src/main/webapp/`
 directory.
 
 The following Facelets files are used in the main interface:
@@ -251,5 +251,3 @@ project:
 No enterprise bean deployment descriptor is used in Duke's Tutoring.
 Annotations in the enterprise bean class files are used for the
 configuration of enterprise beans in this application.
-
-

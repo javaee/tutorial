@@ -80,7 +80,7 @@ underlying properties and methods for the user interface. The front page
 also interacts with the custom components used by the application.
 
 The application uses the following Facelets pages, which are located in
-the tut-install`/examples/case-studies/dukes-bookstore/src/main/webapp/`
+the `_tut-install_/examples/case-studies/dukes-bookstore/src/main/webapp/`
 directory.
 
 * `bookstoreTemplate.xhtml`: The template file, which specifies a header
@@ -129,7 +129,7 @@ bookstore has no more copies of a book that was ordered.
 
 The application uses the following managed beans, which are located in
 the
-tut-install`/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/web/managedbeans/`
+`_tut-install_/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/web/managedbeans/`
 directory.
 
 * `AbstractBean`: Contains utility methods called by other managed
@@ -161,7 +161,7 @@ Custom Components and Other Custom Objects Used in Duke's Bookstore
 The map and area custom components for Duke's Bookstore, along with
 associated renderer, listener, and model classes, are defined in the
 following packages in the
-tut-install`/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/`
+`_tut-install_/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/`
 directory.
 
 * `components`: Contains the `MapComponent` and `AreaComponent` classes.
@@ -176,7 +176,7 @@ information.
 See link:jsf-custom006.html#BNAWA[Delegating Rendering to a Renderer].
 
 The
-tut-install`/examples/case-studies/dukes-bookstore/src/java/dukesbookstore/`
+`_tut-install_/examples/case-studies/dukes-bookstore/src/java/dukesbookstore/`
 directory also contains a custom converter and other custom listeners
 not specifically tied to the custom components.
 
@@ -195,7 +195,7 @@ Properties Files Used in Duke's Bookstore
 The strings used in the Duke's Bookstore application are encapsulated
 into resource bundles to allow the display of localized strings in
 multiple locales. The properties files, located in the
-tut-install`/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/web/messages/`
+`_tut-install_/examples/case-studies/dukes-bookstore/src/main/java/javaeetutorial/dukesbookstore/web/messages/`
 directory, consist of a default file containing English strings and
 three additional files for other locales. The files are as follows:
 
@@ -215,7 +215,7 @@ language setting from the `language` property of `LocaleBean`:
 ----
 
 For more information about resource bundles, see
-link:webi18n.html#BNAXU[Chapter 21, "Internationalizing and Localizing
+link:webi18n.html#BNAXU[Chapter 22, "Internationalizing and Localizing
 Web Applications."]
 
 The resource bundle is configured as follows in the `faces-config.xml`
@@ -246,7 +246,7 @@ the `index.xhtml` page:
 
 [source,oac_no_warn]
 ----
-<h:outputText style="font-weight:bold" 
+<h:outputText style="font-weight:bold"
               value="#{bundle.ChooseBook}" />
 ----
 
@@ -274,5 +274,3 @@ configuration file, which configures the managed beans for the map
 component as well as the resource bundles for the application
 * `src/main/webapp/WEB-INF/web.xml`: The web application configuration
 file
-
-
