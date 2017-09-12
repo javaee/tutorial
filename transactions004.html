@@ -96,7 +96,7 @@ must not use the <code>javax.transaction.UserTransaction</code> interface.</p>
 <h3 id="transaction-attributes">Transaction Attributes</h3>
 <div class="paragraph">
 <p>A transaction attribute controls the scope of a transaction.
-<a href="#BNCIL">Figure 52-1</a> illustrates why controlling the scope is
+<a href="#BNCIL">Figure 54-1</a> illustrates why controlling the scope is
 important. In the diagram, <code>method-A</code> begins a transaction and then
 invokes <code>method-B</code> of <code>Bean-2</code>. When <code>method-B</code> executes, does it run
 within the scope of the transaction started by <code>method-A</code>, or does it
@@ -104,7 +104,7 @@ execute with a new transaction? The answer depends on the transaction
 attribute of <code>method-B</code>.</p>
 </div>
 <div id="BNCIL" class="paragraph">
-<div class="title"><strong>Figure 52-1 Transaction Scope</strong></div>
+<div class="title"><strong>Figure 54-1 Transaction Scope</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_050.png" alt="A diagram showing a transaction between two beans."></span></p>
 </div>
 <div class="paragraph">
@@ -235,7 +235,7 @@ transaction before running the method.</p>
 <div class="sect3">
 <h4 id="summary-of-transaction-attributes">Summary of Transaction Attributes</h4>
 <div class="paragraph">
-<p><a href="#BNCIT">Table 52-1</a> summarizes the effects of the transaction
+<p><a href="#BNCIT">Table 54-1</a> summarizes the effects of the transaction
 attributes. Both the <code>T1</code> and the <code>T2</code> transactions are controlled by
 the container. A <code>T1</code> transaction is associated with the client that
 calls a method in the enterprise bean. In most cases, the client is
@@ -243,7 +243,7 @@ another enterprise bean. A <code>T2</code> transaction is started by the contain
 just before the method executes.</p>
 </div>
 <div class="paragraph">
-<p>In the last column of <a href="#BNCIT">Table 52-1</a>, the word "None" means
+<p>In the last column of <a href="#BNCIT">Table 54-1</a>, the word "None" means
 that the business method does not execute within a transaction
 controlled by the container. However, the database calls in such a
 business method might be controlled by the transaction manager of the
@@ -253,7 +253,7 @@ database management system.</p>
 <p><a id="sthref235"></a><a id="BNCIT"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 52-1 Transaction Attributes and Scope</p>
+<p>Table 54-1 Transaction Attributes and Scope</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 57%;">
 <colgroup>
@@ -351,14 +351,14 @@ the class <code>TransactionAttributeType</code>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>TransactionAttributeType</code> constants shown in <a href="#GKCFD">Table
-52-2</a> encapsulate the transaction attributes described earlier in this
+54-2</a> encapsulate the transaction attributes described earlier in this
 section.</p>
 </div>
 <div class="paragraph">
 <p><a id="sthref236"></a><a id="GKCFD"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 52-2 TransactionAttributeType Constants</p>
+<p>Table 54-2 TransactionAttributeType Constants</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 34%;">
 <colgroup>
