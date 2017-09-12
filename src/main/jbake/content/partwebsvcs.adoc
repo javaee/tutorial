@@ -20,14 +20,12 @@ Web Services
 Part VI explores web services. This part contains the following
 chapters:
 
-* link:webservices-intro.html#GIJTI[Chapter 28, "Introduction to Web
+* link:webservices-intro.html#GIJTI[Chapter 30, "Introduction to Web
 Services"]
-* link:jaxws.html#BNAYL[Chapter 29, "Building Web Services with JAX-WS"]
-* link:jaxrs.html#GIEPU[Chapter 30, "Building RESTful Web Services with
+* link:jaxws.html#BNAYL[Chapter 31, "Building Web Services with JAX-WS"]
+* link:jaxrs.html#GIEPU[Chapter 32, "Building RESTful Web Services with
 JAX-RS"]
-* link:jaxrs-client.html#BABEIGIH[Chapter 31, "Accessing REST Resources
+* link:jaxrs-client.html#BABEIGIH[Chapter 33, "Accessing REST Resources
 with the JAX-RS Client API"]
-* link:jaxrs-advanced.html#GJJXE[Chapter 32, "JAX-RS: Advanced Topics and
+* link:jaxrs-advanced.html#GJJXE[Chapter 34, "JAX-RS: Advanced Topics and
 an Example"]
-
-
