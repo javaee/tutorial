@@ -4,8 +4,8 @@ title=Lock Modes
 next=persistence-entitygraphs.html
 prev=persistence-locking001.html
 ~~~~~~
-Lock Modes
-==========
+= Lock Modes
+
 
 [[GKJIU]]
 
@@ -33,11 +33,11 @@ enumerated type, listed in link:#GKJIE[Table 45-1].
 
 [[sthref183]][[GKJIE]]
 
-Table 45-1 Lock Modes for Concurrent Entity Access
+*Table 45-1 Lock Modes for Concurrent Entity Access*
 
-[width="38%",cols="100%,",options="header",]
+[width="75%",cols="25%,50%"]
 |=======================================================================
-|Lock Mode |Description
+|*Lock Mode* |*Description*
 |`OPTIMISTIC` |Obtain an optimistic read lock for all entities with
 version attributes.
 

@@ -4,8 +4,8 @@ title=Full Query Language Syntax
 next=persistence-criteria.html
 prev=persistence-querylanguage005.html
 ~~~~~~
-Full Query Language Syntax
-==========================
+= Full Query Language Syntax
+
 
 [[BNBUF]]
 
@@ -39,11 +39,11 @@ link:#BNBUH[Table 42-1] describes the BNF symbols used in this chapter.
 
 [[sthref169]][[BNBUH]]
 
-Table 42-1 BNF Symbol Summary
+*Table 42-1 BNF Symbol Summary*
 
-[width="17%",cols="100%,",options="header",]
+[width="75%",cols="25%,45%"]
 |=======================================================================
-|Symbol |Description
+|*Symbol* |*Description*
 |`::=` |The element to the left of the symbol is defined by the
 constructs on the right.
 
@@ -865,11 +865,11 @@ decreasing precedence.
 
 [[sthref170]][[BNBVD]]
 
-Table 42-2 Query Language Order Precedence
+*Table 42-2 Query Language Order Precedence*
 
-[width="21%",cols="100%,",options="header",]
+[width="75%",cols="25%,45%"]
 |==================================
-|Type |Precedence Order
+|*Type* |*Precedence Order*
 |Navigation |`.` (a period)
 |Arithmetic a|
 `+ –` (unary)
@@ -989,11 +989,11 @@ sample `LIKE` expressions.
 
 [[sthref171]][[BNBVH]]
 
-Table 42-3 LIKE Expression Examples
+*Table 42-3 LIKE Expression Examples*
 
-[width="43%",cols="1%,48%,51%",options="header",]
+[width=75%",cols="35%,20%,20%"]
 |============================================================
-|Expression |TRUE |FALSE
+|*Expression* |*TRUE* |*FALSE*
 |`address.phone LIKE '12%3'` a|
 `'123'`
 
@@ -1170,11 +1170,11 @@ position in a string is designated by 1.
 
 [[sthref172]][[BNBVP]]
 
-Table 42-4 String Expressions
+*Table 42-4 String Expressions*
 
-[width="28%",cols=",100%",options="header",]
+[width="75%",cols="45%,25%"]
 |==============================================================
-|Function Syntax |Return Type
+|*Function Syntax* |*Return Type*
 |`CONCAT(String, String)` |`String`
 |`LENGTH(String)` |`int`
 |`LOCATE(String, String [, start])` |`int`
@@ -1219,11 +1219,11 @@ In link:#BNBVQ[Table 42-5], the `number` argument can be an `int`, a
 
 [[sthref173]][[BNBVQ]]
 
-Table 42-5 Arithmetic Expressions
+*Table 42-5 Arithmetic Expressions*
 
-[width="38%",cols=",100%",options="header",]
+[width="60%",cols="30%,30%"]
 |==========================================
-|Function Syntax |Return Type
+|*Function Syntax* |*Return Type*
 |`ABS(number)` |`int`, `float`, or `double`
 |`MOD(int, int)` |`int`
 |`SQRT(double)` |`double`
@@ -1247,11 +1247,11 @@ time, or timestamp on the database server.
 
 [[sthref174]][[GJJNL]]
 
-Table 42-6 Date/Time Expressions
+*Table 42-6 Date/Time Expressions*
 
-[width="50%",cols=",100%",options="header",]
+[width="60%",cols="30%,30%"]
 |=========================================
-|Function Syntax |Return Type
+|*Function Syntax* |*Return Type*
 |`CURRENT_DATE` |`java.sql.Date`
 |`CURRENT_TIME` |`java.sql.Time`
 |`CURRENT_TIMESTAMP` |`java.sql.Timestamp`
@@ -1330,11 +1330,11 @@ these tables, T stands for `TRUE`, F for `FALSE`, and U for unknown.)
 
 [[sthref175]][[BNBVS]]
 
-Table 42-7 AND Operator Logic
+*Table 42-7 AND Operator Logic*
 
-[width="60%",cols="1%,33%,33%,33%",options="header",]
+[width="40%",cols="10%,10%,10%,10%"]
 |============
-|AND |T |F |U
+|*AND* |*T* |*F* |*U*
 |T |T |F |U
 |F |F |F |F
 |U |U |F |U
@@ -1343,11 +1343,11 @@ Table 42-7 AND Operator Logic
 
 [[sthref176]][[BNBVT]]
 
-Table 42-8 OR Operator Logic
+*Table 42-8 OR Operator Logic*
 
-[width="60%",cols="1%,33%,33%,33%",options="header",]
+[width="40%",cols="10%,10%,10%,10%"]
 |===========
-|OR |T |F |U
+|*OR* |*T* |*F* |*U*
 |T |T |T |T
 |F |T |F |U
 |U |T |U |U
@@ -1383,11 +1383,11 @@ truth values of conditional tests.
 
 [[sthref177]][[BNBVV]]
 
-Table 42-9 NOT Operator Logic
+*Table 42-9 NOT Operator Logic*
 
-[width="45%",cols="100%,",options="header",]
+[width="30%",cols="15%,15%"]
 |================
-|NOT Value |Value
+|*NOT Value* |*Value*
 |T |F
 |F |T
 |U |U
@@ -1396,11 +1396,11 @@ Table 42-9 NOT Operator Logic
 
 [[sthref178]][[BNBVW]]
 
-Table 42-10 Conditional Test
+*Table 42-10 Conditional Test*
 
-[width="36%",cols="1%,33%,33%,33%",options="header",]
+[width="60%",cols="30%,10%,10%,10%"]
 |==============================
-|Conditional Test |T |F |U
+|*Conditional Test* |*T* |*F* |*U*
 |Expression `IS TRUE` |T |F |F
 |Expression `IS FALSE` |F |T |F
 |Expression is unknown |F |F |T
@@ -1464,11 +1464,11 @@ in link:#BNBWA[Table 42-11].
 
 [[sthref179]][[BNBWA]]
 
-Table 42-11 Aggregate Functions in Select Statements
+*Table 42-11 Aggregate Functions in Select Statements*
 
-[width="57%",cols="36%,,64%",options="header",]
+[width="80%",cols="15%,50%,64%"]
 |=======================================================================
-|Name |Return Type |Description
+|*Name* |*Return Type* |*Description*
 |`AVG` |`Double` |Returns the mean average of the fields
 
 |`COUNT` |`Long` |Returns the total number of results
