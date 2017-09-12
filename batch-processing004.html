@@ -271,23 +271,23 @@ steps. The attributes of this element are listed in <a href="#BCGJCIEI">Table
 <div class="paragraph">
 <p><a id="sthref273"></a><a id="BCGJCIEI"></a></p>
 </div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Table 58-2 Attributes of the chunk Element</p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 34%;">
+<table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 55.4455%;">
-<col style="width: 0.99%;">
-<col style="width: 43.5645%;">
+<col style="width: 15%;">
+<col style="width: 75%;">
+<col style="width: 10%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Attribute Name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default Value</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Attribute Name</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Default Value</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>checkpoint-policy</code></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -453,9 +453,10 @@ up to a maximum of ten skipped exceptions. The step retries a chunk when
 a <code>MyResourceTempUnavailable</code> exception occurs, up to a maximum of three
 attempts.</p>
 </div>
+<div id="the-batchlet-element" class="paragraph">
+<p>The batchlet Element
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^^</p>
 </div>
-<div class="sect3">
-<h4 id="the-batchlet-element">The batchlet Element</h4>
 <div class="paragraph">
 <p>The <code>batchlet</code> element is a child of the <code>step</code> element for
 task-oriented steps. This element only has the <code>ref</code> attribute, which
@@ -479,9 +480,10 @@ specifies a batch artifact that implements the <code>Batchlet</code> interface. 
 <div class="paragraph">
 <p>This example defines a batch step and specifies its batch artifact.</p>
 </div>
+<div id="the-partition-element" class="paragraph">
+<p>The partition Element
+<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup></p>
 </div>
-<div class="sect3">
-<h4 id="the-partition-element">The partition Element</h4>
 <div class="paragraph">
 <p>The <code>partition</code> element is a child of the <code>step</code> element. It indicates
 that a step is partitioned. Most partitioned steps are chunk steps where
@@ -653,10 +655,10 @@ file:</p>
 Application</a> for an example implementation of the <code>PartitionMapper</code>
 interface.</p>
 </div>
+<div id="the-flow-element" class="paragraph">
+<p>The flow Element
+<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="the-flow-element">The flow Element</h3>
 <div class="paragraph">
 <p>The <code>flow</code> element can be a child of the <code>job</code>, <code>flow</code>, and <code>split</code>
 elements. Its attributes are <code>id</code> and <code>next</code>. Flows can transition to
@@ -703,9 +705,10 @@ elements outside the flow.</p>
 last step does not have the <code>next</code> attribute. The flow transitions to
 <code>stepE</code> when its last step completes.</p>
 </div>
+<div id="the-split-element" class="paragraph">
+<p>The split Element
+<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~~</p>
 </div>
-<div class="sect2">
-<h3 id="the-split-element">The split Element</h3>
 <div class="paragraph">
 <p>The <code>split</code> element can be a child of the <code>job</code> and <code>flow</code> elements. Its
 attributes are <code>id</code> and <code>next</code>. Splits can transition to splits, steps,
@@ -726,9 +729,10 @@ concurrently:</p>
 &lt;/split&gt;</code></pre>
 </div>
 </div>
+<div id="the-decision-element" class="paragraph">
+<p>The decision Element
+<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~~</p>
 </div>
-<div class="sect2">
-<h3 id="the-decision-element">The decision Element</h3>
 <div class="paragraph">
 <p>The <code>decision</code> element can be a child of the <code>job</code> and <code>flow</code> elements.
 Its attributes are <code>id</code> and <code>next</code>. Steps, flows, and splits can
@@ -776,6 +780,9 @@ element can contain the following elements.</p>
   &lt;end on="COMPLETED" exit-status="COMPLETED_AT_DECIDER"/&gt;
   &lt;stop on="MY_TEMP_ISSUE_EXIST_STATUS" restart="step2"/&gt;
 &lt;/decision&gt;</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

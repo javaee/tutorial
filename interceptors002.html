@@ -321,7 +321,7 @@ after calling <code>Invocation.proceed</code> by calling the
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Caution:</p>
+<p><strong>Caution</strong>:</p>
 </div>
 <div class="paragraph">
 <p>Calling methods on the target instance from an <code>@AroundConstruct</code> method
@@ -573,7 +573,7 @@ lower the number, the higher the priority of the associated interceptor.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Note:</p>
+<p><strong>Note</strong>:</p>
 </div>
 <div class="paragraph">
 <p>The invocation order of interceptors with the same priority value is
@@ -589,23 +589,23 @@ constants listed in <a href="#BABFBAEF">Table 57-2</a>.</p>
 <div class="paragraph">
 <p><a id="sthref259"></a><a id="BABFBAEF"></a></p>
 </div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Table 57-2 Interceptor Priority Constants</p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 39%;">
+<table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 66.3366%;">
-<col style="width: 32.6732%;">
-<col style="width: 0.9902%;">
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priority Constant</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Priority Constant</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Value</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PLATFORM_BEFORE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
@@ -667,6 +667,8 @@ application-defined interceptor:</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@Interceptor
 @Priority(Interceptor.Priority.APPLICATION+200
 public class MyInterceptor { ... }</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
