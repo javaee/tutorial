@@ -145,9 +145,9 @@ Bean Programmatically</a>.</p>
 </div>
 <div class="paragraph">
 <p>Some of the material in this chapter assumes that you have already read
-<a href="ejb-intro.html#GIJSZ">Chapter 33, "Enterprise Beans"</a>,
-<a href="ejb-gettingstarted.html#GIJRE">Chapter 34, "Getting Started with
-Enterprise Beans"</a>, and <a href="security-intro.html#BNBWJ">Chapter 48,
+<a href="ejb-intro.html#GIJSZ">Chapter 35, "Enterprise Beans"</a>,
+<a href="ejb-gettingstarted.html#GIJRE">Chapter 36, "Getting Started with
+Enterprise Beans"</a>, and <a href="security-intro.html#BNBWJ">Chapter 50,
 "Introduction to Security in the Java EE Platform"</a>.</p>
 </div>
 <div class="paragraph">
@@ -281,7 +281,7 @@ example:</p>
 </div>
 </li>
 <li>
-<p><code>@RolesAllowed("`list-of-roles</code>")`: Specifies the security roles
+<p><code>@RolesAllowed("_list-of-roles_")</code>: Specifies the security roles
 permitted to access methods in an application. This annotation can be
 specified on a class or on one or more methods. When specified at the
 class level, the annotation applies to all methods in the class. When
@@ -584,11 +584,11 @@ an Enterprise Bean with Programmatic Security</a>.</p>
 <div class="paragraph">
 <p>You can specify whether a caller&#8217;s security identity should be used for
 the execution of specified methods of an enterprise bean or whether a
-specific run-as identity should be used. <a href="#BNBZA">Figure 50-1</a>
+specific run-as identity should be used. <a href="#BNBZA">Figure 52-1</a>
 illustrates this concept.</p>
 </div>
 <div id="BNBZA" class="paragraph">
-<div class="title"><strong>Figure 50-1 Security Identity Propagation</strong></div>
+<div class="title"><strong>Figure 52-1 Security Identity Propagation</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_047.png" alt="Diagram of security identity propagation from client to intermediate container to target container"></span></p>
 </div>
 <div class="paragraph">

@@ -114,12 +114,12 @@ and enterprise tier applications.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="security-webtier.html#BNCAS">Chapter 49, "Getting Started Securing
+<p><a href="security-webtier.html#BNCAS">Chapter 51, "Getting Started Securing
 Web Applications"</a> explains how to add security to web components, such
 as servlets.</p>
 </li>
 <li>
-<p><a href="security-javaee.html#BNBYK">Chapter 50, "Getting Started Securing
+<p><a href="security-javaee.html#BNBYK">Chapter 52, "Getting Started Securing
 Enterprise Applications"</a> explains how to add security to Java EE
 components, such as enterprise beans and application clients.</p>
 </li>
@@ -142,10 +142,10 @@ client and using it to establish an authenticated session.</p>
 <h4 id="step-1-initial-request">Step 1: Initial Request</h4>
 <div class="paragraph">
 <p>In the first step of this example, the web client requests the main
-application URL. This action is shown in <a href="#BNBWN">Figure 48-1</a>.</p>
+application URL. This action is shown in <a href="#BNBWN">Figure 50-1</a>.</p>
 </div>
 <div id="BNBWN" class="paragraph">
-<div class="title"><strong>Figure 48-1 Initial Request</strong></div>
+<div class="title"><strong>Figure 50-1 Initial Request</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_039.png" alt="Diagram of initial request from web client to web server for access to a protected resource"></span></p>
 </div>
 <div class="paragraph">
@@ -163,13 +163,13 @@ For more information on these mechanisms, see
 <p>The web server returns a form that the web client uses to collect
 authentication data, such as user name and password, from the user. The
 web client forwards the authentication data to the web server, where it
-is validated by the web server, as shown in <a href="#BNBWP">Figure 48-2</a>.
+is validated by the web server, as shown in <a href="#BNBWP">Figure 50-2</a>.
 The validation mechanism may be local to a server or may leverage the
 underlying security services. On the basis of the validation, the web
 server sets a credential for the user.</p>
 </div>
 <div id="BNBWP" class="paragraph">
-<div class="title"><strong>Figure 48-2 Initial Authentication</strong></div>
+<div class="title"><strong>Figure 50-2 Initial Authentication</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_040.png" alt="Diagram of initial authentication: server sends form to client, which sends authentication data to server for validation"></span></p>
 </div>
 </div>
@@ -183,10 +183,10 @@ determine the security roles that are permitted access to the resource.
 The security policy is derived from annotations or from the deployment
 descriptor. The web container then tests the user&#8217;s credential against
 each role to determine whether it can map the user to the role.
-<a href="#BNBWR">Figure 48-3</a> shows this process.</p>
+<a href="#BNBWR">Figure 50-3</a> shows this process.</p>
 </div>
 <div id="BNBWR" class="paragraph">
-<div class="title"><strong>Figure 48-3 URL Authorization</strong></div>
+<div class="title"><strong>Figure 50-3 URL Authorization</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_041.png" alt="Diagram of URL authorization"></span></p>
 </div>
 <div class="paragraph">
@@ -200,17 +200,17 @@ the permitted roles.</p>
 <h4 id="step-4-fulfilling-the-original-request">Step 4: Fulfilling the Original Request</h4>
 <div class="paragraph">
 <p>If the user is authorized, the web server returns the result of the
-original URL request, as shown in <a href="#BNBWT">Figure 48-4</a>.</p>
+original URL request, as shown in <a href="#BNBWT">Figure 50-4</a>.</p>
 </div>
 <div id="BNBWT" class="paragraph">
-<div class="title"><strong>Figure 48-4 Fulfilling the Original Request</strong></div>
+<div class="title"><strong>Figure 50-4 Fulfilling the Original Request</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_042.png" alt="Diagram of request fulfillment, showing server returning result to client"></span></p>
 </div>
 <div class="paragraph">
 <p>In our example, the response URL of a web page is returned, enabling the
 user to post form data that needs to be handled by the business-logic
 component of the application. See
-<a href="security-webtier.html#BNCAS">Chapter 49, "Getting Started Securing
+<a href="security-webtier.html#BNCAS">Chapter 51, "Getting Started Securing
 Web Applications"</a> for more information on protecting web applications.</p>
 </div>
 </div>
@@ -220,11 +220,11 @@ Web Applications"</a> for more information on protecting web applications.</p>
 <p>The web page performs the remote method call to the enterprise bean,
 using the user&#8217;s credential to establish a secure association between
 the web page and the enterprise bean, as shown in <a href="#BNBWV">Figure
-48-5</a>. The association is implemented as two related security contexts:
+50-5</a>. The association is implemented as two related security contexts:
 one in the web server and one in the EJB container.</p>
 </div>
 <div id="BNBWV" class="paragraph">
-<div class="title"><strong>Figure 48-5 Invoking an Enterprise Bean Business Method</strong></div>
+<div class="title"><strong>Figure 50-5 Invoking an Enterprise Bean Business Method</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_043.png" alt="Diagram of authorization process between web component and enterprise bean"></span></p>
 </div>
 <div class="paragraph">

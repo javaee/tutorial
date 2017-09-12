@@ -101,7 +101,7 @@ Enterprise Bean with Declarative Security</a></p>
 Securing an Enterprise Bean with Programmatic Security</a></p>
 </li>
 <li>
-<p>GlassFish samples: <code>https://glassfish-samples.java.net/</code></p>
+<p>GlassFish samples: <code><a href="https://glassfish-samples.java.net/" class="bare">https://glassfish-samples.java.net/</a></code></p>
 </li>
 </ul>
 </div>
@@ -122,7 +122,7 @@ Server</a>).</p>
 </li>
 <li>
 <p>Add an authorized user to GlassFish Server. For the examples in this
-chapter and in <a href="security-javaee.html#BNBYK">Chapter 50, "Getting
+chapter and in <a href="security-javaee.html#BNBYK">Chapter 52, "Getting
 Started Securing Enterprise Applications"</a>, add a user to the <code>file</code>
 realm of GlassFish Server, and assign the user to the group
 <code>TutorialUser</code>.</p>
@@ -204,7 +204,7 @@ Applications"</a>. In the example application included with this tutorial,
 many of these steps have been completed for you and are listed here
 simply to show what needs to be done should you wish to create a similar
 application. This application can be found in the
-tut-install`/examples/security/hello2-basicauth/` directory.</p>
+<code><em>tut-install</em>/examples/security/hello2-basicauth/</code> directory.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -307,11 +307,9 @@ security settings in the deployment descriptor. Use the deployment
 descriptor to specify settings for nondefault authentication mechanisms,
 for which you cannot use the <code>@ServletSecurity</code> annotation.</p>
 </div>
-<div id="to-build-package-and-deploy-the-hello2-basicauth-example-using-netbeans-ide" class="paragraph">
-<p>To Build, Package, and Deploy the hello2-basicauth Example Using
-NetBeans IDE
-<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^^</p>
 </div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-hello2-basicauth-example-using-netbeans-ide">To Build, Package, and Deploy the hello2-basicauth Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -411,13 +409,25 @@ GlassFish Server.</p>
 </div>
 <div class="paragraph">
 <p>The server returns the requested resource if all the following
-conditions are met.
-* A user with the user name you entered is defined for GlassFish Server.
-* The user with the user name you entered has the password you entered.
-* The user name and password combination you entered is assigned to the
-group <code>TutorialUser</code> in GlassFish Server.
-* The role of <code>TutorialUser</code>, as defined for the application, is mapped
+conditions are met:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A user with the user name you entered is defined for GlassFish Server.</p>
+</li>
+<li>
+<p>The user with the user name you entered has the password you entered.</p>
+</li>
+<li>
+<p>The user name and password combination you entered is assigned to the
+group <code>TutorialUser</code> in GlassFish Server.</p>
+</li>
+<li>
+<p>The role of <code>TutorialUser</code>, as defined for the application, is mapped
 to the group <code>TutorialUser</code>, as defined for GlassFish Server.</p>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -464,7 +474,7 @@ Error Page</a>.</p>
 </div>
 <div class="paragraph">
 <p>This application can be found in the
-tut-install`/examples/security/hello1-formauth/` directory.</p>
+<code><em>tut-install</em>/examples/security/hello1-formauth/</code> directory.</p>
 </div>
 <div class="sect3">
 <h4 id="creating-the-login-form-and-the-error-page">Creating the Login Form and the Error Page</h4>
@@ -495,7 +505,7 @@ coded as follows:</p>
 </div>
 <div class="paragraph">
 <p>The full code for the login page used in this example can be found at
-tut-install`/examples/security/hello1-formauth/src/main/webapp/login.html`.
+<code><em>tut-install</em>/examples/security/hello1-formauth/src/main/webapp/login.html</code>.
 Here is the code for this page:</p>
 </div>
 <div class="listingblock">
@@ -532,7 +542,7 @@ Here is the code for this page:</p>
 <p>The login error page is displayed if the user enters a user name and
 password combination that is not authorized to access the protected URI.
 For this example, the login error page can be found at
-tut-install`/examples/security/hello1-formauth/``src/main/webapp/error.html`.
+<code><em>tut-install</em>/examples/security/hello1-formauth/src/main/webapp/error.html</code>.
 For this example, the login error page explains the reason for receiving
 the error page and provides a link that will allow the user to try
 again. Here is the code for this page:</p>
@@ -567,7 +577,7 @@ deployment descriptor.</p>
 <div class="paragraph">
 <p>The following sample code shows the security elements added to the
 deployment descriptor for this example, which can be found in
-tut-install`/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml`:</p>
+<code><em>tut-install</em>/examples/security/hello1-formauth/src/main/webapp/WEB-INF/web.xml</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
