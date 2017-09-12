@@ -4,8 +4,8 @@ title=Overview of the JMS Examples
 next=jms-examples003.html
 prev=jms-examples001.html
 ~~~~~~
-Overview of the JMS Examples
-============================
+= Overview of the JMS Examples
+
 
 [[BABEFBHJ]]
 
@@ -20,11 +20,11 @@ example directory for each example is relative to the
 
 [[sthref200]][[sthref201]]
 
-Table 49-1 JMS Examples That Show the Use of Java EE Application Clients
+*Table 49-1 JMS Examples That Show the Use of Java EE Application Clients*
 
-[width="37%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%s"]
 |=======================================================================
-|Example Directory |Description
+|*Example Directory* |*Description*
 |`simple/producer` |Using an application client to send messages; see
 link:jms-examples003.html#BABIHCAE[Sending Messages]
 
@@ -64,12 +64,12 @@ link:jms-examples005.html#BABEJBHA[Using Shared Durable Subscriptions]
 
 [[sthref202]][[sthref203]]
 
-Table 49-2 JMS Examples That Show the Use of Java EE Web and EJB
-Components
+*Table 49-2 JMS Examples That Show the Use of Java EE Web and EJB
+Components*
 
-[width="27%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%s"]
 |=======================================================================
-|Example Directory |Description
+|*Example Directory* |*Description*
 |`websimplemessage` |Using managed beans to send messages and to receive
 messages synchronously; see link:jms-examples006.html#BABBABFC[Sending
 and Receiving Messages Using a Simple Web Application]

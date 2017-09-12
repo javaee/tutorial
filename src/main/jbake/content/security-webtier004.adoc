@@ -443,8 +443,7 @@ deployment descriptor for this example, which can be found in
 [[GJRBA]]
 
 [[to-build-package-and-deploy-the-hello1-formauth-example-using-netbeans-ide]]
-To Build, Package, and Deploy the hello1-formauth Example Using NetBeans
-IDE
+To Build, Package, and Deploy the hello1-formauth Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running
@@ -467,8 +466,7 @@ GlassFish Server instance, then opens it in a browser.
 [[GJRAZ]]
 
 [[to-build-package-and-deploy-the-hello1-formauth-example-using-maven-and-the-asadmin-command]]
-To Build, Package, and Deploy the hello1-formauth Example Using Maven
-and the asadmin Command
+To Build, Package, and Deploy the hello1-formauth Example Using Maven and the asadmin Command
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Follow the steps in link:#GJJLK[To Set Up Your System for Running

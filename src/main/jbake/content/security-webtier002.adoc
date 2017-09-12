@@ -191,7 +191,7 @@ constrained requests on any connection, including an unprotected one.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 In practice, Java EE servers treat the `CONFIDENTIAL` and `INTEGRAL`
 transport guarantee values identically.
@@ -217,7 +217,7 @@ configured for GlassFish Server.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 After you switch to SSL for a session, you should never accept any
 non-SSL requests for the rest of that session. For example, a shopping
@@ -459,7 +459,7 @@ that should be used when form-based login is specified.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Another way to specify form-based authentication is to use the
 `authenticate`, `login`, and `logout` methods of `HttpServletRequest`,
