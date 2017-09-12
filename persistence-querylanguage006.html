@@ -58,7 +58,7 @@
 <div class="paragraph">
 <p>This section discusses the query language syntax, as defined in the Java
 Persistence API 2.0 specification available at
-<code>http://jcp.org/en/jsr/detail?id=317</code>. Much of the following material
+<code><a href="http://jcp.org/en/jsr/detail?id=317" class="bare">http://jcp.org/en/jsr/detail?id=317</a></code>. Much of the following material
 paraphrases or directly quotes the specification.</p>
 </div>
 <div class="paragraph">
@@ -101,20 +101,18 @@ paraphrases or directly quotes the specification.</p>
 <p><a id="sthref169"></a><a id="BNBUH"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-1 BNF Symbol Summary</p>
+<p><strong>Table 42-1 BNF Symbol Summary</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 17%;">
+<table class="tableblock frame-all grid-all" style="width: 75%;">
 <colgroup>
-<col style="width: 99.0099%;">
-<col style="width: 0.9901%;">
+<col style="width: 35.7142%;">
+<col style="width: 64.2858%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Symbol</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Symbol</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>::=</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The element to the left of the symbol is defined by the
@@ -127,11 +125,11 @@ constructs on the right.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The preceding construct may occur zero or more times.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{...}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{&#8230;&#8203;}</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The constructs within the braces are grouped together.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[...]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[&#8230;&#8203;]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The constructs within the brackets are optional.</p></td>
 </tr>
 <tr>
@@ -411,10 +409,10 @@ identification variables.</p>
 <h4 id="identifiers">Identifiers</h4>
 <div class="paragraph">
 <p>An identifier is a sequence of one or more characters. The first
-character must be a valid first character (letter, <code>$</code>, <code>_</code>) in an
+character must be a valid first character (letter, <code>$</code>, <code><em></code>) in an
 identifier of the Java programming language, hereafter in this chapter
 called simply "Java." Each subsequent character in the sequence must be
-a valid nonfirst character (letter, digit, <code>$</code>, <code>_</code>) in a Java
+a valid nonfirst character (letter, digit, <code>$</code>, <code></em></code>) in a Java
 identifier. (For details, see the Java SE API documentation of the
 <code>isJavaIdentifierStart</code> and <code>isJavaIdentifierPart</code> methods of the
 <code>Character</code> class.) The question mark (<code>?</code>) is a reserved character in
@@ -1052,20 +1050,18 @@ decreasing precedence.</p>
 <p><a id="sthref170"></a><a id="BNBVD"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-2 Query Language Order Precedence</p>
+<p><strong>Table 42-2 Query Language Order Precedence</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 21%;">
+<table class="tableblock frame-all grid-all" style="width: 75%;">
 <colgroup>
-<col style="width: 99.0099%;">
-<col style="width: 0.9901%;">
+<col style="width: 35.7142%;">
+<col style="width: 64.2858%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Precedence Order</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Precedence Order</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Navigation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>.</code> (a period)</p></td>
@@ -1214,22 +1210,20 @@ sample <code>LIKE</code> expressions.</p>
 <p><a id="sthref171"></a><a id="BNBVH"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-3 LIKE Expression Examples</p>
+<p><strong>Table 42-3 LIKE Expression Examples</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 43%;">
+<table class="tableblock frame-all grid-all" style="width: 75%;">
 <colgroup>
-<col style="width: 1%;">
-<col style="width: 48%;">
-<col style="width: 51%;">
+<col style="width: 46.6666%;">
+<col style="width: 26.6666%;">
+<col style="width: 26.6668%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Expression</th>
-<th class="tableblock halign-left valign-top">TRUE</th>
-<th class="tableblock halign-left valign-top">FALSE</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Expression</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>TRUE</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>FALSE</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.phone LIKE '12%3'</code></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -1397,7 +1391,7 @@ if the subquery result is empty or if all the values returned are false.
 The <code>SOME</code> keyword is synonymous with <code>ANY</code>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>ALL</code> and <code>ANY</code> expressions are used with the <code>=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>,
+<p>The <code>ALL</code> and <code>ANY</code> expressions are used with the <code>=</code>, <code>&lt;</code>, <code>&#8656;</code>, <code>&gt;</code>,
 <code>&gt;=</code>, and <code>&lt;&gt;</code> comparison operators.</p>
 </div>
 <div class="paragraph">
@@ -1435,20 +1429,18 @@ position in a string is designated by 1.</p>
 <p><a id="sthref172"></a><a id="BNBVP"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-4 String Expressions</p>
+<p><strong>Table 42-4 String Expressions</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 28%;">
+<table class="tableblock frame-all grid-all" style="width: 75%;">
 <colgroup>
-<col style="width: 0.99%;">
-<col style="width: 99.01%;">
+<col style="width: 64.2857%;">
+<col style="width: 35.7143%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Function Syntax</th>
-<th class="tableblock halign-left valign-top">Return Type</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Function Syntax</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Return Type</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CONCAT(String, String)</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
@@ -1526,20 +1518,18 @@ uppercase, respectively.</p>
 <p><a id="sthref173"></a><a id="BNBVQ"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-5 Arithmetic Expressions</p>
+<p><strong>Table 42-5 Arithmetic Expressions</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 38%;">
+<table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
-<col style="width: 0.99%;">
-<col style="width: 99.01%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Function Syntax</th>
-<th class="tableblock halign-left valign-top">Return Type</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Function Syntax</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Return Type</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ABS(number)</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code>, <code>float</code>, or <code>double</code></p></td>
@@ -1581,20 +1571,18 @@ time, or timestamp on the database server.</p>
 <p><a id="sthref174"></a><a id="GJJNL"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-6 Date/Time Expressions</p>
+<p><strong>Table 42-6 Date/Time Expressions</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 50%;">
+<table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
-<col style="width: 0.99%;">
-<col style="width: 99.01%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Function Syntax</th>
-<th class="tableblock halign-left valign-top">Return Type</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Function Syntax</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Return Type</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CURRENT_DATE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.sql.Date</code></p></td>
@@ -1692,24 +1680,22 @@ these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U fo
 <p><a id="sthref175"></a><a id="BNBVS"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-7 AND Operator Logic</p>
+<p><strong>Table 42-7 AND Operator Logic</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 60%;">
+<table class="tableblock frame-all grid-all" style="width: 40%;">
 <colgroup>
-<col style="width: 1%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">AND</th>
-<th class="tableblock halign-left valign-top">T</th>
-<th class="tableblock halign-left valign-top">F</th>
-<th class="tableblock halign-left valign-top">U</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AND</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>T</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>F</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>U</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
@@ -1734,24 +1720,22 @@ these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U fo
 <p><a id="sthref176"></a><a id="BNBVT"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-8 OR Operator Logic</p>
+<p><strong>Table 42-8 OR Operator Logic</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 60%;">
+<table class="tableblock frame-all grid-all" style="width: 40%;">
 <colgroup>
-<col style="width: 1%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">OR</th>
-<th class="tableblock halign-left valign-top">T</th>
-<th class="tableblock halign-left valign-top">F</th>
-<th class="tableblock halign-left valign-top">U</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OR</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>T</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>F</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>U</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
@@ -1804,20 +1788,18 @@ truth values of conditional tests.</p>
 <p><a id="sthref177"></a><a id="BNBVV"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-9 NOT Operator Logic</p>
+<p><strong>Table 42-9 NOT Operator Logic</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 45%;">
+<table class="tableblock frame-all grid-all" style="width: 30%;">
 <colgroup>
-<col style="width: 99.0099%;">
-<col style="width: 0.9901%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">NOT Value</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>NOT Value</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Value</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
@@ -1836,24 +1818,22 @@ truth values of conditional tests.</p>
 <p><a id="sthref178"></a><a id="BNBVW"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-10 Conditional Test</p>
+<p><strong>Table 42-10 Conditional Test</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 36%;">
+<table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
-<col style="width: 1%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
+<col style="width: 50%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6668%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Conditional Test</th>
-<th class="tableblock halign-left valign-top">T</th>
-<th class="tableblock halign-left valign-top">F</th>
-<th class="tableblock halign-left valign-top">U</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Conditional Test</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>T</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>F</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>U</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Expression <code>IS TRUE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
@@ -1943,22 +1923,20 @@ in <a href="#BNBWA">Table 42-11</a>.</p>
 <p><a id="sthref179"></a><a id="BNBWA"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 42-11 Aggregate Functions in Select Statements</p>
+<p><strong>Table 42-11 Aggregate Functions in Select Statements</strong></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 57%;">
+<table class="tableblock frame-all grid-all" style="width: 80%;">
 <colgroup>
-<col style="width: 35.6435%;">
-<col style="width: 0.99%;">
-<col style="width: 63.3665%;">
+<col style="width: 11.6279%;">
+<col style="width: 38.7596%;">
+<col style="width: 49.6125%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Return Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Return Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AVG</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Double</code></p></td>
