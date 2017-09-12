@@ -4,8 +4,8 @@ title=Using Interceptors
 next=interceptors003.html
 prev=interceptors001.html
 ~~~~~~
-Using Interceptors
-==================
+= Using Interceptors
+
 
 [[GKEDM]]
 
@@ -106,7 +106,7 @@ a target method or class:
 
 [source,oac_no_warn]
 ----
-@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class, 
+@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class,
         LastInterceptor.class})
 public void updateInfo(String info) { ... }
 ----
@@ -261,7 +261,7 @@ after calling `Invocation.proceed` by calling the
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Caution:
+*Caution*:
 
 Calling methods on the target instance from an `@AroundConstruct` method
 is dangerous because dependency injection may not have completed on the
@@ -285,7 +285,7 @@ specifying the interceptor classes in the `@Interceptors` annotation:
 
 [source,oac_no_warn]
 ----
-@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class, 
+@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class,
         LastInterceptor.class})
 @Stateless
 public class OrderBean { ... }
@@ -493,7 +493,7 @@ lower the number, the higher the priority of the associated interceptor.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 The invocation order of interceptors with the same priority value is
 implementation-specific.
@@ -506,11 +506,11 @@ constants listed in link:#BABFBAEF[Table 55-2].
 
 [[sthref259]][[BABFBAEF]]
 
-Table 55-2 Interceptor Priority Constants
+*Table 55-2 Interceptor Priority Constants*
 
-[width="39%",cols="67%,33%,",options="header",]
+[width="99%",cols="15%,15%,70%"]
 |=======================================================================
-|Priority Constant |Value |Description
+|*Priority Constant* |*Value* |*Description*
 |`PLATFORM_BEFORE` |0 |Interceptors defined by the Java EE Platform and
 intended to be invoked early in the invocation chain should use the
 range between `PLATFORM_BEFORE` and `LIBRARY_BEFORE`. These interceptors
@@ -553,5 +553,3 @@ application-defined interceptor:
 @Priority(Interceptor.Priority.APPLICATION+200
 public class MyInterceptor { ... }
 ----
-
-
