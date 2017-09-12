@@ -316,7 +316,7 @@ The Java EE platform supports the following authentication mechanisms:
 
 Basic, form-based, and digest authentication are discussed in this
 section. Client and mutual authentication are discussed in
-link:security-advanced.html#GJJWX[Chapter 51, "Java EE Security: Advanced
+link:security-advanced.html#GJJWX[Chapter 53, "Java EE Security: Advanced
 Topics"].
 
 HTTP basic authentication and form-based authentication are not very
@@ -358,12 +358,12 @@ password.
 4.  The server authenticates the user in the specified realm and, if
 successful, returns the requested resource.
 
-link:#BNCBP[Figure 49-1] shows what happens when you specify HTTP basic
+link:#BNCBP[Figure 51-1] shows what happens when you specify HTTP basic
 authentication.
 
 [[BNCBP]]
 
-.*Figure 49-1 HTTP Basic Authentication*
+.*Figure 51-1 HTTP Basic Authentication*
 image:img/javaeett_dt_045.png[
 "Diagram of four steps in HTTP basic authentication between client and
 server"]
@@ -391,12 +391,12 @@ the resource by using the stored URL path.
 * If authentication fails, the client is forwarded or redirected to an
 error page.
 
-link:#GEXFA[Figure 49-2] shows what happens when you specify form-based
+link:#GEXFA[Figure 51-2] shows what happens when you specify form-based
 authentication.
 
 [[GEXFA]]
 
-.*Figure 49-2 Form-Based Authentication*
+.*Figure 51-2 Form-Based Authentication*
 image:img/javaeett_dt_046.png[
 "Diagram of four steps in form-based authentication between client and
 server"]
@@ -562,5 +562,3 @@ directory specified by the `url-pattern` element
 The `@ServletSecurity` annotation cannot be used in this situation
 because its constraints apply to all URL patterns specified by the
 `@WebServlet` annotation.
-
-

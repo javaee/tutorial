@@ -40,7 +40,7 @@ application deployment descriptors.
 Specific annotations that can be used to specify security information
 within an enterprise bean class file are described in
 link:security-javaee002.html#GJGDI[Securing an Enterprise Bean Using
-Declarative Security]. link:security-webtier.html#BNCAS[Chapter 49,
+Declarative Security]. link:security-webtier.html#BNCAS[Chapter 51,
 "Getting Started Securing Web Applications"], describes how to use
 annotations to secure web applications where possible. Deployment
 descriptors are described only where necessary.
@@ -107,5 +107,3 @@ sections:
 Web Applications]
 * link:security-javaee002.html#GJGCS[Securing an Enterprise Bean
 Programmatically]
-
-
