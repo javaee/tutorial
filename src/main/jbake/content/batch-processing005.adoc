@@ -4,8 +4,8 @@ title=Creating Batch Artifacts
 next=batch-processing006.html
 prev=batch-processing004.html
 ~~~~~~
-Creating Batch Artifacts
-========================
+= Creating Batch Artifacts
+
 
 [[BCGHDHGH]]
 
@@ -50,11 +50,13 @@ artifacts for job and step listeners.
 
 [[sthref279]][[BCGGCIDC]]
 
+
 Table 58-3 Main Batch Artifact Interfaces
 
-[width="56%",cols="52%,48%,",options="header",]
+
+[width="99%",cols="15%,15%,70%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.batch.api` |`Batchlet` |Implements the business logic of a
 task-oriented step. It is referenced from the `batchlet` element.
 
@@ -82,11 +84,13 @@ element.
 
 [[sthref280]][[BCGEAAEA]]
 
+
 Table 58-4 Partition Batch Artifact Interfaces
 
-[width="58%",cols="57%,43%,",options="header",]
+
+[width="99%",cols="15%,15%,70%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.batch.api.partition` |`PartitionPlan` |Provides details on how
 to execute a partitioned step, such as the number of partitions, the
 number of threads, and the parameters for each partition. This artifact
@@ -112,11 +116,13 @@ element inside the `partition` element.
 
 [[sthref281]][[BCGCAEDI]]
 
+
 Table 58-5 Listener Batch Artifact Interfaces
 
-[width="61%",cols="1%,44%,55%",options="header",]
+
+[width="99%",cols="15%,15%,70%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.batch.api.listener` |`JobListener` |Intercepts job execution
 before and after running a job. It is referenced from the `listener`
 element inside the `job` element.

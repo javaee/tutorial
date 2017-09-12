@@ -4,8 +4,8 @@ title=The traffic Example
 next=interceptors.html
 prev=connectorexample002.html
 ~~~~~~
-The traffic Example
-===================
++ The traffic Example
+
 
 [[CHDJEADB]]
 
@@ -159,11 +159,13 @@ link:#CHDEDEAF[Table 56-3].
 
 [[sthref251]][[CHDEDEAF]]
 
+
 Table 56-3 Interfaces Implemented in the traffic-rar Module
 
-[width="49%",cols="54%,46%,",options="header",]
+
+[width="99%",cols="20%,20%,60%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.resource.spi` |`ResourceAdapter` |Defines the lifecycle methods
 of the resource adapter.
 

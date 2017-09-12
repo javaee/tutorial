@@ -4,8 +4,8 @@ title=Using the Job Specification Language
 next=batch-processing005.html
 prev=batch-processing003.html
 ~~~~~~
-Using the Job Specification Language
-====================================
+= Using the Job Specification Language
+
 
 [[BCGDDBBG]]
 
@@ -197,11 +197,13 @@ steps. The attributes of this element are listed in link:#BCGJCIEI[Table
 
 [[sthref273]][[BCGJCIEI]]
 
+=======
 Table 58-2 Attributes of the chunk Element
 
-[width="34%",cols="56%,,44%",options="header",]
+
+[width="99%",cols="15%,75%,10%"]
 |=======================================================================
-|Attribute Name |Description |Default Value
+|*Attribute Name* |*Description* |*Default Value*
 |`checkpoint-policy` a|
 Specifies how to commit the results of processing each chunk:
 

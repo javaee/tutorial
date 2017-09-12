@@ -4,8 +4,8 @@ title=Container-Managed Transactions
 next=transactions005.html
 prev=transactions003.html
 ~~~~~~
-Container-Managed Transactions
-==============================
+= Container-Managed Transactions
+
 
 [[BNCIJ]]
 
@@ -189,11 +189,13 @@ database management system.
 
 [[sthref235]][[BNCIT]]
 
+=======
 Table 54-1 Transaction Attributes and Scope
 
-[width="57%",cols="50%,50%,",options="header",]
+
+[width="60%",cols="20%,20%,20%"]
 |=======================================================================
-|Transaction Attribute |Client's Transaction |Business Method's
+|*Transaction Attribute* |*Client's Transaction* |*Business Method's*
 Transaction
 |`Required` |None |T2
 

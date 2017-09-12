@@ -4,8 +4,8 @@ title=Batch Processing in Java EE
 next=batch-processing003.html
 prev=batch-processing001.html
 ~~~~~~
-Batch Processing in Java EE
-===========================
+= Batch Processing in Java EE
+
 
 [[BCGGIBHA]]
 
@@ -173,11 +173,12 @@ link:#BCGJBGDF[Table 58-1]. They are represented as strings.
 
 [[sthref267]][[BCGJBGDF]]
 
+
 Table 58-1 Batch Status Values
 
-[width="28%",cols="100%,",options="header",]
+[width="50%",cols="15%,35%"]
 |============================================================
-|Value |Description
+|*Value* |*Description*
 |`STARTING` |The job has been submitted to the batch runtime.
 |`STARTED` |The job is running.
 |`STOPPING` |The job has been requested to stop.

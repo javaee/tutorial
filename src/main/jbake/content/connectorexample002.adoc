@@ -4,8 +4,8 @@ title=The trading Example
 next=connectorexample003.html
 prev=connectorexample001.html
 ~~~~~~
-The trading Example
-===================
+= The trading Example
+
 
 [[CHDFHAID]]
 
@@ -84,12 +84,14 @@ consists of the classes listed in link:#CHDCHJAC[Table 56-1].
 
 [[sthref242]][[CHDCHJAC]]
 
+
 Table 56-1 Classes and Interfaces in the javaeetutorial.trading.rar.api
 Package
 
-[width="32%",cols="100%,",options="header",]
+
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|API Component |Description
+|*API Component* |*Description*
 |`TradeOrder` |Represents a trade order for the EIS
 
 |`TradeResponse` |Represents a response from the EIS to a trade request
@@ -147,7 +149,7 @@ application.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 You can also configure a connection factory for a previously deployed
 outbound resource adapter using the administration commands from your
@@ -218,11 +220,13 @@ link:#CHDIBBIC[Table 56-2].
 
 [[sthref245]][[CHDIBBIC]]
 
+
 Table 56-2 Interfaces Implemented in the trading-rar Module
 
-[width="58%",cols="45%,55%,",options="header",]
+
+[width="99%",cols="20%,20%,60%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.resource.spi` |`ResourceAdapter` |Defines the lifecycle methods
 of the resource adapter
 
