@@ -10,7 +10,7 @@ Using Java EE Interceptors
 [[GKEED]]
 
 [[using-java-ee-interceptors]]
-55 Using Java EE Interceptors
+57 Using Java EE Interceptors
 -----------------------------
 
 
@@ -23,5 +23,3 @@ The following topics are addressed here:
 * link:interceptors001.html#GKIGQ[Overview of Interceptors]
 * link:interceptors002.html#GKEDM[Using Interceptors]
 * link:interceptors003.html#GKECI[The interceptor Example Application]
-
-

@@ -49,11 +49,11 @@ are not portable across Java EE servers.
 
 Interceptor methods within the target class or in an interceptor class
 are annotated with one of the metadata annotations defined in
-link:#GKECC[Table 55-1].
+link:#GKECC[Table 57-1].
 
 [[sthref253]][[GKECC]]
 
-Table 55-1 Interceptor Metadata Annotations
+Table 57-1 Interceptor Metadata Annotations
 
 [width="44%",cols="100%,",options="header",]
 |=======================================================================
@@ -125,5 +125,3 @@ Contexts and Dependency Injection for Java EE (CDI) builds on the basic
 functionality of Java EE interceptors. For information on CDI
 interceptors, including a discussion of interceptor binding types, see
 link:cdi-adv006.html#GKHJX[Using Interceptors in CDI Applications].
-
-

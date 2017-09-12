@@ -14,7 +14,7 @@ Using Interceptors
 ------------------
 
 To define an interceptor, use one of the interceptor metadata
-annotations listed in link:interceptors001.html#GKECC[Table 55-1] within
+annotations listed in link:interceptors001.html#GKECC[Table 57-1] within
 the target class, or in a separate interceptor class. The following code
 declares an `@AroundTimeout` interceptor method within a target class:
 
@@ -106,7 +106,7 @@ a target method or class:
 
 [source,oac_no_warn]
 ----
-@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class, 
+@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class,
         LastInterceptor.class})
 public void updateInfo(String info) { ... }
 ----
@@ -285,7 +285,7 @@ specifying the interceptor classes in the `@Interceptors` annotation:
 
 [source,oac_no_warn]
 ----
-@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class, 
+@Interceptors({PrimaryInterceptor.class, SecondaryInterceptor.class,
         LastInterceptor.class})
 @Stateless
 public class OrderBean { ... }
@@ -502,11 +502,11 @@ implementation-specific.
 
 
 The `javax.interceptor.Interceptor.Priority` class defines the priority
-constants listed in link:#BABFBAEF[Table 55-2].
+constants listed in link:#BABFBAEF[Table 57-2].
 
 [[sthref259]][[BABFBAEF]]
 
-Table 55-2 Interceptor Priority Constants
+Table 57-2 Interceptor Priority Constants
 
 [width="39%",cols="67%,33%,",options="header",]
 |=======================================================================
@@ -553,5 +553,3 @@ application-defined interceptor:
 @Priority(Interceptor.Priority.APPLICATION+200
 public class MyInterceptor { ... }
 ----
-
-

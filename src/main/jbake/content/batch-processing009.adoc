@@ -74,7 +74,7 @@ three job-level properties and two steps:
 [source,oac_no_warn]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<job id="phonebilling" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+<job id="phonebilling" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
      version="1.0">
     <properties>
         <property name="log_file_name" value="log1.txt"/>
@@ -150,7 +150,7 @@ public class CallRecord implements Serializable {
 
     public CallRecord() { }
 
-    public CallRecord(String datetime, String from, 
+    public CallRecord(String datetime, String from,
             String to, int min, int sec)             throws ParseException { ... }
 
     public CallRecord(String jsonData) throws ParseException { ... }
@@ -187,18 +187,18 @@ public class PhoneBill implements Serializable {
     private BigDecimal taxRate;
     private BigDecimal tax;
     private BigDecimal amountTotal;
- 
+
     public PhoneBill() { }
-    
+
     public PhoneBill(String number) {
         this.phoneNumber = number;
         calls = new ArrayList<>();
     }
-    
+
     public void addCall(CallRecord call) {
         calls.add(call);
     }
-    
+
     public void calculate(BigDecimal taxRate) { ... }
 
     /* ... Getters and setters ... *
@@ -217,9 +217,9 @@ The batch artifacts use instances of these two entities as items to
 read, process, and write.
 
 For more information on the Java Persistence API, see
-link:persistence-intro.html#BNBPZ[Chapter 38, "Introduction to the Java
+link:persistence-intro.html#BNBPZ[Chapter 40, "Introduction to the Java
 Persistence API"]. For more information on the JSON Processing API, see
-link:jsonp.html#GLRBB[Chapter 19, "JSON Processing"].
+link:jsonp.html#GLRBB[Chapter 20, "JSON Processing"].
 
 [[sthref290]]
 
@@ -243,7 +243,7 @@ public class CallRecordReader implements ItemReader {
     @Inject
     JobContext jobCtx;
 
-    /* ... Override the open, close, readItem, 
+    /* ... Override the open, close, readItem,
      *     and checkpointInfo methods ... */
 }
 ----
@@ -269,7 +269,7 @@ end of the log file:
 ----
 @Override
 public Object readItem() throws Exception {
-    /* Read a line from the log file and 
+    /* Read a line from the log file and
      * create a CallRecord from JSON */
     String callEntryJson = breader.readLine();
     if (callEntryJson != null) {
@@ -293,7 +293,7 @@ method looks like this:
 ----
 @Override
 public void writeItems(List<Object> callList) throws Exception {
-    
+
     for (Object callObject : callList) {
         CallRecord call = (CallRecord) callObject;
         PhoneBill bill = em.find(PhoneBill.class, call.getFromNumber());
@@ -340,21 +340,21 @@ public Properties[] getPartitionProperties() {
     long totalItems = getBillCount();
     long partItems = (long) totalItems / getPartitions();
     long remItems = totalItems % getPartitions();
- 
+
     /* Populate a Properties array. Each Properties element
      * in the array corresponds to a partition. */
     Properties[] props = new Properties[getPartitions()];
 
     for (int i = 0; i < getPartitions(); i++) {
         props[i] = new Properties();
-        props[i].setProperty("firstItem", 
+        props[i].setProperty("firstItem",
                 String.valueOf(i * partItems));
         /* Last partition gets the remainder elements */
         if (i == getPartitions() - 1) {
-            props[i].setProperty("numItems", 
+            props[i].setProperty("numItems",
                     String.valueOf(partItems + remItems));
         } else {
-            props[i].setProperty("numItems", 
+            props[i].setProperty("numItems",
                     String.valueOf(partItems));
     }
     return props;
@@ -376,7 +376,7 @@ public class BillReader implements ItemReader {
         /* Get the range of items to work on in this partition */
         long firstItem0 = Long.parseLong(firstItemValue);
         long numItems0 = Long.parseLong(numItemsValue);
- 
+
         if (ckpt == null) {
             /* Create a checkpoint object for this partition */
             checkpoint = new ItemNumberCheckpoint();
@@ -385,7 +385,7 @@ public class BillReader implements ItemReader {
         } else {
             checkpoint = (ItemNumberCheckpoint) ckpt;
         }
- 
+
         /* Adjust range for this partition from the checkpoint */
         long firstItem = checkpoint.getItemNumber();
         long numItems = numItems0 - (firstItem - firstItem0);
@@ -428,11 +428,11 @@ batch job and navigate to the next page:
     <h1>The Phone Billing Example Application</h1>
     <h2>Log file</h2>
     <p>The batch job analyzes the following log file:</p>
-    <textarea cols="90" rows="25" 
+    <textarea cols="90" rows="25"
               readonly="true">#{jsfBean.createAndShowLog()}</textarea>
     <p> </p>
     <h:form>
-        <h:commandButton value="Start Batch Job" 
+        <h:commandButton value="Start Batch Job"
                          action="#{jsfBean.startBatchJob()}" />
     </h:form>
 </body>
@@ -447,13 +447,13 @@ status of the batch job and displays the bills when the job finishes:
 [source,oac_no_warn]
 ----
 <p>Current Status of the Job: <b>#{jsfBean.jobStatus}</b></p>
-<h:dataTable var="_row" value="#{jsfBean.rowList}" 
+<h:dataTable var="_row" value="#{jsfBean.rowList}"
              border="1" rendered="#{jsfBean.completed}">
     <!-- ... show results from jsfBean.rowList ... -->
 </h:dataTable>
 <!-- Render the check status button if the job has not finished -->
 <h:form>
-    <h:commandButton value="Check Status" 
+    <h:commandButton value="Check Status"
                      rendered="#{jsfBean.completed==false}"
                      action="jobstarted" />
 </h:form>
@@ -568,5 +568,3 @@ mvn install
 ----
 http://localhost:8080/phonebilling/
 ----
-
-
