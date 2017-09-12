@@ -4,8 +4,8 @@ title=Entities
 next=persistence-intro003.html
 prev=persistence-intro001.html
 ~~~~~~
-Entities
-========
+= Entities
+
 
 [[BNBQA]]
 
@@ -580,11 +580,11 @@ entities.
 
 [[sthref159]][[GJJNJ]]
 
-Table 40-1 Cascade Operations for Entities
+*Table 40-1 Cascade Operations for Entities*
 
-[width="18%",cols="100%,",options="header",]
+[width="75%",cols="15%,60%"]
 |=======================================================================
-|Cascade Operation |Description
+|*Cascade Operation* |*Description*
 |`ALL` |All cascade operations will be applied to the parent entity's
 related entity. `All` is equivalent to specifying
 `cascade={DETACH, MERGE, PERSIST, REFRESH, REMOVE}`
