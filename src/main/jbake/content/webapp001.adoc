@@ -21,14 +21,14 @@ generates interactive web pages containing various types of markup
 language (HTML, XHTML, XML, and so on) and dynamic content in response
 to requests. Development of presentation-oriented web applications is
 covered in link:jsf-intro.html#BNAPH[Chapter 7, "JavaServer Faces
-Technology,"] through link:servlets.html#BNAFD[Chapter 17, "Java Servlet
+Technology,"] through link:servlets.html#BNAFD[Chapter 18, "Java Servlet
 Technology."]
 * Service-oriented: A service-oriented web application implements the
 endpoint of a web service. Presentation-oriented applications are often
 clients of service-oriented web applications. Development of
 service-oriented web applications is covered in
-link:jaxws.html#BNAYL[Chapter 29, "Building Web Services with JAX-WS,"]
-and link:jaxrs.html#GIEPU[Chapter 30, "Building RESTful Web Services with
+link:jaxws.html#BNAYL[Chapter 31, "Building Web Services with JAX-WS,"]
+and link:jaxrs.html#GIEPU[Chapter 32, "Building RESTful Web Services with
 JAX-RS,"] in link:partwebsvcs.html#BNAYK[Part III, "Web Services."]
 
 In the Java EE platform, web components provide the dynamic extension
@@ -85,5 +85,3 @@ lifecycle and explains how to package and deploy very simple web
 applications on GlassFish Server. The chapter then moves on to
 configuring web applications and discusses how to specify the most
 commonly used configuration parameters.
-
-

@@ -78,7 +78,7 @@ as the target of attached objects in the using page.
 
 
 For more information and a complete list of Facelets composite tags, see
-the olink:JSFTL[JavaServer Faces Facelets Tag Library documentation].
+the JavaServer Faces Facelets Tag Library documentation.
 
 The following example shows a composite component that accepts an email
 address as input:
