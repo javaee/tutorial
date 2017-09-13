@@ -4,8 +4,7 @@ title=Securing Containers
 next=security-intro004.html
 prev=security-intro002.html
 ~~~~~~
-Securing Containers
-===================
+= Securing Containers
 
 [[BNBXE]]
 
@@ -95,8 +94,9 @@ Using Programmatic Security
 Programmatic security is embedded in an application and is used to make
 security decisions. Programmatic security is useful when declarative
 security alone is not sufficient to express the security model of an
-application. The API for programmatic security consists of methods of
-the `EJBContext` interface and the `HttpServletRequest` interface. These
+application. The API for programmatic security consists of methods of the Java
+EE Security API `SecurityContext` interface, and methods of the EJB `EJBContext`
+interface and the servlet `HttpServletRequest` interface. These
 methods allow components to make business-logic decisions based on the
 security role of the caller or remote user.
 
@@ -107,5 +107,3 @@ sections:
 Web Applications]
 * link:security-javaee002.html#GJGCS[Securing an Enterprise Bean
 Programmatically]
-
-
