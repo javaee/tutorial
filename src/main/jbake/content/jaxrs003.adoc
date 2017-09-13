@@ -36,7 +36,7 @@ the application, and you simply need to implement the appropriate
 method.
 
 You can find a version of this application at
-`_tut-install_` `/examples/jaxrs/hello/`.
+`_tut-install_/examples/jaxrs/hello/`.
 
 The following topics are addressed here:
 

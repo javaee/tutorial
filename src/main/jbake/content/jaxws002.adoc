@@ -4,8 +4,8 @@ title=Creating a Simple Web Service and Clients with JAX-WS
 next=jaxws003.html
 prev=jaxws001.html
 ~~~~~~
-Creating a Simple Web Service and Clients with JAX-WS
-=====================================================
+= Creating a Simple Web Service and Clients with JAX-WS
+
 
 [[BNAYN]]
 
@@ -15,10 +15,10 @@ Creating a Simple Web Service and Clients with JAX-WS
 
 This section shows how to build and deploy a simple web service and two
 clients: an application client and a web client. The source code for the
-service is in the tut-install`/examples/jaxws/helloservice-war/`
+service is in the `_tut-install_/examples/jaxws/helloservice-war/`
 directory, and the clients are in the
-tut-install`/examples/jaxws/hello-appclient/` and
-tut-install`/examples/jaxws/hello-webclient/` directories.
+`_tut-install_/examples/jaxws/hello-appclient/` and
+`_tut-install_/examples/jaxws/hello-webclient/` directories.
 
 link:#BNAYO[Figure 31-1] illustrates how JAX-WS technology manages
 communication between a web service and a client.
@@ -179,7 +179,7 @@ select Run.
 +
 This command builds and packages the application into a WAR file,
 `helloservice-war.war`, located in
-tut-install`/examples/jaxws/helloservice-war/target/`, and deploys this
+`_tut-install_/examples/jaxws/helloservice-war/target/`, and deploys this
 WAR file to your GlassFish Server instance. It also opens the web
 service test interface at the URL shown in link:#BNAYW[To Test the
 Service without a Client].
