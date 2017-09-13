@@ -31,7 +31,7 @@ resource bundle) containing the pairs. You construct a resource bundle
 instance by appending a locale string representation to a base name.
 
 The Duke's Bookstore application (see
-link:dukes-bookstore.html#GLNVI[Chapter 58, "Duke's Bookstore Case Study
+link:dukes-bookstore.html#GLNVI[Chapter 60, "Duke's Bookstore Case Study
 Example"]) contains resource bundles with the base name
 `messages.properties` for the locales `de` (German), `es` (Spanish), and
 `fr` (French). The default locale, `en` (English), which is specified in
@@ -40,5 +40,3 @@ name, `messages.properties`.
 
 For more details on internationalization and localization in the Java
 platform, see `http://docs.oracle.com/javase/tutorial/i18n/index.html`.
-
-
