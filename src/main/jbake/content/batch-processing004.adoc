@@ -196,7 +196,6 @@ steps. The attributes of this element are listed in link:#BCGJCIEI[Table
 
 [[sthref273]][[BCGJCIEI]]
 
-=======
 Table 58-2 Attributes of the chunk Element
 
 
