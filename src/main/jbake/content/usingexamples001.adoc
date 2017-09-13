@@ -4,8 +4,8 @@ title=Required Software
 next=usingexamples002.html
 prev=usingexamples.html
 ~~~~~~
-Required Software
-=================
+= Required Software
+
 
 [[GEXAJ]]
 
@@ -16,8 +16,8 @@ Required Software
 The following software is required to run the examples:
 
 * link:#GEXAE[Java Platform, Standard Edition]
-* link:#GEXAB[Java EE 7 Software Development Kit]
-* link:#GEXBA[Java EE 7 Tutorial Component]
+* link:#GEXAB[Java EE 8 Software Development Kit]
+* link:#GEXBA[Java EE 8 Tutorial Component]
 * link:#GEXAZ[NetBeans IDE]
 * link:#GEXAA[Apache Maven]
 
@@ -36,17 +36,16 @@ software from
 [[GEXAB]]
 
 [[java-ee-7-software-development-kit]]
-Java EE 7 Software Development Kit
+Java EE 8 Software Development Kit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-GlassFish Server Open Source Edition 4.1 is targeted as the build and
+GlassFish Server Open Source Edition 5.0 is targeted as the build and
 runtime environment for the tutorial examples. To build, deploy, and run
 the examples, you need a copy of GlassFish Server and, optionally,
-NetBeans IDE. To obtain GlassFish Server, you must install the Java EE 7
-Software Development Kit (SDK) Update 1, which you can download from
+NetBeans IDE. To obtain GlassFish Server, you must install the Java EE 8
+Software Development Kit (SDK), which you can download from
 `http://www.oracle.com/technetwork/java/javaee/downloads/index.html`.
-Make sure that you download the Java EE 7 SDK Update 1, not the Java EE
-7 Web Profile SDK Update 1.
+
 
 [[GEXBC]]
 
@@ -54,16 +53,16 @@ Make sure that you download the Java EE 7 SDK Update 1, not the Java EE
 SDK Installation Tips
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Java EE 7 SDK Update 1 is installed from a ZIP file. It sets the
+The Java EE 8 SDK is installed from a ZIP file. It sets the
 default administration user name as `admin` with no required password.
 The Admin Port is set to 4848, and the HTTP Port is set to 8080.
 
-This tutorial refers to as-install-parent, the directory where you
+This tutorial refers to `_as-install-parent_`, the directory where you
 install GlassFish Server. For example, the default installation
-directory on Microsoft Windows is `C:\glassfish4`, so as-install-parent
-is `C:\glassfish4`. GlassFish Server itself is installed in as-install,
-the `glassfish` directory under as-install-parent. So on Microsoft
-Windows, as-install is `C:\glassfish4\glassfish`.
+directory on Microsoft Windows is `C:\glassfish5`, so `_as-install-parent_`
+is `C:\glassfish5`. GlassFish Server itself is installed in `_as-install_`,
+the `glassfish` directory under `_as-install-parent_`. So on Microsoft
+Windows, `_as-install_` is `C:\glassfish5\glassfish`.
 
 After you install GlassFish Server, add the following directories to
 your `PATH` to avoid having to specify the full path when you use
@@ -78,16 +77,18 @@ as-install/bin
 [[GEXBA]]
 
 [[java-ee-7-tutorial-component]]
-Java EE 7 Tutorial Component
+Java EE 8 Tutorial Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The tutorial component, including the documentation and example source,
-is contained in the Java EE 7 SDK Update 1.
+is contained in the Java EE 8 SDK.
 
+////
 Updates to the Java EE 7 Tutorial are published periodically. For
 details on obtaining these updates, see
 link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
 Tutorial].
+////
 
 [[GEXAZ]]
 
@@ -159,5 +160,3 @@ Be sure to add the maven-install`/bin` directory to your path.
 
 If you are using NetBeans IDE to build and run the examples, it includes
 a copy of Maven.
-
-

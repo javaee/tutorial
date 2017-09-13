@@ -29,8 +29,6 @@ Server]
 * link:usingexamples006.html#GEXAP[Tutorial Example Directory Structure]
 * link:usingexamples007.html#CIHBHEFF[Java EE 7 Maven Archetypes in the
 Tutorial]
-* link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
-Tutorial]
 * link:usingexamples009.html#BNADL[Debugging Java EE Applications]
 
 For additional samples, see the GlassFish samples at
