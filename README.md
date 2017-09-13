@@ -16,9 +16,9 @@ feedback and review comments. All issues will be addressed as soon as possible.
 The Java EE Tutorial project is also open for contributions and your help is greatly appreciated. If you have an idea
 for the tutorial and want to add a section or update an existing section, then review the following links:
 
-* [How to Contribute to GlassFish and Java EE](https://javaee.github.io/glassfish/how-to-contribute)
-* [Pull Request Acceptance Workflow](https://javaee.github.io/glassfish/pr_workflow)
-* [Licenses](https://javaee.github.io/glassfish/LICENSE) governing the GlassFish project
+* [Contribute](CONTRIBUTING.md)
+* [Pull Request Acceptance Workflow](pr_doc_workflow.md)
+* [License](LICENSE.md)
 
 ## Building the Java EE Tutorial
 
