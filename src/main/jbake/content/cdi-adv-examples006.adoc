@@ -18,7 +18,7 @@ The `decorators` example, which is yet another variation on the
 business logic for a bean.
 
 The source files are located in the
-tut-install`/examples/cdi/decorators/src/main/java/javaeetutorial/decorators/`
+`_tut-install_/examples/cdi/decorators/src/main/java/javaeetutorial/decorators/`
 directory.
 
 The following topics are addressed here:
@@ -72,7 +72,7 @@ public abstract class CoderDecorator implements Coder {
     public String codeString(String s, int tval) {
         int len = s.length();
 
-        return "\"" + s + "\" becomes " + "\"" + coder.codeString(s, tval) 
+        return "\"" + s + "\" becomes " + "\"" + coder.codeString(s, tval)
                 + "\", " + len + " characters in length";
     }
 }
@@ -204,5 +204,3 @@ The output from the interceptors appears:
 INFO: Entering method: encodeString in class javaeetutorial.decorators.CoderBean
 INFO: Entering method: codeString in class javaeetutorial.decorators.CoderImpl
 ----
-
-
