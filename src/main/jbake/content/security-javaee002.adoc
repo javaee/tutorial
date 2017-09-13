@@ -107,7 +107,7 @@ end and the application is packaged into a WAR module as a Java class
 file, security for the application can be handled in the application's
 `web.xml` file. The EJB in the WAR file can have its own deployment
 descriptor, `ejb-jar.xml`, if required. Securing web applications using
-`web.xml` is discussed in link:security-webtier.html#BNCAS[Chapter 49,
+`web.xml` is discussed in link:security-webtier.html#BNCAS[Chapter 51,
 "Getting Started Securing Web Applications"].
 
 The following sections describe declarative and programmatic security

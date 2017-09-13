@@ -367,7 +367,7 @@ contains an `activationConfig` element containing
 the bean or the connection factory. These properties can include the
 connection factory, a destination type, a durable subscription, a
 message selector, or an acknowledgment mode. Some of the examples in
-link:jms-examples.html#BNCGV[Chapter 47, "Java Message Service Examples"]
+link:jms-examples.html#BNCGV[Chapter 49, "Java Message Service Examples"]
 set these properties. You can also set the properties in the deployment
 descriptor.
 * The application client container has only one instance of a
