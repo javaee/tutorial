@@ -57,12 +57,8 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>To designate a method that handles errors in an annotated WebSocket
-endpoint:</p>
+endpoint, decorate it with <code>@OnError</code>:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Decorate it with <code>@OnError</code>:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@ServerEndpoint("/testendpoint")
@@ -80,9 +76,6 @@ public class TestEndpoint {
 <p>This method is invoked when there are connection problems, runtime
 errors from message handlers, or conversion errors when decoding
 messages.</p>
-</div>
-</li>
-</ol>
 </div>
 </div>
 </div>
