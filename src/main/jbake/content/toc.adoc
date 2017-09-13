@@ -119,8 +119,8 @@ Interface for Containers]
 
 ** link:overview008.html#CJAJHGIH[Batch Applications for the Java
 Platform]
-* link:overview009.html#GIRDR[Java EE 7 APIs in the Java Platform,
-Standard Edition 7]
+* link:overview009.html#GIRDR[Java EE 8 APIs in the Java Platform,
+Standard Edition 8]
 
 ** link:overview009.html#BNADA[Java Database Connectivity API]
 
@@ -197,14 +197,6 @@ Archetypes]
 Archetypes Using NetBeans IDE]
 *** link:usingexamples007.html#sthref17[Installing the Tutorial
 Archetypes Using Maven]
-* link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
-Tutorial]
-
-** link:usingexamples008.html#GIQYK[To Update the Tutorial Using NetBeans
-IDE]
-
-** link:usingexamples008.html#sthref18[To Update the Tutorial Using the
-Command Line]
 * link:usingexamples009.html#BNADL[Debugging Java EE Applications]
 
 ** link:usingexamples009.html#BNADM[Using the Server Log]

@@ -13,6 +13,7 @@ prev=overview007.html
 Java EE APIs
 ------------
 
+////
 link:#BNACK[Figure 1-6] shows the relationships among the Java EE
 containers.
 
@@ -49,6 +50,7 @@ the application client container.
 image:img/javaeett_dt_009.png[
 "Diagram of Java EE APIs in the application client container"]
 
+////
 The following sections give a brief summary of the technologies required
 by the Java EE platform and the APIs used in Java EE applications.
 

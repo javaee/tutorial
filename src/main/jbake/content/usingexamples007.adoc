@@ -1,7 +1,7 @@
 type=page
 status=published
 title=Java EE Maven Archetypes in the Tutorial
-next=usingexamples008.html
+next=usingexamples009.html
 prev=usingexamples006.html
 ~~~~~~
 = Java EE Maven Archetypes in the Tutorial
