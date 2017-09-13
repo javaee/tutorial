@@ -107,7 +107,7 @@ link:cdi-basic003.html#GJEBJ[About Beans]. A JAR or WAR file that
 contains a CDI bean is a bean archive. For more information on packaging
 bean archives, see link:cdi-basic013.html#GJBNZ[Configuring a CDI
 Application] in this chapter and link:cdi-adv001.html#CACDCFDE[Packaging
-CDI Applications] in link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and
+CDI Applications] in link:cdi-adv.html#GJEHI[Chapter 27, "Contexts and
 Dependency Injection for Java EE: Advanced Topics"].
 
 In this example, `MessageB` is the only class that implements the
@@ -116,5 +116,5 @@ of an interface, CDI provides mechanisms that you can use to select
 which implementation to inject. For more information, see
 link:cdi-basic006.html#GJBCK[Using Qualifiers] in this chapter and
 link:cdi-adv002.html#GJSDF[Using Alternatives in CDI Applications] in
-link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+link:cdi-adv.html#GJEHI[Chapter 27, "Contexts and Dependency Injection
 for Java EE: Advanced Topics"].

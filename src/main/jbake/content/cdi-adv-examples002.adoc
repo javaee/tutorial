@@ -20,7 +20,7 @@ example includes an interface and two implementations of it, a managed
 bean, a Facelets page, and configuration files.
 
 The source files are located in the
-`_tut-install_` `/examples/cdi/encoder/src/main/java/javaeetutorial/encoder/`
+`_tut-install_/examples/cdi/encoder/src/main/java/javaeetutorial/encoder/`
 directory.
 
 The following topics are addressed here:

@@ -25,7 +25,7 @@ It also contains a single entity, a stateful session bean, a Facelets
 page, and a managed bean.
 
 The source files are located in the
-`_tut-install_` `/examples/cdi/producerfields/src/main/java/javaeetutorial/producerfields/`
+`_tut-install_/examples/cdi/producerfields/src/main/java/javaeetutorial/producerfields/`
 directory.
 
 The following topics are addressed here:
