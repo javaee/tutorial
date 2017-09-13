@@ -30,7 +30,7 @@ classes, `BookException` and `IdVerifier`, which are discussed in the
 section link:#BNBOJ[Helper Classes].
 
 The source code for this example is in the
-tut-install`/examples/ejb/cart/` directory.
+`_tut-install_/examples/ejb/cart/` directory.
 
 [[BNBOE]]
 
@@ -354,7 +354,7 @@ tut-install/examples/ejb
 Build.
 +
 This builds and packages the application into `cart.ear`, located in
-tut-install`/examples/ejb/cart/cart-ear/target/`, and deploys this EAR
+`_tut-install_/examples/ejb/cart/cart-ear/target/`, and deploys this EAR
 file to your GlassFish Server instance.
 +
 You will see the output of the `cart-app-client` application client in
@@ -424,5 +424,3 @@ Retrieving book title from cart: Kafka on the Shore
 Removing "Gravity's Rainbow" from cart.
 Caught a BookException: "Gravity's Rainbow" not in cart.
 ----
-
-

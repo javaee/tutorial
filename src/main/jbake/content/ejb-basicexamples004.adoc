@@ -164,7 +164,7 @@ mvn install
 +
 This compiles the source files and packages the application into an EJB
 JAR file located at
-tut-install`/examples/ejb/helloservice/target/helloservice.jar`. Then
+`_tut-install_/examples/ejb/helloservice/target/helloservice.jar`. Then
 the EJB JAR file is deployed to GlassFish Server.
 +
 Upon deployment, GlassFish Server generates additional artifacts
