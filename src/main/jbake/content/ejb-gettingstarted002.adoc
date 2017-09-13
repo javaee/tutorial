@@ -15,7 +15,7 @@ Creating the Enterprise Bean
 
 The enterprise bean in our example is a stateless session bean called
 `ConverterBean`. The source code for `ConverterBean` is in the
-tut-install`/examples/ejb/converter/src/main/java/` directory.
+`_tut-install_/examples/ejb/converter/src/main/java/` directory.
 
 Creating `ConverterBean` requires these steps:
 

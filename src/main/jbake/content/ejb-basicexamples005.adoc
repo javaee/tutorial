@@ -484,7 +484,7 @@ The timersession Example
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The source code for this example is in the
-tut-install`/examples/ejb/timersession/src/main/java/` directory.
+`_tut-install_/examples/ejb/timersession/src/main/java/` directory.
 
 `TimerSessionBean` is a singleton session bean that shows how to set
 both an automatic timer and a programmatic timer. In the source code
