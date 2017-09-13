@@ -21,11 +21,16 @@ JAX-RS provides the annotations listed in link:#GKOBO[Table 34-1].
 [[sthref146]][[GKOBO]]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> b78c565b88a6639346cf144ae0ef4eae4e607943
 *Table 32-1 Advanced JAX-RS Annotations*
 
 [width=99%,cols="5% 95%"]
 |=======================================================================
 |*Annotation*|*Description*
+<<<<<<< HEAD
 =======
 *Table 34-1 Advanced JAX-RS Annotations*
 
@@ -33,6 +38,8 @@ JAX-RS provides the annotations listed in link:#GKOBO[Table 34-1].
 |=======================================================================
 |*Annotation* |*Description*
 >>>>>>> bea9a451005dfddb26d5d3a692bc95976c9d32d8
+=======
+>>>>>>> b78c565b88a6639346cf144ae0ef4eae4e607943
 |`@Context` |Injects information into a class field, bean property, or
 method parameter
 
