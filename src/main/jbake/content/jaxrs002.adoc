@@ -51,33 +51,18 @@ classes will have the resources configured, the helper classes and
 artifacts generated, and the resource exposed to clients by deploying
 the archive to a Java EE server.
 
-link:#GINNA[Table 32-1] lists some of the Java programming annotations
+link:#GINNA[Table 30-1] lists some of the Java programming annotations
 that are defined by JAX-RS, with a brief description of how each is
 used. Further information on the JAX-RS APIs can be viewed at
 `http://docs.oracle.com/javaee/7/api/`.
 
 [[sthref137]][[GINNA]]
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> b78c565b88a6639346cf144ae0ef4eae4e607943
 *Table 30-1 Summary of JAX-RS Annotations*
 
 [width=99%,cols="10% 90%"]
 |=======================================================================
 |*Annotation*|*Description*
-<<<<<<< HEAD
-=======
-*Table 32-1 Summary of JAX-RS Annotations*
-
-[width="99%",cols="10%,90%"]
-|=======================================================================
-|*Annotation* |*Description*
->>>>>>> bea9a451005dfddb26d5d3a692bc95976c9d32d8
-=======
->>>>>>> b78c565b88a6639346cf144ae0ef4eae4e607943
 |`@Path` |The `@Path` annotation's value is a relative URI path
 indicating where the Java class will be hosted: for example,
 `/helloworld`. You can also embed variables in the URIs to make a URI
