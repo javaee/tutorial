@@ -160,7 +160,7 @@ link:#CHDEDEAF[Table 56-3].
 [[sthref251]][[CHDEDEAF]]
 
 
-Table 56-3 Interfaces Implemented in the traffic-rar Module
+*Table 56-3 Interfaces Implemented in the traffic-rar Module*
 
 
 [width="99%",cols="20%,20%,60%"]

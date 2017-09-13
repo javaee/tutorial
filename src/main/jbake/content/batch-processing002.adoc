@@ -174,7 +174,7 @@ link:#BCGJBGDF[Table 58-1]. They are represented as strings.
 [[sthref267]][[BCGJBGDF]]
 
 
-Table 58-1 Batch Status Values
+*Table 58-1 Batch Status Values*
 
 [width="50%",cols="15%,35%"]
 |============================================================
