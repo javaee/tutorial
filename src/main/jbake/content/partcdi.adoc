@@ -20,13 +20,12 @@ Contexts and Dependency Injection for Java EE
 Part V explores Contexts and Dependency Injection for Java EE (CDI).
 This part contains the following chapters:
 
-* link:cdi-basic.html#GIWHB[Chapter 24, "Introduction to Contexts and
+* link:cdi-basic.html#GIWHB[Chapter 25, "Introduction to Contexts and
 Dependency Injection for Java EE"]
-* link:cdi-basicexamples.html#GJBLS[Chapter 25, "Running the Basic
+* link:cdi-basicexamples.html#GJBLS[Chapter 26, "Running the Basic
 Contexts and Dependency Injection Examples"]
-* link:cdi-adv.html#GJEHI[Chapter 26, "Contexts and Dependency Injection
+* link:cdi-adv.html#GJEHI[Chapter 27, "Contexts and Dependency Injection
 for Java EE: Advanced Topics"]
-* link:cdi-adv-examples.html#GKHRE[Chapter 27, "Running the Advanced
+* link:cdi-bootstrap-se8.html#bootstrapping-a-cdi-container-in-java-se[Chapter 28, "Bootstrapping a CDI Container in Java SE"]
+* link:cdi-adv-examples.html#GKHRE[Chapter 29, "Running the Advanced
 Contexts and Dependency Injection Examples"]
-
-

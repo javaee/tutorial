@@ -121,12 +121,12 @@ accounting component to update budget numbers.
 
 Using messaging for these tasks allows the various components to
 interact with one another efficiently, without tying up network or other
-resources. link:#BNCDV[Figure 46-1] illustrates how this simple example
+resources. link:#BNCDV[Figure 48-1] illustrates how this simple example
 might work.
 
 [[BNCDV]]
 
-.*Figure 46-1 Messaging in an Enterprise Application*
+.*Figure 48-1 Messaging in an Enterprise Application*
 image:img/javaeett_dt_026.png[
 "Diagram showing messaging between various departments in an enterprise"]
 
@@ -181,5 +181,3 @@ resource adapter. This capability allows vendors to create JMS providers
 that can be plugged in to multiple application servers, and it allows
 application servers to support multiple JMS providers. For more
 information, see the Java EE Connector architecture specification, v1.7.
-
-

@@ -4,8 +4,8 @@ title=Full Query Language Syntax
 next=persistence-criteria.html
 prev=persistence-querylanguage005.html
 ~~~~~~
-Full Query Language Syntax
-==========================
+= Full Query Language Syntax
+
 
 [[BNBUF]]
 
@@ -35,15 +35,15 @@ The following topics are addressed here:
 BNF Symbols
 ~~~~~~~~~~~
 
-link:#BNBUH[Table 40-1] describes the BNF symbols used in this chapter.
+link:#BNBUH[Table 42-1] describes the BNF symbols used in this chapter.
 
 [[sthref169]][[BNBUH]]
 
-Table 40-1 BNF Symbol Summary
+*Table 42-1 BNF Symbol Summary*
 
-[width="17%",cols="100%,",options="header",]
+[width="75%",cols="25%,45%"]
 |=======================================================================
-|Symbol |Description
+|*Symbol* |*Description*
 |`::=` |The element to the left of the symbol is defined by the
 constructs on the right.
 
@@ -82,7 +82,7 @@ Here is the entire BNF diagram for the query language:
 [source,oac_no_warn]
 ----
 QL_statement ::= select_statement | update_statement | delete_statement
-select_statement ::= select_clause from_clause [where_clause] [groupby_clause] 
+select_statement ::= select_clause from_clause [where_clause] [groupby_clause]
     [having_clause] [orderby_clause]
 update_statement ::= update_clause [where_clause]
 delete_statement ::= delete_clause [where_clause]
@@ -860,16 +860,16 @@ the order of evaluation by using parentheses.
 Operators and Their Precedence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-link:#BNBVD[Table 40-2] lists the query language operators in order of
+link:#BNBVD[Table 42-2] lists the query language operators in order of
 decreasing precedence.
 
 [[sthref170]][[BNBVD]]
 
-Table 40-2 Query Language Order Precedence
+*Table 42-2 Query Language Order Precedence*
 
-[width="21%",cols="100%,",options="header",]
+[width="75%",cols="25%,45%"]
 |==================================
-|Type |Precedence Order
+|*Type* |*Precedence Order*
 |Navigation |`.` (a period)
 |Arithmetic a|
 `+ –` (unary)
@@ -984,16 +984,16 @@ value is a string literal that can contain wildcard characters. The
 underscore (`_`) wildcard character represents any single character. The
 percent (`%`) wildcard character represents zero or more characters. The
 `ESCAPE` clause specifies an escape character for the wildcard
-characters in the pattern value. link:#BNBVH[Table 40-3] shows some
+characters in the pattern value. link:#BNBVH[Table 42-3] shows some
 sample `LIKE` expressions.
 
 [[sthref171]][[BNBVH]]
 
-Table 40-3 LIKE Expression Examples
+*Table 42-3 LIKE Expression Examples*
 
-[width="43%",cols="1%,48%,51%",options="header",]
+[width=75%",cols="35%,20%,20%"]
 |============================================================
-|Expression |TRUE |FALSE
+|*Expression* |*TRUE* |*FALSE*
 |`address.phone LIKE '12%3'` a|
 `'123'`
 
@@ -1161,20 +1161,20 @@ Functional Expressions
 
 The query language includes several string, arithmetic, and date/time
 functions that may be used in the `SELECT`, `WHERE`, or `HAVING` clause
-of a query. The functions are listed in link:#BNBVP[Table 40-4],
-link:#BNBVQ[Table 40-5], and link:#GJJNL[Table 40-6].
+of a query. The functions are listed in link:#BNBVP[Table 42-4],
+link:#BNBVQ[Table 42-5], and link:#GJJNL[Table 42-6].
 
-In link:#BNBVP[Table 40-4], the `start` and `length` arguments are of
+In link:#BNBVP[Table 42-4], the `start` and `length` arguments are of
 type `int` and designate positions in the `String` argument. The first
 position in a string is designated by 1.
 
 [[sthref172]][[BNBVP]]
 
-Table 40-4 String Expressions
+*Table 42-4 String Expressions*
 
-[width="28%",cols=",100%",options="header",]
+[width="75%",cols="45%,25%"]
 |==============================================================
-|Function Syntax |Return Type
+|*Function Syntax* |*Return Type*
 |`CONCAT(String, String)` |`String`
 |`LENGTH(String)` |`int`
 |`LOCATE(String, String [, start])` |`int`
@@ -1214,16 +1214,16 @@ string.
 The `LOWER` and `UPPER` functions convert a string to lowercase or
 uppercase, respectively.
 
-In link:#BNBVQ[Table 40-5], the `number` argument can be an `int`, a
+In link:#BNBVQ[Table 42-5], the `number` argument can be an `int`, a
 `float`, or a `double`.
 
 [[sthref173]][[BNBVQ]]
 
-Table 40-5 Arithmetic Expressions
+*Table 42-5 Arithmetic Expressions*
 
-[width="38%",cols=",100%",options="header",]
+[width="60%",cols="30%,30%"]
 |==========================================
-|Function Syntax |Return Type
+|*Function Syntax* |*Return Type*
 |`ABS(number)` |`int`, `float`, or `double`
 |`MOD(int, int)` |`int`
 |`SQRT(double)` |`double`
@@ -1242,16 +1242,16 @@ The `SQRT` function returns the square root of a number.
 The `SIZE` function returns an integer of the number of elements in the
 given collection.
 
-In link:#GJJNL[Table 40-6], the date/time functions return the date,
+In link:#GJJNL[Table 42-6], the date/time functions return the date,
 time, or timestamp on the database server.
 
 [[sthref174]][[GJJNL]]
 
-Table 40-6 Date/Time Expressions
+*Table 42-6 Date/Time Expressions*
 
-[width="50%",cols=",100%",options="header",]
+[width="60%",cols="30%,30%"]
 |=========================================
-|Function Syntax |Return Type
+|*Function Syntax* |*Return Type*
 |`CURRENT_DATE` |`java.sql.Date`
 |`CURRENT_TIME` |`java.sql.Time`
 |`CURRENT_TIMESTAMP` |`java.sql.Timestamp`
@@ -1297,7 +1297,7 @@ else gets a 5% discount:
 [source,oac_no_warn]
 ----
 UPDATE Customer c
-SET c.discount = 
+SET c.discount =
     CASE c.level
         WHEN 'Gold' THEN 20
         WHEN 'SILVER' THEN 15
@@ -1325,16 +1325,16 @@ unknown value.
 single-valued relationship field to `TRUE`. The `IS NOT NULL` test
 converts them to `FALSE`.
 * Boolean operators and conditional tests use the three-valued logic
-defined by link:#BNBVS[Table 40-7] and link:#BNBVT[Table 40-8]. (In
+defined by link:#BNBVS[Table 42-7] and link:#BNBVT[Table 42-8]. (In
 these tables, T stands for `TRUE`, F for `FALSE`, and U for unknown.)
 
 [[sthref175]][[BNBVS]]
 
-Table 40-7 AND Operator Logic
+*Table 42-7 AND Operator Logic*
 
-[width="60%",cols="1%,33%,33%,33%",options="header",]
+[width="40%",cols="10%,10%,10%,10%"]
 |============
-|AND |T |F |U
+|*AND* |*T* |*F* |*U*
 |T |T |F |U
 |F |F |F |F
 |U |U |F |U
@@ -1343,11 +1343,11 @@ Table 40-7 AND Operator Logic
 
 [[sthref176]][[BNBVT]]
 
-Table 40-8 OR Operator Logic
+*Table 42-8 OR Operator Logic*
 
-[width="60%",cols="1%,33%,33%,33%",options="header",]
+[width="40%",cols="10%,10%,10%,10%"]
 |===========
-|OR |T |F |U
+|*OR* |*T* |*F* |*U*
 |T |T |T |T
 |F |T |F |U
 |U |T |U |U
@@ -1377,17 +1377,17 @@ characters. Trailing blanks are significant; for example, the strings
 `'abc'` and `'abc '` are not equal.
 
 Two entities of the same abstract schema type are equal only if their
-primary keys have the same value. link:#BNBVV[Table 40-9] shows the
-operator logic of a negation, and link:#BNBVW[Table 40-10] shows the
+primary keys have the same value. link:#BNBVV[Table 42-9] shows the
+operator logic of a negation, and link:#BNBVW[Table 42-10] shows the
 truth values of conditional tests.
 
 [[sthref177]][[BNBVV]]
 
-Table 40-9 NOT Operator Logic
+*Table 42-9 NOT Operator Logic*
 
-[width="45%",cols="100%,",options="header",]
+[width="30%",cols="15%,15%"]
 |================
-|NOT Value |Value
+|*NOT Value* |*Value*
 |T |F
 |F |T
 |U |U
@@ -1396,11 +1396,11 @@ Table 40-9 NOT Operator Logic
 
 [[sthref178]][[BNBVW]]
 
-Table 40-10 Conditional Test
+*Table 42-10 Conditional Test*
 
-[width="36%",cols="1%,33%,33%,33%",options="header",]
+[width="60%",cols="30%,10%,10%,10%"]
 |==============================
-|Conditional Test |T |F |U
+|*Conditional Test* |*T* |*F* |*U*
 |Expression `IS TRUE` |T |F |F
 |Expression `IS FALSE` |F |T |F
 |Expression is unknown |F |F |T
@@ -1460,15 +1460,15 @@ element is a string denoting the customer name, and the second array
 element is a string denoting the name of the customer's country.
 
 The result of a query may be the result of an aggregate function, listed
-in link:#BNBWA[Table 40-11].
+in link:#BNBWA[Table 42-11].
 
 [[sthref179]][[BNBWA]]
 
-Table 40-11 Aggregate Functions in Select Statements
+*Table 42-11 Aggregate Functions in Select Statements*
 
-[width="57%",cols="36%,,64%",options="header",]
+[width="80%",cols="15%,50%,64%"]
 |=======================================================================
-|Name |Return Type |Description
+|*Name* |*Return Type* |*Description*
 |`AVG` |`Double` |Returns the mean average of the fields
 
 |`COUNT` |`Long` |Returns the total number of results
@@ -1641,5 +1641,3 @@ SELECT c.status, AVG(o.totalPrice)
 FROM CustomerOrder o JOIN o.customer c
 GROUP BY c.status HAVING c.status IN (1, 2, 3)
 ----
-
-

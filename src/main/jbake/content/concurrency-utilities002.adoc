@@ -4,8 +4,8 @@ title=Main Components of the Concurrency Utilities
 next=concurrency-utilities003.html
 prev=concurrency-utilities001.html
 ~~~~~~
-Main Components of the Concurrency Utilities
-============================================
+= Main Components of the Concurrency Utilities
+
 
 [[CIHFBCFH]]
 
@@ -48,5 +48,3 @@ managed by the container. The context of the container is propagated to
 the thread executing the task. This object can also be used to provide
 custom factories for specific use cases (with custom Threads) and, for
 example, set specific/proprietary properties to these objects.
-
-

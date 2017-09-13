@@ -23,7 +23,7 @@ tasks inside the server.
 A session bean is not persistent. (That is, its data is not saved to a
 database.)
 
-For code samples, see link:ejb-basicexamples.html#GIJRB[Chapter 35,
+For code samples, see link:ejb-basicexamples.html#GIJRB[Chapter 37,
 "Running the Enterprise Bean Examples"].
 
 The following topics are addressed here:
@@ -157,5 +157,3 @@ concurrently.
 * The application needs an enterprise bean to perform tasks upon
 application startup and shutdown.
 * The bean implements a web service.
-
-

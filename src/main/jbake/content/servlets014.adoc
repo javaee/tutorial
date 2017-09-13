@@ -48,15 +48,15 @@ OtherHeaderB: Value
 ----
 
 Java EE supports the HTTP protocol upgrade functionality in servlets, as
-described in link:#BEIBDHAG[Table 17-7].
+described in link:#BEIBDHAG[Table 18-7].
 
 [[sthref110]][[BEIBDHAG]]
 
-Table 17-7 Protocol Upgrade Support
+*Table 18-7 Protocol Upgrade Support*
 
-[width="31%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Class or Interface |Method
+|*Class or Interface* |*Method*
 |`HttpServletRequest` a|
 `HttpUpgradeHandler upgrade(Class handler)`
 

@@ -30,7 +30,7 @@ command button):
 
 [source,oac_no_warn]
 ----
-<h:commandButton id="submit" value="Submit"> 
+<h:commandButton id="submit" value="Submit">
     <f:ajax execute="userNo" render="result" />
 </h:commandButton>
 <h:outputText id="result" value="#{userNumberBean.response}" />
@@ -40,7 +40,7 @@ command button):
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Behind the scenes, once again the `jsf.ajax.request()` method handles
 the response. It registers a response-handling callback when the
@@ -49,6 +49,3 @@ client, the callback is invoked. This callback automatically updates the
 client-side DOM to reflect the rendered response.
 
 |=======================================================================
-
-
-

@@ -25,10 +25,10 @@ classes and Java types for JSON elements. This package also includes
 several classes that implement other JSON-related standards: link:http://tools.ietf.org/html/rfc6901[JSON Pointer],
 link:http://tools.ietf.org/html/rfc6902[JSON Patch], and link:http://tools.ietf.org/html/rfc7396[JSON Merge Patch].
 These standards are used to retrieve, transform or manipulate values
-in an object model. link:#CHDJJCBE[Table 19-1] lists the main classes
+in an object model. link:#CHDJJCBE[Table 20-1] lists the main classes
 and interfaces in this package.
 * The `javax.json.stream` package contains a parser interface and a
-generator interface for the streaming model. link:#CHDIHCEG[Table 19-2]
+generator interface for the streaming model. link:#CHDIHCEG[Table 20-2]
 lists the main classes and interfaces in this package.
 * The `javax.json.spi` package contains a Service Provider Interface (SPI)
 to plug in implementations for JSON processing objects. This package
@@ -37,7 +37,7 @@ provider implements.
 
 [[sthref118]][[CHDJJCBE]]
 
-*Table 19-1 Main Classes and Interfaces in javax.json*
+*Table 20-1 Main Classes and Interfaces in javax.json*
 [width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
@@ -81,7 +81,7 @@ processing.
 
 [[sthref119]][[CHDIHCEG]]
 
-*Table 19-2 Main Classes and Interfaces in javax.json.stream*
+*Table 20-2 Main Classes and Interfaces in javax.json.stream*
 
 [width=99%,cols="25%,75%"]
 |=======================================================================
@@ -91,6 +91,3 @@ from a stream or from an object model.
 
 |`JsonGenerator` | Writes JSON data to a stream one element at a time.
 |=======================================================================
-
-
-

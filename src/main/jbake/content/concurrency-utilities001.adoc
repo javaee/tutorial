@@ -4,8 +4,8 @@ title=Concurrency Basics
 next=concurrency-utilities002.html
 prev=concurrency-utilities.html
 ~~~~~~
-Concurrency Basics
-==================
+= Concurrency Basics
+
 
 [[CIHDFGGG]]
 
@@ -69,5 +69,3 @@ problems. These situations include the following:
 * Thread starvation
 * Concurrent accessing of shared resources
 * Situations when the program generates incorrect data
-
-

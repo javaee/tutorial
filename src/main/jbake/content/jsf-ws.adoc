@@ -1,0 +1,23 @@
+type=page
+status=published
+title=Using WebSockets with JavaServer Faces Technology
+next=jsf-ws001.html
+prev=jsf-configure013.html
+~~~~~~
+= Using WebSockets with JavaServer Faces Technology
+
+
+[[using-websockets-with-javaserver-faces-technology]]
+17 Using WebSockets with JavaServer Faces Technology
+----------------------------------------------------
+This chapter describes using WebSockets in JavaServer Faces web applications.
+
+The following topics are addressed here:
+
+* link:jsf-ws001.html#about-websockets-in-jsf[About WebSockets in JSF]
+* link:jsf-ws002.html#configuring-websockets[Configuring WebSockets]
+* link:jsf-ws003.html#using-the-fwebsocket-tag[Using the f:websocket Tag]
+* link:jsf-ws004.html#websocket-scopes-and-users[WebSocket Scopes and Users]
+* link:jsf-ws005.html#conditionally-connecting-websockets[Conditionally Connecting WebSockets]
+* link:jsf-ws006.html#websocket-security-considerations[WebSocket Security Considerations]
+* link:jsf-ws007.html#using-ajax-with-websockets[Using Ajax With WebSockets]

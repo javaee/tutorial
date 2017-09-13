@@ -4,8 +4,8 @@ title=Loading JavaScript as a Resource
 next=jsf-ajax011.html
 prev=jsf-ajax009.html
 ~~~~~~
-Loading JavaScript as a Resource
-================================
+= Loading JavaScript as a Resource
+
 
 [[GKAAM]]
 
@@ -68,7 +68,7 @@ API. For example, consider the following:
     <h:inputText id="inputname" value="#{userBean.name}"/>
     <h:outputText id="outputname" value="#{userBean.name}"/>
     <h:commandButton id="submit" value="Submit"
-                     onclick="jsf.ajax.request(this, event, 
+                     onclick="jsf.ajax.request(this, event,
                               {execute:'inputname',render:'outputname'});
                               return false;" />
 </h:form>
@@ -83,11 +83,11 @@ link:#GKAIW[Table 13-5].
 +
 [[sthref73]][[GKAIW]]
 
-Table 13-5 Possible Values for the Options Parameter
+*Table 13-5 Possible Values for the Options Parameter*
 
-[width="14%",cols="100%,",options="header",]
+[width="70%",cols="15%,55%"]
 |=======================================================================
-|Name |Value
+|*Name* |*Value*
 |`execute` |A space-delimited list of client identifiers or one of the
 keywords listed in link:jsf-ajax003.html#GKNLK[Table 13-2]. The
 identifiers reference the components that will be processed during the
@@ -133,7 +133,7 @@ To load the Ajax resource from the server side:
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 This method is usually used when creating a custom component or a custom
 renderer for a component.
@@ -147,5 +147,3 @@ The following example shows how the resource is loaded in a bean class:
 ----
 @ResourceDependency(name="jsf.js" library="javax.faces" target="head")
 ----
-
-

@@ -32,11 +32,11 @@ tools.
 
 [[sthref13]][[BNADH]]
 
-Table 1-1 GlassFish Server Tools
+*Table 1-1 GlassFish Server Tools*
 
-[cols="28%,72%",options="header"]
+[width="85%" cols="20%,65%"]
 |=======================================================================
-|Tool |Description
+|*Tool* |*Description*
 a|
 Administration Console
 

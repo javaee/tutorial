@@ -140,7 +140,7 @@ a resource adapter:
 ----
 
 You can find out more about the options for configuring resource adapter
-security by reviewing as-install`/lib/schemas/connector_1_7.xsd`. You
+security by reviewing `_as-install_/lib/schemas/connector_1_7.xsd`. You
 can configure the following elements in the resource adapter deployment
 descriptor file.
 
@@ -226,5 +226,3 @@ connection pool for which you want to create a security map.
 the other required information.
 +
 Click Help for more information on the individual options.
-
-

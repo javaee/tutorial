@@ -4,8 +4,8 @@ title=The taskcreator Concurrency Example
 next=concurrency-utilities007.html
 prev=concurrency-utilities005.html
 ~~~~~~
-The taskcreator Concurrency Example
-===================================
+= The taskcreator Concurrency Example
+
 
 [[CIHBFEAE]]
 
@@ -43,12 +43,12 @@ send information messages to the clients.
 `run` method in this class sends information messages to the web service
 endpoint in `TaskEJB` and sleeps for 1.5 seconds.
 
-link:#CIHHACFF[Figure 57-1] shows the architecture of the `taskcreator`
+link:#CIHHACFF[Figure 59-1] shows the architecture of the `taskcreator`
 example.
 
 [[CIHHACFF]]
 
-.*Figure 57-1 Architecture of the taskcreator Example*
+.*Figure 59-1 Architecture of the taskcreator Example*
 image:img/javaeett_dt_060.png[
 "The figure shows the architecture of the taskcreator example. The
 JavaServer Faces page invokes methods on a CDI-managed bean, which
@@ -84,7 +84,7 @@ public void submitTask(Task task, String type) {
             break;
         case "PERIODIC":
             ScheduledFuture<?> fut;
-            fut = sExecService.scheduleAtFixedRate(task, 0, 8, 
+            fut = sExecService.scheduleAtFixedRate(task, 0, 8,
                     TimeUnit.SECONDS);
             periodicTasks.put(task.getName(), fut);
             break;
@@ -205,5 +205,3 @@ execution log:
 +
 You can add more than one periodic task. To cancel a periodic task,
 select it from the form and click Cancel Task.
-
-

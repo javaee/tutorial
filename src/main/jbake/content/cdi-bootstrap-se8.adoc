@@ -9,7 +9,7 @@ prev=cdi-adv010.html
 
 
 [[bootstrapping-a-cdi-container-in-java-se]]
-27 Bootstrapping a CDI Container in Java SE
+28 Bootstrapping a CDI Container in Java SE
 -------------------------------------------
 
 

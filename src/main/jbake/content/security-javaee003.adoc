@@ -42,7 +42,7 @@ Mechanisms].
 
 This example demonstrates security by starting with the unsecured
 enterprise bean application, `cart`, which is found in the
-tut-install`/examples/ejb/cart/` directory and is discussed in
+`_tut-install_/examples/ejb/cart/` directory and is discussed in
 link:ejb-basicexamples002.html#BNBOD[The cart Example].
 
 In general, the following steps are necessary to add user name/password
@@ -56,7 +56,7 @@ link:ejb-basicexamples002.html#BNBOD[The cart Example]. The example in
 this tutorial starts with this example and demonstrates adding basic
 authentication of the client to this application. The example
 application discussed in this section can be found at
-tut-install`/examples/security/cart-secure/`.
+`_tut-install_/examples/security/cart-secure/`.
 2.  If you have not already done so, complete the steps in
 link:security-webtier004.html#GJJLK[To Set Up Your System for Running the
 Security Examples] to configure your system for running the tutorial
@@ -78,7 +78,7 @@ Annotating the Bean
 The source code for the original `cart` application was modified as
 shown in the following code snippet (modifications in bold). The
 resulting file can be found in the file
-tut-install`/examples/security/cart-secure/cart-secure-ejb/src/main/java/javaeetutorial/cart/ejb/CartBean.java`.
+`_tut-install_/examples/security/cart-secure/cart-secure-ejb/src/main/java/javaeetutorial/cart/ejb/CartBean.java`.
 
 The code snippet is as follows:
 
@@ -280,12 +280,12 @@ methods of the `ConverterBean` so that currency conversion will occur
 only when the requester is in the role of `TutorialUser`.
 
 This example can be found in the
-tut-install`/``examples/security/converter-secure` directory. This
+`_tut-install_/examples/security/converter-secure` directory. This
 example is based on the unsecured enterprise bean application,
 `converter`, which is discussed in
-link:ejb-gettingstarted.html#GIJRE[Chapter 34, "Getting Started with
+link:ejb-gettingstarted.html#GIJRE[Chapter 36, "Getting Started with
 Enterprise Beans"] and is found in the
-tut-install`/examples/ejb/converter/` directory. This section builds on
+`_tut-install_/examples/ejb/converter/` directory. This section builds on
 the example by adding the necessary elements to secure the application
 by using the `getCallerPrincipal` and `isCallerInRole` methods, which
 are discussed in more detail in
@@ -324,7 +324,7 @@ of `TutorialUser`. If the user is in the correct role, the currency
 conversion is computed and displayed. If the user is not in the correct
 role, the computation is not performed, and the application displays the
 result as `0`. The code example can be found in
-tut-install`/examples/security/converter-secure/converter-secure-ejb/src/main/java/javaeetutorial/converter/ejb/ConverterBean.java`.
+`_tut-install_/examples/security/converter-secure/converter-secure-ejb/src/main/java/javaeetutorial/converter/ejb/ConverterBean.java`.
 
 The code snippet (with modifications shown in bold) is as follows:
 
@@ -351,24 +351,24 @@ public class ConverterBean{
     @RolesAllowed("TutorialUser")
      public BigDecimal dollarToYen(BigDecimal dollars) {
         BigDecimal result = new BigDecimal("0.0");
-        Principal callerPrincipal = ctx.getCallerPrincipal(); 
+        Principal callerPrincipal = ctx.getCallerPrincipal();
         if (ctx.isCallerInRole("TutorialUser")) {
             result = dollars.multiply(yenRate);
             return result.setScale(2, BigDecimal.ROUND_UP);
         } else {
-            return result.setScale(2, BigDecimal.ROUND_UP); 
+            return result.setScale(2, BigDecimal.ROUND_UP);
         }
     }
 
     @RolesAllowed("TutorialUser")
     public BigDecimal yenToEuro(BigDecimal yen) {
         BigDecimal result = new BigDecimal("0.0");
-        Principal callerPrincipal = ctx.getCallerPrincipal(); 
+        Principal callerPrincipal = ctx.getCallerPrincipal();
         if (ctx.isCallerInRole("TutorialUser")) {
              result = yen.multiply(euroRate);
              return result.setScale(2, BigDecimal.ROUND_UP);
         } else {
-             return result.setScale(2, BigDecimal.ROUND_UP); 
+             return result.setScale(2, BigDecimal.ROUND_UP);
         }
     }
 }
@@ -458,5 +458,3 @@ Server and has been assigned to the group `TutorialUser`; then click OK.
 3.  Enter `100` in the input field and click Submit.
 +
 A second page appears, showing the converted values.
-
-

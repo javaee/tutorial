@@ -4,8 +4,8 @@ title=Referencing a Managed Bean Method
 next=jsf-develop.html
 prev=jsf-page-core003.html
 ~~~~~~
-Referencing a Managed Bean Method
-=================================
+= Referencing a Managed Bean Method
+
 
 [[BNATN]]
 
@@ -20,11 +20,11 @@ with the tag. These attributes are summarized in link:#BNATO[Table
 
 [[sthref66]][[BNATO]]
 
-Table 11-7 Component Tag Attributes That Reference Managed Bean Methods
+*Table 11-7 Component Tag Attributes That Reference Managed Bean Methods*
 
-[width="26%",cols="100%,",options="header",]
+[width="60%",cols="10%,50%"]
 |=======================================================================
-|Attribute |Function
+|*Attribute* |*Function*
 |`action` |Refers to a managed bean method that performs navigation
 processing for the component and returns a logical outcome `String`
 
@@ -128,9 +128,9 @@ shows how to reference a method that performs validation on
 
 [source,oac_no_warn]
 ----
-<h:inputText id="inputGuess" 
-    value="#{userNumberBean.userNumber}" 
-    required="true" size="3" 
+<h:inputText id="inputGuess"
+    value="#{userNumberBean.userNumber}"
+    required="true" size="3"
     disabled="#{userNumberBean.number eq userNumberBean.userNumber ...}"
     validator="#{userNumberBean.validateNumberRange}">
 </h:inputText>
@@ -170,5 +170,3 @@ entering a name in the input field rendered by this component.
 link:jsf-develop003.html#BNAVF[Writing a Method to Handle a Value-Change
 Event] describes how to implement a method that handles a
 `ValueChangeEvent`.
-
-

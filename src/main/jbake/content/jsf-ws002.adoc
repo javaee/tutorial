@@ -1,0 +1,111 @@
+type=page
+status=published
+title=Configuring WebSockets
+next=jsf-ws003.html
+prev=jsf-ws001.html
+~~~~~~
+= Configuring WebSockets
+
+
+[[configuring-websockets]]
+Configuring WebSockets
+----------------------
+
+To configure WebSockets for use in JSF web applications, first enable the
+WebSocket endpoint using the context parameter in `web.xml`:
+
+[source,oac_no_warn]
+----
+<context-param>
+<param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
+<param-value>true</param-value>
+</context-param>
+----
+
+If your server is configured to run a WebSocket container on a different TCP
+port than the HTTP container, you can use the optional
+`javax.faces.WEBSOCKET_ENDPOINT_PORT` integer context parameter
+to explicitly specify the port:
+
+[source,oac_no_warn]
+----
+<context-param>
+<param-name>javax.faces.WEBSOCKET_ENDPOINT_PORT</param-name>
+<param-value>8000</param-value>
+</context-param>
+----
+
+[[websocket-usage-client-side]]
+WebSocket Usage: Client Side
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Declare the `f:websocket tag` in the JSF view with a channel name and
+an `onmessage` JavaScript listener function.
+
+The following example refers to an existing JavaScript listener function:
+
+[source,oac_no_warn]
+----
+<f:websocket channel="someChannel"
+onmessage="someWebsocketListener" />
+
+function someWebsocketListener(message, channel, event) { console.log(message);
+
+}
+<f:websocket channel="someChannel"
+onmessage="
+----
+
+This example declares an inline JavaScript listener function:
+
+[source,oac_no_warn]
+----
+<f:websocket channel="someChannel"
+onmessage="function(m){console.log(m);}" />
+----
+
+The `onmessage` JavaScript listener function is invoked with three arguments:
+
+* `message`: The push message as a JSON object
+* `channel`: The channel name
+* `event`: The `MessageEvent` instance
+
+When successfully connected, the WebSocket is open by default for as long as
+the document is open, and it will auto-reconnect, at increasing intervals,
+when the connection is closed, or aborted, as a result of events such as a
+network error or server restart. It will not auto-reconnect when the very
+first connection attempt fails. The WebSocket will be implicitly closed after
+the document is unloaded.
+
+[[websocket-usage-server-side]]
+WebSocket Usage: Server Side
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the Java programming side, inject a `PushContext` using the `@Push` annotation
+on the given channel in any CDI or container managed artifact, such as `@Named`,
+or `@WebServlet`, where you want to send a push message. Then invoke
+`PushContext.send(Object)` with any Java object representing the push message.
+
+For example:
+
+[source,oac_no_warn]
+----
+@Inject @Push
+private PushContext someChannel;
+public void sendMessage(Object message) {
+someChannel.send(message);
+}
+----
+
+By default, the name of the channel is taken from the name of the variable
+into which the injection takes place.
+
+Optionally, the channel name can be specified using the `channel` attribute.
+The following example injects the push context for channel name `foo` into a
+variable named `bar`.
+
+`@Inject @Push(channel="foo")private PushContext bar;`
+
+The message object will be encoded as JSON and delivered as a message argument
+of the `onmessage` JavaScript listener function associated with the channel name.
+It can be a String, but it can also be a collection, map, or a JavaBean.

@@ -4,8 +4,8 @@ title=Beans as Injectable Objects
 next=cdi-basic006.html
 prev=cdi-basic004.html
 ~~~~~~
-Beans as Injectable Objects
-===========================
+= Beans as Injectable Objects
+
 
 [[GIZKS]]
 

@@ -4,8 +4,8 @@ title=Annotated Endpoints
 next=websocket005.html
 prev=websocket003.html
 ~~~~~~
-Annotated Endpoints
-===================
+= Annotated Endpoints
+
 
 [[BABFEBGA]]
 
@@ -37,7 +37,7 @@ having to create an additional class for the message handler, this
 example uses the `OnMessage` annotation to designate the method invoked
 to handle messages.
 
-link:#BABDGEJH[Table 18-1] lists the annotations available in the
+link:#BABDGEJH[Table 19-1] lists the annotations available in the
 `javax.websocket` package to designate the methods that handle lifecycle
 events. The examples in the table show the most common parameters for
 these methods. See the API reference for details on what combinations of
@@ -45,16 +45,16 @@ parameters are allowed in each case.
 
 [[sthref115]][[BABDGEJH]]
 
-Table 18-1 WebSocket Endpoint Lifecycle Annotations
+*Table 19-1 WebSocket Endpoint Lifecycle Annotations*
 
-[width="46%",cols="42%,58%,",options="header",]
+[width="80%",cols="20%,20%,60"]
 |========================================
-|Annotation |Event |Example
+|*Annotation* |*Event* |*Example*
 |`OnOpen` |Connection opened a|
 [source,oac_no_warn]
 ----
 @OnOpen
-public void open(Session session, 
+public void open(Session session,
                  EndpointConfig conf) { }
 ----
 
@@ -62,7 +62,7 @@ public void open(Session session,
 [source,oac_no_warn]
 ----
 @OnMessage
-public void message(Session session, 
+public void message(Session session,
                     String msg) { }
 ----
 
@@ -70,7 +70,7 @@ public void message(Session session,
 [source,oac_no_warn]
 ----
 @OnError
-public void error(Session session, 
+public void error(Session session,
                   Throwable error) { }
 ----
 
@@ -78,11 +78,8 @@ public void error(Session session,
 [source,oac_no_warn]
 ----
 @OnClose
-public void close(Session session, 
+public void close(Session session,
                   CloseReason reason) { }
 ----
 
 |========================================
-
-
-

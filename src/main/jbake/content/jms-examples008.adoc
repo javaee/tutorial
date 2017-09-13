@@ -4,8 +4,8 @@ title=Sending Messages from a Session Bean to an MDB
 next=jms-examples009.html
 prev=jms-examples007.html
 ~~~~~~
-Sending Messages from a Session Bean to an MDB
-==============================================
+= Sending Messages from a Session Bean to an MDB
+
 
 [[BNCGW]]
 
@@ -42,7 +42,7 @@ This application demonstrates how to send messages from an enterprise
 bean (in this case, a session bean) rather than from an application
 client, as in the example in link:jms-examples007.html#BNBPK[Receiving
 Messages Asynchronously Using a Message-Driven Bean]. link:#BNCGY[Figure
-47-4] illustrates the structure of this application. Sending messages
+49-4] illustrates the structure of this application. Sending messages
 from an enterprise bean is very similar to sending messages from a
 managed bean, which was shown in
 link:jms-examples006.html#BABBABFC[Sending and Receiving Messages Using a
@@ -50,7 +50,7 @@ Simple Web Application].
 
 [[BNCGY]]
 
-.*Figure 47-4 An Enterprise Bean Application: Client to Session Bean to Message-Driven Bean*
+.*Figure 49-4 An Enterprise Bean Application: Client to Session Bean to Message-Driven Bean*
 image:img/javaeett_dt_037.png[
 "Diagram of application showing an application client calling a session
 bean, which sends messages that are processed by a message-driven bean"]
@@ -227,12 +227,15 @@ select Build. (If NetBeans IDE suggests that you run a priming build,
 click the box to do so.)
 +
 This command creates the following:
-* An application client JAR file that contains the client class file and
+
+** An application client JAR file that contains the client class file and
 the session bean's remote interface, along with a manifest file that
 specifies the main class and places the EJB JAR file in its classpath
-* An EJB JAR file that contains both the session bean and the
+
+** An EJB JAR file that contains both the session bean and the
 message-driven bean
-* An application EAR file that contains the two JAR files
+
+** An application EAR file that contains the two JAR files
 +
 The `clientsessionmdb.ear` file is created in the
 `clientsessionmdb-ear/target/` directory.
@@ -279,12 +282,13 @@ mvn install
 ----
 +
 This command creates the following:
-* An application client JAR file that contains the client class file and
+
+** An application client JAR file that contains the client class file and
 the session bean's remote interface, along with a manifest file that
 specifies the main class and places the EJB JAR file in its classpath
-* An EJB JAR file that contains both the session bean and the
+** An EJB JAR file that contains both the session bean and the
 message-driven bean
-* An application EAR file that contains the two JAR files
+** An application EAR file that contains the two JAR files
 +
 The `clientsessionmdb.ear` file is created in the
 `clientsessionmdb-ear/target/` directory.
@@ -310,5 +314,3 @@ only the messages whose `NewsType` property is `Sports` or `Opinion`.
 ----
 mvn cargo:undeploy
 ----
-
-

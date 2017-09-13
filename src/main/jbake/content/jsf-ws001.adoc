@@ -1,0 +1,21 @@
+type=page
+status=published
+title=About WebSockets in JSF
+next=jsf-ws002.html
+prev=jsf-ws.html
+~~~~~~
+= About WebSockets in JSF
+
+
+[[about-websockets-in-jsf]]
+About WebSockets in JSF
+-----------------------
+
+You use the `f:websocket tag` in a view to allow server-side communications
+to be pushed to all instances of a socket containing the same channel name.
+When the communication is received, an `onmessage`, client-side JavaScript
+event handler can be set that is called whenever a push arrives from the server.
+
+The server side of a WebSocket communication has the ability to push out messages.
+You can do this using `javax.faces.push.PushContext`, which is an injectable
+context, allowing a server push to a named channel.

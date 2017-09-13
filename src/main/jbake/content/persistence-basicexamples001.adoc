@@ -19,6 +19,4 @@ second example, `roster`, is an application that manages a community
 sports system. The third example, `address-book`, is a web application
 that stores contact data. This chapter assumes that you are familiar
 with the concepts detailed in link:persistence-intro.html#BNBPZ[Chapter
-38, "Introduction to the Java Persistence API."]
-
-
+40, "Introduction to the Java Persistence API."]

@@ -4,8 +4,8 @@ title=The traffic Example
 next=interceptors.html
 prev=connectorexample002.html
 ~~~~~~
-The traffic Example
-===================
++ The traffic Example
+
 
 [[CHDJEADB]]
 
@@ -22,7 +22,7 @@ directory. See link:usingexamples.html#GFIUD[Chapter 2, "Using the
 Tutorial Examples,"] for basic information on building and running
 sample applications.
 
-The example demonstrates the scenario in link:#CHDGFGHB[Figure 54-3] and
+The example demonstrates the scenario in link:#CHDGFGHB[Figure 56-3] and
 consists of the following modules:
 
 * `traffic-eis`: A Java SE program that simulates an EIS
@@ -36,7 +36,7 @@ adapter, the message-driven bean, and the web application
 
 [[CHDGFGHB]]
 
-.*Figure 54-3 The traffic Example*
+.*Figure 56-3 The traffic Example*
 image:img/javaeett_dt_056.png[
 "This figure shows the components of the traffic example: a WAR
 communicating with an enterprise bean using a JMS topic, and a RAR
@@ -100,7 +100,7 @@ The MDB in this example is defined as follows:
 ----
 @MessageDriven(
     activationConfig = {
-      @ActivationConfigProperty(propertyName = "port", 
+      @ActivationConfigProperty(propertyName = "port",
                                 propertyValue = "4008")
     }
 )
@@ -145,25 +145,27 @@ Implementing the Inbound Resource Adapter
 The `traffic-rar` module implements the inbound resource adapter
 contract from the Java EE Connector Architecture for the simple traffic
 information system (EIS) used in this example. The architecture of the
-inbound resource adapter is shown in link:#CHDHADDC[Figure 54-4].
+inbound resource adapter is shown in link:#CHDHADDC[Figure 56-4].
 
 [[CHDHADDC]]
 
-.*Figure 54-4 Architecture of the traffic Example*
+.*Figure 56-4 Architecture of the traffic Example*
 image:img/javaeett_dt_057.png[
 "This figure shows the classes in each of the components of the traffic
 example."]
 
 The `traffic-rar` module implements the interfaces listed in
-link:#CHDEDEAF[Table 54-3].
+link:#CHDEDEAF[Table 56-3].
 
 [[sthref251]][[CHDEDEAF]]
 
-Table 54-3 Interfaces Implemented in the traffic-rar Module
 
-[width="49%",cols="54%,46%,",options="header",]
+Table 56-3 Interfaces Implemented in the traffic-rar Module
+
+
+[width="99%",cols="20%,20%,60%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.resource.spi` |`ResourceAdapter` |Defines the lifecycle methods
 of the resource adapter.
 
@@ -187,11 +189,11 @@ class:
 public class TrafficResourceAdapter implements ResourceAdapter, Serializable {
     ...
     @Override
-    public void endpointActivation(MessageEndpointFactory endpointFactory, 
-                                   ActivationSpec spec) 
+    public void endpointActivation(MessageEndpointFactory endpointFactory,
+                                   ActivationSpec spec)
                                    throws ResourceException {
         Class endpointClass = endpointFactory.getEndpointClass();
-        /* this method is called from a new thread in the example: 
+        /* this method is called from a new thread in the example:
         MessageEndpoint endpoint = endpointFactory.createEndpoint(null); */
     }
 }
@@ -238,7 +240,7 @@ methods in the MDB:
 
 [source,oac_no_warn]
 ----
-private String callMdb(MessageEndpoint mdb, Method command, 
+private String callMdb(MessageEndpoint mdb, Method command,
                        String... params) ... {
     String resp;
     /* this code contains proper exception handling in the sources */
@@ -379,5 +381,3 @@ The web interface shows the filtered traffic updates for City1 every few
 seconds.
 8.  After undeploying the `traffic-ear` application, press Ctrl+C in the
 first terminal window to close the `traffic-eis` application.
-
-

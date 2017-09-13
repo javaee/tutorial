@@ -4,8 +4,8 @@ title=Adding Setter and Getter Methods
 next=cdi-basic011.html
 prev=cdi-basic009.html
 ~~~~~~
-Adding Setter and Getter Methods
-================================
+= Adding Setter and Getter Methods
+
 
 [[GJBBP]]
 
@@ -13,16 +13,12 @@ Adding Setter and Getter Methods
 Adding Setter and Getter Methods
 --------------------------------
 
-To make the state of the managed bean accessible:
-
-1.  Add setter and getter methods for that state.
-+
-The `createSalutation` method calls the bean's `greet` method, and the
+To make the state of the managed bean accessible, add setter and getter methods for that state. The `createSalutation` method calls the bean's `greet` method, and the
 `getSalutation` method retrieves the result.
-+
+
 Once the setter and getter methods have been added, the bean is
 complete. The final code looks like this:
-+
+
 [source,oac_no_warn]
 ----
 package greetings;
@@ -36,7 +32,7 @@ import javax.inject.Named;
 public class Printer {
 
     @Inject @Informal Greeting greeting;
-    
+
     private String name;
     private String salutation;
 
@@ -57,5 +53,3 @@ public class Printer {
     }
 }
 ----
-
-

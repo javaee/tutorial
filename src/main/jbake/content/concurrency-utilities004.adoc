@@ -4,8 +4,8 @@ title=Concurrency and Security
 next=concurrency-utilities005.html
 prev=concurrency-utilities003.html
 ~~~~~~
-Concurrency and Security
-========================
+= Concurrency and Security
+
 
 [[CIHCACAA]]
 
@@ -19,5 +19,3 @@ security context, that context can be propagated to the thread of
 execution. The `ContextService` can support several runtime behaviors,
 and the `security` attribute, if enabled, will propagate the container
 security principal.
-
-

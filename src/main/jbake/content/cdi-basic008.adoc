@@ -17,15 +17,15 @@ For a web application to use a bean that injects another bean class, the
 bean needs to be able to hold state over the duration of the user's
 interaction with the application. The way to define this state is to
 give the bean a scope. You can give an object any of the scopes
-described in link:#GJDBG[Table 24-1], depending on how you are using it.
+described in link:#GJDBG[Table 25-1], depending on how you are using it.
 
 [[sthref126]][[GJDBG]]
 
-Table 24-1 Scopes
+Table 25-1 Scopes
 
-[width="49%",cols="45%,55%,",options="header",]
+[width="99%",cols="25%,25%,50%"]
 |=======================================================================
-|Scope |Annotation |Duration
+|*Scope* |*Annotation* |*Duration*
 |Request |`@RequestScoped` |A user's interaction with a web application
 in a single HTTP request.
 
@@ -48,8 +48,8 @@ not cross session boundaries.
 |=======================================================================
 
 
-The first three scopes are defined by both JSR 346 and the JavaServer
-Faces specification. The last two are defined by JSR 346.
+The first three scopes are defined by both JSR 365 and the JavaServer
+Faces specification. The last two are defined by JSR 365.
 
 All predefined scopes except `@Dependent` are contextual scopes. CDI
 places beans of contextual scope in the context whose lifecycle is

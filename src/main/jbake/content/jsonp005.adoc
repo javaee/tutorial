@@ -27,12 +27,10 @@ an Example"]. However, JSON support is not part of JAX-RS (JSR 311) or
 JAXB (JSR 222), so that procedure may not work for Java EE
 implementations other than GlassFish Server.
 
-The Java API for JSON Processing (JSR 353) does not explicitly support
+The Java API for JSON Processing (JSR 374) does not explicitly support
 JSON binding in Java. A future JSR (JSON Binding) that is similar to
 JAXB for XML is under consideration for a future release of Java EE.
 
 You can still use the Java API for JSON Processing with JAX-RS resource
 methods. For more information, see the sample code for JSON Processing
 included with the Java EE 8 SDK.
-
-

@@ -2,15 +2,15 @@ type=page
 status=published
 title=Java Servlet Technology
 next=servlets001.html
-prev=jsf-configure013.html
+prev=jsf-ws007.html
 ~~~~~~
-Java Servlet Technology
-=======================
+= Java Servlet Technology
+
 
 [[BNAFD]]
 
 [[java-servlet-technology]]
-17 Java Servlet Technology
+18 Java Servlet Technology
 --------------------------
 
 
@@ -34,10 +34,10 @@ Technology]
 * link:servlets012.html#BEIGCFDF[Asynchronous Processing]
 * link:servlets013.html#BEIHICDH[Nonblocking I/O]
 * link:servlets014.html#BEIJHCDJ[Protocol Upgrade Processing]
+* link:servlets014a.html#server-push[Server Push]
+* link:servlets014b.html#http-trailer[HTTP Trailer]
 * link:servlets015.html#GKCPG[The mood Example Application]
 * link:servlets016.html#BABDGFJJ[The fileupload Example Application]
 * link:servlets017.html#BEIFAIFF[The dukeetf Example Application]
 * link:servlets018.html#BNAGW[Further Information about Java Servlet
 Technology]
-
-

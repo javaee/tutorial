@@ -51,18 +51,26 @@ classes will have the resources configured, the helper classes and
 artifacts generated, and the resource exposed to clients by deploying
 the archive to a Java EE server.
 
-link:#GINNA[Table 30-1] lists some of the Java programming annotations
+link:#GINNA[Table 32-1] lists some of the Java programming annotations
 that are defined by JAX-RS, with a brief description of how each is
 used. Further information on the JAX-RS APIs can be viewed at
 `http://docs.oracle.com/javaee/7/api/`.
 
 [[sthref137]][[GINNA]]
 
+<<<<<<< HEAD
 *Table 30-1 Summary of JAX-RS Annotations*
 
 [width=99%,cols="10% 90%"]
 |=======================================================================
 |*Annotation*|*Description*
+=======
+*Table 32-1 Summary of JAX-RS Annotations*
+
+[width="99%",cols="10%,90%"]
+|=======================================================================
+|*Annotation* |*Description*
+>>>>>>> bea9a451005dfddb26d5d3a692bc95976c9d32d8
 |`@Path` |The `@Path` annotation's value is a relative URI path
 indicating where the Java class will be hosted: for example,
 `/helloworld`. You can also embed variables in the URIs to make a URI
@@ -340,7 +348,7 @@ variable should be substituted with `%20`.
 When defining URI path templates, be careful that the resulting URI
 after substitution is valid.
 
-link:#GIPYM[Table 30-2] lists some examples of URI path template
+link:#GIPYM[Table 32-2] lists some examples of URI path template
 variables and how the URIs are resolved after substitution. The
 following variable names and values are used in the examples:
 
@@ -354,7 +362,7 @@ following variable names and values are used in the examples:
 [width="100%",cols="100%",]
 |====================================================
 a|
-Note:
+*Note*:
 
 The value of the `name3` variable is an empty string.
 
@@ -363,14 +371,14 @@ The value of the `name3` variable is an empty string.
 
 [[sthref138]][[GIPYM]]
 
-Table 30-2 Examples of URI Path Templates
+*Table 32-2 Examples of URI Path Templates*
 
-[width="45%",cols=",100%",options="header",]
+[width="80%",cols="40%,40%"]
 |=======================================================================
-|URI Path Template |URI After Substitution
+|*URI Path Template* |*URI After Substitution*
 |`http://example.com/{name1}/{name2}/` |`http://example.com/james/gatz/`
 
-|`http://example.com/{question}/``{question}/{question}/`
+|`http://example.com/{question}/{question}/{question}/`
 |`http://example.com/why/why/why/`
 
 |`http://example.com/maps/{location}`
@@ -487,14 +495,14 @@ needs to supply additional metadata, such as HTTP headers or a different
 status code, a method can return a `Response` that wraps the entity and
 that can be built by using `Response.ResponseBuilder`.
 
-link:#GKCCG[Table 30-3] shows the standard types that are supported
+link:#GKCCG[Table 32-3] shows the standard types that are supported
 automatically for HTTP request and response entity bodies. You need to
 write an entity provider only if you are not choosing one of these
 standard types.
 
 [[sthref139]][[GKCCG]]
 
-Table 30-3 Types Supported for HTTP Request and Response Entity Bodies
+Table 32-3 Types Supported for HTTP Request and Response Entity Bodies
 
 [width="50%",cols=",100%",options="header",]
 |=======================================================================

@@ -4,8 +4,8 @@ title=Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean
 next=cdi-basic015.html
 prev=cdi-basic013.html
 ~~~~~~
-Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
-==================================================================================
+= Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
+
 
 [[BABJFEAI]]
 
@@ -92,5 +92,3 @@ destroyed, such as releasing a resource that the bean has been holding.
 `javax.annotation.PreDestroy` annotation.
 
 CDI calls this method before starting to destroy the bean.
-
-

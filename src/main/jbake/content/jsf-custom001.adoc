@@ -79,12 +79,10 @@ This chapter uses the image map component from the Duke's Bookstore case
 study example to explain how you can create simple custom components,
 custom renderers, and associated custom tags, and take care of all the
 other details associated with using the components and renderers in an
-application. See link:dukes-bookstore.html#GLNVI[Chapter 58, "Duke's
+application. See link:dukes-bookstore.html#GLNVI[Chapter 60, "Duke's
 Bookstore Case Study Example"] for more information about this example.
 
 The chapter also describes how to create other custom objects: custom
 converters, custom listeners, and custom validators. It also describes
 how to bind component values and instances to data objects and how to
 bind custom objects to managed bean properties.
-
-

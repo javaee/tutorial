@@ -4,8 +4,8 @@ title=The jobs Concurrency Example
 next=concurrency-utilities006.html
 prev=concurrency-utilities004.html
 ~~~~~~
-The jobs Concurrency Example
-============================
+= The jobs Concurrency Example
+
 
 [[CIHCGGEG]]
 
@@ -173,7 +173,7 @@ The server log includes the following messages:
 +
 [source,oac_no_warn]
 ----
-INFO:   Invalid or missing token! 
+INFO:   Invalid or missing token!
 INFO:   Task started LOW-1
 INFO:   Job 1 successfully submitted
 INFO:   Task finished LOW-1
@@ -193,10 +193,10 @@ The server log will include the following messages:
 +
 [source,oac_no_warn]
 ----
-INFO:   Invalid or missing token! 
+INFO:   Invalid or missing token!
 INFO:   Job 1 successfully submitted
 INFO:   Task started LOW-1
-INFO:   Invalid or missing token! 
+INFO:   Invalid or missing token!
 INFO:   Job 2 was NOT submitted
 INFO:   Task finished LOW-1
 ----
@@ -271,5 +271,3 @@ INFO:   Job 3 successfully submitted
 INFO:   Task finished HIGH-2
 INFO:   Task finished HIGH-3
 ----
-
-

@@ -1,27 +1,29 @@
 type=page
 status=published
 title=JSON Binding
-next=webi18n.html
+next=jsonb001.html
 prev=jsonp008.html
 ~~~~~~
-JSON Binding
-============
+
 
 [[sthref120]]
 
 [[json-binding]]
-20 JSON Binding
+21 JSON Binding
 ---------------
 
-This chapter describes the Java API for JSON Binding (JSR 367). JSON is
-a data exchange format widely used in web services and other connected
-applications. JSR 367 provides a standard binding layer (metadata and
-runtime) for converting Java objects to and from JSON messages.
+This chapter describes the Java API for JSON Binding (JSON-B). JSON is a data exchange format widely used
+in web services and other connected applications. For a brief overview of JSON, see
+link:jsonp001.html#introduction-to-json[Introduction to JSON].
 
-`https://www.jcp.org/en/jsr/detail?id=367`
+The link:https://jcp.org/en/jsr/detail?id=367[JSR 367] specification provides a standard
+binding layer (metadata and runtime) between Java classes and JSON documents. The JSON-B reference
+implementation is Yasson, which is developed through Eclipse.org and is included as part of GlassFish Server.
+You can learn more about Yasson at https://projects.eclipse.org/projects/rt.yasson.
 
 The following topics are addressed here:
 
-TBD
-
-
+* link:jsonb001.html#json-binding-in-the-java-ee-platform[JSON Binding in the Java EE Platform]
+* link:jsonb002.html#overview-of-the-json-binding-api[Overview of the JSON Binding API]
+* link:jsonb003.html#running-the-jsonbbasics-example-application[Running the jsonbbasics Example Application]
+* link:jsonb004.html#further-information-about-the-java-api-for-json-binding[Further Information about the Java API for JSON Binding]

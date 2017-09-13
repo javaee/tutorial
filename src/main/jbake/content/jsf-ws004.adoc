@@ -1,0 +1,79 @@
+type=page
+status=published
+title=WebSocket Scopes and Users
+next=jsf-ws005.html
+prev=jsf-ws003.html
+~~~~~~
+= WebSocket Scopes and Users
+
+
+[[websocket-scopes-and-users]]
+WebSocket Scopes and Users
+--------------------------
+
+By default, the WebSocket is application-scoped. For example, any view or
+session throughout the web application having the same WebSocket channel open
+will receive the same push message. The push message can be sent by all users
+and the application. To restrict the push messages to all views in the current
+user session only, set the optional scope attribute to `session` . In this case,
+the push message can only be sent by the user and not by the application.
+
+`<f:websocket channel="someChannel" scope="session" ... />`
+
+To restrict the push messages to the current view only, you can set the scope
+attribute to `view` . The push message will not show up in other views in the
+same session, even if it has the same URL. This push message can be sent only
+by the user and not by the application.
+
+`<f:websocket channel="someChannel" scope="view" ... />`
+
+The scope attribute may not be an EL expression.
+
+Additionally, you can set the optional `user` attribute to the unique identifier
+of the logged-in user, usually the login name or the user ID. As such, the push
+message can be targeted to a specific user and can also be sent by other users
+and the application. The value of the `user` attribute must implement
+`Serializable` and have a low memory footprint, so an entire user entity is not
+recommended.
+
+For example, when you are using container managed authentication or a related
+framework or library:
+
+`<f:websocket channel="someChannel"user="#{request.remoteUser}" ... />`
+
+Or, when you have a custom user entity accessible via EL, such as
+`#{someLoggedInUser}` which has an `id` property representing its identifier:
+
+[source,oac_no_warn]
+----
+<f:websocket channel="someChannel"
+user="#{someLoggedInUser.id}" ... />
+----
+
+When the `user` attribute is specified, the scope defaults to `session` and
+cannot be set to `application`.
+
+On the server side, the push message can be targeted to the user specified in
+the `user` attribute using `PushContext.send(Object, Serializable)`. The push
+message can be sent by all users and the application.
+
+[source,oac_no_warn]
+----
+@Inject @Push
+private PushContext someChannel;
+
+public void sendMessage(Object message, User recipientUser) { Long recipientUserId = recipientUser.getId(); someChannel.send(message, recipientUserId);
+
+}
+----
+
+Multiple users can be targeted by passing a `Collection` holding user
+identifiers to `PushContext.send(Object, Collection)`.
+
+[source,oac_no_warn]
+----
+public void sendMessage(Object message, Group recipientGroup) {
+Collection<Long> recipientUserIds = recipientGroup.getUserIds();
+someChannel.send(message, recipientUserIds);
+}
+----

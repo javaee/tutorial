@@ -10,7 +10,7 @@ Controlling Concurrent Access to Entity Data with Locking
 [[GKJJF]]
 
 [[controlling-concurrent-access-to-entity-data-with-locking]]
-43 Controlling Concurrent Access to Entity Data with Locking
+45 Controlling Concurrent Access to Entity Data with Locking
 ------------------------------------------------------------
 
 
@@ -23,5 +23,3 @@ The following topics are addressed here:
 * link:persistence-locking001.html#GKJHZ[Overview of Entity Locking and
 Concurrency]
 * link:persistence-locking002.html#GKJIU[Lock Modes]
-
-

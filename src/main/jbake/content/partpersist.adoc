@@ -20,21 +20,19 @@ Persistence
 Part VIII explores the Java Persistence API. This part contains the
 following chapters:
 
-* link:persistence-intro.html#BNBPZ[Chapter 38, "Introduction to the Java
+* link:persistence-intro.html#BNBPZ[Chapter 40, "Introduction to the Java
 Persistence API"]
-* link:persistence-basicexamples.html#GIJST[Chapter 39, "Running the
+* link:persistence-basicexamples.html#GIJST[Chapter 41, "Running the
 Persistence Examples"]
-* link:persistence-querylanguage.html#BNBTG[Chapter 40, "The Java
+* link:persistence-querylanguage.html#BNBTG[Chapter 42, "The Java
 Persistence Query Language"]
-* link:persistence-criteria.html#GJITV[Chapter 41, "Using the Criteria
+* link:persistence-criteria.html#GJITV[Chapter 43, "Using the Criteria
 API to Create Queries"]
-* link:persistence-string-queries.html#GKJIQ[Chapter 42, "Creating and
+* link:persistence-string-queries.html#GKJIQ[Chapter 44, "Creating and
 Using String-Based Criteria Queries"]
-* link:persistence-locking.html#GKJJF[Chapter 43, "Controlling Concurrent
+* link:persistence-locking.html#GKJJF[Chapter 45, "Controlling Concurrent
 Access to Entity Data with Locking"]
-* link:persistence-entitygraphs.html#BABIJIAC[Chapter 44, "Creating Fetch
+* link:persistence-entitygraphs.html#BABIJIAC[Chapter 46, "Creating Fetch
 Plans with Entity Graphs"]
-* link:persistence-cache.html#GKJIA[Chapter 45, "Using a Second-Level
+* link:persistence-cache.html#GKJIA[Chapter 47, "Using a Second-Level
 Cache with Java Persistence API Applications"]
-
-

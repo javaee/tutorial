@@ -4,8 +4,8 @@ title=Understanding the Image Map Example
 next=jsf-custom004.html
 prev=jsf-custom002.html
 ~~~~~~
-Understanding the Image Map Example
-===================================
+= Understanding the Image Map Example
+
 
 [[GLPCB]]
 
@@ -74,7 +74,7 @@ the application needs to render:
          usemap="#bookMap" />
     ...
     <map name="bookMap">
-       <area alt="Duke"                        
+       <area alt="Duke"
           coords="67,23,212,268"
           shape="rect"
           onmouseout="document.forms[0]['j_idt13:mapImage'].src='resources/images/book_all.jpg'"
@@ -125,12 +125,12 @@ the custom components:
 ----
 <h:form>
     ...
-        <h:graphicImage id="mapImage" 
+        <h:graphicImage id="mapImage"
                         name="book_all.jpg"
                         library="images"
                         alt="#{bundle.ChooseBook}"
                         usemap="#bookMap" />
-        <bookstore:map id="bookMap" 
+        <bookstore:map id="bookMap"
                        current="map1"
                        immediate="true"
                        action="bookstore">
@@ -140,9 +140,9 @@ the custom components:
                             onmouseover="resources/images/book_201.jpg"
                             onmouseout="resources/images/book_all.jpg"
                             targetImage="mapImage" />
-            <bookstore:area id="map2" value="#{Book202}" 
+            <bookstore:area id="map2" value="#{Book202}"
                             onmouseover="resources/images/book_202.jpg"
-                            onmouseout="resources/images/book_all.jpg" 
+                            onmouseout="resources/images/book_all.jpg"
                             targetImage="mapImage"/>
             ...
         </bookstore:map>
@@ -288,11 +288,11 @@ the image map component.
 
 [[sthref77]][[GLPEK]]
 
-Table 15-2 Image Map Classes
+*Table 15-2 Image Map Classes*
 
-[width="26%",cols="100%,",options="header",]
+[width="60%",cols="15%,45%"]
 |=======================================================================
-|Class |Function
+|*Class* |*Function*
 |`AreaSelectedEvent` |The `javax.faces.event.ActionEvent` indicating
 that an `AreaComponent` from the `MapComponent` has been selected.
 
@@ -319,5 +319,3 @@ bookstore-dir`/listeners/`. The component classes are located in
 bookstore-dir`/components/`. The renderer classes are located in
 bookstore-dir`/renderers/`. `ImageArea` is located in
 bookstore-dir`/model/`.
-
-

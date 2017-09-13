@@ -4,8 +4,8 @@ title=The Main Differences between Resource Injection and Dependency Injection
 next=packaging.html
 prev=injection002.html
 ~~~~~~
-The Main Differences between Resource Injection and Dependency Injection
-========================================================================
+= The Main Differences between Resource Injection and Dependency Injection
+
 
 [[BABHFECJ]]
 
@@ -18,17 +18,14 @@ injection and dependency injection.
 
 [[sthref19]][[BABCEJEE]]
 
-Table 4-1 Differences between Resource Injection and Dependency
-Injection
+*Table 4-1 Differences between Resource Injection and Dependency
+Injection*
 
-[width="75%",cols="3%,29%,26%,23%,19%",options="header",]
+[width="99%",cols="25%,20%,20%,20%,15%"]
 |=======================================================================
-|Injection Mechanism |Can Inject JNDI Resources Directly |Can Inject
-Regular Classes Directly |Resolves By |Typesafe
+|*Injection Mechanism* |*Can Inject JNDI Resources Directly* |*Can Inject
+Regular Classes Directly* |*Resolves By* |*Typesafe*
 |Resource Injection |Yes |No |Resource name |No
 
 |Dependency Injection |No |Yes |Type |Yes
 |=======================================================================
-
-
-

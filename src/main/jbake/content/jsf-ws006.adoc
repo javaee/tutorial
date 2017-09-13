@@ -1,0 +1,69 @@
+type=page
+status=published
+title=WebSocket Security Considerations
+next=jsf-ws007.html
+prev=jsf-ws005.html
+~~~~~~
+= WebSocket Security Considerations
+
+
+[[websocket-security-considerations]]
+WebSocket Security Considerations
+---------------------------------
+
+If the WebSocket is declared in a page which is restricted to logged-in users
+only with a specific role, then you might want to add the push handshake request
+URL to the set of restricted URLs.
+
+The push handshake request URL is composed of the URI prefix, `/javax.faces.push/`,
+followed by the channel name. In the example of container managed security,
+which has already restricted an example page, `/user/foo.xhtml`, to logged-in
+users with the example role, `USER`, on the example URL pattern, `/user/*`, in
+`web.xml`, see below:
+
+[source,oac_no_warn]
+----
+<security-constraint>
+<web-resource-collection>
+<web-resource-name>Restrict access to role USER.
+</web-resource-name>
+<url-pattern>/user/*</url-pattern>
+</web-resource-collection>
+<auth-constraint>
+<role-name>USER</role-name>
+</auth-constraint>
+</security-constraint>
+----
+
+If the page, `/user/foo.xhtml`, contains `<f:websocket channel="foo">`, then you
+must add a restriction on the push handshake request URL pattern of
+`/javax.faces.push/foo`, as shown next:
+
+[source,oac_no_warn]
+----
+<security-constraint>
+<web-resource-collection>
+<web-resource-name>Restrict access to role USER.
+</web-resource-name>
+<url-pattern>/user/*</url-pattern>
+<url-pattern>/javax.faces.push/foo</url-pattern>
+</web-resource-collection>
+<auth-constraint>
+<role-name>USER</role-name>
+</auth-constraint>
+</security-constraint>
+----
+
+As extra security, particularly for those public channels which cannot be
+restricted by security constraints, the `f:websocket` tag will register all
+previously declared channels in the current HTTP session, and any incoming
+WebSocket open request will be checked for whether it matches these channels
+in the current HTTP session. If the channel is unknown (for example, randomly
+guessed or spoofed by end users or manually reconnected after the session
+is expired), then the WebSocket will immediately be closed with close reason
+code, `CloseCodes.VIOLATED_POLICY (1008)`. Also, when the HTTP session gets
+destroyed, all session and view-scoped channels which are still open will
+explicitly be closed from the server side with close reason code,
+`CloseCodes.NORMAL_CLOSURE (1000)`. Only application-scoped sockets remain open
+and are still reachable from the server even when the session or view associated
+with the page in the client side is expired.

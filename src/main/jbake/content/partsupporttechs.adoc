@@ -20,14 +20,12 @@ Java EE Supporting Technologies
 Part XI explores several technologies that support the Java EE platform.
 This part contains the following chapters:
 
-* link:transactions.html#BNCIH[Chapter 52, "Transactions"]
-* link:resources.html#BNCJH[Chapter 53, "Resource Adapters and
+* link:transactions.html#BNCIH[Chapter 54, "Transactions"]
+* link:resources.html#BNCJH[Chapter 55, "Resource Adapters and
 Contracts"]
-* link:connectorexample.html#GLODB[Chapter 54, "The Resource Adapter
+* link:connectorexample.html#GLODB[Chapter 56, "The Resource Adapter
 Examples"]
-* link:interceptors.html#GKEED[Chapter 55, "Using Java EE Interceptors"]
-* link:batch-processing.html#GKJIQ6[Chapter 56, "Batch Processing"]
-* link:concurrency-utilities.html#GKJIQ8[Chapter 57, "Concurrency
+* link:interceptors.html#GKEED[Chapter 57, "Using Java EE Interceptors"]
+* link:batch-processing.html#GKJIQ6[Chapter 58, "Batch Processing"]
+* link:concurrency-utilities.html#GKJIQ8[Chapter 59, "Concurrency
 Utilities for Java EE"]
-
-

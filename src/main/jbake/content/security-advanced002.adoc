@@ -62,8 +62,8 @@ Mutual Authentication
 With mutual authentication, the server and the client authenticate each
 other. Mutual authentication is of two types:
 
-* Certificate-based (see link:#GLIFJ[Figure 51-1])
-* User name/password-based (see link:#GLIGQ[Figure 51-2])
+* Certificate-based (see link:#GLIFJ[Figure 53-1])
+* User name/password-based (see link:#GLIGQ[Figure 53-2])
 
 When using certificate-based mutual authentication, the following
 actions occur.
@@ -76,12 +76,12 @@ actions occur.
 6.  If successful, the server grants access to the protected resource
 requested by the client.
 
-link:#GLIFJ[Figure 51-1] shows what occurs during certificate-based
+link:#GLIFJ[Figure 53-1] shows what occurs during certificate-based
 mutual authentication.
 
 [[GLIFJ]]
 
-.*Figure 51-1 Certificate-Based Mutual Authentication*
+.*Figure 53-1 Certificate-Based Mutual Authentication*
 image:img/javaeett_dt_048.png[
 "Diagram of six steps in mutual authentication with certificates"]
 
@@ -97,12 +97,12 @@ server.
 6.  If the verification is successful, the server grants access to the
 protected resource requested by the client.
 
-link:#GLIGQ[Figure 51-2] shows what occurs during user
+link:#GLIGQ[Figure 53-2] shows what occurs during user
 name/password-based mutual authentication.
 
 [[GLIGQ]]
 
-.*Figure 51-2 User Name/Password-Based Mutual Authentication*
+.*Figure 53-2 User Name/Password-Based Mutual Authentication*
 image:img/javaeett_dt_049.png[
 "Diagram of five steps in mutual authentication with user name and
 password"]
@@ -191,14 +191,14 @@ the directory where you want to generate the client certificate:
 +
 [source,oac_no_warn]
 ----
-java-home\bin\keytool -genkey -alias client-alias -keyalg RSA 
+java-home\bin\keytool -genkey -alias client-alias -keyalg RSA
 -keypass changeit -storepass changeit -keystore client_keystore.jks
 ----
 3.  Export the generated client certificate into the file `client.cer`:
 +
 [source,oac_no_warn]
 ----
-java-home\bin\keytool -export -alias client-alias -storepass changeit 
+java-home\bin\keytool -export -alias client-alias -storepass changeit
 -file client.cer -keystore client_keystore.jks
 ----
 4.  Add the certificate to the truststore file
@@ -208,8 +208,8 @@ parameters:
 +
 [source,oac_no_warn]
 ----
-java-home\bin\keytool -import -v -trustcacerts -alias client-alias 
--file client.cer -keystore domain-dir/config/cacerts.jks 
+java-home\bin\keytool -import -v -trustcacerts -alias client-alias
+-file client.cer -keystore domain-dir/config/cacerts.jks
 -keypass changeit -storepass changeit
 ----
 +
@@ -231,5 +231,3 @@ Certificate was added to keystore
 [Storing cacerts.jks]
 ----
 5.  Restart GlassFish Server.
-
-

@@ -155,13 +155,13 @@ counter filter to the URL pattern `/*`.
 
 You can map a filter to one or more web resources, and you can map more
 than one filter to a web resource. This is illustrated in
-link:#BNAGH[Figure 17-1], in which filter F1 is mapped to servlets S1,
+link:#BNAGH[Figure 18-1], in which filter F1 is mapped to servlets S1,
 S2, and S3; filter F2 is mapped to servlet S2; and filter F3 is mapped
 to servlets S1 and S2.
 
 [[BNAGH]]
 
-.*Figure 17-1 Filter-to-Servlet Mapping*
+.*Figure 18-1 Filter-to-Servlet Mapping*
 image:img/javaeett_dt_018.png[
 "Diagram of filter-to-servlet mapping with filters F1-F3 and servlets
 S1-S3. F1 filters S1-S3, then F2 filters S2, then F3 filters S1 and S2."]
@@ -222,5 +222,3 @@ mechanism (see link:servlets002.html#BNAFN[Handling Servlet Errors])
 You can direct the filter to be applied to any combination of the
 preceding situations by selecting multiple dispatcher types. If no types
 are specified, the default option is REQUEST.
-
-

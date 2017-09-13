@@ -4,8 +4,8 @@ title=Configuring Managed Beans
 next=jsf-configure006.html
 prev=jsf-configure004.html
 ~~~~~~
-Configuring Managed Beans
-=========================
+= Configuring Managed Beans
+
 
 [[BNAWQ]]
 
@@ -177,12 +177,12 @@ are used to initialize a value.
 
 [[sthref94]][[BNAWT]]
 
-Table 16-1 Subelements of managed-property Elements That Define Property
-Values
+*Table 16-1 Subelements of managed-property Elements That Define Property
+Values*
 
-[width="18%",cols="100%,",options="header",]
+[width="75%",cols="25%,50%"]
 |=======================================================================
-|Element |Value It Defines
+|*Element* |*Value It Defines*
 |`list-entries` |Defines the values in a list
 
 |`map-entries` |Defines the values of a map
@@ -477,11 +477,11 @@ connections.
 
 [[sthref95]][[BNAWZ]]
 
-Table 16-2 Allowable Connections between Scoped Objects
+*Table 16-2 Allowable Connections between Scoped Objects*
 
-[width="27%",cols="100%,",options="header",]
+[width="60%",cols="20%,40%"]
 |==============================================================
-|An Object of This Scope |May Point to an Object of This Scope
+|*An Object of This Scope* |*May Point to an Object of This Scope*
 |`none` |`none`
 |`application` |`none`, `application`
 |`session` |`none`, `application`, `session`
@@ -505,5 +505,3 @@ In addition to configuring `Map` and `List` properties, you can also
 configure a `Map` and a `List` directly so that you can reference them
 from a tag rather than referencing a property that wraps a `Map` or a
 `List`.
-
-

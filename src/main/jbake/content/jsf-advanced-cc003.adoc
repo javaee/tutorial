@@ -4,8 +4,8 @@ title=Validating Composite Component Values
 next=jsf-advanced-cc004.html
 prev=jsf-advanced-cc002.html
 ~~~~~~
-Validating Composite Component Values
-=====================================
+= Validating Composite Component Values
+
 
 [[GKHWO]]
 
@@ -23,11 +23,11 @@ details and a complete list.
 
 [[sthref75]][[GKHVG]]
 
-Table 14-2 Validator Tags
+*Table 14-2 Validator Tags*
 
-[width="27%",cols="100%,",options="header",]
+[width="70%",cols="15%,55%"]
 |=======================================================================
-|Tag Name |Description
+|*Tag Name* |*Description*
 |`f:validateBean` |Delegates the validation of the local value to the
 Bean Validation API.
 
@@ -39,6 +39,3 @@ value of the component. If it matches, it is valid.
 effect as setting the `required` element of a composite component's
 attribute to `true`.
 |=======================================================================
-
-
-

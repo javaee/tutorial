@@ -4,8 +4,8 @@ title=Using Interceptors in CDI Applications
 next=cdi-adv007.html
 prev=cdi-adv005.html
 ~~~~~~
-Using Interceptors in CDI Applications
-======================================
+= Using Interceptors in CDI Applications
+
 
 [[GKHJX]]
 
@@ -21,11 +21,11 @@ often within an application. Such tasks are often called cross-cutting
 tasks. Interceptors allow you to specify the code for these tasks in one
 place for easy maintenance. When interceptors were first introduced to
 the Java EE platform, they were specific to enterprise beans. On the
-Java EE 7 platform, you can use them with Java EE managed objects of all
+Java EE platform, you can use them with Java EE managed objects of all
 kinds, including managed beans.
 
 For information on Java EE interceptors, see
-link:interceptors.html#GKEED[Chapter 55, "Using Java EE Interceptors"].
+link:interceptors.html#GKEED[Chapter 57, "Using Java EE Interceptors"].
 
 An interceptor class often contains a method annotated `@AroundInvoke`,
 which specifies the tasks the interceptor will perform when intercepted
@@ -130,5 +130,3 @@ public class LoggedInterceptor implements Serializable { ... }
 Interceptors with lower priority values are called first. You do not
 need to specify the interceptor in the `beans.xml` file when you use the
 `@Priority` annotation.
-
-

@@ -54,8 +54,6 @@ instances using an interface type and have your managed bean implement
 that interface.
 
 For more information about dependency injection, see
-link:cdi-basic.html#GIWHB[Chapter 24, "Introduction to Contexts and
+link:cdi-basic.html#GIWHB[Chapter 25, "Introduction to Contexts and
 Dependency Injection for Java EE"] and JSR 299 (Contexts and Dependency
 Injection for the Java EE Platform).
-
-

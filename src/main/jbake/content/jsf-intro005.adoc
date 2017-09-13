@@ -374,9 +374,7 @@ validator on the component.
 In the previously described standard validation model, the validator is
 defined for each input component on a page. The Bean Validation model
 allows the validator to be applied to all fields in a page. See
-link:bean-validation.html#CHDGJIIA[Chapter 22, "Introduction to Bean
-Validation"] and link:bean-validation-advanced.html#GKAHP[Chapter 23,
+link:bean-validation.html#CHDGJIIA[Chapter 23, "Introduction to Bean
+Validation"] and link:bean-validation-advanced.html#GKAHP[Chapter 24,
 "Bean Validation: Advanced Topics"] for more information on Bean
 Validation.
-
-
