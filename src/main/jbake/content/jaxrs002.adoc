@@ -58,11 +58,12 @@ used. Further information on the JAX-RS APIs can be viewed at
 
 [[sthref137]][[GINNA]]
 
-*Table 32-1 Summary of JAX-RS Annotations*
 
-[width="99%",cols="10%,90%"]
+*Table 30-1 Summary of JAX-RS Annotations*
+
+[width=99%,cols="10% 90%"]
 |=======================================================================
-|*Annotation* |*Description*
+|*Annotation*|*Description*
 |`@Path` |The `@Path` annotation's value is a relative URI path
 indicating where the Java class will be hosted: for example,
 `/helloworld`. You can also embed variables in the URIs to make a URI

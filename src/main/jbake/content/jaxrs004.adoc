@@ -27,4 +27,4 @@ from O'Reilly Media at
 `http://jcp.org/en/jsr/detail?id=370`
 * Jersey project:
 +
-`https://jersey.java.net/`
+`https://jersey.github.io/`
