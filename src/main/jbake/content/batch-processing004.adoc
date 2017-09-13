@@ -190,14 +190,14 @@ The following is an example of a task step:
 [[the-chunk-element]]
 The chunk Element
 ^^^^^^^^^^^^^^^^^
+
 The `chunk` element is a child of the `step` element for chunk-oriented
 steps. The attributes of this element are listed in link:#BCGJCIEI[Table
 58-2].
 
 [[sthref273]][[BCGJCIEI]]
 
-Table 58-2 Attributes of the chunk Element
-
+*Table 58-2 Attributes of the chunk Element*
 
 [width="99%",cols="15%,75%,10%"]
 |=======================================================================

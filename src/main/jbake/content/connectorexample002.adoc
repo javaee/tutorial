@@ -85,8 +85,8 @@ consists of the classes listed in link:#CHDCHJAC[Table 56-1].
 [[sthref242]][[CHDCHJAC]]
 
 
-Table 56-1 Classes and Interfaces in the javaeetutorial.trading.rar.api
-Package
+*Table 56-1 Classes and Interfaces in the javaeetutorial.trading.rar.api
+Package*
 
 
 [width="80%",cols="20%,60%"]
@@ -221,7 +221,7 @@ link:#CHDIBBIC[Table 56-2].
 [[sthref245]][[CHDIBBIC]]
 
 
-Table 56-2 Interfaces Implemented in the trading-rar Module
+*Table 56-2 Interfaces Implemented in the trading-rar Module*
 
 
 [width="99%",cols="20%,20%,60%"]

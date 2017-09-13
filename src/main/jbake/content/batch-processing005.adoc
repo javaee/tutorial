@@ -51,7 +51,7 @@ artifacts for job and step listeners.
 [[sthref279]][[BCGGCIDC]]
 
 
-Table 58-3 Main Batch Artifact Interfaces
+*Table 58-3 Main Batch Artifact Interfaces*
 
 
 [width="99%",cols="15%,15%,70%"]
@@ -117,7 +117,7 @@ element inside the `partition` element.
 [[sthref281]][[BCGCAEDI]]
 
 
-Table 58-5 Listener Batch Artifact Interfaces
+*Table 58-5 Listener Batch Artifact Interfaces*
 
 
 [width="99%",cols="15%,15%,70%"]
@@ -315,7 +315,7 @@ injection.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Do not access batch context objects inside artifact constructors.
 

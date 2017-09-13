@@ -54,8 +54,8 @@ link:#GKECC[Table 57-1].
 [[sthref253]][[GKECC]]
 
 
-=======
-Table 57-1 Interceptor Metadata Annotations
+
+*Table 57-1 Interceptor Metadata Annotations*
 
 
 [width="80%",cols="20%,60%"]
