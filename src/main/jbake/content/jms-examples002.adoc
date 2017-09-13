@@ -18,7 +18,8 @@ what they do, and link to the section that describes them fully. The
 example directory for each example is relative to the
 `_tut-install_/examples/jms/` directory.
 
-[[sthref200]][[sthref201]]
+[[sthref200]]
+[[sthref201]]
 
 *Table 49-1 JMS Examples That Show the Use of Java EE Application Clients*
 
