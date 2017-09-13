@@ -4,8 +4,8 @@ title=Using the Job Specification Language
 next=batch-processing005.html
 prev=batch-processing003.html
 ~~~~~~
-Using the Job Specification Language
-====================================
+= Using the Job Specification Language
+
 
 [[BCGDDBBG]]
 
@@ -20,7 +20,7 @@ task step:
 
 [source,oac_no_warn]
 ----
-<job id="loganalysis" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+<job id="loganalysis" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
                       version="1.0">
   <properties>
     <property name="input_file" value="input1.txt"/>
@@ -193,15 +193,15 @@ The chunk Element
 
 The `chunk` element is a child of the `step` element for chunk-oriented
 steps. The attributes of this element are listed in link:#BCGJCIEI[Table
-56-2].
+58-2].
 
 [[sthref273]][[BCGJCIEI]]
 
-Table 56-2 Attributes of the chunk Element
+*Table 58-2 Attributes of the chunk Element*
 
-[width="34%",cols="56%,,44%",options="header",]
+[width="99%",cols="15%,75%,10%"]
 |=======================================================================
-|Attribute Name |Description |Default Value
+|*Attribute Name* |*Description* |*Default Value*
 |`checkpoint-policy` a|
 Specifies how to commit the results of processing each chunk:
 
@@ -578,5 +578,3 @@ The following is an example of the `decider` element:
   <stop on="MY_TEMP_ISSUE_EXIST_STATUS" restart="step2"/>
 </decision>
 ----
-
-

@@ -4,8 +4,8 @@ title=Using the JMS API in Java EE Applications
 next=jms-concepts006.html
 prev=jms-concepts004.html
 ~~~~~~
-Using the JMS API in Java EE Applications
-=========================================
+= Using the JMS API in Java EE Applications
+
 
 [[BNCGL]]
 
@@ -107,7 +107,7 @@ any of the components.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 If your application contains one or more message-driven beans, you may
 want to place the annotation on one of the message-driven beans. If you
@@ -367,7 +367,7 @@ contains an `activationConfig` element containing
 the bean or the connection factory. These properties can include the
 connection factory, a destination type, a durable subscription, a
 message selector, or an acknowledgment mode. Some of the examples in
-link:jms-examples.html#BNCGV[Chapter 47, "Java Message Service Examples"]
+link:jms-examples.html#BNCGV[Chapter 49, "Java Message Service Examples"]
 set these properties. You can also set the properties in the deployment
 descriptor.
 * The application client container has only one instance of a
@@ -386,11 +386,11 @@ defined by the JMS specification.
 
 [[sthref199]][[GJKOH]]
 
-Table 48-3 @ActivationConfigProperty Settings for Message-Driven Beans
+*Table 48-3 @ActivationConfigProperty Settings for Message-Driven Beans*
 
-[width="33%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Property Name |Description
+|*Property Name* |*Description*
 |`acknowledgeMode` |Acknowledgment mode, used only for bean-managed
 transactions; the default is `Auto-acknowledge` (`Dups-ok-acknowledge`
 is also permitted)

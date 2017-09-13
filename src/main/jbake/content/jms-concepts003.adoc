@@ -4,8 +4,8 @@ title=The JMS API Programming Model
 next=jms-concepts004.html
 prev=jms-concepts002.html
 ~~~~~~
-The JMS API Programming Model
-=============================
+= The JMS API Programming Model
+
 
 [[BNCEH]]
 
@@ -182,7 +182,7 @@ or more sessions.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 In the Java EE platform, the ability to create multiple sessions from a
 single connection is limited to application clients. In web and
@@ -751,11 +751,11 @@ values.
 
 [[sthref196]][[BNCEU]]
 
-Table 41 How JMS Message Header Field Values Are Set
+*Table 48-1 How JMS Message Header Field Values Are Set*
 
-[width="56%",cols="39%,,61%",options="header",]
+[width="99%",cols="20%,60%,20%"]
 |=======================================================================
-|Header Field |Description |Set By
+|*Header Field* |*Description* |*Set By*
 |`JMSDestination` |Destination to which the message is being sent |JMS
 provider `send` method
 
@@ -829,11 +829,11 @@ to send and receive data in many different forms. link:#BNCEX[Table
 
 [[sthref197]][[BNCEX]]
 
-Table 48-2 JMS Message Types
+*Table 48-2 JMS Message Types*
 
-[width="25%",cols="100%,",options="header",]
+[width="75%",cols="15%,60%"]
 |=======================================================================
-|Message Type |Body Contains
+|*Message Type* |*Body Contains*
 |`TextMessage` |A `java.lang.String` object (for example, the contents
 of an XML file).
 

@@ -10,7 +10,7 @@ Getting Started Securing Enterprise Applications
 [[BNBYK]]
 
 [[getting-started-securing-enterprise-applications]]
-50 Getting Started Securing Enterprise Applications
+52 Getting Started Securing Enterprise Applications
 ---------------------------------------------------
 
 
@@ -23,5 +23,3 @@ The following topics are addressed here:
 Enterprise Applications]
 * link:security-javaee002.html#BNBYL[Securing Enterprise Beans]
 * link:security-javaee003.html#GKBSZ[Examples: Securing Enterprise Beans]
-
-

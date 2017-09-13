@@ -10,7 +10,7 @@ Duke's Bookstore Case Study Example
 [[GLNVI]]
 
 [[dukes-bookstore-case-study-example]]
-58 Duke's Bookstore Case Study Example
+60 Duke's Bookstore Case Study Example
 --------------------------------------
 
 
@@ -28,5 +28,3 @@ Bookstore]
 * link:dukes-bookstore002.html#GLQFD[The Duke's Bookstore Interface]
 * link:dukes-bookstore003.html#GLPPQ[Running the Duke's Bookstore Case
 Study Application]
-
-

@@ -10,7 +10,7 @@ prev=partsecurity.html
 [[BNBWJ]]
 
 [[introduction-to-security-in-the-java-ee-platform]]
-48 Introduction to Security in the Java EE Platform
+50 Introduction to Security in the Java EE Platform
 ---------------------------------------------------
 
 

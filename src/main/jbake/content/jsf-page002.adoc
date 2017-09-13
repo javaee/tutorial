@@ -299,7 +299,7 @@ a|
 In this example and others, `bundle` refers to a
 `java.util.ResourceBundle` file that contains locale-specific strings to
 be displayed. Resource bundles are discussed in
-link:webi18n.html#BNAXU[Chapter 21, "Internationalizing and Localizing
+link:webi18n.html#BNAXU[Chapter 22, "Internationalizing and Localizing
 Web Applications"].
 
 |=======================================================================

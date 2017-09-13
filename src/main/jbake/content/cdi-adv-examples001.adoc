@@ -13,7 +13,7 @@ prev=cdi-adv-examples.html
 Building and Running the CDI Advanced Examples
 ----------------------------------------------
 
-The examples are in the `_tut-install_` `/examples/cdi/` directory. To build
+The examples are in the `_tut-install_/examples/cdi/` directory. To build
 and run the examples, you will do the following.
 
 1.  Use NetBeans IDE or the Maven tool to compile, package, and deploy

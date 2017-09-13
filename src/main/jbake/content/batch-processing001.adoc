@@ -82,12 +82,12 @@ from the last checkpoint. The input retrieval and output writing parts
 of a chunk step save their current position after the processing of each
 chunk, and can recover it when the step is restarted.
 +
-link:#BABFJBAH[Figure 56-1] shows the three parts of two steps in a
+link:#BABFJBAH[Figure 58-1] shows the three parts of two steps in a
 batch job.
 +
 [[BABFJBAH]]
 
-.*Figure 56-1 Chunk Steps in a Batch Job*
+.*Figure 58-1 Chunk Steps in a Batch Job*
 image:img/javaeett_dt_058.png[
 "This figure shows a batch job that contains two chunk steps: step A and
 step B. Step A has the three parts of a chunk-oriented step: input
@@ -148,12 +148,12 @@ the next step or to terminate the batch job. Decision elements set the
 status of the batch job when terminating it. Like a step, a batch job
 can terminate successfully, be interrupted, or fail.
 
-link:#BCGDCDCA[Figure 56-2] shows an example of a job that contains
+link:#BCGDCDCA[Figure 58-2] shows an example of a job that contains
 chunk steps, task steps and a decision element.
 
 [[BCGDCDCA]]
 
-.*Figure 56-2 Steps and Decision Elements in a Job*
+.*Figure 58-2 Steps and Decision Elements in a Job*
 image:img/javaeett_dt_059.png[
 "This figure shows a batch job that contains two chunk steps, a task step
 and a decision element. The job starts with chunk step A, continues with
@@ -183,5 +183,3 @@ developers to concentrate on the business logic of their applications.
 Batch frameworks consist of a format to specify jobs and steps, an
 application programming interface (API), and a service available at
 runtime that manages the execution of batch jobs.
-
-

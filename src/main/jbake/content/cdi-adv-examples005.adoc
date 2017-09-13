@@ -4,8 +4,8 @@ title=The billpayment Example: Using Events and Interceptors
 next=cdi-adv-examples006.html
 prev=cdi-adv-examples004.html
 ~~~~~~
-The billpayment Example: Using Events and Interceptors
-======================================================
+= The billpayment Example: Using Events and Interceptors
+
 
 [[GKHPA]]
 
@@ -16,7 +16,7 @@ The billpayment Example: Using Events and Interceptors
 The `billpayment` example shows how to use both events and interceptors.
 
 The source files are located in the
-tut-install`/examples/cdi/billpayment/src/main/java/javaeetutorial/billpayment/`
+`_tut-install_/examples/cdi/billpayment/src/main/java/javaeetutorial/billpayment/`
 directory.
 
 The following topics are addressed here:
@@ -106,7 +106,7 @@ public class PaymentHandler implements Serializable {
     public void debitPayment(@Observes @Debit PaymentEvent event) {
         logger.log(Level.INFO, "PaymentHandler - Debit Handler: {0}",
                 event.toString());
- 
+
         // call a specific Debit handler class...
     }
 }
@@ -137,7 +137,7 @@ this:
 ----
     <h:body>
         <h3>Bill Payment Options</h3>
-        <p>Enter an amount, select Debit Card or Credit Card, 
+        <p>Enter an amount, select Debit Card or Credit Card,
             then click Pay.</p>
         <h:form>
             <p>
@@ -156,7 +156,7 @@ this:
             </h:selectOneRadio>
             <p><h:commandButton id="submit" value="Pay"
                                 action="#{paymentBean.pay}" /></p>
-            <p><h:commandButton value="Reset" 
+            <p><h:commandButton value="Reset"
                                 action="#{paymentBean.reset}" /></p>
         </h:form>
         ...
@@ -199,7 +199,7 @@ Facelets page and will pass on to the event:
     public static final int DEBIT = 1;
     public static final int CREDIT = 2;
     private int paymentOption = DEBIT;
-    
+
     @Digits(integer = 10, fraction = 2, message = "Invalid value")
     private BigDecimal value;
 
@@ -466,5 +466,3 @@ INFO: PaymentHandler created.
 INFO: Entering method: debitPayment in class billpayment.listener.PaymentHandler
 INFO: PaymentHandler - Debit Handler: Debit = $1234.56 at Tue Dec 14 14:50:28 EST 2010
 ----
-
-

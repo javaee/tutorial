@@ -46,7 +46,7 @@ mode settings:
 
 [source,oac_no_warn]
 ----
-EntityManagerFactory emf = 
+EntityManagerFactory emf =
     Persistence.createEntityManagerFactory(
         "myExamplePU", new Properties().add(
             "javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE"));
@@ -283,15 +283,11 @@ well.
 Removing All Data from the Cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To completely clear the second-level cache:
+To completely clear the second-level cache, call the `Cache.evictAll` method:
 
-1.  Call the `Cache.evictAll` method.
-+
 [source,oac_no_warn]
 ----
 EntityManager em = ...;
 Cache cache = em.getEntityManagerFactory().getCache();
 cache.evictAll();
 ----
-
-

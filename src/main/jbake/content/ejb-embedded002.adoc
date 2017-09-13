@@ -4,8 +4,8 @@ title=Developing Embeddable Enterprise Bean Applications
 next=ejb-embedded003.html
 prev=ejb-embedded001.html
 ~~~~~~
-Developing Embeddable Enterprise Bean Applications
-==================================================
+= Developing Embeddable Enterprise Bean Applications
+
 
 [[GKCRR]]
 
@@ -18,11 +18,11 @@ link:#GKCQC[Table 38-1].
 
 [[sthref157]][[GKCQC]]
 
-Table 38-1 Required Enterprise Bean Features in the Embeddable Container
+*Table 38-1 Required Enterprise Bean Features in the Embeddable Container*
 
-[width="32%",cols="100%,",options="header",]
+[width="50%",cols="15%,25%"]
 |=======================================================================
-|Enterprise Bean Feature |Description
+|*Enterprise Bean Feature* |*Description*
 |Local session beans |Local and no-interface view stateless, stateful,
 and singleton session beans. All method access is synchronous. Session
 beans must not be web service endpoints.

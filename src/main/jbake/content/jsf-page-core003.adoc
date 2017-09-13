@@ -84,7 +84,7 @@ Instead of using the standard validators, you can use Bean Validation to
 validate data. If you specify bean validation constraints on your
 managed bean properties, the constraints are automatically placed on the
 corresponding fields on your applications web pages. See
-link:bean-validation.html#CHDGJIIA[Chapter 22, "Introduction to Bean
+link:bean-validation.html#CHDGJIIA[Chapter 23, "Introduction to Bean
 Validation"] for more information. You do not need to specify the
 `validateBean` tag to use Bean Validation, but the tag allows you to use
 more advanced Bean Validation features. For example, you can use the

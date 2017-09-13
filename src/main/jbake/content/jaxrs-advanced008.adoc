@@ -19,7 +19,7 @@ perform the create, read, update, delete (CRUD) operations for a
 specific entity.
 
 The `customer` sample application is in the
-tut-install`/examples/jaxrs/customer/` directory. See
+`_tut-install_/examples/jaxrs/customer/` directory. See
 link:usingexamples.html#GFIUD[Chapter 2, "Using the Tutorial Examples,"]
 for basic information on building and running sample applications.
 
@@ -38,7 +38,7 @@ Overview of the customer Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The source files of this application are at
-tut-install`/examples/jaxrs/customer/src/main/java/`. The application
+`_tut-install_/examples/jaxrs/customer/src/main/java/`. The application
 has three parts.
 
 * The `Customer` and `Address` entity classes. These classes model the
@@ -72,27 +72,27 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @XmlElement(required=true) 
+
+    @XmlElement(required=true)
     protected int number;
-    
-    @XmlElement(required=true)  
+
+    @XmlElement(required=true)
     protected String street;
-    
-    @XmlElement(required=true)  
+
+    @XmlElement(required=true)
     protected String city;
-    
-    @XmlElement(required=true) 
+
+    @XmlElement(required=true)
     protected String province;
-    
-    @XmlElement(required=true)  
+
+    @XmlElement(required=true)
     protected String zip;
-    
+
     @XmlElement(required=true)
     protected String country;
-    
+
     public Address() { }
-    
+
     // Getter and setter methods
     // ...
 }
@@ -120,27 +120,27 @@ The following class represents a customer:
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @XmlAttribute(required=true) 
+    @XmlAttribute(required=true)
     protected int id;
-    
-    @XmlElement(required=true) 
+
+    @XmlElement(required=true)
     protected String firstname;
-    
-    @XmlElement(required=true) 
+
+    @XmlElement(required=true)
     protected String lastname;
-    
+
     @XmlElement(required=true)
     @OneToOne
     protected Address address;
-    
+
     @XmlElement(required=true)
     protected String email;
-    
+
     @XmlElement (required=true)
     protected String phone;
-    
+
     public Customer() {...}
-    
+
     // Getter and setter methods
     // ...
 }
@@ -221,7 +221,7 @@ public class CustomerService {
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createCustomer(Customer customer) {
- 
+
         try {
             long customerId = persist(customer);
             return Response.created(URI.create("/" + customerId)).build();
@@ -273,7 +273,7 @@ the client.
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Customer getCustomer(@PathParam("id") String customerId) {
         Customer customer = null;
- 
+
         try {
             customer = findById(customerId);
         } catch (Exception ex) {
@@ -315,14 +315,14 @@ test the `CustomerService` web service:
 @Stateless
 public class CustomerBean {
     protected Client client;
-    private static final Logger logger = 
+    private static final Logger logger =
             Logger.getLogger(CustomerBean.class.getName());
-    
+
     @PostConstruct
     private void init() {
         client = ClientBuilder.newClient();
     }
- 
+
     @PreDestroy
     private void clean() {
         client.close();
@@ -343,13 +343,13 @@ public class CustomerBean {
             navigation = "customerCreated";
         } else {
             logger.log(Level.WARNING, "couldn''t create customer with " +
-                    "id {0}. Status returned was {1}", 
+                    "id {0}. Status returned was {1}",
                     new Object[]{customer.getId(), response.getStatus()});
             navigation = "customerError";
         }
         return navigation;
     }
- 
+
     public String retrieveCustomer(String id) {
         String navigation;
         Customer customer =
@@ -364,7 +364,7 @@ public class CustomerBean {
         }
         return navigation;
     }
-    
+
     public List<Customer> retrieveAllCustomers() {
         List<Customer> customers =
                 client.target("http://localhost:8080/customer/webapi/Customer")
@@ -465,5 +465,3 @@ http://localhost:8080/customer/
 ----
 +
 The web client allows you to create and view customers.
-
-

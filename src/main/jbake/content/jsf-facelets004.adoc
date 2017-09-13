@@ -63,7 +63,7 @@ or `h:dataTable.`
 
 
 For more information on Facelets templating tags, see the
-olink:JSFTL[JavaServer Faces Facelets Tag Library documentation].
+JavaServer Faces Facelets Tag Library documentation.
 
 The Facelets tag library includes the main templating tag `ui:insert`. A
 template page that is created with this tag allows you to define a

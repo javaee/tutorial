@@ -4,8 +4,8 @@ title=Using the Timer Service
 next=ejb-basicexamples006.html
 prev=ejb-basicexamples004.html
 ~~~~~~
-Using the Timer Service
-=======================
+= Using the Timer Service
+
 
 [[BNBOY]]
 
@@ -42,11 +42,11 @@ link:#GIQLY[Table 37-1] shows the calendar-based timer attributes.
 
 [[sthref156]][[GIQLY]]
 
-Table 37-1 Calendar-Based Timer Attributes
+*Table 37-1 Calendar-Based Timer Attributes*
 
-[width="51%",cols="30%,45%,25%,",options="header",]
+[width="99%",cols="15%,35%,15%,35%"]
 |=======================================================================
-|Attribute |Description |Default Value |Allowable Values and Examples
+|*Attribute* |*Description* |*Default Value* |*Allowable Values and Examples*
 |`second` |One or more seconds within a minute |`0` |`0` to `59`. For
 example: `second="30"`.
 
@@ -484,7 +484,7 @@ The timersession Example
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The source code for this example is in the
-tut-install`/examples/ejb/timersession/src/main/java/` directory.
+`_tut-install_/examples/ejb/timersession/src/main/java/` directory.
 
 `TimerSessionBean` is a singleton session bean that shows how to set
 both an automatic timer and a programmatic timer. In the source code

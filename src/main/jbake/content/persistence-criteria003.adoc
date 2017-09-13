@@ -4,8 +4,8 @@ title=Using the Criteria API and Metamodel API to Create Basic Typesafe Queries
 next=persistence-string-queries.html
 prev=persistence-criteria002.html
 ~~~~~~
-Using the Criteria API and Metamodel API to Create Basic Typesafe Queries
-=========================================================================
+= Using the Criteria API and Metamodel API to Create Basic Typesafe Queries
+
 
 [[GJIVM]]
 
@@ -230,11 +230,11 @@ can use with `Expression` objects.
 
 [[sthref180]][[GJIWW]]
 
-Table 43-1 Conditional Methods in the Expression Interface
+*Table 43-1 Conditional Methods in the Expression Interface*
 
-[width="20%",cols="100%,",options="header",]
+[width="50%",cols="15%,35%"]
 |============================================================
-|Method |Description
+|*Method* |*Description*
 |`isNull` |Tests whether an expression is null
 |`isNotNull` |Tests whether an expression is not null
 |`in` |Tests whether an expression is within a list of values
@@ -277,11 +277,11 @@ shows conditional methods you can use with `CriteriaBuilder` objects.
 
 [[sthref181]][[GJIXL]]
 
-Table 43-2 Conditional Methods in the CriteriaBuilder Interface
+*Table 43-2 Conditional Methods in the CriteriaBuilder Interface*
 
-[width="20%",cols="100%,",options="header",]
+[width="60%",cols="15%,45%"]
 |=======================================================================
-|Conditional Method |Description
+|*Conditional Method* |*Description*
 |`equal` |Tests whether two expressions are equal
 
 |`notEqual` |Tests whether two expressions are not equal
@@ -350,11 +350,11 @@ link:#GJIWU[Table 43-3].
 
 [[sthref182]][[GJIWU]]
 
-Table 43-3 Compound Predicate Methods in the CriteriaBuilder Interface
+*Table 43-3 Compound Predicate Methods in the CriteriaBuilder Interface*
 
-[width="20%",cols="100%,",options="header",]
+[width="50%",cols="15%,35%"]
 |=========================================================
-|Method |Description
+|*Method* |*Description*
 |`and` |A logical conjunction of two Boolean expressions
 |`or` |A logical disjunction of two Boolean expressions
 |`not` |A logical negation of the given Boolean expression

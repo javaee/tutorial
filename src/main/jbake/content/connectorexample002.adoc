@@ -4,8 +4,8 @@ title=The trading Example
 next=connectorexample003.html
 prev=connectorexample001.html
 ~~~~~~
-The trading Example
-===================
+= The trading Example
+
 
 [[CHDFHAID]]
 
@@ -16,7 +16,7 @@ The trading Example
 The `trading` example demonstrates how to implement and use a simple
 outbound resource adapter that submits requests to a legacy EIS using a
 TCP socket. The example demonstrates the scenario in
-link:#CHDHADIG[Figure 54-1] and consists of the following modules:
+link:#CHDHADIG[Figure 56-1] and consists of the following modules:
 
 * `trading-eis`: A Java SE program that simulates a legacy EIS
 * `trading-rar`: The outbound resource adapter implementation
@@ -26,7 +26,7 @@ adapter and the web application
 
 [[CHDHADIG]]
 
-.*Figure 54-1 The trading Example*
+.*Figure 56-1 The trading Example*
 image:img/javaeett_dt_054.png[
 "This figure shows the trading example components: a deployed WAR and RAR
 that communicate with the EIS over a TCP socket."]
@@ -80,16 +80,18 @@ handles to the EIS. The connection handles enable the application to
 make requests and obtain information from the EIS.
 
 The `trading-rar` module provides a custom client interface that
-consists of the classes listed in link:#CHDCHJAC[Table 54-1].
+consists of the classes listed in link:#CHDCHJAC[Table 56-1].
 
 [[sthref242]][[CHDCHJAC]]
 
-Table 54-1 Classes and Interfaces in the javaeetutorial.trading.rar.api
-Package
 
-[width="32%",cols="100%,",options="header",]
+*Table 56-1 Classes and Interfaces in the javaeetutorial.trading.rar.api
+Package*
+
+
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|API Component |Description
+|*API Component* |*Description*
 |`TradeOrder` |Represents a trade order for the EIS
 
 |`TradeResponse` |Represents a response from the EIS to a trade request
@@ -120,7 +122,7 @@ by using the `@ConnectionFactoryDefinition` annotation as follows:
     interfaceName = "javaeetutorial.trading.rar.api.TradeConnectionFactory",
     resourceAdapter = "#trading-rar",
     minPoolSize = 5,
-    transactionSupport = 
+    transactionSupport =
             TransactionSupport.TransactionSupportLevel.NoTransaction
 )
 public class ResourceAccessBean implements Serializable { ... }
@@ -147,7 +149,7 @@ application.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 You can also configure a connection factory for a previously deployed
 outbound resource adapter using the administration commands from your
@@ -204,25 +206,27 @@ Implementing the Outbound Resource Adapter
 The `trading-rar` module implements the outbound contract and a custom
 client interface for the simple legacy stock trading platform EIS used
 in this example. The architecture of the outbound resource adapter is
-shown in link:#CHDIGAJE[Figure 54-2].
+shown in link:#CHDIGAJE[Figure 56-2].
 
 [[CHDIGAJE]]
 
-.*Figure 54-2 Architecture of the trading Example*
+.*Figure 56-2 Architecture of the trading Example*
 image:img/javaeett_dt_055.png[
 "This figure shows the classes in each of the modules of the trading
 example."]
 
 The `trading-rar` module implements the interfaces listed in
-link:#CHDIBBIC[Table 54-2].
+link:#CHDIBBIC[Table 56-2].
 
 [[sthref245]][[CHDIBBIC]]
 
-Table 54-2 Interfaces Implemented in the trading-rar Module
 
-[width="58%",cols="45%,55%,",options="header",]
+*Table 56-2 Interfaces Implemented in the trading-rar Module*
+
+
+[width="99%",cols="20%,20%,60%"]
 |=======================================================================
-|Package |Interface |Description
+|*Package* |*Interface* |*Description*
 |`javax.resource.spi` |`ResourceAdapter` |Defines the lifecycle methods
 of the resource adapter
 
@@ -374,5 +378,3 @@ The server log shows the requests from the web application and the call
 sequence that provides connection handles from the resource adapter.
 7.  Before undeploying the `trading-ear` application, press Ctrl+C on
 the terminal window to close the `trading-eis` application.
-
-
