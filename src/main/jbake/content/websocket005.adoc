@@ -36,7 +36,7 @@ Follow these steps to send messages in an endpoint.
 +
 The `Session` object is available as a parameter in the annotated
 lifecycle methods of the endpoint, like those in
-link:websocket004.html#BABDGEJH[Table 18-1]. When your message is a
+link:websocket004.html#BABDGEJH[Table 19-1]. When your message is a
 response to a message from the peer, you have the `Session` object
 available inside the method that received the message (the method
 annotated with `@OnMessage`). If you have to send messages that are not
@@ -129,10 +129,8 @@ public class ReceiveEndpoint {
    }
    @OnMessage
    public void pongMessage(Session session, PongMessage msg) {
-      System.out.println("Pong message: " + 
+      System.out.println("Pong message: " +
                           msg.getApplicationData().toString());
    }
 }
 ----
-
-

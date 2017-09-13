@@ -128,7 +128,7 @@ public class PriceVolumeBean {
    private volatile double price = 100.0;
    private volatile int volume = 300000;
    private static final Logger logger = Logger.getLogger("PriceVolumeBean");
-   
+
    @PostConstruct
    public void init() {
        /* Initialize the EJB and create a timer */
@@ -136,7 +136,7 @@ public class PriceVolumeBean {
        random = new Random();
        tservice.createIntervalTimer(1000, 1000, new TimerConfig());
    }
-   
+
    @Timeout
    public void timeout() {
        /* Adjust price and volume and send updates */
@@ -149,7 +149,7 @@ public class PriceVolumeBean {
 
 The enterprise bean calls the `send` method of the `ETFEndpoint` class
 in the timeout method. See link:ejb-basicexamples005.html#BNBOY[Using the
-Timer Service] in link:ejb-basicexamples.html#GIJRB[Chapter 35, "Running
+Timer Service] in link:ejb-basicexamples.html#GIJRB[Chapter 37, "Running
 the Enterprise Bean Examples"] for more information on the timer
 service.
 
@@ -280,5 +280,3 @@ http://localhost:8080/dukeetf2/
 +
 Open the same URL on a different web browser tab or window to see how
 both pages get price and volume updates simultaneously.
-
-

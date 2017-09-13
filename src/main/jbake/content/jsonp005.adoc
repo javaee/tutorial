@@ -15,14 +15,14 @@ JSON in Java EE RESTful Web Services
 
 This section explains how the Java API for JSON Processing is related to
 other Java EE packages that provide JSON support for RESTful web
-services. See link:jaxrs.html#GIEPU[Chapter 30, "Building RESTful Web
+services. See link:jaxrs.html#GIEPU[Chapter 32, "Building RESTful Web
 Services with JAX-RS,"] for more information on RESTful web services.
 
 Jersey, the reference implementation for JAX-RS (JSR 311) included in
 GlassFish Server, provides support for binding JSON data from RESTful
 resource methods to Java objects using JAXB, as described in
 link:jaxrs-advanced007.html#GKKNJ[Using JAX-RS with JAXB] in
-link:jaxrs-advanced.html#GJJXE[Chapter 32, "JAX-RS: Advanced Topics and
+link:jaxrs-advanced.html#GJJXE[Chapter 34, "JAX-RS: Advanced Topics and
 an Example"]. However, JSON support is not part of JAX-RS (JSR 311) or
 JAXB (JSR 222), so that procedure may not work for Java EE
 implementations other than GlassFish Server.
