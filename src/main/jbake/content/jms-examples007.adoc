@@ -49,7 +49,7 @@ messages to a queue
 * `SimpleMessageBean`: A message-driven bean that asynchronously
 processes the messages that are sent to the queue
 
-link:#BNBPM[Figure 47-3] illustrates the structure of this application.
+link:#BNBPM[Figure 49-3] illustrates the structure of this application.
 The application client sends messages to the queue, which was created
 administratively using the Administration Console. The JMS provider (in
 this case, GlassFish Server) delivers the messages to the instances of
@@ -57,7 +57,7 @@ the message-driven bean, which then processes the messages.
 
 [[BNBPM]]
 
-.*Figure 47-3 The simplemessage Application*
+.*Figure 49-3 The simplemessage Application*
 image:img/javaeett_dt_036.png[
 "Diagram of application showing an application client sending a message
 to a queue, and the message being delivered to a message-driven bean"]
@@ -131,7 +131,7 @@ configuration properties:
 })
 ----
 
-See link:jms-concepts005.html#GJKOH[Table 46-3] for a list of the
+See link:jms-concepts005.html#GJKOH[Table 48-3] for a list of the
 available properties.
 
 See link:jms-examples008.html#BNCGW[Sending Messages from a Session Bean
@@ -316,5 +316,3 @@ The received messages may appear in a different order from the order in
 which they were sent.
 4.  After you have finished running the application, undeploy it using
 the `mvn cargo:undeploy` command.
-
-

@@ -4,8 +4,8 @@ title=Monitoring Events on the Client
 next=jsf-ajax006.html
 prev=jsf-ajax004.html
 ~~~~~~
-Monitoring Events on the Client
-===============================
+= Monitoring Events on the Client
+
 
 [[GKDDF]]
 
@@ -24,11 +24,11 @@ the properties listed in link:#GKGOE[Table 13-3].
 
 [[sthref71]][[GKGOE]]
 
-Table 13-3 Properties of the onevent Data Object
+*Table 13-3 Properties of the onevent Data Object*
 
-[width="20%",cols="100%,",options="header",]
+[width="60%",cols="15%,45%"]
 |=======================================================================
-|Property |Description
+|*Property* |*Description*
 |`responseXML` |The response to the Ajax call in XML format
 
 |`responseText` |The response to the Ajax call in text format
@@ -53,5 +53,3 @@ monitors the Ajax request sent by the event:
 ----
 <f:ajax event="click" render="statusmessage" onevent="monitormyajaxevent"/>
 ----
-
-

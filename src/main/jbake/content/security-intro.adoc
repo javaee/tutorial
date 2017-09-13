@@ -4,19 +4,29 @@ title=Introduction to Security in the Java EE Platform
 next=security-intro001.html
 prev=partsecurity.html
 ~~~~~~
-Introduction to Security in the Java EE Platform
-================================================
+= Introduction to Security in the Java EE Platform
+
 
 [[BNBWJ]]
 
 [[introduction-to-security-in-the-java-ee-platform]]
-48 Introduction to Security in the Java EE Platform
+50 Introduction to Security in the Java EE Platform
 ---------------------------------------------------
 
 
 This chapter introduces basic security concepts and security mechanisms.
 More information on these concepts and mechanisms can be found in the
-chapter on security in the Java EE 7 specification.
+chapter on security in the Java EE 8 specification.
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+*Note:*
+
+The SDK may include additional material demonstrating key features of the Java EE Security API. Please check the latest SDK release notes for additional details.
+
+|=======================================================================
+
 
 The following topics are addressed here:
 
@@ -29,5 +39,3 @@ and Roles]
 * link:security-intro006.html#BNBXW[Establishing a Secure Connection
 Using SSL]
 * link:security-intro007.html#BNBYJ[Further Information about Security]
-
-

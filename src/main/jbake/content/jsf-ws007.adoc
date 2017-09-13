@@ -1,0 +1,56 @@
+type=page
+status=published
+title=Using Ajax With WebSockets
+next=servlets.html
+prev=jsf-ws006.html
+~~~~~~
+= Using Ajax With WebSockets
+
+
+[[using-ajax-with-websockets]]
+Using Ajax With WebSockets
+--------------------------
+
+If you want to perform complex UI updates depending on the received push
+message, you can nest the `f:ajax` tag inside the `f:websocket` tag. See the
+following example:
+
+[source,oac_no_warn]
+----
+<h:panelGroup id="foo">
+... (some complex UI here) ...
+</h:panelGroup>
+<h:form>
+<f:websocket channel="someChannel" scope="view">
+<f:ajax event="someEvent"
+listener="#{bean.pushed}" render=":foo" />
+</f:websocket>
+</h:form>
+----
+
+Here, the push message simply represents the ajax event name. You can use any
+custom event name.
+
+`someChannel.send("someEvent");`
+
+An alternative is to combine the `f:websocket` tag with the `h:commandScript` tag.
+The `<f:websocket onmessage>` references exactly the `<h:commandScript name>`.
+
+For example:
+
+[source,oac_no_warn]
+----
+<h:panelGroup id="foo">
+... (some complex UI here) ...
+</h:panelGroup>
+<f:websocket channel="someChannel" scope="view"
+onmessage="pushed" />
+<h:form>
+<h:commandScript name="pushed"
+action="#{bean.pushed}" render=":foo" />
+</h:form>
+----
+
+If you pass a `Map<String,V>` or a JavaBean as the push message object, then all
+entries or properties will transparently be available as request parameters in
+the command script method `#{bean.pushed}`.

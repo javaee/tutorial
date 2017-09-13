@@ -15,9 +15,9 @@ Further Information about Resource Adapters
 
 For more information about resource adapters and annotations, see
 
-* Java EE 7 Platform Specification (JSR 342):
+* Java EE 7 Platform Specification (JSR 366):
 +
-`http://jcp.org/en/jsr/detail?id=342`
+`http://jcp.org/en/jsr/detail?id=366`
 * Java EE Connector Architecture 1.7 specification:
 +
 `http://jcp.org/en/jsr/detail?id=322`
@@ -27,5 +27,3 @@ For more information about resource adapters and annotations, see
 * Common Annotations for the Java Platform:
 +
 `http://www.jcp.org/en/jsr/detail?id=250`
-
-

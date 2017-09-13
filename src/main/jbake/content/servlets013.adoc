@@ -4,8 +4,8 @@ title=Nonblocking I/O
 next=servlets014.html
 prev=servlets012.html
 ~~~~~~
-Nonblocking I/O
-===============
+= Nonblocking I/O
+
 
 [[BEIHICDH]]
 
@@ -45,18 +45,18 @@ to the output stream.
 4.  Process the request and the response inside the listener's callback
 methods.
 
-link:#BEIFDICJ[Table 17-4] and link:#BEIFIIIH[Table 17-5] describe the
+link:#BEIFDICJ[Table 18-4] and link:#BEIFIIIH[Table 18-5] describe the
 methods available in the servlet input and output streams for
-nonblocking I/O support. link:#BEIFGJCG[Table 17-6] describes the
+nonblocking I/O support. link:#BEIFGJCG[Table 18-6] describes the
 interfaces for read listeners and write listeners.
 
 [[sthref106]][[BEIFDICJ]]
 
-Table 17-4 Nonblocking I/O Support in javax.servlet.ServletInputStream
+*Table 18-4 Nonblocking I/O Support in javax.servlet.ServletInputStream*
 
-[width="50%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Method |Description
+|*Method* |*Description*
 |`void setReadListener(ReadListener rl)` |Associates this input stream
 with a listener object that contains callback methods to read data
 asynchronously. You provide the listener object as an anonymous class or
@@ -71,11 +71,11 @@ object.
 
 [[sthref107]][[BEIFIIIH]]
 
-Table 17-5 Nonblocking I/O Support in javax.servlet.ServletOutputStream
+*Table 18-5 Nonblocking I/O Support in javax.servlet.ServletOutputStream*
 
-[width="50%",cols=",100%",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Method |Description
+|*Method* |*Description*
 |`void setWriteListener(WriteListener wl)` |Associates this output
 stream with a listener object that contains callback methods to write
 data asynchronously. You provide the write listener object as an
@@ -89,11 +89,11 @@ blocking.
 
 [[sthref108]][[BEIFGJCG]]
 
-Table 17-6 Listener Interfaces for Nonblocking I/O Support
+*Table 18-6 Listener Interfaces for Nonblocking I/O Support*
 
-[width="52%",cols="37%,63%,",options="header",]
+[width="99%",cols="20%,20%,60%"]
 |=======================================================================
-|Interface |Methods |Description
+|*Interface* |*Methods* |*Description*
 |`ReadListener` a|
 `void onDataAvailable()`
 
@@ -125,20 +125,20 @@ Reading a Large HTTP POST Request Using Nonblocking I/O
 The code in this section shows how to read a large HTTP POST request
 inside a servlet by putting the request in asynchronous mode (as
 described in link:servlets012.html#BEIGCFDF[Asynchronous Processing]) and
-using the nonblocking I/O functionality from link:#BEIFDICJ[Table 17-4]
-and link:#BEIFGJCG[Table 17-6].
+using the nonblocking I/O functionality from link:#BEIFDICJ[Table 18-4]
+and link:#BEIFGJCG[Table 18-6].
 
 [source,oac_no_warn]
 ----
 @WebServlet(urlPatterns={"/asyncioservlet"}, asyncSupported=true)
 public class AsyncIOServlet extends HttpServlet {
    @Override
-   public void doPost(HttpServletRequest request, 
+   public void doPost(HttpServletRequest request,
                       HttpServletResponse response)
                       throws IOException {
       final AsyncContext acontext = request.startAsync();
       final ServletInputStream input = request.getInputStream();
-      
+
       input.setReadListener(new ReadListener() {
          byte buffer[] = new byte[4*1024];
          StringBuilder sbuilder = new StringBuilder();
@@ -175,5 +175,3 @@ stream associated with the request and assigns a read listener defined
 as an inner class. The listener reads parts of the request as they
 become available and then writes some response to the client when it
 finishes reading the request.
-
-

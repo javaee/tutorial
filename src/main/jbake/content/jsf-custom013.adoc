@@ -4,8 +4,8 @@ title=Binding Component Values and Instances to Managed Bean Properties
 next=jsf-custom014.html
 prev=jsf-custom012.html
 ~~~~~~
-Binding Component Values and Instances to Managed Bean Properties
-=================================================================
+= Binding Component Values and Instances to Managed Bean Properties
+
 
 [[BNATG]]
 
@@ -84,11 +84,11 @@ that you can use with the `value` attribute.
 
 [[sthref78]][[BNATH]]
 
-Table 15-3 Examples of Value-Binding Expressions
+*Table 15-3 Examples of Value-Binding Expressions*
 
-[width="47%",cols=",100%",options="header",]
+[width="60%",cols="30%,30%"]
 |=======================================================================
-|Value |Expression
+|*Value* |*Expression*
 |A Boolean |`cart.numberOfItems> 0`
 
 |A property initialized from a context initialization parameter
@@ -136,7 +136,7 @@ the `books` property of the `BookstoreBean` backing bean, whose name is
              headerClass="list-header"
              styleClass="list-background"
              rowClasses="list-row-even, list-row-odd"
-             border="1" 
+             border="1"
              summary="#{bundle.BookCatalog}">
 ----
 
@@ -207,7 +207,7 @@ reference to an implicit object:
 
 [source,oac_no_warn]
 ----
-<h:outputFormat title="thanks" 
+<h:outputFormat title="thanks"
                 value="#{bundle.ThankYouParam}">
     <f:param value="#{sessionScope.name}"/>
 </h:outputFormat>
@@ -231,11 +231,11 @@ therefore should not be used as values for a `UIInput` component.
 
 [[sthref79]][[BNATK]]
 
-Table 15-4 Implicit Objects
+*Table 15-4 Implicit Objects*
 
-[width="22%",cols="100%,",options="header",]
+[width="75%",cols="15%,60%"]
 |=======================================================================
-|Implicit Object |What It Is
+|*Implicit Object* |*What It Is*
 |`applicationScope` |A `Map` of the application scope attribute values,
 keyed by attribute name
 
@@ -287,7 +287,7 @@ to bean properties:
 
 [source,oac_no_warn]
 ----
-<h:selectBooleanCheckbox id="fanClub" 
+<h:selectBooleanCheckbox id="fanClub"
                          rendered="false"
                          binding="#{cashierBean.specialOffer}" />
 <h:outputLabel for="fanClub"
@@ -328,5 +328,3 @@ properties.
 link:jsf-develop002.html#BNAUK[Writing Properties Bound to Component
 Instances] explains how to write the bean properties bound to the
 example components.
-
-

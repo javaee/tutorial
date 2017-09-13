@@ -10,7 +10,7 @@ prev=jaxws005.html
 [[GIEPU]]
 
 [[building-restful-web-services-with-jax-rs]]
-30 Building RESTful Web Services with JAX-RS
+32 Building RESTful Web Services with JAX-RS
 --------------------------------------------
 
 

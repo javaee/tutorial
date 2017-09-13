@@ -4,8 +4,8 @@ title=Database Schema Creation
 next=persistence-intro007.html
 prev=persistence-intro005.html
 ~~~~~~
-Database Schema Creation
-========================
+= Database Schema Creation
+
 
 [[CHDBEGIC]]
 
@@ -64,11 +64,11 @@ provider will not create or drop any database artifacts.
 
 [[sthref162]][[sthref163]]
 
-Table 38-3 Schema Creation Actions
+*Table 40-3 Schema Creation Actions*
 
-[width="31%",cols="100%,",options="header",]
+[width="75%",cols="15%,60%"]
 |=======================================================================
-|Setting |Description
+|*Setting* |*Description*
 |`none` |No schema creation or deletion will take place.
 
 |`create` |The provider will create the database artifacts on
@@ -102,11 +102,11 @@ the provider will create or delete the database artifacts.
 
 [[sthref164]][[sthref165]]
 
-Table 38-4 Settings for Create and Delete Source Properties
+*Table 40-4 Settings for Create and Delete Source Properties*
 
-[width="31%",cols="100%,",options="header",]
+[width="75%",cols="15%,60%"]
 |=======================================================================
-|Setting |Description
+|*Setting* |*Description*
 |`metadata` |Use the object/relational metadata in the application to
 create or delete the database artifacts.
 
@@ -168,5 +168,3 @@ In this example, the load script is a file called `data.sql` in the
 <property name="javax.persistence.sql-load-script-source"
           value="META-INF/sql/data.sql" />
 ----
-
-

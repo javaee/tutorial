@@ -20,11 +20,11 @@ link:#GKVYB[Table 10-8] lists the event-handling core tags.
 
 [[sthref53]][[GKVYB]]
 
-Table 10-8 Event-Handling Core Tags
+*Table 10-8 Event-Handling Core Tags*
 
-[width="36%",cols="100%,",options="header",]
+[width="99%",cols="30%,70%"]
 |=======================================================================
-|Tag |Function
+|*Tag* |*Function*
 |`f:actionListener` |Adds an action listener to a parent component
 
 |`f:phaseListener` |Adds a `PhaseListener` to a page
@@ -42,11 +42,11 @@ link:#GKVYY[Table 10-9] lists the data-conversion core tags.
 
 [[sthref54]][[GKVYY]]
 
-Table 10-9 Data-Conversion Core Tags
+*Table 10-9 Data-Conversion Core Tags*
 
-[width="30%",cols="100%,",options="header",]
+[width="99%",cols="30%,70%"]
 |=======================================================================
-|Tag |Function
+|*Tag* |*Function*
 |`f:converter` |Adds an arbitrary converter to the parent component
 
 |`f:convertDateTime` |Adds a `DateTimeConverter` instance to the parent
@@ -61,11 +61,11 @@ link:#GKVZG[Table 10-10] lists the facet core tags.
 
 [[sthref55]][[GKVZG]]
 
-Table 10-10 Facet Core Tags
+*Table 10-10 Facet Core Tags*
 
-[width="30%",cols="100%,",options="header",]
+[width="99%",cols="30%,70%"]
 |=======================================================================
-|Tag |Function
+|*Tag* |*Function*
 |`f:facet` |Adds a nested component that has a special relationship to
 its enclosing tag
 
@@ -78,11 +78,11 @@ list.
 
 [[sthref56]][[GKVZA]]
 
-Table 10-11 Core Tags That Represent Items in a List
+*Table 10-11 Core Tags That Represent Items in a List*
 
-[width="30%",cols="100%,",options="header",]
+[width="99%",cols="30%,70%"]
 |======================================================
-|Tag |Function
+|*Tag* |*Function*
 |`f:selectItem` |Represents one item in a list of items
 |`f:selectItems` |Represents a set of items
 |======================================================
@@ -92,11 +92,11 @@ link:#GKVYV[Table 10-12] lists the validator core tags.
 
 [[sthref57]][[GKVYV]]
 
-Table 10-12 Validator Core Tags
+*Table 10-12 Validator Core Tags*
 
-[width="30%",cols="100%,",options="header",]
+[width="99%",cols="30%,70%"]
 |=======================================================================
-|Tag |Function
+|*Tag* |*Function*
 |`f:validateDoubleRange` |Adds a `DoubleRangeValidator` to a component
 
 |`f:validateLength` |Adds a `LengthValidator` to a component
@@ -119,11 +119,11 @@ categories.
 
 [[sthref58]][[GKVYU]]
 
-Table 10-13 Miscellaneous Core Tags
+*Table 10-13 Miscellaneous Core Tags*
 
-[width="47%",cols="60%,40%,",options="header",]
+[width="99%",cols="25%,15%,60%"]
 |=======================================================================
-|Tag Category |Tag |Function
+|*Tag Category* |*Tag* |*Function*
 |Attribute configuration |`f:attribute` |Adds configurable attributes to
 a parent component
 
@@ -152,11 +152,11 @@ specific core tags.
 
 [[sthref59]][[BNARE]]
 
-Table 10-14 Where the Core Tags Are Explained
+*Table 10-14 Where the Core Tags Are Explained*
 
-[width="28%",cols="100%,",options="header",]
+[width="99%",cols="30%,70%"]
 |=======================================================================
-|Tags |Where Explained
+|*Tags* |*Where Explained*
 |Event-handling tags a|
 link:jsf-page-core002.html#BNASZ[Registering Listeners on Components]
 
@@ -194,6 +194,9 @@ Validators]
 |`f:ajax` a|
 link:jsf-ajax.html#GKIOW[Chapter 13, "Using Ajax with JavaServer Faces
 Technology"]
+
+|`f:websocket` a|
+link:jsf-ws.html#using-websockets-with-javaserver-faces-technology[Chapter 17, "Using WebSockets with JavaServer Faces Technology"]
 
 
 |=======================================================================

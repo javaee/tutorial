@@ -10,7 +10,7 @@ Accessing REST Resources with the JAX-RS Client API
 [[BABEIGIH]]
 
 [[accessing-rest-resources-with-the-jax-rs-client-api]]
-31 Accessing REST Resources with the JAX-RS Client API
+33 Accessing REST Resources with the JAX-RS Client API
 ------------------------------------------------------
 
 
@@ -26,5 +26,3 @@ The following topics are addressed here:
 * link:jaxrs-client002.html#BABJCIJC[Using the Client API in the JAX-RS
 Example Applications]
 * link:jaxrs-client003.html#BABCDDGH[Advanced Features of the Client API]
-
-

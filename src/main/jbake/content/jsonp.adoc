@@ -10,7 +10,7 @@ JSON Processing
 [[GLRBB]]
 
 [[json-processing]]
-19 JSON Processing
+20 JSON Processing
 ------------------
 
 
@@ -31,5 +31,3 @@ The following topics are addressed here:
 * link:jsonp007.html#BABBJDAC[The jsonpstreaming Example Application]
 * link:jsonp008.html#BABGAAGB[Further Information about the Java API for
 JSON Processing]
-
-

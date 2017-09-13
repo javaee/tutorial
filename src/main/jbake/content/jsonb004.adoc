@@ -1,0 +1,18 @@
+type=page
+status=published
+title=JSON Binding
+next=webi18n.html
+prev=jsonb003.html
+~~~~~~
+
+[[further-information-about-the-java-api-for-json-binding]]
+Further Information about the Java API for JSON Binding
+-------------------------------------------------------
+
+For more information on JSON binding in Java EE, see:
+
+* JSR-367: https://jcp.org/en/jsr/detail?id=367
+* Specification project: http://github.com/javaee/jsonb-spec
+* JSON-B official Web site: http://json-b.net
+* Yasson (Reference Implementation): https://projects.eclipse.org/projects/rt.yasson
+

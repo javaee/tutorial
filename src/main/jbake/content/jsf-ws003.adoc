@@ -1,0 +1,89 @@
+type=page
+status=published
+title=Using the f:websocket Tag
+next=jsf-ws004.html
+prev=jsf-ws002.html
+~~~~~~
+= Using the f:websocket Tag
+
+
+[[using-the-fwebsocket-tag]]
+Using the f:websocket Tag
+-------------------------
+
+link:#attributes-of-the-f:websocket-tag[Table 17-1] describes the attributes of
+the `f:websocket` tag.
+
+[[attributes-of-the-f:websocket-tag]]
+
+*Table 17-1 Attributes of the `f:websocket` Tag*
+[width=85%,cols="15%,15%,55%"]
+|===============================================
+|*Name*|*Type*|*Description*
+|`channel` |String |Required. The name of the WebSocket channel. It may not
+be an EL expression and may only contain alphanumeric characters, hyphens,
+underscores, and periods. All open WebSockets on the same channel name will
+receive the same push notification from the server.
+
+|`id` |String |Optional. The identifier of the UIWebSocket component to be created.
+
+|`scope` |String  |Optional. The scope of the WebSocket channel. It may not be
+an EL expression. Allowed values (case insensitive) are: `application`, `session`,
+and `view`.
+
+When the value is `application`, all channels with the same name throughout the
+application receive the same push message. When the value is `session`, only the
+channels with the same name in the current user session receive the same push
+message. When the value is `view`, only the channel in the current view receives
+the push message.
+
+The default scope is `application`. When the `user` attribute is specified,
+then the default scope is `session`.
+
+|`user` |Serializable   |Optional. The user identifier of the WebSocket channel,
+so that user-targeted push messages can be sent. It must implement Serializable
+and preferably have a low memory footprint.
+
+*Hint*: Use `#{request.remoteUser}` or #`{someLoggedInUser.id}`.
+
+All open WebSockets on the same channel and user will receive the same push
+message from the server.
+
+|`onopen` |String   |Optional. The JavaScript event handler function that is
+invoked when the WebSocket is opened. The function is invoked with one argument:
+the channel name.
+
+|`onmessage` |String  |Optional. The JavaScript event handler function that is
+invoked when a push message is received from the server. The function is invoked
+with three arguments: the push message, the channel name, and the `MessageEvent`
+instance.
+
+|`onclose` |String  |Optional. The JavaScript event handler function that is
+invoked when the WebSocket is closed. The function is invoked with three
+arguments: the close reason code, the channel name, and the `CloseEvent`.
+
+Note that this will also be invoked on errors. If an error occurred, you can
+inspect the close reason code and which code was given (for example, when the
+code is not `1000`).
+
+|`connected` |Boolean  |Optional. Specifies whether to auto-reconnect the
+WebSocket. Defaults to `true`. It is interpreted as a JavaScript instruction to
+open or close the WebSocket push connection.
+
+This attribute is implicitly re-evaluated on every ajax request by a
+`PreRenderViewEvent` listener on the `UIViewRoot`. You can also explicitly set it
+to `false` and then manually control it in JavaScript using `jsf.push.open(clientId)`
+and `jsf.push.close(clientId)`.
+
+|`rendered` |Boolean  |Optional. Specifies whether to render the WebSocket scripts.
+Defaults to `true`.
+
+This attribute is implicitly re-evaluated on every ajax request by a
+`PreRenderViewEvent` listener on the `UIViewRoot`. If the value changes to `false`
+while the WebSocket is already opened, then the WebSocket will implicitly be closed.
+
+|`binding` |UIComponent  |Optional. The value binding expression to a backing
+bean property bound to the component instance for the `UIComponent` created by
+this tag.
+
+|===============================================

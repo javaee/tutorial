@@ -10,7 +10,7 @@ Running the Persistence Examples
 [[GIJST]]
 
 [[running-the-persistence-examples]]
-39 Running the Persistence Examples
+41 Running the Persistence Examples
 -----------------------------------
 
 
@@ -25,5 +25,3 @@ Persistence Examples]
 * link:persistence-basicexamples003.html#GIQSQ[The roster Application]
 * link:persistence-basicexamples004.html#GKANQ[The address-book
 Application]
-
-

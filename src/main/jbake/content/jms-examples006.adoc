@@ -23,7 +23,7 @@ Faces technology, described in link:partwebtier.html#BNADP[Part IX, "The
 Web Tier."]
 
 The example, `websimplemessage`, is under the
-tut-install`/jms/examples/` directory. It uses sending and receiving
+`_tut-install_/jms/examples/` directory. It uses sending and receiving
 Facelets pages as well as corresponding backing beans. When a user
 enters a message in the text field of the sending page and clicks a
 button, the backing bean for the page sends the message to a queue and
@@ -33,7 +33,7 @@ message synchronously and displays it.
 
 [[sthref213]]
 
-.*Figure 47-2 The websimplemessage Application*
+.*Figure 49-2 The websimplemessage Application*
 image:img/javaeett_dt_035.png[
 "Diagram showing a web application in which a managed bean sends a
 message to a queue, and another managed bean receives the message from
@@ -101,7 +101,7 @@ public void sendMessage() {
         String text = "Message from producer: " + messageText;
         context.createProducer().send(queue, text);
 
-        FacesMessage facesMessage = 
+        FacesMessage facesMessage =
                 new FacesMessage("Sent message: " + text);
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
     } catch (Throwable t) {
@@ -130,7 +130,7 @@ public void getMessage() {
         String text = receiver.receiveBody(String.class);
 
         if (text != null) {
-            FacesMessage facesMessage = 
+            FacesMessage facesMessage =
                     new FacesMessage("Reading message: " + text);
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         } else {
@@ -252,5 +252,3 @@ Reading message: Message from producer: Hello, Duke
 6.  After you have finished running the application, undeploy it using
 either the Services tab of NetBeans IDE or the `mvn cargo:undeploy`
 command.
-
-

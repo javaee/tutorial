@@ -41,6 +41,7 @@
 		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
 	</a>
 </span>
+<p align="center" class="beta">Beta Draft (Pre-General Availability)</p>
 
 </body>
 </html>

@@ -4,8 +4,8 @@ title=Asynchronous Processing
 next=servlets013.html
 prev=servlets011.html
 ~~~~~~
-Asynchronous Processing
-=======================
+= Asynchronous Processing
+
 
 [[BEIGCFDF]]
 
@@ -81,16 +81,16 @@ response is not committed after exiting the service method. You have to
 generate the response in the asynchronous context after the blocking
 operation completes or dispatch the request to another servlet.
 
-link:#BEICFIEC[Table 17-3] describes the basic functionality provided by
+link:#BEICFIEC[Table 18-3] describes the basic functionality provided by
 the `AsyncContext` class.
 
 [[sthref104]][[BEICFIEC]]
 
-Table 17-3 Functionality Provided by the AsyncContext Class
+*Table 18-3 Functionality Provided by the AsyncContext Class*
 
-[width="38%",cols="100%,",options="header",]
+[width="90%",cols="20%,70"]
 |=======================================================================
-|Method Signature |Description
+|*Method Signature* |*Description*
 |`void start(Runnable run)` a|
 The container provides a different thread in which the blocking
 operation can be processed.
@@ -159,7 +159,7 @@ public class SyncServlet extends HttpServlet {
    }
 
    @Override
-   public void doGet(HttpServletRequest request, 
+   public void doGet(HttpServletRequest request,
                      HttpServletResponse response) {
       response.setContentType("text/html;charset=UTF-8");
       String param = request.getParameter("param");
@@ -178,7 +178,7 @@ public class AsyncServlet extends HttpServlet {
    /* ... Same variables and init method as in SyncServlet ... */
 
    @Override
-   public void doGet(HttpServletRequest request, 
+   public void doGet(HttpServletRequest request,
                      HttpServletResponse response) {
       response.setContentType("text/html;charset=UTF-8");
       final AsyncContext acontext = request.startAsync();
@@ -209,5 +209,3 @@ sends it to the client.
 
 The service method of `AsyncServlet` returns immediately, and the
 request is processed in the asynchronous context.
-
-

@@ -4,8 +4,8 @@ title=Configuring Navigation Rules
 next=jsf-configure011.html
 prev=jsf-configure009.html
 ~~~~~~
-Configuring Navigation Rules
-============================
+= Configuring Navigation Rules
+
 
 [[BNAXF]]
 
@@ -36,11 +36,11 @@ The outcome can be anything the developer chooses, but link:#BNAXG[Table
 
 [[sthref96]][[BNAXG]]
 
-Table 16-3 Common Outcome Strings
+*Table 16-3 Common Outcome Strings*
 
-[width="17%",cols="100%,",options="header",]
+[width="60%",cols="15%,45%"]
 |=======================================================================
-|Outcome |What It Means
+|*Outcome* |*What It Means*
 |`success` |Everything worked. Go on to the next page.
 
 |`failure` |Something is wrong. Go on to an error page.
@@ -136,5 +136,3 @@ the `action` expression specified by the component tag.
 
 When any of these cases is matched, the component tree defined by the
 `to-view-id` element will be selected for rendering.
-
-

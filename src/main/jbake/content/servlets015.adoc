@@ -2,7 +2,7 @@ type=page
 status=published
 title=The mood Example Application
 next=servlets016.html
-prev=servlets014a.html
+prev=servlets014b.html
 ~~~~~~
 = The mood Example Application
 

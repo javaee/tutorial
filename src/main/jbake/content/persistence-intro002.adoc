@@ -4,8 +4,8 @@ title=Entities
 next=persistence-intro003.html
 prev=persistence-intro001.html
 ~~~~~~
-Entities
-========
+= Entities
+
 
 [[BNBQA]]
 
@@ -575,16 +575,16 @@ deleted. This is called a cascade delete relationship.
 
 The `javax.persistence.CascadeType` enumerated type defines the cascade
 operations that are applied in the `cascade` element of the relationship
-annotations. link:#GJJNJ[Table 38-1] lists the cascade operations for
+annotations. link:#GJJNJ[Table 40-1] lists the cascade operations for
 entities.
 
 [[sthref159]][[GJJNJ]]
 
-Table 38-1 Cascade Operations for Entities
+*Table 40-1 Cascade Operations for Entities*
 
-[width="18%",cols="100%,",options="header",]
+[width="75%",cols="15%,60%"]
 |=======================================================================
-|Cascade Operation |Description
+|*Cascade Operation* |*Description*
 |`ALL` |All cascade operations will be applied to the parent entity's
 related entity. `All` is equivalent to specifying
 `cascade={DETACH, MERGE, PERSIST, REFRESH, REMOVE}`
@@ -704,5 +704,3 @@ classes may also contain relationships to other entities or collections
 of entities. If the embeddable class has such a relationship, the
 relationship is from the target entity or collection of entities to the
 entity that owns the embeddable class.
-
-

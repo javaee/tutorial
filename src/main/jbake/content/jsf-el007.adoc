@@ -4,8 +4,8 @@ title=Examples of EL Expressions
 next=jsf-el008.html
 prev=jsf-el006.html
 ~~~~~~
-Examples of EL Expressions
-==========================
+= Examples of EL Expressions
+
 
 [[BNAIM]]
 
@@ -18,11 +18,11 @@ evaluating them.
 
 [[sthref39]][[BNAIN]]
 
-Table 9-1 Example Expressions
+*Table 9-1 Example Expressions*
 
-[width="45%",cols=",100%",options="header",]
+[width="80%",cols="40%,40%"]
 |=======================================================================
-|EL Expression |Result
+|*EL Expression*|*Result*
 |`${1> (4/2)}` |`false`
 
 |`${4.0>= 3}` |`true`
@@ -81,6 +81,3 @@ during a postback
 |`#{customer.calcTotal}` |The return value of the method `calcTotal` of
 the `customer` bean
 |=======================================================================
-
-
-

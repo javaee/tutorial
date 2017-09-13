@@ -13,7 +13,7 @@ Overview of the EJB Examples
 Overview of the EJB Examples
 ----------------------------
 
-In link:ejb-gettingstarted.html#GIJRE[Chapter 34, "Getting Started with
+In link:ejb-gettingstarted.html#GIJRE[Chapter 36, "Getting Started with
 Enterprise Beans"], you built a stateless session bean named
 `ConverterBean`. This chapter examines the source code of four more
 session beans:
@@ -24,5 +24,3 @@ client
 * `HelloServiceBean`: a stateless session bean that implements a web
 service
 * `TimerSessionBean`: a stateless session bean that sets a timer
-
-

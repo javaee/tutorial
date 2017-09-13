@@ -4,8 +4,8 @@ title=Using Producer Methods, Producer Fields, and Disposer Methods in CDI Appli
 next=cdi-adv004.html
 prev=cdi-adv002.html
 ~~~~~~
-Using Producer Methods, Producer Fields, and Disposer Methods in CDI Applications
-=================================================================================
+= Using Producer Methods, Producer Fields, and Disposer Methods in CDI Applications
+
 
 [[GKGKV]]
 
@@ -147,5 +147,3 @@ The disposer method is called automatically when the context ends (in
 this case, at the end of the conversation, because `RequestBean` has
 conversation scope), and the parameter in the `close` method receives
 the object produced by the producer field.
-
-

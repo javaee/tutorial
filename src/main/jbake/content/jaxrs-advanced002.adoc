@@ -4,8 +4,8 @@ title=Validating Resource Data with Bean Validation
 next=jaxrs-advanced003.html
 prev=jaxrs-advanced001.html
 ~~~~~~
-Validating Resource Data with Bean Validation
-=============================================
+= Validating Resource Data with Bean Validation
+
 
 [[BABCJEDF]]
 
@@ -229,8 +229,6 @@ the JAX-RS runtime will respond to the client request with a 500
 If a `ConstraintValidationException` is thrown, the JAX-RS runtime will
 respond to the client with one of the following HTTP status codes:
 
-* 500 (Internal Server Error) if the exception was thrown while
+* `500` (Internal Server Error) if the exception was thrown while
 validating a method return type
-* 400 (Bad Request) in all other cases
-
-
+* `400` (Bad Request) in all other cases

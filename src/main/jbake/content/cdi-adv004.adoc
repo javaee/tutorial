@@ -4,8 +4,8 @@ title=Using Predefined Beans in CDI Applications
 next=cdi-adv005.html
 prev=cdi-adv003.html
 ~~~~~~
-Using Predefined Beans in CDI Applications
-==========================================
+= Using Predefined Beans in CDI Applications
+
 
 [[CJGHGDBA]]
 
@@ -50,11 +50,11 @@ implements.
 
 [[sthref130]][[sthref131]]
 
-Table 26-1 Injection of Predefined Beans
+*Table 27-1 Injection of Predefined Beans*
 
-[width="51%",cols="48%,52%,",options="header",]
+[width="80%",cols="20%,20%,40%"]
 |=====================================================================
-|Predefined Bean |Resource or CDI Bean |Injection Example
+|*Predefined Bean* |*Resource or CDI Bean* |*Injection Example*
 |`UserTransaction` |Resource |`@Resource UserTransaction transaction;`
 |`Principal` |Resource |`@Resource Principal principal;`
 |`Validator` |Resource |`@Resource Validator validator;`
@@ -92,5 +92,3 @@ public class TransactionServlet extends HttpServlet {
     ...
 }
 ----
-
-

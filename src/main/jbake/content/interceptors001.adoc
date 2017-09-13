@@ -4,8 +4,8 @@ title=Overview of Interceptors
 next=interceptors002.html
 prev=interceptors.html
 ~~~~~~
-Overview of Interceptors
-========================
+= Overview of Interceptors
+
 
 [[GKIGQ]]
 
@@ -39,7 +39,7 @@ interceptors and target classes.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Applications that use the deployment descriptor to define interceptors
 are not portable across Java EE servers.
@@ -49,15 +49,18 @@ are not portable across Java EE servers.
 
 Interceptor methods within the target class or in an interceptor class
 are annotated with one of the metadata annotations defined in
-link:#GKECC[Table 55-1].
+link:#GKECC[Table 57-1].
 
 [[sthref253]][[GKECC]]
 
-Table 55-1 Interceptor Metadata Annotations
 
-[width="44%",cols="100%,",options="header",]
+=======
+Table 57-1 Interceptor Metadata Annotations
+
+
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Interceptor Metadata Annotation |Description
+|*Interceptor Metadata Annotation* |*Description*
 |`javax.interceptor.AroundConstruct` |Designates the method as an
 interceptor method that receives a callback after the target class is
 constructed
@@ -125,5 +128,3 @@ Contexts and Dependency Injection for Java EE (CDI) builds on the basic
 functionality of Java EE interceptors. For information on CDI
 interceptors, including a discussion of interceptor binding types, see
 link:cdi-adv006.html#GKHJX[Using Interceptors in CDI Applications].
-
-

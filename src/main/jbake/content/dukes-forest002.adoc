@@ -14,14 +14,14 @@ Design and Architecture of Duke's Forest
 ----------------------------------------
 
 Duke's Forest is a complex application consisting of three main projects
-and three subprojects. link:#GLNVM[Figure 60-1] shows the architecture
+and three subprojects. link:#GLNVM[Figure 62-1] shows the architecture
 of the three main projects that you will deploy: Duke's Store, Duke's
 Shipment, and Duke's Payment. It also shows how Duke's Store makes use
 of the Events and Entities projects.
 
 [[GLNVM]]
 
-.*Figure 60-1 Architecture of the Duke's Forest Example Application*
+.*Figure 62-1 Architecture of the Duke's Forest Example Application*
 image:img/javaeett_dt_062.png[
 "This figure shows the architecture of the main Duke's Forest projects
 and how they use the Events and Entities projects."]
@@ -86,18 +86,18 @@ such as adding new items to the catalog
 The Duke's Shipment application also has a user interface, accessible to
 administrators.
 
-link:#CIHCHCAA[Figure 60-2] shows how the web applications and the web
+link:#CIHCHCAA[Figure 62-2] shows how the web applications and the web
 service interact.
 
 [[CIHCHCAA]]
 
-.*Figure 60-2 Interactions between Duke's Forest Components*
+.*Figure 62-2 Interactions between Duke's Forest Components*
 image:img/javaeett_dt_063.png[
 "This figure shows the interactions between the Duke's Store and Duke's
 Shipment projects (using REST and HTTP), and between the Duke's Store
 and Duke's Payment projects (using REST and HTTP)."]
 
-As illustrated in link:#CIHCHCAA[Figure 60-2], the customer interacts
+As illustrated in link:#CIHCHCAA[Figure 62-2], the customer interacts
 with the main interface of Duke's Store, while the administrator
 interacts with the administration interface. Both interfaces access a
 façade consisting of managed beans and stateless session beans, which in
@@ -146,12 +146,12 @@ Store shows how the `@Paid` event is handled:
 public void onNewOrder(@Observes @New OrderEvent event) {
 
     if (processPayment(event)) {
-        orderBean.setOrderStatus(event.getOrderID(), 
+        orderBean.setOrderStatus(event.getOrderID(),
                 String.valueOf(OrderBean.Status.PENDING_PAYMENT.getStatus()));
         logger.info("Payment Approved");
         eventManager.fire(event);
     } else {
-        orderBean.setOrderStatus(event.getOrderID(), 
+        orderBean.setOrderStatus(event.getOrderID(),
                 String.valueOf(OrderBean.Status.CANCELLED_PAYMENT.getStatus()));
         logger.info("Payment Denied");
     }
@@ -170,14 +170,14 @@ The entities Project
 
 The `entities` project is a Java Persistence API (JPA) project used by
 both Duke's Store and Duke's Shipment. It is generated from the database
-schema shown in link:#GLNXD[Figure 60-3] and is also used as a base for
+schema shown in link:#GLNXD[Figure 62-3] and is also used as a base for
 the entities consumed and produced by the web services through JAXB.
 Each entity has validation rules based on business requirements,
 specified using Bean Validation.
 
 [[GLNXD]]
 
-.*Figure 60-3 Duke's Forest Database Tables and Their Relationships*
+.*Figure 62-3 Duke's Forest Database Tables and Their Relationships*
 image:img/javaeett_dt_064.png[
 "This figure shows the database tables in Duke's Forest and their
 relationships."]
@@ -638,5 +638,3 @@ Duke's Shipment uses the following deployment descriptors:
 * `glassfish-web.xml`: The configuration file specific to GlassFish
 Server
 * `web.xml`: The web application configuration file
-
-

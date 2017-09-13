@@ -13,10 +13,7 @@ prev=cdi-basic010.html
 Using a Managed Bean in a Facelets Page
 ---------------------------------------
 
-To use the managed bean in a Facelets page, create a form that uses user interface elements to call its methods
-and to display their results. The following example provides a button that asks the user to type a name,
-retrieves the salutation, and then displays the text in a paragraph
-below the button:
+To use the managed bean in a Facelets page, create a form that uses user interface elements to call its methods and to display their results. The following example provides a button that asks the user to type a name, retrieves the salutation, and then displays the text in a paragraph below the button:
 
 [source,oac_no_warn]
 ----

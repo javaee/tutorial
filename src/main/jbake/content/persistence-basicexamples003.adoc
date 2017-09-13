@@ -25,11 +25,11 @@ new features that `order` does not have: many-to-many relationships,
 entity inheritance, and automatic table creation at deployment time.
 
 The database schema in the Java DB database for the `roster` application
-is shown in link:#CHDCHJHG[Figure 39-2].
+is shown in link:#CHDCHJHG[Figure 41-2].
 
 [[CHDCHJHG]]
 
-.*Figure 39-2 Database Schema for the roster Application*
+.*Figure 41-2 Database Schema for the roster Application*
 image:img/javaeett_dt_025.png[
 "Diagram showing the database schema for the roster application"]
 
@@ -150,7 +150,7 @@ public class SummerLeague extends League implements Serializable {
     public SummerLeague() {
     }
 
-    public SummerLeague(String id, String name, String sport) 
+    public SummerLeague(String id, String name, String sport)
             throws IncorrectSportException {
         this.id = id;
         this.name = name;
@@ -288,7 +288,7 @@ who play a particular position on a team:
 public List<PlayerDetails> getPlayersByPosition(String position) {
     logger.info("getPlayersByPosition");
     List<Player> players = null;
-    
+
     try {
         CriteriaQuery<Player> cq = cb.createQuery(Player.class);
         if (cq != null) {
@@ -348,7 +348,7 @@ the database tables used by `roster`. This is done by setting the
 [source,oac_no_warn]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" 
+<persistence version="2.1"
     xmlns="http://xmlns.jcp.org/xml/ns/persistence"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
@@ -356,7 +356,7 @@ the database tables used by `roster`. This is done by setting the
   <persistence-unit name="em" transaction-type="JTA">
     <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" 
+      <property name="javax.persistence.schema-generation.database.action"
                 value="drop-and-create"/>
     </properties>
   </persistence-unit>
@@ -489,5 +489,3 @@ You will see the output, which begins as follows:
 [exec] P22 Janice Walker defender 857.0
 [exec] P25 Frank Fletcher defender 399.0
 ----
-
-

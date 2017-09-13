@@ -189,5 +189,5 @@ Common Annotations for the Java Platform
 Annotations enable a declarative style of programming in the Java
 platform.
 
-The Java EE 7 platform requires Common Annotations for the Java Platform
+The Java EE 8 platform requires Common Annotations for the Java Platform
 1.2.

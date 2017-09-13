@@ -4,8 +4,8 @@ title=Using Alternatives in CDI Applications
 next=cdi-adv003.html
 prev=cdi-adv001.html
 ~~~~~~
-Using Alternatives in CDI Applications
-======================================
+= Using Alternatives in CDI Applications
+
 
 [[GJSDF]]
 
@@ -170,5 +170,3 @@ Such a bean is meant to stand in as a replacement for the default
 implementation, and the alternative implementation automatically
 inherits all qualifiers of the default implementation as well as its EL
 name, if it has one.
-
-

@@ -1,7 +1,7 @@
 type=page
 status=published
 title=Server Push
-next=servlets015.html
+next=servlets014b.html
 prev=servlets014.html
 ~~~~~~
 = Server Push
@@ -28,6 +28,10 @@ request `header.gif`, `footer.gif`, and `style.css`. Servers can preemptively
 start sending the bytes of these assets along with the bytes of the `index.html`.
 
 To use server push, obtain a reference to a `PushBuilder` from an `HttpServletRequest`,
-edit the builder as desired, then call `push()`. See the javadoc for the class
+edit the builder as desired, then call `push()`. See the
+https://javaee.github.io/javaee-spec/[javadoc] for the class
 `javax.servlet.http.PushBuilder` and the method
 `javax.servlet.http.HttpServletRequest.newPushBuilder()`.
+
+To view the GlassFish samples code for this feature, see
+https://github.com/javaee/glassfish-samples/tree/master/ws/javaee8.

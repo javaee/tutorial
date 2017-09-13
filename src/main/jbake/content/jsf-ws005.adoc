@@ -1,0 +1,129 @@
+type=page
+status=published
+title=Conditionally Connecting WebSockets
+next=jsf-ws006.html
+prev=jsf-ws004.html
+~~~~~~
+= Conditionally Connecting WebSockets
+
+
+[[conditionally-connecting-websockets]]
+Conditionally Connecting WebSockets
+-----------------------------------
+
+You can use the optional connected attribute to control whether to
+auto-reconnect the WebSocket.
+
+`<f:websocket ... connected="#{bean.pushable}" />`
+
+The connected attribute defaults to `true` and is interpreted as a JavaScript
+instruction to open or close the WebSocket push connection. If the value is an
+EL expression and it becomes `false` during an ajax request, then the push
+connection will explicitly be closed during `oncomplete` of that ajax request.
+
+You can also explicitly set it to `false` and manually open the push
+connection on the client side by invoking `jsf.push.open(clientId)`,
+passing the component's client ID.
+
+[source,oac_no_warn]
+----
+<h:commandButton ... onclick="jsf.push.open('foo')">
+<f:ajax ... />
+</h:commandButton>
+<f:websocket id="foo" channel="bar" scope="view" ...
+connected="false" />
+----
+
+If you intend to have a one-time push and do not expect more messages,
+you can optionally explicitly close the push connection from the client side
+by invoking `jsf.push.close(clientId)`, passing the component's client ID.
+For example, in the `onmessage` JavaScript listener function, as seen below:
+
+[source,oac_no_warn]
+----
+function someWebsocketListener(message) {
+// ... jsf.push.close('foo');
+}
+----
+
+[[websocket-events-server]]
+WebSocket Events: Server
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When a session or view-scoped socket is automatically closed with close reason
+code `1000` by the server (and thus, not manually closed by the client
+  via `jsf.push.close(clientId)`), it means that the session or view has expired.
+
+[source,oac_no_warn]
+----
+@ApplicationScoped
+public class WebsocketObserver {
+
+public void onOpen(@Observes @Opened WebsocketEvent event) { String channel = event.getChannel();
+// Returns <f:websocket channel>. Long userId = event.getUser();
+// Returns <f:websocket user>, if any.
+// ...
+
+}
+
+public void onClose(@Observes @Closed WebsocketEvent event) { String channel = event.getChannel();
+// Returns <f:websocket channel>. Long userId = event.getUser();
+// Returns <f:websocket user>, if any. CloseCode code = event.getCloseCode();
+// Returns close reason code.
+// ...
+}
+----
+
+[[websocket-events-clients]]
+WebSocket Events: Clients
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use the optional `onopen` JavaScript listener function to listen for
+the open of a WebSocket on the client side. This function is invoked on the
+very first connection attempt, regardless of whether it will be successful.
+It will not be invoked when the WebSocket auto-reconnects a broken connection
+after the first successful connection.
+
+[source,oac_no_warn]
+----
+<f:websocket ... onopen="websocketOpenListener" />
+function websocketOpenListener(channel) {
+// ...
+
+}
+----
+
+The `onopen` JavaScript listener function is invoked with one argument: `channel`
+(the channel name, particularly useful if you have a global listener).
+
+You can use the optional `onclose` JavaScript listener function to listen for
+a normal or abnormal close of a WebSocket. This function is invoked when the
+very first connection attempt fails, or the server has returned close reason
+code `1000` (normal closure) or `1008` (policy violated), or the maximum
+reconnect attempts have been exceeded. It will not be invoked if the WebSocket
+makes an auto-reconnect attempt on a broken connection after the first
+successful connection.
+
+[source,oac_no_warn]
+----
+<f:websocket ... onclose="websocketCloseListener" />
+function websocketCloseListener(code, channel, event) { if (code == -1) {
+// Websockets not supported by client.
+} else if (code == 1000) {
+// Normal close (as result of expired session or view).
+} else {
+// Abnormal close reason (as result of an error).
+}
+
+}
+----
+
+The `onclose` JavaScript listener function is invoked with three arguments:
+
+* `code`: The close reason code as an integer. If it is `-1`, the WebSocket
+is not supported by the client. If it is `1000`, then it was normally closed.
+Otherwise, if it is not `1000`, then there might be an error.
+
+* `channel`: The channel name
+
+* `event`: The `CloseEvent` instance

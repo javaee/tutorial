@@ -50,7 +50,7 @@
     <fileSets>
 	<fileSet>
 	    <directory>target/staging</directory>
-	    <outputDirectory>docs</outputDirectory>
+	    <outputDirectory>doc</outputDirectory>
 	    <excludes>
 		<exclude>_config.yml</exclude>
 		<exclude>_layouts/**</exclude>

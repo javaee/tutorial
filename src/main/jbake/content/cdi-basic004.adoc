@@ -4,8 +4,8 @@ title=About CDI Managed Beans
 next=cdi-basic005.html
 prev=cdi-basic003.html
 ~~~~~~
-About CDI Managed Beans
-=======================
+= About CDI Managed Beans
+
 
 [[GJFZI]]
 
@@ -32,5 +32,3 @@ the case.
 
 No special declaration, such as an annotation, is required to define a
 managed bean.
-
-

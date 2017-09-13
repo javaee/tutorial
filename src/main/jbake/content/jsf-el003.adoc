@@ -4,8 +4,8 @@ title=Value and Method Expressions
 next=jsf-el004.html
 prev=jsf-el002.html
 ~~~~~~
-Value and Method Expressions
-============================
+= Value and Method Expressions
+
 
 [[BNAHU]]
 
@@ -367,7 +367,7 @@ syntax.
 
 Like lvalue expressions, method expressions can use the `.` and the `[]`
 operators. For example, `#{object.method}` is equivalent to
-`#{object["method"]}`. The literal inside the `[]` is converted to
+#`{object["method"]}`. The literal inside the `[]` is converted to
 `String` and is used to find the name of the method that matches it.
 
 Method expressions can be used only in tag attributes and only in the
@@ -415,7 +415,7 @@ For basic information on lambda expressions, see
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Lambda expressions are part of Java SE 8, but you can use them in EL
 expressions with Java SE 7, the Java version associated with the Java EE
@@ -458,5 +458,3 @@ v = (x, y) -> x + y; v(3, 4)
 A lambda expression can also be passed as an argument to a method and be
 invoked in the method. It can also be nested in another lambda
 expression.
-
-

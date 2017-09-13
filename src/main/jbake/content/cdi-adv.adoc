@@ -10,7 +10,7 @@ prev=cdi-basicexamples003.html
 [[GJEHI]]
 
 [[contexts-and-dependency-injection-for-java-ee-advanced-topics]]
-26 Contexts and Dependency Injection for Java EE: Advanced Topics
+27 Contexts and Dependency Injection for Java EE: Advanced Topics
 -----------------------------------------------------------------
 
 

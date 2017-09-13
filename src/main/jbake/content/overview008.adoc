@@ -254,7 +254,7 @@ Faces technology and can be used anywhere in a Java EE application, not
 just in web modules.
 
 The Managed Beans specification is part of the Java EE 8 platform
-specification (JSR 342). The Java EE 8 platform requires Managed Beans
+specification (JSR 366). The Java EE 8 platform requires Managed Beans
 1.0.
 
 [[GJXVO]]
@@ -415,6 +415,25 @@ as a result of the message authentication.
 
 The Java EE 8 platform requires JASPIC 1.1.
 
+[[java-ee-security-api]]
+Java EE Security API
+~~~~~~~~~~~~~~~~~~~~
+
+The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
+Java EE Security introduces the following APIs:
+
+* `SecurityContext` interface
++
+Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.
+* `HttpAuthenticationMechanism` interface
++
+Authenticates callers of a web application, and is specified only for use in the servlet container.
+* `IdentityStore` interface
++
+Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.
+
+The Java EE 8 platform requires Java EE Security API 1.0.
+
 [[CJAHDJBJ]]
 
 [[java-api-for-websocket]]
@@ -456,25 +475,6 @@ Defines a format and processing rules for applying operations to a JSON document
 * Helper classes and methods, called JSON Collectors, which leverage features of the Stream API that was introduced in Java SE 8.
 
 The Java EE 8 platform requires JSON-P 1.1.
-
-[[java-ee-security-api]]
-Java EE Security API
-~~~~~~~~~~~~~~~~~~~~
-
-The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
-Java EE Security introduces the following APIs:
-
-* `SecurityContext` interface
-+
-Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.
-* `HttpAuthenticationMechanism` interface
-+
-Authenticates callers of a web application, and is specified only for use in the servlet container.
-* `IdentityStore` interface
-+
-Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.
-
-The Java EE 8 platform requires Java EE Security API 1.0.
 
 [[java-api-for-json-binding]]
 Java API for JSON Binding

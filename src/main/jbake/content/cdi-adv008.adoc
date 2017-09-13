@@ -1,11 +1,11 @@
 type=page
 status=published
 title=Using Stereotypes in CDI Applications
-next=cdi-adv008.html
+next=cdi-adv009.html
 prev=cdi-adv007.html
 ~~~~~~
-Using Stereotypes in CDI Applications
-=====================================
+= Using Stereotypes in CDI Applications
+
 
 [[GKHQC]]
 

@@ -22,11 +22,11 @@ component tags shown in link:#BNAQH[Table 10-1].
 
 [[sthref40]][[BNAQH]]
 
-Table 10-1 The Component Tags
+*Table 10-1 The Component Tags*
 
-[width="72%",cols="37%,,34%,29%",options="header",]
+[width="99%",cols="15%,30%,30%, 25%"]
 |=======================================================================
-|Tag |Functions |Rendered As |Appearance
+|*Tag*|*Functions*|*Rendered As*|*Appearance*
 |`h:column` |Represents a column of data in a data component |A column
 of data in an HTML table |A column in a table
 
@@ -138,11 +138,11 @@ link:#GKCKS[Table 10-2].
 
 [[sthref41]][[GKCKS]]
 
-Table 10-2 Common Component Tag Attributes
+*Table 10-2 Common Component Tag Attributes*
 
-[width="18%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Attribute |Description
+|*Attribute* |*Description*
 |`binding` |Identifies a bean property and binds the component instance
 to it.
 
@@ -294,12 +294,12 @@ the preceding example uses the `>` operator.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 In this example and others, `bundle` refers to a
 `java.util.ResourceBundle` file that contains locale-specific strings to
 be displayed. Resource bundles are discussed in
-link:webi18n.html#BNAXU[Chapter 21, "Internationalizing and Localizing
+link:webi18n.html#BNAXU[Chapter 22, "Internationalizing and Localizing
 Web Applications"].
 
 |=======================================================================
@@ -479,11 +479,11 @@ components.
 
 [[sthref44]][[BNARQ]]
 
-Table 10-3 Input Tags
+*Table 10-3 Input Tags*
 
-[width="24%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Tag |Function
+|*Tag* |*Function*
 |`h:inputHidden` |Allows a page author to include a hidden variable in a
 page
 
@@ -506,11 +506,11 @@ Faces Facelets Tag Library documentation].
 
 [[sthref45]][[GKCNH]]
 
-Table 10-4 Input Tag Attributes
+*Table 10-4 Input Tag Attributes*
 
-[width="25%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Attribute |Description
+|*Attribute* |*Description*
 |`converter` |Identifies a converter that will be used to convert the
 component's local data. See link:jsf-page-core001.html#BNAST[Using the
 Standard Converters] for more information on how to use this attribute.
@@ -556,11 +556,11 @@ components.
 
 [[sthref46]][[GJFWE]]
 
-Table 10-5 Output Tags
+*Table 10-5 Output Tags*
 
-[width="24%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Tag |Function
+|*Tag* |*Function*
 |`h:outputFormat` |Displays a formatted message
 
 |`h:outputLabel` |The standard read-only label: displays a component as
@@ -875,7 +875,7 @@ This tag will render HTML that looks something like the following:
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 The `h:commandLink` tag will render JavaScript scripting language. If
 you use this tag, make sure that your browser is enabled for JavaScript
@@ -943,11 +943,11 @@ link:#BNASD[Table 10-6] lists the tags used to create panels.
 
 [[sthref47]][[BNASD]]
 
-Table 10-6 Panel Component Tags
+*Table 10-6 Panel Component Tags*
 
-[width="54%",cols="32%,,68%",options="header",]
+[width="90%",cols="20%,50%,20%"]
 |=======================================================================
-|Tag |Attributes |Function
+|*Tag* |*Attributes* |*Function*
 |`h:panelGrid` |`columns`, `columnClasses`, `footerClass`,
 `headerClass`, `panelClass`, `rowClasses`, `role` |Displays a table
 
@@ -1512,11 +1512,11 @@ link:#GKBUK[Table 10-7] shows the optional attributes for the
 
 [[sthref51]][[GKBUK]]
 
-Table 10-7 Optional Attributes for the h:dataTable Tag
+*Table 10-7 Optional Attributes for the h:dataTable Tag*
 
-[width="23%",cols="100%,",options="header",]
+[width="60%",cols="30%,30%"]
 |================================
-|Attribute |Defines Styles For
+|*Attribute* |*Defines Styles For*
 |`captionClass` |Table caption
 |`columnClasses` |All the columns
 |`footerClass` |Footer

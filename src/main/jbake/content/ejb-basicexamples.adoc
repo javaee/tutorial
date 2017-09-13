@@ -10,7 +10,7 @@ Running the Enterprise Bean Examples
 [[GIJRB]]
 
 [[running-the-enterprise-bean-examples]]
-35 Running the Enterprise Bean Examples
+37 Running the Enterprise Bean Examples
 ---------------------------------------
 
 
@@ -29,5 +29,3 @@ counter]
 helloservice]
 * link:ejb-basicexamples005.html#BNBOY[Using the Timer Service]
 * link:ejb-basicexamples006.html#BNBPJ[Handling Exceptions]
-
-

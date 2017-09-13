@@ -10,7 +10,7 @@ Getting Started with Enterprise Beans
 [[GIJRE]]
 
 [[getting-started-with-enterprise-beans]]
-34 Getting Started with Enterprise Beans
+36 Getting Started with Enterprise Beans
 ----------------------------------------
 
 
@@ -28,5 +28,3 @@ Beans]
 * link:ejb-gettingstarted002.html#GIPSS[Creating the Enterprise Bean]
 * link:ejb-gettingstarted003.html#GIPTI[Modifying the Java EE
 Application]
-
-

@@ -4,13 +4,13 @@ title=Running the Basic Contexts and Dependency Injection Examples
 next=cdi-basicexamples001.html
 prev=cdi-basic015.html
 ~~~~~~
-Running the Basic Contexts and Dependency Injection Examples
-============================================================
+= Running the Basic Contexts and Dependency Injection Examples
+
 
 [[GJBLS]]
 
 [[running-the-basic-contexts-and-dependency-injection-examples]]
-25 Running the Basic Contexts and Dependency Injection Examples
+26 Running the Basic Contexts and Dependency Injection Examples
 ---------------------------------------------------------------
 
 
@@ -23,5 +23,3 @@ The following topics are addressed here:
 Samples]
 * link:cdi-basicexamples002.html#GJBJU[The simplegreeting CDI Example]
 * link:cdi-basicexamples003.html#GJCXV[The guessnumber-cdi CDI Example]
-
-

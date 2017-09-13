@@ -1,0 +1,85 @@
+type=page
+status=published
+title=JSON Binding
+next=jsonb002.html
+prev=jsonb.html
+~~~~~~
+
+
+[[json-binding-in-the-java-ee-platform]]
+JSON Binding in the Java EE Platform
+------------------------------------
+
+Java EE includes support for JSR 367, which provides an API that can serialize
+Java objects to JSON documents and deserialize JSON documents to Java objects. The
+Java API for JSON Binding contains the following packages:
+
+* The `javax.json.bind` package contains the binding interface, the builder interface, and
+a configuration class. link:#main-classes-and-interfaces-in-bind[Table 21-1] lists the main classes
+and interfaces in this package.
+
+* The `javax.json.bind.adapter` package contains the `JsonbAdapter` interface, which provides
+methods for binding custom Java types by converting them to known types.
+
+* The `javax.json.bind.annotation` package defines annotations that can be used to customize default
+binding behavior. Annotations can be used for field, JavaBean property, type, or package
+elements.
+
+* The `javax.json.bind.config` package interfaces and classes for customizing default binding behavior.
+link:#main-classes-and-interfaces-in-config[Table 21-2] lists the main classes
+and interfaces in this package.
+
+* The `javax.json.bind.serializer` package contains interfaces that are used to create serialization and
+ deserialization routines for custom types that cannot be easily mapped using the `JsonbAdapter` methods.
+ link:#main-classes-and-interfaces-in-serializer[Table 21-3] lists the main interfaces in this package.
+
+* The `javax.json.bind.spi` package contains a Service Provider Interface (SPI) for  creating
+JSON Binding implementations. This package contains the `JsonbProvider` class, which
+contains the methods that a service provider implements.
+
+
+[[main-classes-and-interfaces-in-bind]]
+
+*Table 21-1 Main Classes and Interfaces in javax.json.bind*
+
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`Jsonb` | Contains the JSON-B methods for serializing Java objects to JSON and deserailizing
+JSON to Java objects.
+
+|`JsonBuilder` | Used by clients to create `Jsonb` instances.
+
+|`JsonbConfig` | Used to set configuration properties on `Jsonb` instances. Properties include
+binding strategies and properties for configuring custom serializers and deserializers.
+
+|`JsonbException` | Indicates that a problem occurred during JSON binding.
+|=======================================================================
+
+[[main-classes-and-interfaces-in-config]]
+
+*Table 21-2 Main Classes and Interfaces in javax.json.bind.config*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`PropertyNamingStrategy` | Used to set how property names are translated.
+
+|`PropertyVisibilityStrategy` | Used to set whether fields and methods should be considered properties
+overriding the default scope and field access behavior.
+
+|`BinaryDataStrategy` | Used to set binary encoding.
+
+|`PropertyOrderStrategy` | Used to set how properties are ordered during serialization.
+|=======================================================================
+
+
+[[main-classes-and-interfaces-in-serializer]]
+
+*Table 21-3 Main Classes and Interfaces in javax.json.bind.serializer*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`JsonbDeserializer` | Used to create a deserialization routine for a custom type.
+
+|`JsonbSerializer` | Used to create a serialization routine for a custom type.
+|=======================================================================

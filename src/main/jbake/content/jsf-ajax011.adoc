@@ -4,8 +4,8 @@ title=The ajaxguessnumber Example Application
 next=jsf-ajax012.html
 prev=jsf-ajax010.html
 ~~~~~~
-The ajaxguessnumber Example Application
-=======================================
+= The ajaxguessnumber Example Application
+
 
 [[GKOKB]]
 
@@ -68,7 +68,7 @@ the same as the `greeting.xhtml` page for the `guessnumber` application:
             Can you guess it?
         </h2>
         <p>
-            <h:inputText id="userNo" 
+            <h:inputText id="userNo"
                          title="Enter a number from 0 to 10:"
                          value="#{userNumberBean.userNumber}">
                 <f:validateLongRange minimum="#{dukesNumberBean.minimum}"
@@ -84,13 +84,13 @@ the same as the `greeting.xhtml` page for the `guessnumber` application:
                 <h:outputText id="result" style="color:blue"
                               value="#{userNumberBean.response}"
                               rendered="#{!facesContext.validationFailed}"/>
-                <h:message id="errors1" 
-                           showSummary="true" 
+                <h:message id="errors1"
+                           showSummary="true"
                            showDetail="false"
                            style="color: #d20005;
                            font-family: 'New Century Schoolbook', serif;
                            font-style: oblique;
-                           text-decoration: overline" 
+                           text-decoration: overline"
                            for="userNo"/>
             </h:panelGroup>
         </p>
@@ -151,7 +151,7 @@ user submitted:
 DukesNumberBean dukesNumberBean;
 ----
 
-You will learn more about CDI in link:cdi-basic.html#GIWHB[Chapter 24,
+You will learn more about CDI in link:cdi-basic.html#GIWHB[Chapter 25,
 "Introduction to Contexts and Dependency Injection for Java EE"].
 
 [[GKOKE]]
@@ -174,8 +174,7 @@ Using Maven]
 [[GLHVU]]
 
 [[to-build-package-and-deploy-the-ajaxguessnumber-example-using-netbeans-ide]]
-To Build, Package, and Deploy the ajaxguessnumber Example Using NetBeans
-IDE
+To Build, Package, and Deploy the ajaxguessnumber Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -238,5 +237,3 @@ http://localhost:8080/ajaxguessnumber
 If the value is in the range of 0 to 10, a message states whether the
 guess is correct or incorrect. If the value is outside that range or if
 the value is not a number, an error message appears in red.
-
-

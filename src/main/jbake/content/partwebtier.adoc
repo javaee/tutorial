@@ -39,10 +39,10 @@ Advanced Topics and an Example"]
 and Other Custom Objects"]
 * link:jsf-configure.html#BNAWO[Chapter 16, "Configuring JavaServer Faces
 Applications"]
-* link:servlets.html#BNAFD[Chapter 17, "Java Servlet Technology"]
-* link:websocket.html#GKJIQ5[Chapter 18, "Java API for WebSocket"]
-* link:jsonp.html#GLRBB[Chapter 19, "JSON Processing"]
-* link:webi18n.html#BNAXU[Chapter 21, "Internationalizing and Localizing
+* link:jsf-ws.html#using-websockets-with-javaserver-faces-technology[Chapter 17, "Using WebSockets with JavaServer Faces Technology"]
+* link:servlets.html#BNAFD[Chapter 18, "Java Servlet Technology"]
+* link:websocket.html#GKJIQ5[Chapter 19, "Java API for WebSocket"]
+* link:jsonp.html#GLRBB[Chapter 20, "JSON Processing"]
+* link:jsonb.html#json-binding[Chapter 21, "JSON Binding"]
+* link:webi18n.html#BNAXU[Chapter 22, "Internationalizing and Localizing
 Web Applications"]
-
-
