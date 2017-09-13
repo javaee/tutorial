@@ -105,10 +105,8 @@ are annotated with one of the metadata annotations defined in
 <div class="paragraph">
 <p><a id="sthref253"></a><a id="GKECC"></a></p>
 </div>
-<div class="exampleblock">
-<div class="content">
 <div class="paragraph">
-<p>Table 57-1 Interceptor Metadata Annotations</p>
+<p><strong>Table 57-1 Interceptor Metadata Annotations</strong></p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 80%;">
 <colgroup>
@@ -149,10 +147,8 @@ method for pre-destroy lifecycle events</p></td>
 </tr>
 </tbody>
 </table>
-<div id="interceptor-classes" class="paragraph">
-<p>Interceptor Classes
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~</p>
-</div>
+<div class="sect2">
+<h3 id="interceptor-classes">Interceptor Classes</h3>
 <div class="paragraph">
 <p>Interceptor classes may be designated with the optional
 <code>javax.interceptor.Interceptor</code> annotation, but interceptor classes are
@@ -172,10 +168,9 @@ injection occurs when the interceptor class instance is created, using
 the naming context of the associated target class, and before any
 <code>@PostConstruct</code> callbacks are invoked.</p>
 </div>
-<div id="interceptor-lifecycle" class="paragraph">
-<p>Interceptor Lifecycle
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub></p>
 </div>
+<div class="sect2">
+<h3 id="interceptor-lifecycle">Interceptor Lifecycle</h3>
 <div class="paragraph">
 <p>Interceptor classes have the same lifecycle as their associated target
 class. When a target class instance is created, an interceptor class
@@ -187,16 +182,14 @@ instances are fully instantiated before any <code>@PostConstruct</code> callback
 are invoked, and any <code>@PreDestroy</code> callbacks are invoked before the
 target class and interceptor class instances are destroyed.</p>
 </div>
-<div id="interceptors-and-cdi" class="paragraph">
-<p>Interceptors and CDI
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~~</p>
 </div>
+<div class="sect2">
+<h3 id="interceptors-and-cdi">Interceptors and CDI</h3>
 <div class="paragraph">
 <p>Contexts and Dependency Injection for Java EE (CDI) builds on the basic
 functionality of Java EE interceptors. For information on CDI
 interceptors, including a discussion of interceptor binding types, see
 <a href="cdi-adv006.html#GKHJX">Using Interceptors in CDI Applications</a>.</p>
-</div>
 </div>
 </div>
 </div>

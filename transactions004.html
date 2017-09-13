@@ -252,10 +252,8 @@ database management system.</p>
 <div class="paragraph">
 <p><a id="sthref235"></a><a id="BNCIT"></a></p>
 </div>
-<div class="exampleblock">
-<div class="content">
 <div class="paragraph">
-<p>Table 54-1 Transaction Attributes and Scope</p>
+<p><strong>Table 54-1 Transaction Attributes and Scope</strong></p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 60%;">
 <colgroup>
@@ -332,10 +330,9 @@ Transaction</p></td>
 </tr>
 </tbody>
 </table>
-<div id="setting-transaction-attributes" class="paragraph">
-<p>Setting Transaction Attributes
-<sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup></p>
 </div>
+<div class="sect3">
+<h4 id="setting-transaction-attributes">Setting Transaction Attributes</h4>
 <div class="paragraph">
 <p>Transaction attributes are specified by decorating the enterprise bean
 class or method with a <code>javax.ejb.TransactionAttribute</code> annotation and
@@ -359,7 +356,7 @@ section.</p>
 <p><a id="sthref236"></a><a id="GKCFD"></a></p>
 </div>
 <div class="paragraph">
-<p>Table 54-2 TransactionAttributeType Constants</p>
+<p><strong>Table 54-2 TransactionAttributeType Constants</strong></p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 34%;">
 <colgroup>
@@ -431,10 +428,10 @@ transaction, and calls to <code>secondMethod</code> will either run in the curre
 transaction or start a new transaction. Calls to <code>thirdMethod</code> or
 <code>fourthMethod</code> do not take place within a transaction.</p>
 </div>
-<div id="rolling-back-a-container-managed-transaction" class="paragraph">
-<p>Rolling Back a Container-Managed Transaction
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~~</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="rolling-back-a-container-managed-transaction">Rolling Back a Container-Managed Transaction</h3>
 <div class="paragraph">
 <p>There are two ways to roll back a container-managed transaction. First,
 if a system exception is thrown, the container will automatically roll
@@ -444,10 +441,9 @@ to roll back the transaction. If the bean throws an application
 exception, the rollback is not automatic but can be initiated by a call
 to <code>setRollbackOnly</code>.</p>
 </div>
-<div id="synchronizing-a-session-beans-instance-variables" class="paragraph">
-<p>Synchronizing a Session Bean&#8217;s Instance Variables
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~</p>
 </div>
+<div class="sect2">
+<h3 id="synchronizing-a-session-beans-instance-variables">Synchronizing a Session Bean&#8217;s Instance Variables</h3>
 <div class="paragraph">
 <p>The <code>SessionSynchronization</code> interface, which is optional, allows
 stateful session bean instances to receive transaction synchronization
@@ -474,10 +470,9 @@ completed. This method has a single <code>boolean</code> parameter whose value i
 <code>true</code> if the transaction was committed and <code>false</code> if it was rolled
 back.</p>
 </div>
-<div id="methods-not-allowed-in-container-managed-transactions" class="paragraph">
-<p>Methods Not Allowed in Container-Managed Transactions
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~~</p>
 </div>
+<div class="sect2">
+<h3 id="methods-not-allowed-in-container-managed-transactions">Methods Not Allowed in Container-Managed Transactions</h3>
 <div class="paragraph">
 <p>You should not invoke any method that might interfere with the
 transaction boundaries set by the container. The following methods are
@@ -500,9 +495,6 @@ prohibited:</p>
 <div class="paragraph">
 <p>You can, however, use these methods to set boundaries in
 application-managed transactions.</p>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
