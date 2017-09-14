@@ -24,9 +24,9 @@ JavaServer Faces application. The following tasks are usually required:
 
 The following topics are addressed here:
 
-* link:#GIQTE[Creating a Facelets Application]
-* link:#GJJKC[Configuring the Application]
-* link:#GIRGF[Running the guessnumber-jsf Facelets Example]
+* link:#creating-a-facelets-application[Creating a Facelets Application]
+* link:#configuring-the-application[Configuring the Application]
+* link:#running-the-guessnumber-jsf-facelets Example[Running the guessnumber-jsf Facelets Example]
 
 [[GIQTE]]
 

@@ -15,11 +15,11 @@ Required Software
 
 The following software is required to run the examples:
 
-* link:#GEXAE[Java Platform, Standard Edition]
-* link:#GEXAB[Java EE 8 Software Development Kit]
-* link:#GEXBA[Java EE 8 Tutorial Component]
-* link:#GEXAZ[NetBeans IDE]
-* link:#GEXAA[Apache Maven]
+* link:#java-platform-standard-edition[Java Platform, Standard Edition]
+* link:#java-ee-7-software-development-kit[Java EE 8 Software Development Kit]
+* link:#java-ee-7-tutorial-component[Java EE 8 Tutorial Component]
+* link:#netbeans-ide[NetBeans IDE]
+* link:#apache-maven[Apache Maven]
 
 [[GEXAE]]
 

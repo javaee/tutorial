@@ -19,9 +19,9 @@ method expressions are used to reference a method.
 
 The following topics are addressed here:
 
-* link:#BNAHV[Value Expressions]
-* link:#BNAHZ[Method Expressions]
-* link:#BEIHCBAH[Lambda Expressions]
+* link:#value-expressions[Value Expressions]
+* link:#method-expressions[Method Expressions]
+* link:#lambda-expressions[Lambda Expressions]
 
 [[BNAHV]]
 
