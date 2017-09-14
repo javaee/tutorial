@@ -22,11 +22,11 @@ The source code for this application is in the
 
 The following topics are addressed here:
 
-* link:#GJWTV[To View the hello1 Web Module Using NetBeans IDE]
-* link:#BNADZ[Packaging and Deploying the hello1 Web Module]
-* link:#BNAEI[Viewing Deployed Web Modules]
-* link:#BCEBEGED[Running the Deployed hello1 Web Module]
-* link:#BNAEN[Undeploying the hello1 Web Module]
+* link:#to-view-the-hello1-web-module-using-netbeans-ide[To View the hello1 Web Module Using NetBeans IDE]
+* link:#packaging-and-deploying-the-hello1-web-module[Packaging and Deploying the hello1 Web Module]
+* link:#viewing-deployed-web-modules[Viewing Deployed Web Modules]
+* link:#running-the-deployed-hello1-web-module[Running the Deployed hello1 Web Module]
+* link:#undeploying-the-hello1-web-module[Undeploying the hello1 Web Module]
 
 [[GJWTV]]
 

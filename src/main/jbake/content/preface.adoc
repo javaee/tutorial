@@ -31,12 +31,12 @@ Server Open Source Edition is hereafter referred to as GlassFish Server.
 
 The following topics are addressed here:
 
-* link:#CIACGIBD[Audience]
-* link:#CIAHFICG[Documentation Accessibility]
-* link:#BNAAC[Before You Read This Book]
-* link:#GIPRL[Related Documentation]
-* link:#GKVTF[Conventions]
-* link:#GFIRK[Default Paths and File Names]
+* link:#audience[Audience]
+* link:#documentation-accessibility[Documentation Accessibility]
+* link:#before-you-read-this-book[Before You Read This Book]
+* link:#related-documentation[Related Documentation]
+* link:#conventions[Conventions]
+* link:#default-paths-and-file-names[Default Paths and File Names]
 
 [[CIACGIBD]]
 
