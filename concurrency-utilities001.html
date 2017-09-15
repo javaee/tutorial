@@ -67,16 +67,6 @@ which was the basis for implementing many of the services offered by
 Java EE containers. At Java SE 5, additional high-level API support for
 concurrency was provided by the <code>java.util.concurrent</code> package.</p>
 </div>
-<div class="paragraph">
-<p>Prior to Java EE 7, there were no specific APIs that allowed enterprise
-developers to use concurrency utilities in a safely standard manner. The
-Java EE web and EJB containers instantiate objects using
-container-managed thread pools. Therefore, using Java SE concurrent APIs
-to instantiate <code>Thread</code> objects was strongly discouraged. If a developer
-creates a new (non-managed) <code>Thread</code> object, the container could not
-guarantee that other Java EE platform services (for example,
-transactions and security) would be part of this <code>Thread</code>.</p>
-</div>
 <div class="sect2">
 <h3 id="threads-and-processes">Threads and Processes</h3>
 <div class="paragraph">
