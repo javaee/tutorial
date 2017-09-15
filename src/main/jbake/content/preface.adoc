@@ -14,17 +14,17 @@ Preface
 -------
 
 This tutorial is a guide to developing enterprise applications for the
-Java Platform, Enterprise Edition 7 (Java EE 7), using GlassFish Server
+Java Platform, Enterprise Edition 8 (Java EE 8), using GlassFish Server
 Open Source Edition.
 
 GlassFish Server Open Source Edition is the leading open-source and
 open-community platform for building and deploying next-generation
 applications and services. GlassFish Server Open Source Edition,
 developed by the GlassFish project open-source community at
-`https://glassfish.java.net/`, is the first compatible implementation of
-the Java EE 7 platform specification. This lightweight, flexible, and
+`https://javaee.github.io/glassfish/`, is the first compatible implementation of
+the Java EE 8 platform specification. This lightweight, flexible, and
 open-source application server enables organizations not only to
-leverage the new capabilities introduced within the Java EE 7
+leverage the new capabilities introduced within the Java EE 8
 specification, but also to add to their existing capabilities through a
 faster and more streamlined development and deployment cycle. GlassFish
 Server Open Source Edition is hereafter referred to as GlassFish Server.
@@ -45,7 +45,7 @@ Audience
 ~~~~~~~~
 
 This tutorial is intended for programmers interested in developing and
-deploying Java EE 7 applications. It covers the technologies comprising
+deploying Java EE 8 applications. It covers the technologies comprising
 the Java EE platform and describes how to develop Java EE components and
 deploy them on the Java EE Software Development Kit (SDK).
 
@@ -88,14 +88,14 @@ Related Documentation
 
 The GlassFish Server documentation set describes deployment planning and
 system installation. To obtain documentation for GlassFish Server Open
-Source Edition, go to `https://glassfish.java.net/docs/`.
+Source Edition, go to `https://javaee.github.io/glassfish/documentation`.
 
-The Java EE 7 API specification can be viewed at
-`http://docs.oracle.com/javaee/7/api/` and is also provided in the Java
-EE 7 SDK.
+The Java EE 8 API specification can be viewed at
+`https://javaee.github.io/glassfish/documentation` and is also provided in the Java
+EE 8 SDK.
 
 Additionally, the Java EE Specifications at
-`http://www.oracle.com/technetwork/java/javaee/tech/index.html` might be
+`https://javaee.github.io/javaee-spec/` might be
 useful.
 
 For information about creating enterprise applications in the NetBeans
@@ -110,7 +110,7 @@ The GlassFish Samples project is a collection of sample applications
 that demonstrate a broad range of Java EE technologies. The GlassFish
 Samples are bundled with the Java EE Software Development Kit (SDK) and
 are also available from the GlassFish Samples project page at
-`https://glassfish-samples.java.net/`.
+`https://javaee.github.io/glassfish-samples/`.
 
 [[GKVTF]]
 
