@@ -274,7 +274,7 @@ import javax.annotation.security.DeclareRoles;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-@DeclareRoles("javaee7user")
+@DeclareRoles("javaeeuser")
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -293,7 +293,7 @@ public class LoginServlet extends HttpServlet {
 
             out.println("Before Login" + "&lt;br&gt;&lt;br&gt;");
             out.println("IsUserInRole?.."
-                        + request.isUserInRole("javaee7user")+"&lt;br&gt;");
+                        + request.isUserInRole("javaeeuser")+"&lt;br&gt;");
             out.println("getRemoteUser?.." + request.getRemoteUser()+"&lt;br&gt;");
             out.println("getUserPrincipal?.."
                         + request.getUserPrincipal()+"&lt;br&gt;");
@@ -308,7 +308,7 @@ public class LoginServlet extends HttpServlet {
             }
             out.println("After Login..."+"&lt;br&gt;&lt;br&gt;");
             out.println("IsUserInRole?.."
-                        + request.isUserInRole("javaee7user")+"&lt;br&gt;");
+                        + request.isUserInRole("javaeeuser")+"&lt;br&gt;");
             out.println("getRemoteUser?.." + request.getRemoteUser()+"&lt;br&gt;");
             out.println("getUserPrincipal?.."
                         + request.getUserPrincipal()+"&lt;br&gt;");
@@ -317,7 +317,7 @@ public class LoginServlet extends HttpServlet {
             request.logout();
             out.println("After Logout..."+"&lt;br&gt;&lt;br&gt;");
             out.println("IsUserInRole?.."
-                        + request.isUserInRole("javaee7user")+"&lt;br&gt;");
+                        + request.isUserInRole("javaeeuser")+"&lt;br&gt;");
             out.println("getRemoteUser?.." + request.getRemoteUser()+"&lt;br&gt;");
             out.println("getUserPrincipal?.."
                         + request.getUserPrincipal()+"&lt;br&gt;");
