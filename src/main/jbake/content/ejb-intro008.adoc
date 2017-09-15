@@ -4,8 +4,7 @@ title=Further Information about Enterprise Beans
 next=ejb-gettingstarted.html
 prev=ejb-intro007.html
 ~~~~~~
-Further Information about Enterprise Beans
-==========================================
+=Further Information about Enterprise Beans
 
 [[GIPLG]]
 
@@ -13,13 +12,9 @@ Further Information about Enterprise Beans
 Further Information about Enterprise Beans
 ------------------------------------------
 
-For more information on Enterprise JavaBeans technology, see
-
-* Enterprise JavaBeans 3.2 specification:
+For more information on Enterprise JavaBeans technology, see the Enterprise JavaBeans 3.2 specification:
 +
 `http://www.jcp.org/en/jsr/detail?id=345`
-* Enterprise JavaBeans 3.2 specification project:
-+
-`https://java.net/projects/ejb-spec/`
+
 
 

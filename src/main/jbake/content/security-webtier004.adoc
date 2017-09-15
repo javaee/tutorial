@@ -41,7 +41,7 @@ various types of applications:
 Enterprise Bean with Declarative Security]
 * link:security-javaee003.html#BNCAA[The converter-secure Example:
 Securing an Enterprise Bean with Programmatic Security]
-* GlassFish samples: `https://glassfish-samples.java.net/`
+* GlassFish samples: `https://javaee.github.io/glassfish-samples/`
 
 [[GJJLK]]
 
