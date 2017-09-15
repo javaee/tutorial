@@ -14,7 +14,7 @@ Introduction to Web Services
 -------------------------------
 
 
-This part of the tutorial discusses Java EE 7 web services technologies.
+This part of the tutorial discusses Java EE 8 web services technologies.
 These technologies include Java API for XML Web Services (JAX-WS) and
 Java API for RESTful Web Services (JAX-RS).
 

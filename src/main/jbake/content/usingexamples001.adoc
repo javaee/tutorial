@@ -84,7 +84,7 @@ The tutorial component, including the documentation and example source,
 is contained in the Java EE 8 SDK.
 
 ////
-Updates to the Java EE 7 Tutorial are published periodically. For
+Updates to the Java EE Tutorial are published periodically. For
 details on obtaining these updates, see
 link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
 Tutorial].
@@ -137,7 +137,7 @@ to add GlassFish Server to NetBeans IDE.
 1.  From the Tools menu, choose Servers.
 2.  In the Servers wizard, click Add Server.
 3.  Under Choose Server, select GlassFish Server and click Next.
-4.  Under Server Location, browse to the location of the Java EE 7 SDK
+4.  Under Server Location, browse to the location of the Java EE 8 SDK
 and click Next.
 5.  Under Domain Location, select Register Local Domain.
 6.  Click Finish.

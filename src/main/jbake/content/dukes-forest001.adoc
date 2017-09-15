@@ -14,7 +14,7 @@ Overview of the Duke's Forest Case Study Example
 ------------------------------------------------
 
 Duke's Forest is a simple e-commerce application that contains several
-web applications and illustrates the use of the following Java EE 7
+web applications and illustrates the use of the following Java EE
 APIs:
 
 * JavaServer Faces technology, including Ajax

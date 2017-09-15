@@ -151,10 +151,10 @@ link:usingexamples.html#GFIUD[2 Using the Tutorial Examples]
 
 ** link:usingexamples001.html#GEXAE[Java Platform, Standard Edition]
 
-** link:usingexamples001.html#GEXAB[Java EE 7 Software Development Kit]
+** link:usingexamples001.html#GEXAB[Java EE 8 Software Development Kit]
 *** link:usingexamples001.html#GEXBC[SDK Installation Tips]
 
-** link:usingexamples001.html#GEXBA[Java EE 7 Tutorial Component]
+** link:usingexamples001.html#GEXBA[Java EE 8 Tutorial Component]
 
 ** link:usingexamples001.html#GEXAZ[NetBeans IDE]
 *** link:usingexamples001.html#GJSEQ[To Install NetBeans IDE without
@@ -188,7 +188,7 @@ Server]
 NetBeans IDE]
 * link:usingexamples005.html#BNAAN[Building the Examples]
 * link:usingexamples006.html#GEXAP[Tutorial Example Directory Structure]
-* link:usingexamples007.html#CIHBHEFF[Java EE 7 Maven Archetypes in the
+* link:usingexamples007.html#CIHBHEFF[Java EE Maven Archetypes in the
 Tutorial]
 
 ** link:usingexamples007.html#CHDJGCCA[Installing the Tutorial

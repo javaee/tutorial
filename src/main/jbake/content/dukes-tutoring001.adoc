@@ -41,7 +41,7 @@ application, and `dukes-tutoring-common` is packaged and deployed with
 entity classes and helper classes to be reused by other applications,
 such as a JavaFX client application.
 
-Duke's Tutoring uses the following Java EE 7 platform features:
+Duke's Tutoring uses the following Java EE platform features:
 
 * Java Persistence API entities
 

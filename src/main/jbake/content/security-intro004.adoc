@@ -15,7 +15,7 @@ Securing GlassFish Server
 
 This tutorial describes deployment to GlassFish Server, which provides
 highly secure, interoperable, and distributed component computing based
-on the Java EE security model. GlassFish Server supports the Java EE 7
+on the Java EE security model. GlassFish Server supports the Java EE 8
 security model. You can configure GlassFish Server for the following
 purposes.
 

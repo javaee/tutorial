@@ -51,7 +51,7 @@ security, read link:security-intro003.html#BNBXH[Using Programmatic
 Security].
 
 More information on these concepts and mechanisms can be found in the
-chapter on security in the Java EE 7 specification.
+chapter on security in the Java EE 8 specification.
 
 Other chapters in this Part discuss security requirements in web tier
 and enterprise tier applications.
@@ -73,7 +73,7 @@ The security behavior of a Java EE environment may be better understood
 by examining what happens in a simple application with a web client, a
 user interface, and enterprise bean business logic.
 
-In the following example, which is taken from the Java EE 7
+In the following example, which is taken from the Java EE
 Specification, the web client relies on the web server to act as its
 authentication proxy by collecting user authentication data from the
 client and using it to establish an authenticated session.

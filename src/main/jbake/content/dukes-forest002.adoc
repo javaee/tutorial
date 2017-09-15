@@ -26,7 +26,7 @@ image:img/javaeett_dt_062.png[
 "This figure shows the architecture of the main Duke's Forest projects
 and how they use the Events and Entities projects."]
 
-Duke's Forest uses the following Java EE 7 platform features:
+Duke's Forest uses the following Java EE platform features:
 
 * Java Persistence API entities
 

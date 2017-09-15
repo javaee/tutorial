@@ -20,7 +20,7 @@ specification and also the preferred presentation technology for
 building JavaServer Faces technology–based applications. JavaServer
 Pages (JSP) technology, previously used as the presentation technology
 for JavaServer Faces, does not support all the new features available in
-JavaServer Faces in the Java EE 7 platform. JSP technology is considered
+JavaServer Faces in the Java EE platform. JSP technology is considered
 to be a deprecated presentation technology for JavaServer Faces.
 
 The following topics are addressed here:

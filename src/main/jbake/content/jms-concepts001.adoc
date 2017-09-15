@@ -148,7 +148,7 @@ messaging capability for an enterprise.
 
 The JMS API is an integral part of the Java EE platform, and application
 developers can use messaging with Java EE components. JMS 2.0 is part of
-the Java EE 7 release.
+the Java EE 8 release.
 
 The JMS API in the Java EE platform has the following features.
 

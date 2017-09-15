@@ -27,7 +27,7 @@ Server]
 Server]
 * link:usingexamples005.html#BNAAN[Building the Examples]
 * link:usingexamples006.html#GEXAP[Tutorial Example Directory Structure]
-* link:usingexamples007.html#CIHBHEFF[Java EE 7 Maven Archetypes in the
+* link:usingexamples007.html#CIHBHEFF[Java EE Maven Archetypes in the
 Tutorial]
 * link:usingexamples009.html#BNADL[Debugging Java EE Applications]
 
