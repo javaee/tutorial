@@ -4,8 +4,8 @@ title=Using the Streaming API
 next=jsonp005.html
 prev=jsonp003.html
 ~~~~~~
-Using the Streaming API
-=======================
+=Using the Streaming API
+
 
 [[BABDBHIA]]
 

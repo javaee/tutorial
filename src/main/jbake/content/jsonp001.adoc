@@ -4,8 +4,8 @@ title=Introduction to JSON
 next=jsonp002.html
 prev=jsonp.html
 ~~~~~~
-Introduction to JSON
-====================
+=Introduction to JSON
+
 
 [[BABEECIB]]
 

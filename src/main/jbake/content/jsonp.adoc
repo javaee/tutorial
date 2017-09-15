@@ -4,8 +4,8 @@ title=JSON Processing
 next=jsonp001.html
 prev=websocket013.html
 ~~~~~~
-JSON Processing
-===============
+=JSON Processing
+
 
 [[GLRBB]]
 

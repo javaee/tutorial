@@ -4,8 +4,8 @@ title=Using the Object Model API
 next=jsonp004.html
 prev=jsonp002.html
 ~~~~~~
-Using the Object Model API
-==========================
+=Using the Object Model API
+
 
 [[BABHAHIA]]
 
