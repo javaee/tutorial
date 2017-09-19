@@ -181,8 +181,7 @@ Command Line]
 
 ** link:usingexamples003.html#GJKST[To Start the Administration Console
 Using NetBeans IDE]
-* link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server]
+* link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby]
 
 ** link:usingexamples004.html#GJSFS[To Start the Database Server Using
 NetBeans IDE]
