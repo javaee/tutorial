@@ -52,8 +52,7 @@ GlassFish Server as a Server Using NetBeans IDE].
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
 2.  If the database server is not already running, start it as described
-in link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server].
+in link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby].
 3.  From the File menu, choose Open Project.
 4.  In the Open Project dialog box, navigate to:
 +
@@ -83,7 +82,7 @@ select Build.
 This command creates a JDBC security realm named tutoringRealm, builds
 and packages the `dukes-tutoring-common` and `dukes-tutoring-war`
 projects, and deploys `dukes-tutoring-war` to GlassFish Server, starting
-the Java DB database and GlassFish Server if they have not already been
+Derby and GlassFish Server if they have not already been
 started.
 
 [[GKJOG]]
@@ -96,8 +95,7 @@ To Build and Deploy Duke's Tutoring Using Maven
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
 2.  If the database server is not already running, start it as described
-in link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server].
+in link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby].
 3.  In a terminal window, go to:
 +
 [source,oac_no_warn]
@@ -186,5 +184,3 @@ possible to edit a guardian or to view or edit an address, although
 Facelets pages exist for these features. The application also makes no
 use of the properties in the `PersonDetails` entity. Feel free to modify
 the application to add these features.
-
-

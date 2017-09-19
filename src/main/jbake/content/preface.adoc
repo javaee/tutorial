@@ -102,9 +102,9 @@ For information about creating enterprise applications in the NetBeans
 Integrated Development Environment (IDE), see
 `https://netbeans.org/kb/`.
 
-For information about the Java DB database for use with GlassFish
+For information about Apache Derby for use with GlassFish
 Server, see
-`http://www.oracle.com/technetwork/java/javadb/overview/index.html`.
+`http://db.apache.org/derby/docs/10.13/adminguide/`.
 
 The GlassFish Samples project is a collection of sample applications
 that demonstrate a broad range of Java EE technologies. The GlassFish

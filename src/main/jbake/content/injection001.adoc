@@ -24,7 +24,7 @@ an interface, which decouples your code from the implementation of the
 resource.
 
 For example, the following code injects a data source object that
-provides connections to the default Java DB database shipped with
+provides connections to the default Apache Derby database shipped with
 GlassFish Server:
 
 [source,oac_no_warn]
@@ -60,5 +60,3 @@ defined in JSR 250 (Common Annotations for the Java Platform). Resource
 injection resolves by name, so it is not typesafe: the type of the
 resource object is not known at compile time, so you can get runtime
 errors if the types of the object and its reference do not match.
-
-

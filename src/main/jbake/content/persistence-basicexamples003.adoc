@@ -24,7 +24,7 @@ Functionally, `roster` is similar to the `order` application, with three
 new features that `order` does not have: many-to-many relationships,
 entity inheritance, and automatic table creation at deployment time.
 
-The database schema in the Java DB database for the `roster` application
+The database schema in Apache Derby for the `roster` application
 is shown in link:#CHDCHJHG[Figure 41-2].
 
 [[CHDCHJHG]]
@@ -388,7 +388,7 @@ link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
 2.  If the database server is not already running, start it by following
 the instructions in link:usingexamples004.html#BNADK[Starting and
-Stopping the Java DB Server].
+Stopping Apache Derby].
 3.  From the File menu, choose Open Project.
 4.  In the Open Project dialog box, navigate to:
 +
@@ -440,7 +440,7 @@ link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
 2.  If the database server is not already running, start it by following
 the instructions in link:usingexamples004.html#BNADK[Starting and
-Stopping the Java DB Server].
+Stopping Apache Derby].
 3.  In a terminal window, go to:
 +
 [source,oac_no_warn]

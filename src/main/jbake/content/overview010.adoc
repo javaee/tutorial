@@ -21,7 +21,7 @@ convenience to the developer.
 
 This section briefly summarizes the tools that make up GlassFish Server.
 Instructions for starting and stopping GlassFish Server, starting the
-Administration Console, and starting and stopping the Java DB server are
+Administration Console, and starting and stopping Apache Derby are
 in link:usingexamples.html#GFIUD[Chapter 2, "Using the Tutorial
 Examples"].
 
@@ -59,7 +59,7 @@ for container-managed persistence.
 |`package-appclient` |A command-line tool to package the application
 client container libraries and JAR files.
 
-|Java DB database |A copy of the Java DB server.
+|Apache Derby |A copy of Apache Derby database.
 
 |`xjc` |A command-line tool to transform, or bind, a source XML schema
 to a set of JAXB content classes in the Java programming language.
