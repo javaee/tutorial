@@ -50,7 +50,7 @@
     <groupId>org.glassfish.docs</groupId>
     <artifactId>javaee-tutorial</artifactId>
     <packaging>pom</packaging>
-    <version>8.1-SNAPSHOT</version>
+    <version>8.0-SNAPSHOT</version>
     <name>Java EE Tutorial</name>
     <properties>
         <site.output.dir>${project.build.directory}/staging</site.output.dir>
