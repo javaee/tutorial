@@ -4,8 +4,7 @@ title=Working with Realms, Users, Groups, and Roles
 next=security-intro006.html
 prev=security-intro004.html
 ~~~~~~
-Working with Realms, Users, Groups, and Roles
-=============================================
+= Working with Realms, Users, Groups, and Roles
 
 [[BNBXJ]]
 
@@ -37,6 +36,15 @@ Groups in GlassFish Server].
 4.  The application deployer maps the application's security roles to
 users, groups, and principals defined in GlassFish Server. This topic is
 discussed in link:#BNBXV[Mapping Roles to Users and Groups].
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+*Note:*
+
+By default, group principal names are mapped to roles of the same name.
+
+|=======================================================================
 
 [[BNBXK]]
 
@@ -353,11 +361,9 @@ architecture provides a mechanism for mapping the roles defined in the
 application to the users or groups defined in the runtime realm.
 
 The role names used in the application are often the same as the group
-names defined in GlassFish Server. Under these circumstances, you can
-enable a default principal-to-role mapping in GlassFish Server by using
-the Administration Console. The task
-link:security-webtier004.html#GJJLK[To Set Up Your System for Running the
-Security Examples] explains how to do this. All the tutorial security
+names defined in GlassFish Server. By default, group principal names are mapped
+to roles of the same name. This principal-to-role mapping is set by default
+in the GlassFish Server Administration Console. All the tutorial security
 examples use default principal-to-role mapping. With that setting
 enabled, if the group name defined on GlassFish Server matches the role
 name defined in the application, there is no need to use the runtime
@@ -408,5 +414,3 @@ group of people who will be given access to the information.
 The `role-name` must match the `role-name` in the `security-role`
 element of the corresponding deployment descriptor or the role name
 defined in a `@DeclareRoles` annotation.
-
-
