@@ -10,7 +10,7 @@ Java EE Security: Advanced Topics
 [[GJJWX]]
 
 [[java-ee-security-advanced-topics]]
-51 Java EE Security: Advanced Topics
+53 Java EE Security: Advanced Topics
 ------------------------------------
 
 
@@ -31,5 +31,3 @@ Systems Applications]
 Deployment Descriptors]
 * link:security-advanced008.html#BABBGBBF[Further Information about
 Advanced Security Topics]
-
-

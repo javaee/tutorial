@@ -4,8 +4,8 @@ title=Container-Managed Transactions
 next=transactions005.html
 prev=transactions003.html
 ~~~~~~
-Container-Managed Transactions
-==============================
+= Container-Managed Transactions
+
 
 [[BNCIJ]]
 
@@ -52,7 +52,7 @@ Transaction Attributes
 ~~~~~~~~~~~~~~~~~~~~~~
 
 A transaction attribute controls the scope of a transaction.
-link:#BNCIL[Figure 52-1] illustrates why controlling the scope is
+link:#BNCIL[Figure 54-1] illustrates why controlling the scope is
 important. In the diagram, `method-A` begins a transaction and then
 invokes `method-B` of `Bean-2`. When `method-B` executes, does it run
 within the scope of the transaction started by `method-A`, or does it
@@ -61,7 +61,7 @@ attribute of `method-B`.
 
 [[BNCIL]]
 
-.*Figure 52-1 Transaction Scope*
+.*Figure 54-1 Transaction Scope*
 image:img/javaeett_dt_050.png[
 "A diagram showing a transaction between two beans."]
 
@@ -174,14 +174,14 @@ transaction before running the method.
 Summary of Transaction Attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-link:#BNCIT[Table 52-1] summarizes the effects of the transaction
+link:#BNCIT[Table 54-1] summarizes the effects of the transaction
 attributes. Both the `T1` and the `T2` transactions are controlled by
 the container. A `T1` transaction is associated with the client that
 calls a method in the enterprise bean. In most cases, the client is
 another enterprise bean. A `T2` transaction is started by the container
 just before the method executes.
 
-In the last column of link:#BNCIT[Table 52-1], the word "None" means
+In the last column of link:#BNCIT[Table 54-1], the word "None" means
 that the business method does not execute within a transaction
 controlled by the container. However, the database calls in such a
 business method might be controlled by the transaction manager of the
@@ -189,11 +189,13 @@ database management system.
 
 [[sthref235]][[BNCIT]]
 
-Table 52-1 Transaction Attributes and Scope
 
-[width="57%",cols="50%,50%,",options="header",]
+*Table 54-1 Transaction Attributes and Scope*
+
+
+[width="60%",cols="20%,20%,20%"]
 |=======================================================================
-|Transaction Attribute |Client's Transaction |Business Method's
+|*Transaction Attribute* |*Client's Transaction* |*Business Method's*
 Transaction
 |`Required` |None |T2
 
@@ -240,12 +242,12 @@ class and the method, the method `TransactionAttributeType` overrides
 the class `TransactionAttributeType`.
 
 The `TransactionAttributeType` constants shown in link:#GKCFD[Table
-52-2] encapsulate the transaction attributes described earlier in this
+54-2] encapsulate the transaction attributes described earlier in this
 section.
 
 [[sthref236]][[GKCFD]]
 
-Table 52-2 TransactionAttributeType Constants
+*Table 54-2 TransactionAttributeType Constants*
 
 [width="34%",cols="100%,",options="header",]
 |========================================================
@@ -348,5 +350,3 @@ prohibited:
 
 You can, however, use these methods to set boundaries in
 application-managed transactions.
-
-

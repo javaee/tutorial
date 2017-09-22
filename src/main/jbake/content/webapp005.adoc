@@ -87,9 +87,9 @@ The welcome files mechanism allows you to specify a list of files that
 the web container can append to a request for a URL (called a valid
 partial request) that is not mapped to a web component. For example,
 suppose that you define a welcome file `welcome.html`. When a client
-requests a URL such as host`:`port`/`webapp`/`directory, where directory
+requests a URL such as `_host:port/webapp/directory_`, where `_directory_`
 is not mapped to a servlet or XHTML page, the file
-host`:`port`/`webapp`/`directory`/welcome.html` is returned to the
+`_host:port/webapp/directory/_`welcome.html` is returned to the
 client.
 
 If a web container receives a valid partial request, the web container
@@ -196,13 +196,13 @@ link:#BNAEV[Table 6-1].
 
 This section explains how to use a couple of the annotations supported
 by a web container to inject resources.
-link:persistence-basicexamples.html#GIJST[Chapter 39, "Running the
+link:persistence-basicexamples.html#GIJST[Chapter 41, "Running the
 Persistence Examples"], explains how web applications use annotations
 supported by the Java Persistence API.
-link:security-webtier.html#BNCAS[Chapter 49, "Getting Started Securing
+link:security-webtier.html#BNCAS[Chapter 51, "Getting Started Securing
 Web Applications"], explains how to use annotations to specify
 information about securing web applications. See
-link:resources.html#BNCJH[Chapter 53, "Resource Adapters and Contracts"],
+link:resources.html#BNCJH[Chapter 55, "Resource Adapters and Contracts"],
 for more information on resources.
 
 [[sthref25]][[BNAEV]]
@@ -286,7 +286,7 @@ do not use the `@Resource` annotation to inject a data source. However,
 this API supports the `@PersistenceUnit` and `@PersistenceContext`
 annotations for injecting `EntityManagerFactory` and `EntityManager`
 instances, respectively.
-link:persistence-basicexamples.html#GIJST[Chapter 39, "Running the
+link:persistence-basicexamples.html#GIJST[Chapter 41, "Running the
 Persistence Examples"] describes these annotations and the use of the
 Java Persistence API in web applications.
 

@@ -20,7 +20,7 @@ For more information about JAX-WS and related technologies, see
 `http://jcp.org/en/jsr/detail?id=224`
 * JAX-WS home:
 +
-`https://jax-ws.java.net/`
+`https://javaee.github.io/metro/`
 * Simple Object Access Protocol (SOAP) 1.2 W3C Note:
 +
 `http://www.w3.org/TR/soap/`

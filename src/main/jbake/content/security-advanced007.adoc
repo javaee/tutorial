@@ -13,7 +13,7 @@ Configuring Security Using Deployment Descriptors
 Configuring Security Using Deployment Descriptors
 -------------------------------------------------
 
-The recommended way to configure security in the Java EE 7 platform is
+The recommended way to configure security in the Java EE 8 platform is
 with annotations. If you wish to override the security settings at
 deployment time, you can use security elements in the `web.xml`
 deployment descriptor to do so. This section describes how to use the

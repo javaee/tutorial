@@ -24,9 +24,9 @@ JavaServer Faces application. The following tasks are usually required:
 
 The following topics are addressed here:
 
-* link:#GIQTE[Creating a Facelets Application]
-* link:#GJJKC[Configuring the Application]
-* link:#GIRGF[Running the guessnumber-jsf Facelets Example]
+* link:#creating-a-facelets-application[Creating a Facelets Application]
+* link:#configuring-the-application[Configuring the Application]
+* link:#running-the-guessnumber-jsf-facelets Example[Running the guessnumber-jsf Facelets Example]
 
 [[GIQTE]]
 
@@ -64,7 +64,7 @@ package javaeetutorial.guessnumber;
 import java.io.Serializable;
 import java.util.Random;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Named; 
+import javax.inject.Named;
 
 @Named
 @SessionScoped
@@ -143,7 +143,7 @@ page, which is XHTML:
 
 [source,oac_no_warn]
 ----
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 ----
 
@@ -271,9 +271,9 @@ in bold.
 [source,oac_no_warn]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
   http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -294,7 +294,7 @@ in bold.
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>greeting.xhtml</welcome-file> 
+        <welcome-file>greeting.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
 ----
@@ -328,8 +328,7 @@ Using Maven]
 [[GJQZL]]
 
 [[to-build-package-and-deploy-the-guessnumber-jsf-example-using-netbeans-ide]]
-To Build, Package, and Deploy the guessnumber-jsf Example Using NetBeans
-IDE
+To Build, Package, and Deploy the guessnumber-jsf Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Make sure that GlassFish Server has been started (see
@@ -398,5 +397,3 @@ incorrect.
 You can continue to guess until you get the correct answer, or you can
 look in the server log, where the `UserNumberBean` constructor displays
 the correct answer.
-
-

@@ -320,7 +320,7 @@ application's web pages.
 
 For more information on using validation constraints, see the following:
 
-* link:bean-validation-advanced.html#GKAHP[Chapter 23, "Bean Validation:
+* link:bean-validation-advanced.html#GKAHP[Chapter 24, "Bean Validation:
 Advanced Topics"]
 * link:jaxrs-advanced002.html#BABCJEDF[Validating Resource Data with Bean
 Validation]

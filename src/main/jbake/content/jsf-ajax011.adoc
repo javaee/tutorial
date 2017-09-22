@@ -151,7 +151,7 @@ user submitted:
 DukesNumberBean dukesNumberBean;
 ----
 
-You will learn more about CDI in link:cdi-basic.html#GIWHB[Chapter 24,
+You will learn more about CDI in link:cdi-basic.html#GIWHB[Chapter 25,
 "Introduction to Contexts and Dependency Injection for Java EE"].
 
 [[GKOKE]]

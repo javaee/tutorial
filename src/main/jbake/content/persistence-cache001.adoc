@@ -4,8 +4,8 @@ title=Overview of the Second-Level Cache
 next=persistence-cache002.html
 prev=persistence-cache.html
 ~~~~~~
-Overview of the Second-Level Cache
-==================================
+= Overview of the Second-Level Cache
+
 
 [[GKJIO]]
 
@@ -26,7 +26,7 @@ normal entity manager operations without knowing about the cache.
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 Persistence providers are not required to support a second-level cache.
 Portable applications should not rely on support by persistence
@@ -41,11 +41,11 @@ are defined by the Java Persistence API.
 
 [[sthref188]][[GKJDG]]
 
-Table 47-1 Cache Mode Settings for the Second-Level Cache
+*Table 47-1 Cache Mode Settings for the Second-Level Cache*
 
-[width="28%",cols="100%,",options="header",]
+[width="80%",cols="20%,60%"]
 |=======================================================================
-|Cache Mode Setting |Description
+|*Cache Mode Setting* |*Description*
 |`ALL` |All entity data is stored in the second-level cache for this
 persistence unit.
 

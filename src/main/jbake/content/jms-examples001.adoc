@@ -4,8 +4,8 @@ title=Building and Running Java Message Service Examples
 next=jms-examples002.html
 prev=jms-examples.html
 ~~~~~~
-Building and Running Java Message Service Examples
-==================================================
+= Building and Running Java Message Service Examples
+
 
 [[A1251921]]
 

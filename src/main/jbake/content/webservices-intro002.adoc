@@ -4,8 +4,8 @@ title=Types of Web Services
 next=webservices-intro003.html
 prev=webservices-intro001.html
 ~~~~~~
-Types of Web Services
-=====================
+= Types of Web Services
+
 
 [[GIQSX]]
 
@@ -42,6 +42,8 @@ defining a message architecture and message formats. Such systems often
 contain a machine-readable description of the operations offered by the
 service, written in the Web Services Description Language (WSDL), an XML
 language for defining interfaces syntactically.
+
+*Note:* JAX-WS is moved to Java SE 8 and is not included in the Java EE 8 platform. However, the JAX-WS API can still be used in EE applications. 
 
 The SOAP message format and the WSDL interface definition language have
 gained widespread adoption. Many development tools, such as NetBeans

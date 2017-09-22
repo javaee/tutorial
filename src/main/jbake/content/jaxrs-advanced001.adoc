@@ -16,15 +16,15 @@ Annotations for Field and Bean Properties of Resource Classes
 JAX-RS annotations for resource classes let you extract specific parts
 or values from a Uniform Resource Identifier (URI) or request header.
 
-JAX-RS provides the annotations listed in link:#GKOBO[Table 34-1].
+JAX-RS provides the annotations listed in link:#GKOBO[Table 32-1].
 
 [[sthref146]][[GKOBO]]
 
-*Table 34-1 Advanced JAX-RS Annotations*
+*Table 32-1 Advanced JAX-RS Annotations*
 
-[width="50%",cols="15%,35%"]
+[width=99%,cols="5% 95%"]
 |=======================================================================
-|*Annotation* |*Description*
+|*Annotation*|*Description*
 |`@Context` |Injects information into a class field, bean property, or
 method parameter
 

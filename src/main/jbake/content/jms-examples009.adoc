@@ -272,8 +272,7 @@ To Run clientmdbentity Using NetBeans IDE
 1.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]), as well as the database server (see
-link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server]).
+link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby]).
 2.  From the File menu, choose Open Project.
 3.  In the Open Project dialog box, navigate to:
 +
@@ -311,8 +310,7 @@ To Run clientmdbentity Using Maven
 1.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]), as well as the database server (see
-link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server]).
+link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby]).
 2.  Go to the following directory:
 +
 [source,oac_no_warn]

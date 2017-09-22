@@ -45,7 +45,7 @@ application component can act as a JMS client.
 +
 Java SE applications can also act as JMS clients; the Message Queue
 Developer's Guide for Java Clients in the GlassFish Server documentation
-(`https://glassfish.java.net/docs/`) explains how to make this work.
+(`https://javaee.github.io/glassfish/documentation`) explains how to make this work.
 * Messages are the objects that communicate information between JMS
 clients.
 * Administered objects are JMS objects configured for the use of

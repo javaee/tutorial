@@ -10,7 +10,7 @@ Batch Processing
 [[GKJIQ6]]
 
 [[batch-processing]]
-56 Batch Processing
+58 Batch Processing
 -------------------
 
 
@@ -38,5 +38,3 @@ Application]
 Application]
 * link:batch-processing010.html#BCGHCHAJ[Further Information about Batch
 Processing]
-
-

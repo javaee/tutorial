@@ -93,8 +93,8 @@ through dependency injection:
 ----
 @ServerEndpoint(
    value = "/websocketbot",
-   decoders = { MessageDecoder.class }, 
-   encoders = { JoinMessageEncoder.class, ChatMessageEncoder.class, 
+   decoders = { MessageDecoder.class },
+   encoders = { JoinMessageEncoder.class, ChatMessageEncoder.class,
                 InfoMessageEncoder.class, UsersMessageEncoder.class }
 )
 /* There is a BotEndpoint instance per connection */
@@ -105,7 +105,7 @@ public class BotEndpoint {
    /* Executor service for asynchronous processing */
    @Resource(name="comp/DefaultManagedExecutorService")
    private ManagedExecutorService mes;
-   
+
    @OnOpen
    public void openConnection(Session session) {
        logger.log(Level.INFO, "Connection opened.");
@@ -124,19 +124,19 @@ decoder converts incoming text messages into `JoinMessage` or
 @OnMessage
 public void message(Session session, Message msg) {
    logger.log(Level.INFO, "Received: {0}", msg.toString());
-   
+
    if (msg instanceof JoinMessage) {
       /* Add the new user and notify everybody */
       JoinMessage jmsg = (JoinMessage) msg;
       session.getUserProperties().put("name", jmsg.getName());
       session.getUserProperties().put("active", true);
       logger.log(Level.INFO, "Received: {0}", jmsg.toString());
-      sendAll(session, new InfoMessage(jmsg.getName() + 
+      sendAll(session, new InfoMessage(jmsg.getName() +
               " has joined the chat"));
-      sendAll(session, new ChatMessage("Duke", jmsg.getName(), 
+      sendAll(session, new ChatMessage("Duke", jmsg.getName(),
               "Hi there!!"));
       sendAll(session, new UsersMessage(this.getUserList(session)));
-      
+
    } else if (msg instanceof ChatMessage) {
       /* Forward the message to everybody */
       ChatMessage cmsg = (ChatMessage) msg;
@@ -188,7 +188,7 @@ accessed by more than one thread are thread safe. In this example, the
 code in `BotBean` is thread safe, and the `BotEndpoint.sendAll` method
 has been declared `synchronized`.
 
-Refer to link:concurrency-utilities.html#GKJIQ8[Chapter 57, "Concurrency
+Refer to link:concurrency-utilities.html#GKJIQ8[Chapter 59, "Concurrency
 Utilities for Java EE"] for more information on the managed executor
 service and Concurrency Utilities for Java EE.
 
@@ -242,7 +242,7 @@ public class ChatMessageEncoder implements Encoder.Text<ChatMessage> {
 }
 ----
 
-See link:jsonp.html#GLRBB[Chapter 19], link:jsonp.html#GLRBB[JSON
+See link:jsonp.html#GLRBB[Chapter 20], link:jsonp.html#GLRBB[JSON
 Processing] for more information on the Java API for JSON Processing.
 
 [[CIHHFICG]]
@@ -290,7 +290,7 @@ public class MessageDecoder implements Decoder.Text<Message> {
        }
        return msg;
    }
-   
+
    /* Decode a JSON message into a Map and check if it contains
     * all the required fields according to its type. */
    @Override
@@ -432,5 +432,3 @@ other.
 4.  Click Show WebSocket Console.
 +
 The console shows the messages sent and received as JSON text.
-
-

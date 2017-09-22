@@ -10,7 +10,7 @@ Duke's Tutoring Case Study Example
 [[GKAEE]]
 
 [[dukes-tutoring-case-study-example]]
-59 Duke's Tutoring Case Study Example
+61 Duke's Tutoring Case Study Example
 -------------------------------------
 
 
@@ -28,5 +28,3 @@ Tutoring]
 * link:dukes-tutoring003.html#GKAFW[Administration Interface]
 * link:dukes-tutoring004.html#GKJNN[Running the Duke's Tutoring Case
 Study Application]
-
-

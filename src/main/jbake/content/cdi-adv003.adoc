@@ -91,7 +91,7 @@ Using Producer Fields to Generate Resources
 
 A common use of a producer field is to generate an object such as a JDBC
 `DataSource` or a Java Persistence API `EntityManager` (see
-link:persistence-intro.html#BNBPZ[Chapter 38, "Introduction to the Java
+link:persistence-intro.html#BNBPZ[Chapter 40, "Introduction to the Java
 Persistence API,"] for more information). The object can then be managed
 by the container. For example, you could create a `@UserDatabase`
 qualifier and then declare a producer field for an entity manager as

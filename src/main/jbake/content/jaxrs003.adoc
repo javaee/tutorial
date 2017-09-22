@@ -36,7 +36,7 @@ the application, and you simply need to implement the appropriate
 method.
 
 You can find a version of this application at
-`_tut-install_` `/examples/jaxrs/hello/`.
+`_tut-install_/examples/jaxrs/hello/`.
 
 The following topics are addressed here:
 
@@ -120,8 +120,7 @@ The rsvp Example Application
 The `rsvp` example application, located in the
 `_tut-install_` `/examples/jaxrs/rsvp/` directory, allows invitees to an
 event to indicate whether they will attend. The events, people invited
-to the event, and the responses to the invite are stored in a Java DB
-database using the Java Persistence API. The JAX-RS resources in `rsvp`
+to the event, and the responses to the invite are stored in Apache Derby using the Java Persistence API. The JAX-RS resources in `rsvp`
 are exposed in a stateless session enterprise bean.
 
 The following topics are addressed here:
@@ -246,7 +245,7 @@ To Run the rsvp Example Application Using NetBeans IDE
 
 1.  If the database server is not already running, start it by following
 the instructions in link:usingexamples004.html#BNADK[Starting and
-Stopping the Java DB Server].
+Stopping Apache Derby].
 2.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).
@@ -287,7 +286,7 @@ To Run the rsvp Example Application Using Maven
 
 1.  If the database server is not already running, start it by following
 the instructions in link:usingexamples004.html#BNADK[Starting and
-Stopping the Java DB Server].
+Stopping Apache Derby].
 2.  Make sure that GlassFish Server has been started (see
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]).

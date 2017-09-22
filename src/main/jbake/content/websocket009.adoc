@@ -4,8 +4,8 @@ title=Handling Errors
 next=websocket010.html
 prev=websocket008.html
 ~~~~~~
-Handling Errors
-===============
+= Handling Errors
+
 
 [[BABDEJHB]]
 
@@ -14,10 +14,8 @@ Handling Errors
 ---------------
 
 To designate a method that handles errors in an annotated WebSocket
-endpoint:
+endpoint, decorate it with `@OnError`:
 
-1.  Decorate it with `@OnError`:
-+
 [source,oac_no_warn]
 ----
 @ServerEndpoint("/testendpoint")
@@ -30,9 +28,7 @@ public class TestEndpoint {
    }
 }
 ----
-+
+
 This method is invoked when there are connection problems, runtime
 errors from message handlers, or conversion errors when decoding
 messages.
-
-

@@ -4,8 +4,8 @@ title=Using the Streaming API
 next=jsonp005.html
 prev=jsonp003.html
 ~~~~~~
-Using the Streaming API
-=======================
+=Using the Streaming API
+
 
 [[BABDBHIA]]
 
@@ -80,7 +80,7 @@ content of the element by calling the method `JsonParser.getString`. For
 * `JsonParser.getLong`
 * `JsonParser.getBigDecimal`
 
-See the Java EE 7 API reference for the `javax.json.stream.JsonParser`
+See the Java EE API reference for the `javax.json.stream.JsonParser`
 interface for more information.
 
 The output of this example is the following:

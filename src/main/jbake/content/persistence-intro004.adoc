@@ -373,7 +373,7 @@ included in a WAR or EAR file, the JAR file should be located in either
 [width="100%",cols="100%",]
 |=======================================================================
 a|
-Note:
+*Note*:
 
 In the Java Persistence API 1.0, JAR files could be located at the root
 of an EAR file as the root of the persistence unit. This is no longer
@@ -381,6 +381,3 @@ supported. Portable applications should use the EAR file's library
 directory as the root of the persistence unit.
 
 |=======================================================================
-
-
-

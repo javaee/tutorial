@@ -27,10 +27,10 @@ interface, as in the following example:
 ----
 @Connector(
     displayName = "TrafficResourceAdapter",
-    vendorName = "Java EE Tutorial", 
+    vendorName = "Java EE Tutorial",
     version = "7.0"
 )
-public class TrafficResourceAdapter implements ResourceAdapter, 
+public class TrafficResourceAdapter implements ResourceAdapter,
                                                Serializable {
     ...
 }
@@ -62,7 +62,7 @@ following example:
 @Activation(
         messageListeners = { TrafficListener.class }
 )
-public class TrafficActivationSpec implements ActivationSpec, 
+public class TrafficActivationSpec implements ActivationSpec,
                                               Serializable {
     ...
     @ConfigProperty()
@@ -121,7 +121,5 @@ resource adapter need to be examined for annotations that specify
 deployment information.
 
 For the complete list of annotations and JavaBeans components provided
-in the Java EE 7 platform, see the Java EE Connector Architecture 1.7
+in the Java EE platform, see the Java EE Connector Architecture 1.7
 specification.
-
-

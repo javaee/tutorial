@@ -14,7 +14,7 @@ Design and Architecture of Duke's Bookstore
 -------------------------------------------
 
 Duke's Bookstore is a simple web application that uses many features of
-JavaServer Faces technology, in addition to other Java EE 7 features:
+JavaServer Faces technology, in addition to other Java EE features:
 
 * JavaServer Faces technology, as well as Contexts and Dependency
 Injection for Java EE (CDI)

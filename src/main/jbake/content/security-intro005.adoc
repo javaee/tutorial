@@ -69,13 +69,13 @@ Mechanism in the Deployment Descriptor].
 In some applications, authorized users are assigned to roles. In this
 situation, the role assigned to the user in the application must be
 mapped to a principal or group defined on the application server.
-link:#BNBXL[Figure 48-6] shows this. More information on mapping roles
+link:#BNBXL[Figure 50-6] shows this. More information on mapping roles
 to users and groups can be found in link:#BNBXU[Setting Up Security
 Roles].
 
 [[BNBXL]]
 
-.*Figure 48-6 Mapping Roles to Users and Groups*
+.*Figure 50-6 Mapping Roles to Users and Groups*
 image:img/javaeett_dt_044.png[
 "Diagram of role mapping, showing creation of users and groups,
 definition of roles, and mapping of roles to users and groups"]
@@ -282,7 +282,7 @@ salary data. Each of these security roles is an abstract logical
 grouping of users that is defined by the person who assembles the
 application. When an application is deployed, the deployer will map the
 roles to security identities in the operational environment, as shown in
-link:#BNBXL[Figure 48-6].
+link:#BNBXL[Figure 50-6].
 
 For Java EE components, you define security roles using the
 `@DeclareRoles` and `@RolesAllowed` metadata annotations.

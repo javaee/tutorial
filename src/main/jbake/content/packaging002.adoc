@@ -16,8 +16,8 @@ Packaging Enterprise Beans
 This section explains how enterprise beans can be packaged in EJB JAR or
 WAR modules. It includes the following sections:
 
-* link:#CHDFCDBG[Packaging Enterprise Beans in EJB JAR Modules]
-* link:#CHDJABEJ[Packaging Enterprise Beans in WAR Modules]
+* link:#packaging-enterprise-beans-in-ejb-jar-modules[Packaging Enterprise Beans in EJB JAR Modules]
+* link:#packaging-enterprise-beans-in-war-modules[Packaging Enterprise Beans in WAR Modules]
 
 [[CHDFCDBG]]
 
@@ -109,5 +109,3 @@ WEB-INF/lib/cc.jar
 WEB-INF/ejb-jar.xml
 WEB-INF/web.xml
 ----
-
-

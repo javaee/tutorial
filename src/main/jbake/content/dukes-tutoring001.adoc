@@ -19,12 +19,12 @@ and tutoring center staff) and an administration interface (for staff to
 maintain the system). The business logic for both interfaces is provided
 by enterprise beans. The enterprise beans use the Java Persistence API
 to create and store the application's data in the database.
-link:#CHDDJDCH[Figure 59-1] illustrates the architecture of the
+link:#CHDDJDCH[Figure 61-1] illustrates the architecture of the
 application.
 
 [[CHDDJDCH]]
 
-.*Figure 59-1 Architecture of the Duke's Tutoring Example Application*
+.*Figure 61-1 Architecture of the Duke's Tutoring Example Application*
 image:img/javaeett_dt_061.png[
 "Architecture diagram of the Duke's Tutoring example application. Two
 clients access the main interface and the admin interface deployed in
@@ -41,7 +41,7 @@ application, and `dukes-tutoring-common` is packaged and deployed with
 entity classes and helper classes to be reused by other applications,
 such as a JavaFX client application.
 
-Duke's Tutoring uses the following Java EE 7 platform features:
+Duke's Tutoring uses the following Java EE platform features:
 
 * Java Persistence API entities
 
@@ -96,5 +96,3 @@ packaged within a single WAR file:
 * The main interface, for students, guardians, and staff
 * The administrative interface used by the staff to manage the students
 and guardians, and to generate attendance reports
-
-

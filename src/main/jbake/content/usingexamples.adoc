@@ -23,13 +23,10 @@ The following topics are addressed here:
 * link:usingexamples002.html#BNADI[Starting and Stopping GlassFish
 Server]
 * link:usingexamples003.html#BNADJ[Starting the Administration Console]
-* link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server]
+* link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby]
 * link:usingexamples005.html#BNAAN[Building the Examples]
 * link:usingexamples006.html#GEXAP[Tutorial Example Directory Structure]
-* link:usingexamples007.html#CIHBHEFF[Java EE 7 Maven Archetypes in the
-Tutorial]
-* link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
+* link:usingexamples007.html#CIHBHEFF[Java EE Maven Archetypes in the
 Tutorial]
 * link:usingexamples009.html#BNADL[Debugging Java EE Applications]
 

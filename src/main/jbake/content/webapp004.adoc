@@ -22,9 +22,9 @@ The source code for this application is in the
 
 The following topics are addressed here:
 
-* link:#BNAEP[Mapping URLs to Web Components]
-* link:#GJWWG[Examining the hello2 Web Module]
-* link:#GKBLH[Running the hello2 Example]
+* link:#mapping-urls-to-web-components[Mapping URLs to Web Components]
+* link:#examining-the-hello2-web-module[Examining the hello2 Web Module]
+* link:#running-the-hello2-example[Running the hello2 Example]
 
 [[BNAEP]]
 

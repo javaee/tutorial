@@ -86,9 +86,9 @@ Programmatic security is discussed in link:#GJGCS[Securing an Enterprise
 Bean Programmatically].
 
 Some of the material in this chapter assumes that you have already read
-link:ejb-intro.html#GIJSZ[Chapter 33, "Enterprise Beans"],
-link:ejb-gettingstarted.html#GIJRE[Chapter 34, "Getting Started with
-Enterprise Beans"], and link:security-intro.html#BNBWJ[Chapter 48,
+link:ejb-intro.html#GIJSZ[Chapter 35, "Enterprise Beans"],
+link:ejb-gettingstarted.html#GIJRE[Chapter 36, "Getting Started with
+Enterprise Beans"], and link:security-intro.html#BNBWJ[Chapter 50,
 "Introduction to Security in the Java EE Platform"].
 
 This section discusses securing a Java EE application where one or more
@@ -107,7 +107,7 @@ end and the application is packaged into a WAR module as a Java class
 file, security for the application can be handled in the application's
 `web.xml` file. The EJB in the WAR file can have its own deployment
 descriptor, `ejb-jar.xml`, if required. Securing web applications using
-`web.xml` is discussed in link:security-webtier.html#BNCAS[Chapter 49,
+`web.xml` is discussed in link:security-webtier.html#BNCAS[Chapter 51,
 "Getting Started Securing Web Applications"].
 
 The following sections describe declarative and programmatic security
@@ -212,7 +212,7 @@ example:
 ----
 @DeclareRoles({"Administrator", "Manager", "Employee"})
 ----
-* `@RolesAllowed("`list-of-roles`")`: Specifies the security roles
+* `@RolesAllowed("_list-of-roles_")`: Specifies the security roles
 permitted to access methods in an application. This annotation can be
 specified on a class or on one or more methods. When specified at the
 class level, the annotation applies to all methods in the class. When
@@ -486,12 +486,12 @@ Propagating a Security Identity (Run-As)
 
 You can specify whether a caller's security identity should be used for
 the execution of specified methods of an enterprise bean or whether a
-specific run-as identity should be used. link:#BNBZA[Figure 50-1]
+specific run-as identity should be used. link:#BNBZA[Figure 52-1]
 illustrates this concept.
 
 [[BNBZA]]
 
-.*Figure 50-1 Security Identity Propagation*
+.*Figure 52-1 Security Identity Propagation*
 image:img/javaeett_dt_047.png[
 "Diagram of security identity propagation from client to intermediate
 container to target container"]
@@ -593,5 +593,3 @@ must set up the appropriate security policy for the enterprise bean
 application.
 
 Deployment information is specific to a web or application server.
-
-

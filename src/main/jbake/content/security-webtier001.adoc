@@ -25,7 +25,7 @@ Internet. In such an environment, a substantial number of web
 applications will require some type of security.
 
 Securing applications and their clients in the business tier and the EIS
-tier is discussed in link:security-javaee.html#BNBYK[Chapter 50, "Getting
+tier is discussed in link:security-javaee.html#BNBYK[Chapter 52, "Getting
 Started Securing Enterprise Applications"].
 
 In the Java EE platform, web components provide the dynamic extension
@@ -72,7 +72,7 @@ Applications].
 * Message security works with web services and incorporates security
 features, such as digital signatures and encryption, into the header of
 a SOAP message, working in the application layer, ensuring end-to-end
-security. Message security is not a component of Java EE 7 and is
+security. Message security is not a component of Java EE and is
 mentioned here for informational purposes only.
 
 Some of the material in this chapter builds on material presented
@@ -82,8 +82,6 @@ are familiar with the information in the following chapters:
 * link:webapp.html#BNADR[Chapter 6, "Getting Started with Web
 Applications"]
 * link:jsf-intro.html#BNAPH[Chapter 7, "JavaServer Faces Technology"]
-* link:servlets.html#BNAFD[Chapter 17, "Java Servlet Technology"]
-* link:security-intro.html#BNBWJ[Chapter 48, "Introduction to Security in
+* link:servlets.html#BNAFD[Chapter 18, "Java Servlet Technology"]
+* link:security-intro.html#BNBWJ[Chapter 50, "Introduction to Security in
 the Java EE Platform"]
-
-

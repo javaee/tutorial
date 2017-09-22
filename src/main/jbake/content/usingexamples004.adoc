@@ -1,44 +1,44 @@
 type=page
 status=published
-title=Starting and Stopping the Java DB Server
+title=Starting and Stopping Apache Derby
 next=usingexamples005.html
 prev=usingexamples003.html
 ~~~~~~
-Starting and Stopping the Java DB Server
-========================================
+= Starting and Stopping Apache Derby
+
 
 [[BNADK]]
 
 [[starting-and-stopping-the-java-db-server]]
-Starting and Stopping the Java DB Server
-----------------------------------------
+Starting and Stopping Apache Derby
+----------------------------------
 
-GlassFish Server includes the Java DB database server.
+GlassFish Server includes Apache Derby.
 
-To start the Java DB server from the command line, open a terminal
-window or command prompt and execute:
+To start Derby from the command line, open a terminal
+window or command prompt, change to the `_as-install_/bin` directory, and execute:
 
 [source,oac_no_warn]
 ----
 asadmin start-database
 ----
 
-To stop the Java DB server from the command line, open a terminal window
-or command prompt and execute:
+To stop Derby from the command line, open a terminal window
+or command prompt, change to the `_as-install_/bin` directory, and execute:
 
 [source,oac_no_warn]
 ----
 asadmin stop-database
 ----
 
-For information about the Java DB included with GlassFish Server, see
-`http://www.oracle.com/technetwork/java/javadb/overview/index.html`.
+For information about Apache Derby included with GlassFish Server, see
+the Release Notes that are located in the `_as-install_/javadb/` directory.
 
 [[GJSFS]]
 
 [[to-start-the-database-server-using-netbeans-ide]]
-To Start the Database Server Using NetBeans IDE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To Start Derby Using NetBeans IDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you start GlassFish Server using NetBeans IDE, the database server
 starts automatically. If you ever need to start the server manually,

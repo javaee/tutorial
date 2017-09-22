@@ -60,7 +60,7 @@
       <connection>scm:git:git@github.com:javaee/tutorial.git</connection>
       <developerConnection>scm:git:git@github.com:javaee/tutorial.git</developerConnection>
       <url>https://github.com/javaee/tutorial</url>      
-      <tag>HEAD</tag>
+    <tag>HEAD</tag>
   </scm>
     <distributionManagement>
         <site>

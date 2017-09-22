@@ -119,8 +119,8 @@ Interface for Containers]
 
 ** link:overview008.html#CJAJHGIH[Batch Applications for the Java
 Platform]
-* link:overview009.html#GIRDR[Java EE 7 APIs in the Java Platform,
-Standard Edition 7]
+* link:overview009.html#GIRDR[Java EE 8 APIs in the Java Platform,
+Standard Edition 8]
 
 ** link:overview009.html#BNADA[Java Database Connectivity API]
 
@@ -151,10 +151,10 @@ link:usingexamples.html#GFIUD[2 Using the Tutorial Examples]
 
 ** link:usingexamples001.html#GEXAE[Java Platform, Standard Edition]
 
-** link:usingexamples001.html#GEXAB[Java EE 7 Software Development Kit]
+** link:usingexamples001.html#GEXAB[Java EE 8 Software Development Kit]
 *** link:usingexamples001.html#GEXBC[SDK Installation Tips]
 
-** link:usingexamples001.html#GEXBA[Java EE 7 Tutorial Component]
+** link:usingexamples001.html#GEXBA[Java EE 8 Tutorial Component]
 
 ** link:usingexamples001.html#GEXAZ[NetBeans IDE]
 *** link:usingexamples001.html#GJSEQ[To Install NetBeans IDE without
@@ -181,14 +181,13 @@ Command Line]
 
 ** link:usingexamples003.html#GJKST[To Start the Administration Console
 Using NetBeans IDE]
-* link:usingexamples004.html#BNADK[Starting and Stopping the Java DB
-Server]
+* link:usingexamples004.html#BNADK[Starting and Stopping Apache Derby]
 
 ** link:usingexamples004.html#GJSFS[To Start the Database Server Using
 NetBeans IDE]
 * link:usingexamples005.html#BNAAN[Building the Examples]
 * link:usingexamples006.html#GEXAP[Tutorial Example Directory Structure]
-* link:usingexamples007.html#CIHBHEFF[Java EE 7 Maven Archetypes in the
+* link:usingexamples007.html#CIHBHEFF[Java EE Maven Archetypes in the
 Tutorial]
 
 ** link:usingexamples007.html#CHDJGCCA[Installing the Tutorial
@@ -197,14 +196,6 @@ Archetypes]
 Archetypes Using NetBeans IDE]
 *** link:usingexamples007.html#sthref17[Installing the Tutorial
 Archetypes Using Maven]
-* link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
-Tutorial]
-
-** link:usingexamples008.html#GIQYK[To Update the Tutorial Using NetBeans
-IDE]
-
-** link:usingexamples008.html#sthref18[To Update the Tutorial Using the
-Command Line]
 * link:usingexamples009.html#BNADL[Debugging Java EE Applications]
 
 ** link:usingexamples009.html#BNADM[Using the Server Log]
