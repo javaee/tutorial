@@ -4,8 +4,7 @@ title=Using Programmatic Security with Web Applications
 next=security-webtier004.html
 prev=security-webtier002.html
 ~~~~~~
-Using Programmatic Security with Web Applications
-=================================================
+= Using Programmatic Security with Web Applications
 
 [[GJIIE]]
 
@@ -30,7 +29,32 @@ The following topics are addressed here:
 Authenticating Users Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following methods of the `HttpServletRequest` interface enable you
+You can use the `SecurityContext` and `HttpServletRequest` interfaces to
+authenticate users for a web application programmatically.
+
+[[security-context]]
+==== SecurityContext
+The `SecurityContext` interface, as specified in the Java EE Security API
+specification, defines the following method to programmatically trigger the
+authentication process:
+
+* `authenticate()` allows an application to signal to the container
+that it should start the authentication process with the caller. This method
+requires `HttpServletRequest` and `HttpServletResponse` parameters to be passed
+in, and can therefore be used only in a valid Servlet context.
+
+Programmatically triggering means that the container responds as if the caller
+had attempted to access a constrained resource. It causes the container to invoke
+the authentication mechanism configured for the application. If the configured
+authentication mechanism is an `HttpAuthenticationMechanism`, then
+the `AuthenticationParameters` argument is meaningful and extended capabilities of
+`HttpAuthenticationMechanism` are available. If not, the behavior and result is
+as if `HttpServletRequest.authenticate()` were called.
+
+
+[[httpservletrequest]]
+==== HttpServletRequest
+The `HttpServletRequest` interface defines the following methods that enable you
 to authenticate users for a web application programmatically.
 
 * `authenticate` allows an application to instigate authentication of
@@ -66,14 +90,14 @@ public class TutorialServlet extends HttpServlet {
     private ConverterBean converterBean;
 
     /**
-     * Processes requests for both HTTP <code>GET</code> 
+     * Processes requests for both HTTP <code>GET</code>
      *    and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, 
+    protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -86,7 +110,7 @@ public class TutorialServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             request.login("TutorialUser", "TutorialUser");
-            BigDecimal result = 
+            BigDecimal result =
                 converterBean.dollarToYen(new BigDecimal("1.0"));
             out.println("<h1>Servlet TutorialServlet result of dollarToYen= "
                 + result + "</h1>");
@@ -114,7 +138,7 @@ import javax.servlet.http.*;
 
 public class TestServlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, 
+    protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -134,11 +158,40 @@ public class TestServlet extends HttpServlet {
 Checking Caller Identity Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In general, security management should be enforced by the container in a
-manner that is transparent to the web component. The security API
-described in this section should be used only in the less frequent
+In general, the container enforces security management in a
+manner that is transparent to the web component. Use the security APIs
+described in this section only in the less frequent
 situations in which the web component methods need to access the
 security context information.
+
+The Java EE Security API specification defines the following methods of the
+`SecurityContext` interface that allow the application to test aspects of the
+caller data:
+
+* `getCallerPrincipal()` retrieves the `Principal` representing the caller.
+This is the container-specific representation of the caller principal,
+and the type may differ from the type of the caller principal originally
+established by an `HttpAuthenticationMechanism`. This method returns null for an
+unauthenticated caller.
+
+* `getPrincipalsByType()` retrieves all principals of the given type. This
+method can be used to retrieve an application-specific caller principal
+established during authentication. This method is primarily useful in the case
+that the container’s caller principal is a different type than the application
+caller principal, and the application needs specific information behavior
+available only from the application principal. This method returns an empty
+`Set` if the caller is unauthenticated, or if the requested type is not found.
++
+Where both a container caller principal and an application caller principal
+are present, the value returned by `getName()` MUST be the same for both
+principals.
+
+* `isCallerInRole()` takes a String argument that represents the role to be
+tested. The specification does not define how the role determination is made,
+but the result MUST be the same as if the corresponding container-specific call
+had been made (for example `HttpServletRequest.isUserInRole()`,
+`EJBContext.isCallerInRole()`), and MUST be consistent with the result implied
+by other specifications that prescribe role-mapping behavior.
 
 Servlet 4.0 specifies the following methods that enable you to access
 security information about the component's caller.
@@ -164,6 +217,41 @@ the remote user.
 Your application can make business-logic decisions based on the
 information obtained using these APIs.
 
+[testing-access-to-a-resource-programmatically]
+Testing Access to a Resource Programmatically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The `SecurityContext` interface, as specified in the Java EE Security API
+specification, defines the following method for programmatically testing
+access to a resource:
+
+*  `hasAccessToWebResource()` method determines if the caller has access to
+the specified web resource for the specified HTTP methods, as determined by
+the security constraints configured for the application.
++
+The resource
+parameter is a `URLPatternSpec` that identifies an application-specific web
+resource. LINK TO JAVADOC???.
++
+This method can be used to check access to resources in the current application
+only — it cannot be called cross-application, or cross-container, to check
+access to resources in a different application.
+
+For example, consider the following Servlet definition:
+
+[source,oac_no_warn]
+----
+@WebServlet("/protectedServlet")
+@ServletSecurity(@HttpConstraint(rolesAllowed = "foo"))
+public class ProtectedServlet extends HttpServlet { ... }
+----
+And the following call to `hasAccessToWebResource()`:
+[source,oac_no_warn]
+----
+securityContext.hasAccessToWebResource("/protectedServlet", GET)
+----
+
+The above `hasAccessToWebResource()` call returns true if, and only if,
+the caller is in role "foo".
 [[GJJLQ]]
 
 [[example-code-for-programmatic-security]]
@@ -194,12 +282,12 @@ import javax.servlet.http.*;
 @DeclareRoles("javaeeuser")
 public class LoginServlet extends HttpServlet {
 
-    /** 
+    /**
      * Processes requests for both HTTP GET and POST methods.
      * @param request servlet request
      * @param response servlet response
      */
-    protected void processRequest(HttpServletRequest request, 
+    protected void processRequest(HttpServletRequest request,
                  HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -207,33 +295,33 @@ public class LoginServlet extends HttpServlet {
         try {
             String userName = request.getParameter("txtUserName");
             String password = request.getParameter("txtPassword");
-            
+
             out.println("Before Login" + "<br><br>");
-            out.println("IsUserInRole?.." 
+            out.println("IsUserInRole?.."
                         + request.isUserInRole("javaeeuser")+"<br>");
             out.println("getRemoteUser?.." + request.getRemoteUser()+"<br>");
-            out.println("getUserPrincipal?.." 
+            out.println("getUserPrincipal?.."
                         + request.getUserPrincipal()+"<br>");
             out.println("getAuthType?.." + request.getAuthType()+"<br><br>");
-            
+
             try {
-                request.login(userName, password); 
+                request.login(userName, password);
             } catch(ServletException ex) {
-                out.println("Login Failed with a ServletException.." 
+                out.println("Login Failed with a ServletException.."
                     + ex.getMessage());
                 return;
             }
             out.println("After Login..."+"<br><br>");
-            out.println("IsUserInRole?.." 
+            out.println("IsUserInRole?.."
                         + request.isUserInRole("javaeeuser")+"<br>");
             out.println("getRemoteUser?.." + request.getRemoteUser()+"<br>");
-            out.println("getUserPrincipal?.." 
+            out.println("getUserPrincipal?.."
                         + request.getUserPrincipal()+"<br>");
             out.println("getAuthType?.." + request.getAuthType()+"<br><br>");
-            
+
             request.logout();
             out.println("After Logout..."+"<br><br>");
-            out.println("IsUserInRole?.." 
+            out.println("IsUserInRole?.."
                         + request.isUserInRole("javaeeuser")+"<br>");
             out.println("getRemoteUser?.." + request.getRemoteUser()+"<br>");
             out.println("getUserPrincipal?.."
@@ -305,5 +393,3 @@ deployment descriptor, as shown here:
 A security role reference, including the name defined by the reference,
 is scoped to the component whose deployment descriptor contains the
 `security-role-ref` deployment descriptor element.
-
-
