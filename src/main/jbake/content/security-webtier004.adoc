@@ -80,11 +80,17 @@ Authentication is case sensitive for both the user name and password, so
 write down the user name and password exactly. This topic is discussed
 more in link:security-intro005.html#BNBXR[Managing Users and Groups in
 GlassFish Server].
-3.  Set up Default Principal to Role Mapping in GlassFish Server.
-1.  From the Administration Console, expand the Configurations node,
-then expand the server-config node.
-2.  Select the Security node.
-3.  Select the Default Principal to Role Mapping Enabled check box.
++
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+*Note:*
+
+Default principal to role mapping is enabled
+by default.
+|=======================================================================
+
+
 4.  Click Save.
 
 [[BNCCK]]
