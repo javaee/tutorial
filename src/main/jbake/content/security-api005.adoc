@@ -1,0 +1,11 @@
+type=page
+status=published
+title=Java API for Security
+next=security-advanced.html
+prev=security-api004.html
+~~~~~~
+== Running the Custom Identity Store Example
+
+[[running-the-custom-identity-store-example]]
+Running the Custom Identity Store Example
+-----------------------------------------

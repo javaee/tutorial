@@ -1,0 +1,144 @@
+type=page
+status=published
+title=Java API for Security
+next=security-api002.html
+prev=security-api.html
+~~~~~~
+== About the Java API for Security
+
+[[BNCAS]]
+
+[[about-the-java-api-for-security]]
+About the Java API for Security
+-------------------------------
+
+
+Java EE includes support for JSR 375, which defines portable, plug-in interfaces
+for authentication and identity stores, and a new injectable-type SecurityContext
+interface that provides an access point for programmatic security. You can use
+the built-in implementations of these APIs, or define custom
+implementations.
+
+The Java API for Security contains the following packages:
+
+* The `javax.security.enterprise` package is the main Java EE security API package
+and contains classes and interfaces that span authentication, authorization, and
+identity concerns. link:#main-classes-and-interfaces-in-enterprise[Table 51-1] lists
+the main class and interfaces in this package.
+
+* The `javax.security.enterprise.authentication.mechanism.http` package contains
+classes and interfaces associated with authentication mechanisms that specifically
+target HTTP as an environment to interact with a caller (challenge/response, obtain
+credentials). This API is specified only for use in the servlet container.
+link:#main-classes-and-interfaces-in-authentication[Table 51-2] lists the main classes
+and interfaces in this package.
+
+* The `javax.javax.security.enterprise.credential` package contains classes and
+interfaces associated with submitting credentials. link:#main-classes-and-interfaces-in-credential[Table 51-3]
+lists the main classes and interfaces in this package.
+
+* The `javax.security.enterprise.identitystore` package contains classes and
+interfaces associated with the identity store, which validate the credentials of the
+Caller, and access a Caller's identity attributes. link:#main-classes-and-interfaces-in-identitystore[Table 51-4]
+lists the main classes and interfaces in this package.
+
+
+[[main-classes-and-interfaces-in-enterprise]]
+
+*Table 51-1  Main Classes and Interfaces in javax.security.enterprise*
+
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`SecurityContext` | Injectable-type interface that provides an access point for
+programmatic security intended to be used by application code to query and interact
+with the Java EE Security API.
+
+|`CallerPrincipal` | Principal type that represents the identity of the
+application caller.
+
+|`AuthenticationStatus` | Enum used as a return value, primarily by the
+`HttpAuthenticationMechanism` to indicate the result of the authentication process.
+
+|`AuthenticationException` | Indicates that a problem occurred during the
+authentication process.
+|=======================================================================
+
+[[main-classes-and-interfaces-in-authentication]]
+
+*Table 51-2 Main Classes and Interfaces in javax.security.enterprise.authentication.mechanism.http*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`HttpAuthenticationMechanism` | Interface used to obtain a caller's credentials in some way,
+using the HTTP protocol where necessary.
+
+|`HttpMessageContext` | Interface that contains all of the per-request state
+information and encapsulates the client request, server response,
+container handler for authentication callbacks, and the subject representing
+the caller.
+
+|`AuthenticationParameters` | Parameters that are provided with the authentication
+request.
+
+|`HttpMessageContextWrapper` | Class that is an implementation of the
+HttpMessageContext interface that can be subclassed by developers wishing to
+provide extra or different functionality.
+|=======================================================================
+
+
+[[main-classes-and-interfaces-in-credential]]
+
+*Table 51-3 Main Classes and Interfaces in javax.security.enterprise.credential*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`Credential` | Represents the credential the caller uses to authenticate.
+
+|`AbstractClearableCredential` | Class that contains behavior common to `credential`
+implementations that can be meaningfully cleared.
+
+|`BasicAuthenticationCredential` | Class that extends `UsernamePasswordCredential`
+to represent credentials used by HTTP Basic Authentication.
+
+|`CallerOnlyCredential` | Class that represents a credential that contains only a
+caller name and no secret of any kind.
+
+|`Password` | Class that represents a text-based password, and includes a built-in
+mechanism for securely clearing the value.
+
+|`RememberMeCredential` | Class that represents a credential presented as a token,
+for the explicit usage with the JSR 375 remember me function.
+
+|`UsernamePasswordCredential` | Class that represents the credentials typically
+used by standard caller name/password authentication.
+|=======================================================================
+
+[[main-classes-and-interfaces-in-identitystore]]
+
+*Table 51-4 Main Classes and Interfaces in javax.security.enterprise.identitystore*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`IdentityStore` |  Mechanism for validating a caller's credentials and
+accessing a caller's identity attributes.
+
+|`IdentityStoreHandler` | Mechanism for validating a caller's credentials,
+and accessing a caller's identity attributes, by consulting a set of one or more
+'IdentityStore's.
+
+|`PasswordHash` |  Interface for objects that can generate and verify password hashes.
+
+|`Pbkdf2PasswordHash` | Interface that represents the built-in `Pbkdf2PasswordHash`
+implementation.
+
+|`RememberMeIdentityStore` | Mechanism for validating a caller's credentials and
+accessing a caller's identity attributes. This interface is specifically tailored
+for the "remember me" feature.
+
+|`CredentialValidationResult` | Class that represents the result from an attempt
+to validate an instance of `Credential`.
+
+|`IdentityStorePermission` | Class for IdentityStore permissions. The permission
+name currently defined is `getGroups`.
+|=======================================================================

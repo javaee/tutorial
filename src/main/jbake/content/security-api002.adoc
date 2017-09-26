@@ -1,0 +1,13 @@
+type=page
+status=published
+title=Java API for Security
+next=security-api003.html
+prev=security-api001.html
+~~~~~~
+== Overview of the HTTP Authentication Mechanism Interface
+
+[[BNCAS]]
+
+[[overview-of-the-http-auth-mech-int]]
+Overview of the HTTP Authentication Mechanism Interface
+-------------------------------------------------------
