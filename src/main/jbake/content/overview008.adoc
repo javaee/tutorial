@@ -198,7 +198,7 @@ consists of the following areas:
 * The query language
 * Object/relational mapping metadata
 
-The Java EE 8 platform requires Java Persistence API 2.1.
+The Java EE 8 platform requires Java Persistence API 2.2.
 
 [[BNACR]]
 
@@ -373,7 +373,7 @@ send mail
 The Java EE platform includes the JavaMail API with a service provider
 that allows application components to send Internet mail.
 
-The Java EE 8 platform requires JavaMail 1.5.
+The Java EE 8 platform requires JavaMail 1.6.
 
 [[GIRBE]]
 
@@ -448,7 +448,7 @@ enables Java EE applications to create endpoints using annotations that
 specify the configuration parameters of the endpoint and designate its
 lifecycle callback methods.
 
-The Java EE 8 platform requires Java API for WebSocket 1.0.
+The Java EE 8 platform requires Java API for WebSocket 1.1.
 
 [[CJAGIEEI]]
 
