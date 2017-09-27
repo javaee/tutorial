@@ -1,7 +1,7 @@
 type=page
 status=published
 title=Examples: Securing Enterprise Beans
-next=security-advanced.html
+next=security-api.html
 prev=security-javaee002.html
 ~~~~~~
 Examples: Securing Enterprise Beans
