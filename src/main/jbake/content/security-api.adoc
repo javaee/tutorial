@@ -2,14 +2,14 @@ type=page
 status=published
 title=Java API for Security
 next=security-api001.html
-prev=security-javaee003.html.html
+prev=security-javaee003.html
 ~~~~~~
-== Java API for Security
+= Java API for Security
 
-[[BNCAS]]
+
 
 [[java-api-for-security]]
-51 Java API for Security
+53 Java API for Security
 ------------------------
 
 

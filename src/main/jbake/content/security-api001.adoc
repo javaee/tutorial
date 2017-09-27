@@ -4,9 +4,9 @@ title=Java API for Security
 next=security-api002.html
 prev=security-api.html
 ~~~~~~
-== About the Java API for Security
+= About the Java API for Security
 
-[[BNCAS]]
+
 
 [[about-the-java-api-for-security]]
 About the Java API for Security

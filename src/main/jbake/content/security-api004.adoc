@@ -4,7 +4,8 @@ title=Java API for Security
 next=security-api005.html
 prev=security-api003.html
 ~~~~~~
-== Running the Built-In Database Identity Store Example
+= Running the Built-In Database Identity Store Example
+
 
 [[running-the-built-in-database-identity-store-example]]
 Running the Built-In Database Identity Store Example

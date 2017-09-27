@@ -4,7 +4,7 @@ title=Java API for Security
 next=security-api004.html
 prev=security-api002.html
 ~~~~~~
-== Overview of the Identity Store Interfaces
+= Overview of the Identity Store Interfaces
 
 [[overview-of-the-identity-store-interfaces]]
 Overview of the Identity Store Interfaces
