@@ -4,8 +4,7 @@ title=Security
 next=security-intro.html
 prev=jms-examples010.html
 ~~~~~~
-Security
-========
+= Security
 
 [[GIJRP]][[JEETT00133]]
 
@@ -26,5 +25,6 @@ the Java EE Platform"]
 Web Applications"]
 * link:security-javaee.html#BNBYK[Chapter 52, "Getting Started Securing
 Enterprise Applications"]
-* link:security-advanced.html#GJJWX[Chapter 53, "Java EE Security:
+* link:security-api.html#java-api-for-security[Chapter 53, "Java API for Security"]
+* link:security-advanced.html#GJJWX[Chapter 54, "Java EE Security:
 Advanced Topics"]
