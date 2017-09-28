@@ -10,3 +10,282 @@ prev=security-api003.html
 [[running-the-built-in-database-identity-store-example]]
 Running the Built-In Database Identity Store Example
 ----------------------------------------------------
+The example described in this section demonstrates how to use the built-in database
+identity store for credential validation.
+
+Topics include:
+
+* link:#overview-of-the-built-in-database-identity-store-example[Overview of the Built-In Database Identity Store Example]
+* link:#to-run-the-built-in-database-identity-store-example[To Run the Built-In Database Identity Store Example]
+
+[[overview-of-the-custom-identity-store-example]]
+Overview of the Built-In Database Identity Store Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+JSR 375 mandates that a Java EE container MUST support a built-in `IdentityStore`
+backed by a database. To support this mandatory requirement, `DatabaseIdentityStore`
+is bundled with the GlassFish-RI.
+
+This example demonstrates how you can configure a DatabaseIdentityStore to point
+to a backend database and then use it as an IdentityStore.
+
+The following users and groups are defined in this example.
+
+[width=99%,cols="30%,40%,30%"]
+|=======================================================================
+|*User* |*Password* |*Group*
+
+|Joe | secret1 | foo, bar
+|Sam | secret2 | foo, bar
+|Tom | secret2 | foo
+|Sue | secret2 | foo
+|=======================================================================
+
+When a request is made to the application with certain credentials,
+the authentication mechanism bundled with this application comes into effect
+and authentication is performed against the DatabaseIdentityStore as defined
+in the application.
+
+Post authentication, the application also verifies the roles the caller is in
+and sends the details as part of the response.
+
+How to define credentials and the roles assigned to users is shown below:
+[source,oac_no_warn]
+----
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import javax.annotation.sql.DataSourceDefinition;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.sql.DataSource;
+
+@Singleton
+@Startup
+public class DatabaseSetup {
+
+    // The default datasource that is bundled with GlassFish is used to store // credentials.
+    @Resource(lookup="java:comp/DefaultDataSource")
+    private DataSource dataSource;
+
+    @PostConstruct
+    public void init() {
+
+        // ...
+        executeUpdate(dataSource, "INSERT INTO caller VALUES('Joe', '" + passwordHash.generate("secret1".toCharArray()) + "')");
+        // ...
+        executeUpdate(dataSource, "INSERT INTO caller_groups VALUES('Joe', 'foo')");
+        executeUpdate(dataSource, "INSERT INTO caller_groups VALUES('Joe', 'bar')");
+        // ...
+    }
+
+    @PreDestroy
+    public void destroy() {
+    	// ...
+    }
+
+    private void executeUpdate(DataSource dataSource, String query) {
+        // ...
+    }
+}
+----
+
+With `@Startup` annotation, this singleton enterprise bean is initialized during
+application startup and the credentials are set in the underlying database.
+
+The built-in `DatabaseIdentityStore` gets mapped with the `DefaultDataSource` by
+defining the `ApplicationConfig` with the help of `@DatabaseIdentityStoreDefinition`.
+
+[source,oac_no_warn]
+----
+
+// Database Definition for built-in DatabaseIdentityStore
+@DatabaseIdentityStoreDefinition(
+    callerQuery = "#{'select password from caller where name = ?'}",
+    groupsQuery = "select group_name from caller_groups where caller_name = ?",
+    hashAlgorithm = Pbkdf2PasswordHash.class,
+    priorityExpression = "#{100}",
+    hashAlgorithmParameters = {
+        "Pbkdf2PasswordHash.Iterations=3072",
+        "${applicationConfig.dyna}"
+    }
+)
+
+@ApplicationScoped
+@Named
+public class ApplicationConfig {
+
+  public String[] getDyna() {
+       return new String[]{"Pbkdf2PasswordHash.Algorithm=PBKDF2WithHmacSHA512", "Pbkdf2PasswordHash.SaltSizeBytes=64"};
+   }
+
+}
+----
+
+In this application, credentials are validated using the BASIC authentication mechanism.
+The following annotation in `ApplicationConfig` ensures that the `BasicAuthenticationMechanism`
+is used to perform credential validation.
+[source,oac_no_warn]
+----
+@BasicAuthenticationMechanismDefinition(
+        realmName = "file"
+)
+----
+Note that in GlassFish, when `BasicAuthenticationMechanism` is used as the
+authentication mechanism and the user provides the wrong credentials, the `realmName`
+is presented to user, as a hint.
+
+[source,oac_no_warn]
+----
+curl -I -u Joe http://localhost:8080/built-in-db-identity-store/servlet
+Enter host password for user 'Joe':
+HTTP/1.1 401 Unauthorized
+Server: GlassFish Server Open Source Edition  5.0
+X-Powered-By: Servlet/3.1 JSP/2.3 (GlassFish Server Open Source Edition  5.0  Java/Oracle Corporation/1.8)
+WWW-Authenticate: Basic realm="file"
+Content-Length: 1090
+Content-Language:
+Content-Type: text/html
+----
+
+When a request is made to the application, the roles the user is in are returned
+as part of the repsonse.
+
+[source,oac_no_warn]
+----
+@WebServlet("/servlet")
+@DeclareRoles({ "foo", "bar", "kaz" })
+@ServletSecurity(@HttpConstraint(rolesAllowed = "foo"))
+public class Servlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String webName = null;
+        if (request.getUserPrincipal() != null) {
+            webName = request.getUserPrincipal().getName();
+        }
+
+        response.getWriter().write("web username: " + webName + "\n");
+
+        response.getWriter().write("web user has role \"foo\": " + request.isUserInRole("foo") + "\n");
+        response.getWriter().write("web user has role \"bar\": " + request.isUserInRole("bar") + "\n");
+        response.getWriter().write("web user has role \"kaz\": " + request.isUserInRole("kaz") + "\n");
+    }
+
+}
+----
+Note that the container needs to be made aware of the supported roles, which is
+achieved with the help of `@DeclareRoles` annotation as shown above.
+[source,oac_no_warn]
+----
+@DeclareRoles({ "foo", "bar", "kaz" })
+----
+
+In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do
+not need to bundle web.xml with the application to provide mapping between
+roles and groups.
+
+[[to-run-the-built-in-database-identity-store-example]]
+To Run the Built-In Dababase Identity Store Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In this example, the credentials of user Joe are used to make a request and
+to validate the response according to the credentials/roles defined in
+`DatabaseSetup.java`.
+
+Steps:
+
+1. Because we are using the default datasource bundled with GlassFish for
+`DatabaseIdentityStore`, start the default database by running the following command:
++
+[source,oac_no_warn]
+----
+asadmin start-database
+----
+
+2. Start the domain.
++
+[source,oac_no_warn]
+----
+asadmin start-domain
+----
+
+3. Deploy the application.
++
+[source,oac_no_warn]
+----
+asadmin deploy <project>/target/built-in-db-identity-store.war
+----
+
+After the application is deployed, make a request to the application using the
+following request URL:
+
+[source,oac_no_warn]
+----
+http://localhost:8080/built-in-db-identity-store/servlet
+----
+
+Because BASIC authentication is being used here, the container responds back
+prompting for username and password.
+
+After username and password are provided,
+the client presents the request to the container with base64 encoded string and
+with the `Authorization` header having the value in the format expected for
+basic authentication.
+
+With username and password available to the container, the validation is performed
+against `DatabaseIdentityStore`.
+
+The corresponding `UsernamePasswordCredential` object is passed as a parameter to
+the `DatabaseIdentityStore#validate()` method.
+
+The password is then fetched from the database for user Joe.
+The password stored in database is hashed using `PBKDF2` algorithm.
+The password is then verified by the built-in `Pbkdf2PasswordHash` implementation.
+
+On successful verification, the request finally gets delegated to the servlet
+in question and the following response is returned to the end user.
+
+[source,oac_no_warn]
+----
+web username: Joe
+web user has role "foo": true
+web user has role "bar": true
+web user has role "kaz": false
+----
+
+If invalid credentials are used:
+
+Request URL:
+[source,oac_no_warn]
+----
+http://localhost:8080/built-in-db-identity-store/servlet
+----
+
+The following response is returned:
+[source,oac_no_warn]
+----
+HTTP Status 401 - Unauthorized
+
+type Status report
+
+message Unauthorized
+
+description This request requires HTTP authentication.
+
+GlassFish Server Open Source Edition 5
+----
+
+In this application, we are using BasicAuthenticationMechanism.
+
+When a request is made to the servlet in question, container delegates the request
+to org.glassfish.soteria.mechanisms.jaspic.HttpBridgeServerAuthModule,
+which then invokes BasicAuthenticationMechanism#validateRequest method, and gets
+the credential from the request.

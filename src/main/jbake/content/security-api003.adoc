@@ -9,3 +9,6 @@ prev=security-api002.html
 [[overview-of-the-identity-store-interfaces]]
 Overview of the Identity Store Interfaces
 -----------------------------------------
+Include a discussion about IdentityStore and IdentityStoreHandler interfaces,
+how to implement the default implementation, and how to create a custom identity
+store if desired.

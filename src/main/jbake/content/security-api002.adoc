@@ -7,7 +7,9 @@ prev=security-api001.html
 = Overview of the HTTP Authentication Mechanism Interface
 
 
-
 [[overview-of-the-http-auth-mech-int]]
 Overview of the HTTP Authentication Mechanism Interface
 -------------------------------------------------------
+Include a discussion about how the standard HTTPAuthenticationMechanism interface
+ implementations can be used, and how you can create a custom
+ HttpAuthenticationMechanism if desired.
