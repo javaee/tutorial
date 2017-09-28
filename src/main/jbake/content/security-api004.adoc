@@ -33,11 +33,10 @@ The following users and groups are defined in this example.
 [width=99%,cols="30%,40%,30%"]
 |=======================================================================
 |*User* |*Password* |*Group*
-
-|Joe | secret1 | foo, bar
-|Sam | secret2 | foo, bar
-|Tom | secret2 | foo
-|Sue | secret2 | foo
+|Joe |secret1 |foo, bar
+|Sam |secret2 |foo, bar
+|Tom |secret2 |foo
+|Sue |secret2 |foo
 |=======================================================================
 
 When a request is made to the application with certain credentials,

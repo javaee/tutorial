@@ -32,11 +32,11 @@ The following user and group are defined in this example.
 
 
 [width=99%,cols="30%,40%,30%"]
-|=======================================================================
+|====================================
 |*User* |*Password* |*Group*
 
-|Joe | secret1 | foo, bar |
-|=======================================================================
+|Joe |secret1 |foo, bar |
+|====================================
 
 When a request is made to the application with certain credentials, the configured
 authentication mechanism comes into effect and authentication is performed
