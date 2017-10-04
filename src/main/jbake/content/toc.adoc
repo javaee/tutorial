@@ -2706,18 +2706,22 @@ Example Using Maven]
 Example]
 
 [[java-api-for-security]]
-link:security-api.html#java-api-for-security[53 Java API for Security]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+link:security-api.html#using-the-java-ee-security-api[53 Using the Java EE Security API]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* link:security-api001.html#about-the-java-api-for-security[About the Java API for Security]
+* link:security-api001.html#about-the-java-ee-security-api[About the Java EE Security API]
 
 * link:security-api002.html#overview-of-the-http-auth-mech-int[Overview of the HTTP Authentication Mechanism Interface]
 
 * link:security-api003.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces]
 
 * link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
+** link:security-api004.html#overview-of-the-built-in-database-identity-store-example[Overview of the Built-In Database Identity Store Example]
+** link:security-api004.html#running-the-built-in-db-identity-store-example[Running the built-in-db-identity-store Example]
 
 * link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
+** link:security-api005.html#overview-of-the-custom-identity-store-example[Overview of the Custom Identity Store Example]
+** link:security-api005.html#running-the-custom-identity-store-example[Running the custom-identity-store Example]
 
 [[java-ee-security-advanced-topics]]
 link:security-advanced.html#GJJWX[53 Java EE Security: Advanced Topics]

@@ -91,8 +91,6 @@ by default.
 |=======================================================================
 
 
-4.  Click Save.
-
 [[BNCCK]]
 
 [[the-hello2-basicauth-example-basic-authentication-with-a-servlet]]
