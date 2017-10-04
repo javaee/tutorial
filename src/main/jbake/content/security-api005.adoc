@@ -16,7 +16,7 @@ identity store in your application for credential validation.
 Topics include:
 
 * link:#overview-of-the-custom-identity-store-example[Overview of the Custom Identity Store Example]
-* link:#running-the-custom-identity-store-example[Running the custom-identity-store Example]
+* link:#running-the-custom-id-store-example[Running the custom-identity-store Example]
 
 [[overview-of-the-custom-identity-store-example]]
 Overview of the Custom Identity Store Example
@@ -150,7 +150,7 @@ In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do
 not need to bundle `web.xml` with the application to provide mapping between roles
 and groups.
 
-[running-the-custom-identity-store-example]
+[running-the-custom-id-store-example]
 Running the custom-identity-store Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -158,7 +158,7 @@ You can use either NetBeans IDE or Maven to build, package, deploy, and run the 
 as described in the following topics:
 
 * link:#to-build-package-and-deploy-the-custom-identity-store-example-using-netbeans-ide[To Build, Package, and Deploy the custom-identity-store Example Using NetBeans IDE]
-* link:#to-build-package-and-deploy-the-custom-identity-store-example-using-maven[To Build, Package, and Deploy the custom-identity-store Example Using Maven]
+* link:#to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven[To Build, Package, and Deploy the custom-identity-store Example Using Maven]
 * link:#to-run-the-custom-identity-store-example[To Run the custom-identity-store Example]
 
 
