@@ -2,10 +2,9 @@ type=page
 status=published
 title=Java EE Security: Advanced Topics
 next=security-advanced001.html
-prev=security-javaee003.html
+prev=security-api005.html
 ~~~~~~
-Java EE Security: Advanced Topics
-=================================
+= Java EE Security: Advanced Topics
 
 [[GJJWX]]
 

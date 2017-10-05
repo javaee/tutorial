@@ -44,7 +44,7 @@ lists the main classes and interfaces in this package.
 
 *Table 51-1  Main Classes and Interfaces in javax.security.enterprise*
 
-[width=99%,cols="35%,65%"]
+[width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
 |`SecurityContext` |Injectable-type interface that provides an access point for
@@ -65,7 +65,7 @@ authentication process.
 
 
 *Table 51-2 Main Classes and Interfaces in javax.security.enterprise.authentication.mechanism.http*
-[width=99%,cols="35%,65%"]
+[width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
 |`HttpAuthenticationMechanism` |Interface representing an HTTP authentication mechanism.
@@ -82,7 +82,7 @@ of an `HttpAuthenticationMechanism` at runtime.
 customize `HttpMessageContext` behavior.
 |=======================================================================
 
-[width="100%",cols="100%",]
+[width="99%",cols="100%",]
 |=======================================================================
 a|
 *Note:*
@@ -96,7 +96,7 @@ authentication mechanisms or modify that behavior of an authentication mechanism
 [[main-classes-and-interfaces-in-credential]]
 
 *Table 51-3 Main Classes and Interfaces in javax.security.enterprise.credential*
-[width=99%,cols="35%,65%"]
+[width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
 |`Credential` |Interface that represents a generic credential and defines
@@ -125,7 +125,7 @@ used by standard caller name/password authentication.
 [[main-classes-and-interfaces-in-identitystore]]
 
 *Table 51-4 Main Classes and Interfaces in javax.security.enterprise.identitystore*
-[width=99%,cols="35%,65%"]
+[width=99%,cols="25%,75%"]
 |=======================================================================
 |*Class or Interface* |*Description*
 |`IdentityStore` |Interface representing an Identity Store.

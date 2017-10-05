@@ -74,7 +74,7 @@ Define the Users and Groups in the Identity Store
 
 The following table shows the users, passwords, and groups used in this example.
 
-[width=60%,cols="30%,40%,30%"]
+[width=40%,cols="30%,40%,30%"]
 |=======================================================================
 |*User* |*Password* |*Group*
 |Joe |secret1 |foo, bar
