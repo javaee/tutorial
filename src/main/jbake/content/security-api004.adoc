@@ -25,15 +25,15 @@ JSR 375 mandates that a Java EE container MUST support a built-in `IdentityStore
 backed by a database. To support this mandatory requirement, `DatabaseIdentityStore`
 is bundled with the GlassFish-RI.
 
-The source code for this example is in the
-`_tut-install_/examples/security/security-api/built-in-db-identity-store` directory.
-
 This example demonstrates how you can configure a `DatabaseIdentityStore` to point
 to a backend database and then use it as an IdentityStore. The authentication mechanism used is
 `BasicAuthenticationMechanism`.
 
-The high-level process for configuring the DatabaseIdentityStore is shown in the
-following sections. Note that the configuration described in these sections has
+The source code for this example is in the
+`_tut-install_/examples/security/security-api/built-in-db-identity-store` directory.
+
+The following sections describe the high-level process for configuring the
+`DatabaseIdentityStore`. Note that the configuration described in these sections has
 already been completed in the application files, but is provided here to illustrate
 what you need to do to use the built-in database identity store.
 
@@ -74,7 +74,7 @@ Define the Users and Groups in the Identity Store
 
 The following table shows the users, passwords, and groups used in this example.
 
-[width=99%,cols="30%,40%,30%"]
+[width=60%,cols="30%,40%,30%"]
 |=======================================================================
 |*User* |*Password* |*Group*
 |Joe |secret1 |foo, bar
@@ -194,7 +194,7 @@ Declare Roles in the Servlet Container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 When a request is made to the application, the roles the user is in are returned
 as part of the response. Note that the container needs to be made aware of the
-supported roles, which you specify using the `@DeclareRoles({ "foo", "bar", "kaz" })`
+supported roles, which are defined using the `@DeclareRoles({ "foo", "bar", "kaz" })`
 annotation as shown below.
 
 [source,oac_no_warn]
@@ -222,11 +222,6 @@ public class Servlet extends HttpServlet {
     }
 
 }
-----
-
-[source,oac_no_warn]
-----
-@DeclareRoles({ "foo", "bar", "kaz" })
 ----
 
 In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do

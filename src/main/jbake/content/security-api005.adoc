@@ -25,15 +25,15 @@ As an alternative to using a built-in identity store, an application can provide
 its own IdentityStore. When bundled with the application,
 this custom identity store can then be used for authentication and authorization.
 
-The source code for this example is in the
-`_tut-install_/examples/security/security-api/custom-identity-store` directory.
-
 This example demonstrates how to define a custom identity store, `TestIdentityStore`, and
 provide it as part of the application being deployed. The authentication mechanism used is
 `BasicAuthenticationMechanism`.
 
-The high-level process for defining the `TestIdentityStore` is shown in the
-following sections. Note that the configuration described in these sections has
+The source code for this example is in the
+`_tut-install_/examples/security/security-api/custom-identity-store` directory.
+
+The following sections describe the high-level process for defining
+the `TestIdentityStore`. Note that the configuration described in these sections has
 already been completed in the application files, but is provided here to illustrate
 what you need to do to use a custom identity store.
 
@@ -72,7 +72,7 @@ Define the Users and Groups in the Identity Store
 The following table shows the user, password, and group used in this example.
 
 
-[width=99%,cols="30%,40%,30%"]
+[width=60%,cols="30%,40%,30%"]
 |====================================
 |*User* |*Password* |*Group*
 
