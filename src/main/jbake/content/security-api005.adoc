@@ -48,8 +48,8 @@ against the `TestIdentityStore` as defined in the application.
 Post authentication, the application also verifies the roles the caller is in and
 sends the details as part of the response.
 
-Note that in GlassFish, when `BasicAuthenticationMechanism` is used as the
-authentication mechanism and the user provides the wrong credentials, the `realmName`
+Note that in GlassFish, if the user provides the wrong credentials when using
+`BasicAuthenticationMechanism`, then the `realmName`
 is presented to user, as a hint.
 
 [source,oac_no_warn]
@@ -93,7 +93,7 @@ Specify the Authentication Mechanism
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this application, credentials are validated using the BASIC authentication mechanism.
-Specify the `@BasicAuthenticationMechanismDefinition`annotation in the `ApplicationConfig.java`
+Specify the `@BasicAuthenticationMechanismDefinition` annotation in the `ApplicationConfig.java`
 to ensure that the `BasicAuthenticationMechanism`
 is used to perform credential validation.
 
@@ -118,7 +118,8 @@ Declare Roles in the Servlet Container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 When a request is made to the application, the roles the user is in are
 returned as part of the response. Note that the container needs to be made aware
-of the supported roles, which you specify using the `@Declareroles({ "foo", "bar", "kaz" })` annotation as shown below.
+of the supported roles, which you specify using the `@Declareroles({ "foo", "bar", "kaz" })`
+annotation as shown below.
 
 [source,oac_no_warn]
 ----
@@ -210,7 +211,7 @@ deploys the WAR file.
 
 [[to-run-the-custom-identity-store-example]]
 To Run the custom-identity-store Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In this example, use the credentials of user `Joe` to make a request and
 to validate the response according to the credentials defined in `TestIdentityStore`.
 

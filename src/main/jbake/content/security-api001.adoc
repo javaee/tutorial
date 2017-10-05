@@ -47,7 +47,6 @@ lists the main classes and interfaces in this package.
 [width=99%,cols="35%,65%"]
 |=======================================================================
 |*Class or Interface* |*Description*
-
 |`SecurityContext` |Injectable-type interface that provides an access point for
 programmatic security intended to be used by application code to query and interact
 with the Java EE Security API.
@@ -69,7 +68,6 @@ authentication process.
 [width=99%,cols="35%,65%"]
 |=======================================================================
 |*Class or Interface* |*Description*
-
 |`HttpAuthenticationMechanism` |Interface representing an HTTP authentication mechanism.
 Developers can provide their own implementation of this interface, or use one of
 several built-in HTTP authentication mechanisms.
@@ -88,11 +86,11 @@ customize `HttpMessageContext` behavior.
 |=======================================================================
 a|
 *Note:*
-
 The 'javax.security.enterprise.authentication.mechanism.http' package also includes
 a number of annotation classes that can be used to configure/enable the built-in
 authentication mechanisms or modify that behavior of an authentication mechanism.
 |=======================================================================
+
 
 
 [[main-classes-and-interfaces-in-credential]]
@@ -101,7 +99,6 @@ authentication mechanisms or modify that behavior of an authentication mechanism
 [width=99%,cols="35%,65%"]
 |=======================================================================
 |*Class or Interface* |*Description*
-
 |`Credential` |Interface that represents a generic credential and defines
 several methods to operate on credentials. All other classes in this package
 are implementations of the Credential interface.
@@ -131,7 +128,6 @@ used by standard caller name/password authentication.
 [width=99%,cols="35%,65%"]
 |=======================================================================
 |*Class or Interface* |*Description*
-
 |`IdentityStore` |Interface representing an Identity Store.
 Developers can provide their own implementation of this interface, or use one of
 the built-in Identity Stores.

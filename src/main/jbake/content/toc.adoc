@@ -2566,11 +2566,11 @@ Roles?]
 *** link:security-intro005.html#BNBXP[What Is a Role?]
 *** link:security-intro005.html#BNBXQ[Some Other Terminology]
 
-** link:security-intro005.html#BNBXR[Managing Users and Groups in
+** link:security-intro005.html#managing-users-and-groups-in-glassfish-server[Managing Users and Groups in
 GlassFish Server]
-*** link:security-intro005.html#BNBXS[To Add Users to GlassFish Server]
+*** link:security-intro005.html#to-add-users-to-glassfish-server[To Add Users to GlassFish Server]
 
-** link:security-intro005.html#BNBXU[Setting Up Security Roles]
+** link:security-intro005.html#setting-up-security-roles[Setting Up Security Roles]
 
 ** link:security-intro005.html#BNBXV[Mapping Roles to Users and Groups]
 * link:security-intro006.html#BNBXW[Establishing a Secure Connection

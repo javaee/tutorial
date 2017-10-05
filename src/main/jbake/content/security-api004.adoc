@@ -50,8 +50,8 @@ in the application.
 Post authentication, the application also verifies the roles the caller is in
 and sends the details as part of the response.
 
-Note that in GlassFish, when `BasicAuthenticationMechanism` is used as the
-authentication mechanism and the user provides the wrong credentials, the `realmName`
+Note that in GlassFish, if the user provides the wrong credentials when using
+`BasicAuthenticationMechanism`, then the `realmName`
 is presented to user, as a hint.
 
 [source,oac_no_warn]
@@ -368,9 +368,12 @@ http://localhost:8080/built-in-db-identity-store/servlet
 Again, because BASIC authentication is being used here, the container responds back
 prompting for username and password.
 
-2. Enter an invalid username and password at the prompt.
+2. Enter an invalid username and password.
+You are promted to enter the credentials again, but you are not authenticated.
+
 +
-The following response is returned:
+When you click Cancel in the Authentication required window, the following
+response is returned:
 +
 [source,oac_no_warn]
 ----
