@@ -4,10 +4,7 @@ title=Using the Streaming API
 next=jsonp005.html
 prev=jsonp003.html
 ~~~~~~
-=Using the Streaming API
-
-
-[[BABDBHIA]]
+= Using the Streaming API
 
 [[using-the-streaming-api]]
 Using the Streaming API
@@ -17,10 +14,9 @@ This section describes two use cases of the streaming API.
 
 The following topics are addressed here:
 
-* link:#BABGCHIG[Reading JSON Data Using a Parser]
-* link:#BABGJEEF[Writing JSON Data Using a Generator]
+* link:#reading-json-data-using-a-parser[Reading JSON Data Using a Parser]
+* link:#writing-json-data-using-a-generator[Writing JSON Data Using a Generator]
 
-[[BABGCHIG]]
 
 [[reading-json-data-using-a-parser]]
 Reading JSON Data Using a Parser
@@ -108,7 +104,6 @@ END_ARRAY
 END_OBJECT
 ----
 
-[[BABGJEEF]]
 
 [[writing-json-data-using-a-generator]]
 Writing JSON Data Using a Generator

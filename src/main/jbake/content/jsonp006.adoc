@@ -4,10 +4,8 @@ title=The jsonpmodel Example Application
 next=jsonp007.html
 prev=jsonp005.html
 ~~~~~~
-=The jsonpmodel Example Application
+= The jsonpmodel Example Application
 
-
-[[BABEDFCG]]
 
 [[the-jsonpmodel-example-application]]
 The jsonpmodel Example Application
@@ -23,10 +21,9 @@ tut-install`/examples/web/jsonp/jsonpmodel` directory.
 
 The following topics are addressed here:
 
-* link:#CEGHHCCC[Components of the jsonpmodel Example Application]
-* link:#CEGEFHFH[Running the jsonpmodel Example Application]
+* link:#components-of-the-jsonpmodel-example-application[Components of the jsonpmodel Example Application]
+* link:#running-the-jsonpmodel-example-application[Running the jsonpmodel Example Application]
 
-[[CEGHHCCC]]
 
 [[components-of-the-jsonpmodel-example-application]]
 Components of the jsonpmodel Example Application
@@ -56,7 +53,6 @@ example in link:jsonp003.html#BABHEJFF[Writing an Object Model to a
 Stream]. The code to navigate the object model tree is similar to the
 example in link:jsonp003.html#BABJHEHG[Navigating an Object Model].
 
-[[CEGEFHFH]]
 
 [[running-the-jsonpmodel-example-application]]
 Running the jsonpmodel Example Application
@@ -67,11 +63,10 @@ using NetBeans IDE and from the command line.
 
 The following topics are addressed here:
 
-* link:#CEGFECCB[To Run the jsonpmodel Example Application Using
+* link:#to-run-the-jsonpmodel-example-application-using-netbeans-ide[To Run the jsonpmodel Example Application Using
 NetBeans IDE]
-* link:#CEGGJBFA[To Run the jsonpmodel Example Application Using Maven]
+* link:#to-run-the-jsonpmodel-example-application-using-maven[To Run the jsonpmodel Example Application Using Maven]
 
-[[CEGFECCB]]
 
 [[to-run-the-jsonpmodel-example-application-using-netbeans-ide]]
 To Run the jsonpmodel Example Application Using NetBeans IDE
@@ -106,7 +101,6 @@ from the form.
 8.  Click Parse JSON. The following page contains a table that lists the
 nodes of the object model tree.
 
-[[CEGGJBFA]]
 
 [[to-run-the-jsonpmodel-example-application-using-maven]]
 To Run the jsonpmodel Example Application Using Maven

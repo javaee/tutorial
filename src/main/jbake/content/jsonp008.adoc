@@ -4,10 +4,8 @@ title=Further Information about the Java API for JSON Processing
 next=jsonb.html
 prev=jsonp007.html
 ~~~~~~
-=Further Information about the Java API for JSON Processing
+= Further Information about the Java API for JSON Processing
 
-
-[[BABGAAGB]]
 
 [[further-information-about-the-java-api-for-json-processing]]
 Further Information about the Java API for JSON Processing

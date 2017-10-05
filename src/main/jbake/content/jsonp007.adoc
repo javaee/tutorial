@@ -4,10 +4,7 @@ title=The jsonpstreaming Example Application
 next=jsonp008.html
 prev=jsonp006.html
 ~~~~~~
-=The jsonpstreaming Example Application
-
-
-[[BABBJDAC]]
+= The jsonpstreaming Example Application
 
 [[the-jsonpstreaming-example-application]]
 The jsonpstreaming Example Application
@@ -23,10 +20,9 @@ tut-install`/examples/web/jsonp/jsonpstreaming` directory.
 
 The following topics are addressed here:
 
-* link:#CEGDBIID[Components of the jsonpstreaming Example Application]
-* link:#CEGGHFIG[Running the jsonpstreaming Example Application]
+* link:#components-of-the-jsonpstreaming-example-application[Components of the jsonpstreaming Example Application]
+* link:#running-the-jsonpstreaming-example-application[Running the jsonpstreaming Example Application]
 
-[[CEGDBIID]]
 
 [[components-of-the-jsonpstreaming-example-application]]
 Components of the jsonpstreaming Example Application
@@ -54,7 +50,6 @@ Using a Generator]. The code to parse JSON data from a file is similar
 to the example in link:jsonp004.html#BABGCHIG[Reading JSON Data Using a
 Parser].
 
-[[CEGGHFIG]]
 
 [[running-the-jsonpstreaming-example-application]]
 Running the jsonpstreaming Example Application
@@ -65,12 +60,10 @@ application using NetBeans IDE and from the command line.
 
 The following topics are addressed here:
 
-* link:#CEGJCBCG[To Run the jsonpstreaming Example Application Using
+* link:#to-run-the-jsonpstreaming-example-application-using-netbeans-ide[To Run the jsonpstreaming Example Application Using
 NetBeans IDE]
-* link:#CEGCGDDJ[To Run the jsonpstreaming Example Application Using
+* link:#to-run-the-jsonpstreaming-example-application-using-maven[To Run the jsonpstreaming Example Application Using
 Maven]
-
-[[CEGJCBCG]]
 
 [[to-run-the-jsonpstreaming-example-application-using-netbeans-ide]]
 To Run the jsonpstreaming Example Application Using NetBeans IDE
@@ -105,7 +98,6 @@ page shows the contents of the text file.
 8.  Click Parse JSON from File. The following page contains a table that
 lists the parser events for the JSON data in the text file.
 
-[[CEGCGDDJ]]
 
 [[to-run-the-jsonpstreaming-example-application-using-maven]]
 To Run the jsonpstreaming Example Application Using Maven

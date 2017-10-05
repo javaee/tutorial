@@ -6,8 +6,6 @@ prev=jsonp008.html
 ~~~~~~
 = JSON Binding
 
-[[sthref120]]
-
 [[json-binding]]
 21 JSON Binding
 ---------------

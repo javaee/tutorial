@@ -1050,72 +1050,59 @@ Application]
 * link:websocket013.html#BABDFIFD[Further Information about WebSocket]
 
 [[json-processing]]
-link:jsonp.html#GLRBB[20 JSON Processing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+link:jsonp.html[20 JSON Processing]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* link:jsonp001.html#BABEECIB[Introduction to JSON]
+* link:jsonp001.html[Introduction to JSON]
+** link:jsonp001.html#json-syntax[JSON Syntax]
+** link:jsonp001.html#uses-of-json[Uses of JSON]
+** link:jsonp001.html#generating-and-parsing-json-data[Generating and Parsing JSON Data]
 
-** link:jsonp001.html#BABGHEHG[JSON Syntax]
+* link:jsonp002.html[JSON Processing in the Java EE Platform]
 
-** link:jsonp001.html#CEGJHJAB[Uses of JSON]
+* link:jsonp003.html[Using the Object Model API]
+** link:jsonp003.html#creating-an-object-model-from-json-data[Creating an Object Model from JSON Data]
+** link:jsonp003.html#creating-an-object-model-from-application-code[Creating an Object Model from Application Code]
+** link:jsonp003.html#navigating-an-object-model[Navigating an Object Model]
+** link:jsonp003.html#writing-an-object-model-to-a-stream[Writing an Object Model to a Stream]
 
-** link:jsonp001.html#BABJJACI[Generating and Parsing JSON Data]
-* link:jsonp002.html#BABDFHHD[JSON Processing in the Java EE Platform]
-* link:jsonp003.html#BABHAHIA[Using the Object Model API]
+* link:jsonp004.html[Using the Streaming API]
+** link:jsonp004.html#reading-json-data-using-a-parser[Reading JSON Data Using a Parser]
+** link:jsonp004.html#writing-json-data-using-a-generator[Writing JSON Data Using a Generator]
 
-** link:jsonp003.html#BABBHEBA[Creating an Object Model from JSON Data]
+* link:jsonp005.html[JSON in Java EE RESTful Web Services]
 
-** link:jsonp003.html#BABIGIAF[Creating an Object Model from Application
-Code]
+* link:jsonp006.html[The jsonpmodel Example Application]
+** link:jsonp006.html#components-of-the-jsonpmodel-example-application[Components of the jsonpmodel Example Application]
+** link:jsonp006.html#running-the-jsonpmodel-example-application[Running the jsonpmodel Example Application]
+*** link:jsonp006.html#to-run-the-jsonpmodel-example-application-using-netbeans-ide[To Run the jsonpmodel Example Application Using NetBeans IDE]
+*** link:jsonp006.html#to-run-the-jsonpmodel-example-application-using-maven[To Run the jsonpmodel Example Application Using Maven]
 
-** link:jsonp003.html#BABJHEHG[Navigating an Object Model]
+* link:jsonp007.html[The jsonpstreaming Example Application]
+** link:jsonp007.html#components-of-the-jsonpstreaming-example-application[Components of the jsonpstreaming Example Application]
+** link:jsonp007.html#running-the-jsonpstreaming-example-application[Running the jsonpstreaming Example Application]
+*** link:jsonp007.html#to-run-the-jsonpstreaming-example-application-using-netbeans-ide[To Run the jsonpstreaming Example Application Using NetBeans IDE]
+*** link:jsonp007.html#to-run-the-jsonpstreaming-example-application-using-maven[To Run the jsonpstreaming Example Application Using Maven]
 
-** link:jsonp003.html#BABHEJFF[Writing an Object Model to a Stream]
-* link:jsonp004.html#BABDBHIA[Using the Streaming API]
-
-** link:jsonp004.html#BABGCHIG[Reading JSON Data Using a Parser]
-
-** link:jsonp004.html#BABGJEEF[Writing JSON Data Using a Generator]
-* link:jsonp005.html#BABCFABH[JSON in Java EE RESTful Web Services]
-* link:jsonp006.html#BABEDFCG[The jsonpmodel Example Application]
-
-** link:jsonp006.html#CEGHHCCC[Components of the jsonpmodel Example
-Application]
-
-** link:jsonp006.html#CEGEFHFH[Running the jsonpmodel Example
-Application]
-*** link:jsonp006.html#CEGFECCB[To Run the jsonpmodel Example Application
-Using NetBeans IDE]
-*** link:jsonp006.html#CEGGJBFA[To Run the jsonpmodel Example Application
-Using Maven]
-* link:jsonp007.html#BABBJDAC[The jsonpstreaming Example Application]
-
-** link:jsonp007.html#CEGDBIID[Components of the jsonpstreaming Example
-Application]
-
-** link:jsonp007.html#CEGGHFIG[Running the jsonpstreaming Example
-Application]
-*** link:jsonp007.html#CEGJCBCG[To Run the jsonpstreaming Example
-Application Using NetBeans IDE]
-*** link:jsonp007.html#CEGCGDDJ[To Run the jsonpstreaming Example
-Application Using Maven]
-* link:jsonp008.html#BABGAAGB[Further Information about the Java API for
-JSON Processing]
+* link:jsonp008.html[Further Information about the Java API for JSON Processing]
 
 [[json-binding]]
-link:jsonb.html#sthref120[21 JSON Binding]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+link:jsonb.html[21 JSON Binding]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* link:jsonb001.html#json-binding-in-the-java-ee-platform[JSON Binding in the Java EE Platform]
-* link:jsonb002.html#overview-of-the-json-binding-api[Overview of the JSON Binding API]
+* link:jsonb001.html[JSON Binding in the Java EE Platform]
+
+* link:jsonb002.html[Overview of the JSON Binding API]
 ** link:jsonb002.html#creating-a-jasonb-instance[Creating a jasonb Instance]
 ** link:jsonb002.html#using-the-default-mapping[Using the Default Mapping]
 ** link:jsonb002.html#using-customizations[Using Customizations]
 ** link:jsonb002.html#using-annotations[Using Annotations]
-* link:jsonb003.html#running-the-jsonbbasics-example-application[Running the jsonbbasics Example Application]
+
+* link:jsonb003.html[Running the jsonbbasics Example Application]
 ** link:jsonb003.html#components-of-the-jsonbbasics-example-application[Components of the jsonbbasics Example Application]
 ** link:jsonb003.html#running-the-jsonbbasics-example-application[Running the jsonbbasics Example Application]
-* link:jsonb004.html#further-information-about-the-java-api-for-json-binding[Further Information about the Java API for JSON Binding]
+
+* link:jsonb004.html#[Further Information about the Java API for JSON Binding]
 
 [[internationalizing-and-localizing-web-applications]]
 link:webi18n.html#BNAXU[22 Internationalizing and Localizing Web Applications]

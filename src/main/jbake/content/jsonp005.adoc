@@ -4,10 +4,8 @@ title=JSON in Java EE RESTful Web Services
 next=jsonp006.html
 prev=jsonp004.html
 ~~~~~~
-=JSON in Java EE RESTful Web Services
+= JSON in Java EE RESTful Web Services
 
-
-[[BABCFABH]]
 
 [[json-in-java-ee-restful-web-services]]
 JSON in Java EE RESTful Web Services

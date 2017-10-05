@@ -4,10 +4,7 @@ title=JSON Processing in the Java EE Platform
 next=jsonp003.html
 prev=jsonp001.html
 ~~~~~~
-=JSON Processing in the Java EE Platform
-
-
-[[BABDFHHD]]
+= JSON Processing in the Java EE Platform
 
 [[json-processing-in-the-java-ee-platform]]
 JSON Processing in the Java EE Platform

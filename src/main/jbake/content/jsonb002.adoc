@@ -23,7 +23,7 @@ The following topics are addressed here:
 * link:#using-annotations[Using Annotations]
 
 
-[[creating-a-jasonb-nstance]]
+[[creating-a-jasonb-instance]]
 Creating a jasonb Instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

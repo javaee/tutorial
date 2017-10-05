@@ -4,10 +4,8 @@ title=Introduction to JSON
 next=jsonp002.html
 prev=jsonp.html
 ~~~~~~
-=Introduction to JSON
+= Introduction to JSON
 
-
-[[BABEECIB]]
 
 [[introduction-to-json]]
 Introduction to JSON
@@ -21,11 +19,9 @@ parse JSON.
 
 The following topics are addressed here:
 
-* link:#BABGHEHG[JSON Syntax]
-* link:#CEGJHJAB[Uses of JSON]
-* link:#BABJJACI[Generating and Parsing JSON Data]
-
-[[BABGHEHG]]
+* link:#json-syntax[JSON Syntax]
+* link:#uses-of-json[Uses of JSON]
+* link:#generating-and-parsing-json-data[Generating and Parsing JSON Data]
 
 [[json-syntax]]
 JSON Syntax
@@ -70,8 +66,6 @@ including another array or an object.
 * When objects and arrays contain other objects or arrays, the data has
 a tree-like structure.
 
-[[CEGJHJAB]]
-
 [[uses-of-json]]
 Uses of JSON
 ~~~~~~~~~~~~
@@ -96,8 +90,6 @@ JSON representations are usually more compact than XML representations
 because JSON does not have closing tags. Unlike XML, JSON does not have
 a widely accepted schema for defining and validating the structure of
 JSON data.
-
-[[BABJJACI]]
 
 [[generating-and-parsing-json-data]]
 Generating and Parsing JSON Data

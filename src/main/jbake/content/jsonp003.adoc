@@ -4,10 +4,8 @@ title=Using the Object Model API
 next=jsonp004.html
 prev=jsonp002.html
 ~~~~~~
-=Using the Object Model API
+= Using the Object Model API
 
-
-[[BABHAHIA]]
 
 [[using-the-object-model-api]]
 Using the Object Model API
@@ -20,12 +18,11 @@ model to a stream.
 
 The following topics are addressed here:
 
-* link:#BABBHEBA[Creating an Object Model from JSON Data]
-* link:#BABIGIAF[Creating an Object Model from Application Code]
-* link:#BABJHEHG[Navigating an Object Model]
-* link:#BABHEJFF[Writing an Object Model to a Stream]
+* link:#creating-an-object-model-from-json-data[Creating an Object Model from JSON Data]
+* link:#creating-an-object-model-from-application-code[Creating an Object Model from Application Code]
+* link:#navigating-an-object-model[Navigating an Object Model]
+* link:#writing-an-object-model-to-a-stream[Writing an Object Model to a Stream]
 
-[[BABBHEBA]]
 
 [[creating-an-object-model-from-json-data]]
 Creating an Object Model from JSON Data
@@ -51,7 +48,6 @@ and `JsonArray` are subtypes of `JsonStructure`. This reference
 represents the top of the tree and can be used to navigate the tree or
 to write it to a stream as JSON data.
 
-[[BABIGIAF]]
 
 [[creating-an-object-model-from-application-code]]
 Creating an Object Model from Application Code
@@ -111,7 +107,6 @@ the corresponding `add` method, as shown in this example.
 The resulting tree represents the JSON data from
 link:jsonp001.html#BABGHEHG[JSON Syntax].
 
-[[BABJHEHG]]
 
 [[navigating-an-object-model]]
 Navigating an Object Model
@@ -208,8 +203,6 @@ OBJECT
 Key type: STRING home
 Key number: STRING 222-222-2222
 ----
-
-[[BABHEJFF]]
 
 [[writing-an-object-model-to-a-stream]]
 Writing an Object Model to a Stream
