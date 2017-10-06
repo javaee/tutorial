@@ -4,8 +4,7 @@ title=Securing Web Applications
 next=security-webtier003.html
 prev=security-webtier001.html
 ~~~~~~
-Securing Web Applications
-=========================
+= Securing Web Applications
 
 [[GKBAA]]
 
@@ -19,12 +18,12 @@ installation into a runtime environment.
 
 The following topics are addressed here:
 
-* link:#CHDBIBHI[Overview of Securing Web Applications]
-* link:#BNCBK[Specifying Security Constraints]
-* link:#GKBSA[Specifying Authentication Mechanisms]
-* link:#BNCBN[Specifying an Authentication Mechanism in the Deployment
+* link:#overview-of-securing-web-applications[Overview of Securing Web Applications]
+* link:#specifying-security-constraints[Specifying Security Constraints]
+* link:#specifying-authentication-mechanisms[Specifying Authentication Mechanisms]
+* link:#specifying-an-authentication-mechanism-in-the-deployment-descriptor[Specifying an Authentication Mechanism in the Deployment
 Descriptor]
-* link:#BNCAV[Declaring Security Roles]
+* link:#declaring-security-roles[Declaring Security Roles]
 
 [[CHDBIBHI]]
 

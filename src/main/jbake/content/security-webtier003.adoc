@@ -18,10 +18,11 @@ model of the application.
 
 The following topics are addressed here:
 
-* link:#GIRCJ[Authenticating Users Programmatically]
-* link:#BNCBA[Checking Caller Identity Programmatically]
-* link:#GJJLQ[Example Code for Programmatic Security]
-* link:#BNCBB[Declaring and Linking Role References]
+* link:#authenticating-users-programmatically[Authenticating Users Programmatically]
+* link:#checking-caller-identity-programmatically[Checking Caller Identity Programmatically]
+* link:#testing-access-to-a-resource-programmatically[Testing Access to a Resource Programmatically]
+* link:#example-code-for-programmatic-security[Example Code for Programmatic Security]
+* link:#declaring-and-linking-role-references[Declaring and Linking Role References]
 
 [[GIRCJ]]
 

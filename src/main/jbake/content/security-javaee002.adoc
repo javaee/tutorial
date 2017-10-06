@@ -4,8 +4,7 @@ title=Securing Enterprise Beans
 next=security-javaee003.html
 prev=security-javaee001.html
 ~~~~~~
-Securing Enterprise Beans
-=========================
+= Securing Enterprise Beans
 
 [[BNBYL]]
 
@@ -377,7 +376,7 @@ Programmatic security, code that is embedded in a business method, is
 used to access a caller's identity programmatically and uses this
 information to make security decisions within the method itself.
 
-The following topics are addressed here:
+The following topic is addressed here:
 
 * link:#GJGCR[Accessing an Enterprise Bean Caller's Security Context]
 
@@ -511,7 +510,8 @@ technique is used when the target container expects access using a
 specific identity.
 
 To propagate an identity to the target enterprise bean, configure a
-run-as identity for the bean, as described in link:#BNBZB[Configuring a
+run-as identity for the bean, as described in
+link:#configuring-a-components-propagated-security-identity[Configuring a
 Component's Propagated Security Identity]. Establishing a run-as
 identity for an enterprise bean does not affect the identities of its
 callers, which are the identities tested for permission to access the

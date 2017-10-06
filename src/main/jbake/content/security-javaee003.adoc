@@ -4,8 +4,7 @@ title=Examples: Securing Enterprise Beans
 next=security-api.html
 prev=security-javaee002.html
 ~~~~~~
-Examples: Securing Enterprise Beans
-===================================
+= Examples: Securing Enterprise Beans
 
 [[GKBSZ]]
 
@@ -18,9 +17,9 @@ declarative and programmatic security.
 
 The following topics are addressed here:
 
-* link:#BNBZK[The cart-secure Example: Securing an Enterprise Bean with
+* link:#the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security[The cart-secure Example: Securing an Enterprise Bean with
 Declarative Security]
-* link:#BNCAA[The converter-secure Example: Securing an Enterprise Bean
+* link:#the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security[The converter-secure Example: Securing an Enterprise Bean
 with Programmatic Security]
 
 [[BNBZK]]

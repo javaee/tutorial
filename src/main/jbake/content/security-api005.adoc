@@ -117,7 +117,7 @@ Declare Roles in the Servlet Container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 When a request is made to the application, the roles the user is in are
 returned as part of the response. Note that the container needs to be made aware
-of the supported roles, which you specify using the `@Declareroles({ "foo", "bar", "kaz" })`
+of the supported roles, which are defined using the `@Declareroles({ "foo", "bar", "kaz" })`
 annotation as shown below.
 
 [source,oac_no_warn]
