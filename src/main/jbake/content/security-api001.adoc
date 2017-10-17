@@ -86,9 +86,9 @@ customize `HttpMessageContext` behavior.
 |=======================================================================
 a|
 *Note:*
-The 'javax.security.enterprise.authentication.mechanism.http' package also includes
-a number of annotation classes that can be used to configure/enable the built-in
-authentication mechanisms or modify that behavior of an authentication mechanism.
+The `javax.security.enterprise.authentication.mechanism.http` package also includes
+a number of annotation classes that are used to configure/enable the built-in
+authentication mechanisms or to modify the behavior of an authentication mechanism.
 |=======================================================================
 
 
