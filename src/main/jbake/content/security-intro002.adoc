@@ -4,8 +4,7 @@ title=Security Mechanisms
 next=security-intro003.html
 prev=security-intro001.html
 ~~~~~~
-Security Mechanisms
-===================
+= Security Mechanisms
 
 [[BNBWY]]
 
@@ -215,5 +214,3 @@ stack that uses Web Services Security (WSS) to secure messages. Because
 this message security is specific to Metro and is not a part of the Java
 EE platform, this tutorial does not discuss using WSS to secure
 messages. See the Metro User's Guide at `https://javaee.github.io/metro/`.
-
-

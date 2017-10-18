@@ -4,8 +4,7 @@ title=Overview of Web Application Security
 next=security-webtier002.html
 prev=security-webtier.html
 ~~~~~~
-Overview of Web Application Security
-====================================
+= Overview of Web Application Security
 
 [[BNCAT]]
 

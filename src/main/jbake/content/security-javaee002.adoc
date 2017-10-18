@@ -393,6 +393,32 @@ less frequent situations in which the enterprise bean business methods
 need to access the security context information, such as when you want
 to restrict access to a particular time of day.
 
+The `SecurityContext` interface, as specified in the Java EE Security API specification,
+defines three methods
+that allow the bean provider to access security information about the enterprise bean's
+caller:
+
+* `getCallerPrincipal()` retrieves the `Principal`that represents the name
+of the authenticated caller.
+This is the container-specific representation of the caller principal,
+and the type may differ from the type of the caller principal originally
+established by an `HttpAuthenticationMechanism`. This method returns null for an
+unauthenticated caller.
+
+* `getPrincipalsByType()` retrieves all principals of the given type from the
+authenticated caller's Subject. This method returns an empty
+`Set` if the caller is unauthenticated, or if the requested type is not found.
++
+Where both a container caller principal and an application caller principal
+are present, the value returned by `getName()` MUST be the same for both
+principals.
+
+* `isCallerInRole()` takes a String argument that represents the role to be
+tested. The specification does not define how the role determination is made,
+but the result MUST be the same as if the corresponding container-specific call
+had been made (for example `EJBContext.isCallerInRole()`), and MUST be consistent with the result implied
+by other specifications that prescribe role-mapping behavior.
+
 The `javax.ejb.EJBContext` interface provides two methods that allow the
 bean provider to access security information about the enterprise bean's
 caller.

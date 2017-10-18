@@ -52,7 +52,9 @@ deployment descriptor:
 </login-config>
 ----
 The Java EE Security API provides an alternative means to configure client authentication
-using the `HttpAuthenticationMechanism`. See link:security-api002#overview-of-the-http-auth-mech-int[Overview of the HTTP Authentication Mechanism Interface]. 
+using the `HttpAuthenticationMechanism` interface. See link:security-api002#overview-of-the-http-auth-mech-int[Overview of
+the HTTP Authentication Mechanism Interface].
+
 [[GLIEL]]
 
 [[mutual-authentication]]

@@ -4,8 +4,7 @@ title=Establishing a Secure Connection Using SSL
 next=security-intro007.html
 prev=security-intro005.html
 ~~~~~~
-Establishing a Secure Connection Using SSL
-==========================================
+= Establishing a Secure Connection Using SSL
 
 [[BNBXW]]
 
@@ -110,5 +109,3 @@ series of dialog boxes, and click Finish when you reach the last dialog
 box. The certificates will appear only the first time. When you accept
 the certificates, subsequent hits to this site assume that you still
 trust the content.
-
-

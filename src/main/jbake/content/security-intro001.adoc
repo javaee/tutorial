@@ -4,8 +4,7 @@ title=Overview of Java EE Security
 next=security-intro002.html
 prev=security-intro.html
 ~~~~~~
-Overview of Java EE Security
-============================
+= Overview of Java EE Security
 
 [[BNBWK]]
 
