@@ -318,6 +318,14 @@ section. Client and mutual authentication are discussed in
 link:security-advanced.html#GJJWX[Chapter 53, "Java EE Security: Advanced
 Topics"].
 
+The Java EE Security API provides an alternative to specifying authentication mechanisms
+using the built-in authentication mechanism types of the
+`HttpAuthenticationMechanism` interface. The built-in authentication mechanisms perform
+BASIC, FORM, and Custom FORM authentication and are enabled and configured using
+annotations. You can use these built-in annotations
+in place of `<login-config>` described in the sections below. For more information, see link:security-api002.html#overview-of-the-http-authentication-mechanism-interface[Overview of
+the HTTP Authentication Mechanism Interface].
+
 HTTP basic authentication and form-based authentication are not very
 secure authentication mechanisms. Basic authentication sends user names
 and passwords over the Internet as Base64-encoded text. Form-based
@@ -392,6 +400,17 @@ error page.
 
 link:#GEXFA[Figure 51-2] shows what happens when you specify form-based
 authentication.
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+*Note*:
+
+Custom FORM, as specified in the Java EE Security API, differs from FORM
+in that the authentication dialog does not happen by posting back to `j_security_check`,
+but instead by invoking `SecurityContext.authenticate()` with the credentials the application
+collected.
+|=======================================================================
 
 [[GEXFA]]
 
