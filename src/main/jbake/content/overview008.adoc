@@ -424,24 +424,24 @@ The Java EE Security API specification defines portable, plug-in interfaces for
 HTTP authentication and identity stores, and an injectable SecurityContext interface
 that provides an API for programmatic security.
 
-Implementations of the HttpAuthenticationMechanism interface can be used to
+Implementations of the `HttpAuthenticationMechanism` interface can be used to
 authenticate callers of web applications. An application can supply its own
-HttpAuthenticationMechanism, or use one of the default implementations provided
+`HttpAuthenticationMechanism`, or use one of the default implementations provided
 by the container.
 
-Implementations of the IdentityStore interface can be used to validate user
+Implementations of the `IdentityStore` interface can be used to validate user
 credentials and retrieve group information. An application can provide its own
-IdentityStore, or use the built in LDAP or Database store.
+`IdentityStore`, or use the built in LDAP or Database store.
 
-The HttpAuthenticationMechanism and IdentityStore APIs provide an advantage over
+The `HttpAuthenticationMechanism` and `IdentityStore` APIs provide an advantage over
 container-provided implementations in that they allow an application to control
 the authentication process, and the identity stores used for authentication,
 in a standard, portable way.
 
-The SecurityContext API is intended for use by application code to query and
+The `SecurityContext` API is intended for use by application code to query and
 interact with the current security context. The specification also provides
 for default group-to-role mapping, and defines a principal type called
-CallerPrincipal that can represent the identity of an application caller.
+`CallerPrincipal` that can represent the identity of an application caller.
 
 The Java EE 8 platform requires Java EE Security API 1.0.
 

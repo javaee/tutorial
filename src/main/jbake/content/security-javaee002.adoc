@@ -153,10 +153,13 @@ authentication will be used to verify the identity of the user.
 It is important to keep in mind that security roles are used to define
 the logical security view of an application. They should not be confused
 with the user groups, users, principals, and other concepts that exist
-in GlassFish Server. An additional step is required to map the roles
+in GlassFish Server. Note that he Java EE Security API requires that group
+principal names be mapped to roles of the same name by default. You do not
+need to perform any additional steps to map the roles
 defined in the application to users, groups, and principals that are the
 components of the user database in the `file` realm of GlassFish Server.
-These steps are outlined in link:security-intro005.html#BNBXV[Mapping
+This mapping is set by default in the GlassFish Server Administration Console
+as described in link:security-intro005.html#BNBXV[Mapping
 Roles to Users and Groups].
 
 The following sections show how an application developer uses
@@ -398,7 +401,7 @@ defines three methods
 that allow the bean provider to access security information about the enterprise bean's
 caller:
 
-* `getCallerPrincipal()` retrieves the `Principal`that represents the name
+* `getCallerPrincipal()` retrieves the `Principal` that represents the name
 of the authenticated caller.
 This is the container-specific representation of the caller principal,
 and the type may differ from the type of the caller principal originally
