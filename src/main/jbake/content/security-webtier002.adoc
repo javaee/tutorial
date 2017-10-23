@@ -412,6 +412,8 @@ but instead by invoking `SecurityContext.authenticate()` with the credentials th
 collected.
 |=======================================================================
 
+
+
 [[GEXFA]]
 
 .*Figure 51-2 Form-Based Authentication*

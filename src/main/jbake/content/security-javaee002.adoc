@@ -153,11 +153,12 @@ authentication will be used to verify the identity of the user.
 It is important to keep in mind that security roles are used to define
 the logical security view of an application. They should not be confused
 with the user groups, users, principals, and other concepts that exist
-in GlassFish Server. Note that he Java EE Security API requires that group
-principal names be mapped to roles of the same name by default. You do not
-need to perform any additional steps to map the roles
+in GlassFish Server. Note that the Java EE Security API requires that group
+principal names be mapped to roles of the same name by default, but that implementations
+of the standard may allow configuration of a different default. In GlassFish Server,
+you do not need to perform any additional steps to map the roles
 defined in the application to users, groups, and principals that are the
-components of the user database in the `file` realm of GlassFish Server.
+components of the user database in the `file` realm.
 This mapping is set by default in the GlassFish Server Administration Console
 as described in link:security-intro005.html#BNBXV[Mapping
 Roles to Users and Groups].
@@ -413,14 +414,14 @@ authenticated caller's Subject. This method returns an empty
 `Set` if the caller is unauthenticated, or if the requested type is not found.
 +
 Where both a container caller principal and an application caller principal
-are present, the value returned by `getName()` MUST be the same for both
+are present, the value returned by `getName()` is the same for both
 principals.
 
 * `isCallerInRole()` takes a String argument that represents the role to be
 tested. The specification does not define how the role determination is made,
-but the result MUST be the same as if the corresponding container-specific call
-had been made (for example `EJBContext.isCallerInRole()`), and MUST be consistent with the result implied
-by other specifications that prescribe role-mapping behavior.
+but the result must be the same as if the corresponding container-specific call
+had been made (for example `EJBContext.isCallerInRole()`), and must be consistent with
+the result implied by specifications that prescribe role-mapping behavior.
 
 The `javax.ejb.EJBContext` interface provides two methods that allow the
 bean provider to access security information about the enterprise bean's

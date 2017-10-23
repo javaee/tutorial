@@ -2719,8 +2719,14 @@ link:security-api.html#using-the-java-ee-security-api[53 Using the Java EE Secur
 
 * link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
 ** link:security-api004.html#overview-of-the-built-in-database-identity-store-example[Overview of the Built-In Database Identity Store Example]
+*** link:security-api004.html#define-the-users-and-groups-in-the-identity-store[Define the Users and Groups in the Identity Store]
+*** link:security-api004.html#map-the-databaseidentitystore-to-the-default-data-source[Map the DatabaseIdentityStore to the Default Data source]
+*** link:security-api004.html#specify-the-authentication-mechanism[Specify the Authentication Mechanism]
+*** link:security-api004.html#declare-roles-in-the-servlet-container[Declare Roles in the Servlet Container]
 ** link:security-api004.html#running-the-built-in-db-identity-store-example[Running the built-in-db-identity-store Example]
-
+*** link:security-api004.html#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-netbeans-ide[To Build, Package, and Deploy the built-in-db-identity-store Example Using NetBeans IDE]
+*** link:security-api004.html#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-using-maven[To Build, Package, and Deploy the built-in-db-identity-store Example Using Maven]
+*** link:security-api004.html#to-run-the-built-in-db-identity-store-example[To Run the built-in-db-identity-store Example]
 * link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
 ** link:security-api005.html#overview-of-the-custom-identity-store-example[Overview of the Custom Identity Store Example]
 ** link:security-api005.html#running-the-custom-identity-store-example[Running the custom-identity-store Example]

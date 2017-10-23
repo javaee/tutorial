@@ -184,15 +184,15 @@ available only from the application principal. This method returns an empty
 `Set` if the caller is unauthenticated, or if the requested type is not found.
 +
 Where both a container caller principal and an application caller principal
-are present, the value returned by `getName()` MUST be the same for both
+are present, the value returned by `getName()` is the same for both
 principals.
 
 * `isCallerInRole()` takes a String argument that represents the role to be
 tested. The specification does not define how the role determination is made,
-but the result MUST be the same as if the corresponding container-specific call
+but the result must be the same as if the corresponding container-specific call
 had been made (for example `HttpServletRequest.isUserInRole()`,
-`EJBContext.isCallerInRole()`), and MUST be consistent with the result implied
-by other specifications that prescribe role-mapping behavior.
+`EJBContext.isCallerInRole()`), and must be consistent with the result implied
+by specifications that prescribe role-mapping behavior.
 
 Servlet 4.0 specifies the following methods that enable you to access
 security information about the component's caller.
