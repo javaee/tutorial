@@ -2718,21 +2718,32 @@ link:security-api.html#using-the-java-ee-security-api[53 Using the Java EE Secur
 * link:security-api003.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces]
 
 * link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
+
 ** link:security-api004.html#overview-of-the-built-in-database-identity-store-example[Overview of the Built-In Database Identity Store Example]
 *** link:security-api004.html#define-the-users-and-groups-in-the-identity-store[Define the Users and Groups in the Identity Store]
 *** link:security-api004.html#map-the-databaseidentitystore-to-the-default-data-source[Map the DatabaseIdentityStore to the Default Data source]
 *** link:security-api004.html#specify-the-authentication-mechanism[Specify the Authentication Mechanism]
 *** link:security-api004.html#declare-roles-in-the-servlet-container[Declare Roles in the Servlet Container]
+
 ** link:security-api004.html#running-the-built-in-db-identity-store-example[Running the built-in-db-identity-store Example]
 *** link:security-api004.html#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-netbeans-ide[To Build, Package, and Deploy the built-in-db-identity-store Example Using NetBeans IDE]
 *** link:security-api004.html#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-using-maven[To Build, Package, and Deploy the built-in-db-identity-store Example Using Maven]
 *** link:security-api004.html#to-run-the-built-in-db-identity-store-example[To Run the built-in-db-identity-store Example]
+
 * link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
+
 ** link:security-api005.html#overview-of-the-custom-identity-store-example[Overview of the Custom Identity Store Example]
+*** link:security-api005.html#define-the-users-and-groups-in-the-identity-store[Define the Users and Groups in the Identity Store]
+*** link:security-api005.html#specify-the-authentication-mechanism[Specify the Authentication Mechanism]
+*** link:security-api005.html#declare-roles-in-the-servlet-container[Declare Roles in the Servlet Container]
+
 ** link:security-api005.html#running-the-custom-identity-store-example[Running the custom-identity-store Example]
+*** link:security-api005.html#to-build-package-and-deploy-the-custom-identity-store-example-using-netbeans-ide[To Build, Package, and Deploy the custom-identity-store Example Using NetBeans IDE]
+*** link:security-api005.html#to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven[To Build, Package, and Deploy the custom-identity-store Example Using Maven]
+*** link:security-api005.html#to-run-the-custom-identity-store-example[To Run the custom-identity-store Example]
 
 [[java-ee-security-advanced-topics]]
-link:security-advanced.html#GJJWX[53 Java EE Security: Advanced Topics]
+link:security-advanced.html#GJJWX[54 Java EE Security: Advanced Topics]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:security-advanced001.html#BNBYB[Working with Digital Certificates]
@@ -2799,7 +2810,7 @@ link:partsupporttechs.html#GIJUE[Part XI Java EE Supporting Technologies]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [[transactions]]
-link:transactions.html#BNCIH[54 Transactions]
+link:transactions.html#BNCIH[55 Transactions]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:transactions001.html#A1024277[Overview of Transactions]
@@ -2841,7 +2852,7 @@ Transactions]
 * link:transactions009.html#GKCMI[Further Information about Transactions]
 
 [[resource-adapters-and-contracts]]
-link:resources.html#BNCJH[55 Resource Adapters and Contracts]
+link:resources.html#BNCJH[56 Resource Adapters and Contracts]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:resources001.html#GIPGL[What Is a Resource Adapter?]
@@ -2861,7 +2872,7 @@ and Dependency Injection for Java EE (CDI)]
 Adapters]
 
 [[the-resource-adapter-examples]]
-link:connectorexample.html#GLODB[56 The Resource Adapter Examples]
+link:connectorexample.html#GLODB[57 The Resource Adapter Examples]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:connectorexample001.html#A1253757[Overview of the Resource Adapter
@@ -2894,7 +2905,7 @@ Using NetBeans IDE]
 Using Maven]
 
 [[using-java-ee-interceptors]]
-link:interceptors.html#GKEED[57 Using Java EE Interceptors]
+link:interceptors.html#GKEED[58 Using Java EE Interceptors]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:interceptors001.html#GKIGQ[Overview of Interceptors]
@@ -2938,7 +2949,7 @@ NetBeans IDE]
 Maven]
 
 [[batch-processing]]
-link:batch-processing.html#GKJIQ6[58 Batch Processing]
+link:batch-processing.html#GKJIQ6[59 Batch Processing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:batch-processing001.html#BCGJDEEH[Introduction to Batch
@@ -3048,7 +3059,7 @@ Example Application Using Maven]
 Processing]
 
 [[concurrency-utilities-for-java-ee]]
-link:concurrency-utilities.html#GKJIQ8[59 Concurrency Utilities for Java EE]
+link:concurrency-utilities.html#GKJIQ8[60 Concurrency Utilities for Java EE]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:concurrency-utilities001.html#CIHDFGGG[Concurrency Basics]
@@ -3092,7 +3103,7 @@ link:partcasestudies.html#GKGJW[Part XII Case Studies]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [[dukes-bookstore-case-study-example]]
-link:dukes-bookstore.html#GLNVI[60 Duke's Bookstore Case Study Example]
+link:dukes-bookstore.html#GLNVI[61 Duke's Bookstore Case Study Example]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:dukes-bookstore001.html#GLOAW[Design and Architecture of Duke's
@@ -3128,7 +3139,7 @@ Bookstore Using Maven]
 ** link:dukes-bookstore003.html#BABEHDEG[To Run Duke's Bookstore]
 
 [[dukes-tutoring-case-study-example]]
-link:dukes-tutoring.html#GKAEE[61 Duke's Tutoring Case Study Example]
+link:dukes-tutoring.html#GKAEE[62 Duke's Tutoring Case Study Example]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:dukes-tutoring001.html#GKAEI[Design and Architecture of Duke's
@@ -3178,7 +3189,7 @@ Using Maven]
 *** link:dukes-tutoring004.html#GKJOC[Using Duke's Tutoring]
 
 [[dukes-forest-case-study-example]]
-link:dukes-forest.html#GLNPW[62 Duke's Forest Case Study Example]
+link:dukes-forest.html#GLNPW[63 Duke's Forest Case Study Example]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:dukes-forest001.html#A1256074[Overview of the Duke's Forest Case

@@ -218,9 +218,11 @@ the remote user.
 Your application can make business-logic decisions based on the
 information obtained using these APIs.
 
-[testing-access-to-a-resource-programmatically]
+
+[[testing-access-to-a-resource-programmatically]]
 Testing Access to a Resource Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The `SecurityContext` interface, as specified in the Java EE Security API
 specification, defines the following method for programmatically testing
 access to a resource:

@@ -10,7 +10,7 @@ The Resource Adapter Examples
 [[GLODB]]
 
 [[the-resource-adapter-examples]]
-56 The Resource Adapter Examples
+57 The Resource Adapter Examples
 --------------------------------
 
 

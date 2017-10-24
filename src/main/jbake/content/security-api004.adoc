@@ -136,7 +136,7 @@ public class DatabaseSetup {
 ----
 
 
-[map-the-databaseidentitystore-to-the-default-data-source]
+[[map-the-databaseidentitystore-to-the-default-data-source]]
 Map the DatabaseIdentityStore to the Default Data source
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Use the `@DatabaseIdentityStoreDefinition` annotation to map the built-in `DatabaseIdentityStore`
@@ -228,7 +228,7 @@ In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do
 not need to bundle web.xml with the application to provide mapping between
 roles and groups.
 
-[running-the-built-in-db-id-store-example]
+[[running-the-built-in-db-identity-store-example]]
 Running the built-in-db-identity-store Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

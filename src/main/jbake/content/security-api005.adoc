@@ -150,7 +150,7 @@ In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do
 not need to bundle `web.xml` with the application to provide mapping between roles
 and groups.
 
-[running-the-custom-id-store-example]
+[[running-the-custom-id-store-example]]
 Running the custom-identity-store Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
