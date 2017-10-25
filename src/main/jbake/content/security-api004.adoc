@@ -141,7 +141,8 @@ Map the DatabaseIdentityStore to the Default Data source
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Use the `@DatabaseIdentityStoreDefinition` annotation to map the built-in `DatabaseIdentityStore`
 to the `DefaultDataSource` in
-the `ApplicationConfig.java` file.
+the `ApplicationConfig.java` file. This example also demonstrates the use of the
+`Pbkdf2PasswordHash` interface.
 
 [source,oac_no_warn]
 ----
