@@ -2676,8 +2676,6 @@ Mechanism and Secure Connection]
 
 ** link:security-javaee002.html#GJGCS[Securing an Enterprise Bean
 Programmatically]
-*** link:security-javaee002.html#GJGCR[Accessing an Enterprise Bean
-Caller's Security Context]
 
 ** link:security-javaee002.html#BNBYR[Propagating a Security Identity
 (Run-As)]

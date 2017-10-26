@@ -12,9 +12,8 @@ Overview of the Identity Store Interfaces
 The Identity Store Interfaces are described in the following sections:
 
 * link:#the-identitystore-interface[The IdentityStore Interface]
-* link:#the-identitystorehandler-interface[The IdentityStoreHandler Interface]
-* link:#the-passwordhash-interface[The PasswordHash Interface]
 * link:#the-remembermeidentitystore-interface[The RememberMeIdentityStore Interface]
+* link:#the-passwordhash-interface[The PasswordHash Interface]
 
 [[the-identitystore-interface]]
 The IdentityStore Interface
@@ -39,10 +38,15 @@ and/or lookup user groups.
 
 * `DatabaseIdentityStoreDefinition` -- configures an identity store with the
 parameters necessary to connect to an external database, validate user credentials,
-and/or lookup user groups.
+and/or lookup user groups. You must supply a PasswordHash implementation when
+configuring a Database Identity Store. See link:#the-passwordhash-interface[The PasswordHash Interface].
 
-link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
-demonstrates usage of the built-in database identity store.
+An application can provide its own custom identity store, or use the built-in LDAP or database
+identity stores. For examples of both types, see:
+
+* link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
+
+* link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
 
 Multiple implementations of `IdentityStore` may be present; if so, they are invoked
 in priority order, based on each identity store's self-declared priority and
@@ -52,10 +56,9 @@ IdentityStores are primarily intended for use by implementations of
 `HttpAuthenticationMechanisms`, but this is not a requirement.
 They can be used by other types of authentication mechanisms as well, or by containers.
 
-[[the-identitystorehandler-interface]]
-The IdentityStoreHandler Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+[[identitystorehandler]]
+IdentityStoreHandler
+^^^^^^^^^^^^^^^^^^^^
 Authentication mechanisms do not interact with `IdentityStore` directly; instead,
 they call an `IdentityStoreHandler`. An implementation of the `IdentityStoreHandler`
 interface provides a single method, `validate(Credential)`, which, when invoked,
@@ -81,7 +84,9 @@ An application may also supply its own `IdentityStoreHandler`, which can use any
 desired algorithm to select and invoke on IdentityStores, and return an
 aggregated (or non-aggregated) result.
 
-IdentityStore Interface Details:
+[[identitystoreinterface-methods]]
+IdentityStore Interface Methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The IdentityStore interface itself has four methods:
 
@@ -107,24 +112,6 @@ incumbent on the implementation of the `getCallerGroups()` method; the built-in
 IdentityStores do check for this permission, if a SecurityManager is configured,
 and the built-in IdentityStoreHandler invokes the `getCallerGroups()` method in
 the context of a `PrivilegedAction` block.
-
-[[the-passwordhash-interface]]
-The PasswordHash Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Unlike some types of identity stores, for example LDAP directories,
-databases can store and retrieve user passwords, but can't verify them natively.
-Therefore, the built-in Database identity store must verify user passwords itself.
-Most often, this involves generating a hash of the user's password for comparison
-with a hash value stored in the database.
-
-In order to provide maximum flexibility and interoperability, the Database identity
-store does not implement any specific password hashing algorithms. Instead, it
-defines the PasswordHash interface, and expects the application to provide an
-implementation of PasswordHash that can verify passwords from the specific store
-the application will use. The PasswordHash implementation must be made available
-as a dependent scoped bean, and is configured by providing the fully-qualified
-name of the desired type as a hashAlgorithm value on the DatabaseIdentityStoreDefinition.
 
 [[the-remembermeidentitystore-interface]]
 The RememberMeIdentityStore Interface
@@ -190,6 +177,24 @@ User identity information managed by a `RememberMeIdentityStore` should be store
 as securely as possible (but does not necessarily need to be reliably persisted --
 the only impact of a "forgotten" session is that the user will be prompted to
 log in again).
+
+[[the-passwordhash-interface]]
+The PasswordHash Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Unlike some types of identity stores, for example LDAP directories,
+databases can store and retrieve user passwords, but can't verify them natively.
+Therefore, the built-in Database identity store must verify user passwords itself.
+Most often, this involves generating a hash of the user's password for comparison
+with a hash value stored in the database.
+
+In order to provide maximum flexibility and interoperability, the Database identity
+store does not implement any specific password hashing algorithms. Instead, it
+defines the PasswordHash interface, and expects the application to provide an
+implementation of PasswordHash that can verify passwords from the specific store
+the application will use. The PasswordHash implementation must be made available
+as a dependent scoped bean, and is configured by providing the fully-qualified
+name of the desired type as a hashAlgorithm value on the DatabaseIdentityStoreDefinition.
 
 The PasswordHash algorithm defines three methods:
 

@@ -288,8 +288,8 @@ Enterprise Beans"] and is found in the
 the example by adding the necessary elements to secure the application
 by using the `getCallerPrincipal` and `isCallerInRole` methods, which
 are discussed in more detail in
-link:security-javaee002.html#GJGCR[Accessing an Enterprise Bean Caller's
-Security Context].
+link:security-javaee002.html#securing-an-enterprise-bean-programmatically
+[Securing an Enterprise Bean Programmatically].
 
 In general, the following steps are necessary when using the
 `getCallerPrincipal` and `isCallerInRole` methods with an enterprise
