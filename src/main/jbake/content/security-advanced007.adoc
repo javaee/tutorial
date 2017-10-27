@@ -83,8 +83,9 @@ Specifying Non-Default Principal-to-Role Mapping in the Deployment Descriptor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Java EE Security API requires that group principal names be mapped to
-roles of the same name by default. However, implementations of the standard
-can provide mechanisms to configure a different default.
+roles of the same name by default. GlassFish adheres to this standard, by default,
+and provides group principal to role mapping. Implementations of the standard
+can, however, provide mechanisms to configure a different default.
 
 To map a role name permitted by the application or module to principals
 (users) and groups defined on the server, use the

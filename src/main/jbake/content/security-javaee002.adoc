@@ -381,8 +381,11 @@ used to access a caller's identity programmatically and uses this
 information to make security decisions within the method itself.
 
 In general, security management should be enforced by the container in a
-manner that is transparent to the enterprise bean's business methods.
-The security API described in this section should be used only in the
+manner that is transparent to the enterprise bean's business methods. This section
+describes the SecurityContext API and security-related methods of the EJBContext API.
+The newer SecurityContext API duplicates some functions of the EJBContext API,
+because it is intended to provide a consistent API across containers.
+These security APIs should be used only in the
 less frequent situations in which the enterprise bean business methods
 need to access the security context information.
 
@@ -421,7 +424,7 @@ caller.
 * `getCallerPrincipal` allows the enterprise bean methods to obtain the
 current caller principal's name. The methods might, for example, use the
 name as a key to information in a database. This method never returns null. Instead,
-it returns a principal with a special (platform-dependent) username to indicate
+it returns a (vendor-specific) principal with a special  username to indicate
 an anonymous/unauthenticated caller.
 Note that this behavior differs
 from the behavior of the `SecurityContext.getCallerPrincipal()` method, which

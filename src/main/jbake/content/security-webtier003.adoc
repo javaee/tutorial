@@ -40,9 +40,7 @@ specification, defines the following method to programmatically trigger the
 authentication process:
 
 * `authenticate()` allows an application to signal to the container
-that it should start the authentication process with the caller. This method
-requires `HttpServletRequest` and `HttpServletResponse` parameters to be passed
-in, and can therefore be used only in a valid Servlet context.
+that it should start the authentication process with the caller.
 
 Programmatically triggering means that the container responds as if the caller
 had attempted to access a constrained resource. It causes the container to invoke

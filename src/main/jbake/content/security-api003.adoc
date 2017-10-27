@@ -13,7 +13,6 @@ The Identity Store Interfaces are described in the following sections:
 
 * link:#the-identitystore-interface[The IdentityStore Interface]
 * link:#the-remembermeidentitystore-interface[The RememberMeIdentityStore Interface]
-* link:#the-passwordhash-interface[The PasswordHash Interface]
 
 [[the-identitystore-interface]]
 The IdentityStore Interface
@@ -48,13 +47,14 @@ identity stores. For examples of both types, see:
 
 * link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
 
-Multiple implementations of `IdentityStore` may be present; if so, they are invoked
-in priority order, based on each identity store's self-declared priority and
-type (validation, groups, or both). An implementation of `IdentityStore` must be a
+An implementation of `IdentityStore` must be a
 CDI bean to be recognized and deployed at runtime, and is assumed to be normal scoped.
 IdentityStores are primarily intended for use by implementations of
 `HttpAuthenticationMechanisms`, but this is not a requirement.
 They can be used by other types of authentication mechanisms as well, or by containers.
+
+Multiple implementations of `IdentityStore` may be present. If so, they are invoked
+under the control of an IdentityStoreHandler.
 
 [[identitystorehandler]]
 IdentityStoreHandler
@@ -112,6 +112,72 @@ incumbent on the implementation of the `getCallerGroups()` method; the built-in
 IdentityStores do check for this permission, if a SecurityManager is configured,
 and the built-in IdentityStoreHandler invokes the `getCallerGroups()` method in
 the context of a `PrivilegedAction` block.
+
+[[the-passwordhash-interface]]
+The PasswordHash Interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Unlike some types of identity stores, for example LDAP directories,
+databases can store and retrieve user passwords, but can't verify them natively.
+Therefore, the built-in Database identity store must verify user passwords itself.
+Most often, this involves generating a hash of the user's password for comparison
+with a hash value stored in the database.
+
+In order to provide maximum flexibility and interoperability, the Database identity
+store does not implement any specific password hashing algorithms. Instead, it
+defines the PasswordHash interface, and expects the application to provide an
+implementation of PasswordHash that can verify passwords from the specific store
+the application will use. The PasswordHash implementation must be made available
+as a dependent scoped bean, and is configured by providing the fully-qualified
+name of the desired type as a hashAlgorithm value on the DatabaseIdentityStoreDefinition.
+
+The PasswordHash algorithm defines three methods:
+
+* `initialize(Map<String,String> parameters)` -- initialize the PasswordHash with
+the supplied Map of parameters. The Database identity store calls this method when
+initializing, passing the `hashAlgorithmParameters` value of the
+`DatabaseIdentityStoreDefinition` annotation (after conversion to a Map).
+
+* `verify(char[] password, String hashedPassword)` -- verify a caller-supplied
+password against the caller's stored password hash as retrieved from the database.
+The `hashedPassword` value should be provided exactly as it was returned from the database.
+
+* generate(char[] password) -- generate a password hash from the supplied password.
+The value returned should be formatted and encoded exactly it would be stored
+in the database. While it is useful to generate the hash of a caller-supplied password
+during `verify()`, this method is intended primarily for use by applications or
+`IdentityStore` implementations that want to support password management/reset
+capability without having to duplicate the code used to verify passwords.
+
+Note that, while the interface is oriented toward hashing passwords, it can also
+support alternative approaches, such as two-way encryption of stored passwords.
+
+There is a built-in `Pbkdf2PasswordHash` implementation that supports, as it's
+name suggests, PBKDF2 password hashing. It supports several parameters that
+control the generation of hash values
+(key size, iterations, and so on -- see the Javadoc),
+and those parameters are encoded into the resulting hash value, so that hashes
+can be verified even if the currently configured parameters are different from
+the parameters in effect when a stored hash was generated.
+
+While it is necessary to write a custom `PasswordHash` to enable interoperability
+with a legacy identity store that stores password hashes in a format other
+than the `Pbkdf2PasswordHash` format, developers should consider carefully
+whether `Pbkdf2PasswordHash` is sufficient for new identity stores, and avoid
+writing a new PasswordHash implementation without a solid understanding of the
+cryptographic and other security considerations involved. Some of the
+considerations specific to password hashing are:
+
+* The requirements for hashing passwords differ considerably from the requirements
+for hashing in other contexts. In particular, speed is normally a virtue when
+generating hashes, but when generating password hashes, slower is better -- to
+slow down brute force attacks against hashed values.
+
+* The comparison of a generated hash with a stored hash should take constant time,
+whether it succeeds or fails, in order to avoid giving an attacker clues about
+the password value based on the timing of failed attempts.
+
+* A new random salt should be used each time a new password hash value is generated.
 
 [[the-remembermeidentitystore-interface]]
 The RememberMeIdentityStore Interface
@@ -177,69 +243,3 @@ User identity information managed by a `RememberMeIdentityStore` should be store
 as securely as possible (but does not necessarily need to be reliably persisted --
 the only impact of a "forgotten" session is that the user will be prompted to
 log in again).
-
-[[the-passwordhash-interface]]
-The PasswordHash Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Unlike some types of identity stores, for example LDAP directories,
-databases can store and retrieve user passwords, but can't verify them natively.
-Therefore, the built-in Database identity store must verify user passwords itself.
-Most often, this involves generating a hash of the user's password for comparison
-with a hash value stored in the database.
-
-In order to provide maximum flexibility and interoperability, the Database identity
-store does not implement any specific password hashing algorithms. Instead, it
-defines the PasswordHash interface, and expects the application to provide an
-implementation of PasswordHash that can verify passwords from the specific store
-the application will use. The PasswordHash implementation must be made available
-as a dependent scoped bean, and is configured by providing the fully-qualified
-name of the desired type as a hashAlgorithm value on the DatabaseIdentityStoreDefinition.
-
-The PasswordHash algorithm defines three methods:
-
-* `initialize(Map<String,String> parameters)` -- initialize the PasswordHash with
-the supplied Map of parameters. The Database identity store calls this method when
-initializing, passing the `hashAlgorithmParameters` value of the
-`DatabaseIdentityStoreDefinition` annotation (after conversion to a Map).
-
-* `verify(char[] password, String hashedPassword)` -- verify a caller-supplied
-password against the caller's stored password hash as retrieved from the database.
-The `hashedPassword` value should be provided exactly as it was returned from the database.
-
-* generate(char[] password) -- generate a password hash from the supplied password.
-The value returned should be formatted and encoded exactly it would be stored
-in the database. While it is useful to generate the hash of a caller-supplied password
-during `verify()`, this method is intended primarily for use by applications or
-`IdentityStore` implementations that want to support password management/reset
-capability without having to duplicate the code used to verify passwords.
-
-Note that, while the interface is oriented toward hashing passwords, it can also
-support alternative approaches, such as two-way encryption of stored passwords.
-
-There is a built-in `Pbkdf2PasswordHash` implementation that supports, as it's
-name suggests, PBKDF2 password hashing. It supports several parameters that
-control the generation of hash values
-(key size, iterations, and so on -- see the Javadoc),
-and those parameters are encoded into the resulting hash value, so that hashes
-can be verified even if the currently configured parameters are different from
-the parameters in effect when a stored hash was generated.
-
-While it is necessary to write a custom `PasswordHash` to enable interoperability
-with a legacy identity store that stores password hashes in a format other
-than the `Pbkdf2PasswordHash` format, developers should consider carefully
-whether `Pbkdf2PasswordHash` is sufficient for new identity stores, and avoid
-writing a new PasswordHash implementation without a solid understanding of the
-cryptographic and other security considerations involved. Some of the
-considerations specific to password hashing are:
-
-* The requirements for hashing passwords differ considerably from the requirements
-for hashing in other contexts. In particular, speed is normally a virtue when
-generating hashes, but when generating password hashes, slower is better -- to
-slow down brute force attacks against hashed values.
-
-* The comparison of a generated hash with a stored hash should take constant time,
-whether it succeeds or fails, in order to avoid giving an attacker clues about
-the password value based on the timing of failed attempts.
-
-* A new random salt should be used each time a new password hash value is generated.
