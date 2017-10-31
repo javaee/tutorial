@@ -37,4 +37,4 @@ authenticate against in a standard, portable way.
 An application can provide its own `IdentityStore`,
 or use the built in LDAP or Database identity store implementations of the interface.
 For details about the `IdentityStore` interfaces and examples of their usage, see
-link:security-api004.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces].
+link:security-api003.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces].

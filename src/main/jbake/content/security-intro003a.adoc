@@ -66,7 +66,7 @@ is to register a corresponding `AuthConfigProvider` with the global `AuthConfigF
 An `AuthConfigProvider` makes a `ServerAuthModule` available to the container, via a
 series of intermediary objects, for runtime message processing.
 
-[jsr-375-java-ee-security-api]
+[[jsr-375-java-ee-security-api]]
 JSR-375 Java EE Security API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 JSR-375 defines the following authentication-related plugin SPIs:
