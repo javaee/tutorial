@@ -2,7 +2,7 @@ type=page
 status=published
 title=Establishing a Secure Connection Using SSL
 next=security-intro007.html
-prev=security-intro005.html
+prev=security-intro005a.html
 ~~~~~~
 = Establishing a Secure Connection Using SSL
 

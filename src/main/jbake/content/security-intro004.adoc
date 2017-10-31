@@ -2,7 +2,7 @@ type=page
 status=published
 title=Securing GlassFish Server
 next=security-intro005.html
-prev=security-intro003.html
+prev=security-intro003a.html
 ~~~~~~
 = Securing GlassFish Server
 

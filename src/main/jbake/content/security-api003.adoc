@@ -54,7 +54,7 @@ IdentityStores are primarily intended for use by implementations of
 They can be used by other types of authentication mechanisms as well, or by containers.
 
 Multiple implementations of `IdentityStore` may be present. If so, they are invoked
-under the control of an IdentityStoreHandler.
+under the control of an `IdentityStoreHandler`.
 
 [[identitystorehandler]]
 IdentityStoreHandler
@@ -125,13 +125,13 @@ with a hash value stored in the database.
 
 In order to provide maximum flexibility and interoperability, the Database identity
 store does not implement any specific password hashing algorithms. Instead, it
-defines the PasswordHash interface, and expects the application to provide an
-implementation of PasswordHash that can verify passwords from the specific store
-the application will use. The PasswordHash implementation must be made available
-as a dependent scoped bean, and is configured by providing the fully-qualified
-name of the desired type as a hashAlgorithm value on the DatabaseIdentityStoreDefinition.
+defines the `PasswordHash` interface, and expects the application to provide an
+implementation of `PasswordHash` that can verify passwords from the specific store
+the application will use. The `PasswordHash` implementation must be made available
+as a dependent-scoped bean, and is configured by providing the fully-qualified
+name of the desired type as the `hashAlgorithm` value on a `DatabaseIdentityStoreDefinition`.
 
-The PasswordHash algorithm defines three methods:
+The `PasswordHash` algorithm defines three methods:
 
 * `initialize(Map<String,String> parameters)` -- initialize the PasswordHash with
 the supplied Map of parameters. The Database identity store calls this method when
@@ -142,7 +142,7 @@ initializing, passing the `hashAlgorithmParameters` value of the
 password against the caller's stored password hash as retrieved from the database.
 The `hashedPassword` value should be provided exactly as it was returned from the database.
 
-* generate(char[] password) -- generate a password hash from the supplied password.
+* `generate(char[] password)` -- generate a password hash from the supplied password.
 The value returned should be formatted and encoded exactly it would be stored
 in the database. While it is useful to generate the hash of a caller-supplied password
 during `verify()`, this method is intended primarily for use by applications or

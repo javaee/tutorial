@@ -298,7 +298,8 @@ Java EE Security API, and documented in
 link:security-api.html#using-the-java-ee-security-api[Chapter 53, "Using the Java EE Security API"].
 |=======================================================================
 
-A user authentication mechanism specifies
+
+A user authentication mechanism specifies:
 
 * The way a user gains access to web content
 * With basic authentication, the realm in which the user will be

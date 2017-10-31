@@ -2554,6 +2554,10 @@ Security Information]
 Declarative Security]
 
 ** link:security-intro003.html#using-programmatic-security[Using Programmatic Security]
+* link:security-intro003a.html#using-pluggable-providers[Using Pluggable Providers]
+** link:security-intro003a.html#jsr-196-java-authentication-service-provider-interface-for-containers-jaspic[JSR-196 Java Authentication Service Provider Interface for Containers (JASPIC)]
+** link:security-intro003a.html#jsr-375-java-ee-security-api[JSR-375 Java EE Security API]
+
 * link:security-intro004.html#BNBXI[Securing GlassFish Server]
 * link:security-intro005.html#BNBXJ[Working with Realms, Users, Groups,
 and Roles]
@@ -2573,6 +2577,8 @@ GlassFish Server]
 ** link:security-intro005.html#setting-up-security-roles[Setting Up Security Roles]
 
 ** link:security-intro005.html#mapping-roles-to-users-and-groups[Mapping Roles to Users and Groups]
+
+* link:security-intro005a.html#working-with-identity-stores[Working with Identity Stores]
 * link:security-intro006.html#BNBXW[Establishing a Secure Connection
 Using SSL]
 
