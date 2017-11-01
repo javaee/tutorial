@@ -54,7 +54,7 @@ is called for the response before it is sent. In contrast to the Servlet
 Container Profile, `validateRequest()` processing for SOAP messages typically involves
 verifying signatures on signed elements, decrypting encrypted elements, and/or
 establishing the identity of a SOAP actor based on a token included in the message,
-whereas `secureResponse()` typically involves signing and/or encrypting all or part
+while `secureResponse()` typically involves signing and/or encrypting elements
 of the outbound message.
 
 JASPIC does not define any standard or built-in ServerAuthModules; they must be
@@ -76,7 +76,7 @@ to a web application. It defines three methods that correspond to the methods of
 JASPIC `ServerAuthModule`, albeit with slightly different signatures.
 An `HttpAuthenticationMechanism` provides similar functionality to a `ServerAuthModule`,
 and the Servlet Container uses a special `ServerAuthModule` to invoke the
-HttpAuthenticationMechanism's methods, but HttpAuthenticationMechanisms are much
+HttpAuthenticationMechanism's methods, but HttpAuthenticationMechanisms are
 simpler to write, and to deploy, than are ServerAuthModules.
 
 * `IdentityStore` - This interface defines methods for validating a caller's
@@ -87,7 +87,7 @@ specific order and aggregates the results.
 
 * `RememberMeIdentityStore` - This interface is a variation on the `IdentityStore`
 interface, intended specifically to address cases where an authenticated user's
-identity should be remembered for an extended period of time so that the caller
+identity should be remembered for an extended period of time, so that the caller
 can return to the application periodically without needing to present primary
 authentication credentials each time.
 
@@ -95,9 +95,9 @@ Implementations of these SPI interfaces are CDI beans, and, as such, application
 can provide implementations that support application-specific authentication
 mechanisms, or validate user credentials against application-specific identity stores,
 simply by including them in a bean archive that is part of the deployed application.
-There are also several standard built-in implementations of `HttpAuthenticationMechanism`
+There are also several standard, built-in implementations of `HttpAuthenticationMechanism`
 and `IdentityStore` that provide configurable support for common authentication and
-credential validation use cases without the need to write custom implementations.
+credential validation use cases, without the need to write custom implementations.
 
 Because these SPIs, related annotations, and the CDI deployment mechanism are all
 part of standard Java EE, implementations are completely portable (to the extent
