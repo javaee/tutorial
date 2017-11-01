@@ -25,7 +25,7 @@ but it can also manage user account data itself.
 The `IdentityStore` interface is intended
 primarily for use by the `HttpAuthenticationMechanism` (also specified in the
 Java EE Security API), but can be used by other implementations such as a JASPIC
-`ServerAuthModule` or a container's built-in authentication mechanism. Using the
+`ServerAuthModule` or a container's built-in authentication mechanisms. Using the
 `HttpAuthenticationMechanism`
 and `IdentityStore` implementations, both built-in and custom, provides a significant
 advantage over the BASIC and FORM mechanisms

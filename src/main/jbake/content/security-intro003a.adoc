@@ -9,7 +9,7 @@ prev=security-intro003.html
 [[using-pluggable-providers]]
 Using Pluggable Providers
 -------------------------
-Java EE provides two specifications that define SPI interfaces for
+Java EE includes two specifications that define SPI interfaces for
 pluggable security providers, JSR-196 and JSR-375. These specifications are
 described in more detail in the following sections:
 
@@ -26,9 +26,9 @@ which the sender of a message "secures" it, and the receiver "validates" it.
 The details of how messages are secured and validated are undefined by the model;
 support for securing and validating particular types of messages is provided by
 "auth modules" -- implementations of the JASPIC `ClientAuthModule` and
-`ServerAuthModule` interfaces that support particular protocols or message types,
+`ServerAuthModule` interfaces -- that support particular protocols or message types,
 and that plug in to the JASPIC framework. (Note that it is not necessary for a
-client and server to both use JASPIC as long as both sides process messages
+client and server to both use JASPIC, as long as both sides process messages
 correctly for a given protocol.)
 
 JASPIC defines two "profiles" for integrating JASPIC auth modules into Java EE
@@ -41,8 +41,8 @@ In the case of the Servlet Container Profile, if a `ServerAuthModule` is configu
 for a given application context, then the modules's `validateRequest()` method must be
 invoked (and succeed) before authorizing access and calling the target servlet,
 and the module's `secureResponse()` method must be called before returning a response.
-Typically, the `ServerAuthModule` under the Servlet Container Profile looks for
-user credentials or tokens and uses them to authenticate the caller and establish
+Typically, a `ServerAuthModule` written for the Servlet Container Profile looks for
+user credentials or tokens in an incoming request, and then uses them to authenticate the caller and establish
 the caller's identity. A `ServerAuthModule` may also engage in a challenge/response
 protocol with the client, or negotiate with a third party to establish/verify the
 client's identity.
@@ -50,7 +50,7 @@ client's identity.
 As with the Servlet Container Profile, the SOAP Profile requires that
 `validateRequest()` be called and succeed before proceeding to authorize access and
 perform any further processing of an incoming message, and that `secureResponse()`
-is called for the response (if any) before it is sent. In contrast to the Servlet
+is called for the response before it is sent. In contrast to the Servlet
 Container Profile, `validateRequest()` processing for SOAP messages typically involves
 verifying signatures on signed elements, decrypting encrypted elements, and/or
 establishing the identity of a SOAP actor based on a token included in the message,

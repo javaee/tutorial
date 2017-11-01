@@ -383,7 +383,7 @@ information to make security decisions within the method itself.
 In general, security management should be enforced by the container in a
 manner that is transparent to the enterprise bean's business methods. This section
 describes the SecurityContext API and security-related methods of the EJBContext API.
-The newer SecurityContext API duplicates some functions of the EJBContext API,
+The newer SecurityContext API duplicates some functions of the EJBContext API
 because it is intended to provide a consistent API across containers.
 These security APIs should be used only in the
 less frequent situations in which the enterprise bean business methods

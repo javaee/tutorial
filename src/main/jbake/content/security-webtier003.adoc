@@ -230,8 +230,9 @@ the specified web resource for the specified HTTP methods, as determined by
 the security constraints configured for the application.
 +
 The resource
-parameter is a `URLPatternSpec` that identifies an application-specific web
-resource. LINK TO JAVADOC???.
+parameter is an `URLPatternSpec`, as defined by the Java Authorization Contract
+for Containers 1.5 specification (`http://jcp.org/en/jsr/detail?id=115`), that
+identifies an application-specific web resource.
 +
 This method can be used to check access to resources in the current application
 only — it cannot be called cross-application, or cross-container, to check

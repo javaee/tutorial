@@ -286,13 +286,15 @@ following:
 Specifying Authentication Mechanisms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+This section describes built-in authentication mechanisms defined by
+the Servlet specification.
+
 [width="100%",cols="100%",]
 |=======================================================================
 a|
 *Note*:
 
-The following section describes built-in authentication mechanisms defined in
-the Servlet specification. An alternative way to perform user authentication, including BASIC
+An alternative way to perform user authentication, including BASIC
 and FORM authentication, is to use the `HttpAuthenticationMechanism`, specified by the
 Java EE Security API, and documented in
 link:security-api.html#using-the-java-ee-security-api[Chapter 53, "Using the Java EE Security API"].
