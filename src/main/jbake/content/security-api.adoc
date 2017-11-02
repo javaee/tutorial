@@ -1,0 +1,27 @@
+type=page
+status=published
+title=Using the Java EE Security API
+next=security-api001.html
+prev=security-javaee003.html
+~~~~~~
+= Using the Java EE Security API
+
+
+
+[[using-the-java-ee-security-api]]
+53 Using the Java EE Security API
+---------------------------------
+
+
+This chapter describes the authentication and credential validation
+functionality provided by the Java EE Security API. The API also
+defines a SecurityContext access point for programmatic security.
+
+
+The following topics are addressed here:
+
+* link:security-api001.html#about-the-java-ee-security-api[About the Java EE Security API]
+* link:security-api002.html#overview-of-the-http-auth-mech-int[Overview of the HTTP Authentication Mechanism Interface]
+* link:security-api003.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces]
+* link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
+* link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]

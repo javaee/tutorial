@@ -4,8 +4,7 @@ title=Securing Enterprise Beans
 next=security-javaee003.html
 prev=security-javaee001.html
 ~~~~~~
-Securing Enterprise Beans
-=========================
+= Securing Enterprise Beans
 
 [[BNBYL]]
 
@@ -154,10 +153,14 @@ authentication will be used to verify the identity of the user.
 It is important to keep in mind that security roles are used to define
 the logical security view of an application. They should not be confused
 with the user groups, users, principals, and other concepts that exist
-in GlassFish Server. An additional step is required to map the roles
+in GlassFish Server. Note that the Java EE Security API requires that group
+principal names be mapped to roles of the same name by default, but that implementations
+of the standard may allow configuration of a different default. In GlassFish Server,
+you do not need to perform any additional steps to map the roles
 defined in the application to users, groups, and principals that are the
-components of the user database in the `file` realm of GlassFish Server.
-These steps are outlined in link:security-intro005.html#BNBXV[Mapping
+components of the user database in the `file` realm.
+This mapping is set by default in the GlassFish Server Administration Console
+as described in link:security-intro005.html#BNBXV[Mapping
 Roles to Users and Groups].
 
 The following sections show how an application developer uses
@@ -377,22 +380,42 @@ Programmatic security, code that is embedded in a business method, is
 used to access a caller's identity programmatically and uses this
 information to make security decisions within the method itself.
 
-The following topics are addressed here:
-
-* link:#GJGCR[Accessing an Enterprise Bean Caller's Security Context]
-
-[[GJGCR]]
-
-[[accessing-an-enterprise-bean-callers-security-context]]
-Accessing an Enterprise Bean Caller's Security Context
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 In general, security management should be enforced by the container in a
-manner that is transparent to the enterprise bean's business methods.
-The security API described in this section should be used only in the
+manner that is transparent to the enterprise bean's business methods. This section
+describes the SecurityContext API and security-related methods of the EJBContext API.
+The newer SecurityContext API duplicates some functions of the EJBContext API
+because it is intended to provide a consistent API across containers.
+These security APIs should be used only in the
 less frequent situations in which the enterprise bean business methods
-need to access the security context information, such as when you want
-to restrict access to a particular time of day.
+need to access the security context information.
+
+The `SecurityContext` interface, as specified in the Java EE Security API specification,
+defines three methods
+that allow the bean provider to access security information about the enterprise bean's
+caller:
+
+* `getCallerPrincipal()` retrieves the `Principal` that represents the name
+of the authenticated caller.
+This is the container-specific representation of the caller principal,
+and the type may differ from the type of the caller principal originally
+established by an `HttpAuthenticationMechanism`. This method returns null for an
+unauthenticated caller. Note that this behavior differs from the behavior of
+the `EJBContext.getCallerPrincipal()` method,
+which returns a (vendor-specific) special principal to represent an anonymous caller.
+
+* `getPrincipalsByType()` retrieves all principals of the given type from the
+authenticated caller's Subject. This method returns an empty
+`Set` if the caller is unauthenticated, or if the requested type is not found.
++
+Where both a container caller principal and an application caller principal
+are present, the value returned by `getName()` is the same for both
+principals.
+
+* `isCallerInRole()` takes a String argument that represents the role to be
+tested. The specification does not define how the role determination is made,
+but the result must be the same as if the corresponding container-specific call
+had been made (for example `EJBContext.isCallerInRole()`), and must be consistent with
+the result implied by specifications that prescribe role-mapping behavior.
 
 The `javax.ejb.EJBContext` interface provides two methods that allow the
 bean provider to access security information about the enterprise bean's
@@ -400,7 +423,12 @@ caller.
 
 * `getCallerPrincipal` allows the enterprise bean methods to obtain the
 current caller principal's name. The methods might, for example, use the
-name as a key to information in a database.
+name as a key to information in a database. This method never returns null. Instead,
+it returns a (vendor-specific) principal with a special  username to indicate
+an anonymous/unauthenticated caller.
+Note that this behavior differs
+from the behavior of the `SecurityContext.getCallerPrincipal()` method, which
+returns null for an unauthenticated caller.
 +
 The following code sample illustrates the use of the
 `getCallerPrincipal` method:
@@ -511,7 +539,8 @@ technique is used when the target container expects access using a
 specific identity.
 
 To propagate an identity to the target enterprise bean, configure a
-run-as identity for the bean, as described in link:#BNBZB[Configuring a
+run-as identity for the bean, as described in
+link:#configuring-a-components-propagated-security-identity[Configuring a
 Component's Propagated Security Identity]. Establishing a run-as
 identity for an enterprise bean does not affect the identities of its
 callers, which are the identities tested for permission to access the

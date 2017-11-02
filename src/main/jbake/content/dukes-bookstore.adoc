@@ -10,7 +10,7 @@ Duke's Bookstore Case Study Example
 [[GLNVI]]
 
 [[dukes-bookstore-case-study-example]]
-60 Duke's Bookstore Case Study Example
+61 Duke's Bookstore Case Study Example
 --------------------------------------
 
 

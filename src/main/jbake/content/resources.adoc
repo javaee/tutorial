@@ -10,7 +10,7 @@ Resource Adapters and Contracts
 [[BNCJH]]
 
 [[resource-adapters-and-contracts]]
-55 Resource Adapters and Contracts
+56 Resource Adapters and Contracts
 ----------------------------------
 
 

@@ -1,11 +1,10 @@
 type=page
 status=published
 title=Examples: Securing Enterprise Beans
-next=security-advanced.html
+next=security-api.html
 prev=security-javaee002.html
 ~~~~~~
-Examples: Securing Enterprise Beans
-===================================
+= Examples: Securing Enterprise Beans
 
 [[GKBSZ]]
 
@@ -18,9 +17,9 @@ declarative and programmatic security.
 
 The following topics are addressed here:
 
-* link:#BNBZK[The cart-secure Example: Securing an Enterprise Bean with
+* link:#the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security[The cart-secure Example: Securing an Enterprise Bean with
 Declarative Security]
-* link:#BNCAA[The converter-secure Example: Securing an Enterprise Bean
+* link:#the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security[The converter-secure Example: Securing an Enterprise Bean
 with Programmatic Security]
 
 [[BNBZK]]
@@ -289,8 +288,8 @@ Enterprise Beans"] and is found in the
 the example by adding the necessary elements to secure the application
 by using the `getCallerPrincipal` and `isCallerInRole` methods, which
 are discussed in more detail in
-link:security-javaee002.html#GJGCR[Accessing an Enterprise Bean Caller's
-Security Context].
+link:security-javaee002.html#securing-an-enterprise-bean-programmatically
+[Securing an Enterprise Bean Programmatically].
 
 In general, the following steps are necessary when using the
 `getCallerPrincipal` and `isCallerInRole` methods with an enterprise

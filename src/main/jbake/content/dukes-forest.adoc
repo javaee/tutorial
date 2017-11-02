@@ -10,7 +10,7 @@ Duke's Forest Case Study Example
 [[GLNPW]]
 
 [[dukes-forest-case-study-example]]
-62 Duke's Forest Case Study Example
+63 Duke's Forest Case Study Example
 -----------------------------------
 
 

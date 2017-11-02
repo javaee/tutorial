@@ -1,0 +1,157 @@
+type=page
+status=published
+title=About the Java EE Security API
+next=security-api002.html
+prev=security-api.html
+~~~~~~
+= About the Java EE Security API
+
+[[about-the-java-ee-security-api]]
+About the Java EE Security API
+------------------------------
+
+Java EE includes support for JSR 375, which defines portable, plug-in interfaces
+for authentication and identity stores, and a new injectable-type SecurityContext
+interface that provides an access point for programmatic security. You can use
+the built-in implementations of these APIs, or define custom
+implementations.
+
+The Java EE Security API contains the following packages:
+
+* The `javax.security.enterprise` package is the main Java EE security API package
+and contains classes and interfaces that span authentication, authorization, and
+identity concerns. link:#main-classes-and-interfaces-in-enterprise[Table 51-1] lists
+the main class and interfaces in this package.
+
+* The `javax.security.enterprise.authentication.mechanism.http` package contains
+classes and interfaces associated with HTTP-based authentication mechanisms that
+can interact with a caller or third-parties as part of an authentication protocol.
+link:#main-classes-and-interfaces-in-authentication[Table 51-2] lists the main classes
+and interfaces in this package.
+
+* The `javax.javax.security.enterprise.credential` package contains classes and
+interfaces for representing user credentials. link:#main-classes-and-interfaces-in-credential[Table 51-3]
+lists the main classes and interfaces in this package.
+
+* The `javax.security.enterprise.identitystore` package contains classes and
+interfaces associated with identity stores that validate a caller's credentials
+and lookup caller groups. link:#main-classes-and-interfaces-in-identitystore[Table 51-4]
+lists the main classes and interfaces in this package.
+
+
+
+[[main-classes-and-interfaces-in-enterprise]]
+
+*Table 51-1  Main Classes and Interfaces in javax.security.enterprise*
+
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`SecurityContext` |Injectable-type interface that provides an access point for
+programmatic security intended to be used by application code to query and interact
+with the Java EE Security API.
+
+|`CallerPrincipal` |Principal type that can represent the identity of the
+application caller.
+
+|`AuthenticationStatus` |Enum used to indicate the return value from an authentication
+mechanism.
+
+|`AuthenticationException` |Indicates that a problem occurred during the
+authentication process.
+|=======================================================================
+
+[[main-classes-and-interfaces-in-authentication]]
+
+
+*Table 51-2 Main Classes and Interfaces in javax.security.enterprise.authentication.mechanism.http*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`HttpAuthenticationMechanism` |Interface representing an HTTP authentication mechanism.
+Developers can provide their own implementation of this interface, or use one of
+several built-in HTTP authentication mechanisms.
+
+|`HttpMessageContext` |Interface representing the parameters passed to/from methods
+of an `HttpAuthenticationMechanism` at runtime.
+
+|`AuthenticationParameters` |Class that carries parameters passed to the
+`SecurityContext.authenticate()` method.
+
+|`HttpMessageContextWrapper` |Abstract class developers can extend to
+customize `HttpMessageContext` behavior.
+|=======================================================================
+
+[width="99%",cols="100%",]
+|=======================================================================
+a|
+*Note:*
+The `javax.security.enterprise.authentication.mechanism.http` package also includes
+a number of annotation classes that are used to configure/enable the built-in
+authentication mechanisms or to modify the behavior of an authentication mechanism.
+|=======================================================================
+
+
+
+[[main-classes-and-interfaces-in-credential]]
+
+*Table 51-3 Main Classes and Interfaces in javax.security.enterprise.credential*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`Credential` |Interface that represents a generic credential and defines
+several methods to operate on credentials. All other classes in this package
+are implementations of the Credential interface.
+
+|`AbstractClearableCredential` |Abstract class implementing behavior common to
+Credentials that can be meaningfully cleared.
+
+|`BasicAuthenticationCredential` |Class that extends `UsernamePasswordCredential`
+to represent credentials used by HTTP Basic Authentication.
+
+|`CallerOnlyCredential` |Credential that contains a caller name only; can be
+used to assert an identity, but not to authenticate a user, due to the lack of
+any secret or other credential that can be validated.
+
+|`Password` |Class that represents a text-based password.
+
+|`RememberMeCredential` |Class that represents a credential presented as a token,
+for the explicit usage with the JSR 375 remember me function.
+
+|`UsernamePasswordCredential` |Class that represents the credentials typically
+used by standard caller name/password authentication.
+|=======================================================================
+
+[[main-classes-and-interfaces-in-identitystore]]
+
+*Table 51-4 Main Classes and Interfaces in javax.security.enterprise.identitystore*
+[width=99%,cols="25%,75%"]
+|=======================================================================
+|*Class or Interface* |*Description*
+|`IdentityStore` |Interface representing an Identity Store.
+Developers can provide their own implementation of this interface, or use one of
+the built-in Identity Stores.
+
+|`IdentityStoreHandler` |Interface that defines the method applications use to
+interact with Identity Stores. Applications can use the built-in
+IdentityStoreHandler, or supply their own implementation if custom behavior is desired.
+
+|`PasswordHash` |Interface defining methods for generating and
+validating password hashes, needed to securely validate passwords when using
+the built-in Database Identity Store. Developers can implement this interface
+to generate/validate password hashes using any desired algorithm.
+
+|`Pbkdf2PasswordHash` |Marker interface implemented by the built-in PBKDF2
+PasswordHash implementation. Developers can use this interface to select the
+built-in PBKDF2 algorithm when configuring the Database Identity Store.
+
+|`RememberMeIdentityStore` |Interface defining a special type of Identity Store,
+used in conjunction with the RememberMe annotation to provide RememberMe
+behavior for an application.
+
+|`CredentialValidationResult` |Class that represents the result from an attempt
+to validate a Credential.
+
+|`IdentityStorePermission` |Permission required to invoke the `getGroups` method of an
+IdentityStore, when a SecurityManager is configured.
+|=======================================================================

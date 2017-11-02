@@ -1,0 +1,40 @@
+type=page
+status=published
+title=Working with Identity Stores
+next=security-intro006.html
+prev=security-intro005.html
+~~~~~~
+= Working with Identity Stores
+
+[[working-with-identity-stores]]
+Working with Identity Stores
+----------------------------
+An identity store is a database or directory (store) that contains identity information
+about a collection of users that includes an application's callers. An identity store
+holds callers names, group membership information, and information sufficient
+to allow it to validate a caller's credentials. An identity store may also contain other
+information, such as globally unique caller identifiers or other caller attributes.
+
+As specified in the Java EE Security API, the `IdentityStore` interface
+provides an abstraction of an identity store. Implementations of the `IdentityStore`
+interface interact with identity stores to authenticate users
+and to retrieve caller group information. Most often, an implementation of the `IdentityStore`
+interface interacts with an external identity store, such as an LDAP server,
+but it can also manage user account data itself.
+
+The `IdentityStore` interface is intended
+primarily for use by the `HttpAuthenticationMechanism` (also specified in the
+Java EE Security API), but can be used by other implementations such as a JASPIC
+`ServerAuthModule` or a container's built-in authentication mechanisms. Using the
+`HttpAuthenticationMechanism`
+and `IdentityStore` implementations, both built-in and custom, provides a significant
+advantage over the BASIC and FORM mechanisms
+defined by Servlet 4.0 (and previous versions) and configured declaratively
+using `<login-config>` in `web.xml`,
+because it allows an application to control the identity stores it will
+authenticate against in a standard, portable way.
+
+An application can provide its own `IdentityStore`,
+or use the built in LDAP or Database identity store implementations of the interface.
+For details about the `IdentityStore` interfaces and examples of their usage, see
+link:security-api003.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces].

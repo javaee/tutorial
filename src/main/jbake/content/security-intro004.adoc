@@ -2,10 +2,9 @@ type=page
 status=published
 title=Securing GlassFish Server
 next=security-intro005.html
-prev=security-intro003.html
+prev=security-intro003a.html
 ~~~~~~
-Securing GlassFish Server
-=========================
+= Securing GlassFish Server
 
 [[BNBXI]]
 
@@ -33,10 +32,8 @@ These contracts specify how the authorization providers are installed,
 configured, and used in access decisions.
 * Using pluggable audit modules.
 * Customizing authentication mechanisms. All implementations of Java EE
-7 compatible web containers are required to support the Servlet Profile
+8 compatible web containers are required to support the Servlet Profile
 of JSR 196, which offers an avenue for customizing the authentication
 mechanism applied by the web container on behalf of one or more
 applications.
 * Setting and changing policy permissions for an application.
-
-

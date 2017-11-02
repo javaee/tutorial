@@ -4,8 +4,7 @@ title=Authentication Mechanisms
 next=security-advanced003.html
 prev=security-advanced001.html
 ~~~~~~
-Authentication Mechanisms
-=========================
+= Authentication Mechanisms
 
 [[GLIEN]]
 
@@ -18,8 +17,8 @@ authentication mechanisms.
 
 The following topics are addressed here:
 
-* link:#GLIEQ[Client Authentication]
-* link:#GLIEL[Mutual Authentication]
+* link:#client-authentication[Client Authentication]
+* link:#mutual-authentication[Mutual Authentication]
 
 [[GLIEQ]]
 
@@ -52,6 +51,12 @@ deployment descriptor:
     <auth-method>CLIENT-CERT</auth-method>
 </login-config>
 ----
+The Java EE Security API provides an alternative means to configure client authentication
+using the `HttpAuthenticationMechanism` interface. This
+interface defines an SPI for writing
+authentication mechanisms that can be provided with an application and
+deployed using CDI. See link:security-api002.html#overview-of-the-http-authentication-mechanism-interface[Overview of
+the HTTP Authentication Mechanism Interface].
 
 [[GLIEL]]
 

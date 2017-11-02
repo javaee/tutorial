@@ -4,8 +4,7 @@ title=Securing Web Applications
 next=security-webtier003.html
 prev=security-webtier001.html
 ~~~~~~
-Securing Web Applications
-=========================
+= Securing Web Applications
 
 [[GKBAA]]
 
@@ -19,12 +18,12 @@ installation into a runtime environment.
 
 The following topics are addressed here:
 
-* link:#CHDBIBHI[Overview of Securing Web Applications]
-* link:#BNCBK[Specifying Security Constraints]
-* link:#GKBSA[Specifying Authentication Mechanisms]
-* link:#BNCBN[Specifying an Authentication Mechanism in the Deployment
+* link:#overview-of-securing-web-applications[Overview of Securing Web Applications]
+* link:#specifying-security-constraints[Specifying Security Constraints]
+* link:#specifying-authentication-mechanisms[Specifying Authentication Mechanisms]
+* link:#specifying-an-authentication-mechanism-in-the-deployment-descriptor[Specifying an Authentication Mechanism in the Deployment
 Descriptor]
-* link:#BNCAV[Declaring Security Roles]
+* link:#declaring-security-roles[Declaring Security Roles]
 
 [[CHDBIBHI]]
 
@@ -287,7 +286,22 @@ following:
 Specifying Authentication Mechanisms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A user authentication mechanism specifies
+This section describes built-in authentication mechanisms defined by
+the Servlet specification.
+
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+*Note*:
+
+An alternative way to perform user authentication, including BASIC
+and FORM authentication, is to use the `HttpAuthenticationMechanism`, specified by the
+Java EE Security API, and documented in
+link:security-api.html#using-the-java-ee-security-api[Chapter 53, "Using the Java EE Security API"].
+|=======================================================================
+
+
+A user authentication mechanism specifies:
 
 * The way a user gains access to web content
 * With basic authentication, the realm in which the user will be
@@ -316,7 +330,7 @@ The Java EE platform supports the following authentication mechanisms:
 
 Basic, form-based, and digest authentication are discussed in this
 section. Client and mutual authentication are discussed in
-link:security-advanced.html#GJJWX[Chapter 53, "Java EE Security: Advanced
+link:security-advanced.html#GJJWX[Chapter 54, "Java EE Security: Advanced
 Topics"].
 
 HTTP basic authentication and form-based authentication are not very
@@ -393,6 +407,7 @@ error page.
 
 link:#GEXFA[Figure 51-2] shows what happens when you specify form-based
 authentication.
+
 
 [[GEXFA]]
 

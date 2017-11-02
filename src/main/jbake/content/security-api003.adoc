@@ -1,0 +1,245 @@
+type=page
+status=published
+title=Overview of the Identity Store Interfaces
+next=security-api004.html
+prev=security-api002.html
+~~~~~~
+= Overview of the Identity Store Interfaces
+
+[[overview-of-the-identity-store-interfaces]]
+Overview of the Identity Store Interfaces
+-----------------------------------------
+The Identity Store Interfaces are described in the following sections:
+
+* link:#the-identitystore-interface[The IdentityStore Interface]
+* link:#the-remembermeidentitystore-interface[The RememberMeIdentityStore Interface]
+
+[[the-identitystore-interface]]
+The IdentityStore Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The `IdentityStore` interface defines an SPI for interacting with identity stores,
+which are directories or databases containing user account information.
+An implementation of the `IdentityStore` interface can validate users' credentials,
+provide information about the groups they belong to, or both. Most often, an
+`IdentityStore` implementation will interact with an external identity store --
+an LDAP server, for example -- to perform the actual credential validation and
+group lookups, but an `IdentityStore` may also manage user account data itself.
+
+There are two built-in implementations of `IdentityStore`: an LDAP identity store,
+and a Database identity store. These identity stores delegate to external stores
+that must already exist; the IdentityStore implementations do not provide or
+manage the external store. They are configured with the parameters necessary
+to communicate with an external store using the following annotations:
+
+* `LdapIdentityStoreDefinition` -- configures an identity store with the parameters
+necessary to communicate with an external LDAP server, validate user credentials,
+and/or lookup user groups.
+
+* `DatabaseIdentityStoreDefinition` -- configures an identity store with the
+parameters necessary to connect to an external database, validate user credentials,
+and/or lookup user groups. You must supply a PasswordHash implementation when
+configuring a Database Identity Store. See link:#the-passwordhash-interface[The PasswordHash Interface].
+
+An application can provide its own custom identity store, or use the built-in LDAP or database
+identity stores. For examples of both types, see:
+
+* link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
+
+* link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
+
+An implementation of `IdentityStore` must be a
+CDI bean to be recognized and deployed at runtime, and is assumed to be normal scoped.
+IdentityStores are primarily intended for use by implementations of
+`HttpAuthenticationMechanisms`, but this is not a requirement.
+They can be used by other types of authentication mechanisms as well, or by containers.
+
+Multiple implementations of `IdentityStore` may be present. If so, they are invoked
+under the control of an `IdentityStoreHandler`.
+
+[[identitystorehandler]]
+IdentityStoreHandler
+^^^^^^^^^^^^^^^^^^^^
+Authentication mechanisms do not interact with `IdentityStore` directly; instead,
+they call an `IdentityStoreHandler`. An implementation of the `IdentityStoreHandler`
+interface provides a single method, `validate(Credential)`, which, when invoked,
+iterates over the available IdentityStores and returns an aggregated result.
+An `IdentityStoreHandler` must also be a CDI bean, and is assumed to be normal scoped.
+At runtime, an authentication mechanism injects the `IdentityStoreHandler` and
+invokes on it. The `IdentityStoreHandler`, in turn, looks up the available IdentityStores
+and invokes on them to determine the aggregate result.
+
+There is a built-in `IdentityStoreHandler` that implements a standard algorithm
+defined by JSR-375. The JSR-375 specification provides a full description of
+the algorithm, but it can be roughly summarized as follows:
+
+* Iterate over the available validating IdentityStores, in priority order,
+until the provided Credential is validated or there are no more IdentityStores.
+
+* If the Credential was validated, iterate over the available group-providing
+IdentityStores, in priority order, aggregating the groups returned by each store.
+
+* Return the validated caller and group information.
+
+An application may also supply its own `IdentityStoreHandler`, which can use any
+desired algorithm to select and invoke on IdentityStores, and return an
+aggregated (or non-aggregated) result.
+
+[[identitystoreinterface-methods]]
+IdentityStore Interface Methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The IdentityStore interface itself has four methods:
+
+* `validate(Credential)` -- validate a Credential, and return the result of that
+validation.
+
+* `getCallerGroups(CredentialValidationResult)` -- return the groups associated
+with the caller indicated by the supplied `CredentialValidationResult`, which
+represents the result of a previous, successful validation.
+
+* `validationTypes()` -- returns a Set of validation types (one or more of
+`VALIDATE`, `PROVIDE_GROUPS`)
+that indicate the operations supported by this instance of the `IdentityStore`.
+
+* `priority()` -- returns a positive integer representing the self-declared
+priority of this IdentityStore. Lower values represent higher priority.
+
+Because `getCallerGroups()` is a sensitive operation -- it can return information
+about arbitrary users, and does not require that the caller provide the user's
+credential or proof of identity -- the caller should have the
+`IdentityStorePermission("getGroups")` permission. Enforcement of this check is
+incumbent on the implementation of the `getCallerGroups()` method; the built-in
+IdentityStores do check for this permission, if a SecurityManager is configured,
+and the built-in IdentityStoreHandler invokes the `getCallerGroups()` method in
+the context of a `PrivilegedAction` block.
+
+[[the-passwordhash-interface]]
+The PasswordHash Interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Unlike some types of identity stores, for example LDAP directories,
+databases can store and retrieve user passwords, but can't verify them natively.
+Therefore, the built-in Database identity store must verify user passwords itself.
+Most often, this involves generating a hash of the user's password for comparison
+with a hash value stored in the database.
+
+In order to provide maximum flexibility and interoperability, the Database identity
+store does not implement any specific password hashing algorithms. Instead, it
+defines the `PasswordHash` interface, and expects the application to provide an
+implementation of `PasswordHash` that can verify passwords from the specific store
+the application will use. The `PasswordHash` implementation must be made available
+as a dependent-scoped bean, and is configured by providing the fully-qualified
+name of the desired type as the `hashAlgorithm` value on a `DatabaseIdentityStoreDefinition`.
+
+The `PasswordHash` algorithm defines three methods:
+
+* `initialize(Map<String,String> parameters)` -- initialize the PasswordHash with
+the supplied Map of parameters. The Database identity store calls this method when
+initializing, passing the `hashAlgorithmParameters` value of the
+`DatabaseIdentityStoreDefinition` annotation (after conversion to a Map).
+
+* `verify(char[] password, String hashedPassword)` -- verify a caller-supplied
+password against the caller's stored password hash as retrieved from the database.
+The `hashedPassword` value should be provided exactly as it was returned from the database.
+
+* `generate(char[] password)` -- generate a password hash from the supplied password.
+The value returned should be formatted and encoded exactly it would be stored
+in the database. While it is useful to generate the hash of a caller-supplied password
+during `verify()`, this method is intended primarily for use by applications or
+`IdentityStore` implementations that want to support password management/reset
+capability without having to duplicate the code used to verify passwords.
+
+Note that, while the interface is oriented toward hashing passwords, it can also
+support alternative approaches, such as two-way encryption of stored passwords.
+
+There is a built-in `Pbkdf2PasswordHash` implementation that supports, as it's
+name suggests, PBKDF2 password hashing. It supports several parameters that
+control the generation of hash values
+(key size, iterations, and so on -- see the Javadoc),
+and those parameters are encoded into the resulting hash value, so that hashes
+can be verified even if the currently configured parameters are different from
+the parameters in effect when a stored hash was generated.
+
+While it is necessary to write a custom `PasswordHash` to enable interoperability
+with a legacy identity store that stores password hashes in a format other
+than the `Pbkdf2PasswordHash` format, developers should consider carefully
+whether `Pbkdf2PasswordHash` is sufficient for new identity stores, and avoid
+writing a new PasswordHash implementation without a solid understanding of the
+cryptographic and other security considerations involved. Some of the
+considerations specific to password hashing are:
+
+* The requirements for hashing passwords differ considerably from the requirements
+for hashing in other contexts. In particular, speed is normally a virtue when
+generating hashes, but when generating password hashes, slower is better -- to
+slow down brute force attacks against hashed values.
+
+* The comparison of a generated hash with a stored hash should take constant time,
+whether it succeeds or fails, in order to avoid giving an attacker clues about
+the password value based on the timing of failed attempts.
+
+* A new random salt should be used each time a new password hash value is generated.
+
+[[the-remembermeidentitystore-interface]]
+The RememberMeIdentityStore Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The `RememberMeIdentityStore` interface represents a special type of identity store.
+It is not directly related to the `IdentityStore` interface; that is, it does not
+implement or extend it. It does, however, perform a similar, albeit specialized, function.
+
+In some cases, an application wants to "remember" a user's authenticated session
+for an extended period. For example, a web site may remember you when you visit,
+and prompt for your password only periodically, perhaps once every two weeks,
+as long as you don't explicitly log out.
+
+RememberMe works as follows:
+
+* When a request from an unauthenicated user is received, the user is authenticated
+using an `HttpAuthenticationMechanism` that is provided by the application
+(this is required -- `RememberMeIdentityStore` can only be used in conjunction with an
+  application-supplied `HttpAuthenticationMechanism`).
+
+* After authentication, the configured `RememberMeIdentityStore` saves information
+about the user's authenticated identity, so that it be restored later, and
+generates a long-lived "remember me" login token that is sent back to the client,
+perhaps as a cookie.
+
+* On a subsequent visit to the application, the client presents the login token.
+The `RememberMeIdentityStore` then validates the token and returns the stored user
+identity, which is then established as the user's authenticated identity.
+If the token is invalid or expired, it is discarded, the user is authenticated
+normally again, and a new login token is generated.
+
+The `RememberMeIdentityStore` interface defines the following methods:
+
+* `generateLoginToken(CallerPrincipal caller, Set<String> groups)` -- generate a
+login token for a newly authenticated user, and associate it with the provided
+caller/group information.
+
+* `removeLoginToken(String token)` -- remove the (presumably expired or invalid)
+login token and any associated caller/group information.
+
+* `validate(RememberMeCredential credential)` -- validate the supplied credential, and,
+if valid, return the associated caller/group information. (`RememberMeCredential` is
+  essentially just a holder for a login token).
+
+An implementation of `RememberMeIdentityStore` must be a CDI bean, and is assumed
+to be normal scoped. It is configured by adding a `RememberMe` annotation to an
+application's `HttpAuthenticationMechanism`, which indicates that a
+`RememberMeIdentityStore` is in use, and provides related configuration parameters.
+A container-supplied interceptor then intercepts calls to the `HttpAuthenticationMechanism`,
+invokes the `RememberMeIdentityStore` as necessary before and after calls to the
+authentication mechanism, and ensures that the user's identity is correctly
+set for the session. The JSR-375 specification provides a detailed description
+of the required interceptor behavior.
+
+Implementations of `RememberMeIdentityStore` should take care to manage tokens
+and user identity information securely. For example, login tokens should not
+contain sensitive user information, like credentials or sensitive attributes,
+to avoid exposing that information if an attacker were able to gain access
+to the token -- even an encrypted token is potentially vulnerable to an
+attacker with sufficient time/resources. Similarly, tokens should be
+encrypted/signed wherever possible, and sent only over secure channels (HTTPS).
+User identity information managed by a `RememberMeIdentityStore` should be stored
+as securely as possible (but does not necessarily need to be reliably persisted --
+the only impact of a "forgotten" session is that the user will be prompted to
+log in again).

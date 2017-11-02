@@ -10,7 +10,7 @@ Using Java EE Interceptors
 [[GKEED]]
 
 [[using-java-ee-interceptors]]
-57 Using Java EE Interceptors
+58 Using Java EE Interceptors
 -----------------------------
 
 

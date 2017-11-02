@@ -18,11 +18,11 @@ run correctly.
 
 The following topics are addressed here:
 
-* link:#CHDEBCHG[Overview of Examples of Securing Web Applications]
-* link:#GJJLK[To Set Up Your System for Running the Security Examples]
-* link:#BNCCK[The hello2-basicauth Example: Basic Authentication with a
+* link:#overview-of-examples-of-securing-web-applications[Overview of Examples of Securing Web Applications]
+* link:#to-set-up-your-system-for-running-the-security-examples[To Set Up Your System for Running the Security Examples]
+* link:#the-hello2-basicauth-example-basic-authentication-with-a-servlet[The hello2-basicauth Example: Basic Authentication with a
 Servlet]
-* link:#BNCBY[The hello1-formauth Example: Form-Based Authentication
+* link:#the-hello1-formauth-example-form-based-authentication-with-a-javaserver-faces-application[The hello1-formauth Example: Form-Based Authentication
 with a JavaServer Faces Application]
 
 [[CHDEBCHG]]
@@ -80,12 +80,19 @@ Authentication is case sensitive for both the user name and password, so
 write down the user name and password exactly. This topic is discussed
 more in link:security-intro005.html#BNBXR[Managing Users and Groups in
 GlassFish Server].
-3.  Set up Default Principal to Role Mapping in GlassFish Server.
-1.  From the Administration Console, expand the Configurations node,
-then expand the server-config node.
-2.  Select the Security node.
-3.  Select the Default Principal to Role Mapping Enabled check box.
-4.  Click Save.
++
+[width="100%",cols="100%",]
+|=======================================================================
+a|
+*Note:*
+
+The Java EE Security API requires that
+group principal names are mapped
+to roles of the same name by default. Therefore, the *Default Principal To Role Mapping* setting
+is enabled by default on the Security page of
+the console.
+|=======================================================================
+
 
 [[BNCCK]]
 

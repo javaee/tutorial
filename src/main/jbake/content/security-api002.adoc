@@ -1,0 +1,76 @@
+type=page
+status=published
+title=Overview of the HTTP Authentication Mechanism Interface
+next=security-api003.html
+prev=security-api001.html
+~~~~~~
+= Overview of the HTTP Authentication Mechanism Interface
+
+
+[[overview-of-the-http-authentication-mechanism-interface]]
+Overview of the HTTP Authentication Mechanism Interface
+-------------------------------------------------------
+
+The `HttpAuthenticationMechanism` interface defines an SPI for writing
+authentication mechanisms that can be provided with an application and
+deployed using CDI. Developers can write their own implementations of `HttpAuthenticationMechanism`
+to support specific authentication token types or protocols. There are also several
+built-in authentication mechanisms that perform BASIC, FORM, and Custom FORM
+authentication.
+
+The built-in authentication mechanisms are enabled and configured through the use
+of one of the following annotations:
+
+* BasicAuthenticationMechanismDefinition -- implements BASIC authentication that
+conforms to the behavior of the servlet container when BASIC <auth-method> is
+declared in web.xml.
+
+* FormAuthenticationMechanismDefinition -- implements FORM authentication that
+conforms to the behavior of the servlet container when the FORM <auth-method>
+is declared in web.xml.
+
+* CustomFormAuthenticationMechanismDefinition -- implements a modified version of
+FORM authentication in which custom handling replaces the POST to j_security_check.
+
+An implementation of HttpAuthenticationMechanism must be a CDI bean to be
+recognized and deployed at runtime, and is assumed to be normal scoped.
+During bean discovery, the servlet container looks for a bean that implements
+`HttpAuthenticationMechanism` -- there should be only one per application -- and,
+if found, arranges for it to be deployed to authenticate the application's callers.
+
+The servlet container leverages JASPIC, the Java Authentication Service
+Provider Interface for Containers, to deploy authentication mechanisms.
+The container provides a JASPIC Server Auth Module (SAM) that can delegate to an
+`HttpAuthenticationMechanism`, and arranges for that "bridge" SAM to be registered
+with the JASPIC `AuthConfigFactory`. At runtime, normal JASPIC processing invokes
+the bridge SAM, which then delegates to the `HttpAuthenticationMechanism` to
+perform the authentication and drive any necessary dialog with the caller, or with
+third parties involved in the authentication protocol flow.
+
+The HttpAuthenticationMechanism interface defines the following three methods,
+which correspond to the three methods defined by the JASPIC ServerAuth interface.
+When one of the JASPIC methods is invoked on the bridge SAM, it delegates to the
+corresponding method of the `HttpAuthenticationMechanism`. Although the method names
+are identical, the method signatures are not; the bridge SAM maps back and forth
+between the parameters passed to it by the JASPIC framework, and the parameters
+expected by an `HttpAuthenticationMechanism`.
+
+* `validateRequest()` -- validate an incoming request and authenticates the caller.
+* `secureResponse()` -- (optional if default is sufficient) secure a response message.
+* `cleanSubject()` -- (optional if default is sufficient) clear the provided Subject of
+principals and credentials.
+
+Only the `validateRequest()` method must be implemented by an `HttpAuthenticationMechanism`;
+the interface includes default implementations for secureResponse()` and `cleanSubject()` that will
+often be sufficient.
+
+The following annotations can be used to add additional behaviors to an `HttpAuthenticationMechanism`:
+
+* `AutoApplySession` -- indicates that the JASPIC `registerSession` functionality
+should be enabled such that the the caller's authenticated identity is
+persisted in the caller's servlet session.
+* `LoginToContinue` -- mechanism to specify properties for FORM login --
+login page, error page, etc. The built-in FORM authentication mechanisms use
+LoginToContinue to configure the necessary parameters.
+* `RememberMe` -- specifies that a `RememberMe` identity store should be used to
+enable `RememberMe` functionality for the authentication mechanism.

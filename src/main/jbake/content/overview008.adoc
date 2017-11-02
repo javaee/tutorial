@@ -420,19 +420,28 @@ The Java EE 8 platform requires JASPIC 1.1.
 [[java-ee-security-api]]
 Java EE Security API
 ~~~~~~~~~~~~~~~~~~~~
+The Java EE Security API specification defines portable, plug-in interfaces for
+HTTP authentication and identity stores, and an injectable SecurityContext interface
+that provides an API for programmatic security.
 
-The purpose of the Java EE Security API specification is to modernize and simplify the security APIs by simultaneously establishing common approaches and mechanisms and removing the more complex APIs from the developer view where possible.
-Java EE Security introduces the following APIs:
+Implementations of the `HttpAuthenticationMechanism` interface can be used to
+authenticate callers of web applications. An application can supply its own
+`HttpAuthenticationMechanism`, or use one of the default implementations provided
+by the container.
 
-* `SecurityContext` interface
-+
-Provides a common, uniform access point that enables an application to test aspects of caller data and grant or deny access to resources.
-* `HttpAuthenticationMechanism` interface
-+
-Authenticates callers of a web application, and is specified only for use in the servlet container.
-* `IdentityStore` interface
-+
-Provides an abstraction of an identity store and that can be used to authenticate users and retrieve  caller groups.
+Implementations of the `IdentityStore` interface can be used to validate user
+credentials and retrieve group information. An application can provide its own
+`IdentityStore`, or use the built in LDAP or Database store.
+
+The `HttpAuthenticationMechanism` and `IdentityStore` APIs provide an advantage over
+container-provided implementations in that they allow an application to control
+the authentication process, and the identity stores used for authentication,
+in a standard, portable way.
+
+The `SecurityContext` API is intended for use by application code to query and
+interact with the current security context. The specification also provides
+for default group-to-role mapping, and defines a principal type called
+`CallerPrincipal` that can represent the identity of an application caller.
 
 The Java EE 8 platform requires Java EE Security API 1.0.
 

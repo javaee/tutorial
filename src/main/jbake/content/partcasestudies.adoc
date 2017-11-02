@@ -20,9 +20,9 @@ Case Studies
 Part XII presents case studies that use a variety of Java EE
 technologies. This part contains the following chapters:
 
-* link:dukes-bookstore.html#GLNVI[Chapter 60, "Duke's Bookstore Case
+* link:dukes-bookstore.html#GLNVI[Chapter 61, "Duke's Bookstore Case
 Study Example"]
-* link:dukes-tutoring.html#GKAEE[Chapter 61, "Duke's Tutoring Case Study
+* link:dukes-tutoring.html#GKAEE[Chapter 62, "Duke's Tutoring Case Study
 Example"]
-* link:dukes-forest.html#GLNPW[Chapter 62, "Duke's Forest Case Study
+* link:dukes-forest.html#GLNPW[Chapter 63, "Duke's Forest Case Study
 Example"]

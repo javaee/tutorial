@@ -1,0 +1,105 @@
+type=page
+status=published
+title=Using Pluggable Providers
+next=security-intro004.html
+prev=security-intro003.html
+~~~~~~
+= Using Pluggable Providers
+
+[[using-pluggable-providers]]
+Using Pluggable Providers
+-------------------------
+Java EE includes two specifications that define SPI interfaces for
+pluggable security providers, JSR-196 and JSR-375. These specifications are
+described in more detail in the following sections:
+
+* link:#jsr-196-java-authentication-service-provider-interface-for-containers-jaspic[JSR-196 Java
+Authentication Service Provider Interface for Containers (JASPIC)]
+* link:#jsr-375-java-ee-security-api[JSR-375 Java EE Security API]
+
+[[jsr-196-java-authentication-service-provider-interface-for-containers-jaspic]]
+JSR-196 Java Authentication Service Provider Interface for Containers (JASPIC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+JSR-196 defines a model for securing messages sent between a client and server in
+which the sender of a message "secures" it, and the receiver "validates" it.
+The details of how messages are secured and validated are undefined by the model;
+support for securing and validating particular types of messages is provided by
+"auth modules" -- implementations of the JASPIC `ClientAuthModule` and
+`ServerAuthModule` interfaces -- that support particular protocols or message types,
+and that plug in to the JASPIC framework. (Note that it is not necessary for a
+client and server to both use JASPIC, as long as both sides process messages
+correctly for a given protocol.)
+
+JASPIC defines two "profiles" for integrating JASPIC auth modules into Java EE
+containers: the Servlet Container Profile, and the SOAP Profile. Each specifies
+how JASPIC message processing must be integrated into the request processing flow
+of the container in question to validate incoming requests and secure outgoing
+responses.
+
+In the case of the Servlet Container Profile, if a `ServerAuthModule` is configured/available
+for a given application context, then the modules's `validateRequest()` method must be
+invoked (and succeed) before authorizing access and calling the target servlet,
+and the module's `secureResponse()` method must be called before returning a response.
+Typically, a `ServerAuthModule` written for the Servlet Container Profile looks for
+user credentials or tokens in an incoming request, and then uses them to authenticate the caller and establish
+the caller's identity. A `ServerAuthModule` may also engage in a challenge/response
+protocol with the client, or negotiate with a third party to establish/verify the
+client's identity.
+
+As with the Servlet Container Profile, the SOAP Profile requires that
+`validateRequest()` be called and succeed before proceeding to authorize access and
+perform any further processing of an incoming message, and that `secureResponse()`
+is called for the response before it is sent. In contrast to the Servlet
+Container Profile, `validateRequest()` processing for SOAP messages typically involves
+verifying signatures on signed elements, decrypting encrypted elements, and/or
+establishing the identity of a SOAP actor based on a token included in the message,
+while `secureResponse()` typically involves signing and/or encrypting elements
+of the outbound message.
+
+JASPIC does not define any standard or built-in ServerAuthModules; they must be
+provided either by the application using the module, or as a non-standard
+extension of a particular vendor's Java EE product. ServerAuthModules can
+sometimes be directly configured for an application in a vendor-specific way, but
+the standard mechanism for making a `ServerAuthModule` available to an application
+is to register a corresponding `AuthConfigProvider` with the global `AuthConfigFactory`.
+An `AuthConfigProvider` makes a `ServerAuthModule` available to the container, via a
+series of intermediary objects, for runtime message processing.
+
+[[jsr-375-java-ee-security-api]]
+JSR-375 Java EE Security API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+JSR-375 defines the following authentication-related plugin SPIs:
+
+* `HttpAuthenticationMechanism` - An interface for modules that authenticate callers
+to a web application. It defines three methods that correspond to the methods of a
+JASPIC `ServerAuthModule`, albeit with slightly different signatures.
+An `HttpAuthenticationMechanism` provides similar functionality to a `ServerAuthModule`,
+and the Servlet Container uses a special `ServerAuthModule` to invoke the
+HttpAuthenticationMechanism's methods, but HttpAuthenticationMechanisms are
+simpler to write, and to deploy, than are ServerAuthModules.
+
+* `IdentityStore` - This interface defines methods for validating a caller's
+credentials (such as username and password) and returning group membership information.
+IdentityStores are invoked under the control of an `IdentityStoreHandler`, which, if
+multiple IdentityStores are present, calls the available IdentityStores in a
+specific order and aggregates the results.
+
+* `RememberMeIdentityStore` - This interface is a variation on the `IdentityStore`
+interface, intended specifically to address cases where an authenticated user's
+identity should be remembered for an extended period of time, so that the caller
+can return to the application periodically without needing to present primary
+authentication credentials each time.
+
+Implementations of these SPI interfaces are CDI beans, and, as such, applications
+can provide implementations that support application-specific authentication
+mechanisms, or validate user credentials against application-specific identity stores,
+simply by including them in a bean archive that is part of the deployed application.
+There are also several standard, built-in implementations of `HttpAuthenticationMechanism`
+and `IdentityStore` that provide configurable support for common authentication and
+credential validation use cases, without the need to write custom implementations.
+
+Because these SPIs, related annotations, and the CDI deployment mechanism are all
+part of standard Java EE, implementations are completely portable (to the extent
+they do not rely internally on platform-specific APIs or libraries) and can be
+portably deployed to any Java EE server.

@@ -4,8 +4,7 @@ title=Getting Started Securing Enterprise Applications
 next=security-javaee001.html
 prev=security-webtier004.html
 ~~~~~~
-Getting Started Securing Enterprise Applications
-================================================
+= Getting Started Securing Enterprise Applications
 
 [[BNBYK]]
 

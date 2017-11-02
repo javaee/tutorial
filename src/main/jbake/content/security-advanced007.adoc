@@ -4,8 +4,7 @@ title=Configuring Security Using Deployment Descriptors
 next=security-advanced008.html
 prev=security-advanced006.html
 ~~~~~~
-Configuring Security Using Deployment Descriptors
-=================================================
+= Configuring Security Using Deployment Descriptors
 
 [[GKHRL]]
 
@@ -22,9 +21,9 @@ default principal-to-role mapping.
 
 The following topics are addressed here:
 
-* link:#BNCCM[Specifying Security for Basic Authentication in the
+* link:#specifying-security-for-basic-authentication-in-the-deployment-descriptor[Specifying Security for Basic Authentication in the
 Deployment Descriptor]
-* link:#GKAFQ[Specifying Non-Default Principal-to-Role Mapping in the
+* link:#specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor[Specifying Non-Default Principal-to-Role Mapping in the
 Deployment Descriptor]
 
 [[BNCCM]]
@@ -83,6 +82,11 @@ it from being read in transit.
 Specifying Non-Default Principal-to-Role Mapping in the Deployment Descriptor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The Java EE Security API requires that group principal names be mapped to
+roles of the same name by default. GlassFish adheres to this standard, by default,
+and provides group principal to role mapping. Implementations of the standard
+can, however, provide mechanisms to configure a different default.
+
 To map a role name permitted by the application or module to principals
 (users) and groups defined on the server, use the
 `security-role-mapping` element in the runtime deployment descriptor
@@ -113,5 +117,3 @@ The `role-name` in this example must exactly match the `role-name` in
 the `security-role` element of the corresponding `web.xml` file or the
 role name defined in the `@DeclareRoles` and/or `@RolesAllowed`
 annotations.
-
-

@@ -2510,60 +2510,66 @@ link:security-intro.html#BNBWJ[50 Introduction to Security in the Java EE Platfo
 
 * link:security-intro001.html#BNBWK[Overview of Java EE Security]
 
-** link:security-intro001.html#BNBWL[A Simple Application Security
+** link:security-intro001.html#a-simple-application-security-walkthrough[A Simple Application Security
 Walkthrough]
-*** link:security-intro001.html#BNBWM[Step 1: Initial Request]
-*** link:security-intro001.html#BNBWO[Step 2: Initial Authentication]
-*** link:security-intro001.html#BNBWQ[Step 3: URL Authorization]
-*** link:security-intro001.html#BNBWS[Step 4: Fulfilling the Original
+*** link:security-intro001.html#step-1-initial-request[Step 1: Initial Request]
+*** link:security-intro001.html#step-2-initial-authentication[Step 2: Initial Authentication]
+*** link:security-intro001.html#step-3-url-authorization[Step 3: URL Authorization]
+*** link:security-intro001.html#step-4-fulfilling-the-original-request[Step 4: Fulfilling the Original
 Request]
-*** link:security-intro001.html#BNBWU[Step 5: Invoking Enterprise Bean
+*** link:security-intro001.html#step-5-invoking-enterprise-bean-business-methods[Step 5: Invoking Enterprise Bean
 Business Methods]
 
-** link:security-intro001.html#BNBWW[Features of a Security Mechanism]
+** link:security-intro001.html#features-of-a-security-mechanism[Features of a Security Mechanism]
 
-** link:security-intro001.html#BNBWX[Characteristics of Application
+** link:security-intro001.html#characteristics-of-application-security[Characteristics of Application
 Security]
 * link:security-intro002.html#BNBWY[Security Mechanisms]
 
-** link:security-intro002.html#BNBWZ[Java SE Security Mechanisms]
+** link:security-intro002.html#java-se-security-mechanisms[Java SE Security Mechanisms]
 
-** link:security-intro002.html#BNBXA[Java EE Security Mechanisms]
-*** link:security-intro002.html#BNBXB[Application-Layer Security]
-*** link:security-intro002.html#BNBXC[Transport-Layer Security]
-*** link:security-intro002.html#BNBXD[Message-Layer Security]
+** link:security-intro002.html#java-ee-security-mechanisms[Java EE Security Mechanisms]
+*** link:security-intro002.html#application-layer-security[Application-Layer Security]
+*** link:security-intro002.html#transport-layer-security[Transport-Layer Security]
+*** link:security-intro002.html#message-layer-security[Message-Layer Security]
 * link:security-intro003.html#BNBXE[Securing Containers]
 
-** link:security-intro003.html#BNBXG[Using Annotations to Specify
+** link:security-intro003.html#using-annotations-to-specify-security-information[Using Annotations to Specify
 Security Information]
 
-** link:security-intro003.html#BNBXF[Using Deployment Descriptors for
+** link:security-intro003.html#using-deployment-descriptors-for-declarative-security[Using Deployment Descriptors for
 Declarative Security]
 
-** link:security-intro003.html#BNBXH[Using Programmatic Security]
+** link:security-intro003.html#using-programmatic-security[Using Programmatic Security]
+* link:security-intro003a.html#using-pluggable-providers[Using Pluggable Providers]
+** link:security-intro003a.html#jsr-196-java-authentication-service-provider-interface-for-containers-jaspic[JSR-196 Java Authentication Service Provider Interface for Containers (JASPIC)]
+** link:security-intro003a.html#jsr-375-java-ee-security-api[JSR-375 Java EE Security API]
+
 * link:security-intro004.html#BNBXI[Securing GlassFish Server]
 * link:security-intro005.html#BNBXJ[Working with Realms, Users, Groups,
 and Roles]
 
-** link:security-intro005.html#BNBXK[What Are Realms, Users, Groups, and
+** link:security-intro005.html#what-are-realms-users-groups-and-roles[What Are Realms, Users, Groups, and
 Roles?]
-*** link:security-intro005.html#BNBXM[What Is a Realm?]
-*** link:security-intro005.html#BNBXN[What Is a User?]
-*** link:security-intro005.html#BNBXO[What Is a Group?]
-*** link:security-intro005.html#BNBXP[What Is a Role?]
-*** link:security-intro005.html#BNBXQ[Some Other Terminology]
+*** link:security-intro005.html#what-is-a-realm[What Is a Realm?]
+*** link:security-intro005.html#what-is-a-user[What Is a User?]
+*** link:security-intro005.html#what-is-a-group[What Is a Group?]
+*** link:security-intro005.html#what-is-a-role[What Is a Role?]
+*** link:security-intro005.html#some-other-terminology[Some Other Terminology]
 
-** link:security-intro005.html#BNBXR[Managing Users and Groups in
+** link:security-intro005.html#managing-users-and-groups-in-glassfish-server[Managing Users and Groups in
 GlassFish Server]
-*** link:security-intro005.html#BNBXS[To Add Users to GlassFish Server]
+*** link:security-intro005.html#to-add-users-to-glassfish-server[To Add Users to GlassFish Server]
 
-** link:security-intro005.html#BNBXU[Setting Up Security Roles]
+** link:security-intro005.html#setting-up-security-roles[Setting Up Security Roles]
 
-** link:security-intro005.html#BNBXV[Mapping Roles to Users and Groups]
+** link:security-intro005.html#mapping-roles-to-users-and-groups[Mapping Roles to Users and Groups]
+
+* link:security-intro005a.html#working-with-identity-stores[Working with Identity Stores]
 * link:security-intro006.html#BNBXW[Establishing a Secure Connection
 Using SSL]
 
-** link:security-intro006.html#BNBXX[Verifying and Configuring SSL
+** link:security-intro006.html#verifying-and-configuring-ssl-support[Verifying and Configuring SSL
 Support]
 * link:security-intro007.html#BNBYJ[Further Information about Security]
 
@@ -2575,73 +2581,75 @@ link:security-webtier.html#BNCAS[51 Getting Started Securing Web Applications]
 Security]
 * link:security-webtier002.html#GKBAA[Securing Web Applications]
 
-** link:security-webtier002.html#CHDBIBHI[Overview of Securing Web
+** link:security-webtier002.html#overview-of-securing-web-applications[Overview of Securing Web
 Applications]
 
-** link:security-webtier002.html#BNCBK[Specifying Security Constraints]
-*** link:security-webtier002.html#GJJCD[Specifying a Web Resource
+** link:security-webtier002.html#specifying-security-constraints[Specifying Security Constraints]
+*** link:security-webtier002.html#specifying-a-web-resource-collection[Specifying a Web Resource
 Collection]
-*** link:security-webtier002.html#GJJCG[Specifying an Authorization
+*** link:security-webtier002.html#specifying-an-authorization-constraint[Specifying an Authorization
 Constraint]
-*** link:security-webtier002.html#BNCBM[Specifying a Secure Connection]
-*** link:security-webtier002.html#BNCBL[Specifying Security Constraints
+*** link:security-webtier002.html#specifying-a-secure-connection[Specifying a Secure Connection]
+*** link:security-webtier002.html#specifying-security-constraints-for-resources[Specifying Security Constraints
 for Resources]
 
-** link:security-webtier002.html#GKBSA[Specifying Authentication
+** link:security-webtier002.html#specifying-authentication-mechanisms[Specifying Authentication
 Mechanisms]
-*** link:security-webtier002.html#BNCBO[HTTP Basic Authentication]
-*** link:security-webtier002.html#BNCBQ[Form-Based Authentication]
-*** link:security-webtier002.html#BNCBW[Digest Authentication]
+*** link:security-webtier002.html#http-basic-authentication[HTTP Basic Authentication]
+*** link:security-webtier002.html#form-based-authentication[Form-Based Authentication]
+*** link:security-webtier002.html#digest-authentication[Digest Authentication]
 
-** link:security-webtier002.html#BNCBN[Specifying an Authentication
+** link:security-webtier002.html#specifying-an-authentication-mechanism-in-the-deployment-descriptor[Specifying an Authentication
 Mechanism in the Deployment Descriptor]
 
-** link:security-webtier002.html#BNCAV[Declaring Security Roles]
+** link:security-webtier002.html#declaring-security-roles[Declaring Security Roles]
 * link:security-webtier003.html#GJIIE[Using Programmatic Security with
 Web Applications]
 
-** link:security-webtier003.html#GIRCJ[Authenticating Users
+** link:security-webtier003.html#authenticating-users-programmatically[Authenticating Users
 Programmatically]
 
-** link:security-webtier003.html#BNCBA[Checking Caller Identity
+** link:security-webtier003.html#checking-caller-identity-programmatically[Checking Caller Identity
 Programmatically]
 
-** link:security-webtier003.html#GJJLQ[Example Code for Programmatic
+** link:security-webtier003.html#testing-access-to-a-resource-programmatically[Testing Access to a Resource Programmatically]
+
+** link:security-webtier003.html#example-code-for-programmatic-security[Example Code for Programmatic
 Security]
 
-** link:security-webtier003.html#BNCBB[Declaring and Linking Role
+** link:security-webtier003.html#declaring-and-linking-role-references[Declaring and Linking Role
 References]
 * link:security-webtier004.html#BNCBX[Examples: Securing Web
 Applications]
 
-** link:security-webtier004.html#CHDEBCHG[Overview of Examples of
+** link:security-webtier004.html#overview-of-examples-of-securing-web-applications[Overview of Examples of
 Securing Web Applications]
 
-** link:security-webtier004.html#GJJLK[To Set Up Your System for Running
+** link:security-webtier004.html#to-set-up-your-system-for-running-the-security-examples[To Set Up Your System for Running
 the Security Examples]
 
-** link:security-webtier004.html#BNCCK[The hello2-basicauth Example:
+** link:security-webtier004.html#the-hello2-basicauth-example-basic-authentication-with-a-servlet[The hello2-basicauth Example:
 Basic Authentication with a Servlet]
-*** link:security-webtier004.html#GJRMH[Specifying Security for Basic
+*** link:security-webtier004.html#specifying-security-for-basic-authentication-using-annotations[Specifying Security for Basic
 Authentication Using Annotations]
-*** link:security-webtier004.html#GJQYS[To Build, Package, and Deploy the
+*** link:security-webtier004.html#to-build-package-and-deploy-the-hello2-basicauth-example-using-netbeans-ide[To Build, Package, and Deploy the
 hello2-basicauth Example Using NetBeans IDE]
-*** link:security-webtier004.html#GJQZH[To Build, Package, and Deploy the
+*** link:security-webtier004.html#to-build-package-and-deploy-the-hello2-basicauth-example-using-maven[To Build, Package, and Deploy the
 hello2-basicauth Example Using Maven]
-*** link:security-webtier004.html#GJQZF[To Run the hello2-basicauth
+*** link:security-webtier004.html#to-run-the-hello2-basicauth-example[To Run the hello2-basicauth
 Example]
 
-** link:security-webtier004.html#BNCBY[The hello1-formauth Example:
-Form-Based Authentication with a JavaServer Faces Application]
-*** link:security-webtier004.html#BNCCA[Creating the Login Form and the
+** link:security-webtier004.html#the-hello1-formauth-example-form-based-authentication-with-a-javaserver-faces-application[The
+hello1-formauth Example: Form-Based Authentication with a JavaServer Faces Application]
+*** link:security-webtier004.html#creating-the-login-form-and-the-error-page[Creating the Login Form and the
 Error Page]
-*** link:security-webtier004.html#BNCCB[Specifying Security for the
+*** link:security-webtier004.html#specifying-security-for-the-form-based-authentication-example[Specifying Security for the
 Form-Based Authentication Example]
-*** link:security-webtier004.html#GJRBA[To Build, Package, and Deploy the
+*** link:security-webtier004.html#to-build-package-and-deploy-the-hello1-formauth-example-using-netbeans-ide[To Build, Package, and Deploy the
 hello1-formauth Example Using NetBeans IDE]
-*** link:security-webtier004.html#GJRAZ[To Build, Package, and Deploy the
+*** link:security-webtier004.html#to-build-package-and-deploy-the-hello1-formauth-example-using-maven-and-the-asadmin-command[To Build, Package, and Deploy the
 hello1-formauth Example Using Maven and the asadmin Command]
-*** link:security-webtier004.html#GJRAL[To Run the hello1-formauth
+*** link:security-webtier004.html#to-run-the-hello1-formauth-example[To Run the hello1-formauth
 Example]
 
 [[getting-started-securing-enterprise-applications]]
@@ -2661,8 +2669,6 @@ Mechanism and Secure Connection]
 
 ** link:security-javaee002.html#GJGCS[Securing an Enterprise Bean
 Programmatically]
-*** link:security-javaee002.html#GJGCR[Accessing an Enterprise Bean
-Caller's Security Context]
 
 ** link:security-javaee002.html#BNBYR[Propagating a Security Identity
 (Run-As)]
@@ -2692,8 +2698,43 @@ Example Using Maven]
 *** link:security-javaee003.html#GJTDP[To Run the converter-secure
 Example]
 
+[[java-api-for-security]]
+link:security-api.html#using-the-java-ee-security-api[53 Using the Java EE Security API]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* link:security-api001.html#about-the-java-ee-security-api[About the Java EE Security API]
+
+* link:security-api002.html#overview-of-the-http-auth-mech-int[Overview of the HTTP Authentication Mechanism Interface]
+
+* link:security-api003.html#overview-of-the-identity-store-interfaces[Overview of the Identity Store Interfaces]
+
+* link:security-api004.html#running-the-built-in-database-identity-store-example[Running the Built-In Database Identity Store Example]
+
+** link:security-api004.html#overview-of-the-built-in-database-identity-store-example[Overview of the Built-In Database Identity Store Example]
+*** link:security-api004.html#define-the-users-and-groups-in-the-identity-store[Define the Users and Groups in the Identity Store]
+*** link:security-api004.html#map-the-databaseidentitystore-to-the-default-data-source[Map the DatabaseIdentityStore to the Default Data source]
+*** link:security-api004.html#specify-the-authentication-mechanism[Specify the Authentication Mechanism]
+*** link:security-api004.html#declare-roles-in-the-servlet-container[Declare Roles in the Servlet Container]
+
+** link:security-api004.html#running-the-built-in-db-identity-store-example[Running the built-in-db-identity-store Example]
+*** link:security-api004.html#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-netbeans-ide[To Build, Package, and Deploy the built-in-db-identity-store Example Using NetBeans IDE]
+*** link:security-api004.html#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-using-maven[To Build, Package, and Deploy the built-in-db-identity-store Example Using Maven]
+*** link:security-api004.html#to-run-the-built-in-db-identity-store-example[To Run the built-in-db-identity-store Example]
+
+* link:security-api005.html#running-the-custom-identity-store-example[Running the Custom Identity Store Example]
+
+** link:security-api005.html#overview-of-the-custom-identity-store-example[Overview of the Custom Identity Store Example]
+*** link:security-api005.html#define-the-users-and-groups-in-the-identity-store[Define the Users and Groups in the Identity Store]
+*** link:security-api005.html#specify-the-authentication-mechanism[Specify the Authentication Mechanism]
+*** link:security-api005.html#declare-roles-in-the-servlet-container[Declare Roles in the Servlet Container]
+
+** link:security-api005.html#running-the-custom-identity-store-example[Running the custom-identity-store Example]
+*** link:security-api005.html#to-build-package-and-deploy-the-custom-identity-store-example-using-netbeans-ide[To Build, Package, and Deploy the custom-identity-store Example Using NetBeans IDE]
+*** link:security-api005.html#to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven[To Build, Package, and Deploy the custom-identity-store Example Using Maven]
+*** link:security-api005.html#to-run-the-custom-identity-store-example[To Run the custom-identity-store Example]
+
 [[java-ee-security-advanced-topics]]
-link:security-advanced.html#GJJWX[53 Java EE Security: Advanced Topics]
+link:security-advanced.html#GJJWX[54 Java EE Security: Advanced Topics]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:security-advanced001.html#BNBYB[Working with Digital Certificates]
@@ -2760,7 +2801,7 @@ link:partsupporttechs.html#GIJUE[Part XI Java EE Supporting Technologies]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [[transactions]]
-link:transactions.html#BNCIH[54 Transactions]
+link:transactions.html#BNCIH[55 Transactions]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:transactions001.html#A1024277[Overview of Transactions]
@@ -2802,7 +2843,7 @@ Transactions]
 * link:transactions009.html#GKCMI[Further Information about Transactions]
 
 [[resource-adapters-and-contracts]]
-link:resources.html#BNCJH[55 Resource Adapters and Contracts]
+link:resources.html#BNCJH[56 Resource Adapters and Contracts]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:resources001.html#GIPGL[What Is a Resource Adapter?]
@@ -2822,7 +2863,7 @@ and Dependency Injection for Java EE (CDI)]
 Adapters]
 
 [[the-resource-adapter-examples]]
-link:connectorexample.html#GLODB[56 The Resource Adapter Examples]
+link:connectorexample.html#GLODB[57 The Resource Adapter Examples]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:connectorexample001.html#A1253757[Overview of the Resource Adapter
@@ -2855,7 +2896,7 @@ Using NetBeans IDE]
 Using Maven]
 
 [[using-java-ee-interceptors]]
-link:interceptors.html#GKEED[57 Using Java EE Interceptors]
+link:interceptors.html#GKEED[58 Using Java EE Interceptors]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:interceptors001.html#GKIGQ[Overview of Interceptors]
@@ -2899,7 +2940,7 @@ NetBeans IDE]
 Maven]
 
 [[batch-processing]]
-link:batch-processing.html#GKJIQ6[58 Batch Processing]
+link:batch-processing.html#GKJIQ6[59 Batch Processing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:batch-processing001.html#BCGJDEEH[Introduction to Batch
@@ -3009,7 +3050,7 @@ Example Application Using Maven]
 Processing]
 
 [[concurrency-utilities-for-java-ee]]
-link:concurrency-utilities.html#GKJIQ8[59 Concurrency Utilities for Java EE]
+link:concurrency-utilities.html#GKJIQ8[60 Concurrency Utilities for Java EE]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:concurrency-utilities001.html#CIHDFGGG[Concurrency Basics]
@@ -3053,7 +3094,7 @@ link:partcasestudies.html#GKGJW[Part XII Case Studies]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [[dukes-bookstore-case-study-example]]
-link:dukes-bookstore.html#GLNVI[60 Duke's Bookstore Case Study Example]
+link:dukes-bookstore.html#GLNVI[61 Duke's Bookstore Case Study Example]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:dukes-bookstore001.html#GLOAW[Design and Architecture of Duke's
@@ -3089,7 +3130,7 @@ Bookstore Using Maven]
 ** link:dukes-bookstore003.html#BABEHDEG[To Run Duke's Bookstore]
 
 [[dukes-tutoring-case-study-example]]
-link:dukes-tutoring.html#GKAEE[61 Duke's Tutoring Case Study Example]
+link:dukes-tutoring.html#GKAEE[62 Duke's Tutoring Case Study Example]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:dukes-tutoring001.html#GKAEI[Design and Architecture of Duke's
@@ -3139,7 +3180,7 @@ Using Maven]
 *** link:dukes-tutoring004.html#GKJOC[Using Duke's Tutoring]
 
 [[dukes-forest-case-study-example]]
-link:dukes-forest.html#GLNPW[62 Duke's Forest Case Study Example]
+link:dukes-forest.html#GLNPW[63 Duke's Forest Case Study Example]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * link:dukes-forest001.html#A1256074[Overview of the Duke's Forest Case

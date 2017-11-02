@@ -4,8 +4,7 @@ title=Securing Enterprise Information Systems Applications
 next=security-advanced007.html
 prev=security-advanced005.html
 ~~~~~~
-Securing Enterprise Information Systems Applications
-====================================================
+= Securing Enterprise Information Systems Applications
 
 [[GLIFD]]
 
@@ -18,12 +17,12 @@ a connection to an EIS resource.
 
 The following topics are addressed here:
 
-* link:#BABBJHIC[Overview of Securing Enterprise Information Systems
+* link:#overview-of-securing-enterprise-information-systems-applications[Overview of Securing Enterprise Information Systems
 Applications]
-* link:#GLIHL[Container-Managed Sign-On]
-* link:#GLIDP[Component-Managed Sign-On]
-* link:#GLIGS[Configuring Resource Adapter Security]
-* link:#GLIGW[Mapping an Application Principal to EIS Principals]
+* link:#container-managed-sign-on[Container-Managed Sign-On]
+* link:#component-managed-sign-on[Component-Managed Sign-On]
+* link:#configuring-resource-adapter-security[Configuring Resource Adapter Security]
+* link:#mapping-an-application-principal-to-eis-principals[Mapping an Application Principal to EIS Principals]
 
 [[BABBJHIC]]
 
