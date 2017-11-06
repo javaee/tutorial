@@ -65,20 +65,20 @@ installation into a runtime environment.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#CHDBIBHI">Overview of Securing Web Applications</a></p>
+<p><a href="#overview-of-securing-web-applications">Overview of Securing Web Applications</a></p>
 </li>
 <li>
-<p><a href="#BNCBK">Specifying Security Constraints</a></p>
+<p><a href="#specifying-security-constraints">Specifying Security Constraints</a></p>
 </li>
 <li>
-<p><a href="#GKBSA">Specifying Authentication Mechanisms</a></p>
+<p><a href="#specifying-authentication-mechanisms">Specifying Authentication Mechanisms</a></p>
 </li>
 <li>
-<p><a href="#BNCBN">Specifying an Authentication Mechanism in the Deployment
+<p><a href="#specifying-an-authentication-mechanism-in-the-deployment-descriptor">Specifying an Authentication Mechanism in the Deployment
 Descriptor</a></p>
 </li>
 <li>
-<p><a href="#BNCAV">Declaring Security Roles</a></p>
+<p><a href="#declaring-security-roles">Declaring Security Roles</a></p>
 </li>
 </ul>
 </div>
@@ -176,10 +176,10 @@ is protected. Assuming that the application is installed at context path
 <div class="ulist">
 <ul>
 <li>
-<p><code>http://localhost:8080/myapp/index.xhtml</code> is not protected.</p>
+<p><code><a href="http://localhost:8080/myapp/index.xhtml" class="bare">http://localhost:8080/myapp/index.xhtml</a></code> is not protected.</p>
 </li>
 <li>
-<p><code>http://localhost:8080/myapp/cart/index.xhtml</code> is protected.</p>
+<p><code><a href="http://localhost:8080/myapp/cart/index.xhtml" class="bare">http://localhost:8080/myapp/cart/index.xhtml</a></code> is protected.</p>
 <div class="paragraph">
 <p>A user will be prompted to log in the first time he or she accesses a
 resource in the <code>cart/</code> subdirectory.</p>
@@ -345,8 +345,8 @@ easily implemented by using a filter.</p>
 <p>You can create security constraints for resources within your
 application. For example, you could allow users with the role of
 <code>PARTNER</code> full access to all resources at the URL pattern
-<code>/acme/wholesale/*</code> and allow users with the role of <code>CLIENT</code> full
-access to all resources at the URL pattern <code>/acme/retail/*</code>. This is the
+<code>/acme/wholesale/<strong></code> and allow users with the role of <code>CLIENT</code> full
+access to all resources at the URL pattern <code>/acme/retail/</strong></code>. This is the
 recommended way to protect resources if you do not want to protect some
 HTTP methods while leaving other HTTP methods unprotected. An example of
 a deployment descriptor that would demonstrate this functionality is the
@@ -388,7 +388,29 @@ following:</p>
 <div class="sect2">
 <h3 id="specifying-authentication-mechanisms">Specifying Authentication Mechanisms</h3>
 <div class="paragraph">
-<p>A user authentication mechanism specifies</p>
+<p>This section describes built-in authentication mechanisms defined by
+the Servlet specification.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Note</strong>:</p>
+</div>
+<div class="paragraph">
+<p>An alternative way to perform user authentication, including BASIC
+and FORM authentication, is to use the <code>HttpAuthenticationMechanism</code>, specified by the
+Java EE Security API, and documented in
+<a href="security-api.html#using-the-java-ee-security-api">Chapter 53, "Using the Java EE Security API"</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A user authentication mechanism specifies:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -443,7 +465,7 @@ Server</a>.</p>
 <div class="paragraph">
 <p>Basic, form-based, and digest authentication are discussed in this
 section. Client and mutual authentication are discussed in
-<a href="security-advanced.html#GJJWX">Chapter 53, "Java EE Security: Advanced
+<a href="security-advanced.html#GJJWX">Chapter 54, "Java EE Security: Advanced
 Topics"</a>.</p>
 </div>
 <div class="paragraph">

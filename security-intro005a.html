@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Java EE Security: Advanced Topics</title>
+    <title>Working with Identity Stores</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/96c4d89611.js"></script>
@@ -28,14 +28,14 @@
 	</colgroup>
 	<tr>
 		<td align="left">
-		<a href="security-api005.html">
+		<a href="security-intro005.html">
 			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Previous</span>
 		</a>
 		</td>
 
 		<td align="left">
-		<a href="security-advanced001.html">
+		<a href="security-intro006.html">
 			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>
@@ -52,46 +52,41 @@
 
 
 <div class="sect1">
-<h2 id="java-ee-security-advanced-topics">54 Java EE Security: Advanced Topics</h2>
+<h2 id="working-with-identity-stores">Working with Identity Stores</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This chapter provides advanced information on securing Java EE
-applications.</p>
+<p>An identity store is a database or directory (store) that contains identity information
+about a collection of users that includes an application&#8217;s callers. An identity store
+holds callers names, group membership information, and information sufficient
+to allow it to validate a caller&#8217;s credentials. An identity store may also contain other
+information, such as globally unique caller identifiers or other caller attributes.</p>
 </div>
 <div class="paragraph">
-<p>The following topics are addressed here:</p>
+<p>As specified in the Java EE Security API, the <code>IdentityStore</code> interface
+provides an abstraction of an identity store. Implementations of the <code>IdentityStore</code>
+interface interact with identity stores to authenticate users
+and to retrieve caller group information. Most often, an implementation of the <code>IdentityStore</code>
+interface interacts with an external identity store, such as an LDAP server,
+but it can also manage user account data itself.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="security-advanced001.html#BNBYB">Working with Digital Certificates</a></p>
-</li>
-<li>
-<p><a href="security-advanced002.html#GLIEN">Authentication Mechanisms</a></p>
-</li>
-<li>
-<p><a href="security-advanced003.html#BABEJJDE">Using the JDBC Realm for User
-Authentication</a></p>
-</li>
-<li>
-<p><a href="security-advanced004.html#BABGEJJJ">Securing HTTP Resources</a></p>
-</li>
-<li>
-<p><a href="security-advanced005.html#GLIGC">Securing Application Clients</a></p>
-</li>
-<li>
-<p><a href="security-advanced006.html#GLIFD">Securing Enterprise Information
-Systems Applications</a></p>
-</li>
-<li>
-<p><a href="security-advanced007.html#GKHRL">Configuring Security Using
-Deployment Descriptors</a></p>
-</li>
-<li>
-<p><a href="security-advanced008.html#BABBGBBF">Further Information about
-Advanced Security Topics</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The <code>IdentityStore</code> interface is intended
+primarily for use by the <code>HttpAuthenticationMechanism</code> (also specified in the
+Java EE Security API), but can be used by other implementations such as a JASPIC
+<code>ServerAuthModule</code> or a container&#8217;s built-in authentication mechanisms. Using the
+<code>HttpAuthenticationMechanism</code>
+and <code>IdentityStore</code> implementations, both built-in and custom, provides a significant
+advantage over the BASIC and FORM mechanisms
+defined by Servlet 4.0 (and previous versions) and configured declaratively
+using <code>&lt;login-config&gt;</code> in <code>web.xml</code>,
+because it allows an application to control the identity stores it will
+authenticate against in a standard, portable way.</p>
+</div>
+<div class="paragraph">
+<p>An application can provide its own <code>IdentityStore</code>,
+or use the built in LDAP or Database identity store implementations of the interface.
+For details about the <code>IdentityStore</code> interfaces and examples of their usage, see
+<a href="security-api003.html#overview-of-the-identity-store-interfaces">Overview of the Identity Store Interfaces</a>.</p>
 </div>
 </div>
 </div>
@@ -106,14 +101,14 @@ Advanced Security Topics</a></p>
 	</colgroup>
 	<tr>		
 		<td align="left">
-		<a href="security-api005.html">
+		<a href="security-intro005.html">
 			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Previous</span>
 		</a>
 		</td>
 
 		<td align="left">
-		<a href="security-advanced001.html">
+		<a href="security-intro006.html">
 			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>

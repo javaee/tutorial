@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using Pluggable Providers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b>
+	 <!-- <p class="beta">Beta Draft (Pre-General Availability)</p> -->
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-intro003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-intro004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="using-pluggable-providers">Using Pluggable Providers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java EE includes two specifications that define SPI interfaces for
+pluggable security providers, JSR-196 and JSR-375. These specifications are
+described in more detail in the following sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#jsr-196-java-authentication-service-provider-interface-for-containers-jaspic">JSR-196 Java
+Authentication Service Provider Interface for Containers (JASPIC)</a></p>
+</li>
+<li>
+<p><a href="#jsr-375-java-ee-security-api">JSR-375 Java EE Security API</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="jsr-196-java-authentication-service-provider-interface-for-containers-jaspic">JSR-196 Java Authentication Service Provider Interface for Containers (JASPIC)</h3>
+<div class="paragraph">
+<p>JSR-196 defines a model for securing messages sent between a client and server in
+which the sender of a message "secures" it, and the receiver "validates" it.
+The details of how messages are secured and validated are undefined by the model;
+support for securing and validating particular types of messages is provided by
+"auth modules"&#8201;&#8212;&#8201;implementations of the JASPIC <code>ClientAuthModule</code> and
+<code>ServerAuthModule</code> interfaces&#8201;&#8212;&#8201;that support particular protocols or message types,
+and that plug in to the JASPIC framework. (Note that it is not necessary for a
+client and server to both use JASPIC, as long as both sides process messages
+correctly for a given protocol.)</p>
+</div>
+<div class="paragraph">
+<p>JASPIC defines two "profiles" for integrating JASPIC auth modules into Java EE
+containers: the Servlet Container Profile, and the SOAP Profile. Each specifies
+how JASPIC message processing must be integrated into the request processing flow
+of the container in question to validate incoming requests and secure outgoing
+responses.</p>
+</div>
+<div class="paragraph">
+<p>In the case of the Servlet Container Profile, if a <code>ServerAuthModule</code> is configured/available
+for a given application context, then the modules&#8217;s <code>validateRequest()</code> method must be
+invoked (and succeed) before authorizing access and calling the target servlet,
+and the module&#8217;s <code>secureResponse()</code> method must be called before returning a response.
+Typically, a <code>ServerAuthModule</code> written for the Servlet Container Profile looks for
+user credentials or tokens in an incoming request, and then uses them to authenticate the caller and establish
+the caller&#8217;s identity. A <code>ServerAuthModule</code> may also engage in a challenge/response
+protocol with the client, or negotiate with a third party to establish/verify the
+client&#8217;s identity.</p>
+</div>
+<div class="paragraph">
+<p>As with the Servlet Container Profile, the SOAP Profile requires that
+<code>validateRequest()</code> be called and succeed before proceeding to authorize access and
+perform any further processing of an incoming message, and that <code>secureResponse()</code>
+is called for the response before it is sent. In contrast to the Servlet
+Container Profile, <code>validateRequest()</code> processing for SOAP messages typically involves
+verifying signatures on signed elements, decrypting encrypted elements, and/or
+establishing the identity of a SOAP actor based on a token included in the message,
+while <code>secureResponse()</code> typically involves signing and/or encrypting elements
+of the outbound message.</p>
+</div>
+<div class="paragraph">
+<p>JASPIC does not define any standard or built-in ServerAuthModules; they must be
+provided either by the application using the module, or as a non-standard
+extension of a particular vendor&#8217;s Java EE product. ServerAuthModules can
+sometimes be directly configured for an application in a vendor-specific way, but
+the standard mechanism for making a <code>ServerAuthModule</code> available to an application
+is to register a corresponding <code>AuthConfigProvider</code> with the global <code>AuthConfigFactory</code>.
+An <code>AuthConfigProvider</code> makes a <code>ServerAuthModule</code> available to the container, via a
+series of intermediary objects, for runtime message processing.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jsr-375-java-ee-security-api">JSR-375 Java EE Security API</h3>
+<div class="paragraph">
+<p>JSR-375 defines the following authentication-related plugin SPIs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>HttpAuthenticationMechanism</code> - An interface for modules that authenticate callers
+to a web application. It defines three methods that correspond to the methods of a
+JASPIC <code>ServerAuthModule</code>, albeit with slightly different signatures.
+An <code>HttpAuthenticationMechanism</code> provides similar functionality to a <code>ServerAuthModule</code>,
+and the Servlet Container uses a special <code>ServerAuthModule</code> to invoke the
+HttpAuthenticationMechanism&#8217;s methods, but HttpAuthenticationMechanisms are
+simpler to write, and to deploy, than are ServerAuthModules.</p>
+</li>
+<li>
+<p><code>IdentityStore</code> - This interface defines methods for validating a caller&#8217;s
+credentials (such as username and password) and returning group membership information.
+IdentityStores are invoked under the control of an <code>IdentityStoreHandler</code>, which, if
+multiple IdentityStores are present, calls the available IdentityStores in a
+specific order and aggregates the results.</p>
+</li>
+<li>
+<p><code>RememberMeIdentityStore</code> - This interface is a variation on the <code>IdentityStore</code>
+interface, intended specifically to address cases where an authenticated user&#8217;s
+identity should be remembered for an extended period of time, so that the caller
+can return to the application periodically without needing to present primary
+authentication credentials each time.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Implementations of these SPI interfaces are CDI beans, and, as such, applications
+can provide implementations that support application-specific authentication
+mechanisms, or validate user credentials against application-specific identity stores,
+simply by including them in a bean archive that is part of the deployed application.
+There are also several standard, built-in implementations of <code>HttpAuthenticationMechanism</code>
+and <code>IdentityStore</code> that provide configurable support for common authentication and
+credential validation use cases, without the need to write custom implementations.</p>
+</div>
+<div class="paragraph">
+<p>Because these SPIs, related annotations, and the CDI deployment mechanism are all
+part of standard Java EE, implementations are completely portable (to the extent
+they do not rely internally on platform-specific APIs or libraries) and can be
+portably deployed to any Java EE server.</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-intro003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-intro004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<!--<p align="center" class="beta">Beta Draft (Pre-General Availability)</p> -->
+
+</body>
+</html>

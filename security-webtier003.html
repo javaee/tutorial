@@ -65,23 +65,57 @@ model of the application.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#GIRCJ">Authenticating Users Programmatically</a></p>
+<p><a href="#authenticating-users-programmatically">Authenticating Users Programmatically</a></p>
 </li>
 <li>
-<p><a href="#BNCBA">Checking Caller Identity Programmatically</a></p>
+<p><a href="#checking-caller-identity-programmatically">Checking Caller Identity Programmatically</a></p>
 </li>
 <li>
-<p><a href="#GJJLQ">Example Code for Programmatic Security</a></p>
+<p><a href="#testing-access-to-a-resource-programmatically">Testing Access to a Resource Programmatically</a></p>
 </li>
 <li>
-<p><a href="#BNCBB">Declaring and Linking Role References</a></p>
+<p><a href="#example-code-for-programmatic-security">Example Code for Programmatic Security</a></p>
+</li>
+<li>
+<p><a href="#declaring-and-linking-role-references">Declaring and Linking Role References</a></p>
 </li>
 </ul>
 </div>
 <div class="sect2">
 <h3 id="authenticating-users-programmatically">Authenticating Users Programmatically</h3>
 <div class="paragraph">
-<p>The following methods of the <code>HttpServletRequest</code> interface enable you
+<p>You can use the <code>SecurityContext</code> and <code>HttpServletRequest</code> interfaces to
+authenticate users for a web application programmatically.</p>
+</div>
+<div class="sect3">
+<h4 id="security-context">SecurityContext</h4>
+<div class="paragraph">
+<p>The <code>SecurityContext</code> interface, as specified in the Java EE Security API
+specification, defines the following method to programmatically trigger the
+authentication process:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>authenticate()</code> allows an application to signal to the container
+that it should start the authentication process with the caller.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Programmatically triggering means that the container responds as if the caller
+had attempted to access a constrained resource. It causes the container to invoke
+the authentication mechanism configured for the application. If the configured
+authentication mechanism is an <code>HttpAuthenticationMechanism</code>, then
+the <code>AuthenticationParameters</code> argument is meaningful and extended capabilities of
+<code>HttpAuthenticationMechanism</code> are available. If not, the behavior and result is
+as if <code>HttpServletRequest.authenticate()</code> were called.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="httpservletrequest">HttpServletRequest</h4>
+<div class="paragraph">
+<p>The <code>HttpServletRequest</code> interface defines the following methods that enable you
 to authenticate users for a web application programmatically.</p>
 </div>
 <div class="ulist">
@@ -191,14 +225,53 @@ public class TestServlet extends HttpServlet {
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
 <h3 id="checking-caller-identity-programmatically">Checking Caller Identity Programmatically</h3>
 <div class="paragraph">
-<p>In general, security management should be enforced by the container in a
-manner that is transparent to the web component. The security API
-described in this section should be used only in the less frequent
+<p>In general, the container enforces security management in a
+manner that is transparent to the web component. Use the security APIs
+described in this section only in the less frequent
 situations in which the web component methods need to access the
 security context information.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE Security API specification defines the following methods of the
+<code>SecurityContext</code> interface that allow the application to test aspects of the
+caller data:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getCallerPrincipal()</code> retrieves the <code>Principal</code> representing the caller.
+This is the container-specific representation of the caller principal,
+and the type may differ from the type of the caller principal originally
+established by an <code>HttpAuthenticationMechanism</code>. This method returns null for an
+unauthenticated caller.</p>
+</li>
+<li>
+<p><code>getPrincipalsByType()</code> retrieves all principals of the given type. This
+method can be used to retrieve an application-specific caller principal
+established during authentication. This method is primarily useful in the case
+that the container’s caller principal is a different type than the application
+caller principal, and the application needs specific information behavior
+available only from the application principal. This method returns an empty
+<code>Set</code> if the caller is unauthenticated, or if the requested type is not found.</p>
+<div class="paragraph">
+<p>Where both a container caller principal and an application caller principal
+are present, the value returned by <code>getName()</code> is the same for both
+principals.</p>
+</div>
+</li>
+<li>
+<p><code>isCallerInRole()</code> takes a String argument that represents the role to be
+tested. The specification does not define how the role determination is made,
+but the result must be the same as if the corresponding container-specific call
+had been made (for example <code>HttpServletRequest.isUserInRole()</code>,
+<code>EJBContext.isCallerInRole()</code>), and must be consistent with the result implied
+by specifications that prescribe role-mapping behavior.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Servlet 4.0 specifies the following methods that enable you to access
@@ -235,6 +308,56 @@ the remote user.</p>
 <div class="paragraph">
 <p>Your application can make business-logic decisions based on the
 information obtained using these APIs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="testing-access-to-a-resource-programmatically">Testing Access to a Resource Programmatically</h3>
+<div class="paragraph">
+<p>The <code>SecurityContext</code> interface, as specified in the Java EE Security API
+specification, defines the following method for programmatically testing
+access to a resource:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>hasAccessToWebResource()</code> method determines if the caller has access to
+the specified web resource for the specified HTTP methods, as determined by
+the security constraints configured for the application.</p>
+<div class="paragraph">
+<p>The resource
+parameter is an <code>URLPatternSpec</code>, as defined by the Java Authorization Contract
+for Containers 1.5 specification (<code><a href="http://jcp.org/en/jsr/detail?id=115" class="bare">http://jcp.org/en/jsr/detail?id=115</a></code>), that
+identifies an application-specific web resource.</p>
+</div>
+<div class="paragraph">
+<p>This method can be used to check access to resources in the current application
+only — it cannot be called cross-application, or cross-container, to check
+access to resources in a different application.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, consider the following Servlet definition:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/protectedServlet")
+@ServletSecurity(@HttpConstraint(rolesAllowed = "foo"))
+public class ProtectedServlet extends HttpServlet { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the following call to <code>hasAccessToWebResource()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">securityContext.hasAccessToWebResource("/protectedServlet", GET)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above <code>hasAccessToWebResource()</code> call returns true if, and only if,
+the caller is in role "foo".</p>
 </div>
 </div>
 <div class="sect2">

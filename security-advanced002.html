@@ -64,10 +64,10 @@ authentication mechanisms.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#GLIEQ">Client Authentication</a></p>
+<p><a href="#client-authentication">Client Authentication</a></p>
 </li>
 <li>
-<p><a href="#GLIEL">Mutual Authentication</a></p>
+<p><a href="#mutual-authentication">Mutual Authentication</a></p>
 </li>
 </ul>
 </div>
@@ -101,6 +101,14 @@ deployment descriptor:</p>
     &lt;auth-method&gt;CLIENT-CERT&lt;/auth-method&gt;
 &lt;/login-config&gt;</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The Java EE Security API provides an alternative means to configure client authentication
+using the <code>HttpAuthenticationMechanism</code> interface. This
+interface defines an SPI for writing
+authentication mechanisms that can be provided with an application and
+deployed using CDI. See <a href="security-api002.html#overview-of-the-http-authentication-mechanism-interface">Overview of
+the HTTP Authentication Mechanism Interface</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -248,16 +256,16 @@ to enter the server name, organizational unit, organization, locality,
 state, and country code.</p>
 </div>
 <div class="paragraph">
-<p>You must enter the server name in response to <code>keytool</code>'s first prompt,
+<p>You must enter the server name in response to <code>keytool&#8217;s first prompt,
 in which it asks for first and last names. For testing purposes, this
-can be <code>localhost</code>. If this example is to verify mutual authentication
+can be `localhost</code>. If this example is to verify mutual authentication
 and you receive a runtime error stating that the HTTPS host name is
 wrong, re-create the client certificate, being sure to use the same host
 name you will use when running the example. For example, if your machine
 name is <code>duke</code>, then enter <code>duke</code> as the certificate CN or when prompted
 for first and last names. When accessing the application, enter a URL
 that points to the same location (for example,
-<code>https://duke:8181/mutualauth/hello</code>). This is necessary because during
+<code><a href="https://duke:8181/mutualauth/hello" class="bare">https://duke:8181/mutualauth/hello</a></code>). This is necessary because during
 SSL handshake, the server verifies the client certificate by comparing
 the certificate name to the host name from which it originates.</p>
 </div>

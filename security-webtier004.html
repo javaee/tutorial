@@ -64,17 +64,17 @@ run correctly.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#CHDEBCHG">Overview of Examples of Securing Web Applications</a></p>
+<p><a href="#overview-of-examples-of-securing-web-applications">Overview of Examples of Securing Web Applications</a></p>
 </li>
 <li>
-<p><a href="#GJJLK">To Set Up Your System for Running the Security Examples</a></p>
+<p><a href="#to-set-up-your-system-for-running-the-security-examples">To Set Up Your System for Running the Security Examples</a></p>
 </li>
 <li>
-<p><a href="#BNCCK">The hello2-basicauth Example: Basic Authentication with a
+<p><a href="#the-hello2-basicauth-example-basic-authentication-with-a-servlet">The hello2-basicauth Example: Basic Authentication with a
 Servlet</a></p>
 </li>
 <li>
-<p><a href="#BNCBY">The hello1-formauth Example: Form-Based Authentication
+<p><a href="#the-hello1-formauth-example-form-based-authentication-with-a-javaserver-faces-application">The hello1-formauth Example: Form-Based Authentication
 with a JavaServer Faces Application</a></p>
 </li>
 </ul>
@@ -165,22 +165,25 @@ write down the user name and password exactly. This topic is discussed
 more in <a href="security-intro005.html#BNBXR">Managing Users and Groups in
 GlassFish Server</a>.</p>
 </div>
-</li>
-<li>
-<p>Set up Default Principal to Role Mapping in GlassFish Server.</p>
-</li>
-<li>
-<p>From the Administration Console, expand the Configurations node,
-then expand the server-config node.</p>
-</li>
-<li>
-<p>Select the Security node.</p>
-</li>
-<li>
-<p>Select the Default Principal to Role Mapping Enabled check box.</p>
-</li>
-<li>
-<p>Click Save.</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Note:</strong></p>
+</div>
+<div class="paragraph">
+<p>The Java EE Security API requires that
+group principal names are mapped
+to roles of the same name by default. Therefore, the <strong>Default Principal To Role Mapping</strong> setting
+is enabled by default on the Security page of
+the console.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
 </div>

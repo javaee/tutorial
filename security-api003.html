@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of the Identity Store Interfaces</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b>
+	 <!-- <p class="beta">Beta Draft (Pre-General Availability)</p> -->
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-api002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-the-identity-store-interfaces">Overview of the Identity Store Interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Identity Store Interfaces are described in the following sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#the-identitystore-interface">The IdentityStore Interface</a></p>
+</li>
+<li>
+<p><a href="#the-remembermeidentitystore-interface">The RememberMeIdentityStore Interface</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="the-identitystore-interface">The IdentityStore Interface</h3>
+<div class="paragraph">
+<p>The <code>IdentityStore</code> interface defines an SPI for interacting with identity stores,
+which are directories or databases containing user account information.
+An implementation of the <code>IdentityStore</code> interface can validate users' credentials,
+provide information about the groups they belong to, or both. Most often, an
+<code>IdentityStore</code> implementation will interact with an external identity store&#8201;&#8212;&#8201;an LDAP server, for example&#8201;&#8212;&#8201;to perform the actual credential validation and
+group lookups, but an <code>IdentityStore</code> may also manage user account data itself.</p>
+</div>
+<div class="paragraph">
+<p>There are two built-in implementations of <code>IdentityStore</code>: an LDAP identity store,
+and a Database identity store. These identity stores delegate to external stores
+that must already exist; the IdentityStore implementations do not provide or
+manage the external store. They are configured with the parameters necessary
+to communicate with an external store using the following annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>LdapIdentityStoreDefinition</code>&#8201;&#8212;&#8201;configures an identity store with the parameters
+necessary to communicate with an external LDAP server, validate user credentials,
+and/or lookup user groups.</p>
+</li>
+<li>
+<p><code>DatabaseIdentityStoreDefinition</code>&#8201;&#8212;&#8201;configures an identity store with the
+parameters necessary to connect to an external database, validate user credentials,
+and/or lookup user groups. You must supply a PasswordHash implementation when
+configuring a Database Identity Store. See <a href="#the-passwordhash-interface">The PasswordHash Interface</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An application can provide its own custom identity store, or use the built-in LDAP or database
+identity stores. For examples of both types, see:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="security-api004.html#running-the-built-in-database-identity-store-example">Running the Built-In Database Identity Store Example</a></p>
+</li>
+<li>
+<p><a href="security-api005.html#running-the-custom-identity-store-example">Running the Custom Identity Store Example</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An implementation of <code>IdentityStore</code> must be a
+CDI bean to be recognized and deployed at runtime, and is assumed to be normal scoped.
+IdentityStores are primarily intended for use by implementations of
+<code>HttpAuthenticationMechanisms</code>, but this is not a requirement.
+They can be used by other types of authentication mechanisms as well, or by containers.</p>
+</div>
+<div class="paragraph">
+<p>Multiple implementations of <code>IdentityStore</code> may be present. If so, they are invoked
+under the control of an <code>IdentityStoreHandler</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="identitystorehandler">IdentityStoreHandler</h4>
+<div class="paragraph">
+<p>Authentication mechanisms do not interact with <code>IdentityStore</code> directly; instead,
+they call an <code>IdentityStoreHandler</code>. An implementation of the <code>IdentityStoreHandler</code>
+interface provides a single method, <code>validate(Credential)</code>, which, when invoked,
+iterates over the available IdentityStores and returns an aggregated result.
+An <code>IdentityStoreHandler</code> must also be a CDI bean, and is assumed to be normal scoped.
+At runtime, an authentication mechanism injects the <code>IdentityStoreHandler</code> and
+invokes on it. The <code>IdentityStoreHandler</code>, in turn, looks up the available IdentityStores
+and invokes on them to determine the aggregate result.</p>
+</div>
+<div class="paragraph">
+<p>There is a built-in <code>IdentityStoreHandler</code> that implements a standard algorithm
+defined by JSR-375. The JSR-375 specification provides a full description of
+the algorithm, but it can be roughly summarized as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Iterate over the available validating IdentityStores, in priority order,
+until the provided Credential is validated or there are no more IdentityStores.</p>
+</li>
+<li>
+<p>If the Credential was validated, iterate over the available group-providing
+IdentityStores, in priority order, aggregating the groups returned by each store.</p>
+</li>
+<li>
+<p>Return the validated caller and group information.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An application may also supply its own <code>IdentityStoreHandler</code>, which can use any
+desired algorithm to select and invoke on IdentityStores, and return an
+aggregated (or non-aggregated) result.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="identitystoreinterface-methods">IdentityStore Interface Methods</h4>
+<div class="paragraph">
+<p>The IdentityStore interface itself has four methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>validate(Credential)</code>&#8201;&#8212;&#8201;validate a Credential, and return the result of that
+validation.</p>
+</li>
+<li>
+<p><code>getCallerGroups(CredentialValidationResult)</code>&#8201;&#8212;&#8201;return the groups associated
+with the caller indicated by the supplied <code>CredentialValidationResult</code>, which
+represents the result of a previous, successful validation.</p>
+</li>
+<li>
+<p><code>validationTypes()</code>&#8201;&#8212;&#8201;returns a Set of validation types (one or more of
+<code>VALIDATE</code>, <code>PROVIDE_GROUPS</code>)
+that indicate the operations supported by this instance of the <code>IdentityStore</code>.</p>
+</li>
+<li>
+<p><code>priority()</code>&#8201;&#8212;&#8201;returns a positive integer representing the self-declared
+priority of this IdentityStore. Lower values represent higher priority.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Because <code>getCallerGroups()</code> is a sensitive operation&#8201;&#8212;&#8201;it can return information
+about arbitrary users, and does not require that the caller provide the user&#8217;s
+credential or proof of identity&#8201;&#8212;&#8201;the caller should have the
+<code>IdentityStorePermission("getGroups")</code> permission. Enforcement of this check is
+incumbent on the implementation of the <code>getCallerGroups()</code> method; the built-in
+IdentityStores do check for this permission, if a SecurityManager is configured,
+and the built-in IdentityStoreHandler invokes the <code>getCallerGroups()</code> method in
+the context of a <code>PrivilegedAction</code> block.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-passwordhash-interface">The PasswordHash Interface</h4>
+<div class="paragraph">
+<p>Unlike some types of identity stores, for example LDAP directories,
+databases can store and retrieve user passwords, but can&#8217;t verify them natively.
+Therefore, the built-in Database identity store must verify user passwords itself.
+Most often, this involves generating a hash of the user&#8217;s password for comparison
+with a hash value stored in the database.</p>
+</div>
+<div class="paragraph">
+<p>In order to provide maximum flexibility and interoperability, the Database identity
+store does not implement any specific password hashing algorithms. Instead, it
+defines the <code>PasswordHash</code> interface, and expects the application to provide an
+implementation of <code>PasswordHash</code> that can verify passwords from the specific store
+the application will use. The <code>PasswordHash</code> implementation must be made available
+as a dependent-scoped bean, and is configured by providing the fully-qualified
+name of the desired type as the <code>hashAlgorithm</code> value on a <code>DatabaseIdentityStoreDefinition</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PasswordHash</code> algorithm defines three methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>initialize(Map&lt;String,String&gt; parameters)</code>&#8201;&#8212;&#8201;initialize the PasswordHash with
+the supplied Map of parameters. The Database identity store calls this method when
+initializing, passing the <code>hashAlgorithmParameters</code> value of the
+<code>DatabaseIdentityStoreDefinition</code> annotation (after conversion to a Map).</p>
+</li>
+<li>
+<p><code>verify(char[] password, String hashedPassword)</code>&#8201;&#8212;&#8201;verify a caller-supplied
+password against the caller&#8217;s stored password hash as retrieved from the database.
+The <code>hashedPassword</code> value should be provided exactly as it was returned from the database.</p>
+</li>
+<li>
+<p><code>generate(char[] password)</code>&#8201;&#8212;&#8201;generate a password hash from the supplied password.
+The value returned should be formatted and encoded exactly it would be stored
+in the database. While it is useful to generate the hash of a caller-supplied password
+during <code>verify()</code>, this method is intended primarily for use by applications or
+<code>IdentityStore</code> implementations that want to support password management/reset
+capability without having to duplicate the code used to verify passwords.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note that, while the interface is oriented toward hashing passwords, it can also
+support alternative approaches, such as two-way encryption of stored passwords.</p>
+</div>
+<div class="paragraph">
+<p>There is a built-in <code>Pbkdf2PasswordHash</code> implementation that supports, as it&#8217;s
+name suggests, PBKDF2 password hashing. It supports several parameters that
+control the generation of hash values
+(key size, iterations, and so on&#8201;&#8212;&#8201;see the Javadoc),
+and those parameters are encoded into the resulting hash value, so that hashes
+can be verified even if the currently configured parameters are different from
+the parameters in effect when a stored hash was generated.</p>
+</div>
+<div class="paragraph">
+<p>While it is necessary to write a custom <code>PasswordHash</code> to enable interoperability
+with a legacy identity store that stores password hashes in a format other
+than the <code>Pbkdf2PasswordHash</code> format, developers should consider carefully
+whether <code>Pbkdf2PasswordHash</code> is sufficient for new identity stores, and avoid
+writing a new PasswordHash implementation without a solid understanding of the
+cryptographic and other security considerations involved. Some of the
+considerations specific to password hashing are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The requirements for hashing passwords differ considerably from the requirements
+for hashing in other contexts. In particular, speed is normally a virtue when
+generating hashes, but when generating password hashes, slower is better&#8201;&#8212;&#8201;to
+slow down brute force attacks against hashed values.</p>
+</li>
+<li>
+<p>The comparison of a generated hash with a stored hash should take constant time,
+whether it succeeds or fails, in order to avoid giving an attacker clues about
+the password value based on the timing of failed attempts.</p>
+</li>
+<li>
+<p>A new random salt should be used each time a new password hash value is generated.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-remembermeidentitystore-interface">The RememberMeIdentityStore Interface</h3>
+<div class="paragraph">
+<p>The <code>RememberMeIdentityStore</code> interface represents a special type of identity store.
+It is not directly related to the <code>IdentityStore</code> interface; that is, it does not
+implement or extend it. It does, however, perform a similar, albeit specialized, function.</p>
+</div>
+<div class="paragraph">
+<p>In some cases, an application wants to "remember" a user&#8217;s authenticated session
+for an extended period. For example, a web site may remember you when you visit,
+and prompt for your password only periodically, perhaps once every two weeks,
+as long as you don&#8217;t explicitly log out.</p>
+</div>
+<div class="paragraph">
+<p>RememberMe works as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When a request from an unauthenicated user is received, the user is authenticated
+using an <code>HttpAuthenticationMechanism</code> that is provided by the application
+(this is required&#8201;&#8212;&#8201;<code>RememberMeIdentityStore</code> can only be used in conjunction with an
+  application-supplied <code>HttpAuthenticationMechanism</code>).</p>
+</li>
+<li>
+<p>After authentication, the configured <code>RememberMeIdentityStore</code> saves information
+about the user&#8217;s authenticated identity, so that it be restored later, and
+generates a long-lived "remember me" login token that is sent back to the client,
+perhaps as a cookie.</p>
+</li>
+<li>
+<p>On a subsequent visit to the application, the client presents the login token.
+The <code>RememberMeIdentityStore</code> then validates the token and returns the stored user
+identity, which is then established as the user&#8217;s authenticated identity.
+If the token is invalid or expired, it is discarded, the user is authenticated
+normally again, and a new login token is generated.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>RememberMeIdentityStore</code> interface defines the following methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>generateLoginToken(CallerPrincipal caller, Set&lt;String&gt; groups)</code>&#8201;&#8212;&#8201;generate a
+login token for a newly authenticated user, and associate it with the provided
+caller/group information.</p>
+</li>
+<li>
+<p><code>removeLoginToken(String token)</code>&#8201;&#8212;&#8201;remove the (presumably expired or invalid)
+login token and any associated caller/group information.</p>
+</li>
+<li>
+<p><code>validate(RememberMeCredential credential)</code>&#8201;&#8212;&#8201;validate the supplied credential, and,
+if valid, return the associated caller/group information. (<code>RememberMeCredential</code> is
+  essentially just a holder for a login token).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An implementation of <code>RememberMeIdentityStore</code> must be a CDI bean, and is assumed
+to be normal scoped. It is configured by adding a <code>RememberMe</code> annotation to an
+application&#8217;s <code>HttpAuthenticationMechanism</code>, which indicates that a
+<code>RememberMeIdentityStore</code> is in use, and provides related configuration parameters.
+A container-supplied interceptor then intercepts calls to the <code>HttpAuthenticationMechanism</code>,
+invokes the <code>RememberMeIdentityStore</code> as necessary before and after calls to the
+authentication mechanism, and ensures that the user&#8217;s identity is correctly
+set for the session. The JSR-375 specification provides a detailed description
+of the required interceptor behavior.</p>
+</div>
+<div class="paragraph">
+<p>Implementations of <code>RememberMeIdentityStore</code> should take care to manage tokens
+and user identity information securely. For example, login tokens should not
+contain sensitive user information, like credentials or sensitive attributes,
+to avoid exposing that information if an attacker were able to gain access
+to the token&#8201;&#8212;&#8201;even an encrypted token is potentially vulnerable to an
+attacker with sufficient time/resources. Similarly, tokens should be
+encrypted/signed wherever possible, and sent only over secure channels (HTTPS).
+User identity information managed by a <code>RememberMeIdentityStore</code> should be stored
+as securely as possible (but does not necessarily need to be reliably persisted&#8201;&#8212;&#8201;the only impact of a "forgotten" session is that the user will be prompted to
+log in again).</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-api002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<!--<p align="center" class="beta">Beta Draft (Pre-General Availability)</p> -->
+
+</body>
+</html>

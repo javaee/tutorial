@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Running the Built-In Database Identity Store Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b>
+	 <!-- <p class="beta">Beta Draft (Pre-General Availability)</p> -->
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-api003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api005.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="running-the-built-in-database-identity-store-example">Running the Built-In Database Identity Store Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The example described in this section demonstrates how to use the built-in database
+identity store for credential validation.</p>
+</div>
+<div class="paragraph">
+<p>Topics include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#overview-of-the-built-in-database-identity-store-example">Overview of the Built-In Database Identity Store Example</a></p>
+</li>
+<li>
+<p><a href="#running-the-built-in-db-id-store-example">Running the built-in-db-identity-store Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-built-in-database-identity-store-example">Overview of the Built-In Database Identity Store Example</h3>
+<div class="paragraph">
+<p>JSR 375 mandates that a Java EE container MUST support a built-in <code>IdentityStore</code>
+backed by a database. To support this mandatory requirement, <code>DatabaseIdentityStore</code>
+is bundled with the GlassFish-RI.</p>
+</div>
+<div class="paragraph">
+<p>This example demonstrates how you can configure a <code>DatabaseIdentityStore</code> to point
+to a backend database and then use it as an IdentityStore. The authentication mechanism used is
+<code>BasicAuthenticationMechanism</code>.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this example is in the
+<code><em>tut-install</em>/examples/security/security-api/built-in-db-identity-store</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The following sections describe the high-level process for configuring the
+<code>DatabaseIdentityStore</code>. Note that the configuration described in these sections has
+already been completed in the application files, but is provided here to illustrate
+what you need to do to use the built-in database identity store.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#define-the-users-and-groups-in-the-identity-store">Define the Users and Groups in the Identity Store</a></p>
+</li>
+<li>
+<p><a href="#map-the-databaseidentitystore-to-the-default-data-source">Map the DatabaseIdentityStore to the Default Data source</a></p>
+</li>
+<li>
+<p><a href="#specify-the-authentication-mechanism">Specify the Authentication Mechanism</a></p>
+</li>
+<li>
+<p><a href="#declare-roles-in-the-servlet-container">Declare Roles in the Servlet Container</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a request that includes credentials is sent to the application,
+it triggers the configured authentication mechanism
+and authentication is performed against the <code>DatabaseIdentityStore</code> as defined
+in the application.</p>
+</div>
+<div class="paragraph">
+<p>Post authentication, the application also verifies the roles the caller is in
+and sends the details as part of the response.</p>
+</div>
+<div class="paragraph">
+<p>Note that in GlassFish, if the user provides the wrong credentials when using
+<code>BasicAuthenticationMechanism</code>, then the <code>realmName</code>
+is presented to user, as a hint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">curl -I -u Joe http://localhost:8080/built-in-db-identity-store/servlet
+Enter host password for user 'Joe':
+HTTP/1.1 401 Unauthorized
+Server: GlassFish Server Open Source Edition  5.0
+X-Powered-By: Servlet/3.1 JSP/2.3 (GlassFish Server Open Source Edition  5.0  Java/Oracle Corporation/1.8)
+WWW-Authenticate: Basic realm="file"
+Content-Length: 1090
+Content-Language:
+Content-Type: text/html</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="define-the-users-and-groups-in-the-identity-store">Define the Users and Groups in the Identity Store</h4>
+<div class="paragraph">
+<p>The following table shows the users, passwords, and groups used in this example.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 40%;">
+<col style="width: 30%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Password</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Group</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Joe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secret1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">foo, bar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sam</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secret2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">foo, bar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secret2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">foo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secret2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">foo</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following code shows how to define credentials and the roles assigned to
+users in the  <code>DatabaseSetup.java</code> file.</p>
+</div>
+<div class="paragraph">
+<p>With <code>@Startup</code> annotation, this singleton enterprise bean is initialized during
+application startup and the credentials are set in the underlying database.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import javax.annotation.sql.DataSourceDefinition;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.sql.DataSource;
+
+@Singleton
+@Startup
+public class DatabaseSetup {
+
+    // The default datasource that is bundled with GlassFish is used to store // credentials.
+    @Resource(lookup="java:comp/DefaultDataSource")
+    private DataSource dataSource;
+
+    @PostConstruct
+    public void init() {
+
+        // ...
+        executeUpdate(dataSource, "INSERT INTO caller VALUES('Joe', '" + passwordHash.generate("secret1".toCharArray()) + "')");
+        // ...
+        executeUpdate(dataSource, "INSERT INTO caller_groups VALUES('Joe', 'foo')");
+        executeUpdate(dataSource, "INSERT INTO caller_groups VALUES('Joe', 'bar')");
+        // ...
+    }
+
+    @PreDestroy
+    public void destroy() {
+    	// ...
+    }
+
+    private void executeUpdate(DataSource dataSource, String query) {
+        // ...
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="map-the-databaseidentitystore-to-the-default-data-source">Map the DatabaseIdentityStore to the Default Data source</h4>
+<div class="paragraph">
+<p>Use the <code>@DatabaseIdentityStoreDefinition</code> annotation to map the built-in <code>DatabaseIdentityStore</code>
+to the <code>DefaultDataSource</code> in
+the <code>ApplicationConfig.java</code> file. This example also demonstrates the use of the
+<code>Pbkdf2PasswordHash</code> interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">// Database Definition for built-in DatabaseIdentityStore
+@DatabaseIdentityStoreDefinition(
+    callerQuery = "#{'select password from caller where name = ?'}",
+    groupsQuery = "select group_name from caller_groups where caller_name = ?",
+    hashAlgorithm = Pbkdf2PasswordHash.class,
+    priorityExpression = "#{100}",
+    hashAlgorithmParameters = {
+        "Pbkdf2PasswordHash.Iterations=3072",
+        "${applicationConfig.dyna}"
+    }
+)
+
+@ApplicationScoped
+@Named
+public class ApplicationConfig {
+
+  public String[] getDyna() {
+       return new String[]{"Pbkdf2PasswordHash.Algorithm=PBKDF2WithHmacSHA512", "Pbkdf2PasswordHash.SaltSizeBytes=64"};
+   }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="specify-the-authentication-mechanism">Specify the Authentication Mechanism</h4>
+<div class="paragraph">
+<p>In this application, credentials are validated using the BASIC authentication mechanism.
+Specify the <code>@BasicAuthenticationMechanismDefinition</code> annotation in the <code>ApplicationConfig.java</code>
+to ensure that the <code>BasicAuthenticationMechanism</code>
+is used to perform credential validation.</p>
+</div>
+<div class="paragraph">
+<p>When a request is made to the servlet in question, the container delegates the request
+to <code>org.glassfish.soteria.mechanisms.jaspic.HttpBridgeServerAuthModule</code>,
+which then invokes the <code>BasicAuthenticationMechanism#validateRequest</code> method, and gets
+the credential from the request.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@BasicAuthenticationMechanismDefinition(
+        realmName = "file"
+)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="declare-roles-in-the-servlet-container">Declare Roles in the Servlet Container</h4>
+<div class="paragraph">
+<p>When a request is made to the application, the roles the user is in are returned
+as part of the response. Note that the container needs to be made aware of the
+supported roles, which are defined using the <code>@DeclareRoles({ "foo", "bar", "kaz" })</code>
+annotation as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@WebServlet("/servlet")
+@DeclareRoles({ "foo", "bar", "kaz" })
+@ServletSecurity(@HttpConstraint(rolesAllowed = "foo"))
+public class Servlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String webName = null;
+        if (request.getUserPrincipal() != null) {
+            webName = request.getUserPrincipal().getName();
+        }
+
+        response.getWriter().write("web username: " + webName + "\n");
+
+        response.getWriter().write("web user has role \"foo\": " + request.isUserInRole("foo") + "\n");
+        response.getWriter().write("web user has role \"bar\": " + request.isUserInRole("bar") + "\n");
+        response.getWriter().write("web user has role \"kaz\": " + request.isUserInRole("kaz") + "\n");
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do
+not need to bundle web.xml with the application to provide mapping between
+roles and groups.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-built-in-db-identity-store-example">Running the built-in-db-identity-store Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and run the <code>built-in-db-identity-store</code> application
+as described in the following topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-netbeans-ide">To Build, Package, and Deploy the built-in-db-identity-store Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#to-build-package-and-deploy-the-built-in-db-identity-store-example-using-using-maven">To Build, Package, and Deploy the built-in-db-identity-store Example Using Maven</a></p>
+</li>
+<li>
+<p><a href="#to-run-the-built-in-db-identity-store-example">To Run the built-in-db-identity-store Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-built-in-db-identity-store-example-using-netbeans-ide">To Build, Package, and Deploy the built-in-db-identity-store Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If you have not already done so, start the default database. This is necessary because
+we are using the DefaultDataSource bundled with GlassFish for <code>DatabaseIdentityStore</code>.
+See <a href="usingexamples004.html#starting-and-stopping-the-java-db-server">Starting and Stopping Apache Derby</a>.</p>
+</li>
+<li>
+<p>If you have not already done so, start the GlassFish server. See
+<a href="usingexamples002.html#starting-and-stopping-glassfish-server">Starting and Stopping GlassFish Server</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/security-api</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>built-in-db-identity-store</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>built-in-db-identity-store</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and deploys the example application to your
+GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-built-in-db-identity-store-example-using-using-maven">To Build, Package, and Deploy the built-in-db-identity-store Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If you have not already done so, start the default database. This is necessary because
+we are using the DefaultDataSource bundled with GlassFish for <code>DatabaseIdentityStore</code>.
+See <a href="usingexamples004.html#starting-and-stopping-the-java-db-server">Starting and Stopping Apache Derby</a>.</p>
+</li>
+<li>
+<p>If you have not already done so, start the GlassFish server. See
+<a href="usingexamples002.html#starting-and-stopping-glassfish-server">Starting and Stopping GlassFish Server</a>.</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/security-api/built-in-db-identity-store</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>built-in-db-identity-store.war</code>, that is located in the <code>target</code> directory, then
+deploys the WAR file.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-built-in-db-identity-store-example">To Run the built-in-db-identity-store Example</h4>
+<div class="paragraph">
+<p>In this example, use the credentials of user Joe to make a request and
+to validate the response according to the credentials/roles defined in
+<code>DatabaseSetup.java</code>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make a request to the deployed application by entering
+the following request URL in your web browser:</p>
+<div class="paragraph">
+<p>Request URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/built-in-db-identity-store/servlet</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because BASIC authentication is being used here, the container responds back
+prompting for username and password.</p>
+</div>
+</li>
+<li>
+<p>Enter the username <code>Joe</code>, and the password <code>secret1</code> at the prompt.</p>
+<div class="paragraph">
+<p>Once you provide the credentials, the following process occurs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The client presents the request to the container with base64 encoded string and
+with the <code>Authorization</code> header using the value in the format expected for
+basic authentication.</p>
+</li>
+<li>
+<p>With the username and password available to the container, validation is performed
+against <code>DatabaseIdentityStore</code>.</p>
+</li>
+<li>
+<p>The corresponding <code>UsernamePasswordCredential</code> object is passed as a parameter to
+the <code>DatabaseIdentityStore#validate()</code> method.</p>
+</li>
+<li>
+<p>The password is fetched from the database for user Joe.</p>
+</li>
+<li>
+<p>The password stored in the database is hashed using the  <code>PBKDF2</code> algorithm and
+verified by the built-in <code>Pbkdf2PasswordHash</code> implementation.</p>
+</li>
+<li>
+<p>On successful verification, the request gets delegated to the servlet
+in question and the following response is returned to the end user.</p>
+<div class="paragraph">
+<p>Response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">web username: Joe
+web user has role "foo": true
+web user has role "bar": true
+web user has role "kaz": false</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test the authentication using invalid credentials. Make a request to the
+deployed application by entering the following request URL
+in your web browser:</p>
+<div class="paragraph">
+<p>Request URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/built-in-db-identity-store/servlet</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, because BASIC authentication is being used here, the container responds back
+prompting for username and password.</p>
+</div>
+</li>
+<li>
+<p>Enter an invalid username and password.
+You are promted to enter the credentials again, but you are not authenticated.</p>
+<div class="paragraph">
+<p>When you click Cancel in the Authentication required window, the following
+response is returned:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">HTTP Status 401 - Unauthorized
+
+type Status report
+
+message Unauthorized
+
+description This request requires HTTP authentication.
+
+GlassFish Server Open Source Edition 5</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-api003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api005.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<!--<p align="center" class="beta">Beta Draft (Pre-General Availability)</p> -->
+
+</body>
+</html>

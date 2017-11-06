@@ -68,11 +68,11 @@ default principal-to-role mapping.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#BNCCM">Specifying Security for Basic Authentication in the
+<p><a href="#specifying-security-for-basic-authentication-in-the-deployment-descriptor">Specifying Security for Basic Authentication in the
 Deployment Descriptor</a></p>
 </li>
 <li>
-<p><a href="#GKAFQ">Specifying Non-Default Principal-to-Role Mapping in the
+<p><a href="#specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor">Specifying Non-Default Principal-to-Role Mapping in the
 Deployment Descriptor</a></p>
 </li>
 </ul>
@@ -138,6 +138,12 @@ it from being read in transit.</p>
 </div>
 <div class="sect2">
 <h3 id="specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor">Specifying Non-Default Principal-to-Role Mapping in the Deployment Descriptor</h3>
+<div class="paragraph">
+<p>The Java EE Security API requires that group principal names be mapped to
+roles of the same name by default. GlassFish adheres to this standard, by default,
+and provides group principal to role mapping. Implementations of the standard
+can, however, provide mechanisms to configure a different default.</p>
+</div>
 <div class="paragraph">
 <p>To map a role name permitted by the application or module to principals
 (users) and groups defined on the server, use the

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Overview of the HTTP Authentication Mechanism Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b>
+	 <!-- <p class="beta">Beta Draft (Pre-General Availability)</p> -->
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-api001.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api003.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="overview-of-the-http-authentication-mechanism-interface">Overview of the HTTP Authentication Mechanism Interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>HttpAuthenticationMechanism</code> interface defines an SPI for writing
+authentication mechanisms that can be provided with an application and
+deployed using CDI. Developers can write their own implementations of <code>HttpAuthenticationMechanism</code>
+to support specific authentication token types or protocols. There are also several
+built-in authentication mechanisms that perform BASIC, FORM, and Custom FORM
+authentication.</p>
+</div>
+<div class="paragraph">
+<p>The built-in authentication mechanisms are enabled and configured through the use
+of one of the following annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BasicAuthenticationMechanismDefinition&#8201;&#8212;&#8201;implements BASIC authentication that
+conforms to the behavior of the servlet container when BASIC &lt;auth-method&gt; is
+declared in web.xml.</p>
+</li>
+<li>
+<p>FormAuthenticationMechanismDefinition&#8201;&#8212;&#8201;implements FORM authentication that
+conforms to the behavior of the servlet container when the FORM &lt;auth-method&gt;
+is declared in web.xml.</p>
+</li>
+<li>
+<p>CustomFormAuthenticationMechanismDefinition&#8201;&#8212;&#8201;implements a modified version of
+FORM authentication in which custom handling replaces the POST to j_security_check.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An implementation of HttpAuthenticationMechanism must be a CDI bean to be
+recognized and deployed at runtime, and is assumed to be normal scoped.
+During bean discovery, the servlet container looks for a bean that implements
+<code>HttpAuthenticationMechanism</code>&#8201;&#8212;&#8201;there should be only one per application&#8201;&#8212;&#8201;and,
+if found, arranges for it to be deployed to authenticate the application&#8217;s callers.</p>
+</div>
+<div class="paragraph">
+<p>The servlet container leverages JASPIC, the Java Authentication Service
+Provider Interface for Containers, to deploy authentication mechanisms.
+The container provides a JASPIC Server Auth Module (SAM) that can delegate to an
+<code>HttpAuthenticationMechanism</code>, and arranges for that "bridge" SAM to be registered
+with the JASPIC <code>AuthConfigFactory</code>. At runtime, normal JASPIC processing invokes
+the bridge SAM, which then delegates to the <code>HttpAuthenticationMechanism</code> to
+perform the authentication and drive any necessary dialog with the caller, or with
+third parties involved in the authentication protocol flow.</p>
+</div>
+<div class="paragraph">
+<p>The HttpAuthenticationMechanism interface defines the following three methods,
+which correspond to the three methods defined by the JASPIC ServerAuth interface.
+When one of the JASPIC methods is invoked on the bridge SAM, it delegates to the
+corresponding method of the <code>HttpAuthenticationMechanism</code>. Although the method names
+are identical, the method signatures are not; the bridge SAM maps back and forth
+between the parameters passed to it by the JASPIC framework, and the parameters
+expected by an <code>HttpAuthenticationMechanism</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>validateRequest()</code>&#8201;&#8212;&#8201;validate an incoming request and authenticates the caller.</p>
+</li>
+<li>
+<p><code>secureResponse()</code>&#8201;&#8212;&#8201;(optional if default is sufficient) secure a response message.</p>
+</li>
+<li>
+<p><code>cleanSubject()</code>&#8201;&#8212;&#8201;(optional if default is sufficient) clear the provided Subject of
+principals and credentials.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Only the <code>validateRequest()</code> method must be implemented by an <code>HttpAuthenticationMechanism</code>;
+the interface includes default implementations for secureResponse()` and <code>cleanSubject()</code> that will
+often be sufficient.</p>
+</div>
+<div class="paragraph">
+<p>The following annotations can be used to add additional behaviors to an <code>HttpAuthenticationMechanism</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AutoApplySession</code>&#8201;&#8212;&#8201;indicates that the JASPIC <code>registerSession</code> functionality
+should be enabled such that the the caller&#8217;s authenticated identity is
+persisted in the caller&#8217;s servlet session.</p>
+</li>
+<li>
+<p><code>LoginToContinue</code>&#8201;&#8212;&#8201;mechanism to specify properties for FORM login&#8201;&#8212;&#8201;login page, error page, etc. The built-in FORM authentication mechanisms use
+LoginToContinue to configure the necessary parameters.</p>
+</li>
+<li>
+<p><code>RememberMe</code>&#8201;&#8212;&#8201;specifies that a <code>RememberMe</code> identity store should be used to
+enable <code>RememberMe</code> functionality for the authentication mechanism.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-api001.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api003.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<!--<p align="center" class="beta">Beta Draft (Pre-General Availability)</p> -->
+
+</body>
+</html>

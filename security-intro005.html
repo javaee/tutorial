@@ -35,7 +35,7 @@
 		</td>
 
 		<td align="left">
-		<a href="security-intro006.html">
+		<a href="security-intro005a.html">
 			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>
@@ -92,6 +92,21 @@ discussed in <a href="#BNBXV">Mapping Roles to Users and Groups</a>.</p>
 </li>
 </ol>
 </div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Note:</strong></p>
+</div>
+<div class="paragraph">
+<p>By default, group principal names are mapped to roles of the same name.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="sect2">
 <h3 id="what-are-realms-users-groups-and-roles">What Are Realms, Users, Groups, and Roles?</h3>
 <div class="paragraph">
@@ -281,7 +296,7 @@ examples.</p>
 <p>Start the Administration Console, if you haven&#8217;t already done so.</p>
 <div class="paragraph">
 <p>To start the Administration Console, open a web browser and specify the
-URL <code>http://localhost:4848/</code>. If you changed the default Admin port
+URL <code><a href="http://localhost:4848/" class="bare">http://localhost:4848/</a></code>. If you changed the default Admin port
 during installation, enter the correct port number in place of <code>4848</code>.</p>
 </div>
 </li>
@@ -453,11 +468,11 @@ application to the users or groups defined in the runtime realm.</p>
 </div>
 <div class="paragraph">
 <p>The role names used in the application are often the same as the group
-names defined in GlassFish Server. Under these circumstances, you can
-enable a default principal-to-role mapping in GlassFish Server by using
-the Administration Console. The task
-<a href="security-webtier004.html#GJJLK">To Set Up Your System for Running the
-Security Examples</a> explains how to do this. All the tutorial security
+names defined in GlassFish Server. The Java EE Security API requires that
+group principal names are mapped
+to roles of the same name by default. Accordingly, the <strong>Default Principal To Role Mapping</strong> setting
+is enabled by default on the Security page of
+the GlassFish Server Administration Console. All the tutorial security
 examples use default principal-to-role mapping. With that setting
 enabled, if the group name defined on GlassFish Server matches the role
 name defined in the application, there is no need to use the runtime
@@ -534,7 +549,7 @@ defined in a <code>@DeclareRoles</code> annotation.</p>
 		</td>
 
 		<td align="left">
-		<a href="security-intro006.html">
+		<a href="security-intro005a.html">
 			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>

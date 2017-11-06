@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Java EE Security: Advanced Topics</title>
+    <title>Using the Java EE Security API</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/96c4d89611.js"></script>
@@ -28,14 +28,14 @@
 	</colgroup>
 	<tr>
 		<td align="left">
-		<a href="security-api005.html">
+		<a href="security-javaee003.html">
 			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Previous</span>
 		</a>
 		</td>
 
 		<td align="left">
-		<a href="security-advanced001.html">
+		<a href="security-api001.html">
 			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>
@@ -52,11 +52,12 @@
 
 
 <div class="sect1">
-<h2 id="java-ee-security-advanced-topics">54 Java EE Security: Advanced Topics</h2>
+<h2 id="using-the-java-ee-security-api">53 Using the Java EE Security API</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This chapter provides advanced information on securing Java EE
-applications.</p>
+<p>This chapter describes the authentication and credential validation
+functionality provided by the Java EE Security API. The API also
+defines a SecurityContext access point for programmatic security.</p>
 </div>
 <div class="paragraph">
 <p>The following topics are addressed here:</p>
@@ -64,32 +65,19 @@ applications.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="security-advanced001.html#BNBYB">Working with Digital Certificates</a></p>
+<p><a href="security-api001.html#about-the-java-ee-security-api">About the Java EE Security API</a></p>
 </li>
 <li>
-<p><a href="security-advanced002.html#GLIEN">Authentication Mechanisms</a></p>
+<p><a href="security-api002.html#overview-of-the-http-auth-mech-int">Overview of the HTTP Authentication Mechanism Interface</a></p>
 </li>
 <li>
-<p><a href="security-advanced003.html#BABEJJDE">Using the JDBC Realm for User
-Authentication</a></p>
+<p><a href="security-api003.html#overview-of-the-identity-store-interfaces">Overview of the Identity Store Interfaces</a></p>
 </li>
 <li>
-<p><a href="security-advanced004.html#BABGEJJJ">Securing HTTP Resources</a></p>
+<p><a href="security-api004.html#running-the-built-in-database-identity-store-example">Running the Built-In Database Identity Store Example</a></p>
 </li>
 <li>
-<p><a href="security-advanced005.html#GLIGC">Securing Application Clients</a></p>
-</li>
-<li>
-<p><a href="security-advanced006.html#GLIFD">Securing Enterprise Information
-Systems Applications</a></p>
-</li>
-<li>
-<p><a href="security-advanced007.html#GKHRL">Configuring Security Using
-Deployment Descriptors</a></p>
-</li>
-<li>
-<p><a href="security-advanced008.html#BABBGBBF">Further Information about
-Advanced Security Topics</a></p>
+<p><a href="security-api005.html#running-the-custom-identity-store-example">Running the Custom Identity Store Example</a></p>
 </li>
 </ul>
 </div>
@@ -106,14 +94,14 @@ Advanced Security Topics</a></p>
 	</colgroup>
 	<tr>		
 		<td align="left">
-		<a href="security-api005.html">
+		<a href="security-javaee003.html">
 			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Previous</span>
 		</a>
 		</td>
 
 		<td align="left">
-		<a href="security-advanced001.html">
+		<a href="security-api001.html">
 			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>

@@ -35,7 +35,7 @@
 		</td>
 
 		<td align="left">
-		<a href="security-advanced.html">
+		<a href="security-api.html">
 			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>
@@ -64,11 +64,11 @@ declarative and programmatic security.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#BNBZK">The cart-secure Example: Securing an Enterprise Bean with
+<p><a href="#the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security">The cart-secure Example: Securing an Enterprise Bean with
 Declarative Security</a></p>
 </li>
 <li>
-<p><a href="#BNCAA">The converter-secure Example: Securing an Enterprise Bean
+<p><a href="#the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security">The converter-secure Example: Securing an Enterprise Bean
 with Programmatic Security</a></p>
 </li>
 </ul>
@@ -91,7 +91,7 @@ Mechanisms</a>.</p>
 <div class="paragraph">
 <p>This example demonstrates security by starting with the unsecured
 enterprise bean application, <code>cart</code>, which is found in the
-<code>_tut-install_/examples/ejb/cart/</code> directory and is discussed in
+<code><em>tut-install</em>/examples/ejb/cart/</code> directory and is discussed in
 <a href="ejb-basicexamples002.html#BNBOD">The cart Example</a>.</p>
 </div>
 <div class="paragraph">
@@ -109,7 +109,7 @@ what needs to be done should you wish to create a similar application.</p>
 this tutorial starts with this example and demonstrates adding basic
 authentication of the client to this application. The example
 application discussed in this section can be found at
-<code>_tut-install_/examples/security/cart-secure/</code>.</p>
+<code><em>tut-install</em>/examples/security/cart-secure/</code>.</p>
 </li>
 <li>
 <p>If you have not already done so, complete the steps in
@@ -136,7 +136,7 @@ cart-secure Example Using Maven</a>.</p>
 <p>The source code for the original <code>cart</code> application was modified as
 shown in the following code snippet (modifications in bold). The
 resulting file can be found in the file
-<code>_tut-install_/examples/security/cart-secure/cart-secure-ejb/src/main/java/javaeetutorial/cart/ejb/CartBean.java</code>.</p>
+<code><em>tut-install</em>/examples/security/cart-secure/cart-secure-ejb/src/main/java/javaeetutorial/cart/ejb/CartBean.java</code>.</p>
 </div>
 <div class="paragraph">
 <p>The code snippet is as follows:</p>
@@ -369,17 +369,17 @@ only when the requester is in the role of <code>TutorialUser</code>.</p>
 </div>
 <div class="paragraph">
 <p>This example can be found in the
-<code>_tut-install_/examples/security/converter-secure</code> directory. This
+<code><em>tut-install</em>/examples/security/converter-secure</code> directory. This
 example is based on the unsecured enterprise bean application,
 <code>converter</code>, which is discussed in
 <a href="ejb-gettingstarted.html#GIJRE">Chapter 36, "Getting Started with
 Enterprise Beans"</a> and is found in the
-<code>_tut-install_/examples/ejb/converter/</code> directory. This section builds on
+<code><em>tut-install</em>/examples/ejb/converter/</code> directory. This section builds on
 the example by adding the necessary elements to secure the application
 by using the <code>getCallerPrincipal</code> and <code>isCallerInRole</code> methods, which
 are discussed in more detail in
-<a href="security-javaee002.html#GJGCR">Accessing an Enterprise Bean Caller&#8217;s
-Security Context</a>.</p>
+link:security-javaee002.html#securing-an-enterprise-bean-programmatically
+[Securing an Enterprise Bean Programmatically].</p>
 </div>
 <div class="paragraph">
 <p>In general, the following steps are necessary when using the
@@ -424,7 +424,7 @@ of <code>TutorialUser</code>. If the user is in the correct role, the currency
 conversion is computed and displayed. If the user is not in the correct
 role, the computation is not performed, and the application displays the
 result as <code>0</code>. The code example can be found in
-<code>_tut-install_/examples/security/converter-secure/converter-secure-ejb/src/main/java/javaeetutorial/converter/ejb/ConverterBean.java</code>.</p>
+<code><em>tut-install</em>/examples/security/converter-secure/converter-secure-ejb/src/main/java/javaeetutorial/converter/ejb/ConverterBean.java</code>.</p>
 </div>
 <div class="paragraph">
 <p>The code snippet (with modifications shown in bold) is as follows:</p>
@@ -608,7 +608,7 @@ Server and has been assigned to the group <code>TutorialUser</code>; then click 
 		</td>
 
 		<td align="left">
-		<a href="security-advanced.html">
+		<a href="security-api.html">
 			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
 			<span style="position:relative;top:-2px;">Next</span>
 		</a>

@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>About the Java EE Security API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b>
+	 <!-- <p class="beta">Beta Draft (Pre-General Availability)</p> -->
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-api.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api002.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="about-the-java-ee-security-api">About the Java EE Security API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Java EE includes support for JSR 375, which defines portable, plug-in interfaces
+for authentication and identity stores, and a new injectable-type SecurityContext
+interface that provides an access point for programmatic security. You can use
+the built-in implementations of these APIs, or define custom
+implementations.</p>
+</div>
+<div class="paragraph">
+<p>The Java EE Security API contains the following packages:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>javax.security.enterprise</code> package is the main Java EE security API package
+and contains classes and interfaces that span authentication, authorization, and
+identity concerns. <a href="#main-classes-and-interfaces-in-enterprise">Table 51-1</a> lists
+the main class and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.security.enterprise.authentication.mechanism.http</code> package contains
+classes and interfaces associated with HTTP-based authentication mechanisms that
+can interact with a caller or third-parties as part of an authentication protocol.
+<a href="#main-classes-and-interfaces-in-authentication">Table 51-2</a> lists the main classes
+and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.javax.security.enterprise.credential</code> package contains classes and
+interfaces for representing user credentials. <a href="#main-classes-and-interfaces-in-credential">Table 51-3</a>
+lists the main classes and interfaces in this package.</p>
+</li>
+<li>
+<p>The <code>javax.security.enterprise.identitystore</code> package contains classes and
+interfaces associated with identity stores that validate a caller&#8217;s credentials
+and lookup caller groups. <a href="#main-classes-and-interfaces-in-identitystore">Table 51-4</a>
+lists the main classes and interfaces in this package.</p>
+</li>
+</ul>
+</div>
+<div id="main-classes-and-interfaces-in-enterprise" class="paragraph">
+<p><strong>Table 51-1  Main Classes and Interfaces in javax.security.enterprise</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SecurityContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Injectable-type interface that provides an access point for
+programmatic security intended to be used by application code to query and interact
+with the Java EE Security API.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CallerPrincipal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Principal type that can represent the identity of the
+application caller.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AuthenticationStatus</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enum used to indicate the return value from an authentication
+mechanism.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AuthenticationException</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that a problem occurred during the
+authentication process.</p></td>
+</tr>
+</tbody>
+</table>
+<div id="main-classes-and-interfaces-in-authentication" class="paragraph">
+<p><strong>Table 51-2 Main Classes and Interfaces in javax.security.enterprise.authentication.mechanism.http</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HttpAuthenticationMechanism</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface representing an HTTP authentication mechanism.
+Developers can provide their own implementation of this interface, or use one of
+several built-in HTTP authentication mechanisms.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HttpMessageContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface representing the parameters passed to/from methods
+of an <code>HttpAuthenticationMechanism</code> at runtime.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AuthenticationParameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class that carries parameters passed to the
+<code>SecurityContext.authenticate()</code> method.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HttpMessageContextWrapper</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abstract class developers can extend to
+customize <code>HttpMessageContext</code> behavior.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Note:</strong>
+The <code>javax.security.enterprise.authentication.mechanism.http</code> package also includes
+a number of annotation classes that are used to configure/enable the built-in
+authentication mechanisms or to modify the behavior of an authentication mechanism.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div id="main-classes-and-interfaces-in-credential" class="paragraph">
+<p><strong>Table 51-3 Main Classes and Interfaces in javax.security.enterprise.credential</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Credential</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface that represents a generic credential and defines
+several methods to operate on credentials. All other classes in this package
+are implementations of the Credential interface.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractClearableCredential</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abstract class implementing behavior common to
+Credentials that can be meaningfully cleared.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BasicAuthenticationCredential</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class that extends <code>UsernamePasswordCredential</code>
+to represent credentials used by HTTP Basic Authentication.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CallerOnlyCredential</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Credential that contains a caller name only; can be
+used to assert an identity, but not to authenticate a user, due to the lack of
+any secret or other credential that can be validated.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class that represents a text-based password.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RememberMeCredential</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class that represents a credential presented as a token,
+for the explicit usage with the JSR 375 remember me function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UsernamePasswordCredential</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class that represents the credentials typically
+used by standard caller name/password authentication.</p></td>
+</tr>
+</tbody>
+</table>
+<div id="main-classes-and-interfaces-in-identitystore" class="paragraph">
+<p><strong>Table 51-4 Main Classes and Interfaces in javax.security.enterprise.identitystore</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Class or Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IdentityStore</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface representing an Identity Store.
+Developers can provide their own implementation of this interface, or use one of
+the built-in Identity Stores.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IdentityStoreHandler</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface that defines the method applications use to
+interact with Identity Stores. Applications can use the built-in
+IdentityStoreHandler, or supply their own implementation if custom behavior is desired.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PasswordHash</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface defining methods for generating and
+validating password hashes, needed to securely validate passwords when using
+the built-in Database Identity Store. Developers can implement this interface
+to generate/validate password hashes using any desired algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pbkdf2PasswordHash</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marker interface implemented by the built-in PBKDF2
+PasswordHash implementation. Developers can use this interface to select the
+built-in PBKDF2 algorithm when configuring the Database Identity Store.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RememberMeIdentityStore</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface defining a special type of Identity Store,
+used in conjunction with the RememberMe annotation to provide RememberMe
+behavior for an application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CredentialValidationResult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class that represents the result from an attempt
+to validate a Credential.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IdentityStorePermission</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Permission required to invoke the <code>getGroups</code> method of an
+IdentityStore, when a SecurityManager is configured.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-api.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-api002.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<!--<p align="center" class="beta">Beta Draft (Pre-General Availability)</p> -->
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Running the Custom Identity Store Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/96c4d89611.js"></script>
+  </head>
+  <body>
+<table id="doc-title" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="left" valign="top">
+  <b>Java Platform, Enterprise Edition (Java EE) 8</b><br />
+  <b>The Java EE Tutorial</b>
+	 <!-- <p class="beta">Beta Draft (Pre-General Availability)</p> -->
+  </td>
+  </tr>
+</table>
+<hr />
+
+<table width="90%" id="top-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>
+		<td align="left">
+		<a href="security-api004.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class=" vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+
+<div class="sect1">
+<h2 id="running-the-custom-identity-store-example">Running the Custom Identity Store Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The example described in this section demonstrates how to bundle and use a custom
+identity store in your application for credential validation.</p>
+</div>
+<div class="paragraph">
+<p>Topics include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#overview-of-the-custom-identity-store-example">Overview of the Custom Identity Store Example</a></p>
+</li>
+<li>
+<p><a href="#running-the-custom-id-store-example">Running the custom-identity-store Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="overview-of-the-custom-identity-store-example">Overview of the Custom Identity Store Example</h3>
+<div class="paragraph">
+<p>As an alternative to using a built-in identity store, an application can provide
+its own IdentityStore. When bundled with the application,
+this custom identity store can then be used for authentication and authorization.</p>
+</div>
+<div class="paragraph">
+<p>This example demonstrates how to define a custom identity store, <code>TestIdentityStore</code>, and
+provide it as part of the application being deployed. The authentication mechanism used is
+<code>BasicAuthenticationMechanism</code>.</p>
+</div>
+<div class="paragraph">
+<p>The source code for this example is in the
+<code><em>tut-install</em>/examples/security/security-api/custom-identity-store</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The following sections describe the high-level process for defining
+the <code>TestIdentityStore</code>. Note that the configuration described in these sections has
+already been completed in the application files, but is provided here to illustrate
+what you need to do to use a custom identity store.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#define-the-users-and-groups-in-the-identity-store">Define the Users and Groups in the Identity Store</a></p>
+</li>
+<li>
+<p><a href="#specify-the-authentication-mechanism">Specify the Authentication Mechanism</a></p>
+</li>
+<li>
+<p><a href="#declare-roles-in-the-servlet-container">Declare Roles in the Servlet Container</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a request that includes credentials is sent to the application, the configured
+authentication mechanism comes into effect and authentication is performed
+against the <code>TestIdentityStore</code> as defined in the application.</p>
+</div>
+<div class="paragraph">
+<p>Post authentication, the application also verifies the roles the caller is in and
+sends the details as part of the response.</p>
+</div>
+<div class="paragraph">
+<p>Note that in GlassFish, if the user provides the wrong credentials when using
+<code>BasicAuthenticationMechanism</code>, then the <code>realmName</code>
+is presented to user, as a hint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">curl -I -u Joe http://localhost:8080/custom-identity-store/servlet
+Enter host password for user 'Joe':
+HTTP/1.1 401 Unauthorized
+Server: GlassFish Server Open Source Edition  5.0
+X-Powered-By: Servlet/3.1 JSP/2.3 (GlassFish Server Open Source Edition  5.0  Java/Oracle Corporation/1.8)
+WWW-Authenticate: Basic realm="file"
+Content-Length: 1090
+Content-Language:
+Content-Type: text/html</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="define-the-users-and-groups-in-the-identity-store">Define the Users and Groups in the Identity Store</h4>
+<div class="paragraph">
+<p>The following table shows the user, password, and group used in this example.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 40%;">
+<col style="width: 30%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Password</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Group</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Joe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secret1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">foo, bar</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following code snippet shows how you define the credentials and the roles
+assigned to users in the <code>TestIdentityStore.java</code> file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">if (usernamePasswordCredential.compareTo("Joe", "secret1")) {
+    return new CredentialValidationResult("Joe", new HashSet&lt;&gt;(asList("foo", "bar")));
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="specify-the-authentication-mechanism">Specify the Authentication Mechanism</h4>
+<div class="paragraph">
+<p>In this application, credentials are validated using the BASIC authentication mechanism.
+Specify the <code>@BasicAuthenticationMechanismDefinition</code> annotation in the <code>ApplicationConfig.java</code>
+to ensure that the <code>BasicAuthenticationMechanism</code>
+is used to perform credential validation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@BasicAuthenticationMechanismDefinition(
+        realmName = "file"
+)
+
+@ApplicationScoped
+@Named
+public class ApplicationConfig {
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="declare-roles-in-the-servlet-container">Declare Roles in the Servlet Container</h4>
+<div class="paragraph">
+<p>When a request is made to the application, the roles the user is in are
+returned as part of the response. Note that the container needs to be made aware
+of the supported roles, which are defined using the <code>@Declareroles({ "foo", "bar", "kaz" })</code>
+annotation as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">@DeclareRoles({ "foo", "bar", "kaz" })
+@WebServlet("/servlet")
+public class Servlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String webName = null;
+        if (request.getUserPrincipal() != null) {
+            webName = request.getUserPrincipal().getName();
+        }
+
+        response.getWriter().write("web username: " + webName + "\n");
+
+        response.getWriter().write("web user has role \"foo\": " + request.isUserInRole("foo") + "\n");
+        response.getWriter().write("web user has role \"bar\": " + request.isUserInRole("bar") + "\n");
+        response.getWriter().write("web user has role \"kaz\": " + request.isUserInRole("kaz") + "\n");
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In GlassFish 5.0, group to role mapping is enabled by default. Therefore, you do
+not need to bundle <code>web.xml</code> with the application to provide mapping between roles
+and groups.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-the-custom-id-store-example">Running the custom-identity-store Example</h3>
+<div class="paragraph">
+<p>You can use either NetBeans IDE or Maven to build, package, deploy, and run the <code>custom-identity-store</code> application
+as described in the following topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#to-build-package-and-deploy-the-custom-identity-store-example-using-netbeans-ide">To Build, Package, and Deploy the custom-identity-store Example Using NetBeans IDE</a></p>
+</li>
+<li>
+<p><a href="#to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven">To Build, Package, and Deploy the custom-identity-store Example Using Maven</a></p>
+</li>
+<li>
+<p><a href="#to-run-the-custom-identity-store-example">To Run the custom-identity-store Example</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-custom-identity-store-example-using-netbeans-ide">To Build, Package, and Deploy the custom-identity-store Example Using NetBeans IDE</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If you have not already done so, start the GlassFish server. See
+<a href="usingexamples002.html#starting-and-stopping-glassfish-server">Starting and Stopping GlassFish Server</a>.</p>
+</li>
+<li>
+<p>From the File menu, choose Open Project.</p>
+</li>
+<li>
+<p>In the Open Project dialog box, navigate to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/security-api</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>custom-identity-store</code> folder.</p>
+</li>
+<li>
+<p>Click Open Project.</p>
+</li>
+<li>
+<p>In the Projects tab, right-click the <code>custom-identity-store</code> project and
+select Build.</p>
+<div class="paragraph">
+<p>This command builds and deploys the example application to your
+GlassFish Server instance.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven">To Build, Package, and Deploy the custom-identity-store Example Using Maven</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If you have not already done so, start the GlassFish server. See
+<a href="usingexamples002.html#starting-and-stopping-glassfish-server">Starting and Stopping GlassFish Server</a>..</p>
+</li>
+<li>
+<p>In a terminal window, go to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">tut-install/examples/security/security-api/custom-identity-store</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command builds and packages the application into a WAR file,
+<code>custom-identity-store.war</code>, that is located in the <code>target</code> directory, then
+deploys the WAR file.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-run-the-custom-identity-store-example">To Run the custom-identity-store Example</h4>
+<div class="paragraph">
+<p>In this example, use the credentials of user <code>Joe</code> to make a request and
+to validate the response according to the credentials defined in <code>TestIdentityStore</code>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make a request to the deployed application using valid credentials by entering
+the following request URL in your web browser:</p>
+<div class="paragraph">
+<p>Request URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/custom-identity-store/servlet?name=Joe&amp;password=secret1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">web username: Joe
+web user has role "foo": true
+web user has role "bar": true
+web user has role "kaz": false</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Test the authentication using invalid credentials. Make a request to the
+deployed application by entering the following request URL
+in your web browser:</p>
+<div class="paragraph">
+<p>Request URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">http://localhost:8080/custom-identity-store/servlet?name=Joe&amp;password=secret3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">HTTP Status 401 - Unauthorized
+
+type Status report
+
+message Unauthorized
+
+description This request requires HTTP authentication.
+
+GlassFish Server Open Source Edition 5</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr />
+
+<table width="90%" id="bottom-nav" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="12%"/>
+		<col width="12%"/>
+		<col width="*"/>
+	</colgroup>
+	<tr>		
+		<td align="left">
+		<a href="security-api004.html">
+			<span class=" vector-font"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Previous</span>
+		</a>
+		</td>
+
+		<td align="left">
+		<a href="security-advanced.html">
+			<span class="vector-font"><i class="fa fa-arrow-circle-right vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Next</span>
+		</a>
+		</td>
+
+		<td align="right">
+		<a href="toc.html">
+			<span class="vector-font"><i class="fa fa-list vector-font" aria-hidden="true"></i></span>
+			<span style="position:relative;top:-2px;">Contents</span>
+		</a>
+		</td>
+	</tr>
+</table>
+
+<span id="copyright">
+	<a href="img/cpyr.adoc">
+		<img src="img/oracle.gif" height="10px" alt="Oracle Logo" />&nbsp;			
+		<span>Copyright&nbsp;&copy;&nbsp;2017,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+	</a>
+</span>
+<!--<p align="center" class="beta">Beta Draft (Pre-General Availability)</p> -->
+
+</body>
+</html>
