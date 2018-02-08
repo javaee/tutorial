@@ -118,7 +118,7 @@ image:img/javaeett_dt_028.png[
 "Diagram of point-to-point messaging, showing Client 1 sending a message
 to a queue, and Client 2 consuming and acknowledging the message"]
 
-Use PTP messaging when every message you send must be processed
+Use PTP messaging when every message you send can only be processed
 successfully by one consumer.
 
 [[BNCED]]
