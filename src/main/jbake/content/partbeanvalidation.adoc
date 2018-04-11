@@ -9,13 +9,9 @@ Bean Validation
 
 [[sthref1322]][[JEETT001301]]
 
-[[part-iv]]
-Part IV +
----------
-
-[[bean-validation]]
-Bean Validation
----------------
+[[part-iv-bean-validation]]
+Part IV Bean Validation
+-----------------------
 
 Part IV explores Java API for JavaBean Validation ("Bean Validation").
 This part contains the following chapters:

@@ -9,13 +9,9 @@ Introduction
 
 [[GFIRP]][[JEETT00127]]
 
-[[part-i]]
-Part I +
---------
-
-[[introduction]]
-Introduction
-------------
+[[part-i-introduction]]
+Part I Introduction
+-------------------
 
 Part I introduces the platform, the tutorial, and the examples. This
 part contains the following chapters:

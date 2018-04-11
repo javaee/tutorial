@@ -9,13 +9,9 @@ Java EE Supporting Technologies
 
 [[GIJUE]][[JEETT00134]]
 
-[[part-xi]]
-Part XI +
----------
-
-[[java-ee-supporting-technologies]]
-Java EE Supporting Technologies
--------------------------------
+[[part-xi-java-ee-supporting-technologies]]
+Part XI Java EE Supporting Technologies
+---------------------------------------
 
 Part XI explores several technologies that support the Java EE platform.
 This part contains the following chapters:

@@ -9,13 +9,9 @@ Web Services
 
 [[BNAYK]][[JEETT00129]]
 
-[[part-vi]]
-Part VI +
----------
-
-[[web-services]]
-Web Services
-------------
+[[part-vi-web-services]]
+Part VI Web Services
+--------------------
 
 Part VI explores web services. This part contains the following
 chapters:

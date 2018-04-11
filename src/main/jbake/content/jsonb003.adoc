@@ -27,7 +27,7 @@ The following topics are addressed here:
 
 [[components-of-the-jsonbbasics-example-application]]
 Components of the jsonbbasics Example Application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `jsonbbasics` example application contains the following files.
 
@@ -48,7 +48,7 @@ uses the JSON Binding API.
 
 [[running-the-jsonbbasics-example-application]]
 Running the jsonbbasics Example Application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This section describes how to run the `jsonbbasics` example application
 from the command line using Maven.

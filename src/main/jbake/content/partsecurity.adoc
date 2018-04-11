@@ -8,13 +8,9 @@ prev=jms-examples010.html
 
 [[GIJRP]][[JEETT00133]]
 
-[[part-x]]
-Part X +
---------
-
-[[security]]
-Security
---------
+[[part-x-security]]
+Part X Security
+---------------
 
 Part X explores security concepts and examples. This part contains the
 following chapters:

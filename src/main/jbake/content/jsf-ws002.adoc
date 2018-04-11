@@ -37,7 +37,7 @@ to explicitly specify the port:
 
 [[websocket-usage-client-side]]
 WebSocket Usage: Client Side
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Declare the `f:websocket tag` in the JSF view with a channel name and
 an `onmessage` JavaScript listener function.
@@ -79,7 +79,7 @@ the document is unloaded.
 
 [[websocket-usage-server-side]]
 WebSocket Usage: Server Side
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On the Java programming side, inject a `PushContext` using the `@Push` annotation
 on the given channel in any CDI or container managed artifact, such as `@Named`,

@@ -9,13 +9,9 @@ Messaging
 
 [[GFIRP3]][[JEETT1712]]
 
-[[part-ix]]
-Part IX +
----------
-
-[[messaging]]
-Messaging
----------
+[[part-ix-messaging]]
+Part IX Messaging
+-----------------
 
 Part IX introduces messaging. This part contains the following chapters:
 

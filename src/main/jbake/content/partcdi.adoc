@@ -9,13 +9,9 @@ Contexts and Dependency Injection for Java EE
 
 [[GJBNR]][[JEETT00131]]
 
-[[part-v]]
-Part V +
---------
-
-[[contexts-and-dependency-injection-for-java-ee]]
-Contexts and Dependency Injection for Java EE
----------------------------------------------
+[[part-v-contexts-and-dependency-injection-for-java-ee]]
+Part V Contexts and Dependency Injection for Java EE
+----------------------------------------------------
 
 Part V explores Contexts and Dependency Injection for Java EE (CDI).
 This part contains the following chapters:

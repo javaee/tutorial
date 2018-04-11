@@ -9,13 +9,9 @@ Persistence
 
 [[BNBPY]][[JEETT00132]]
 
-[[part-viii]]
-Part VIII +
------------
-
-[[persistence]]
-Persistence
------------
+[[part-viii-persistence]]
+Part VIII Persistence
+---------------------
 
 Part VIII explores the Java Persistence API. This part contains the
 following chapters:

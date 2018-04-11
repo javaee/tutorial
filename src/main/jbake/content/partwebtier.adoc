@@ -9,13 +9,9 @@ The Web Tier
 
 [[BNADP]][[JEETT00128]]
 
-[[part-iii]]
-Part III +
-----------
-
-[[the-web-tier]]
-The Web Tier
-------------
+[[part-iii-the-web-tier]]
+Part III The Web Tier
+---------------------
 
 Part III explores the technologies in the web tier. This part contains
 the following chapters:

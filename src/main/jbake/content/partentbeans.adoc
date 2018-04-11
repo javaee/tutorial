@@ -9,13 +9,9 @@ Enterprise Beans
 
 [[BNBLR]][[JEETT00130]]
 
-[[part-vii]]
-Part VII +
-----------
-
-[[enterprise-beans]]
-Enterprise Beans
-----------------
+[[part-vii-enterprise-beans]]
+Part VII Enterprise Beans
+-------------------------
 
 Part VII explores Enterprise JavaBeans components. This part contains
 the following chapters:

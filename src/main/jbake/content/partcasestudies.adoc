@@ -9,13 +9,9 @@ Case Studies
 
 [[GKGJW]][[JEETT00135]]
 
-[[part-xii]]
-Part XII +
-----------
-
-[[case-studies]]
-Case Studies
-------------
+[[part-xii-case-studies]]
+Part XII Case Studies
+---------------------
 
 Part XII presents case studies that use a variety of Java EE
 technologies. This part contains the following chapters:

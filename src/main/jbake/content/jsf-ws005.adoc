@@ -48,7 +48,7 @@ function someWebsocketListener(message) {
 
 [[websocket-events-server]]
 WebSocket Events: Server
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a session or view-scoped socket is automatically closed with close reason
 code `1000` by the server (and thus, not manually closed by the client
