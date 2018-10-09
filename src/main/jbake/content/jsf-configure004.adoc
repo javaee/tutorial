@@ -155,7 +155,7 @@ configuration for the following reasons.
 * The flow does not call another flow, nor does it pass parameters to
 another flow.
 * The flow uses default names for the first page of the flow,
-flow-name`.xhtml`, and the return page, flow-name`-return.xhtml`.
+flow-name`.xhtml`, and the return page, flow-name-`return.xhtml`.
 
 This example has only four Facelets pages.
 
@@ -299,7 +299,7 @@ other. Both flows have explicit flow definitions. One flow,
 `joinFlow`, is specified in a configuration file.
 
 The source code for this application is in the
-tut-install`/examples/web/jsf/checkout-module/` directory.
+`tut-install/examples/web/jsf/checkout-module/` directory.
 
 For the `checkout-module` application, the directory structure is as
 follows (there is also a `src/main/webapp/resources` directory with a
@@ -428,14 +428,14 @@ Using a Configuration File to Configure a Flow
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you use an application configuration resource file to configure a
-flow, it must be named flowName`-flow.xml`. In this example, the join
+flow, it must be named flowName-`flow.xml`. In this example, the join
 flow uses a configuration file named `joinFlow-flow.xml`. The file is a
 `faces-config` file that specifies a `flow-definition` element. This
 element must define the flow name using the `id` attribute. Under the
 `flow-definition` element, there must be a `flow-return` element that
 specifies the return point for the flow. Any inbound parameters are
 specified with `inbound-parameter` elements. If the flow calls another
-flow, the `call-flow` element must use the flow-reference element to
+flow, the `flow-call` element must use the flow-reference element to
 name the called flow and may use the `outbound-parameter` element to
 specify any outbound parameters.
 
