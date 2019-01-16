@@ -7,9 +7,8 @@ prev=interceptors003.html
 Batch Processing
 ================
 
-[[GKJIQ6]]
+[[GKJIQ6]][[batch-processing]]
 
-[[batch-processing]]
 59 Batch Processing
 -------------------
 

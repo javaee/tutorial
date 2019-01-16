@@ -7,9 +7,8 @@ prev=partplatform.html
 Resource Creation
 =================
 
-[[GKJIQ2]]
+[[GKJIQ2]][[resource-creation]]
 
-[[resource-creation]]
 3 Resource Creation
 -------------------
 

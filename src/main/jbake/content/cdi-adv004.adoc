@@ -7,9 +7,8 @@ prev=cdi-adv003.html
 = Using Predefined Beans in CDI Applications
 
 
-[[CJGHGDBA]]
+[[CJGHGDBA]][[using-predefined-beans-in-cdi-applications]]
 
-[[using-predefined-beans-in-cdi-applications]]
 Using Predefined Beans in CDI Applications
 ------------------------------------------
 

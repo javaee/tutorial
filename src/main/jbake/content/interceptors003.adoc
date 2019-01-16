@@ -7,9 +7,8 @@ prev=interceptors002.html
 The interceptor Example Application
 ===================================
 
-[[GKECI]]
+[[GKECI]][[the-interceptor-example-application]]
 
-[[the-interceptor-example-application]]
 The interceptor Example Application
 -----------------------------------
 
@@ -66,9 +65,8 @@ application that consists of two Facelets views: `index.xhtml`, which
 contains a form for entering the name, and `response.xhtml`, which
 displays the final name.
 
-[[sthref260]]
+[[sthref260]][[running-the-interceptor-example]]
 
-[[running-the-interceptor-example]]
 Running the interceptor Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,9 +78,8 @@ The following topics are addressed here:
 * link:#GKEDF[To Run the interceptor Example Using NetBeans IDE]
 * link:#GKECT[To Run the interceptor Example Using Maven]
 
-[[GKEDF]]
+[[GKEDF]][[to-run-the-interceptor-example-using-netbeans-ide]]
 
-[[to-run-the-interceptor-example-using-netbeans-ide]]
 To Run the interceptor Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -112,9 +109,8 @@ http://localhost:8080/interceptor/
 The name will be converted to lowercase by the method interceptor
 defined in the `HelloInterceptor` class.
 
-[[GKECT]]
+[[GKECT]][[to-run-the-interceptor-example-using-maven]]
 
-[[to-run-the-interceptor-example-using-maven]]
 To Run the interceptor Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=webapp.html
 Web Applications
 ================
 
-[[GEYSJ]]
+[[GEYSJ]][[web-applications]]
 
-[[web-applications]]
 Web Applications
 ----------------
 

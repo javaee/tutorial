@@ -7,9 +7,8 @@ prev=servlets014b.html
 = The mood Example Application
 
 
-[[GKCPG]]
+[[GKCPG]][[the-mood-example-application]]
 
-[[the-mood-example-application]]
 The mood Example Application
 ----------------------------
 
@@ -25,9 +24,8 @@ The following topics are addressed here:
 * link:#CHDEBFCB[Components of the mood Example Application]
 * link:#GKCOJ[Running the mood Example]
 
-[[CHDEBFCB]]
+[[CHDEBFCB]][[components-of-the-mood-example-application]]
 
-[[components-of-the-mood-example-application]]
 Components of the mood Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,9 +63,8 @@ statement that sets Duke's mood based on the current time.
 `SimpleServletListener` logs changes in the servlet's lifecycle. The log
 entries appear in the server log.
 
-[[GKCOJ]]
+[[GKCOJ]][[running-the-mood-example]]
 
-[[running-the-mood-example]]
 Running the mood Example
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -79,9 +76,8 @@ The following topics are addressed here:
 * link:#GKCOB[To Run the mood Example Using NetBeans IDE]
 * link:#GKCPJ[To Run the mood Example Using Maven]
 
-[[GKCOB]]
+[[GKCOB]][[to-run-the-mood-example-using-netbeans-ide]]
 
-[[to-run-the-mood-example-using-netbeans-ide]]
 To Run the mood Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -111,9 +107,8 @@ The URL specifies the context root, followed by the URL pattern.
 A web page appears with the title "Servlet MoodServlet at /mood", a text
 string describing Duke's mood, and an illustrative graphic.
 
-[[GKCPJ]]
+[[GKCPJ]][[to-run-the-mood-example-using-maven]]
 
-[[to-run-the-mood-example-using-maven]]
 To Run the mood Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

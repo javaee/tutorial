@@ -7,9 +7,8 @@ prev=jsf-ajax011.html
 = Further Information about Ajax in JavaServer Faces Technology
 
 
-[[GKSDK]]
+[[GKSDK]][[further-information-about-ajax-in-javaserver-faces-technology]]
 
-[[further-information-about-ajax-in-javaserver-faces-technology]]
 Further Information about Ajax in JavaServer Faces Technology
 -------------------------------------------------------------
 

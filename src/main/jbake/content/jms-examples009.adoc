@@ -7,9 +7,8 @@ prev=jms-examples008.html
 = Using an Entity to Join Messages from Two MDBs
 
 
-[[BNCHF]]
+[[BNCHF]][[using-an-entity-to-join-messages-from-two-mdbs]]
 
-[[using-an-entity-to-join-messages-from-two-mdbs]]
 Using an Entity to Join Messages from Two MDBs
 ----------------------------------------------
 
@@ -32,9 +31,8 @@ The following topics are addressed here:
 Example]
 * link:#CHDEEDJH[Running the clientmdbentity Example]
 
-[[BNCHG]]
+[[BNCHG]][[overview-of-the-clientmdbentity-example-application]]
 
-[[overview-of-the-clientmdbentity-example-application]]
 Overview of the clientmdbentity Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -102,13 +100,13 @@ entity.
 [[BNCHH]]
 
 .*Figure 49-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity*
+
 image:img/javaeett_dt_038.png[
 "Diagram of application showing an application client, two message-driven
 beans, and an entity, as well as the associated topic and queue"]
 
-[[BNCHI]]
+[[BNCHI]][[writing-the-application-components-for-the-clientmdbentity-example]]
 
-[[writing-the-application-components-for-the-clientmdbentity-example]]
 Writing the Application Components for the clientmdbentity Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -122,9 +120,8 @@ The following topics are addressed here:
 Example]
 * link:#BNCHL[Coding the Entity Class for the clientmdbentity Example]
 
-[[BNCHJ]]
+[[BNCHJ]][[coding-the-application-client-humanresourceclient.java]]
 
-[[coding-the-application-client-humanresourceclient.java]]
 Coding the Application Client: HumanResourceClient.java
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -150,9 +147,8 @@ the message listener displays the information received and determines
 whether all five messages have arrived. When they have, the message
 listener notifies the `main` method, which then exits.
 
-[[BNCHK]]
+[[BNCHK]][[coding-the-message-driven-beans-for-the-clientmdbentity-example]]
 
-[[coding-the-message-driven-beans-for-the-clientmdbentity-example]]
 Coding the Message-Driven Beans for the clientmdbentity Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -184,9 +180,8 @@ information from the message, creates a `JMSProducer`, and sends a reply
 message that contains the information stored in the entity.
 4.  It removes the entity.
 
-[[BNCHL]]
+[[BNCHL]][[coding-the-entity-class-for-the-clientmdbentity-example]]
 
-[[coding-the-entity-class-for-the-clientmdbentity-example]]
 Coding the Entity Class for the clientmdbentity Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -242,9 +237,8 @@ settings:
 </persistence>
 ----
 
-[[CHDEEDJH]]
+[[CHDEEDJH]][[running-the-clientmdbentity-example]]
 
-[[running-the-clientmdbentity-example]]
 Running the clientmdbentity Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -263,9 +257,8 @@ The following topics are addressed here:
 * link:#CHDICHGH[To Run clientmdbentity Using Maven]
 * link:#CHDCDEEF[Viewing the Application Output]
 
-[[CHDIJDEE]]
+[[CHDIJDEE]][[to-run-clientmdbentity-using-netbeans-ide]]
 
-[[to-run-clientmdbentity-using-netbeans-ide]]
 To Run clientmdbentity Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -301,9 +294,8 @@ The `clientmdbentity.ear` file is created in the
 The command then deploys the EAR file, retrieves the client stubs, and
 runs the application client.
 
-[[CHDICHGH]]
+[[CHDICHGH]][[to-run-clientmdbentity-using-maven]]
 
-[[to-run-clientmdbentity-using-maven]]
 To Run clientmdbentity Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -338,9 +330,8 @@ class, along with the `persistence.xml` file
 The command then deploys the application, retrieves the client stubs,
 and runs the application client.
 
-[[CHDCDEEF]]
+[[CHDCDEEF]][[viewing-the-application-output]]
 
-[[viewing-the-application-output]]
 Viewing the Application Output
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

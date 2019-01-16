@@ -7,9 +7,8 @@ prev=resources001.html
 Metadata Annotations
 ====================
 
-[[GIRDD]]
+[[GIRDD]][[metadata-annotations]]
 
-[[metadata-annotations]]
 Metadata Annotations
 --------------------
 

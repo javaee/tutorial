@@ -7,9 +7,8 @@ prev=injection002.html
 = The Main Differences between Resource Injection and Dependency Injection
 
 
-[[BABHFECJ]]
+[[BABHFECJ]][[the-main-differences-between-resource-injection-and-dependency-injection]]
 
-[[the-main-differences-between-resource-injection-and-dependency-injection]]
 The Main Differences between Resource Injection and Dependency Injection
 ------------------------------------------------------------------------
 

@@ -7,9 +7,8 @@ prev=cdi-basic012.html
 = Configuring a CDI Application
 
 
-[[GJBNZ]]
+[[GJBNZ]][[configuring-a-cdi-application]]
 
-[[configuring-a-cdi-application]]
 Configuring a CDI Application
 -----------------------------
 

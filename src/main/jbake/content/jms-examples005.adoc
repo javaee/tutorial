@@ -7,9 +7,8 @@ prev=jms-examples004.html
 Writing High Performance and Scalable JMS Applications
 ======================================================
 
-[[BABGEFHC]]
+[[BABGEFHC]][[writing-high-performance-and-scalable-jms-applications]]
 
-[[writing-high-performance-and-scalable-jms-applications]]
 Writing High Performance and Scalable JMS Applications
 ------------------------------------------------------
 
@@ -22,9 +21,8 @@ The following topics are addressed here:
 * link:#BABIBEAC[Using Shared Nondurable Subscriptions]
 * link:#BABEJBHA[Using Shared Durable Subscriptions]
 
-[[BABIBEAC]]
+[[BABIBEAC]][[using-shared-nondurable-subscriptions]]
 
-[[using-shared-nondurable-subscriptions]]
 Using Shared Nondurable Subscriptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -51,9 +49,8 @@ will be added to each topic subscription. However, if there are multiple
 consumers on a particular subscription, each message added to that
 subscription will be delivered to only one of those consumers.
 
-[[sthref210]]
+[[sthref210]][[writing-the-clients-for-the-shared-consumer-example]]
 
-[[writing-the-clients-for-the-shared-consumer-example]]
 Writing the Clients for the Shared Consumer Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -88,9 +85,8 @@ For this example, you will use the default connection factory and the
 topic you created in link:jms-examples003.html#BABHEFCB[To Create
 Resources for the Simple Examples].
 
-[[sthref211]]
+[[sthref211]][[to-run-the-sharedconsumer-and-producer-clients]]
 
-[[to-run-the-sharedconsumer-and-producer-clients]]
 To Run the SharedConsumer and Producer Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -146,9 +142,8 @@ message stream.
 7.  Enter `Q` or `q` and press Return to stop each client and see a
 report of the number of text messages received.
 
-[[BABEJBHA]]
+[[BABEJBHA]][[using-shared-durable-subscriptions]]
 
-[[using-shared-durable-subscriptions]]
 Using Shared Durable Subscriptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -176,9 +171,8 @@ consumer = context.createSharedDurableConsumer(topic, "MakeItLast");
 
 You run the example in combination with the `Producer.java` client.
 
-[[sthref212]]
+[[sthref212]][[to-run-the-shareddurableconsumer-and-producer-clients]]
 
-[[to-run-the-shareddurableconsumer-and-producer-clients]]
 To Run the SharedDurableConsumer and Producer Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

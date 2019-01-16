@@ -7,9 +7,8 @@ prev=persistence-string-queries003.html
 Controlling Concurrent Access to Entity Data with Locking
 =========================================================
 
-[[GKJJF]]
+[[GKJJF]][[controlling-concurrent-access-to-entity-data-with-locking]]
 
-[[controlling-concurrent-access-to-entity-data-with-locking]]
 45 Controlling Concurrent Access to Entity Data with Locking
 ------------------------------------------------------------
 

@@ -7,9 +7,8 @@ prev=jsf-ajax006.html
 Receiving an Ajax Response
 ==========================
 
-[[GKDBR]]
+[[GKDBR]][[receiving-an-ajax-response]]
 
-[[receiving-an-ajax-response]]
 Receiving an Ajax Response
 --------------------------
 

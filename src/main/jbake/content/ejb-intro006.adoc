@@ -7,9 +7,8 @@ prev=ejb-intro005.html
 = Naming Conventions for Enterprise Beans
 
 
-[[GIPKS]]
+[[GIPKS]][[naming-conventions-for-enterprise-beans]]
 
-[[naming-conventions-for-enterprise-beans]]
 Naming Conventions for Enterprise Beans
 ---------------------------------------
 

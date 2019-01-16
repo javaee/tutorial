@@ -7,9 +7,8 @@ prev=bean-validation-advanced001.html
 Customizing Validator Messages
 ==============================
 
-[[GKAHI]]
+[[GKAHI]][[customizing-validator-messages]]
 
-[[customizing-validator-messages]]
 Customizing Validator Messages
 ------------------------------
 
@@ -21,9 +20,8 @@ The following topics are addressed here:
 
 * link:#GKAGY[The ValidationMessages Resource Bundle]
 
-[[GKAGY]]
+[[GKAGY]][[the-validationmessages-resource-bundle]]
 
-[[the-validationmessages-resource-bundle]]
 The ValidationMessages Resource Bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -33,9 +31,8 @@ messages. The `ValidationMessages` resource bundle is typically a
 properties file, `ValidationMessages.properties`, in the default package
 of an application.
 
-[[GKAIQ]]
+[[GKAIQ]][[localizing-validation-messages]]
 
-[[localizing-validation-messages]]
 Localizing Validation Messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

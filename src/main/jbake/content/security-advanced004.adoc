@@ -7,9 +7,8 @@ prev=security-advanced003.html
 Securing HTTP Resources
 =======================
 
-[[BABGEJJJ]]
+[[BABGEJJJ]][[securing-http-resources]]
 
-[[securing-http-resources]]
 Securing HTTP Resources
 -----------------------
 

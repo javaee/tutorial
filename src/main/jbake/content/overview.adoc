@@ -7,9 +7,8 @@ prev=partintro.html
 Overview
 ========
 
-[[BNAAW]]
+[[BNAAW]][[overview]]
 
-[[overview]]
 1 Overview
 ----------
 

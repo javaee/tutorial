@@ -7,9 +7,8 @@ prev=cdi-adv-examples004.html
 = The billpayment Example: Using Events and Interceptors
 
 
-[[GKHPA]]
+[[GKHPA]][[the-billpayment-example-using-events-and-interceptors]]
 
-[[the-billpayment-example-using-events-and-interceptors]]
 The billpayment Example: Using Events and Interceptors
 ------------------------------------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 * link:#GKHRQ[The LoggedInterceptor Interceptor Class]
 * link:#GKHPK[Running the billpayment Example]
 
-[[CHDIBGDF]]
+[[CHDIBGDF]][[overview-of-the-billpayment-example]]
 
-[[overview-of-the-billpayment-example]]
 Overview of the billpayment Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -42,9 +40,8 @@ listener handles the event using observer methods.
 The example also defines an interceptor that is set on a class and on
 two methods of another class.
 
-[[GKHOK]]
+[[GKHOK]][[the-paymentevent-event-class]]
 
-[[the-paymentevent-event-class]]
 The PaymentEvent Event Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,9 +77,8 @@ bean using `new` and then populated. For this reason, the CDI container
 cannot intercept the creation of the bean, and hence it cannot allow
 interception of its getter and setter methods.
 
-[[GKHRB]]
+[[GKHRB]][[the-paymenthandler-event-listener]]
 
-[[the-paymenthandler-event-listener]]
 The PaymentHandler Event Listener
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -123,9 +119,8 @@ link:#GKHRJ[The billpayment Facelets Pages and Managed Bean].
 The `PaymentHandler` bean is annotated `@Logged` so that all its methods
 can be intercepted.
 
-[[GKHRJ]]
+[[GKHRJ]][[the-billpayment-facelets-pages-and-managed-bean]]
 
-[[the-billpayment-facelets-pages-and-managed-bean]]
 The billpayment Facelets Pages and Managed Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -285,9 +280,8 @@ expression to display the payment method:
     </h:body>
 ----
 
-[[GKHRQ]]
+[[GKHRQ]][[the-loggedinterceptor-interceptor-class]]
 
-[[the-loggedinterceptor-interceptor-class]]
 The LoggedInterceptor Interceptor Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -350,9 +344,8 @@ annotated `@Logged`, so all their methods are intercepted. In
 `PaymentBean`, only the `pay` and `reset` methods are annotated
 `@Logged`, so only those methods are intercepted.
 
-[[GKHPK]]
+[[GKHPK]][[running-the-billpayment-example]]
 
-[[running-the-billpayment-example]]
 Running the billpayment Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -367,9 +360,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GKHPT[To Run the billpayment Example]
 
-[[GKHQS]]
+[[GKHQS]][[to-build-package-and-deploy-the-billpayment-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-billpayment-example-using-netbeans-ide]]
 To Build, Package, and Deploy the billpayment Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -392,9 +384,8 @@ This command builds and packages the application into a WAR file,
 `billpayment.war`, located in the `target` directory, and then deploys
 it to GlassFish Server.
 
-[[GKHPX]]
+[[GKHPX]][[to-build-package-and-deploy-the-billpayment-example-using-maven]]
 
-[[to-build-package-and-deploy-the-billpayment-example-using-maven]]
 To Build, Package, and Deploy the billpayment Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -418,9 +409,8 @@ This command builds and packages the application into a WAR file,
 `billpayment.war`, located in the `target` directory, and then deploys
 it to GlassFish Server.
 
-[[GKHPT]]
+[[GKHPT]][[to-run-the-billpayment-example]]
 
-[[to-run-the-billpayment-example]]
 To Run the billpayment Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

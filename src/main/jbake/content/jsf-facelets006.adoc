@@ -7,9 +7,8 @@ prev=jsf-facelets005.html
 Web Resources
 =============
 
-[[GIRGM]]
+[[GIRGM]][[web-resources]]
 
-[[web-resources]]
 Web Resources
 -------------
 

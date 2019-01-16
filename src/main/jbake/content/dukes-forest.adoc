@@ -7,9 +7,8 @@ prev=dukes-tutoring004.html
 Duke's Forest Case Study Example
 ================================
 
-[[GLNPW]]
+[[GLNPW]][[dukes-forest-case-study-example]]
 
-[[dukes-forest-case-study-example]]
 63 Duke's Forest Case Study Example
 -----------------------------------
 

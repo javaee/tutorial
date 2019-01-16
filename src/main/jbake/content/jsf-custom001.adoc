@@ -7,9 +7,8 @@ prev=jsf-custom.html
 Introduction to Creating Custom Components
 ==========================================
 
-[[A1350198]]
+[[A1350198]][[introduction-to-creating-custom-components]]
 
-[[introduction-to-creating-custom-components]]
 Introduction to Creating Custom Components
 ------------------------------------------
 

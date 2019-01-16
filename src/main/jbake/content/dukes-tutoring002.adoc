@@ -7,9 +7,8 @@ prev=dukes-tutoring001.html
 Main Interface
 ==============
 
-[[GKAFH]]
+[[GKAFH]][[main-interface]]
 
-[[main-interface]]
 Main Interface
 --------------
 
@@ -26,9 +25,8 @@ The following topics are addressed here:
 * link:#GKADA[Properties Files]
 * link:#GKAEV[Deployment Descriptors Used in Duke's Tutoring]
 
-[[GKAFJ]]
+[[GKAFJ]][[java-persistence-api-entities-used-in-the-main-interface]]
 
-[[java-persistence-api-entities-used-in-the-main-interface]]
 Java Persistence API Entities Used in the Main Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -74,9 +72,8 @@ link:persistence-intro002.html#GKAHQ[Validating Persistent Fields and
 Properties] and link:bean-validation-advanced.html#GKAHP[Chapter 24,
 "Bean Validation: Advanced Topics."]
 
-[[GKAFC]]
+[[GKAFC]][[enterprise-beans-used-in-the-main-interface]]
 
-[[enterprise-beans-used-in-the-main-interface]]
 Enterprise Beans Used in the Main Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -102,9 +99,8 @@ link:persistence-criteria.html#GJITV[Chapter 43, "Using the Criteria API
 to Create Queries."] For information on CDI events, see
 link:cdi-adv005.html#GKHIC[Using Events in CDI Applications].
 
-[[BCGHHCDA]]
+[[BCGHHCDA]][[websocket-endpoint-used-in-the-main-interface]]
 
-[[websocket-endpoint-used-in-the-main-interface]]
 WebSocket Endpoint Used in the Main Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -127,9 +123,8 @@ link:websocket.html#GKJIQ5[Chapter 19, "Java API for WebSocket."] For
 information on CDI events, see link:cdi-adv005.html#GKHIC[Using Events in
 CDI Applications].
 
-[[GKAET]]
+[[GKAET]][[facelets-files-used-in-the-main-interface]]
 
-[[facelets-files-used-in-the-main-interface]]
 Facelets Files Used in the Main Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -164,9 +159,8 @@ interface's navigation bar
 For information on using Facelets, see
 link:jsf-facelets.html#GIEPX[Chapter 8, "Introduction to Facelets."]
 
-[[GKADH]]
+[[GKADH]][[helper-classes-used-in-the-main-interface]]
 
-[[helper-classes-used-in-the-main-interface]]
 Helper Classes Used in the Main Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -184,9 +178,8 @@ a student can have. Possible values are `IN`, `OUT`, and `PARK`.
 also defines a `toString` method that returns a localized translation of
 the status based on the locale.
 
-[[GKADA]]
+[[GKADA]][[properties-files]]
 
-[[properties-files]]
 Properties Files
 ~~~~~~~~~~~~~~~~
 
@@ -228,9 +221,8 @@ located in `Messages_zh.properties`.
 For information on localizing web applications, see
 link:jsf-configure006.html#BNAXB[Registering Application Messages].
 
-[[GKAEV]]
+[[GKAEV]][[deployment-descriptors-used-in-dukes-tutoring]]
 
-[[deployment-descriptors-used-in-dukes-tutoring]]
 Deployment Descriptors Used in Duke's Tutoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=transactions007.html
 Transactions in Web Components
 ==============================
 
-[[BNCJG]]
+[[BNCJG]][[transactions-in-web-components]]
 
-[[transactions-in-web-components]]
 Transactions in Web Components
 ------------------------------
 

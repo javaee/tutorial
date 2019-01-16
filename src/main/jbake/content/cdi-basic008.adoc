@@ -7,9 +7,8 @@ prev=cdi-basic007.html
 = Using Scopes
 
 
-[[GJBBK]]
+[[GJBBK]][[using-scopes]]
 
-[[using-scopes]]
 Using Scopes
 ------------
 

@@ -7,9 +7,8 @@ prev=dukes-bookstore001.html
 The Duke's Bookstore Interface
 ==============================
 
-[[GLQFD]]
+[[GLQFD]][[the-dukes-bookstore-interface]]
 
-[[the-dukes-bookstore-interface]]
 The Duke's Bookstore Interface
 ------------------------------
 
@@ -26,9 +25,8 @@ Bookstore]
 * link:#GLQDG[Properties Files Used in Duke's Bookstore]
 * link:#GLQED[Deployment Descriptors Used in Duke's Bookstore]
 
-[[GLQER]]
+[[GLQER]][[the-book-java-persistence-api-entity]]
 
-[[the-book-java-persistence-api-entity]]
 The Book Java Persistence API Entity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -49,9 +47,8 @@ The `Book` entity defines attributes used in the example:
 
 The `Book` entity also defines a simple named query, `findBooks`.
 
-[[GLQEU]]
+[[GLQEU]][[enterprise-beans-used-in-dukes-bookstore]]
 
-[[enterprise-beans-used-in-dukes-bookstore]]
 Enterprise Beans Used in Duke's Bookstore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -67,9 +64,8 @@ in the `Book` entity.
 the catalog when the application is initially deployed. It calls the
 `createBook` method defined in `BookRequestBean`.
 
-[[GLQDP]]
+[[GLQDP]][[facelets-pages-and-managed-beans-used-in-dukes-bookstore]]
 
-[[facelets-pages-and-managed-beans-used-in-dukes-bookstore]]
 Facelets Pages and Managed Beans Used in Duke's Bookstore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -152,9 +148,8 @@ each page.
 * `ShowCartBean`: Backing bean for the `bookshowcart.xhtml` page.
 Specifies the name `showcart`.
 
-[[GLQDX]]
+[[GLQDX]][[custom-components-and-other-custom-objects-used-in-dukes-bookstore]]
 
-[[custom-components-and-other-custom-objects-used-in-dukes-bookstore]]
 Custom Components and Other Custom Objects Used in Duke's Bookstore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -186,9 +181,8 @@ link:jsf-custom011.html#BNAUS[Creating and Using a Custom Converter].
 `MapBookChangeListener`, and `NameChanged` classes. See
 link:jsf-custom007.html#BNAUT[Implementing an Event Listener].
 
-[[GLQDG]]
+[[GLQDG]][[properties-files-used-in-dukes-bookstore]]
 
-[[properties-files-used-in-dukes-bookstore]]
 Properties Files Used in Duke's Bookstore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -257,9 +251,8 @@ In `Messages.properties`, the key string is defined as follows:
 ChooseBook=Choose a Book from our Catalog
 ----
 
-[[GLQED]]
+[[GLQED]][[deployment-descriptors-used-in-dukes-bookstore]]
 
-[[deployment-descriptors-used-in-dukes-bookstore]]
 Deployment Descriptors Used in Duke's Bookstore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

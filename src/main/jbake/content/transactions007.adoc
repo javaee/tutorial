@@ -7,9 +7,8 @@ prev=transactions006.html
 Updating Multiple Databases
 ===========================
 
-[[BNCJD]]
+[[BNCJD]][[updating-multiple-databases]]
 
-[[updating-multiple-databases]]
 Updating Multiple Databases
 ---------------------------
 

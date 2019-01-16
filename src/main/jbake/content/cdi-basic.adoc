@@ -7,9 +7,8 @@ prev=partcdi.html
 = Introduction to Contexts and Dependency Injection for Java EE
 
 
-[[GIWHB]]
+[[GIWHB]][[introduction-to-contexts-and-dependency-injection-for-java-ee]]
 
-[[introduction-to-contexts-and-dependency-injection-for-java-ee]]
 25 Introduction to Contexts and Dependency Injection for Java EE
 ----------------------------------------------------------------
 

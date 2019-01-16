@@ -7,9 +7,8 @@ prev=jsf-configure007.html
 Registering a Custom Validator
 ==============================
 
-[[BNAXD]]
+[[BNAXD]][[registering-a-custom-validator]]
 
-[[registering-a-custom-validator]]
 Registering a Custom Validator
 ------------------------------
 

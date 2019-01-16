@@ -7,9 +7,8 @@ prev=overview005.html
 Web Services Support
 ====================
 
-[[BNABS]]
+[[BNABS]][[web-services-support]]
 
-[[web-services-support]]
 Web Services Support
 --------------------
 
@@ -39,9 +38,8 @@ the like. The next section introduces XML and explains how parties doing
 business can use XML tags and schemas to exchange data in a meaningful
 way.
 
-[[BNABT]]
+[[BNABT]][[xml]]
 
-[[xml]]
 XML
 ~~~
 
@@ -64,9 +62,8 @@ to create a marketing presentation.
 * Another company might read the XML pricing information into an
 application for processing.
 
-[[BNABU]]
+[[BNABU]][[soap-transport-protocol]]
 
-[[soap-transport-protocol]]
 SOAP Transport Protocol
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -87,9 +84,8 @@ application-defined data types within the message
 * Defines an XML-based convention for representing the request to the
 remote service and the resulting response
 
-[[BNABV]]
+[[BNABV]][[wsdl-standard-format]]
 
-[[wsdl-standard-format]]
 WSDL Standard Format
 ~~~~~~~~~~~~~~~~~~~~
 

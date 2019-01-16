@@ -7,9 +7,8 @@ prev=webservices-intro.html
 What Are Web Services?
 ======================
 
-[[GIJVH]]
+[[GIJVH]][[what-are-web-services]]
 
-[[what-are-web-services]]
 What Are Web Services?
 ----------------------
 

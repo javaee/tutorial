@@ -7,9 +7,8 @@ prev=servlets008.html
 Maintaining Client State
 ========================
 
-[[BNAGM]]
+[[BNAGM]][[maintaining-client-state]]
 
-[[maintaining-client-state]]
 Maintaining Client State
 ------------------------
 
@@ -21,9 +20,8 @@ HTTP is stateless. To support applications that need to maintain state,
 Java Servlet technology provides an API for managing sessions and allows
 several mechanisms for implementing sessions.
 
-[[BNAGN]]
+[[BNAGN]][[accessing-a-session]]
 
-[[accessing-a-session]]
 Accessing a Session
 ~~~~~~~~~~~~~~~~~~~
 
@@ -32,9 +30,8 @@ session by calling the `getSession` method of a request object. This
 method returns the current session associated with this request; or, if
 the request does not have a session, this method creates one.
 
-[[BNAGO]]
+[[BNAGO]][[associating-objects-with-a-session]]
 
-[[associating-objects-with-a-session]]
 Associating Objects with a Session
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -57,9 +54,8 @@ between virtual machines or saved to and restored from persistent
 storage. To receive this notification, your object must implement the
 `javax.servlet.http.HttpSessionActivationListener` interface.
 
-[[BNAGQ]]
+[[BNAGQ]][[session-management]]
 
-[[session-management]]
 Session Management
 ~~~~~~~~~~~~~~~~~~
 
@@ -75,9 +71,8 @@ resets the session's time-to-live counter.
 session's `invalidate` method to invalidate a session on the server side
 and remove any session data.
 
-[[sthref100]]
+[[sthref100]][[to-set-the-timeout-period-using-netbeans-ide]]
 
-[[to-set-the-timeout-period-using-netbeans-ide]]
 To Set the Timeout Period Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -95,9 +90,8 @@ node.
 The integer value represents the number of minutes of inactivity that
 must pass before the session times out.
 
-[[BNAGR]]
+[[BNAGR]][[session-tracking]]
 
-[[session-tracking]]
 Session Tracking
 ~~~~~~~~~~~~~~~~
 

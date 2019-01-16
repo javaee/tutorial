@@ -7,9 +7,8 @@ prev=overview006.html
 Java EE Application Assembly and Deployment
 ===========================================
 
-[[BNABX]]
+[[BNABX]][[java-ee-application-assembly-and-deployment]]
 
-[[java-ee-application-assembly-and-deployment]]
 Java EE Application Assembly and Deployment
 -------------------------------------------
 

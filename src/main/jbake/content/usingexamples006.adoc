@@ -7,9 +7,8 @@ prev=usingexamples005.html
 Tutorial Example Directory Structure
 ====================================
 
-[[GEXAP]]
+[[GEXAP]][[tutorial-example-directory-structure]]
 
-[[tutorial-example-directory-structure]]
 Tutorial Example Directory Structure
 ------------------------------------
 

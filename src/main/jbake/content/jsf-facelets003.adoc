@@ -7,9 +7,8 @@ prev=jsf-facelets002.html
 Developing a Simple Facelets Application: The guessnumber-jsf Example Application
 =================================================================================
 
-[[GIPOB]]
+[[GIPOB]][[developing-a-simple-facelets-application-the-guessnumber-jsf-example-application]]
 
-[[developing-a-simple-facelets-application-the-guessnumber-jsf-example-application]]
 Developing a Simple Facelets Application: The guessnumber-jsf Example Application
 ---------------------------------------------------------------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 * link:#configuring-the-application[Configuring the Application]
 * link:#running-the-guessnumber-jsf-facelets Example[Running the guessnumber-jsf Facelets Example]
 
-[[GIQTE]]
+[[GIQTE]][[creating-a-facelets-application]]
 
-[[creating-a-facelets-application]]
 Creating a Facelets Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -43,9 +41,8 @@ correctly or incorrectly.
 The source code for this application is in the
 tut-install`/examples/web/jsf/guessnumber-jsf/` directory.
 
-[[GIQQZ]]
+[[GIQQZ]][[developing-a-managed-bean]]
 
-[[developing-a-managed-bean]]
 Developing a Managed Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -123,9 +120,8 @@ accessible through the EL. The `@SessionScoped` annotation registers the
 bean scope as `session` to enable you to make multiple guesses as you
 run the application.
 
-[[GJZPV]]
+[[GJZPV]][[creating-facelets-views]]
 
-[[creating-facelets-views]]
 Creating Facelets Views
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -250,9 +246,8 @@ content:
 This page also uses implicit navigation, setting the `action` attribute
 for the Back button to send the user to the `greeting.xhtml` page.
 
-[[GJJKC]]
+[[GJJKC]][[configuring-the-application]]
 
-[[configuring-the-application]]
 Configuring the Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -308,9 +303,8 @@ For example, if the project stage is defined as `Development`, debugging
 information is automatically generated for the user. If not defined by
 the user, the default project stage is `Production`.
 
-[[GIRGF]]
+[[GIRGF]][[running-the-guessnumber-jsf-facelets-example]]
 
-[[running-the-guessnumber-jsf-facelets-example]]
 Running the guessnumber-jsf Facelets Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -325,9 +319,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GJQYX[To Run the guessnumber-jsf Example]
 
-[[GJQZL]]
+[[GJQZL]][[to-build-package-and-deploy-the-guessnumber-jsf-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-guessnumber-jsf-example-using-netbeans-ide]]
 To Build, Package, and Deploy the guessnumber-jsf Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -349,9 +342,8 @@ select Build.
 This option builds the example application and deploys it to your
 GlassFish Server instance.
 
-[[GJQYU]]
+[[GJQYU]][[to-build-package-and-deploy-the-guessnumber-jsf-example-using-maven]]
 
-[[to-build-package-and-deploy-the-guessnumber-jsf-example-using-maven]]
 To Build, Package, and Deploy the guessnumber-jsf Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -375,9 +367,8 @@ This command builds and packages the application into a WAR file,
 `guessnumber-jsf.war`, that is located in the `target` directory. It
 then deploys it to the server.
 
-[[GJQYX]]
+[[GJQYX]][[to-run-the-guessnumber-jsf-example]]
 
-[[to-run-the-guessnumber-jsf-example]]
 To Run the guessnumber-jsf Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

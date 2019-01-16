@@ -7,9 +7,8 @@ prev=jms-concepts001.html
 Basic JMS API Concepts
 ======================
 
-[[BNCDX]]
+[[BNCDX]][[basic-jms-api-concepts]]
 
-[[basic-jms-api-concepts]]
 Basic JMS API Concepts
 ----------------------
 
@@ -27,9 +26,8 @@ The following topics are addressed here:
 * link:#BNCEA[Messaging Styles]
 * link:#BNCEG[Message Consumption]
 
-[[BNCDY]]
+[[BNCDY]][[jms-api-architecture]]
 
-[[jms-api-architecture]]
 JMS API Architecture
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -63,16 +61,14 @@ resource injection to access the administered objects in the namespace
 and then establish a logical connection to the same objects through the
 JMS provider.
 
-[[BNCDZ]]
+[[BNCDZ]].*Figure 48-2 JMS API Architecture*
 
-.*Figure 48-2 JMS API Architecture*
 image:img/javaeett_dt_027.png[
 "Diagram of JMS API architecture, showing administrative tool, JMS
 client, JNDI namespace, and JMS provider"]
 
-[[BNCEA]]
+[[BNCEA]][[messaging-styles]]
 
-[[messaging-styles]]
 Messaging Styles
 ~~~~~~~~~~~~~~~~
 
@@ -92,9 +88,8 @@ code itself can be common to both styles, making your applications
 flexible and reusable. This tutorial describes and illustrates this
 coding approach, using the greatly simplified API provided by JMS 2.0.
 
-[[BNCEB]]
+[[BNCEB]][[point-to-point-messaging-style]]
 
-[[point-to-point-messaging-style]]
 Point-to-Point Messaging Style
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -121,9 +116,8 @@ to a queue, and Client 2 consuming and acknowledging the message"]
 Use PTP messaging when every message you send must be processed
 successfully by one consumer.
 
-[[BNCED]]
+[[BNCED]][[publishsubscribe-messaging-style]]
 
-[[publishsubscribe-messaging-style]]
 Publish/Subscribe Messaging Style
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -167,13 +161,13 @@ messaging.
 [[BNCEE]]
 
 .*Figure 48-4 Publish/Subscribe Messaging*
+
 image:img/javaeett_dt_029.png[
 "Diagram of pub/sub messaging, showing Client 1 sending a message to a
 topic, and the message being delivered to two consumers to the topic"]
 
-[[BNCEG]]
+[[BNCEG]][[message-consumption]]
 
-[[message-consumption]]
 Message Consumption
 ~~~~~~~~~~~~~~~~~~~
 

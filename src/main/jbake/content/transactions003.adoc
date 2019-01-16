@@ -7,9 +7,8 @@ prev=transactions002.html
 What Is a Transaction?
 ======================
 
-[[BNCII]]
+[[BNCII]][[what-is-a-transaction]]
 
-[[what-is-a-transaction]]
 What Is a Transaction?
 ----------------------
 

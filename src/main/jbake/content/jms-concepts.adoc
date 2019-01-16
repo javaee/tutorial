@@ -8,9 +8,8 @@ prev=partmessaging.html
 :description: Java message service allows applications to create, send, and receive messages.
 :keywords: jms, glassfish
 
-[[BNCDQ]]
+[[BNCDQ]][[java-message-service-concepts]]
 
-[[java-message-service-concepts]]
 48 Java Message Service Concepts
 --------------------------------
 

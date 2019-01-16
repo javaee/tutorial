@@ -7,9 +7,8 @@ prev=jsf-facelets006.html
 Relocatable Resources
 =====================
 
-[[BABHGBJI]]
+[[BABHGBJI]][[relocatable-resources]]
 
-[[relocatable-resources]]
 Relocatable Resources
 ---------------------
 

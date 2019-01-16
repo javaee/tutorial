@@ -7,9 +7,8 @@ prev=partwebsvcs.html
 Introduction to Web Services
 ============================
 
-[[GIJTI]]
+[[GIJTI]][[introduction-to-web-services]]
 
-[[introduction-to-web-services]]
 30 Introduction to Web Services
 -------------------------------
 

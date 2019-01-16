@@ -7,9 +7,8 @@ prev=packaging002.html
 Packaging Web Archives
 ======================
 
-[[BCGHAHGD]]
+[[BCGHAHGD]][[packaging-web-archives]]
 
-[[packaging-web-archives]]
 Packaging Web Archives
 ----------------------
 

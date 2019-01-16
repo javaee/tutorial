@@ -7,9 +7,8 @@ prev=partsecurity.html
 = Introduction to Security in the Java EE Platform
 
 
-[[BNBWJ]]
+[[BNBWJ]][[introduction-to-security-in-the-java-ee-platform]]
 
-[[introduction-to-security-in-the-java-ee-platform]]
 50 Introduction to Security in the Java EE Platform
 ---------------------------------------------------
 

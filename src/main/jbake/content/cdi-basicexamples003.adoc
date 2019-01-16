@@ -6,9 +6,8 @@ prev=cdi-basicexamples002.html
 ~~~~~~
 = The guessnumber-cdi CDI Example
 
-[[GJCXV]]
+[[GJCXV]][[the-guessnumber-cdi-cdi-example]]
 
-[[the-guessnumber-cdi-cdi-example]]
 The guessnumber-cdi CDI Example
 -------------------------------
 
@@ -31,9 +30,8 @@ The following topics are addressed here:
 * link:#GJDON[The Facelets Page]
 * link:#GJDPW[Running the guessnumber-cdi Example]
 
-[[GJDJU]]
+[[GJDJU]][[the-guessnumber-cdi-source-files]]
 
-[[the-guessnumber-cdi-source-files]]
 The guessnumber-cdi Source Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -48,9 +46,8 @@ The source files are located in the
 `_tut-install_/examples/cdi/guessnumber-cdi/src/main/java/javaeetutorial/guessnumber`
 directory.
 
-[[GJDJP]]
+[[GJDJP]][[the-maxnumber-and-random-qualifier-interfaces]]
 
-[[the-maxnumber-and-random-qualifier-interfaces]]
 The @MaxNumber and @Random Qualifier Interfaces
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -102,9 +99,8 @@ public @interface Random {
 }
 ----
 
-[[GJDJN]]
+[[GJDJN]][[the-generator-managed-bean]]
 
-[[the-generator-managed-bean]]
 The Generator Managed Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -146,9 +142,8 @@ public class Generator implements Serializable {
 }
 ----
 
-[[GJDHY]]
+[[GJDHY]][[the-usernumberbean-managed-bean]]
 
-[[the-usernumberbean-managed-bean]]
 The UserNumberBean Managed Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -277,9 +272,8 @@ public class UserNumberBean implements Serializable {
 }
 ----
 
-[[GJDON]]
+[[GJDON]][[the-facelets-page]]
 
-[[the-facelets-page]]
 The Facelets Page
 ~~~~~~~~~~~~~~~~~
 
@@ -353,9 +347,8 @@ maximum or minimum value or, if the guess is correct, to generate a
 `FacesMessage` to that effect. The method that determines whether each
 guess is valid is `userNumberBean.validateNumberRange`.
 
-[[GJDPW]]
+[[GJDPW]][[running-the-guessnumber-cdi-example]]
 
-[[running-the-guessnumber-cdi-example]]
 Running the guessnumber-cdi Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -370,9 +363,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GJDQB[To Run the guessnumber Example]
 
-[[GJDPS]]
+[[GJDPS]][[to-build-package-and-deploy-the-guessnumber-cdi-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-guessnumber-cdi-example-using-netbeans-ide]]
 To Build, Package, and Deploy the guessnumber-cdi Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -395,9 +387,8 @@ This command builds and packages the application into a WAR file,
 `guessnumber-cdi.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GJDPR]]
+[[GJDPR]][[to-build-package-and-deploy-the-guessnumber-cdi-example-using-maven]]
 
-[[to-build-package-and-deploy-the-guessnumber-cdi-example-using-maven]]
 To Build, Package, and Deploy the guessnumber-cdi Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -421,9 +412,8 @@ This command builds and packages the application into a WAR file,
 `guessnumber-cdi.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GJDQB]]
+[[GJDQB]][[to-run-the-guessnumber-example]]
 
-[[to-run-the-guessnumber-example]]
 To Run the guessnumber Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

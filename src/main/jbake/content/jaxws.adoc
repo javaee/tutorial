@@ -7,9 +7,8 @@ prev=webservices-intro003.html
 Building Web Services with JAX-WS
 =================================
 
-[[BNAYL]]
+[[BNAYL]][[building-web-services-with-jax-ws]]
 
-[[building-web-services-with-jax-ws]]
 31 Building Web Services with JAX-WS
 ------------------------------------
 

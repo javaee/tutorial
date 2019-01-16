@@ -7,9 +7,8 @@ prev=injection001.html
 Dependency Injection
 ====================
 
-[[BABDJGIE]]
+[[BABDJGIE]][[dependency-injection]]
 
-[[dependency-injection]]
 Dependency Injection
 --------------------
 

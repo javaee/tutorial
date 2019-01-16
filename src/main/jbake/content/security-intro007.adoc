@@ -6,9 +6,8 @@ prev=security-intro006.html
 ~~~~~~
 = Further Information about Security
 
-[[BNBYJ]]
+[[BNBYJ]][[further-information-about-security]]
 
-[[further-information-about-security]]
 Further Information about Security
 ----------------------------------
 

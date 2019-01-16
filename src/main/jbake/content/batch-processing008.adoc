@@ -7,9 +7,8 @@ prev=batch-processing007.html
 The webserverlog Example Application
 ====================================
 
-[[BCGJHEHJ]]
+[[BCGJHEHJ]][[the-webserverlog-example-application]]
 
-[[the-webserverlog-example-application]]
 The webserverlog Example Application
 ------------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#BABCHDFB[Architecture of the webserverlog Example Application]
 * link:#BABFIHJA[Running the webserverlog Example Application]
 
-[[BABCHDFB]]
+[[BABCHDFB]][[architecture-of-the-webserverlog-example-application]]
 
-[[architecture-of-the-webserverlog-example-application]]
 Architecture of the webserverlog Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -58,9 +56,8 @@ results.
 The bean submits the job to the batch runtime, checks on the status of
 the job, and reads the results from a text file.
 
-[[BABFGCEC]]
+[[BABFGCEC]][[the-job-definition-file]]
 
-[[the-job-definition-file]]
 The Job Definition File
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -124,9 +121,8 @@ The second step is defined as follows:
 This step is a task step that specifies the batch artifact that
 implements it. This is the last step of the job.
 
-[[BABIHBFF]]
+[[BABIHBFF]][[the-logline-and-logfilteredline-items]]
 
-[[the-logline-and-logfilteredline-items]]
 The LogLine and LogFilteredLine Items
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -148,9 +144,8 @@ public class LogLine {
 The `LogFileteredLine` class is similar to this class but only has two
 fields: the IP address of the client and the URL.
 
-[[sthref284]]
+[[sthref284]][[the-chunk-step-batch-artifacts]]
 
-[[the-chunk-step-batch-artifacts]]
 The Chunk Step Batch Artifacts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -258,9 +253,8 @@ public void writeItems(List<Object> items) throws Exception {
 }
 ----
 
-[[BCGCCFAC]]
+[[BCGCCFAC]][[the-listener-batch-artifacts]]
 
-[[the-listener-batch-artifacts]]
 The Listener Batch Artifacts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -301,9 +295,8 @@ public class InfoItemProcessListener implements ItemProcessListener {
 }
 ----
 
-[[sthref285]]
+[[sthref285]][[the-task-step-batch-artifact]]
 
-[[the-task-step-batch-artifact]]
 The Task Step Batch Artifact
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -332,9 +325,8 @@ public String process() throws Exception {
 }
 ----
 
-[[sthref286]]
+[[sthref286]][[the-javaserver-faces-pages]]
 
-[[the-javaserver-faces-pages]]
 The JavaServer Faces Pages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -373,9 +365,8 @@ status of the batch job and displays the results when the job finishes:
 </h:form>
 ----
 
-[[sthref287]]
+[[sthref287]][[the-managed-bean]]
 
-[[the-managed-bean]]
 The Managed Bean
 ^^^^^^^^^^^^^^^^
 
@@ -407,9 +398,8 @@ public String getJobStatus() {
 
 The `showResults` method reads the results from a text file.
 
-[[BABFIHJA]]
+[[BABFIHJA]][[running-the-webserverlog-example-application]]
 
-[[running-the-webserverlog-example-application]]
 Running the webserverlog Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -423,9 +413,8 @@ NetBeans IDE]
 * link:#BABGACCD[To Run the webserverlog Example Application Using
 Maven]
 
-[[BABHIJBE]]
+[[BABHIJBE]][[to-run-the-webserverlog-example-application-using-netbeans-ide]]
 
-[[to-run-the-webserverlog-example-application-using-netbeans-ide]]
 To Run the webserverlog Example Application Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -453,9 +442,8 @@ the server; and launches a web browser window at the following URL:
 http://localhost:8080/webserverlog/
 ----
 
-[[BABGACCD]]
+[[BABGACCD]][[to-run-the-webserverlog-example-application-using-maven]]
 
-[[to-run-the-webserverlog-example-application-using-maven]]
 To Run the webserverlog Example Application Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

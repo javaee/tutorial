@@ -7,9 +7,8 @@ prev=cdi-basicexamples.html
 = Building and Running the CDI Samples
 
 
-[[A1250045]]
+[[A1250045]][[building-and-running-the-cdi-samples]]
 
-[[building-and-running-the-cdi-samples]]
 Building and Running the CDI Samples
 ------------------------------------
 

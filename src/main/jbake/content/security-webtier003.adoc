@@ -6,9 +6,8 @@ prev=security-webtier002.html
 ~~~~~~
 = Using Programmatic Security with Web Applications
 
-[[GJIIE]]
+[[GJIIE]][[using-programmatic-security-with-web-applications]]
 
-[[using-programmatic-security-with-web-applications]]
 Using Programmatic Security with Web Applications
 -------------------------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#example-code-for-programmatic-security[Example Code for Programmatic Security]
 * link:#declaring-and-linking-role-references[Declaring and Linking Role References]
 
-[[GIRCJ]]
+[[GIRCJ]][[authenticating-users-programmatically]]
 
-[[authenticating-users-programmatically]]
 Authenticating Users Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -151,9 +149,8 @@ public class TestServlet extends HttpServlet {
     }
 ----
 
-[[BNCBA]]
+[[BNCBA]][[checking-caller-identity-programmatically]]
 
-[[checking-caller-identity-programmatically]]
 Checking Caller Identity Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -254,9 +251,9 @@ securityContext.hasAccessToWebResource("/protectedServlet", GET)
 
 The above `hasAccessToWebResource()` call returns true if, and only if,
 the caller is in role "foo".
-[[GJJLQ]]
 
-[[example-code-for-programmatic-security]]
+[[GJJLQ]][[example-code-for-programmatic-security]]
+
 Example Code for Programmatic Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -337,9 +334,8 @@ public class LoginServlet extends HttpServlet {
 }
 ----
 
-[[BNCBB]]
+[[BNCBB]][[declaring-and-linking-role-references]]
 
-[[declaring-and-linking-role-references]]
 Declaring and Linking Role References
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

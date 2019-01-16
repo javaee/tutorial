@@ -7,9 +7,8 @@ prev=ejb-gettingstarted.html
 Starting With Enterprise Beans
 ==============================
 
-[[A1249349]]
+[[A1249349]][[starting-with-enterprise-beans]]
 
-[[starting-with-enterprise-beans]]
 Starting With Enterprise Beans
 ------------------------------
 

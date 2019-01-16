@@ -7,9 +7,8 @@ prev=jaxrs-advanced005.html
 Runtime Content Negotiation
 ===========================
 
-[[GKQBQ]]
+[[GKQBQ]][[runtime-content-negotiation]]
 
-[[runtime-content-negotiation]]
 Runtime Content Negotiation
 ---------------------------
 

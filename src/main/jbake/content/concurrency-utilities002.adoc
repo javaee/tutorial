@@ -7,9 +7,8 @@ prev=concurrency-utilities001.html
 = Main Components of the Concurrency Utilities
 
 
-[[CIHFBCFH]]
+[[CIHFBCFH]][[main-components-of-the-concurrency-utilities]]
 
-[[main-components-of-the-concurrency-utilities]]
 Main Components of the Concurrency Utilities
 --------------------------------------------
 

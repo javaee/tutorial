@@ -7,9 +7,8 @@ prev=ejb-basicexamples003.html
 = A Web Service Example: helloservice
 
 
-[[BNBOR]]
+[[BNBOR]][[a-web-service-example-helloservice]]
 
-[[a-web-service-example-helloservice]]
 A Web Service Example: helloservice
 -----------------------------------
 
@@ -25,9 +24,8 @@ The following topics are addressed here:
 * link:#BNBOT[Stateless Session Bean Implementation Class]
 * link:#BNBOU[Running the helloservice Example]
 
-[[BNBOS]]
+[[BNBOS]][[the-web-service-endpoint-implementation-class]]
 
-[[the-web-service-endpoint-implementation-class]]
 The Web Service Endpoint Implementation Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,9 +63,8 @@ implementing class begins responding to web service clients.
 The `@PreDestroy` method is called by the container before the endpoint
 is removed from operation.
 
-[[BNBOT]]
+[[BNBOT]][[stateless-session-bean-implementation-class]]
 
-[[stateless-session-bean-implementation-class]]
 Stateless Session Bean Implementation Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -97,9 +94,8 @@ public class HelloServiceBean {
 }
 ----
 
-[[BNBOU]]
+[[BNBOU]][[running-the-helloservice-example]]
 
-[[running-the-helloservice-example]]
 Running the helloservice Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -115,9 +111,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#BNBOX[To Test the Service without a Client]
 
-[[BNBOV]]
+[[BNBOV]][[to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide]]
 To Build, Package, and Deploy the helloservice Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -140,9 +135,8 @@ This builds and packages the application into `helloservice.ear`,
 located in `_tut-install_/examples/ejb/helloservice/target/`, and deploys
 this EAR file to GlassFish Server.
 
-[[BNBOW]]
+[[BNBOW]][[to-build-package-and-deploy-the-helloservice-example-using-maven]]
 
-[[to-build-package-and-deploy-the-helloservice-example-using-maven]]
 To Build, Package, and Deploy the helloservice Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -170,9 +164,8 @@ the EJB JAR file is deployed to GlassFish Server.
 Upon deployment, GlassFish Server generates additional artifacts
 required for web service invocation, including the WSDL file.
 
-[[BNBOX]]
+[[BNBOX]][[to-test-the-service-without-a-client]]
 
-[[to-test-the-service-without-a-client]]
 To Test the Service without a Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

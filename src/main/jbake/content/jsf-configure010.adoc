@@ -7,9 +7,8 @@ prev=jsf-configure009.html
 = Configuring Navigation Rules
 
 
-[[BNAXF]]
+[[BNAXF]][[configuring-navigation-rules]]
 
-[[configuring-navigation-rules]]
 Configuring Navigation Rules
 ----------------------------
 

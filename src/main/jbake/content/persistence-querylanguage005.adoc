@@ -7,9 +7,8 @@ prev=persistence-querylanguage004.html
 Example Queries
 ===============
 
-[[BNBTL]]
+[[BNBTL]][[example-queries]]
 
-[[example-queries]]
 Example Queries
 ---------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#BNBTW[Queries with Other Conditional Expressions]
 * link:#BNBUC[Bulk Updates and Deletes]
 
-[[BNBTM]]
+[[BNBTM]][[simple-queries]]
 
-[[simple-queries]]
 Simple Queries
 ~~~~~~~~~~~~~~
 
@@ -39,9 +37,8 @@ The following topics are addressed here:
 * link:#BNBTO[Eliminating Duplicate Values]
 * link:#BNBTP[Using Named Parameters]
 
-[[BNBTN]]
+[[BNBTN]][[a-basic-select-query]]
 
-[[a-basic-select-query]]
 A Basic Select Query
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -65,9 +62,8 @@ The `Player` element is the abstract schema name of the `Player` entity.
 * See also: link:persistence-querylanguage006.html#BNBUM[Identification
 Variables].
 
-[[BNBTO]]
+[[BNBTO]][[eliminating-duplicate-values]]
 
-[[eliminating-duplicate-values]]
 Eliminating Duplicate Values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -89,9 +85,8 @@ denotes the input parameter of the query.
 Parameters] and link:persistence-querylanguage006.html#BNBWB[The DISTINCT
 Keyword].
 
-[[BNBTP]]
+[[BNBTP]][[using-named-parameters]]
 
-[[using-named-parameters]]
 Using Named Parameters
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -110,9 +105,8 @@ fields with the named parameters of the query, set using the
 input parameter using a colon (`:`) followed by an identifier. The first
 input parameter is `:position`, the second is `:name`.
 
-[[BNBTQ]]
+[[BNBTQ]][[queries-that-navigate-to-related-entities]]
 
-[[queries-that-navigate-to-related-entities]]
 Queries That Navigate to Related Entities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -129,9 +123,8 @@ The following topics are addressed here:
 * link:#BNBTU[Traversing Multiple Relationships]
 * link:#BNBTV[Navigating According to Related Fields]
 
-[[BNBTR]]
+[[BNBTR]][[a-simple-query-with-relationships]]
 
-[[a-simple-query-with-relationships]]
 A Simple Query with Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -167,9 +160,8 @@ FROM Player p
 WHERE p.team IS NOT EMPTY
 ----
 
-[[BNBTS]]
+[[BNBTS]][[navigating-to-single-valued-relationship-fields]]
 
-[[navigating-to-single-valued-relationship-fields]]
 Navigating to Single-Valued Relationship Fields
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -186,9 +178,8 @@ WHERE l.sport = 'soccer' OR l.sport ='football'
 In this example, the query will return all teams that are in either
 soccer or football leagues.
 
-[[BNBTT]]
+[[BNBTT]][[traversing-relationships-with-an-input-parameter]]
 
-[[traversing-relationships-with-an-input-parameter]]
 Traversing Relationships with an Input Parameter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -216,9 +207,8 @@ illegal expression).
 * See also: link:persistence-querylanguage006.html#BNBUQ[Path
 Expressions].
 
-[[BNBTU]]
+[[BNBTU]][[traversing-multiple-relationships]]
 
-[[traversing-multiple-relationships]]
 Traversing Multiple Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -240,9 +230,8 @@ this example, the parameter is an object whose type is a `League`. This
 type matches the `league` relationship field in the comparison
 expression of the `WHERE` clause.
 
-[[BNBTV]]
+[[BNBTV]][[navigating-according-to-related-fields]]
 
-[[navigating-according-to-related-fields]]
 Navigating According to Related Fields
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -261,9 +250,8 @@ the `Player` entity to `Team` (`p.teams`) and then from `Team` to the
 `league` relationship field can be followed by the `sport` persistent
 field.
 
-[[BNBTW]]
+[[BNBTW]][[queries-with-other-conditional-expressions]]
 
-[[queries-with-other-conditional-expressions]]
 Queries with Other Conditional Expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -282,9 +270,8 @@ The following topics are addressed here:
 * link:#BNBUA[The BETWEEN Expression]
 * link:#BNBUB[Comparison Operators]
 
-[[BNBTX]]
+[[BNBTX]][[the-like-expression]]
 
-[[the-like-expression]]
 The LIKE Expression
 ^^^^^^^^^^^^^^^^^^^
 
@@ -304,9 +291,8 @@ whose names begin with the string "Mich." For example, "Michael" and
 * See also: link:persistence-querylanguage006.html#BNBVG[LIKE
 Expressions].
 
-[[BNBTY]]
+[[BNBTY]][[the-is-null-expression]]
 
-[[the-is-null-expression]]
 The IS NULL Expression
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -326,9 +312,8 @@ teams that do not have a league.
 Expressions] and link:persistence-querylanguage006.html#BNBVR[NULL
 Values].
 
-[[BNBTZ]]
+[[BNBTZ]][[the-is-empty-expression]]
 
-[[the-is-empty-expression]]
 The IS EMPTY Expression
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -346,9 +331,8 @@ collection is empty, and the conditional expression is `TRUE`.
 * See also: link:persistence-querylanguage006.html#BNBVJ[Empty Collection
 Comparison Expressions].
 
-[[BNBUA]]
+[[BNBUA]][[the-between-expression]]
 
-[[the-between-expression]]
 The BETWEEN Expression
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -373,9 +357,8 @@ p.salary >= :lowerSalary AND p.salary <= :higherSalary
 * See also: link:persistence-querylanguage006.html#BNBVE[BETWEEN
 Expressions].
 
-[[BNBUB]]
+[[BNBUB]][[comparison-operators]]
 
-[[comparison-operators]]
 Comparison Operators
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -395,9 +378,8 @@ one player (`p2`) with that of the other players (`p1`).
 * See also: link:persistence-querylanguage006.html#BNBUM[Identification
 Variables].
 
-[[BNBUC]]
+[[BNBUC]][[bulk-updates-and-deletes]]
 
-[[bulk-updates-and-deletes]]
 Bulk Updates and Deletes
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -412,9 +394,8 @@ The following topics are addressed here:
 * link:#BNBUD[Update Queries]
 * link:#BNBUE[Delete Queries]
 
-[[BNBUD]]
+[[BNBUD]][[update-queries]]
 
-[[update-queries]]
 Update Queries
 ^^^^^^^^^^^^^^
 
@@ -429,9 +410,8 @@ WHERE p.lastPlayed < :inactiveThresholdDate
 `inactive` if the player's last game was longer ago than the date
 specified in `inactiveThresholdDate`.
 
-[[BNBUE]]
+[[BNBUE]][[delete-queries]]
 
-[[delete-queries]]
 Delete Queries
 ^^^^^^^^^^^^^^
 

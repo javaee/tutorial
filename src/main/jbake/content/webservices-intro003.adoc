@@ -7,9 +7,8 @@ prev=webservices-intro002.html
 Deciding Which Type of Web Service to Use
 =========================================
 
-[[GJBJI]]
+[[GJBJI]][[deciding-which-type-of-web-service-to-use]]
 
-[[deciding-which-type-of-web-service-to-use]]
 Deciding Which Type of Web Service to Use
 -----------------------------------------
 

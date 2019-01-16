@@ -7,9 +7,8 @@ prev=jsf-ajax007.html
 Ajax Request Lifecycle
 ======================
 
-[[GKUAR]]
+[[GKUAR]][[ajax-request-lifecycle]]
 
-[[ajax-request-lifecycle]]
 Ajax Request Lifecycle
 ----------------------
 

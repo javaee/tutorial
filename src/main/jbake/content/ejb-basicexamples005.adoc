@@ -7,9 +7,8 @@ prev=ejb-basicexamples004.html
 = Using the Timer Service
 
 
-[[BNBOY]]
+[[BNBOY]][[using-the-timer-service]]
 
-[[using-the-timer-service]]
 Using the Timer Service
 -----------------------
 
@@ -29,9 +28,8 @@ are created upon the successful deployment of an enterprise bean that
 contains a method annotated with the `javax.ejb.Schedule` or
 `javax.ejb.Schedules` annotations.
 
-[[GIQLK]]
+[[GIQLK]][[creating-calendar-based-timer-expressions]]
 
-[[creating-calendar-based-timer-expressions]]
 Creating Calendar-Based Timer Expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,9 +97,8 @@ of the month). For example: `dayOfMonth="–3"`.
 |=======================================================================
 
 
-[[GIQMX]]
+[[GIQMX]][[specifying-multiple-values-in-calendar-expressions]]
 
-[[specifying-multiple-values-in-calendar-expressions]]
 Specifying Multiple Values in Calendar Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -223,9 +220,8 @@ The following expression represents every 2 hours starting at noon:
 hour="12/2"
 ----
 
-[[GIQLT]]
+[[GIQLT]][[programmatic-timers]]
 
-[[programmatic-timers]]
 Programmatic Timers
 ~~~~~~~~~~~~~~~~~~~
 
@@ -234,9 +230,8 @@ method annotated `@Timeout` in the bean's implementation class. The
 `@Timeout` method contains the business logic that handles the timed
 event.
 
-[[BNBOZ]]
+[[BNBOZ]][[the-timeout-method]]
 
-[[the-timeout-method]]
 The @Timeout Method
 ^^^^^^^^^^^^^^^^^^^
 
@@ -252,9 +247,8 @@ public void timeout(Timer timer) {
 }
 ----
 
-[[BNBPA]]
+[[BNBPA]][[creating-programmatic-timers]]
 
-[[creating-programmatic-timers]]
 Creating Programmatic Timers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -341,9 +335,8 @@ service is not intended for real-time applications, a callback to the
 service is for business applications, which typically measure time in
 hours, days, or longer durations.
 
-[[GIQMB]]
+[[GIQMB]][[automatic-timers]]
 
-[[automatic-timers]]
 Automatic Timers
 ~~~~~~~~~~~~~~~~
 
@@ -406,9 +399,8 @@ sets a timer to expire every Friday at 11:00 p.m.:
 public void doPeriodicCleanup() { ... }
 ----
 
-[[BNBPB]]
+[[BNBPB]][[canceling-and-saving-timers]]
 
-[[canceling-and-saving-timers]]
 Canceling and Saving Timers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -432,9 +424,8 @@ remote clients and web service clients cannot access a bean's
 `TimerHandle` object. Local clients, however, do not have this
 restriction.
 
-[[BNBPC]]
+[[BNBPC]][[getting-timer-information]]
 
-[[getting-timer-information]]
 Getting Timer Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -458,9 +449,8 @@ To retrieve all of a bean's active timers, call the `getTimers` method
 of the `TimerService` interface. The `getTimers` method returns a
 collection of `Timer` objects.
 
-[[BNBPD]]
+[[BNBPD]][[transactions-and-timers]]
 
-[[transactions-and-timers]]
 Transactions and Timers
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -477,9 +467,8 @@ begins the new transaction before calling the `@Timeout` method. If the
 transaction is rolled back, the container will call the `@Timeout`
 method at least one more time.
 
-[[BNBPE]]
+[[BNBPE]][[the-timersession-example]]
 
-[[the-timersession-example]]
 The timersession Example
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -635,9 +624,8 @@ to virtual machine constraints.
 |=======================================================================
 
 
-[[BNBPF]]
+[[BNBPF]][[running-the-timersession-example]]
 
-[[running-the-timersession-example]]
 Running the timersession Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -651,9 +639,8 @@ The following topics are addressed here:
 Using Maven]
 * link:#GIQOP[To Run the Web Client]
 
-[[GIQNI]]
+[[GIQNI]][[to-run-the-timersession-example-using-netbeans-ide]]
 
-[[to-run-the-timersession-example-using-netbeans-ide]]
 To Run the timersession Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -676,9 +663,8 @@ This builds and packages the application into a WAR file located at
 this WAR file to your GlassFish Server instance, and then runs the web
 client.
 
-[[GIQNQ]]
+[[GIQNQ]][[to-build-package-and-deploy-the-timersession-example-using-maven]]
 
-[[to-build-package-and-deploy-the-timersession-example-using-maven]]
 To Build, Package, and Deploy the timersession Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -702,9 +688,8 @@ This builds and packages the application into a WAR file located at
 `_tut-install_/examples/ejb/timersession/target/timersession.war` and
 deploys this WAR file to your GlassFish Server instance.
 
-[[GIQOP]]
+[[GIQOP]][[to-run-the-web-client]]
 
-[[to-run-the-web-client]]
 To Run the Web Client
 ^^^^^^^^^^^^^^^^^^^^^
 

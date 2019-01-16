@@ -7,9 +7,8 @@ prev=batch-processing009.html
 Further Information about Batch Processing
 ==========================================
 
-[[BCGHCHAJ]]
+[[BCGHCHAJ]][[further-information-about-batch-processing]]
 
-[[further-information-about-batch-processing]]
 Further Information about Batch Processing
 ------------------------------------------
 

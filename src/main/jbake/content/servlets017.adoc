@@ -7,9 +7,8 @@ prev=servlets016.html
 The dukeetf Example Application
 ===============================
 
-[[BEIFAIFF]]
+[[BEIFAIFF]][[the-dukeetf-example-application]]
 
-[[the-dukeetf-example-application]]
 The dukeetf Example Application
 -------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#CHDBBEDA[Architecture of the dukeetf Example Application]
 * link:#CHDHBBBI[Running the dukeetf Example Application]
 
-[[CHDBBEDA]]
+[[CHDBBEDA]][[architecture-of-the-dukeetf-example-application]]
 
-[[architecture-of-the-dukeetf-example-application]]
 Architecture of the dukeetf Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -53,9 +51,8 @@ uses JavaScript to make new connections. In this model, clients make a
 new request immediately after receiving new data, and the server keeps
 the connection open until new data becomes available.
 
-[[sthref111]]
+[[sthref111]][[the-servlet]]
 
-[[the-servlet]]
 The Servlet
 ^^^^^^^^^^^
 
@@ -137,9 +134,8 @@ public void doGet(HttpServletRequest request,
 }
 ----
 
-[[sthref112]]
+[[sthref112]][[the-enterprise-bean]]
 
-[[the-enterprise-bean]]
 The Enterprise Bean
 ^^^^^^^^^^^^^^^^^^^
 
@@ -185,9 +181,8 @@ See link:ejb-basicexamples005.html#BNBOY[Using the Timer Service] in
 link:ejb-basicexamples.html#GIJRB[Chapter 37, "Running the Enterprise
 Bean Examples"] for more information on the timer service.
 
-[[sthref113]]
+[[sthref113]][[the-html-page]]
 
-[[the-html-page]]
 The HTML Page
 ^^^^^^^^^^^^^
 
@@ -247,9 +242,8 @@ link:websocket.html#GKJIQ5[Chapter 19, "Java API for WebSocket"] for an
 equivalent version of this example implemented using a WebSocket
 endpoint.
 
-[[CHDHBBBI]]
+[[CHDHBBBI]][[running-the-dukeetf-example-application]]
 
-[[running-the-dukeetf-example-application]]
 Running the dukeetf Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -262,9 +256,8 @@ The following topics are addressed here:
 IDE]
 * link:#CHDHHAFG[To Run the dukeetf Example Application Using Maven]
 
-[[CHDCGCJD]]
+[[CHDCGCJD]][[to-run-the-dukeetf-example-application-using-netbeans-ide]]
 
-[[to-run-the-dukeetf-example-application-using-netbeans-ide]]
 To Run the dukeetf Example Application Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -295,9 +288,8 @@ http://localhost:8080/dukeetf/
 Open the same URL in a different web browser to see how both pages get
 price and volume updates simultaneously.
 
-[[CHDHHAFG]]
+[[CHDHHAFG]][[to-run-the-dukeetf-example-application-using-maven]]
 
-[[to-run-the-dukeetf-example-application-using-maven]]
 To Run the dukeetf Example Application Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

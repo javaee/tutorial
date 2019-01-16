@@ -7,9 +7,8 @@ prev=jsf-configure004.html
 = Configuring Managed Beans
 
 
-[[BNAWQ]]
+[[BNAWQ]][[configuring-managed-beans]]
 
-[[configuring-managed-beans]]
 Configuring Managed Beans
 -------------------------
 
@@ -49,9 +48,8 @@ creation facility. See link:jsf-develop002.html#BNATY[Writing Bean
 Properties] and link:jsf-develop003.html#BNAVB[Writing Managed Bean
 Methods] for information on programming managed beans.
 
-[[BNAWR]]
+[[BNAWR]][[using-the-managed-bean-element]]
 
-[[using-the-managed-bean-element]]
 Using the managed-bean Element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -160,9 +158,8 @@ managed-property Element], explains in more detail how to use the
 `managed-property` element. See link:#BNAWY[Initializing Managed Bean
 Properties] for an example of initializing a managed bean property.
 
-[[BNAWS]]
+[[BNAWS]][[initializing-properties-using-the-managed-property-element]]
 
-[[initializing-properties-using-the-managed-property-element]]
 Initializing Properties Using the managed-property Element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -202,9 +199,8 @@ the `value` subelement and other subelements to initialize properties of
 Java `Enum` types, `Map`, `array`, and `Collection`, as well as
 initialization parameters.
 
-[[BNAWU]]
+[[BNAWU]][[referencing-a-java-enum-type]]
 
-[[referencing-a-java-enum-type]]
 Referencing a Java Enum Type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -241,9 +237,8 @@ When the system encounters this property, it iterates over each of the
 members of the `enum` and calls `toString()` on each member until it
 finds one that is exactly equal to the value from the `value` element.
 
-[[BNAWV]]
+[[BNAWV]][[referencing-a-context-initialization-parameter]]
 
-[[referencing-a-context-initialization-parameter]]
 Referencing a Context Initialization Parameter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -290,9 +285,8 @@ property from the `area` component tag's `value` attribute:
 
 Values are retrieved from other implicit objects in a similar way.
 
-[[BNAWW]]
+[[BNAWW]][[initializing-map-properties]]
 
-[[initializing-map-properties]]
 Initializing Map Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -366,9 +360,8 @@ Instead of using a `map-entries` element, it is also possible to assign
 the entire map using a `value` element that specifies a map-typed
 expression.
 
-[[BNAWX]]
+[[BNAWX]][[initializing-array-and-list-properties]]
 
-[[initializing-array-and-list-properties]]
 Initializing Array and List Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -402,9 +395,8 @@ an argument of `null`. A `null` property cannot be specified for a
 property whose data type is a Java primitive, such as `int` or
 `boolean`.
 
-[[BNAWY]]
+[[BNAWY]][[initializing-managed-bean-properties]]
 
-[[initializing-managed-bean-properties]]
 Initializing Managed Bean Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -495,9 +487,8 @@ neither of the `AddressBean` objects in the preceding example should
 point back to the `CustomerBean` object, because `CustomerBean` already
 points to the `AddressBean` objects.
 
-[[BNAXA]]
+[[BNAXA]][[initializing-maps-and-lists]]
 
-[[initializing-maps-and-lists]]
 Initializing Maps and Lists
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

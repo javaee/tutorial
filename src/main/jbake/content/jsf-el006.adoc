@@ -7,9 +7,8 @@ prev=jsf-el005.html
 Reserved Words
 ==============
 
-[[BNAIL]]
+[[BNAIL]][[reserved-words]]
 
-[[reserved-words]]
 Reserved Words
 --------------
 

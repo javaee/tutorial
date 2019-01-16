@@ -7,9 +7,8 @@ prev=jaxrs-client.html
 Overview of the Client API
 ==========================
 
-[[BABBIHEJ]]
+[[BABBIHEJ]][[overview-of-the-client-api]]
 
-[[overview-of-the-client-api]]
 Overview of the Client API
 --------------------------
 
@@ -25,9 +24,8 @@ The following topics are addressed here:
 * link:#CHDDBFCG[Setting Path Parameters in Targets]
 * link:#CHDEFCDB[Invoking the Request]
 
-[[CHDFCABB]]
+[[CHDFCABB]][[creating-a-basic-client-request-using-the-client-api]]
 
-[[creating-a-basic-client-request-using-the-client-api]]
 Creating a Basic Client Request Using the Client API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -60,9 +58,8 @@ the returned entity. The `javax.ws.rs.client.Invocation.Builder.get`
 method invokes the service using an HTTP `GET` request, setting the type
 of the returned entity to `String`.
 
-[[CHDHBFHJ]]
+[[CHDHBFHJ]][[obtaining-the-client-instance]]
 
-[[obtaining-the-client-instance]]
 Obtaining the Client Instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -90,9 +87,8 @@ limit the number of `Client` instances in your application, as the
 initialization and destruction of these instances may be expensive in
 your runtime environment.
 
-[[CHDDCICC]]
+[[CHDDCICC]][[setting-the-client-target]]
 
-[[setting-the-client-target]]
 Setting the Client Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -126,9 +122,8 @@ WebTarget write = base.path("write");
 The `WebTarget.path` method creates a new `WebTarget` instance by
 appending the current target URI with the path that was passed in.
 
-[[CHDDBFCG]]
+[[CHDDBFCG]][[setting-path-parameters-in-targets]]
 
-[[setting-path-parameters-in-targets]]
 Setting Path Parameters in Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -146,9 +141,8 @@ WebTarget myResource = client.target("http://example.com/webapi/read")
         .resolveTemplate("userName", "janedoe")        .queryParam("chapter", "1");// http://example.com/webapi/read/janedoe?chapter=1Response response = myResource.request(...)        .get();
 ----
 
-[[CHDEFCDB]]
+[[CHDEFCDB]][[invoking-the-request]]
 
-[[invoking-the-request]]
 Invoking the Request
 ~~~~~~~~~~~~~~~~~~~~
 

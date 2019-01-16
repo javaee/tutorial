@@ -7,9 +7,8 @@ prev=jms-concepts006.html
 Java Message Service Examples
 =============================
 
-[[BNCGV]]
+[[BNCGV]][[java-message-service-examples]]
 
-[[java-message-service-examples]]
 49 Java Message Service Examples
 --------------------------------
 

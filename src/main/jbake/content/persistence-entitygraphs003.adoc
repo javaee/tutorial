@@ -7,9 +7,8 @@ prev=persistence-entitygraphs002.html
 Using Named Entity Graphs
 =========================
 
-[[BABFIGEI]]
+[[BABFIGEI]][[using-named-entity-graphs]]
 
-[[using-named-entity-graphs]]
 Using Named Entity Graphs
 -------------------------
 
@@ -20,9 +19,8 @@ for all named entity graphs, defined in both annotations and in XML,
 within an application. A named entity graph set using an annotation may
 be overridden using `named-entity-graph`.
 
-[[sthref186]]
+[[sthref186]][[applying-named-entity-graph-annotations-to-entity-classes]]
 
-[[applying-named-entity-graph-annotations-to-entity-classes]]
 Applying Named Entity Graph Annotations to Entity Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -105,9 +103,8 @@ of the message, including any message attachments:
 public class EmailMessage { ... }
 ----
 
-[[sthref187]]
+[[sthref187]][[obtaining-entitygraph-instances-from-named-entity-graphs]]
 
-[[obtaining-entitygraph-instances-from-named-entity-graphs]]
 Obtaining EntityGraph Instances from Named Entity Graphs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,18 +7,16 @@ prev=usingexamples007.html
 = Getting the Latest Updates to the Tutorial
 
 
-[[GIQWR]]
+[[GIQWR]][[getting-the-latest-updates-to-the-tutorial]]
 
-[[getting-the-latest-updates-to-the-tutorial]]
 Getting the Latest Updates to the Tutorial
 ------------------------------------------
 
 Check for any updates to the tutorial by using the Update Tool included
 with the Java EE SDK.
 
-[[GIQYK]]
+[[GIQYK]][[to-update-the-tutorial-using-netbeans-ide]]
 
-[[to-update-the-tutorial-using-netbeans-ide]]
 To Update the Tutorial Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -32,9 +30,8 @@ package.
 5.  If there is an updated version of the Tutorial, select *Java EE
 Tutorial* (`javaee-tutorial`) and click *Install*.
 
-[[sthref18]]
+[[sthref18]][[to-update-the-tutorial-using-the-command-line]]
 
-[[to-update-the-tutorial-using-the-command-line]]
 To Update the Tutorial Using the Command Line
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

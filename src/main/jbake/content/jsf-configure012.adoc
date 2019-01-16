@@ -7,9 +7,8 @@ prev=jsf-configure011.html
 Registering a Custom Component
 ==============================
 
-[[BNAXI]]
+[[BNAXI]][[registering-a-custom-component]]
 
-[[registering-a-custom-component]]
 Registering a Custom Component
 ------------------------------
 

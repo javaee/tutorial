@@ -7,9 +7,8 @@ prev=jsf-configure003.html
 = Using Faces Flows
 
 
-[[CHDGFCJF]]
+[[CHDGFCJF]][[using-faces-flows]]
 
-[[using-faces-flows]]
 Using Faces Flows
 -----------------
 
@@ -75,9 +74,8 @@ parameters that it can accept from Flow B. Flow B is identical to Flow A
 except for the names of the flow and files. Each flow also has an
 associated managed bean; the beans are `Flow_a_Bean` and `Flow_b_Bean`.
 
-[[sthref81]]
+[[sthref81]][[packaging-flows-in-an-application]]
 
-[[packaging-flows-in-an-application]]
 Packaging Flows in an Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -114,9 +112,8 @@ src/main/java/javaeetutorial/flowexample
 In this example, `flow-a` is defined programmatically in `FlowA.java`,
 while `flow-b` is defined by the configuration file `flow-b-flow.xml`.
 
-[[sthref82]]
+[[sthref82]][[the-simplest-possible-flow-the-simple-flow-example-application]]
 
-[[the-simplest-possible-flow-the-simple-flow-example-application]]
 The Simplest Possible Flow: The simple-flow Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -210,9 +207,8 @@ no value outside of the flow, and provides a link that navigates to the
 The Facelets pages use only flow-scoped data, so the example does not
 need a managed bean.
 
-[[sthref83]]
+[[sthref83]][[to-build-package-and-deploy-the-simple-flow-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-simple-flow-example-using-netbeans-ide]]
 To Build, Package, and Deploy the simple-flow Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -235,9 +231,8 @@ This command builds and packages the application into a WAR file,
 `simple-flow.war`, that is located in the `target` directory. It then
 deploys the application to the server.
 
-[[sthref84]]
+[[sthref84]][[to-build-package-and-deploy-the-simple-flow-example-using-maven]]
 
-[[to-build-package-and-deploy-the-simple-flow-example-using-maven]]
 To Build, Package, and Deploy the simple-flow Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -261,9 +256,8 @@ This command builds and packages the application into a WAR file,
 `simple-flow.war`, that is located in the `target` directory. It then
 deploys the application to the server.
 
-[[sthref85]]
+[[sthref85]][[to-run-the-simple-flow-example]]
 
-[[to-run-the-simple-flow-example]]
 To Run the simple-flow Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -282,9 +276,8 @@ Click Return.
 inaccessible value. Click Back to Start to return to the `index.xhtml`
 page.
 
-[[sthref86]]
+[[sthref86]][[the-checkout-module-example-application]]
 
-[[the-checkout-module-example-application]]
 The checkout-module Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -343,9 +336,8 @@ The managed beans scoped to each flow are `CheckoutFlowBean.java` and
 `JoinFlowBean.java`, whereas `CheckoutBean.java` is the backing bean for
 the `index.html` page.
 
-[[sthref87]]
+[[sthref87]][[the-facelets-pages-for-the-checkout-module-example]]
 
-[[the-facelets-pages-for-the-checkout-module-example]]
 The Facelets Pages for the checkout-module Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -421,9 +413,8 @@ to call the checkout flow as well as one to return from the join flow:
 For this flow, the actions `callcheckoutFlow` and `returnFromJoinFlow`
 are defined in the configuration file `joinFlow-flow.xml`.
 
-[[sthref88]]
+[[sthref88]][[using-a-configuration-file-to-configure-a-flow]]
 
-[[using-a-configuration-file-to-configure-a-flow]]
 Using a Configuration File to Configure a Flow
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -498,9 +489,8 @@ action of calling the flow. Within the `flow-call` element, the
 to be passed when `checkoutFlow` is called. Here they are just arbitrary
 strings.
 
-[[sthref89]]
+[[sthref89]][[using-a-java-class-to-configure-a-flow]]
 
-[[using-a-java-class-to-configure-a-flow]]
 Using a Java Class to Configure a Flow
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -582,9 +572,8 @@ are values from the `CheckoutFlowBean` managed bean.
 Finally, the `defineFlow` method calls the `getFlow` method and returns
 the result.
 
-[[sthref90]]
+[[sthref90]][[the-flow-scoped-managed-beans]]
 
-[[the-flow-scoped-managed-beans]]
 The Flow-Scoped Managed Beans
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -606,9 +595,8 @@ public String getReturnValue() {
 
 For the `JoinFlowBean`, the return node is the `exithome.xhtml` page.
 
-[[sthref91]]
+[[sthref91]][[to-build-package-and-deploy-the-checkout-module-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-checkout-module-example-using-netbeans-ide]]
 To Build, Package, and Deploy the checkout-module Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -631,9 +619,8 @@ This command builds and packages the application into a WAR file,
 `checkout-module.war`, that is located in the `target` directory. It
 then deploys the application to the server.
 
-[[sthref92]]
+[[sthref92]][[to-build-package-and-deploy-the-checkout-module-example-using-maven]]
 
-[[to-build-package-and-deploy-the-checkout-module-example-using-maven]]
 To Build, Package, and Deploy the checkout-module Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -657,9 +644,8 @@ This command builds and packages the application into a WAR file,
 `checkout-module.war`, that is located in the `target` directory. It
 then deploys the application to the server.
 
-[[sthref93]]
+[[sthref93]][[to-run-the-checkout-module-example]]
 
-[[to-run-the-checkout-module-example]]
 To Run the checkout-module Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

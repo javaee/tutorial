@@ -7,9 +7,8 @@ prev=jsf-ajax009.html
 = Loading JavaScript as a Resource
 
 
-[[GKAAM]]
+[[GKAAM]][[loading-javascript-as-a-resource]]
 
-[[loading-javascript-as-a-resource]]
 Loading JavaScript as a Resource
 --------------------------------
 
@@ -33,9 +32,8 @@ topics:
 – Uses the `javax.faces.application.ResourceDependency` annotation on a
 `UIComponent` Java class
 
-[[GKAFI]]
+[[GKAFI]][[using-javascript-api-in-a-facelets-application]]
 
-[[using-javascript-api-in-a-facelets-application]]
 Using JavaScript API in a Facelets Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -116,9 +114,8 @@ If no identifier is specified, the default assumed keyword for the
 You can also place the JavaScript method in a file and include it as a
 resource.
 
-[[GKIPX]]
+[[GKIPX]][[using-the-resourcedependency-annotation-in-a-bean-class]]
 
-[[using-the-resourcedependency-annotation-in-a-bean-class]]
 Using the @ResourceDependency Annotation in a Bean Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

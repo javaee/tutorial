@@ -7,9 +7,8 @@ prev=overview001.html
 = Java EE 8 Platform Highlights
 
 
-[[GIQVH]]
+[[GIQVH]][[java-ee-8-platform-highlights]]
 
-[[java-ee-8-platform-highlights]]
 Java EE 8 Platform Highlights
 -----------------------------
 

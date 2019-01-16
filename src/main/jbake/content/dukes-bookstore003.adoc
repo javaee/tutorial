@@ -7,11 +7,8 @@ prev=dukes-bookstore002.html
 Running the Duke's Bookstore Case Study Application
 ===================================================
 
-[[GLPPQ]]
+[[GLPPQ]][[running-the-dukes-bookstore-case-study-application]]
 
-[[running-the-dukes-bookstore-case-study-application]]
-Running the Duke's Bookstore Case Study Application
----------------------------------------------------
 
 You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the Duke's Bookstore application.
@@ -22,9 +19,8 @@ The following topics are addressed here:
 * link:#GLPQN[To Build and Deploy Duke's Bookstore Using Maven]
 * link:#BABEHDEG[To Run Duke's Bookstore]
 
-[[GLPQG]]
+[[GLPQG]][[to-build-and-deploy-dukes-bookstore-using-netbeans-ide]]
 
-[[to-build-and-deploy-dukes-bookstore-using-netbeans-ide]]
 To Build and Deploy Duke's Bookstore Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,9 +42,8 @@ select Build.
 This will build, package, and deploy Duke's Bookstore to GlassFish
 Server.
 
-[[GLPQN]]
+[[GLPQN]][[to-build-and-deploy-dukes-bookstore-using-maven]]
 
-[[to-build-and-deploy-dukes-bookstore-using-maven]]
 To Build and Deploy Duke's Bookstore Using Maven
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,9 +68,8 @@ This command builds the application and packages it in a WAR file in the
 `_tut-install_/examples/case-studies/dukes-bookstore/target/` directory.
 It then deploys the application to GlassFish Server.
 
-[[BABEHDEG]]
+[[BABEHDEG]][[to-run-dukes-bookstore]]
 
-[[to-run-dukes-bookstore]]
 To Run Duke's Bookstore
 ~~~~~~~~~~~~~~~~~~~~~~~
 

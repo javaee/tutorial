@@ -7,9 +7,8 @@ prev=cdi-basic001.html
 = Overview of CDI
 
 
-[[GIWHL]]
+[[GIWHL]][[overview-of-cdi]]
 
-[[overview-of-cdi]]
 Overview of CDI
 ---------------
 

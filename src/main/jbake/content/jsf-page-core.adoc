@@ -7,9 +7,8 @@ prev=jsf-page003.html
 Using Converters, Listeners, and Validators
 ===========================================
 
-[[GJCUT]]
+[[GJCUT]][[using-converters-listeners-and-validators]]
 
-[[using-converters-listeners-and-validators]]
 11 Using Converters, Listeners, and Validators
 ----------------------------------------------
 

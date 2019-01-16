@@ -6,9 +6,8 @@ prev=security-javaee002.html
 ~~~~~~
 = Examples: Securing Enterprise Beans
 
-[[GKBSZ]]
+[[GKBSZ]][[examples-securing-enterprise-beans]]
 
-[[examples-securing-enterprise-beans]]
 Examples: Securing Enterprise Beans
 -----------------------------------
 
@@ -22,9 +21,8 @@ Declarative Security]
 * link:#the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security[The converter-secure Example: Securing an Enterprise Bean
 with Programmatic Security]
 
-[[BNBZK]]
+[[BNBZK]][[the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security]]
 
-[[the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security]]
 The cart-secure Example: Securing an Enterprise Bean with Declarative Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -68,9 +66,8 @@ the client application by following the steps in link:#BNBZN[To Run the
 cart-secure Example Using NetBeans IDE] or link:#BNBZO[To Run the
 cart-secure Example Using Maven].
 
-[[BNBZL]]
+[[BNBZL]][[annotating-the-bean]]
 
-[[annotating-the-bean]]
 Annotating the Bean
 ^^^^^^^^^^^^^^^^^^^
 
@@ -175,9 +172,8 @@ authentication will be required for a user to access these methods. If
 no authentication method is specified in the deployment descriptor, the
 type of authentication will be user name/password authentication.
 
-[[BNBZN]]
+[[BNBZN]][[to-run-the-cart-secure-example-using-netbeans-ide]]
 
-[[to-run-the-cart-secure-example-using-netbeans-ide]]
 To Run the cart-secure Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -222,9 +218,8 @@ Java Result: 1
 If the user name and password are not authenticated, the dialog box
 reappears until you enter correct values.
 
-[[BNBZO]]
+[[BNBZO]][[to-run-the-cart-secure-example-using-maven]]
 
-[[to-run-the-cart-secure-example-using-maven]]
 To Run the cart-secure Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -266,9 +261,8 @@ Java Result: 1
 If the user name and password are not authenticated, the dialog box
 reappears until you enter correct values.
 
-[[BNCAA]]
+[[BNCAA]][[the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security]]
 
-[[the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security]]
 The converter-secure Example: Securing an Enterprise Bean with Programmatic Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -311,9 +305,8 @@ link:security-webtier004.html#GJRMH[Specifying Security for Basic
 Authentication Using Annotations].
 5.  Build, package, deploy, and run the application.
 
-[[BNCAB]]
+[[BNCAB]][[modifying-converterbean]]
 
-[[modifying-converterbean]]
 Modifying ConverterBean
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -373,9 +366,8 @@ public class ConverterBean{
 }
 ----
 
-[[GKBSI]]
+[[GKBSI]][[modifying-converterservlet]]
 
-[[modifying-converterservlet]]
 Modifying ConverterServlet
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -390,9 +382,8 @@ client, `ConverterServlet`:
     rolesAllowed = {"TutorialUser"}))
 ----
 
-[[BNCAD]]
+[[BNCAD]][[to-run-the-converter-secure-example-using-netbeans-ide]]
 
-[[to-run-the-converter-secure-example-using-netbeans-ide]]
 To Run the converter-secure Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -412,9 +403,8 @@ tut-install/examples/security
 This command builds and deploys the example application to your
 GlassFish Server instance.
 
-[[BNCAE]]
+[[BNCAE]][[to-run-the-converter-secure-example-using-maven]]
 
-[[to-run-the-converter-secure-example-using-maven]]
 To Run the converter-secure Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -437,9 +427,8 @@ This command builds and packages the application into a WAR file,
 `converter-secure.war`, that is located in the `target` directory, and
 deploys the WAR file.
 
-[[GJTDP]]
+[[GJTDP]][[to-run-the-converter-secure-example]]
 
-[[to-run-the-converter-secure-example]]
 To Run the converter-secure Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=jsf-el002.html
 = Value and Method Expressions
 
 
-[[BNAHU]]
+[[BNAHU]][[value-and-method-expressions]]
 
-[[value-and-method-expressions]]
 Value and Method Expressions
 ----------------------------
 
@@ -23,9 +22,8 @@ The following topics are addressed here:
 * link:#method-expressions[Method Expressions]
 * link:#lambda-expressions[Lambda Expressions]
 
-[[BNAHV]]
+[[BNAHV]][[value-expressions]]
 
-[[value-expressions]]
 Value Expressions
 ~~~~~~~~~~~~~~~~~
 
@@ -60,9 +58,8 @@ is evaluated immediately during an initial request for the page. During
 a postback request, this expression can be used to set the value of the
 `name` property with user input.
 
-[[BNAHW]]
+[[BNAHW]][[referencing-objects]]
 
-[[referencing-objects]]
 Referencing Objects
 ^^^^^^^^^^^^^^^^^^^
 
@@ -107,9 +104,8 @@ you can compare `suit.hearts` to the instance:
 ${mySuit == suit.hearts}
 ----
 
-[[BNAHX]]
+[[BNAHX]][[referencing-object-properties-or-collection-elements]]
 
-[[referencing-object-properties-or-collection-elements]]
 Referencing Object Properties or Collection Elements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -168,9 +164,8 @@ ${customer.orders["socks"]}
 ${customer.orders.socks}
 ----
 
-[[sthref38]]
+[[sthref38]][[referencing-literals]]
 
-[[referencing-literals]]
 Referencing Literals
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -189,9 +184,8 @@ Here are some examples:
 * `${true}`
 * `${57}`
 
-[[GJHBZ]]
+[[GJHBZ]][[parameterized-method-calls]]
 
-[[parameterized-method-calls]]
 Parameterized Method Calls
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -244,9 +238,8 @@ in which a parameter is passed:
 In the preceding example, you are passing the string `'SOMESTOCK'` (a
 stock symbol) as a parameter to the `buy` method.
 
-[[BNAHY]]
+[[BNAHY]][[where-value-expressions-can-be-used]]
 
-[[where-value-expressions-can-be-used]]
 Where Value Expressions Can Be Used
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -330,9 +323,8 @@ of an attribute of type `float` will result in the following conversion:
 Float.valueOf("1.2E4").floatValue()
 ----
 
-[[BNAHZ]]
+[[BNAHZ]][[method-expressions]]
 
-[[method-expressions]]
 Method Expressions
 ~~~~~~~~~~~~~~~~~~
 
@@ -397,9 +389,8 @@ this method expression is invoked, the method returns the `String`
 literal, which is then converted to the expected return type, as defined
 in the tag's tag library descriptor.
 
-[[BEIHCBAH]]
+[[BEIHCBAH]][[lambda-expressions]]
 
-[[lambda-expressions]]
 Lambda Expressions
 ~~~~~~~~~~~~~~~~~~
 

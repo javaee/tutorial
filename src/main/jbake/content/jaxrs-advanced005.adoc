@@ -7,9 +7,8 @@ prev=jaxrs-advanced004.html
 Conditional HTTP Requests
 =========================
 
-[[GKQDA]]
+[[GKQDA]][[conditional-http-requests]]
 
-[[conditional-http-requests]]
 Conditional HTTP Requests
 -------------------------
 

@@ -7,9 +7,8 @@ prev=dukes-forest001.html
 Design and Architecture of Duke's Forest
 ========================================
 
-[[GLNRJ]]
+[[GLNRJ]][[design-and-architecture-of-dukes-forest]]
 
-[[design-and-architecture-of-dukes-forest]]
 Design and Architecture of Duke's Forest
 ----------------------------------------
 
@@ -115,9 +114,8 @@ The most fundamental building blocks of the application are the Events
 and Entities projects, which are bundled into Duke's Store and Duke's
 Shipment along with the Duke's Resources project.
 
-[[CIHHJEGA]]
+[[CIHHJEGA]][[the-events-project]]
 
-[[the-events-project]]
 The events Project
 ~~~~~~~~~~~~~~~~~~
 
@@ -162,9 +160,8 @@ To enable users to add more events to the project easily or update an
 event class with more fields for a new client, this component is a
 separate project within the application.
 
-[[CIHFCIAC]]
+[[CIHFCIAC]][[the-entities-project]]
 
-[[the-entities-project]]
 The entities Project
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -228,9 +225,8 @@ attributes include a quantity and id values for the product and the
 customer.
 * `OrderStatus`, which defines a status attribute for each order.
 
-[[sthref301]]
+[[sthref301]][[the-dukes-payment-project]]
 
-[[the-dukes-payment-project]]
 The dukes-payment Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -249,9 +245,8 @@ service. The implementation itself exposes a simple method,
 or deny the order payment. The method is called from the checkout
 process of Duke's Store.
 
-[[sthref302]]
+[[sthref302]][[the-dukes-resources-project]]
 
-[[the-dukes-resources-project]]
 The dukes-resources Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -270,9 +265,8 @@ classpath. The resources are in the `src/main/resources` directory:
 * `ValidationMessages_es.properties`: Bean Validation messages in
 Spanish
 
-[[sthref303]]
+[[sthref303]][[the-dukes-store-project]]
 
-[[the-dukes-store-project]]
 The Duke's Store Project
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -335,9 +329,8 @@ public class ProductBean extends AbstractFacade<Product> {
     ...
 ----
 
-[[sthref304]]
+[[sthref304]][[enterprise-beans-used-in-dukes-store]]
 
-[[enterprise-beans-used-in-dukes-store]]
 Enterprise Beans Used in Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -371,9 +364,8 @@ invokes the RESTful web service in `dukes-payment` and publishes an
 order to the JMS queue for shipping approval if the payment is
 successful.
 
-[[sthref305]]
+[[sthref305]][[facelets-files-used-in-the-main-interface-of-dukes-store]]
 
-[[facelets-files-used-in-the-main-interface-of-dukes-store]]
 Facelets Files Used in the Main Interface of Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -406,9 +398,8 @@ an order (`View_popup.xhtml`).
 * `product` directory: Pages related to products (`List.xhtml`,
 `ListCategory.xhtml`, `View.xhtml`).
 
-[[CIHHDHIH]]
+[[CIHHDHIH]][[facelets-files-used-in-the-administration-interface-of-dukes-store]]
 
-[[facelets-files-used-in-the-administration-interface-of-dukes-store]]
 Facelets Files Used in the Administration Interface of Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -432,9 +423,8 @@ details of an order (`View_popup.xhtml`)
 (`Confirm.xhtm`l, `Create.xhtml`, `Edit.xhtml`, `List.xhtml`,
 `View.xhtml`)
 
-[[sthref306]]
+[[sthref306]][[managed-beans-used-in-dukes-store]]
 
-[[managed-beans-used-in-dukes-store]]
 Managed Beans Used in Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -451,9 +441,8 @@ the enterprise beans. The beans are in the `com.forest.web` package:
 * `ProductController`
 * `UserController`
 
-[[sthref307]]
+[[sthref307]][[helper-classes-used-in-dukes-store]]
 
-[[helper-classes-used-in-dukes-store]]
 Helper Classes Used in Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -469,9 +458,8 @@ messages on a `FacesContext` instance
 * `MD5Util`: Class used by the `CustomerController` managed bean to
 generate an encrypted password for a user
 
-[[CIHEBAFD]]
+[[CIHEBAFD]][[qualifiers-used-in-dukes-store]]
 
-[[qualifiers-used-in-dukes-store]]
 Qualifiers Used in Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -482,9 +470,8 @@ Duke's Store defines the following qualifiers in the
 * `@New`: Qualifies an order as new
 * `@Paid`: Qualifies an order as paid
 
-[[sthref308]]
+[[sthref308]][[event-handlers-used-in-dukes-store]]
 
-[[event-handlers-used-in-dukes-store]]
 Event Handlers Used in Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -507,9 +494,8 @@ When an administrator accesses Duke's Shipment, it will call the Order
 Service, a RESTful web service, and ask for all orders in the database
 that are ready for delivery.
 
-[[sthref309]]
+[[sthref309]][[deployment-descriptors-used-in-dukes-store]]
 
-[[deployment-descriptors-used-in-dukes-store]]
 Deployment Descriptors Used in Duke's Store
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -521,9 +507,8 @@ Duke's Store uses the following deployment descriptors, located in the
 Server
 * `web.xml`: The web application configuration file
 
-[[sthref310]]
+[[sthref310]][[the-dukes-shipment-project]]
 
-[[the-dukes-shipment-project]]
 The Duke's Shipment Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -550,9 +535,8 @@ code looks like this:
 </h:commandLink>
 ----
 
-[[sthref311]]
+[[sthref311]][[enterprise-beans-used-in-dukes-shipment]]
 
-[[enterprise-beans-used-in-dukes-shipment]]
 Enterprise Beans Used in Duke's Shipment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -569,9 +553,8 @@ The `OrderBrowser` stateless session bean, located in the
 order queue and another that consumes an order message after the
 administrator approves or denies the order for shipment.
 
-[[sthref312]]
+[[sthref312]][[facelets-files-used-in-dukes-shipment]]
 
-[[facelets-files-used-in-dukes-shipment]]
 Facelets Files Used in Duke's Shipment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -591,9 +574,8 @@ is a login error.
 * `admin/index.xhtml`: Page for the main screen content after
 authentication.
 
-[[sthref313]]
+[[sthref313]][[managed-beans-used-in-dukes-shipment]]
 
-[[managed-beans-used-in-dukes-shipment]]
 Managed Beans Used in Duke's Shipment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -605,9 +587,8 @@ Service
 * `web.UserController`: Managed bean that corresponds to the `UserBean`
 session bean
 
-[[sthref314]]
+[[sthref314]][[helper-class-used-in-dukes-shipment]]
 
-[[helper-class-used-in-dukes-shipment]]
 Helper Class Used in Duke's Shipment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -617,18 +598,16 @@ the `com.forest.shipment.web.util` package:
 * `JsfUtil`: Class used for JavaServer Faces operations, such as queuing
 messages on a `FacesContext` instance
 
-[[sthref315]]
+[[sthref315]][[qualifier-used-in-dukes-shipment]]
 
-[[qualifier-used-in-dukes-shipment]]
 Qualifier Used in Duke's Shipment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Duke's Shipment includes the `@LoggedIn` qualifier described in
 link:#CIHEBAFD[Qualifiers Used in Duke's Store].
 
-[[sthref316]]
+[[sthref316]][[deployment-descriptors-used-in-dukes-shipment]]
 
-[[deployment-descriptors-used-in-dukes-shipment]]
 Deployment Descriptors Used in Duke's Shipment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

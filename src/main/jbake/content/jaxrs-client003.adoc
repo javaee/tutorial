@@ -7,9 +7,8 @@ prev=jaxrs-client002.html
 = Advanced Features of the Client API
 
 
-[[BABCDDGH]]
+[[BABCDDGH]][[advanced-features-of-the-client-api]]
 
-[[advanced-features-of-the-client-api]]
 Advanced Features of the Client API
 -----------------------------------
 
@@ -21,9 +20,8 @@ The following topics are addressed here:
 * link:#CHDGBBCC[Configuring the Client Request]
 * link:#CHDEBIGG[Asynchronous Invocations in the Client API]
 
-[[CHDGBBCC]]
+[[CHDGBBCC]][[configuring-the-client-request]]
 
-[[configuring-the-client-request]]
 Configuring the Client Request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -36,9 +34,8 @@ The following topics are addressed here:
 * link:#CHDHFFDJ[Setting Cookies in the Client Request]
 * link:#CHDJEFID[Adding Filters to the Client]
 
-[[CHDHAFBG]]
+[[CHDHAFBG]][[setting-message-headers-in-the-client-request]]
 
-[[setting-message-headers-in-the-client-request]]
 Setting Message Headers in the Client Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -84,9 +81,8 @@ values.add(...)
 myHeaders.add("myHeader", values
 ----
 
-[[CHDHFFDJ]]
+[[CHDHFFDJ]][[setting-cookies-in-the-client-request]]
 
-[[setting-cookies-in-the-client-request]]
 Setting Cookies in the Client Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -120,9 +116,8 @@ String response = myResource.request(MediaType.TEXT_PLAIN)
         .get(String.class);
 ----
 
-[[CHDJEFID]]
+[[CHDJEFID]][[adding-filters-to-the-client]]
 
-[[adding-filters-to-the-client]]
 Adding Filters to the Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -200,9 +195,8 @@ public void filter(ClientRequestContext requestContext) throws IOException {
 }
 ----
 
-[[CHDEBIGG]]
+[[CHDEBIGG]][[asynchronous-invocations-in-the-client-api]]
 
-[[asynchronous-invocations-in-the-client-api]]
 Asynchronous Invocations in the Client API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -234,9 +228,8 @@ Future<String> response = myResource.request(MediaType.TEXT_PLAIN)
         .get(String.class);
 ----
 
-[[sthref140]]
+[[sthref140]][[using-custom-callbacks-in-asynchronous-invocations]]
 
-[[using-custom-callbacks-in-asynchronous-invocations]]
 Using Custom Callbacks in Asynchronous Invocations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -267,9 +260,8 @@ Future<Customer> fCustomer = myResource.request(MediaType.TEXT_PLAIN)
     });
 ----
 
-[[sthref141]]
+[[sthref141]][[using-reactive-approach-in-asynchronous-invocations]]
 
-[[using-reactive-approach-in-asynchronous-invocations]]
 Using Reactive Approach in Asynchronous Invocations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -292,9 +284,8 @@ In the example, an asynchronous processing of the interface
 `CompletionStage<String>` is created and waits till it is completed and
 the result is displayed. The `CompletionStage` that is returned can then be used only to retrieve the result as shown in the above example or can be combined with other completion stages to ease and improve the processing of asynchronous tasks.
 
-[[sthref142]]
+[[sthref142]][[using-server-sent-events]]
 
-[[using-server-sent-events]]
 Using Server-Sent Events
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -311,9 +302,8 @@ The communication channel established by the client lasts till the
 client closes the connection and it is also re-used by the server to
 send multiple events from the server.
 
-[[sthref143]]
+[[sthref143]][[overview-of-the-sse-api]]
 
-[[overview-of-the-sse-api]]
 Overview of the SSE API
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -353,9 +343,8 @@ enabled.
 The events that are streamed to the clients can be defined with the
 details such as `event`, `data`, `id`, `retry`, and `comment`.
 
-[[sthref144]]
+[[sthref144]][[broadcasting-using-sse]]
 
-[[broadcasting-using-sse]]
 Broadcasting Using SSE
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -401,9 +390,8 @@ the creation of multiple instances of the class. The `register` method
 on a broadcaster is used to add a new `SseEventSink`; the `broadcast`
 method is used to send an SSE event to all registered clients.
 
-[[sthref145]]
+[[sthref145]][[listening-and-receiving-events]]
 
-[[listening-and-receiving-events]]
 Listening and Receiving Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

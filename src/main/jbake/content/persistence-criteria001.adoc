@@ -7,9 +7,8 @@ prev=persistence-criteria.html
 Overview of the Criteria and Metamodel APIs
 ===========================================
 
-[[GJRIJ]]
+[[GJRIJ]][[overview-of-the-criteria-and-metamodel-apis]]
 
-[[overview-of-the-criteria-and-metamodel-apis]]
 Overview of the Criteria and Metamodel APIs
 -------------------------------------------
 

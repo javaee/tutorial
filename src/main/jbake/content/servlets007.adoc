@@ -7,9 +7,8 @@ prev=servlets006.html
 Invoking Other Web Resources
 ============================
 
-[[BNAGI]]
+[[BNAGI]][[invoking-other-web-resources]]
 
-[[invoking-other-web-resources]]
 Invoking Other Web Resources
 ----------------------------
 
@@ -32,9 +31,8 @@ available or if the server has not implemented a `RequestDispatcher`
 object for that type of resource, `getRequestDispatcher` will return
 null. Your servlet should be prepared to deal with this condition.
 
-[[BNAGJ]]
+[[BNAGJ]][[including-other-resources-in-the-response]]
 
-[[including-other-resources-in-the-response]]
 Including Other Resources in the Response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -60,9 +58,8 @@ response object.
 * It cannot set headers or call any method, such as `setCookie`, that
 affects the headers of the response.
 
-[[BNAGK]]
+[[BNAGK]][[transferring-control-to-another-web-component]]
 
-[[transferring-control-to-another-web-component]]
 Transferring Control to Another Web Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

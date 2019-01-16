@@ -7,9 +7,8 @@ prev=dukes-tutoring002.html
 Administration Interface
 ========================
 
-[[GKAFW]]
+[[GKAFW]][[administration-interface]]
 
-[[administration-interface]]
 Administration Interface
 ------------------------
 
@@ -27,9 +26,8 @@ The following topics are addressed here:
 * link:#BCGHIDEG[CDI Managed Beans Used in the Administration Interface]
 * link:#BCGFFFCA[Helper Classes Used in the Administration Interface]
 
-[[GKAEN]]
+[[GKAEN]][[enterprise-beans-used-in-the-administration-interface]]
 
-[[enterprise-beans-used-in-the-administration-interface]]
 Enterprise Beans Used in the Administration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -40,9 +38,8 @@ The following enterprise bean, in the `dukestutoring.ejb` package of the
 in the administration interface. Calls security methods to allow
 invocation of the business methods only by authorized users.
 
-[[GKACB]]
+[[GKACB]][[facelets-files-used-in-the-administration-interface]]
 
-[[facelets-files-used-in-the-administration-interface]]
 Facelets Files Used in the Administration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -66,9 +63,8 @@ login form using Java EE security
 * `WEB-INF/includes/adminNav.xhtml`: XHTML fragment for the
 administration interface's navigation bar
 
-[[BCGHIDEG]]
+[[BCGHIDEG]][[cdi-managed-beans-used-in-the-administration-interface]]
 
-[[cdi-managed-beans-used-in-the-administration-interface]]
 CDI Managed Beans Used in the Administration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -91,9 +87,8 @@ code attributes have Bean Validation annotations that require the fields
 to be filled in, and the postal code attribute has an additional
 annotation to ensure that the data is properly formed.
 
-[[BCGFFFCA]]
+[[BCGFFFCA]][[helper-classes-used-in-the-administration-interface]]
 
-[[helper-classes-used-in-the-administration-interface]]
 Helper Classes Used in the Administration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

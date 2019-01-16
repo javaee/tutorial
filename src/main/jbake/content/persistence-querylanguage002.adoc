@@ -7,9 +7,8 @@ prev=persistence-querylanguage001.html
 Query Language Terminology
 ==========================
 
-[[BNBTH]]
+[[BNBTH]][[query-language-terminology]]
 
-[[query-language-terminology]]
 Query Language Terminology
 --------------------------
 

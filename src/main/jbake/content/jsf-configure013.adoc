@@ -7,9 +7,8 @@ prev=jsf-configure012.html
 = Basic Requirements of a JavaServer Faces Application
 
 
-[[BNAXJ]]
+[[BNAXJ]][[basic-requirements-of-a-javaserver-faces-application]]
 
-[[basic-requirements-of-a-javaserver-faces-application]]
 Basic Requirements of a JavaServer Faces Application
 ----------------------------------------------------
 
@@ -58,9 +57,8 @@ The `web.xml` file (or web deployment descriptor), the set of JAR files,
 and the set of application files must be contained in the `WEB-INF`
 directory of the WAR file.
 
-[[BNAXK]]
+[[BNAXK]][[configuring-an-application-with-a-web-deployment-descriptor]]
 
-[[configuring-an-application-with-a-web-deployment-descriptor]]
 Configuring an Application with a Web Deployment Descriptor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -89,9 +87,8 @@ This section gives more details on these configurations. Where
 appropriate, it also describes how you can make these configurations
 using NetBeans IDE.
 
-[[GLPOO]]
+[[GLPOO]][[identifying-the-servlet-for-lifecycle-processing]]
 
-[[identifying-the-servlet-for-lifecycle-processing]]
 Identifying the Servlet for Lifecycle Processing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -178,9 +175,8 @@ deployment descriptor is automatically created for you with default
 configurations. If you created your application without an IDE, you can
 create a web deployment descriptor.
 
-[[BNAXM]]
+[[BNAXM]][[to-specify-a-path-to-an-application-configuration-resource-file]]
 
-[[to-specify-a-path-to-an-application-configuration-resource-file]]
 To Specify a Path to an Application Configuration Resource File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -208,9 +204,8 @@ field.
 3.  Click OK.
 8.  Repeat steps 1 through 7 for each configuration file.
 
-[[BNAXN]]
+[[BNAXN]][[to-specify-where-state-is-saved]]
 
-[[to-specify-where-state-is-saved]]
 To Specify Where State Is Saved
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -241,9 +236,8 @@ rendered to a hidden field on the page. The JavaServer Faces
 implementation saves the state on the server by default. Duke's Forest
 saves its state on the client.
 
-[[GIQXL]]
+[[GIQXL]][[configuring-project-stage]]
 
-[[configuring-project-stage]]
 Configuring Project Stage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -274,9 +268,8 @@ deployment descriptor file. Here is an example:
 If no Project Stage is defined, the default stage is `Production`. You
 can also add custom stages according to your requirements.
 
-[[BNAXT]]
+[[BNAXT]][[including-the-classes-pages-and-other-resources]]
 
-[[including-the-classes-pages-and-other-resources]]
 Including the Classes, Pages, and Other Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=resources004.html
 Further Information about Resource Adapters
 ===========================================
 
-[[BNCJW]]
+[[BNCJW]][[further-information-about-resource-adapters]]
 
-[[further-information-about-resource-adapters]]
 Further Information about Resource Adapters
 -------------------------------------------
 

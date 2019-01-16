@@ -7,9 +7,8 @@ prev=jms-examples005.html
 Sending and Receiving Messages Using a Simple Web Application
 =============================================================
 
-[[BABBABFC]]
+[[BABBABFC]][[sending-and-receiving-messages-using-a-simple-web-application]]
 
-[[sending-and-receiving-messages-using-a-simple-web-application]]
 Sending and Receiving Messages Using a Simple Web Application
 -------------------------------------------------------------
 
@@ -39,9 +38,8 @@ image:img/javaeett_dt_035.png[
 message to a queue, and another managed bean receives the message from
 the queue."]
 
-[[sthref215]]
+[[sthref215]][[the-websimplemessage-facelets-pages]]
 
-[[the-websimplemessage-facelets-pages]]
 The websimplemessage Facelets Pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -59,9 +57,8 @@ method is called to fetch the message from the queue and display its
 contents. When the user clicks the Send Another Message button, the
 sender.xhtml page appears again.
 
-[[sthref216]]
+[[sthref216]][[the-websimplemessage-managed-beans]]
 
-[[the-websimplemessage-managed-beans]]
 The websimplemessage Managed Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -146,9 +143,8 @@ public void getMessage() {
 }
 ----
 
-[[sthref217]]
+[[sthref217]][[running-the-websimplemessage-example]]
 
-[[running-the-websimplemessage-example]]
 Running the websimplemessage Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -163,18 +159,16 @@ IDE]
 * link:#CHDBBBEI[To Package and Deploy websimplemessage Using Maven]
 * link:#CHDIFEHC[To Run the websimplemessage Example]
 
-[[CHDHEHAB]]
+[[CHDHEHAB]][[creating-resources-for-the-websimplemessage-example]]
 
-[[creating-resources-for-the-websimplemessage-example]]
 Creating Resources for the websimplemessage Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This example uses an annotation-defined queue and the preconfigured
 default connection factory `java:comp/DefaultJMSConnectionFactory`.
 
-[[CHDBADGA]]
+[[CHDBADGA]][[to-package-and-deploy-websimplemessage-using-netbeans-ide]]
 
-[[to-package-and-deploy-websimplemessage-using-netbeans-ide]]
 To Package and Deploy websimplemessage Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -195,9 +189,8 @@ select Build.
 +
 This command builds and deploys the project.
 
-[[CHDBBBEI]]
+[[CHDBBBEI]][[to-package-and-deploy-websimplemessage-using-maven]]
 
-[[to-package-and-deploy-websimplemessage-using-maven]]
 To Package and Deploy websimplemessage Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -218,9 +211,8 @@ use the following command:
 mvn install
 ----
 
-[[CHDIFEHC]]
+[[CHDIFEHC]][[to-run-the-websimplemessage-example]]
 
-[[to-run-the-websimplemessage-example]]
 To Run the websimplemessage Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=security-advanced002.html
 Using the JDBC Realm for User Authentication
 ============================================
 
-[[BABEJJDE]]
+[[BABEJJDE]][[using-the-jdbc-realm-for-user-authentication]]
 
-[[using-the-jdbc-realm-for-user-authentication]]
 Using the JDBC Realm for User Authentication
 --------------------------------------------
 
@@ -44,9 +43,8 @@ Two of the tutorial case studies, link:dukes-tutoring.html#GKAEE[Chapter
 link:dukes-forest.html#GLNPW[Chapter 62, "Duke's Forest Case Study
 Example,"] use a JDBC realm for user authentication.
 
-[[sthref233]]
+[[sthref233]][[to-configure-a-jdbc-authentication-realm]]
 
-[[to-configure-a-jdbc-authentication-realm]]
 To Configure a JDBC Authentication Realm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

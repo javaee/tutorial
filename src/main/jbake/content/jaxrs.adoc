@@ -7,9 +7,8 @@ prev=jaxws005.html
 = Building RESTful Web Services with JAX-RS
 
 
-[[GIEPU]]
+[[GIEPU]][[building-restful-web-services-with-jax-rs]]
 
-[[building-restful-web-services-with-jax-rs]]
 32 Building RESTful Web Services with JAX-RS
 --------------------------------------------
 

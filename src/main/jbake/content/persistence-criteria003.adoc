@@ -7,9 +7,8 @@ prev=persistence-criteria002.html
 = Using the Criteria API and Metamodel API to Create Basic Typesafe Queries
 
 
-[[GJIVM]]
+[[GJIVM]][[using-the-criteria-api-and-metamodel-api-to-create-basic-typesafe-queries]]
 
-[[using-the-criteria-api-and-metamodel-api-to-create-basic-typesafe-queries]]
 Using the Criteria API and Metamodel API to Create Basic Typesafe Queries
 -------------------------------------------------------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 * link:#GJIXE[Managing Criteria Query Results]
 * link:#GJIVY[Executing Queries]
 
-[[GJIVS]]
+[[GJIVS]][[creating-a-criteria-query]]
 
-[[creating-a-criteria-query]]
 Creating a Criteria Query
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -87,9 +85,8 @@ that returns a `String`:
 CriteriaQuery<String> cq = cb.createQuery(String.class);
 ----
 
-[[GJIVQ]]
+[[GJIVQ]][[query-roots]]
 
-[[query-roots]]
 Query Roots
 ~~~~~~~~~~~
 
@@ -132,9 +129,8 @@ Root<Pet> pet1 = cq.from(Pet.class);
 Root<Pet> pet2 = cq.from(Pet.class);
 ----
 
-[[GJIUV]]
+[[GJIUV]][[querying-relationships-using-joins]]
 
-[[querying-relationships-using-joins]]
 Querying Relationships Using Joins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -171,9 +167,8 @@ Root<Pet> pet = cq.from(Pet.class);
 Join<Owner, Address> address = pet.join(Pet_.owners).join(Owner_.addresses);
 ----
 
-[[GJIVE]]
+[[GJIVE]][[path-navigation-in-criteria-queries]]
 
-[[path-navigation-in-criteria-queries]]
 Path Navigation in Criteria Queries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -202,9 +197,8 @@ Root<Pet> pet = cq.from(Pet.class);
 cq.select(pet.get(Pet_.name));
 ----
 
-[[GJIVI]]
+[[GJIVI]][[restricting-criteria-query-results]]
 
-[[restricting-criteria-query-results]]
 Restricting Criteria Query Results
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -218,9 +212,8 @@ restrict the results according to the conditions of the expressions. To
 create `Expression` instances, use methods defined in the `Expression`
 and `CriteriaBuilder` interfaces.
 
-[[GJIWN]]
+[[GJIWN]][[the-expression-interface-methods]]
 
-[[the-expression-interface-methods]]
 The Expression Interface Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -264,9 +257,8 @@ cq.where(pet.get(Pet_.color).in("brown", "black"));
 The `in` method can also check whether an attribute is a member of a
 collection.
 
-[[GJIXA]]
+[[GJIXA]][[expression-methods-in-the-criteriabuilder-interface]]
 
-[[expression-methods-in-the-criteriabuilder-interface]]
 Expression Methods in the CriteriaBuilder Interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -371,9 +363,8 @@ cq.where(cb.equal(pet.get(Pet_.name), "Fido")
         .and(cb.equal(pet.get(Pet_.color), "brown")));
 ----
 
-[[GJIXE]]
+[[GJIXE]][[managing-criteria-query-results]]
 
-[[managing-criteria-query-results]]
 Managing Criteria Query Results
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -392,9 +383,8 @@ The following topics are addressed here:
 * link:#GJIWO[Ordering Results]
 * link:#GJIXG[Grouping Results]
 
-[[GJIWO]]
+[[GJIWO]][[ordering-results]]
 
-[[ordering-results]]
 Ordering Results
 ^^^^^^^^^^^^^^^^
 
@@ -452,9 +442,8 @@ cq.orderBy(cb.asc(owner.get(Owner_.lastName)), owner.get(Owner_.firstName)));
 The results of this query will be ordered alphabetically by the pet
 owner's last name, then first name.
 
-[[GJIXG]]
+[[GJIXG]][[grouping-results]]
 
-[[grouping-results]]
 Grouping Results
 ^^^^^^^^^^^^^^^^
 
@@ -489,9 +478,8 @@ as in the preceding example. However, the only returned groups will be
 `Pet` entities where the `color` attribute is set to `brown` or
 `blonde`. That is, no gray-colored pets will be returned in this query.
 
-[[GJIVY]]
+[[GJIVY]][[executing-queries]]
 
-[[executing-queries]]
 Executing Queries
 ~~~~~~~~~~~~~~~~~
 
@@ -502,9 +490,8 @@ the type of the query result, passing the `CriteriaQuery` object to
 To execute a query, call either `getSingleResult` or `getResultList` on
 the `TypedQuery<T>` object.
 
-[[GJIUR]]
+[[GJIUR]][[single-valued-query-results]]
 
-[[single-valued-query-results]]
 Single-Valued Query Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -519,9 +506,8 @@ TypedQuery<Pet> q = em.createQuery(cq);
 Pet result = q.getSingleResult();
 ----
 
-[[GJIVP]]
+[[GJIVP]][[collection-valued-query-results]]
 
-[[collection-valued-query-results]]
 Collection-Valued Query Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

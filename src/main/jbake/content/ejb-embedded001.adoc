@@ -7,9 +7,8 @@ prev=ejb-embedded.html
 Overview of the Embedded Enterprise Bean Container
 ==================================================
 
-[[GKFAE]]
+[[GKFAE]][[overview-of-the-embedded-enterprise-bean-container]]
 
-[[overview-of-the-embedded-enterprise-bean-container]]
 Overview of the Embedded Enterprise Bean Container
 --------------------------------------------------
 

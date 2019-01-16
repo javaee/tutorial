@@ -7,9 +7,8 @@ prev=persistence-basicexamples001.html
 The order Application
 =====================
 
-[[GIQST]]
+[[GIQST]][[the-order-application]]
 
-[[the-order-application]]
 The order Application
 ---------------------
 
@@ -54,9 +53,8 @@ omitted from the table names.
 |=======================================================================
 
 
-[[GIQRH]]
+[[GIQRH]][[entity-relationships-in-the-order-application]]
 
-[[entity-relationships-in-the-order-application]]
 Entity Relationships in the order Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -72,9 +70,8 @@ The following topics are addressed here:
 Foreign Keys]
 * link:#GIQUD[Unidirectional Relationships]
 
-[[GIQQR]]
+[[GIQQR]][[self-referential-relationships]]
 
-[[self-referential-relationships]]
 Self-Referential Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -108,9 +105,8 @@ public Collection<Part> getParts() {
 ...
 ----
 
-[[GIQSR]]
+[[GIQSR]][[one-to-one-relationships]]
 
-[[one-to-one-relationships]]
 One-to-One Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -149,9 +145,8 @@ Note that, because `Part` uses a compound primary key, the
 `PARTREVISION` column refers to `PERSISTENCE_ORDER_PART`'s `REVISION`
 column.
 
-[[GIQTJ]]
+[[GIQTJ]][[one-to-many-relationship-mapped-to-overlapping-primary-and-foreign-keys]]
 
-[[one-to-many-relationship-mapped-to-overlapping-primary-and-foreign-keys]]
 One-to-Many Relationship Mapped to Overlapping Primary and Foreign Keys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -189,9 +184,8 @@ public CustomerOrder getCustomerOrder() {
 }
 ----
 
-[[GIQUD]]
+[[GIQUD]][[unidirectional-relationships]]
 
-[[unidirectional-relationships]]
 Unidirectional Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -208,9 +202,8 @@ public VendorPart getVendorPart() {
 }
 ----
 
-[[GIQQY]]
+[[GIQQY]][[primary-keys-in-the-order-application]]
 
-[[primary-keys-in-the-order-application]]
 Primary Keys in the order Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -223,9 +216,8 @@ The following topics are addressed here:
 * link:#GIQUV[Generated Primary Keys]
 * link:#GIQUF[Compound Primary Keys]
 
-[[GIQUV]]
+[[GIQUV]][[generated-primary-keys]]
 
-[[generated-primary-keys]]
 Generated Primary Keys
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -273,9 +265,8 @@ increment when allocating primary key values. In this case, each
 The primary key field `vendorPartNumber` is of type `Long`, as the
 generated primary key's field must be an integral type.
 
-[[GIQUF]]
+[[GIQUF]][[compound-primary-keys]]
 
-[[compound-primary-keys]]
 Compound Primary Keys
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -448,9 +439,8 @@ public class Part implements Serializable {
 }
 ----
 
-[[GIQTL]]
+[[GIQTL]][[entity-mapped-to-more-than-one-database-table]]
 
-[[entity-mapped-to-more-than-one-database-table]]
 Entity Mapped to More Than One Database Table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -486,9 +476,8 @@ table the column refers to. In this case, the primary key column names
 for both `PERSISTENCE_ORDER_PART_DETAIL` and `PERSISTENCE_ORDER_PART`
 are the same: `PARTNUMBER` and `REVISION`, respectively.
 
-[[GIQUE]]
+[[GIQUE]][[cascade-operations-in-the-order-application]]
 
-[[cascade-operations-in-the-order-application]]
 Cascade Operations in the order Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -532,9 +521,8 @@ public CustomerOrder getCustomerOrder() {
 }
 ----
 
-[[GIQSC]]
+[[GIQSC]][[blob-and-clob-database-types-in-the-order-application]]
 
-[[blob-and-clob-database-types-in-the-order-application]]
 BLOB and CLOB Database Types in the order Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -572,9 +560,8 @@ public String getSpecification() {
 Both of these fields use the `@Column` annotation and set the `table`
 element to the secondary table.
 
-[[GIQUM]]
+[[GIQUM]][[temporal-types-in-the-order-application]]
 
-[[temporal-types-in-the-order-application]]
 Temporal Types in the order Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -600,9 +587,8 @@ public Date getLastUpdate() {
 }
 ----
 
-[[GIQQV]]
+[[GIQQV]][[managing-the-order-applications-entities]]
 
-[[managing-the-order-applications-entities]]
 Managing the order Application's Entities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -622,9 +608,8 @@ This `EntityManager` instance is a container-managed entity manager, so
 the container takes care of all the transactions involved in managing
 `order`'s entities.
 
-[[GIQRR]]
+[[GIQRR]][[creating-entities]]
 
-[[creating-entities]]
 Creating Entities
 ^^^^^^^^^^^^^^^^^
 
@@ -650,9 +635,8 @@ deployed. The `createData` method is annotated with `@PostConstruct` and
 creates the initial entities used by `order` by calling `RequestBean`'s
 business methods.
 
-[[GIQQC]]
+[[GIQQC]][[finding-entities]]
 
-[[finding-entities]]
 Finding Entities
 ^^^^^^^^^^^^^^^^
 
@@ -668,9 +652,8 @@ CustomerOrder order = em.find(CustomerOrder.class, orderId);
 The first argument of `EntityManager.find` is the entity class, and the
 second is the primary key.
 
-[[GIQUK]]
+[[GIQUK]][[setting-entity-relationships]]
 
-[[setting-entity-relationships]]
 Setting Entity Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -697,9 +680,8 @@ vendor.addVendorPart(vendorPart);
 vendorPart.setVendor(vendor);
 ----
 
-[[GIQSV]]
+[[GIQSV]][[using-queries]]
 
-[[using-queries]]
 Using Queries
 ^^^^^^^^^^^^^
 
@@ -757,9 +739,8 @@ return (Double) em.createNamedQuery(
 The `Query.getSingleResult` method is used for this query because the
 query returns a single value.
 
-[[GIQTW]]
+[[GIQTW]][[removing-entities]]
 
-[[removing-entities]]
 Removing Entities
 ^^^^^^^^^^^^^^^^^
 
@@ -773,9 +754,8 @@ CustomerOrder order = em.find(CustomerOrder.class, orderId);
 em.remove(order);
 ----
 
-[[GIQUP]]
+[[GIQUP]][[running-the-order-example]]
 
-[[running-the-order-example]]
 Running the order Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -788,9 +768,8 @@ The following topics are addressed here:
 * link:#GIQSG[To Run the order Example Using NetBeans IDE]
 * link:#GIQTY[To Run the order Example Using Maven]
 
-[[GIQSG]]
+[[GIQSG]][[to-run-the-order-example-using-netbeans-ide]]
 
-[[to-run-the-order-example-using-netbeans-ide]]
 To Run the order Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -818,9 +797,8 @@ NetBeans IDE opens a web browser to the following URL:
 http://localhost:8080/order/
 ----
 
-[[GIQTY]]
+[[GIQTY]][[to-run-the-order-example-using-maven]]
 
-[[to-run-the-order-example-using-maven]]
 To Run the order Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

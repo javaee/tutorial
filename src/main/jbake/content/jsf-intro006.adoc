@@ -7,9 +7,8 @@ prev=jsf-intro005.html
 Navigation Model
 ================
 
-[[BNAQL]]
+[[BNAQL]][[navigation-model]]
 
-[[navigation-model]]
 Navigation Model
 ----------------
 

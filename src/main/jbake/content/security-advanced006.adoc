@@ -6,9 +6,8 @@ prev=security-advanced005.html
 ~~~~~~
 = Securing Enterprise Information Systems Applications
 
-[[GLIFD]]
+[[GLIFD]][[securing-enterprise-information-systems-applications]]
 
-[[securing-enterprise-information-systems-applications]]
 Securing Enterprise Information Systems Applications
 ----------------------------------------------------
 
@@ -24,9 +23,8 @@ Applications]
 * link:#configuring-resource-adapter-security[Configuring Resource Adapter Security]
 * link:#mapping-an-application-principal-to-eis-principals[Mapping an Application Principal to EIS Principals]
 
-[[BABBJHIC]]
+[[BABBJHIC]][[overview-of-securing-enterprise-information-systems-applications]]
 
-[[overview-of-securing-enterprise-information-systems-applications]]
 Overview of Securing Enterprise Information Systems Applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -44,9 +42,8 @@ sign-on by including code that performs the sign-on process to an EIS.
 You can also configure security for resource adapters. See
 link:#GLIGS[Configuring Resource Adapter Security].
 
-[[GLIHL]]
+[[GLIHL]][[container-managed-sign-on]]
 
-[[container-managed-sign-on]]
 Container-Managed Sign-On
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -69,9 +66,8 @@ javax.resource.cci.Connection cx = cxf.getConnection();
 ...
 ----
 
-[[GLIDP]]
+[[GLIDP]][[component-managed-sign-on]]
 
-[[component-managed-sign-on]]
 Component-Managed Sign-On
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -102,9 +98,8 @@ javax.resource.cci.Connection cx =
 ...
 ----
 
-[[GLIGS]]
+[[GLIGS]][[configuring-resource-adapter-security]]
 
-[[configuring-resource-adapter-security]]
 Configuring Resource Adapter Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -192,9 +187,8 @@ principal. The security map is usually used if one or more EIS back-end
 principals are used to execute operations (on the EIS) initiated by
 various principals or user groups in the application.
 
-[[GLIGW]]
+[[GLIGW]][[mapping-an-application-principal-to-eis-principals]]
 
-[[mapping-an-application-principal-to-eis-principals]]
 Mapping an Application Principal to EIS Principals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

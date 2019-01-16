@@ -7,9 +7,8 @@ prev=websocket003.html
 = Annotated Endpoints
 
 
-[[BABFEBGA]]
+[[BABFEBGA]][[annotated-endpoints]]
 
-[[annotated-endpoints]]
 Annotated Endpoints
 -------------------
 

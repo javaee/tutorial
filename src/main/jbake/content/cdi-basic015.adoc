@@ -7,9 +7,8 @@ prev=cdi-basic014.html
 = Further Information about CDI
 
 
-[[GIWEL]]
+[[GIWEL]][[further-information-about-cdi]]
 
-[[further-information-about-cdi]]
 Further Information about CDI
 -----------------------------
 

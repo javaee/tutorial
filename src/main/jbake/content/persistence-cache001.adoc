@@ -7,9 +7,8 @@ prev=persistence-cache.html
 = Overview of the Second-Level Cache
 
 
-[[GKJIO]]
+[[GKJIO]][[overview-of-the-second-level-cache]]
 
-[[overview-of-the-second-level-cache]]
 Overview of the Second-Level Cache
 ----------------------------------
 
@@ -79,9 +78,8 @@ Store Modes])
 Which of these strategies works best to avoid stale reads depends upon
 the application.
 
-[[GKJIW]]
+[[GKJIW]][[controlling-whether-entities-may-be-cached]]
 
-[[controlling-whether-entities-may-be-cached]]
 Controlling whether Entities May Be Cached
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

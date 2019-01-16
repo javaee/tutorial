@@ -7,9 +7,8 @@ prev=partbeanvalidation.html
 = Introduction to Bean Validation
 
 
-[[CHDGJIIA]]
+[[CHDGJIIA]][[introduction-to-bean-validation]]
 
-[[introduction-to-bean-validation]]
 23 Introduction to Bean Validation
 ----------------------------------
 

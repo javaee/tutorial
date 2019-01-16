@@ -7,9 +7,8 @@ prev=jaxrs002.html
 = Example Applications for JAX-RS
 
 
-[[GIPZZ]]
+[[GIPZZ]][[example-applications-for-jax-rs]]
 
-[[example-applications-for-jax-rs]]
 Example Applications for JAX-RS
 -------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#GJVBC[The rsvp Example Application]
 * link:#GIRCI[Real-World Examples]
 
-[[GIPYZ]]
+[[GIPYZ]][[creating-a-simple-restful-web-service]]
 
-[[creating-a-simple-restful-web-service]]
 Creating a Simple RESTful Web Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -42,9 +40,8 @@ The following topics are addressed here:
 
 * link:#GIQAA[To Create a RESTful Web Service Using NetBeans IDE]
 
-[[GIQAA]]
+[[GIQAA]][[to-create-a-restful-web-service-using-netbeans-ide]]
 
-[[to-create-a-restful-web-service-using-netbeans-ide]]
 To Create a RESTful Web Service Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -111,9 +108,8 @@ a section on creating a CRUD application from a database. Create, read,
 update, and delete (CRUD) are the four basic functions of persistent
 storage and relational databases.
 
-[[GJVBC]]
+[[GJVBC]][[the-rsvp-example-application]]
 
-[[the-rsvp-example-application]]
 The rsvp Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -128,9 +124,8 @@ The following topics are addressed here:
 * link:#GJVAW[Components of the rsvp Example Application]
 * link:#GKCCA[Running the rsvp Example Application]
 
-[[GJVAW]]
+[[GJVAW]][[components-of-the-rsvp-example-application]]
 
-[[components-of-the-rsvp-example-application]]
 Components of the rsvp Example Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -223,9 +218,8 @@ how the Client API is used in `rsvp`, see
 link:jaxrs-client002.html#BABEDFIG["The Client API in the rsvp Example
 Application"].
 
-[[GKCCA]]
+[[GKCCA]][[running-the-rsvp-example-application]]
 
-[[running-the-rsvp-example-application]]
 Running the rsvp Example Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -237,9 +231,8 @@ The following topics are addressed here:
 * link:#CIHEFEHA[To Run the rsvp Example Application Using NetBeans IDE]
 * link:#CIHHHIEI[To Run the rsvp Example Application Using Maven]
 
-[[CIHEFEHA]]
+[[CIHEFEHA]][[to-run-the-rsvp-example-application-using-netbeans-ide]]
 
-[[to-run-the-rsvp-example-application-using-netbeans-ide]]
 To Run the rsvp Example Application Using NetBeans IDE
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -278,9 +271,8 @@ status.
 The invitee's new status should now be displayed in the table of
 invitees and their response statuses.
 
-[[CIHHHIEI]]
+[[CIHHHIEI]][[to-run-the-rsvp-example-application-using-maven]]
 
-[[to-run-the-rsvp-example-application-using-maven]]
 To Run the rsvp Example Application Using Maven
 +++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -321,9 +313,8 @@ status.
 The invitee's new status should now be displayed in the table of
 invitees and their response statuses.
 
-[[GIRCI]]
+[[GIRCI]][[real-world-examples]]
 
-[[real-world-examples]]
 Real-World Examples
 ~~~~~~~~~~~~~~~~~~~
 

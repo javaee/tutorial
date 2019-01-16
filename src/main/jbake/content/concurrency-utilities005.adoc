@@ -7,9 +7,8 @@ prev=concurrency-utilities004.html
 = The jobs Concurrency Example
 
 
-[[CIHCGGEG]]
+[[CIHCGGEG]][[the-jobs-concurrency-example]]
 
-[[the-jobs-concurrency-example]]
 The jobs Concurrency Example
 ----------------------------
 
@@ -44,9 +43,8 @@ processing will be much faster.
 This differentiation is made possible by the use of two different
 Managed Executor Services, one for each type of request.
 
-[[sthref294]]
+[[sthref294]][[running-the-jobs-example]]
 
-[[running-the-jobs-example]]
 Running the jobs Example
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -67,9 +65,8 @@ Priority]
 * link:#CHDHEABJ[To Run the jobs Example and Submit Jobs with High
 Priority]
 
-[[CHDCIBBD]]
+[[CHDCIBBD]][[to-configure-glassfish-server-for-the-basic-concurrency-example]]
 
-[[to-configure-glassfish-server-for-the-basic-concurrency-example]]
 To Configure GlassFish Server for the Basic Concurrency Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -99,9 +96,8 @@ values for other settings):
 * Task Queue Capacity: 0
 10. Click OK.
 
-[[CHDFBAHJ]]
+[[CHDFBAHJ]][[to-build-package-and-deploy-the-jobs-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-jobs-example-using-netbeans-ide]]
 To Build, Package, and Deploy the jobs Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -122,9 +118,8 @@ Build.
 +
 This command builds and deploys the application.
 
-[[CHDECFFF]]
+[[CHDECFFF]][[to-build-package-and-deploy-the-jobs-example-using-maven]]
 
-[[to-build-package-and-deploy-the-jobs-example-using-maven]]
 To Build, Package, and Deploy the jobs Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -144,9 +139,8 @@ tut-install/examples/concurrency/jobs
 mvn install
 ----
 
-[[CHDFHHAF]]
+[[CHDFHHAF]][[to-run-the-jobs-example-and-submit-jobs-with-low-priority]]
 
-[[to-run-the-jobs-example-and-submit-jobs-with-low-priority]]
 To Run the jobs Example and Submit Jobs with Low Priority
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -201,9 +195,8 @@ INFO:   Job 2 was NOT submitted
 INFO:   Task finished LOW-1
 ----
 
-[[CHDHEABJ]]
+[[CHDHEABJ]][[to-run-the-jobs-example-and-submit-jobs-with-high-priority]]
 
-[[to-run-the-jobs-example-and-submit-jobs-with-high-priority]]
 To Run the jobs Example and Submit Jobs with High Priority
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

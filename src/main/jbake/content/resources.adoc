@@ -7,9 +7,8 @@ prev=transactions009.html
 Resource Adapters and Contracts
 ===============================
 
-[[BNCJH]]
+[[BNCJH]][[resource-adapters-and-contracts]]
 
-[[resource-adapters-and-contracts]]
 56 Resource Adapters and Contracts
 ----------------------------------
 

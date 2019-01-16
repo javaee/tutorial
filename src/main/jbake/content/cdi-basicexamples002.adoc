@@ -6,9 +6,8 @@ prev=cdi-basicexamples001.html
 ~~~~~~
 = The simplegreeting CDI Example
 
-[[GJBJU]]
+[[GJBJU]][[the-simplegreeting-cdi-example]]
 
-[[the-simplegreeting-cdi-example]]
 The simplegreeting CDI Example
 ------------------------------
 
@@ -25,9 +24,8 @@ The following topics are addressed here:
 * link:#GJDOJ[The Facelets Template and Page]
 * link:#GJCYM[Running the simplegreeting Example]
 
-[[GJCQS]]
+[[GJCQS]][[the-simplegreeting-source-files]]
 
-[[the-simplegreeting-source-files]]
 The simplegreeting Source Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,9 +44,8 @@ The source files are located in the
 `_tut-install_/examples/cdi/simplegreeting/src/main/java/javaeetutorial/simplegreeting`
 directory.
 
-[[GJDOJ]]
+[[GJDOJ]][[the-facelets-template-and-page]]
 
-[[the-facelets-template-and-page]]
 The Facelets Template and Page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -148,9 +145,8 @@ following location:
 tut-install/examples/cdi/simplegreeting/src/main/webapp/resources/css/default.css
 ----
 
-[[GJCYM]]
+[[GJCYM]][[running-the-simplegreeting-example]]
 
-[[running-the-simplegreeting-example]]
 Running the simplegreeting Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -165,9 +161,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GJCZE[To Run the simplegreeting Example]
 
-[[GJCXP]]
+[[GJCXP]][[to-build-package-and-run-the-simplegreeting-example-using-netbeans-ide]]
 
-[[to-build-package-and-run-the-simplegreeting-example-using-netbeans-ide]]
 To Build, Package, and Run the simplegreeting Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -203,9 +198,8 @@ This command builds and packages the application into a WAR file,
 `simplegreeting.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GJCZT]]
+[[GJCZT]][[to-build-package-and-deploy-the-simplegreeting-example-using-maven]]
 
-[[to-build-package-and-deploy-the-simplegreeting-example-using-maven]]
 To Build, Package, and Deploy the simplegreeting Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -229,9 +223,8 @@ This command builds and packages the application into a WAR file,
 `simplegreeting.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GJCZE]]
+[[GJCZE]][[to-run-the-simplegreeting-example]]
 
-[[to-run-the-simplegreeting-example]]
 To Run the simplegreeting Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=partpersist.html
 Introduction to the Java Persistence API
 ========================================
 
-[[BNBPZ]]
+[[BNBPZ]][[introduction-to-the-java-persistence-api]]
 
-[[introduction-to-the-java-persistence-api]]
 40 Introduction to the Java Persistence API
 -------------------------------------------
 

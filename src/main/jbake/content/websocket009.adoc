@@ -7,9 +7,8 @@ prev=websocket008.html
 = Handling Errors
 
 
-[[BABDEJHB]]
+[[BABDEJHB]][[handling-errors]]
 
-[[handling-errors]]
 Handling Errors
 ---------------
 

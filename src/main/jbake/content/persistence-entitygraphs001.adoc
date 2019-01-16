@@ -7,9 +7,8 @@ prev=persistence-entitygraphs.html
 Overview of Using Fetch Plans and Entity Graphs
 ===============================================
 
-[[A1153411]]
+[[A1153411]][[overview-of-using-fetch-plans-and-entity-graphs]]
 
-[[overview-of-using-fetch-plans-and-entity-graphs]]
 Overview of Using Fetch Plans and Entity Graphs
 -----------------------------------------------
 

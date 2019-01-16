@@ -7,9 +7,8 @@ prev=ejb-intro006.html
 The Lifecycles of Enterprise Beans
 ==================================
 
-[[GIPLJ]]
+[[GIPLJ]][[the-lifecycles-of-enterprise-beans]]
 
-[[the-lifecycles-of-enterprise-beans]]
 The Lifecycles of Enterprise Beans
 ----------------------------------
 
@@ -30,9 +29,8 @@ The following topics are addressed here:
 * link:#GIPRX[The Lifecycle of a Singleton Session Bean]
 * link:#GIPKW[The Lifecycle of a Message-Driven Bean]
 
-[[GIPLN]]
+[[GIPLN]][[the-lifecycle-of-a-stateful-session-bean]]
 
-[[the-lifecycle-of-a-stateful-session-bean]]
 The Lifecycle of a Stateful Session Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -69,9 +67,8 @@ method annotated `@Remove`. All other methods in link:#GIPMI[Figure
 link:resources.html#BNCJH[Chapter 55, "Resource Adapters and Contracts"]
 for more information.
 
-[[GIPLM]]
+[[GIPLM]][[the-lifecycle-of-a-stateless-session-bean]]
 
-[[the-lifecycle-of-a-stateless-session-bean]]
 The Lifecycle of a Stateless Session Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -96,9 +93,8 @@ At the end of the lifecycle, the EJB container calls the method
 annotated `@PreDestroy`, if it exists. The bean's instance is then ready
 for garbage collection.
 
-[[GIPRX]]
+[[GIPRX]][[the-lifecycle-of-a-singleton-session-bean]]
 
-[[the-lifecycle-of-a-singleton-session-bean]]
 The Lifecycle of a Singleton Session Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -117,9 +113,8 @@ At the end of the lifecycle, the EJB container calls the method
 annotated `@PreDestroy`, if it exists. The singleton session bean is now
 ready for garbage collection.
 
-[[GIPKW]]
+[[GIPKW]][[the-lifecycle-of-a-message-driven-bean]]
 
-[[the-lifecycle-of-a-message-driven-bean]]
 The Lifecycle of a Message-Driven Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

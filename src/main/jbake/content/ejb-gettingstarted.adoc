@@ -7,9 +7,8 @@ prev=ejb-intro008.html
 Getting Started with Enterprise Beans
 =====================================
 
-[[GIJRE]]
+[[GIJRE]][[getting-started-with-enterprise-beans]]
 
-[[getting-started-with-enterprise-beans]]
 36 Getting Started with Enterprise Beans
 ----------------------------------------
 

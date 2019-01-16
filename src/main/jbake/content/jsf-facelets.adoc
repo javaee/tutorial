@@ -7,9 +7,8 @@ prev=jsf-intro009.html
 Introduction to Facelets
 ========================
 
-[[GIEPX]]
+[[GIEPX]][[introduction-to-facelets]]
 
-[[introduction-to-facelets]]
 8 Introduction to Facelets
 --------------------------
 

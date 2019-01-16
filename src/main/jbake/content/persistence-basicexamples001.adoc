@@ -7,9 +7,8 @@ prev=persistence-basicexamples.html
 Overview of the Persistence Examples
 ====================================
 
-[[A1023268]]
+[[A1023268]][[overview-of-the-persistence-examples]]
 
-[[overview-of-the-persistence-examples]]
 Overview of the Persistence Examples
 ------------------------------------
 

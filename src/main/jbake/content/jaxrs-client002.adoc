@@ -7,9 +7,8 @@ prev=jaxrs-client001.html
 Using the Client API in the JAX-RS Example Applications
 =======================================================
 
-[[BABJCIJC]]
+[[BABJCIJC]][[using-the-client-api-in-the-jax-rs-example-applications]]
 
-[[using-the-client-api-in-the-jax-rs-example-applications]]
 Using the Client API in the JAX-RS Example Applications
 -------------------------------------------------------
 
@@ -22,9 +21,8 @@ The following topics are addressed here:
 * link:#BABEDFIG[The Client API in the rsvp Example Application]
 * link:#CHDGBGID[The Client API in the customer Example Application]
 
-[[BABEDFIG]]
+[[BABEDFIG]][[the-client-api-in-the-rsvp-example-application]]
 
-[[the-client-api-in-the-rsvp-example-application]]
 The Client API in the rsvp Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -106,9 +104,8 @@ response. The body of the request is an XML document.
     }
 ----
 
-[[CHDGBGID]]
+[[CHDGBGID]][[the-client-api-in-the-customer-example-application]]
 
-[[the-client-api-in-the-customer-example-application]]
 The Client API in the customer Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

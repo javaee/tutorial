@@ -7,9 +7,8 @@ prev=bean-validation002.html
 # Validating Null and Empty Strings
 
 
-[[GKCRG]]
+[[GKCRG]][[validating-null-and-empty-strings]]
 
-[[validating-null-and-empty-strings]]
 Validating Null and Empty Strings
 ---------------------------------
 

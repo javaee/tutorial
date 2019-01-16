@@ -7,9 +7,8 @@ prev=persistence-intro005.html
 = Database Schema Creation
 
 
-[[CHDBEGIC]]
+[[CHDBEGIC]][[database-schema-creation]]
 
-[[database-schema-creation]]
 Database Schema Creation
 ------------------------
 
@@ -51,9 +50,8 @@ and load data from a provided script when the application is deployed:
 </persistence>
 ----
 
-[[sthref161]]
+[[sthref161]][[configuring-an-application-to-create-or-drop-database-tables]]
 
-[[configuring-an-application-to-create-or-drop-database-tables]]
 Configuring an Application to Create or Drop Database Tables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -148,9 +146,8 @@ In the above example, the `create-script-source` is set to a SQL file
 called `create.sql` in the `META-INF/sql` directory relative to root of
 the persistence unit.
 
-[[sthref166]]
+[[sthref166]][[loading-data-using-sql-scripts]]
 
-[[loading-data-using-sql-scripts]]
 Loading Data Using SQL Scripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

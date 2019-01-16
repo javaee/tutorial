@@ -6,9 +6,8 @@ prev=security-intro003a.html
 ~~~~~~
 = Securing GlassFish Server
 
-[[BNBXI]]
+[[BNBXI]][[securing-glassfish-server]]
 
-[[securing-glassfish-server]]
 Securing GlassFish Server
 -------------------------
 

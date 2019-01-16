@@ -7,9 +7,8 @@ prev=persistence-intro003.html
 Managing Entities
 =================
 
-[[BNBQW]]
+[[BNBQW]][[managing-entities]]
 
-[[managing-entities]]
 Managing Entities
 -----------------
 
@@ -26,9 +25,8 @@ The following topics are addressed here:
 * link:#BNBQY[The EntityManager Interface]
 * link:#BNBRJ[Persistence Units]
 
-[[BNBQY]]
+[[BNBQY]][[the-entitymanager-interface]]
 
-[[the-entitymanager-interface]]
 The EntityManager Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,9 +44,8 @@ The following topics are addressed here:
 * link:#BNBRE[Removing Entity Instances]
 * link:#BNBRF[Synchronizing Entity Data to the Database]
 
-[[BNBQZ]]
+[[BNBQZ]][[container-managed-entity-managers]]
 
-[[container-managed-entity-managers]]
 Container-Managed Entity Managers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -80,9 +77,8 @@ the application component:
 EntityManager em;
 ----
 
-[[BNBRA]]
+[[BNBRA]][[application-managed-entity-managers]]
 
-[[application-managed-entity-managers]]
 Application-Managed Entity Managers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -166,9 +162,8 @@ try {
 }
 ----
 
-[[BNBRB]]
+[[BNBRB]][[finding-entities-using-the-entitymanager]]
 
-[[finding-entities-using-the-entitymanager]]
 Finding Entities Using the EntityManager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -186,9 +181,8 @@ public void enterOrder(int custID, CustomerOrder newOrder) {
 }
 ----
 
-[[BNBRC]]
+[[BNBRC]][[managing-an-entity-instances-lifecycle]]
 
-[[managing-an-entity-instances-lifecycle]]
 Managing an Entity Instance's Lifecycle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -206,9 +200,8 @@ currently associated with a persistence context.
 with a persistent context, and are scheduled for removal from the data
 store.
 
-[[BNBRD]]
+[[BNBRD]][[persisting-entity-instances]]
 
-[[persisting-entity-instances]]
 Persisting Entity Instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -252,9 +245,8 @@ public Collection<LineItem> getLineItems() {
 }
 ----
 
-[[BNBRE]]
+[[BNBRE]][[removing-entity-instances]]
 
-[[removing-entity-instances]]
 Removing Entity Instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -284,9 +276,8 @@ public void removeOrder(Integer orderId) {
     }...
 ----
 
-[[BNBRF]]
+[[BNBRF]][[synchronizing-entity-data-to-the-database]]
 
-[[synchronizing-entity-data-to-the-database]]
 Synchronizing Entity Data to the Database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -305,9 +296,8 @@ will be synchronized with the data store when `flush` is called.
 If the entity is removed, calling `flush` will remove the entity data
 from the data store.
 
-[[BNBRJ]]
+[[BNBRJ]][[persistence-units]]
 
-[[persistence-units]]
 Persistence Units
 ~~~~~~~~~~~~~~~~~
 

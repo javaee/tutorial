@@ -7,9 +7,8 @@ prev=jsf-configure.html
 Introduction to Configuring JavaServer Faces Applications
 =========================================================
 
-[[A1352824]]
+[[A1352824]][[introduction-to-configuring-javaserver-faces-applications]]
 
-[[introduction-to-configuring-javaserver-faces-applications]]
 Introduction to Configuring JavaServer Faces Applications
 ---------------------------------------------------------
 

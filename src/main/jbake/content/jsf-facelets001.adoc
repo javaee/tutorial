@@ -7,9 +7,8 @@ prev=jsf-facelets.html
 = What Is Facelets?
 
 
-[[GIJTU]]
+[[GIJTU]][[what-is-facelets]]
 
-[[what-is-facelets]]
 What Is Facelets?
 -----------------
 

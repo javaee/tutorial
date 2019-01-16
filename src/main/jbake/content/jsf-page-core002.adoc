@@ -7,9 +7,8 @@ prev=jsf-page-core001.html
 = Registering Listeners on Components
 
 
-[[BNASZ]]
+[[BNASZ]][[registering-listeners-on-components]]
 
-[[registering-listeners-on-components]]
 Registering Listeners on Components
 -----------------------------------
 
@@ -33,9 +32,8 @@ listener and a `BookChange` action listener implementation on
 components. The Duke's Bookstore case study includes both of these
 listeners.
 
-[[BNATA]]
+[[BNATA]][[registering-a-value-change-listener-on-a-component]]
 
-[[registering-a-value-change-listener-on-a-component]]
 Registering a Value-Change Listener on a Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -93,9 +91,8 @@ similar way to the `binding` attribute supported by the standard
 converter tags. See link:jsf-custom013.html#BNATG[Binding Component
 Values and Instances to Managed Bean Properties] for more information.
 
-[[BNATB]]
+[[BNATB]][[registering-an-action-listener-on-a-component]]
 
-[[registering-an-action-listener-on-a-component]]
 Registering an Action Listener on a Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

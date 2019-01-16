@@ -7,9 +7,8 @@ prev=injection003.html
 Packaging
 =========
 
-[[GKJIQ4]]
+[[GKJIQ4]][[packaging]]
 
-[[packaging]]
 5 Packaging
 -----------
 

@@ -7,9 +7,8 @@ prev=webservices-intro001.html
 = Types of Web Services
 
 
-[[GIQSX]]
+[[GIQSX]][[types-of-web-services]]
 
-[[types-of-web-services]]
 Types of Web Services
 ---------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 * link:#GKCDG["Big" Web Services]
 * link:#GKCAW[RESTful Web Services]
 
-[[GKCDG]]
+[[GKCDG]][[big-web-services]]
 
-[[big-web-services]]
 "Big" Web Services
 ~~~~~~~~~~~~~~~~~~
 
@@ -66,9 +64,8 @@ such as Web Services Reliable Messaging (WSRM), and APIs, such as
 JAX-WS, with their client-side asynchronous invocation support, can be
 leveraged out of the box.
 
-[[GKCAW]]
+[[GKCAW]][[restful-web-services]]
 
-[[restful-web-services]]
 RESTful Web Services
 ~~~~~~~~~~~~~~~~~~~~
 

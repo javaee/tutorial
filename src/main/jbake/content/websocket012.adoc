@@ -7,9 +7,8 @@ prev=websocket011.html
 The websocketbot Example Application
 ====================================
 
-[[BABCDBBC]]
+[[BABCDBBC]][[the-websocketbot-example-application]]
 
-[[the-websocketbot-example-application]]
 The websocketbot Example Application
 ------------------------------------
 
@@ -25,9 +24,8 @@ The following topics are addressed here:
 * link:#CIHICIDE[Architecture of the websocketbot Example Application]
 * link:#CIHHJHDB[Running the websocketbot Example Application]
 
-[[CIHICIDE]]
+[[CIHICIDE]][[architecture-of-the-websocketbot-example-application]]
 
-[[architecture-of-the-websocketbot-example-application]]
 Architecture of the websocketbot Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -52,9 +50,8 @@ parses WebSocket text messages as JSON data and decodes them into
 (`index.html`) that uses JavaScript code to implement the client for the
 chat room
 
-[[CIHDAEHF]]
+[[CIHDAEHF]][[the-cdi-bean]]
 
-[[the-cdi-bean]]
 The CDI Bean
 ^^^^^^^^^^^^
 
@@ -70,9 +67,8 @@ public class BotBean {
 }
 ----
 
-[[CIHJJJHG]]
+[[CIHJJJHG]][[the-websocket-endpoint]]
 
-[[the-websocket-endpoint]]
 The WebSocket Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -192,9 +188,8 @@ Refer to link:concurrency-utilities.html#GKJIQ8[Chapter 59, "Concurrency
 Utilities for Java EE"] for more information on the managed executor
 service and Concurrency Utilities for Java EE.
 
-[[CIHFDGHG]]
+[[CIHFDGHG]][[the-application-messages]]
 
-[[the-application-messages]]
 The Application Messages
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -213,9 +208,8 @@ public class ChatMessage extends Message {
 }
 ----
 
-[[CIHGHHBD]]
+[[CIHGHHBD]][[the-encoder-classes]]
 
-[[the-encoder-classes]]
 The Encoder Classes
 ^^^^^^^^^^^^^^^^^^^
 
@@ -245,9 +239,8 @@ public class ChatMessageEncoder implements Encoder.Text<ChatMessage> {
 See link:jsonp.html#GLRBB[Chapter 20], link:jsonp.html#GLRBB[JSON
 Processing] for more information on the Java API for JSON Processing.
 
-[[CIHHFICG]]
+[[CIHHFICG]][[the-message-decoder]]
 
-[[the-message-decoder]]
 The Message Decoder
 ^^^^^^^^^^^^^^^^^^^
 
@@ -301,9 +294,8 @@ public class MessageDecoder implements Decoder.Text<Message> {
 }
 ----
 
-[[CIHGDBGF]]
+[[CIHGDBGF]][[the-html-page]]
 
-[[the-html-page]]
 The HTML Page
 ^^^^^^^^^^^^^
 
@@ -318,9 +310,8 @@ endpoint, send messages, and designate callback methods. The WebSocket
 API is supported by most modern browsers and is widely used for web
 client development with HTML5.
 
-[[CIHHJHDB]]
+[[CIHHJHDB]][[running-the-websocketbot-example-application]]
 
-[[running-the-websocketbot-example-application]]
 Running the websocketbot Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -335,9 +326,8 @@ NetBeans IDE]
 Maven]
 * link:#BABDDAAG[To Test the websocketbot Example Application]
 
-[[CIHFDDGE]]
+[[CIHFDDGE]][[to-run-the-websocketbot-example-application-using-netbeans-ide]]
 
-[[to-run-the-websocketbot-example-application-using-netbeans-ide]]
 To Run the websocketbot Example Application Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -368,9 +358,8 @@ http://localhost:8080/websocketbot/
 See link:#BABDDAAG[To Test the websocketbot Example Application] for
 more information.
 
-[[CIHEDEHB]]
+[[CIHEDEHB]][[to-run-the-websocketbot-example-application-using-maven]]
 
-[[to-run-the-websocketbot-example-application-using-maven]]
 To Run the websocketbot Example Application Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -399,9 +388,8 @@ http://localhost:8080/websocketbot/
 See link:#BABDDAAG[To Test the websocketbot Example Application] for
 more information.
 
-[[BABDDAAG]]
+[[BABDDAAG]][[to-test-the-websocketbot-example-application]]
 
-[[to-test-the-websocketbot-example-application]]
 To Test the websocketbot Example Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

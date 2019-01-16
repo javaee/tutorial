@@ -7,9 +7,8 @@ prev=partwebtier.html
 Getting Started with Web Applications
 =====================================
 
-[[BNADR]]
+[[BNADR]][[getting-started-with-web-applications]]
 
-[[getting-started-with-web-applications]]
 6 Getting Started with Web Applications
 ---------------------------------------
 

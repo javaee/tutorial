@@ -7,9 +7,8 @@ prev=jms-concepts002.html
 = The JMS API Programming Model
 
 
-[[BNCEH]]
+[[BNCEH]][[the-jms-api-programming-model]]
 
-[[the-jms-api-programming-model]]
 The JMS API Programming Model
 -----------------------------
 
@@ -48,9 +47,8 @@ Examples,"] beginning with link:jms-examples003.html#BNCFA[Writing Simple
 JMS Applications]. For more detail, see the JMS API documentation, part
 of the Java EE API documentation.
 
-[[BNCEJ]]
+[[BNCEJ]][[jms-administered-objects]]
 
-[[jms-administered-objects]]
 JMS Administered Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -85,9 +83,8 @@ link:jms-concepts005.html#BABHFBDH[Creating Resources for Java EE
 Applications] for details. Definitions in a deployment descriptor
 override those specified by annotations.
 
-[[BNCEK]]
+[[BNCEK]][[jms-connection-factories]]
 
-[[jms-connection-factories]]
 JMS Connection Factories
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -114,9 +111,8 @@ connection factory and assigns it to a `ConnectionFactory` object:
 private static ConnectionFactory connectionFactory;
 ----
 
-[[BNCEL]]
+[[BNCEL]][[jms-destinations]]
 
-[[jms-destinations]]
 JMS Destinations
 ^^^^^^^^^^^^^^^^
 
@@ -167,9 +163,8 @@ and use it with a `Queue`. The behavior of the application will depend
 on the kind of destination you use and not on the kind of connection
 factory you use.
 
-[[BNCEM]]
+[[BNCEM]][[connections]]
 
-[[connections]]
 Connections
 ~~~~~~~~~~~
 
@@ -195,9 +190,8 @@ session.
 You normally create a connection by creating a `JMSContext` object. See
 link:#BABGDFEA[JMSContext Objects] for details.
 
-[[BNCEN]]
+[[BNCEN]][[sessions]]
 
-[[sessions]]
 Sessions
 ~~~~~~~~
 
@@ -216,9 +210,8 @@ A session provides a transactional context with which to group a set of
 sends and receives into an atomic unit of work. For details, see
 link:jms-concepts004.html#BNCGH[Using JMS Local Transactions].
 
-[[BABGDFEA]]
+[[BABGDFEA]][[jmscontext-objects]]
 
-[[jmscontext-objects]]
 JMSContext Objects
 ~~~~~~~~~~~~~~~~~~
 
@@ -286,9 +279,8 @@ activity within the `try`-with-resources block. If you do not use a
 `JMSContext` to close the connection when the application has finished
 its work.
 
-[[BNCEO]]
+[[BNCEO]][[jms-message-producers]]
 
-[[jms-message-producers]]
 JMS Message Producers
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -319,9 +311,8 @@ You can create the message in a variable before sending it, as shown
 here, or you can create it within the `send` call. See link:#BNCES[JMS
 Messages] for more information.
 
-[[BNCEP]]
+[[BNCEP]][[jms-message-consumers]]
 
-[[jms-message-consumers]]
 JMS Message Consumers
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -383,9 +374,8 @@ topic. For details, see link:#BNCGD[Creating Durable Subscriptions]. For
 topics, you can also create shared consumers; see
 link:#BABJCIGJ[Creating Shared Subscriptions].
 
-[[BNCEQ]]
+[[BNCEQ]][[jms-message-listeners]]
 
-[[jms-message-listeners]]
 JMS Message Listeners
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -427,9 +417,8 @@ Message Delivery]. link:jms-examples.html#BNCGV[Chapter 49, "Java Message
 Service Examples,"] contains several more examples of message listeners
 and message-driven beans.
 
-[[BNCER]]
+[[BNCER]][[jms-message-selectors]]
 
-[[jms-message-selectors]]
 JMS Message Selectors
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -461,9 +450,8 @@ properties match the selector. (See link:#BNCET[Message Headers] and
 link:#BNCEV[Message Properties].) A message selector cannot select
 messages on the basis of the content of the message body.
 
-[[BABEEJJJ]]
+[[BABEEJJJ]][[consuming-messages-from-topics]]
 
-[[consuming-messages-from-topics]]
 Consuming Messages from Topics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -519,9 +507,8 @@ explicitly deleted, even if there are no consumer objects consuming
 messages from it. See link:#BNCGD[Creating Durable Subscriptions] for
 details.
 
-[[BNCGD]]
+[[BNCGD]][[creating-durable-subscriptions]]
 
-[[creating-durable-subscriptions]]
 Creating Durable Subscriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -617,6 +604,7 @@ M6, but they do not receive messages M3 and M4.
 [[BNCGE]]
 
 .*Figure 48-6 Nondurable Subscriptions and Consumers*
+
 image:img/javaeett_dt_031.png[
 "Diagram showing messages being lost when nondurable subscriptions are
 used"]
@@ -658,9 +646,8 @@ and link:jms-examples008.html#BNCGW[Sending Messages from a Session Bean
 to an MDB] for examples of Java EE applications that use durable
 subscriptions.
 
-[[BABJCIGJ]]
+[[BABJCIGJ]][[creating-shared-subscriptions]]
 
-[[creating-shared-subscriptions]]
 Creating Shared Subscriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -701,9 +688,8 @@ You can also create shared durable subscriptions by using the
 `JMSContext.createSharedDurableConsumer` method. For details, see
 link:#BNCGD[Creating Durable Subscriptions].
 
-[[BNCES]]
+[[BNCES]][[jms-messages]]
 
-[[jms-messages]]
 JMS Messages
 ~~~~~~~~~~~~
 
@@ -728,9 +714,8 @@ The following topics are addressed here:
 * link:#BNCEV[Message Properties]
 * link:#BNCEW[Message Bodies]
 
-[[BNCET]]
+[[BNCET]][[message-headers]]
 
-[[message-headers]]
 Message Headers
 ^^^^^^^^^^^^^^^
 
@@ -796,9 +781,8 @@ provider prior to delivery
 |=======================================================================
 
 
-[[BNCEV]]
+[[BNCEV]][[message-properties]]
 
-[[message-properties]]
 Message Properties
 ^^^^^^^^^^^^^^^^^^
 
@@ -816,9 +800,8 @@ The JMS API provides some predefined property names that begin with
 been delivered); the rest are optional. The use of these predefined
 properties or of user-defined properties in applications is optional.
 
-[[BNCEW]]
+[[BNCEW]][[message-bodies]]
 
-[[message-bodies]]
 Message Bodies
 ^^^^^^^^^^^^^^
 
@@ -932,9 +915,8 @@ The examples in link:jms-examples.html#BNCGV[Chapter 49, "Java Message
 Service Examples,"] use messages of type `TextMessage`, `MapMessage`,
 and `Message`.
 
-[[BNCEY]]
+[[BNCEY]][[jms-queue-browsers]]
 
-[[jms-queue-browsers]]
 JMS Queue Browsers
 ~~~~~~~~~~~~~~~~~~
 
@@ -963,9 +945,8 @@ durable subscriptions allow messages to remain on a topic while the
 message consumer is not active, JMS does not define any facility for
 examining them.
 
-[[BNCEZ]]
+[[BNCEZ]][[jms-exception-handling]]
 
-[[jms-exception-handling]]
 JMS Exception Handling
 ~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=ejb-gettingstarted003.html
 Running the Enterprise Bean Examples
 ====================================
 
-[[GIJRB]]
+[[GIJRB]][[running-the-enterprise-bean-examples]]
 
-[[running-the-enterprise-bean-examples]]
 37 Running the Enterprise Bean Examples
 ---------------------------------------
 

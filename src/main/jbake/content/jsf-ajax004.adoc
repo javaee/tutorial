@@ -7,9 +7,7 @@ prev=jsf-ajax003.html
 Sending an Ajax Request
 =======================
 
-[[GKACE]]
-
-[[sending-an-ajax-request]]
+[[GKACE]][[sending-an-ajax-request]]
 Sending an Ajax Request
 -----------------------
 
@@ -42,9 +40,8 @@ The following topics are addressed here:
 * link:#GKHWM[Using the immediate Attribute]
 * link:#GKHZS[Using the listener Attribute]
 
-[[GKHVT]]
+[[GKHVT]][[using-the-event-attribute]]
 
-[[using-the-event-attribute]]
 Using the event Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -85,9 +82,8 @@ not have the `on` prefix.
 For a command button, the default event is `click`, so you do not
 actually need to specify `event="click"` to obtain the desired behavior.
 
-[[GKHUZ]]
+[[GKHUZ]][[using-the-execute-attribute]]
 
-[[using-the-execute-attribute]]
 Using the execute Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,9 +115,8 @@ The following code specifies that the `h:inputText` component with the
 </h:commandButton>
 ----
 
-[[GKHWM]]
+[[GKHWM]][[using-the-immediate-attribute]]
 
-[[using-the-immediate-attribute]]
 Using the immediate Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -133,9 +128,8 @@ broadcast during the Invoke Application phase.
 
 If not defined, the default value of this attribute is `false`.
 
-[[GKHZS]]
+[[GKHZS]][[using-the-listener-attribute]]
 
-[[using-the-listener-attribute]]
 Using the listener Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

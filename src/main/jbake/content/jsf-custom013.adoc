@@ -7,9 +7,8 @@ prev=jsf-custom012.html
 = Binding Component Values and Instances to Managed Bean Properties
 
 
-[[BNATG]]
+[[BNATG]][[binding-component-values-and-instances-to-managed-bean-properties]]
 
-[[binding-component-values-and-instances-to-managed-bean-properties]]
 Binding Component Values and Instances to Managed Bean Properties
 -----------------------------------------------------------------
 
@@ -109,9 +108,8 @@ component's value to a bean property or other data objects and how to
 use the `binding` attribute to bind a component instance to a bean
 property.
 
-[[BNATI]]
+[[BNATI]][[binding-a-component-value-to-a-property]]
 
-[[binding-a-component-value-to-a-property]]
 Binding a Component Value to a Property
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -193,9 +191,8 @@ See link:jsf-configure005.html#BNAWQ[Configuring Managed Beans] for
 information on how to configure beans in the application configuration
 resource file.
 
-[[BNATJ]]
+[[BNATJ]][[binding-a-component-value-to-an-implicit-object]]
 
-[[binding-a-component-value-to-an-implicit-object]]
 Binding a Component Value to an Implicit Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -271,9 +268,8 @@ the `FacesRequest` for this request
 |=======================================================================
 
 
-[[BNATL]]
+[[BNATL]][[binding-a-component-instance-to-a-bean-property]]
 
-[[binding-a-component-instance-to-a-bean-property]]
 Binding a Component Instance to a Bean Property
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=jaxrs-client003.html
 JAX-RS: Advanced Topics and an Example
 ======================================
 
-[[GJJXE]]
+[[GJJXE]][[jax-rs-advanced-topics-and-an-example]]
 
-[[jax-rs-advanced-topics-and-an-example]]
 34 JAX-RS: Advanced Topics and an Example
 -----------------------------------------
 

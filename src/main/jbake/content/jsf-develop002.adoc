@@ -7,9 +7,8 @@ prev=jsf-develop001.html
 = Writing Bean Properties
 
 
-[[BNATY]]
+[[BNATY]][[writing-bean-properties]]
 
-[[writing-bean-properties]]
 Writing Bean Properties
 -----------------------
 
@@ -63,9 +62,8 @@ objects described in link:jsf-page002.html#BNARF[Adding Components to a
 Page Using HTML Tag Library Tags], and to converter, listener, and
 validator implementations.
 
-[[BNATZ]]
+[[BNATZ]][[writing-properties-bound-to-component-values]]
 
-[[writing-properties-bound-to-component-values]]
 Writing Properties Bound to Component Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -104,9 +102,8 @@ When they bind components to properties by using the `value` attributes
 of the component tags, page authors need to ensure that the
 corresponding properties match the types of the components' values.
 
-[[BNAUB]]
+[[BNAUB]][[uiinput-and-uioutput-properties]]
 
-[[uiinput-and-uioutput-properties]]
 UIInput and UIOutput Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -172,9 +169,8 @@ public void setShipDate(Date shipDate) {
 }
 ----
 
-[[BNAUC]]
+[[BNAUC]][[uidata-properties]]
 
-[[uidata-properties]]
 UIData Properties
 ^^^^^^^^^^^^^^^^^
 
@@ -264,9 +260,8 @@ For UIData and UIRepeat, the supported types are:
 * `java.util.Map`
 * `java.lang.Object` (becomes ScalarDataModel)
 
-[[BNAUD]]
+[[BNAUD]][[uiselectboolean-properties]]
 
-[[uiselectboolean-properties]]
 UISelectBoolean Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -303,9 +298,8 @@ public boolean getReceiveEmails() {
 }
 ----
 
-[[BNAUE]]
+[[BNAUE]][[uiselectmany-properties]]
 
-[[uiselectmany-properties]]
 UISelectMany Properties
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -352,9 +346,8 @@ link:#BNAUG[UISelectItem Properties] and link:#BNAUH[UISelectItems
 Properties] for information on writing the bean properties for the
 `UISelectItem` and `UISelectItems` components.
 
-[[BNAUF]]
+[[BNAUF]][[uiselectone-properties]]
 
-[[uiselectone-properties]]
 UISelectOne Properties
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -412,9 +405,8 @@ For information on how to write the managed bean properties for the
 link:#BNAUG[UISelectItem Properties] and link:#BNAUH[UISelectItems
 Properties].
 
-[[BNAUG]]
+[[BNAUG]][[uiselectitem-properties]]
 
-[[uiselectitem-properties]]
 UISelectItem Properties
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -442,9 +434,8 @@ void setItemOne(SelectItem item) {
 }
 ----
 
-[[BNAUH]]
+[[BNAUH]][[uiselectitems-properties]]
 
-[[uiselectitems-properties]]
 UISelectItems Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -487,9 +478,8 @@ value of the item, whereas the second argument is a `String`
 representing the label that appears in the `UISelectMany` component on
 the page.
 
-[[BNAUK]]
+[[BNAUK]][[writing-properties-bound-to-component-instances]]]
 
-[[writing-properties-bound-to-component-instances]]
 Writing Properties Bound to Component Instances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -558,9 +548,8 @@ For more information on writing managed bean methods that handle
 navigation, see link:jsf-develop003.html#BNAVC[Writing a Method to Handle
 Navigation].
 
-[[BNAUL]]
+[[BNAUL]][[writing-properties-bound-to-converters-listeners-or-validators]]
 
-[[writing-properties-bound-to-converters-listeners-or-validators]]
 Writing Properties Bound to Converters, Listeners, or Validators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

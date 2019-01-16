@@ -7,9 +7,8 @@ prev=jsf-facelets007.html
 Resource Library Contracts
 ==========================
 
-[[BABHAHDF]]
+[[BABHAHDF]][[resource-library-contracts]]
 
-[[resource-library-contracts]]
 Resource Library Contracts
 --------------------------
 
@@ -81,9 +80,8 @@ You can specify the contract usage within an application's
 You need to use this element only if your application uses more than one
 contract, however.
 
-[[sthref32]]
+[[sthref32]][[the-hello1-rlc-example-application]]
 
-[[the-hello1-rlc-example-application]]
 The hello1-rlc Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -109,9 +107,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#BABFCHEB[To Run the hello1-rlc Example]
 
-[[BABGEDEB]]
+[[BABGEDEB]][[configuring-the-hello1-rlc-example]]
 
-[[configuring-the-hello1-rlc-example]]
 Configuring the hello1-rlc Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -168,9 +165,8 @@ Because it is not located under `src/main/webapp/reply`, this Facelets
 page uses the `hello` contract, whereas
 `src/main/webapp/reply/response.xhtml` uses the `reply` contract.
 
-[[BABDHCFG]]
+[[BABDHCFG]][[the-facelets-pages-for-the-hello1-rlc-example]]
 
-[[the-facelets-pages-for-the-hello1-rlc-example]]
 The Facelets Pages for the hello1-rlc Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -190,9 +186,8 @@ specifies.
 The `default.css` stylesheets in the two contracts differ in only one
 respect: the background color specified for the `body` element.
 
-[[BABBGFFF]]
+[[BABBGFFF]][[to-build-package-and-deploy-the-hello1-rlc-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-hello1-rlc-example-using-netbeans-ide]]
 To Build, Package, and Deploy the hello1-rlc Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -214,9 +209,8 @@ Build.
 This option builds the example application and deploys it to your
 GlassFish Server instance.
 
-[[BABJAGFB]]
+[[BABJAGFB]][[to-build-package-and-deploy-the-hello1-rlc-example-using-maven]]
 
-[[to-build-package-and-deploy-the-hello1-rlc-example-using-maven]]
 To Build, Package, and Deploy the hello1-rlc Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -240,9 +234,8 @@ This command builds and packages the application into a WAR file,
 `hello1-rlc.war`, that is located in the `target` directory. It then
 deploys it to your GlassFish Server instance.
 
-[[BABFCHEB]]
+[[BABFCHEB]][[to-run-the-hello1-rlc-example]]
 
-[[to-run-the-hello1-rlc-example]]
 To Run the hello1-rlc Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

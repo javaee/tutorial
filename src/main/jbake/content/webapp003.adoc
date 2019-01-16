@@ -7,9 +7,8 @@ prev=webapp002.html
 = A Web Module That Uses JavaServer Faces Technology: The hello1 Example
 
 
-[[BNADX]]
+[[BNADX]][[a-web-module-that-uses-javaserver-faces-technology-the-hello1-example]]
 
-[[a-web-module-that-uses-javaserver-faces-technology-the-hello1-example]]
 A Web Module That Uses JavaServer Faces Technology: The hello1 Example
 ----------------------------------------------------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 * link:#running-the-deployed-hello1-web-module[Running the Deployed hello1 Web Module]
 * link:#undeploying-the-hello1-web-module[Undeploying the hello1 Web Module]
 
-[[GJWTV]]
+[[GJWTV]][[to-view-the-hello1-web-module-using-netbeans-ide]]
 
-[[to-view-the-hello1-web-module-using-netbeans-ide]]
 To View the hello1 Web Module Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -220,9 +218,8 @@ page:
     </welcome-file-list>
 ----
 
-[[GLQLK]]
+[[GLQLK]][[introduction-to-scopes]]
 
-[[introduction-to-scopes]]
 Introduction to Scopes
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -248,9 +245,8 @@ all users' interactions with a web application.
 For more information on scopes in JavaServer Faces technology, see
 link:jsf-configure002.html#GIRCR[Using Managed Bean Scopes].
 
-[[BNADZ]]
+[[BNADZ]][[packaging-and-deploying-the-hello1-web-module]]
 
-[[packaging-and-deploying-the-hello1-web-module]]
 Packaging and Deploying the hello1 Web Module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -270,9 +266,8 @@ You can deploy a WAR file to GlassFish Server by:
 Throughout the tutorial, you will use NetBeans IDE or Maven for
 packaging and deploying.
 
-[[GJRGN]]
+[[GJRGN]][[to-build-and-package-the-hello1-web-module-using-netbeans-ide]]
 
-[[to-build-and-package-the-hello1-web-module-using-netbeans-ide]]
 To Build and Package the hello1 Web Module Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -293,9 +288,8 @@ tut-install/examples/web/jsf
 6.  In the Projects tab, right-click the `hello1` project and select
 Build. This command deploys the project to the server.
 
-[[GJRKN]]
+[[GJRKN]][[to-build-and-package-the-hello1-web-module-using-maven]]
 
-[[to-build-and-package-the-hello1-web-module-using-maven]]
 To Build and Package the hello1 Web Module Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -321,9 +315,8 @@ This command spawns any necessary compilations and creates the WAR file
 in `_tut-install_/examples/web/jsf/hello1/target/`. It then deploys the
 project to the server.
 
-[[BNAEI]]
+[[BNAEI]][[viewing-deployed-web-modules]]
 
-[[viewing-deployed-web-modules]]
 Viewing Deployed Web Modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -331,9 +324,8 @@ GlassFish Server provides two ways to view the deployed web modules: the
 Administration Console and the `asadmin` command. You can also use
 NetBeans IDE to view deployed modules.
 
-[[GJSGR]]
+[[GJSGR]][[to-view-deployed-web-modules-using-the-administration-console]]
 
-[[to-view-deployed-web-modules-using-the-administration-console]]
 To View Deployed Web Modules Using the Administration Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -344,9 +336,8 @@ To view deployed web modules using the Administration Console:
 +
 The deployed web modules appear in the Deployed Applications table.
 
-[[GJSEW]]
+[[GJSEW]][[to-view-deployed-web-modules-using-the-asadmin-command]]
 
-[[to-view-deployed-web-modules-using-the-asadmin-command]]
 To View Deployed Web Modules Using the asadmin Command
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -357,9 +348,8 @@ Enter the following command:
 asadmin list-applications
 ----
 
-[[sthref24]]
+[[sthref24]][[to-view-deployed-web-modules-using-netbeans-ide]]
 
-[[to-view-deployed-web-modules-using-netbeans-ide]]
 To View Deployed Web Modules Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -369,9 +359,8 @@ To view deployed web modules using NetBeans IDE:
 GlassFish Server node.
 2.  Expand the Applications node to view the deployed modules.
 
-[[BCEBEGED]]
+[[BCEBEGED]][[running-the-deployed-hello1-web-module]]
 
-[[running-the-deployed-hello1-web-module]]
 Running the Deployed hello1 Web Module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -394,9 +383,8 @@ http://localhost:8080/hello1/
 The response page displays the name you submitted. Click Back to try
 again.
 
-[[BNAEM]]
+[[BNAEM]][[dynamic-reloading-of-deployed-modules]]
 
-[[dynamic-reloading-of-deployed-modules]]
 Dynamic Reloading of Deployed Modules
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -417,18 +405,16 @@ that time become invalid, and the client must restart the session.
 
 In GlassFish Server, dynamic reloading is enabled by default.
 
-[[BNAEN]]
+[[BNAEN]][[undeploying-the-hello1-web-module]]
 
-[[undeploying-the-hello1-web-module]]
 Undeploying the hello1 Web Module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can undeploy web modules and other types of enterprise applications
 by using either NetBeans IDE or Maven.
 
-[[GJSEJ]]
+[[GJSEJ]][[to-undeploy-the-hello1-web-module-using-netbeans-ide]]
 
-[[to-undeploy-the-hello1-web-module-using-netbeans-ide]]
 To Undeploy the hello1 Web Module Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -441,9 +427,8 @@ GlassFish Server node.
 4.  To delete the class files and other build artifacts, go back to the
 Projects tab, right-click the project, and select Clean.
 
-[[GJSHH]]
+[[GJSHH]][[to-undeploy-the-hello1-web-module-using-maven]]
 
-[[to-undeploy-the-hello1-web-module-using-maven]]
 To Undeploy the hello1 Web Module Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

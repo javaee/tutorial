@@ -7,9 +7,8 @@ prev=jsf-page-core004.html
 Developing with JavaServer Faces Technology
 ===========================================
 
-[[BNATX]]
+[[BNATX]][[developing-with-javaserver-faces-technology]]
 
-[[developing-with-javaserver-faces-technology]]
 12 Developing with JavaServer Faces Technology
 ----------------------------------------------
 

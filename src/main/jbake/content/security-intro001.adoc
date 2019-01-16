@@ -6,9 +6,8 @@ prev=security-intro.html
 ~~~~~~
 = Overview of Java EE Security
 
-[[BNBWK]]
+[[BNBWK]][[overview-of-java-ee-security]]
 
-[[overview-of-java-ee-security]]
 Overview of Java EE Security
 ----------------------------
 
@@ -72,9 +71,8 @@ components, such as enterprise beans and application clients.
 describes the authentication and credential validation funtionality provided by
 the Java EE security API, and provides examples.
 
-[[BNBWL]]
+[[BNBWL]][[a-simple-application-security-walkthrough]]
 
-[[a-simple-application-security-walkthrough]]
 A Simple Application Security Walkthrough
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -87,9 +85,8 @@ Specification, the web client relies on the web server to act as its
 authentication proxy by collecting user authentication data from the
 client and using it to establish an authenticated session.
 
-[[BNBWM]]
+[[BNBWM]][[step-1-initial-request]]
 
-[[step-1-initial-request]]
 Step 1: Initial Request
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -110,9 +107,8 @@ and invokes the appropriate authentication mechanism for this resource.
 For more information on these mechanisms, see
 link:security-intro002.html#BNBWY[Security Mechanisms].
 
-[[BNBWO]]
+[[BNBWO]][[step-2-initial-authentication]]
 
-[[step-2-initial-authentication]]
 Step 2: Initial Authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -131,9 +127,8 @@ image:img/javaeett_dt_040.png[
 "Diagram of initial authentication: server sends form to client, which
 sends authentication data to server for validation"]
 
-[[BNBWQ]]
+[[BNBWQ]][[step-3-url-authorization]]
 
-[[step-3-url-authorization]]
 Step 3: URL Authorization
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -157,9 +152,8 @@ the web server is able to map the user to a role. A "not authorized"
 outcome is reached if the web server is unable to map the user to any of
 the permitted roles.
 
-[[BNBWS]]
+[[BNBWS]][[step-4-fulfilling-the-original-request]]
 
-[[step-4-fulfilling-the-original-request]]
 Step 4: Fulfilling the Original Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -179,9 +173,8 @@ component of the application. See
 link:security-webtier.html#BNCAS[Chapter 51, "Getting Started Securing
 Web Applications"] for more information on protecting web applications.
 
-[[BNBWU]]
+[[BNBWU]][[step-5-invoking-enterprise-bean-business-methods]]
 
-[[step-5-invoking-enterprise-bean-business-methods]]
 Step 5: Invoking Enterprise Bean Business Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -218,9 +211,8 @@ enterprise bean method. The result of the bean's execution of the call
 is returned to the web page and ultimately to the user by the web server
 and the web client.
 
-[[BNBWW]]
+[[BNBWW]][[features-of-a-security-mechanism]]
 
-[[features-of-a-security-mechanism]]
 Features of a Security Mechanism
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -240,9 +232,8 @@ Ideally, properly implemented security mechanisms will also be
 * Transparent to system users
 * Interoperable across application and enterprise boundaries
 
-[[BNBWX]]
+[[BNBWX]][[characteristics-of-application-security]]
 
-[[characteristics-of-application-security]]
 Characteristics of Application Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

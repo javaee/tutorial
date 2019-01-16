@@ -7,9 +7,8 @@ prev=cdi-adv-examples003.html
 = The producerfields Example: Using Producer Fields to Generate Resources
 
 
-[[GKHRG]]
+[[GKHRG]][[the-producerfields-example-using-producer-fields-to-generate-resources]]
 
-[[the-producerfields-example-using-producer-fields-to-generate-resources]]
 The producerfields Example: Using Producer Fields to Generate Resources
 -----------------------------------------------------------------------
 
@@ -35,9 +34,8 @@ The following topics are addressed here:
 * link:#GKHPF[The producerfields Facelets Pages and Managed Bean]
 * link:#GKHRH[Running the producerfields Example]
 
-[[GKHPP]]
+[[GKHPP]][[the-producer-field-for-the-producerfields-example]]
 
-[[the-producer-field-for-the-producerfields-example]]
 The Producer Field for the producerfields Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -126,9 +124,8 @@ public class JPAResourceProducer {
 The `EntityManagerFactory` declarations also allow applications to use
 an application-managed entity manager.
 
-[[GKHPD]]
+[[GKHPD]][[the-producerfields-entity-and-session-bean]]
 
-[[the-producerfields-entity-and-session-bean]]
 The producerfields Entity and Session Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -217,9 +214,8 @@ created so far by creating a query:
 }
 ----
 
-[[GKHPF]]
+[[GKHPF]][[the-producerfields-facelets-pages-and-managed-bean]]
 
-[[the-producerfields-facelets-pages-and-managed-bean]]
 The producerfields Facelets Pages and Managed Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -339,9 +335,8 @@ bean's `getToDos` method. Each row of the table displays the
 `timeCreated` and `taskText` fields of the individual task. Finally, a
 Back button returns the user to the `index.xhtml` page.
 
-[[GKHRH]]
+[[GKHRH]][[running-the-producerfields-example]]
 
-[[running-the-producerfields-example]]
 Running the producerfields Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -356,9 +351,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GKHRR[To Run the producerfields Example]
 
-[[GKHPB]]
+[[GKHPB]][[to-build-package-and-deploy-the-producerfields-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-producerfields-example-using-netbeans-ide]]
 To Build, Package, and Deploy the producerfields Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -384,9 +378,8 @@ This command builds and packages the application into a WAR file,
 `producerfields.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GKHRM]]
+[[GKHRM]][[to-build-package-and-deploy-the-producerfields-example-using-maven]]
 
-[[to-build-package-and-deploy-the-producerfields-example-using-maven]]
 To Build, Package, and Deploy the producerfields Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -413,9 +406,8 @@ This command builds and packages the application into a WAR file,
 `producerfields.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GKHRR]]
+[[GKHRR]][[to-run-the-producerfields-example]]
 
-[[to-run-the-producerfields-example]]
 To Run the producerfields Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -6,9 +6,8 @@ prev=security-intro004.html
 ~~~~~~
 = Working with Realms, Users, Groups, and Roles
 
-[[BNBXJ]]
+[[BNBXJ]][[working-with-realms-users-groups-and-roles]]
 
-[[working-with-realms-users-groups-and-roles]]
 Working with Realms, Users, Groups, and Roles
 ---------------------------------------------
 
@@ -46,9 +45,8 @@ By default, group principal names are mapped to roles of the same name.
 
 |=======================================================================
 
-[[BNBXK]]
+[[BNBXK]][[what-are-realms-users-groups-and-roles]]
 
-[[what-are-realms-users-groups-and-roles]]
 What Are Realms, Users, Groups, and Roles?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -83,9 +81,8 @@ definition of roles, and mapping of roles to users and groups"]
 The following sections provide more information on realms, users,
 groups, and roles.
 
-[[BNBXM]]
+[[BNBXM]][[what-is-a-realm]]
 
-[[what-is-a-realm]]
 What Is a Realm?
 ^^^^^^^^^^^^^^^^
 
@@ -123,9 +120,8 @@ Administration Console to manage users in this realm in the same way you
 manage users in the `file` realm. For more information, see
 link:#BNBXR[Managing Users and Groups in GlassFish Server].
 
-[[BNBXN]]
+[[BNBXN]][[what-is-a-user]]
 
-[[what-is-a-user]]
 What Is a User?
 ^^^^^^^^^^^^^^^
 
@@ -143,9 +139,8 @@ operating system. The Java EE server authentication service is not
 connected to the security mechanism of the operating system. The two
 security services manage users that belong to different realms.
 
-[[BNBXO]]
+[[BNBXO]][[what-is-a-group]]
 
-[[what-is-a-group]]
 What Is a Group?
 ^^^^^^^^^^^^^^^^
 
@@ -163,9 +158,8 @@ A group in GlassFish Server has a different scope from a role. A group
 is designated for the entire GlassFish Server, whereas a role is
 associated only with a specific application in GlassFish Server.
 
-[[BNBXP]]
+[[BNBXP]][[what-is-a-role]]
 
-[[what-is-a-role]]
 What Is a Role?
 ^^^^^^^^^^^^^^^
 
@@ -174,9 +168,8 @@ of resources in an application. A role can be compared to a key that can
 open a lock. Many people might have a copy of the key. The lock doesn't
 care who you are, only that you have the right key.
 
-[[BNBXQ]]
+[[BNBXQ]][[some-other-terminology]]
 
-[[some-other-terminology]]
 Some Other Terminology
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -199,9 +192,8 @@ attributes used to authenticate a principal for Java EE services. A
 principal acquires a credential upon authentication or from another
 principal that allows its credential to be used.
 
-[[BNBXR]]
+[[BNBXR]][[managing-users-and-groups-in-glassfish-server]]
 
-[[managing-users-and-groups-in-glassfish-server]]
 Managing Users and Groups in GlassFish Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -212,9 +204,8 @@ The following topics are addressed here:
 
 * link:#BNBXS[To Add Users to GlassFish Server]
 
-[[BNBXS]]
+[[BNBXS]][[to-add-users-to-glassfish-server]]
 
-[[to-add-users-to-glassfish-server]]
 To Add Users to GlassFish Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -265,9 +256,8 @@ in this tutorial.
 10. Click OK to add this user to the realm, or click Cancel to quit
 without saving.
 
-[[BNBXU]]
+[[BNBXU]][[setting-up-security-roles]]
 
-[[setting-up-security-roles]]
 Setting Up Security Roles
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -348,9 +338,8 @@ has declared what roles are authorized to access protected parts of an
 application, the next step is to map the security role to the name of a
 user, or principal.
 
-[[BNBXV]]
+[[BNBXV]][[mapping-roles-to-users-and-groups]]
 
-[[mapping-roles-to-users-and-groups]]
 Mapping Roles to Users and Groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

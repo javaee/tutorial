@@ -7,9 +7,8 @@ prev=security-advanced007.html
 Further Information about Advanced Security Topics
 ==================================================
 
-[[BABBGBBF]]
+[[BABBGBBF]][[further-information-about-advanced-security-topics]]
 
-[[further-information-about-advanced-security-topics]]
 Further Information about Advanced Security Topics
 --------------------------------------------------
 

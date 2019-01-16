@@ -7,9 +7,8 @@ prev=bean-validation.html
 # Overview of Bean Validation
 
 
-[[A1101988]]
+[[A1101988]][[overview-of-bean-validation]]
 
-[[overview-of-bean-validation]]
 Overview of Bean Validation
 ---------------------------
 

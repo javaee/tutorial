@@ -7,9 +7,8 @@ prev=jsf-facelets004.html
 = Composite Components
 
 
-[[GIQZR]]
+[[GIQZR]][[composite-components]]
 
-[[composite-components]]
 Composite Components
 --------------------
 

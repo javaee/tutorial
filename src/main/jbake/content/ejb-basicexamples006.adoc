@@ -7,9 +7,8 @@ prev=ejb-basicexamples005.html
 Handling Exceptions
 ===================
 
-[[BNBPJ]]
+[[BNBPJ]][[handling-exceptions]]
 
-[[handling-exceptions]]
 Handling Exceptions
 -------------------
 

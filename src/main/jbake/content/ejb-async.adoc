@@ -7,9 +7,7 @@ prev=ejb-embedded003.html
 Using Asynchronous Method Invocation in Session Beans
 =====================================================
 
-[[GKIDZ]]
-
-[[using-asynchronous-method-invocation-in-session-beans]]
+[[GKIDZ]][[using-asynchronous-method-invocation-in-session-beans]]
 39 Using Asynchronous Method Invocation in Session Beans
 --------------------------------------------------------
 

@@ -7,9 +7,8 @@ prev=jsf-el.html
 Overview of the EL
 ==================
 
-[[BNAHQ]]
+[[BNAHQ]][[overview-of-the-el]]
 
-[[overview-of-the-el]]
 Overview of the EL
 ------------------
 

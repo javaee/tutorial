@@ -7,9 +7,8 @@ prev=jms-examples.html
 = Building and Running Java Message Service Examples
 
 
-[[A1251921]]
+[[A1251921]][[building-and-running-java-message-service-examples]]
 
-[[building-and-running-java-message-service-examples]]
 Building and Running Java Message Service Examples
 --------------------------------------------------
 

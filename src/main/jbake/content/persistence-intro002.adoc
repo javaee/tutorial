@@ -7,9 +7,8 @@ prev=persistence-intro001.html
 = Entities
 
 
-[[BNBQA]]
+[[BNBQA]][[entities]]
 
-[[entities]]
 Entities
 --------
 
@@ -24,9 +23,8 @@ persistent fields or persistent properties. These fields or properties
 use object/relational mapping annotations to map the entities and entity
 relationships to the relational data in the underlying data store.
 
-[[BNBQB]]
+[[BNBQB]][[requirements-for-entity-classes]]
 
-[[requirements-for-entity-classes]]
 Requirements for Entity Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -48,9 +46,8 @@ package-private and can be accessed directly only by the entity class's
 methods. Clients must access the entity's state through accessor or
 business methods.
 
-[[BNBQC]]
+[[BNBQC]][[persistent-fields-and-properties-in-entity-classes]]
 
-[[persistent-fields-and-properties-in-entity-classes]]
 Persistent Fields and Properties in Entity Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -97,9 +94,8 @@ entity's instance variables, the entity uses persistent fields. If the
 mapping annotations are applied to the entity's getter methods for
 JavaBeans-style properties, the entity uses persistent properties.
 
-[[BNBQD]]
+[[BNBQD]][[persistent-fields]]
 
-[[persistent-fields]]
 Persistent Fields
 ^^^^^^^^^^^^^^^^^
 
@@ -109,9 +105,8 @@ annotated `javax.persistence.Transient` or not marked as Java
 `transient` will be persisted to the data store. The object/relational
 mapping annotations must be applied to the instance variables.
 
-[[BNBQE]]
+[[BNBQE]][[persistent-properties]]
 
-[[persistent-properties]]
 Persistent Properties
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -140,9 +135,8 @@ The object/relational mapping annotations for persistent properties must
 be applied to the getter methods. Mapping annotations cannot be applied
 to fields or properties annotated `@Transient` or marked `transient`.
 
-[[GIQVN]]
+[[GIQVN]][[using-collections-in-entity-fields-and-properties]]
 
-[[using-collections-in-entity-fields-and-properties]]
 Using Collections in Entity Fields and Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -255,9 +249,8 @@ represents the value of the `Map`. If generic types are not used, the
 `targetEntity` attribute of the `@OneToMany` and `@ManyToMany`
 annotations must be set to the type of the `Map` value.
 
-[[GKAHQ]]
+[[GKAHQ]][[validating-persistent-fields-and-properties]]
 
-[[validating-persistent-fields-and-properties]]
 Validating Persistent Fields and Properties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -360,9 +353,8 @@ in the United States and Canada of the form `(`xxx`)` xxx`-`xxxx.
 The `birthday` field is annotated with the `@Past` constraint, which
 ensures that the value of `birthday` must be in the past.
 
-[[BNBQF]]
+[[BNBQF]][[primary-keys-in-entities]]
 
-[[primary-keys-in-entities]]
 Primary Keys in Entities
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -459,9 +451,8 @@ public final class LineItemKey implements Serializable {
 }
 ----
 
-[[BNBQH]]
+[[BNBQH]][[multiplicity-in-entity-relationships]]
 
-[[multiplicity-in-entity-relationships]]
 Multiplicity in Entity Relationships
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -494,9 +485,8 @@ relationship. Many-to-many relationships use the
 `javax.persistence.ManyToMany` annotation on the corresponding
 persistent property or field.
 
-[[BNBQI]]
+[[BNBQI]][[direction-in-entity-relationships]]
 
-[[direction-in-entity-relationships]]
 Direction in Entity Relationships
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -506,9 +496,8 @@ an inverse side. A unidirectional relationship has only an owning side.
 The owning side of a relationship determines how the Persistence runtime
 makes updates to the relationship in the database.
 
-[[BNBQJ]]
+[[BNBQJ]][[bidirectional-relationships]]
 
-[[bidirectional-relationships]]
 Bidirectional Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -535,9 +524,8 @@ corresponds to the side that contains the corresponding foreign key.
 * For many-to-many bidirectional relationships, either side may be the
 owning side.
 
-[[BNBQK]]
+[[BNBQK]][[unidirectional-relationships]]
 
-[[unidirectional-relationships]]
 Unidirectional Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -548,9 +536,8 @@ would not have a relationship field or property for `LineItem`. In other
 words, `LineItem` knows about `Product`, but `Product` doesn't know
 which `LineItem` instances refer to it.
 
-[[BNBQL]]
+[[BNBQL]][[queries-and-relationship-direction]]
 
-[[queries-and-relationship-direction]]
 Queries and Relationship Direction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -562,9 +549,8 @@ opposite direction. For `CustomerOrder` and `LineItem`, a query could
 navigate in both directions because these two entities have a
 bidirectional relationship.
 
-[[BNBQM]]
+[[BNBQM]][[cascade-operations-and-relationships]]
 
-[[cascade-operations-and-relationships]]
 Cascade Operations and Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -616,9 +602,8 @@ For example:
 public Set<CustomerOrder> getOrders() { return orders; }
 ----
 
-[[GIQXY]]
+[[GIQXY]][[orphan-removal-in-relationships]]
 
-[[orphan-removal-in-relationships]]
 Orphan Removal in Relationships
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -644,9 +629,8 @@ The following example will cascade the remove operation to the orphaned
 public List<CustomerOrder> getOrders() { ... }
 ----
 
-[[GJIWZ]]
+[[GJIWZ]][[embeddable-classes-in-entities]]
 
-[[embeddable-classes-in-entities]]
 Embeddable Classes in Entities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

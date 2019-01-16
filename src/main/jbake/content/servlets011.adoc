@@ -7,9 +7,8 @@ prev=servlets010.html
 Uploading Files with Java Servlet Technology
 ============================================
 
-[[BABFGCHB]]
+[[BABFGCHB]][[uploading-files-with-java-servlet-technology]]
 
-[[uploading-files-with-java-servlet-technology]]
 Uploading Files with Java Servlet Technology
 --------------------------------------------
 
@@ -30,9 +29,8 @@ annotated with `@MultipartConfig` can retrieve the `Part` components of
 a given `multipart/form-data` request by calling the
 `request.getPart(String name)` or `request.getParts()` method.
 
-[[sthref101]]
+[[sthref101]][[the-multipartconfig-annotation]]
 
-[[the-multipartconfig-annotation]]
 The @MultipartConfig Annotation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -79,9 +77,8 @@ file:
 </multipart-config>
 ----
 
-[[sthref102]]
+[[sthref102]][[the-getparts-and-getpart-methods]]
 
-[[the-getparts-and-getpart-methods]]
 The getParts and getPart Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

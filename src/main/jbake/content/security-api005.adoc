@@ -183,9 +183,8 @@ select Build.
 This command builds and deploys the example application to your
 GlassFish Server instance.
 
-[[GJQZH]]
+[[GJQZH]][[to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven]]
 
-[[to-build-package-and-deploy-the-custom-identity-store-example-using-using-maven]]
 To Build, Package, and Deploy the custom-identity-store Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

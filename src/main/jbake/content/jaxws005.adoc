@@ -7,9 +7,8 @@ prev=jaxws004.html
 Further Information about JAX-WS
 ================================
 
-[[BNAZE]]
+[[BNAZE]][[further-information-about-jax-ws]]
 
-[[further-information-about-jax-ws]]
 Further Information about JAX-WS
 --------------------------------
 

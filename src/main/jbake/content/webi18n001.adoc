@@ -7,9 +7,8 @@ prev=webi18n.html
 Java Platform Localization Classes
 ==================================
 
-[[BNAXV]]
+[[BNAXV]][[java-platform-localization-classes]]
 
-[[java-platform-localization-classes]]
 Java Platform Localization Classes
 ----------------------------------
 

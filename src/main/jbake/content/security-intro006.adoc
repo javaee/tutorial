@@ -6,9 +6,8 @@ prev=security-intro005a.html
 ~~~~~~
 = Establishing a Secure Connection Using SSL
 
-[[BNBXW]]
+[[BNBXW]][[establishing-a-secure-connection-using-ssl]]
 
-[[establishing-a-secure-connection-using-ssl]]
 Establishing a Secure Connection Using SSL
 ------------------------------------------
 
@@ -70,9 +69,8 @@ domain names do not match, these browsers will display a warning to the
 client. In general, only address-based virtual hosts are commonly used
 with SSL in a production environment.
 
-[[BNBXX]]
+[[BNBXX]][[verifying-and-configuring-ssl-support]]
 
-[[verifying-and-configuring-ssl-support]]
 Verifying and Configuring SSL Support
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=jaxrs-advanced007.html
 The customer Example Application
 ================================
 
-[[GKOIB]]
+[[GKOIB]][[the-customer-example-application]]
 
-[[the-customer-example-application]]
 The customer Example Application
 --------------------------------
 
@@ -31,9 +30,8 @@ The following topics are addressed here:
 * link:#GKQJQ[Using the JAX-RS Client in the CustomerBean Classes]
 * link:#GKQKV[Running the customer Example]
 
-[[GKOFO]]
+[[GKOFO]][[overview-of-the-customer-example-application]]
 
-[[overview-of-the-customer-example-application]]
 Overview of the customer Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -54,9 +52,8 @@ methods of `CustomerService`.
 The `customer` example application shows you how to model your data
 entities as Java classes with JAXB annotations.
 
-[[CIHJFEJI]]
+[[CIHJFEJI]][[the-customer-and-address-entity-classes]]
 
-[[the-customer-and-address-entity-classes]]
 The Customer and Address Entity Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -192,9 +189,8 @@ classes:
 </xs:schema>
 ----
 
-[[GKLGT]]
+[[GKLGT]][[the-customerservice-class]]
 
-[[the-customerservice-class]]
 The CustomerService Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -297,9 +293,8 @@ the client.
     }
 ----
 
-[[GKQJQ]]
+[[GKQJQ]][[using-the-jax-rs-client-in-the-customerbean-classes]]
 
-[[using-the-jax-rs-client-in-the-customerbean-classes]]
 Using the JAX-RS Client in the CustomerBean Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -383,9 +378,8 @@ All of these HTTP status codes indicate success: 201 for `POST`, 200 for
 status codes, see
 `http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html`.
 
-[[GKQKV]]
+[[GKQKV]][[running-the-customer-example]]
 
-[[running-the-customer-example]]
 Running the customer Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -399,9 +393,8 @@ NetBeans IDE]
 * link:#GKQJV[To Build, Package, and Deploy the customer Example Using
 Maven]
 
-[[GKQLY]]
+[[GKQLY]][[to-build-package-and-deploy-the-customer-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-customer-example-using-netbeans-ide]]
 To Build, Package, and Deploy the customer Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -432,9 +425,8 @@ http://localhost:8080/customer/
 +
 The web client allows you to create and view customers.
 
-[[GKQJV]]
+[[GKQJV]][[to-build-package-and-deploy-the-customer-example-using-maven]]
 
-[[to-build-package-and-deploy-the-customer-example-using-maven]]
 To Build, Package, and Deploy the customer Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

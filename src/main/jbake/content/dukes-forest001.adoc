@@ -7,9 +7,8 @@ prev=dukes-forest.html
 Overview of the Duke's Forest Case Study Example
 ================================================
 
-[[A1256074]]
+[[A1256074]][[overview-of-the-dukes-forest-case-study-example]]
 
-[[overview-of-the-dukes-forest-case-study-example]]
 Overview of the Duke's Forest Case Study Example
 ------------------------------------------------
 

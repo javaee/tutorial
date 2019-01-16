@@ -7,9 +7,8 @@ prev=persistence-querylanguage.html
 Overview of the Java Persistence Query Language
 ===============================================
 
-[[A1073303]]
+[[A1073303]][[overview-of-the-java-persistence-query-language]]
 
-[[overview-of-the-java-persistence-query-language]]
 Overview of the Java Persistence Query Language
 -----------------------------------------------
 

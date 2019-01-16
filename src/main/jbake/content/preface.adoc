@@ -7,9 +7,8 @@ prev=title.html
 = Preface
 
 
-[[GEXAF]]
+[[GEXAF]][[preface]]
 
-[[preface]]
 Preface
 -------
 
@@ -38,9 +37,8 @@ The following topics are addressed here:
 * link:#conventions[Conventions]
 * link:#default-paths-and-file-names[Default Paths and File Names]
 
-[[CIACGIBD]]
+[[CIACGIBD]][[audience]]
 
-[[audience]]
 Audience
 ~~~~~~~~
 
@@ -49,9 +47,8 @@ deploying Java EE 8 applications. It covers the technologies comprising
 the Java EE platform and describes how to develop Java EE components and
 deploy them on the Java EE Software Development Kit (SDK).
 
-[[CIAHFICG]]
+[[CIAHFICG]][[documentation-accessibility]]
 
-[[documentation-accessibility]]
 Documentation Accessibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -69,9 +66,8 @@ support through My Oracle Support. For information, visit
 `http://www.oracle.com/pls/topic/lookup?ctx=acc&id=trs` if you are
 hearing impaired.
 
-[[BNAAC]]
+[[BNAAC]][[before-you-read-this-book]]
 
-[[before-you-read-this-book]]
 Before You Read This Book
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,9 +76,8 @@ of the Java programming language. A good way to get to that point is to
 work through the Java Tutorials
 (`http://docs.oracle.com/javase/tutorial/index.html`).
 
-[[GIPRL]]
+[[GIPRL]][[related-documentation]]
 
-[[related-documentation]]
 Related Documentation
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -112,9 +107,8 @@ Samples are bundled with the Java EE Software Development Kit (SDK) and
 are also available from the GlassFish Samples project page at
 `https://javaee.github.io/glassfish-samples/`.
 
-[[GKVTF]]
+[[GKVTF]][[conventions]]
 
-[[conventions]]
 Conventions
 ~~~~~~~~~~~
 
@@ -150,9 +144,8 @@ The command to remove a file is `rm _filename_`.
 |=======================================================================
 
 
-[[GFIRK]]
+[[GFIRK]][[default-paths-and-file-names]]
 
-[[default-paths-and-file-names]]
 Default Paths and File Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

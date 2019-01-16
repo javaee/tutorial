@@ -7,9 +7,8 @@ prev=jsf-custom008.html
 Defining the Custom Component Tag in a Tag Library Descriptor
 =============================================================
 
-[[BNAWN]]
+[[BNAWN]][[defining-the-custom-component-tag-in-a-tag-library-descriptor]]
 
-[[defining-the-custom-component-tag-in-a-tag-library-descriptor]]
 Defining the Custom Component Tag in a Tag Library Descriptor
 -------------------------------------------------------------
 

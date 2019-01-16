@@ -7,9 +7,8 @@ prev=jsf-custom002.html
 = Understanding the Image Map Example
 
 
-[[GLPCB]]
+[[GLPCB]][[understanding-the-image-map-example]]
 
-[[understanding-the-image-map-example]]
 Understanding the Image Map Example
 -----------------------------------
 
@@ -29,9 +28,8 @@ Map?]
 * link:#GLPBO[Configuring Model Data]
 * link:#GLPEL[Summary of the Image Map Application Classes]
 
-[[GLPBD]]
+[[GLPBD]][[why-use-javaserver-faces-technology-to-implement-an-image-map]]
 
-[[why-use-javaserver-faces-technology-to-implement-an-image-map]]
 Why Use JavaServer Faces Technology to Implement an Image Map?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -54,9 +52,8 @@ it has the best of both styles of image maps: It can handle the parts of
 the application that need to be performed on the server while allowing
 the other parts of the application to be performed on the client side.
 
-[[GLPEM]]
+[[GLPEM]][[understanding-the-rendered-html]]
 
-[[understanding-the-rendered-html]]
 Understanding the Rendered HTML
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -110,9 +107,8 @@ The server-side objects retrieve the value of `bookMap_current` and set
 the locale in the `javax.faces.context.FacesContext` instance according
 to the region that was selected.
 
-[[GLPCD]]
+[[GLPCD]][[understanding-the-facelets-page]]
 
-[[understanding-the-facelets-page]]
 Understanding the Facelets Page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -192,9 +188,8 @@ scope. The value of this attribute is a bean, which stores the `coords`,
 `shape`, and `alt` data. How these beans are stored in the application
 scope is explained more in the next section.
 
-[[GLPBO]]
+[[GLPBO]][[configuring-model-data]]
 
-[[configuring-model-data]]
 Configuring Model Data
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -277,9 +272,8 @@ and alternative text values by calling the appropriate accessor methods
 of `ImageArea`. link:jsf-custom006.html#BNAWB[Creating the Renderer
 Class] explains how to do this in the `AreaRenderer` class.
 
-[[GLPEL]]
+[[GLPEL]][[summary-of-the-image-map-application-classes]]
 
-[[summary-of-the-image-map-application-classes]]
 Summary of the Image Map Application Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

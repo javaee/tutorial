@@ -7,9 +7,8 @@ prev=servlets007.html
 Accessing the Web Context
 =========================
 
-[[BNAGL]]
+[[BNAGL]][[accessing-the-web-context]]
 
-[[accessing-the-web-context]]
 Accessing the Web Context
 -------------------------
 

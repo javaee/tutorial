@@ -7,9 +7,8 @@ prev=jaxrs-advanced006.html
 Using JAX-RS with JAXB
 ======================
 
-[[GKKNJ]]
+[[GKKNJ]][[using-jax-rs-with-jaxb]]
 
-[[using-jax-rs-with-jaxb]]
 Using JAX-RS with JAXB
 ----------------------
 
@@ -91,9 +90,8 @@ interface.
 The following sections explain how to use JAXB with JAX-RS resource
 methods.
 
-[[sthref147]]
+[[sthref147]][[using-java-objects-to-model-your-data]]
 
-[[using-java-objects-to-model-your-data]]
 Using Java Objects to Model Your Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -195,9 +193,8 @@ link:jaxrs-advanced008.html#GKOIB[The customer Example Application]. The
 classes that model the data, which results in a more hierarchical XML
 representation.
 
-[[sthref148]]
+[[sthref148]][[starting-from-an-existing-xml-schema-definition]]
 
-[[starting-from-an-existing-xml-schema-definition]]
 Starting from an Existing XML Schema Definition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -320,9 +317,8 @@ public class ProductService {
 }
 ----
 
-[[sthref149]]
+[[sthref149]][[using-json-with-jax-rs-and-jaxb]]
 
-[[using-json-with-jax-rs-and-jaxb]]
 Using JSON with JAX-RS and JAXB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=cdi-basic.html
 = Getting Started
 
 
-[[BABJDJGA]]
+[[BABJDJGA]][[getting-started]]
 
-[[getting-started]]
 Getting Started
 ---------------
 

@@ -7,9 +7,8 @@ prev=persistence-string-queries001.html
 Creating String-Based Queries
 =============================
 
-[[GKJBQ]]
+[[GKJBQ]][[creating-string-based-queries]]
 
-[[creating-string-based-queries]]
 Creating String-Based Queries
 -----------------------------
 

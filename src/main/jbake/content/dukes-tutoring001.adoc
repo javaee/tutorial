@@ -7,9 +7,8 @@ prev=dukes-tutoring.html
 Design and Architecture of Duke's Tutoring
 ==========================================
 
-[[GKAEI]]
+[[GKAEI]][[design-and-architecture-of-dukes-tutoring]]
 
-[[design-and-architecture-of-dukes-tutoring]]
 Design and Architecture of Duke's Tutoring
 ------------------------------------------
 

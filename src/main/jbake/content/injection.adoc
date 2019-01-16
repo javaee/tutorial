@@ -7,9 +7,8 @@ prev=resource-creation003.html
 Injection
 =========
 
-[[GKJIQ3]]
+[[GKJIQ3]][[injection]]
 
-[[injection]]
 4 Injection
 -----------
 

@@ -7,9 +7,8 @@ prev=persistence-locking.html
 Overview of Entity Locking and Concurrency
 ==========================================
 
-[[GKJHZ]]
+[[GKJHZ]][[overview-of-entity-locking-and-concurrency]]
 
-[[overview-of-entity-locking-and-concurrency]]
 Overview of Entity Locking and Concurrency
 ------------------------------------------
 
@@ -59,9 +58,8 @@ modification may result in decreased application performance.
 |=======================================================================
 
 
-[[GKJJC]]
+[[GKJJC]][[using-optimistic-locking]]
 
-[[using-optimistic-locking]]
 Using Optimistic Locking
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

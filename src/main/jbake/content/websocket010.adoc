@@ -7,9 +7,8 @@ prev=websocket009.html
 Specifying an Endpoint Configurator Class
 =========================================
 
-[[BABJAIGH]]
+[[BABJAIGH]][[specifying-an-endpoint-configurator-class]]
 
-[[specifying-an-endpoint-configurator-class]]
 Specifying an Endpoint Configurator Class
 -----------------------------------------
 

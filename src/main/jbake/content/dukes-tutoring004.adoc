@@ -7,9 +7,8 @@ prev=dukes-tutoring003.html
 Running the Duke's Tutoring Case Study Application
 ==================================================
 
-[[GKJNN]]
+[[GKJNN]][[running-the-dukes-tutoring-case-study-application]]
 
-[[running-the-dukes-tutoring-case-study-application]]
 Running the Duke's Tutoring Case Study Application
 --------------------------------------------------
 
@@ -20,9 +19,8 @@ The following topics are addressed here:
 
 * link:#GKJOA[Running Duke's Tutoring]
 
-[[GKJOA]]
+[[GKJOA]][[running-dukes-tutoring]]
 
-[[running-dukes-tutoring]]
 Running Duke's Tutoring
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -35,9 +33,8 @@ The following topics are addressed here:
 * link:#GKJOG[To Build and Deploy Duke's Tutoring Using Maven]
 * link:#GKJOC[Using Duke's Tutoring]
 
-[[GKJNR]]
+[[GKJNR]][[to-build-and-deploy-dukes-tutoring-using-netbeans-ide]]
 
-[[to-build-and-deploy-dukes-tutoring-using-netbeans-ide]]
 To Build and Deploy Duke's Tutoring Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -85,9 +82,8 @@ projects, and deploys `dukes-tutoring-war` to GlassFish Server, starting
 Derby and GlassFish Server if they have not already been
 started.
 
-[[GKJOG]]
+[[GKJOG]][[to-build-and-deploy-dukes-tutoring-using-maven]]
 
-[[to-build-and-deploy-dukes-tutoring-using-maven]]
 To Build and Deploy Duke's Tutoring Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -113,9 +109,8 @@ This command creates a JDBC security realm named tutoringRealm, builds
 and packages the `dukes-tutoring-common` and `dukes-tutoring-war`
 projects, and deploys `dukes-tutoring-war` to GlassFish Server.
 
-[[GKJOC]]
+[[GKJOC]][[using-dukes-tutoring]]
 
-[[using-dukes-tutoring]]
 Using Duke's Tutoring
 ^^^^^^^^^^^^^^^^^^^^^
 

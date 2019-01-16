@@ -7,9 +7,8 @@ prev=concurrency-utilities003.html
 = Concurrency and Security
 
 
-[[CIHCACAA]]
+[[CIHCACAA]][[concurrency-and-security]]
 
-[[concurrency-and-security]]
 Concurrency and Security
 ------------------------
 

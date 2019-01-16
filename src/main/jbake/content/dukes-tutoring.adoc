@@ -7,9 +7,8 @@ prev=dukes-bookstore003.html
 Duke's Tutoring Case Study Example
 ==================================
 
-[[GKAEE]]
+[[GKAEE]][[dukes-tutoring-case-study-example]]
 
-[[dukes-tutoring-case-study-example]]
 62 Duke's Tutoring Case Study Example
 -------------------------------------
 

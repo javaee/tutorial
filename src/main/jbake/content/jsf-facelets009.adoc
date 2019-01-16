@@ -7,9 +7,8 @@ prev=jsf-facelets008.html
 = HTML5-Friendly Markup
 
 
-[[BABGECCJ]]
+[[BABGECCJ]][[html5-friendly-markup]]
 
-[[html5-friendly-markup]]
 HTML5-Friendly Markup
 ---------------------
 
@@ -37,9 +36,8 @@ rather than having to pass this control off to component authors. You
 can mix and match JavaServer Faces and HTML5 components and elements as
 you see fit.
 
-[[sthref33]]
+[[sthref33]][[using-pass-through-elements]]
 
-[[using-pass-through-elements]]
 Using Pass-Through Elements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -117,9 +115,8 @@ interprets the markup that the page author has written.
 |=======================================================
 
 
-[[sthref35]]
+[[sthref35]][[using-pass-through-attributes]]
 
-[[using-pass-through-attributes]]
 Using Pass-Through Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -204,9 +201,8 @@ public Bean() {
 }
 ----
 
-[[BABGGIAA]]
+[[BABGGIAA]][[the-reservation-example-application]]
 
-[[the-reservation-example-application]]
 The reservation Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -226,9 +222,8 @@ The following topics are addressed here:
 * link:#BABIHHGC[To Build, Package, and Deploy the reservation Example
 Using NetBeans IDE]
 
-[[BABGCAHH]]
+[[BABGCAHH]][[the-facelets-pages-for-the-reservation-application]]
 
-[[the-facelets-pages-for-the-reservation-application]]
 The Facelets Pages for the reservation Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -325,9 +320,8 @@ The second Facelets page, `confirmation.xhtml`, uses a pass-through
 a Facelets `h:commandButton` tag to allow the user to return to the
 `reservation.xhtml` page.
 
-[[BABHFCCG]]
+[[BABHFCCG]][[the-managed-bean-for-the-reservation-application]]
 
-[[the-managed-bean-for-the-reservation-application]]
 The Managed Bean for the reservation Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -337,9 +331,8 @@ Facelets pages. It also contains two methods, `calculateTotal` and
 `clear`, that act as listeners for Ajax events on the
 `reservation.xhtml` page.
 
-[[BABIHHGC]]
+[[BABIHHGC]][[to-build-package-and-deploy-the-reservation-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-reservation-example-using-netbeans-ide]]
 To Build, Package, and Deploy the reservation Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -361,9 +354,8 @@ select Build.
 This option builds the example application and deploys it to your
 GlassFish Server instance.
 
-[[sthref36]]
+[[sthref36]][[to-build-package-and-deploy-the-reservation-example-using-maven]]
 
-[[to-build-package-and-deploy-the-reservation-example-using-maven]]
 To Build, Package, and Deploy the reservation Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -387,9 +379,8 @@ This command builds and packages the application into a WAR file,
 `reservation.war`, that is located in the `target` directory. It then
 deploys the WAR file to your GlassFish Server instance.
 
-[[sthref37]]
+[[sthref37]][[to-run-the-reservation-example]]
 
-[[to-run-the-reservation-example]]
 To Run the reservation Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=cdi-basic004.html
 = Beans as Injectable Objects
 
 
-[[GIZKS]]
+[[GIZKS]][[beans-as-injectable-objects]]
 
-[[beans-as-injectable-objects]]
 Beans as Injectable Objects
 ---------------------------
 

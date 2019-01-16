@@ -7,9 +7,8 @@ prev=servlets002.html
 = Sharing Information
 
 
-[[BNAFO]]
+[[BNAFO]][[sharing-information]]
 
-[[sharing-information]]
 Sharing Information
 -------------------
 
@@ -23,9 +22,8 @@ accomplish their tasks. Web components can do so by doing the following.
 that allow a web component to invoke other web resources are described
 in link:servlets007.html#BNAGI[Invoking Other Web Resources].
 
-[[BNAFP]]
+[[BNAFP]][[using-scope-objects]]
 
-[[using-scope-objects]]
 Using Scope Objects
 ~~~~~~~~~~~~~~~~~~~
 
@@ -57,9 +55,8 @@ object.
 |=======================================================================
 
 
-[[BNAFS]]
+[[BNAFS]][[controlling-concurrent-access-to-shared-resources]]
 
-[[controlling-concurrent-access-to-shared-resources]]
 Controlling Concurrent Access to Shared Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

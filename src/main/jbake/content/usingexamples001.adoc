@@ -7,9 +7,8 @@ prev=usingexamples.html
 = Required Software
 
 
-[[GEXAJ]]
+[[GEXAJ]][[required-software]]
 
-[[required-software]]
 Required Software
 -----------------
 
@@ -21,9 +20,8 @@ The following software is required to run the examples:
 * link:#netbeans-ide[NetBeans IDE]
 * link:#apache-maven[Apache Maven]
 
-[[GEXAE]]
+[[GEXAE]][[java-platform-standard-edition]]
 
-[[java-platform-standard-edition]]
 Java Platform, Standard Edition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -33,9 +31,8 @@ Update 65 or above or JDK 8 Update 20 or above. You can download JDK
 software from
 `http://www.oracle.com/technetwork/java/javase/downloads/index.html`.
 
-[[GEXAB]]
+[[GEXAB]][[java-ee-7-software-development-kit]]
 
-[[java-ee-7-software-development-kit]]
 Java EE 8 Software Development Kit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -47,9 +44,8 @@ Software Development Kit (SDK), which you can download from
 `http://www.oracle.com/technetwork/java/javaee/downloads/index.html`.
 
 
-[[GEXBC]]
+[[GEXBC]][[sdk-installation-tips]]
 
-[[sdk-installation-tips]]
 SDK Installation Tips
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -74,9 +70,8 @@ as-install-parent/bin
 as-install/bin
 ----
 
-[[GEXBA]]
+[[GEXBA]][[java-ee-7-tutorial-component]]
 
-[[java-ee-7-tutorial-component]]
 Java EE 8 Tutorial Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -90,9 +85,8 @@ link:usingexamples008.html#GIQWR[Getting the Latest Updates to the
 Tutorial].
 ////
 
-[[GEXAZ]]
+[[GEXAZ]][[netbeans-ide]]
 
-[[netbeans-ide]]
 NetBeans IDE
 ~~~~~~~~~~~~
 
@@ -106,9 +100,8 @@ IDE. You can download NetBeans IDE from
 `https://netbeans.org/downloads/index.html`. Make sure that you download
 the Java EE bundle.
 
-[[GJSEQ]]
+[[GJSEQ]][[to-install-netbeans-ide-without-glassfish-server]]
 
-[[to-install-netbeans-ide-without-glassfish-server]]
 To Install NetBeans IDE without GlassFish Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -124,9 +117,8 @@ A few of the tutorial examples use the Junit library, so you should
 install it.
 3.  Continue with the installation of NetBeans IDE.
 
-[[GIQZL]]
+[[GIQZL]][[to-add-glassfish-server-as-a-server-using-netbeans-ide]]
 
-[[to-add-glassfish-server-as-a-server-using-netbeans-ide]]
 To Add GlassFish Server as a Server Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -142,9 +134,8 @@ and click Next.
 5.  Under Domain Location, select Register Local Domain.
 6.  Click Finish.
 
-[[GEXAA]]
+[[GEXAA]][[apache-maven]]
 
-[[apache-maven]]
 Apache Maven
 ~~~~~~~~~~~~
 

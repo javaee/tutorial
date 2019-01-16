@@ -7,9 +7,8 @@ prev=concurrency-utilities002.html
 = Concurrency and Transactions
 
 
-[[CIHIDBDG]]
+[[CIHIDBDG]][[concurrency-and-transactions]]
 
-[[concurrency-and-transactions]]
 Concurrency and Transactions
 ----------------------------
 

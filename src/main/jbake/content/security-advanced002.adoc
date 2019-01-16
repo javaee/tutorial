@@ -6,9 +6,8 @@ prev=security-advanced001.html
 ~~~~~~
 = Authentication Mechanisms
 
-[[GLIEN]]
+[[GLIEN]][[authentication-mechanisms]]
 
-[[authentication-mechanisms]]
 Authentication Mechanisms
 -------------------------
 
@@ -20,9 +19,8 @@ The following topics are addressed here:
 * link:#client-authentication[Client Authentication]
 * link:#mutual-authentication[Mutual Authentication]
 
-[[GLIEQ]]
+[[GLIEQ]][[client-authentication]]
 
-[[client-authentication]]
 Client Authentication
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -58,9 +56,8 @@ authentication mechanisms that can be provided with an application and
 deployed using CDI. See link:security-api002.html#overview-of-the-http-authentication-mechanism-interface[Overview of
 the HTTP Authentication Mechanism Interface].
 
-[[GLIEL]]
+[[GLIEL]][[mutual-authentication]]
 
-[[mutual-authentication]]
 Mutual Authentication
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -112,9 +109,8 @@ image:img/javaeett_dt_049.png[
 "Diagram of five steps in mutual authentication with user name and
 password"]
 
-[[BNBYH]]
+[[BNBYH]][[enabling-mutual-authentication-over-ssl]]
 
-[[enabling-mutual-authentication-over-ssl]]
 Enabling Mutual Authentication over SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -147,9 +143,8 @@ all of the time, which can severely degrade performance.
 When client authentication is enabled in both of these ways, client
 authentication will be performed twice.
 
-[[BNBYI]]
+[[BNBYI]][[creating-a-client-certificate-for-mutual-authentication]]
 
-[[creating-a-client-certificate-for-mutual-authentication]]
 Creating a Client Certificate for Mutual Authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

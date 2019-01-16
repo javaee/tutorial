@@ -7,9 +7,8 @@ prev=websocket001.html
 Creating WebSocket Applications in the Java EE Platform
 =======================================================
 
-[[BABEAEFC]]
+[[BABEAEFC]][[creating-websocket-applications-in-the-java-ee-platform]]
 
-[[creating-websocket-applications-in-the-java-ee-platform]]
 Creating WebSocket Applications in the Java EE Platform
 -------------------------------------------------------
 
@@ -50,9 +49,8 @@ a programmatic endpoint, but it focuses on annotated endpoints.
 |=======================================================================
 
 
-[[sthref114]]
+[[sthref114]][[creating-and-deploying-a-websocket-endpoint]]
 
-[[creating-and-deploying-a-websocket-endpoint]]
 Creating and Deploying a WebSocket Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

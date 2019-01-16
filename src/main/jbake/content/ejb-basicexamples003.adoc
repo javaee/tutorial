@@ -7,9 +7,8 @@ prev=ejb-basicexamples002.html
 A Singleton Session Bean Example: counter
 =========================================
 
-[[GIPVI]]
+[[GIPVI]][[a-singleton-session-bean-example-counter]]
 
-[[a-singleton-session-bean-example-counter]]
 A Singleton Session Bean Example: counter
 -----------------------------------------
 
@@ -22,9 +21,8 @@ The following topics are addressed here:
 * link:#GIPXL[The Architecture of the counter Example]
 * link:#GIPVL[Running the counter Example]
 
-[[GIPVC]]
+[[GIPVC]][[creating-a-singleton-session-bean]]
 
-[[creating-a-singleton-session-bean]]
 Creating a Singleton Session Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -37,9 +35,8 @@ enterprise bean implementation class is a singleton session bean:
 public class SingletonBean { ... }
 ----
 
-[[GIPPQ]]
+[[GIPPQ]][[initializing-singleton-session-beans]]
 
-[[initializing-singleton-session-beans]]
 Initializing Singleton Session Beans
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -122,9 +119,8 @@ the EJB container may initialize either `PrimaryBean` or `SecondaryBean`
 first. That is, the EJB container could initialize the singletons in the
 following order: `SecondaryBean`, `PrimaryBean`, `TertiaryBean`.
 
-[[GIPSZ]]
+[[GIPSZ]][[managing-concurrent-access-in-a-singleton-session-bean]]
 
-[[managing-concurrent-access-in-a-singleton-session-bean]]
 Managing Concurrent Access in a Singleton Session Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -308,9 +304,8 @@ specify bean-managed concurrency:
 public class AnotherSingletonBean { ... }
 ----
 
-[[GIPVD]]
+[[GIPVD]][[handling-errors-in-a-singleton-session-bean]]
 
-[[handling-errors-in-a-singleton-session-bean]]
 Handling Errors in a Singleton Session Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -322,9 +317,8 @@ initialized, it is not destroyed if the singleton's business or
 lifecycle methods cause system exceptions. This ensures that the same
 singleton instance is used throughout the application lifecycle.
 
-[[GIPXL]]
+[[GIPXL]][[the-architecture-of-the-counter-example]]
 
-[[the-architecture-of-the-counter-example]]
 The Architecture of the counter Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -454,9 +448,8 @@ managed bean. Here is the content of `index.xhtml`:
 </html>
 ----
 
-[[GIPVL]]
+[[GIPVL]][[running-the-counter-example]]
 
-[[running-the-counter-example]]
 Running the counter Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -470,9 +463,8 @@ The following topics are addressed here:
 * link:#GIPXT[To Run the counter Example Using NetBeans IDE]
 * link:#GIPZW[To Run the counter Example Using Maven]
 
-[[GIPXT]]
+[[GIPXT]][[to-run-the-counter-example-using-netbeans-ide]]
 
-[[to-run-the-counter-example-using-netbeans-ide]]
 To Run the counter Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -495,9 +487,8 @@ A web browser will open the URL `http://localhost:8080/counter`, which
 displays the number of hits.
 7.  Reload the page to see the hit count increment.
 
-[[GIPZW]]
+[[GIPZW]][[to-run-the-counter-example-using-maven]]
 
-[[to-run-the-counter-example-using-maven]]
 To Run the counter Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

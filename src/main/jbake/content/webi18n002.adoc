@@ -7,9 +7,8 @@ prev=webi18n001.html
 Providing Localized Messages and Labels
 =======================================
 
-[[BNAXW]]
+[[BNAXW]][[providing-localized-messages-and-labels]]
 
-[[providing-localized-messages-and-labels]]
 Providing Localized Messages and Labels
 ---------------------------------------
 
@@ -43,9 +42,8 @@ Visitor=You are visitor number
 What=What We\'re Reading
 ----
 
-[[GKUIA]]
+[[GKUIA]][[establishing-the-locale]]
 
-[[establishing-the-locale]]
 Establishing the Locale
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -87,9 +85,8 @@ public class LocaleBean {
 }
 ----
 
-[[BNAXY]]
+[[BNAXY]][[setting-the-resource-bundle]]
 
-[[setting-the-resource-bundle]]
 Setting the Resource Bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -140,9 +137,8 @@ file.
 For more information on using this element, see
 link:jsf-configure006.html#BNAXB[Registering Application Messages].
 
-[[GKUFC]]
+[[GKUFC]][[retrieving-localized-messages]]
 
-[[retrieving-localized-messages]]
 Retrieving Localized Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

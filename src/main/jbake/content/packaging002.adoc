@@ -7,9 +7,8 @@ prev=packaging001.html
 Packaging Enterprise Beans
 ==========================
 
-[[BCGECBIJ]]
+[[BCGECBIJ]][[packaging-enterprise-beans]]
 
-[[packaging-enterprise-beans]]
 Packaging Enterprise Beans
 --------------------------
 
@@ -19,9 +18,8 @@ WAR modules. It includes the following sections:
 * link:#packaging-enterprise-beans-in-ejb-jar-modules[Packaging Enterprise Beans in EJB JAR Modules]
 * link:#packaging-enterprise-beans-in-war-modules[Packaging Enterprise Beans in WAR Modules]
 
-[[CHDFCDBG]]
+[[CHDFCDBG]][[packaging-enterprise-beans-in-ejb-jar-modules]]
 
-[[packaging-enterprise-beans-in-ejb-jar-modules]]
 Packaging Enterprise Beans in EJB JAR Modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -41,9 +39,8 @@ image:img/javaeett_dt_011.png[
 "Diagram showing the structure and contents of an enterprise bean JAR
 file."]
 
-[[CHDJABEJ]]
+[[CHDJABEJ]][[packaging-enterprise-beans-in-war-modules]]
 
-[[packaging-enterprise-beans-in-war-modules]]
 Packaging Enterprise Beans in WAR Modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

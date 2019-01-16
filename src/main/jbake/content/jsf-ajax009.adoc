@@ -7,9 +7,8 @@ prev=jsf-ajax008.html
 Grouping of Components
 ======================
 
-[[GKHYH]]
+[[GKHYH]][[grouping-of-components]]
 
-[[grouping-of-components]]
 Grouping of Components
 ----------------------
 

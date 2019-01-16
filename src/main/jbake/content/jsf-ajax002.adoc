@@ -7,9 +7,8 @@ prev=jsf-ajax001.html
 Using Ajax Functionality with JavaServer Faces Technology
 =========================================================
 
-[[GKINL]]
+[[GKINL]][[using-ajax-functionality-with-javaserver-faces-technology]]
 
-[[using-ajax-functionality-with-javaserver-faces-technology]]
 Using Ajax Functionality with JavaServer Faces Technology
 ---------------------------------------------------------
 

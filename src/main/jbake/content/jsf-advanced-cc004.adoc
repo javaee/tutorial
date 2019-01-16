@@ -7,9 +7,8 @@ prev=jsf-advanced-cc003.html
 = The compositecomponentexample Example Application
 
 
-[[GKHVN]]
+[[GKHVN]][[the-compositecomponentexample-example-application]]
 
-[[the-compositecomponentexample-example-application]]
 The compositecomponentexample Example Application
 -------------------------------------------------
 
@@ -33,9 +32,8 @@ The following topics are addressed here:
 * link:#GKHVQ[The Managed Bean]
 * link:#GLECV[Running the compositecomponentexample Example]
 
-[[GKHUU]]
+[[GKHUU]][[the-composite-component-file]]
 
-[[the-composite-component-file]]
 The Composite Component File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -111,9 +109,8 @@ prime or not is rendered only if the input value is validated.
 </composite:implementation>
 ----
 
-[[GKHVX]]
+[[GKHVX]][[the-using-page]]
 
-[[the-using-page]]
 The Using Page
 ~~~~~~~~~~~~~~
 
@@ -130,9 +127,8 @@ along with the managed bean. It validates the user's input.
 </div>
 ----
 
-[[GKHVQ]]
+[[GKHVQ]][[the-managed-bean]]
 
-[[the-managed-bean]]
 The Managed Bean
 ~~~~~~~~~~~~~~~~
 
@@ -166,9 +162,8 @@ public class PrimeBean implements Serializable {
 }
 ----
 
-[[GLECV]]
+[[GLECV]][[running-the-compositecomponentexample-example]]
 
-[[running-the-compositecomponentexample-example]]
 Running the compositecomponentexample Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -183,9 +178,8 @@ compositecomponentexample Example Using NetBeans IDE]
 compositecomponentexample Example Using Maven]
 * link:#GLEEU[To Run the compositecomponentexample Example]
 
-[[GKHVC]]
+[[GKHVC]][[to-build-package-and-deploy-the-compositecomponentexample-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-compositecomponentexample-example-using-netbeans-ide]]
 To Build, Package, and Deploy the compositecomponentexample Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -206,9 +200,8 @@ project and select Build.
 +
 This command builds and deploys the application.
 
-[[GLEAE]]
+[[GLEAE]][[to-build-package-and-deploy-the-compositecomponentexample-example-using-maven]]
 
-[[to-build-package-and-deploy-the-compositecomponentexample-example-using-maven]]
 To Build, Package, and Deploy the compositecomponentexample Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -228,9 +221,8 @@ tut-install/examples/web/jsf/compositecomponentexample/
 mvn install
 ----
 
-[[GLEEU]]
+[[GLEEU]][[to-run-the-compositecomponentexample-example]]
 
-[[to-run-the-compositecomponentexample-example]]
 To Run the compositecomponentexample Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

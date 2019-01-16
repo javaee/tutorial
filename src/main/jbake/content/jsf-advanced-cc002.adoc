@@ -7,9 +7,8 @@ prev=jsf-advanced-cc001.html
 Invoking a Managed Bean
 =======================
 
-[[GKHUO]]
+[[GKHUO]][[invoking-a-managed-bean]]
 
-[[invoking-a-managed-bean]]
 Invoking a Managed Bean
 -----------------------
 

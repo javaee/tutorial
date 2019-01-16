@@ -7,9 +7,8 @@ prev=batch-processing004.html
 = Creating Batch Artifacts
 
 
-[[BCGHDHGH]]
+[[BCGHDHGH]][[creating-batch-artifacts]]
 
-[[creating-batch-artifacts]]
 Creating Batch Artifacts
 ------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 * link:#BCGIFJBB[Dependency Injection in Batch Artifacts]
 * link:#BCGCJEEF[Using the Context Objects from the Batch Runtime]
 
-[[BABDAIBI]]
+[[BABDAIBI]][[batch-artifact-interfaces]]
 
-[[batch-artifact-interfaces]]
 Batch Artifact Interfaces
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -49,7 +47,6 @@ link:#BCGCAEDI[Table 58-5] lists the interfaces to implement batch
 artifacts for job and step listeners.
 
 [[sthref279]][[BCGGCIDC]]
-
 
 *Table 58-3 Main Batch Artifact Interfaces*
 
@@ -84,7 +81,6 @@ element.
 
 [[sthref280]][[BCGEAAEA]]
 
-
 Table 58-4 Partition Batch Artifact Interfaces
 
 
@@ -115,7 +111,6 @@ element inside the `partition` element.
 
 
 [[sthref281]][[BCGCAEDI]]
-
 
 *Table 58-5 Listener Batch Artifact Interfaces*
 
@@ -177,9 +172,8 @@ referenced from the `listener` element inside the `step` element.
 |=======================================================================
 
 
-[[BCGIFJBB]]
+[[BCGIFJBB]][[dependency-injection-in-batch-artifacts]]
 
-[[dependency-injection-in-batch-artifacts]]
 Dependency Injection in Batch Artifacts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -263,9 +257,8 @@ procedure.
 * The batch artifacts throw null pointer exceptions when accessing
 injected objects.
 
-[[BCGCJEEF]]
+[[BCGCJEEF]][[using-the-context-objects-from-the-batch-runtime]]
 
-[[using-the-context-objects-from-the-batch-runtime]]
 Using the Context Objects from the Batch Runtime
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=usingexamples003.html
 = Starting and Stopping Apache Derby
 
 
-[[BNADK]]
+[[BNADK]][[starting-and-stopping-the-java-db-server]]
 
-[[starting-and-stopping-the-java-db-server]]
 Starting and Stopping Apache Derby
 ----------------------------------
 
@@ -34,9 +33,8 @@ asadmin stop-database
 For information about Apache Derby included with GlassFish Server, see
 the Release Notes that are located in the `_as-install_/javadb/` directory.
 
-[[GJSFS]]
+[[GJSFS]][[to-start-the-database-server-using-netbeans-ide]]
 
-[[to-start-the-database-server-using-netbeans-ide]]
 To Start Derby Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

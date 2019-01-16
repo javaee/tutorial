@@ -7,9 +7,8 @@ prev=jsf-configure002.html
 Application Configuration Resource File
 =======================================
 
-[[BNAWP]]
+[[BNAWP]][[application-configuration-resource-file]]
 
-[[application-configuration-resource-file]]
 Application Configuration Resource File
 ---------------------------------------
 
@@ -86,9 +85,8 @@ creates a single instance of the `Application` class and configures it
 with the information you provided in the application configuration
 resource file.
 
-[[GIREP]]
+[[GIREP]][[configuring-eager-application-scoped-managed-beans]]
 
-[[configuring-eager-application-scoped-managed-beans]]
 Configuring Eager Application-Scoped Managed Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -117,9 +115,8 @@ The annotation is as follows:
 @ApplicationScoped
 ----
 
-[[GIQCK]]
+[[GIQCK]][[ordering-of-application-configuration-resource-files]]
 
-[[ordering-of-application-configuration-resource-files]]
 Ordering of Application Configuration Resource Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

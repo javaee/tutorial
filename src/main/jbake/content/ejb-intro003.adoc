@@ -7,9 +7,8 @@ prev=ejb-intro002.html
 What Is a Message-Driven Bean?
 ==============================
 
-[[GIPKO]]
+[[GIPKO]][[what-is-a-message-driven-bean]]
 
-[[what-is-a-message-driven-bean]]
 What Is a Message-Driven Bean?
 ------------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 Beans?]
 * link:#GIPJX[When to Use Message-Driven Beans]
 
-[[GIPMJ]]
+[[GIPMJ]][[what-makes-message-driven-beans-different-from-session-beans]]
 
-[[what-makes-message-driven-beans-different-from-session-beans]]
 What Makes Message-Driven Beans Different from Session Beans?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -89,9 +87,8 @@ link:jms-examples007.html#BNBPK[Receiving Messages Asynchronously Using a
 Message-Driven Bean] and link:transactions.html#BNCIH[Chapter 54,
 "Transactions"].
 
-[[GIPJX]]
+[[GIPJX]][[when-to-use-message-driven-beans]]
 
-[[when-to-use-message-driven-beans]]
 When to Use Message-Driven Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

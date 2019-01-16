@@ -6,9 +6,8 @@ prev=security-intro002.html
 ~~~~~~
 = Securing Containers
 
-[[BNBXE]]
+[[BNBXE]][[securing-containers]]
 
-[[securing-containers]]
 Securing Containers
 -------------------
 
@@ -22,9 +21,8 @@ The following topics are addressed here:
 * link:#using-deployment-descriptors-for-declarative-security[Using Deployment Descriptors for Declarative Security]
 * link:#using-programmatic-security[Using Programmatic Security]
 
-[[BNBXG]]
+[[BNBXG]][[using-annotations-to-specify-security-information]]
 
-[[using-annotations-to-specify-security-information]]
 Using Annotations to Specify Security Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -47,9 +45,8 @@ descriptors are described only where necessary.
 For more information on annotations, see
 link:security-intro007.html#BNBYJ[Further Information about Security].
 
-[[BNBXF]]
+[[BNBXF]][[using-deployment-descriptors-for-declarative-security]]
 
-[[using-deployment-descriptors-for-declarative-security]]
 Using Deployment Descriptors for Declarative Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -85,9 +82,8 @@ Chapter 14 of the EJB 3.2 Core Contracts and Requirements Specification
 (JSR 345), which can be downloaded from
 `http://jcp.org/en/jsr/detail?id=345`.
 
-[[BNBXH]]
+[[BNBXH]][[using-programmatic-security]]
 
-[[using-programmatic-security]]
 Using Programmatic Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

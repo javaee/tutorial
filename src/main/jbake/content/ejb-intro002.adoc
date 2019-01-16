@@ -7,9 +7,8 @@ prev=ejb-intro001.html
 What Is a Session Bean?
 =======================
 
-[[GIPJG]]
+[[GIPJG]][[what-is-a-session-bean]]
 
-[[what-is-a-session-bean]]
 What Is a Session Bean?
 -----------------------
 
@@ -31,9 +30,8 @@ The following topics are addressed here:
 * link:#GIPKR[Types of Session Beans]
 * link:#GIPMT[When to Use Session Beans]
 
-[[GIPKR]]
+[[GIPKR]][[types-of-session-beans]]
 
-[[types-of-session-beans]]
 Types of Session Beans
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -45,9 +43,8 @@ The following topics are addressed here:
 * link:#GIPIN[Stateless Session Beans]
 * link:#GIPIM[Singleton Session Beans]
 
-[[GIPNL]]
+[[GIPNL]][[stateful-session-beans]]
 
-[[stateful-session-beans]]
 Stateful Session Beans
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -68,9 +65,8 @@ This transient nature of the state is not a problem, however, because
 when the conversation between the client and the bean ends, there is no
 need to retain the state.
 
-[[GIPIN]]
+[[GIPIN]][[stateless-session-beans]]
 
-[[stateless-session-beans]]
 Stateless Session Beans
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -94,9 +90,8 @@ beans than stateful session beans to support the same number of clients.
 A stateless session bean can implement a web service, but a stateful
 session bean cannot.
 
-[[GIPIM]]
+[[GIPIM]][[singleton-session-beans]]
 
-[[singleton-session-beans]]
 Singleton Session Beans
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -122,9 +117,8 @@ singleton may perform cleanup tasks on application shutdown as well,
 because the singleton will operate throughout the lifecycle of the
 application.
 
-[[GIPMT]]
+[[GIPMT]][[when-to-use-session-beans]]
 
-[[when-to-use-session-beans]]
 When to Use Session Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

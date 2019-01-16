@@ -7,9 +7,8 @@ prev=cdi-adv-examples002.html
 = The producermethods Example: Using a Producer Method to Choose a Bean Implementation
 
 
-[[GKHPY]]
+[[GKHPY]][[the-producermethods-example-using-a-producer-method-to-choose-a-bean-implementation]]
 
-[[the-producermethods-example-using-a-producer-method-to-choose-a-bean-implementation]]
 The producermethods Example: Using a Producer Method to Choose a Bean Implementation
 ------------------------------------------------------------------------------------
 
@@ -29,9 +28,8 @@ The following topics are addressed here:
 * link:#GKHRO[Components of the producermethods Example]
 * link:#GKHQE[Running the producermethods Example]
 
-[[GKHRO]]
+[[GKHRO]][[components-of-the-producermethods-example]]
 
-[[components-of-the-producermethods-example]]
 Components of the producermethods Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -120,9 +118,8 @@ whose selected value is assigned to the property `coderBean.coderType`:
             ...
 ----
 
-[[GKHQE]]
+[[GKHQE]][[running-the-producermethods-example]]
 
-[[running-the-producermethods-example]]
 Running the producermethods Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -137,9 +134,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GKHQG[To Run the producermethods Example]
 
-[[GKHPE]]
+[[GKHPE]][[to-build-package-and-deploy-the-producermethods-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-producermethods-example-using-netbeans-ide]]
 To Build, Package, and Deploy the producermethods Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -162,9 +158,8 @@ This command builds and packages the application into a WAR file,
 `producermethods.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GKHPS]]
+[[GKHPS]][[to-build-package-and-deploy-the-producermethods-example-using-maven]]
 
-[[to-build-package-and-deploy-the-producermethods-example-using-maven]]
 To Build, Package, and Deploy the producermethods Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -188,9 +183,8 @@ This command builds and packages the application into a WAR file,
 `producermethods.war`, located in the `target` directory, and then
 deploys it to GlassFish Server.
 
-[[GKHQG]]
+[[GKHQG]][[to-run-the-producermethods-example]]
 
-[[to-run-the-producermethods-example]]
 To Run the producermethods Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=jsf-page-core.html
 = Using the Standard Converters
 
 
-[[BNAST]]
+[[BNAST]][[using-the-standard-converters]]
 
-[[using-the-standard-converters]]
 Using the Standard Converters
 -----------------------------
 
@@ -75,9 +74,8 @@ see link:#BNASX[Using NumberConverter]. The following section explains
 how to convert a component's value, including how to register other
 standard converters with a component.
 
-[[BNASU]]
+[[BNASU]][[converting-a-components-value]]
 
-[[converting-a-components-value]]
 Converting a Component's Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -139,9 +137,8 @@ You can also create custom converters and register them on components
 using the `f:converter` tag. For details, see
 link:jsf-custom011.html#BNAUS[Creating and Using a Custom Converter].
 
-[[BNASV]]
+[[BNASV]][[using-datetimeconverter]]
 
-[[using-datetimeconverter]]
 Using DateTimeConverter
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -290,9 +287,8 @@ See link:#CFHEABEI[Table 11-3] for additional information.
 |=======================================================================
 
 
-[[BNASX]]
+[[BNASX]][[using-numberconverter]]
 
-[[using-numberconverter]]
 Using NumberConverter
 ~~~~~~~~~~~~~~~~~~~~~
 

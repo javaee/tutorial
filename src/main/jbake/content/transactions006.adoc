@@ -7,9 +7,8 @@ prev=transactions005.html
 Transaction Timeouts
 ====================
 
-[[BNCJC]]
+[[BNCJC]][[transaction-timeouts]]
 
-[[transaction-timeouts]]
 Transaction Timeouts
 --------------------
 
@@ -20,9 +19,8 @@ link:usingexamples003.html#BNADJ[Starting the Administration Console].
 For enterprise beans with bean-managed JTA transactions, you invoke the
 `setTransactionTimeout` method of the `UserTransaction` interface.
 
-[[sthref237]]
+[[sthref237]][[to-set-a-transaction-timeout]]
 
-[[to-set-a-transaction-timeout]]
 To Set a Transaction Timeout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

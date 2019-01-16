@@ -7,9 +7,8 @@ prev=jaxrs004.html
 Accessing REST Resources with the JAX-RS Client API
 ===================================================
 
-[[BABEIGIH]]
+[[BABEIGIH]][[accessing-rest-resources-with-the-jax-rs-client-api]]
 
-[[accessing-rest-resources-with-the-jax-rs-client-api]]
 33 Accessing REST Resources with the JAX-RS Client API
 ------------------------------------------------------
 

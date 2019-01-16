@@ -7,9 +7,8 @@ prev=persistence-intro.html
 Overview of the Java Persistence API
 ====================================
 
-[[A1019685]]
+[[A1019685]][[overview-of-the-java-persistence-api]]
 
-[[overview-of-the-java-persistence-api]]
 Overview of the Java Persistence API
 ------------------------------------
 

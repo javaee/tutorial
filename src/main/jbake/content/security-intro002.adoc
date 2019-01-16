@@ -6,9 +6,8 @@ prev=security-intro001.html
 ~~~~~~
 = Security Mechanisms
 
-[[BNBWY]]
+[[BNBWY]][[security-mechanisms]]
 
-[[security-mechanisms]]
 Security Mechanisms
 -------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#BNBWZ[Java SE Security Mechanisms]
 * link:#BNBXA[Java EE Security Mechanisms]
 
-[[BNBWZ]]
+[[BNBWZ]][[java-se-security-mechanisms]]
 
-[[java-se-security-mechanisms]]
 Java SE Security Mechanisms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -69,9 +67,8 @@ and obtaining, listing, and managing Kerberos tickets.
 For more information on Java SE security, visit
 `http://docs.oracle.com/javase/7/docs/technotes/guides/security/`.
 
-[[BNBXA]]
+[[BNBXA]][[java-ee-security-mechanisms]]
 
-[[java-ee-security-mechanisms]]
 Java EE Security Mechanisms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -83,9 +80,8 @@ authenticating users and authorizing access to application functions and
 associated data at many different layers. Java EE security services are
 separate from the security mechanisms of the operating system.
 
-[[BNBXB]]
+[[BNBXB]][[application-layer-security]]
 
-[[application-layer-security]]
 Application-Layer Security
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -125,9 +121,8 @@ transferable between application types.
 For more information on providing security at the application layer, see
 link:security-intro003.html#BNBXE[Securing Containers].
 
-[[BNBXC]]
+[[BNBXC]][[transport-layer-security]]
 
-[[transport-layer-security]]
 Transport-Layer Security
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -179,9 +174,8 @@ For more information on transport-layer security, see
 link:security-intro006.html#BNBXW[Establishing a Secure Connection Using
 SSL].
 
-[[BNBXD]]
+[[BNBXD]][[message-layer-security]]
 
-[[message-layer-security]]
 Message-Layer Security
 ^^^^^^^^^^^^^^^^^^^^^^
 

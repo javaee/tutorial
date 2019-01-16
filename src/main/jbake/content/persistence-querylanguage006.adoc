@@ -7,9 +7,8 @@ prev=persistence-querylanguage005.html
 = Full Query Language Syntax
 
 
-[[BNBUF]]
+[[BNBUF]][[full-query-language-syntax]]
 
-[[full-query-language-syntax]]
 Full Query Language Syntax
 --------------------------
 
@@ -29,9 +28,8 @@ The following topics are addressed here:
 * link:#BNBWD[ORDER BY Clause]
 * link:#BNBWE[GROUP BY and HAVING Clauses]
 
-[[BNBUG]]
+[[BNBUG]][[bnf-symbols]]
 
-[[bnf-symbols]]
 BNF Symbols
 ~~~~~~~~~~~
 
@@ -71,9 +69,8 @@ or a line feed.
 |=======================================================================
 
 
-[[BNBUI]]
+[[BNBUI]][[bnf-grammar-of-the-java-persistence-query-language]]
 
-[[bnf-grammar-of-the-java-persistence-query-language]]
 BNF Grammar of the Java Persistence Query Language
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -300,9 +297,8 @@ functions_returning_strings ::=
 trim_specification ::= LEADING | TRAILING | BOTH
 ----
 
-[[BNBUJ]]
+[[BNBUJ]][[from-clause]]
 
-[[from-clause]]
 FROM Clause
 ~~~~~~~~~~~
 
@@ -317,9 +313,8 @@ The following topics are addressed here:
 * link:#BNBUO[Collection Member Declarations]
 * link:#BNBUP[Joins]
 
-[[BNBUK]]
+[[BNBUK]][[identifiers]]
 
-[[identifiers]]
 Identifiers
 ^^^^^^^^^^^
 
@@ -424,9 +419,8 @@ It is not recommended that you use an SQL keyword as an identifier,
 because the list of keywords may expand to include other reserved SQL
 words in the future.
 
-[[BNBUM]]
+[[BNBUM]][[identification-variables]]
 
-[[identification-variables]]
 Identification Variables
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -489,9 +483,8 @@ value whose type is that of the expression used in the declaration.
 There are two kinds of declarations: range variable and collection
 member.
 
-[[BNBUN]]
+[[BNBUN]][[range-variable-declarations]]
 
-[[range-variable-declarations]]
 Range Variable Declarations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -530,9 +523,8 @@ FROM Player p1, Player p2
 For an example of such a query, see
 link:persistence-querylanguage005.html#BNBUB[Comparison Operators].
 
-[[BNBUO]]
+[[BNBUO]][[collection-member-declarations]]
 
-[[collection-member-declarations]]
 Collection Member Declarations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -560,9 +552,8 @@ identification variable called `t` represents a single member of the
 FROM Player p, IN (p.teams) t
 ----
 
-[[BNBUP]]
+[[BNBUP]][[joins]]
 
-[[joins]]
 Joins
 ^^^^^
 
@@ -630,9 +621,8 @@ FROM Department d LEFT JOIN FETCH d.employees
 WHERE d.deptno = 1
 ----
 
-[[BNBUQ]]
+[[BNBUQ]][[path-expressions]]
 
-[[path-expressions]]
 Path Expressions
 ~~~~~~~~~~~~~~~~
 
@@ -651,9 +641,8 @@ The following topics are addressed here:
 * link:#BNBUS[Expression Types]
 * link:#BNBUT[Navigation]
 
-[[BNBUR]]
+[[BNBUR]][[examples-of-path-expressions]]
 
-[[examples-of-path-expressions]]
 Examples of Path Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -691,9 +680,8 @@ FROM Player p
 WHERE p.teams IS EMPTY
 ----
 
-[[BNBUS]]
+[[BNBUS]][[expression-types]]
 
-[[expression-types]]
 Expression Types
 ^^^^^^^^^^^^^^^^
 
@@ -714,9 +702,8 @@ is the abstract schema name for the `Team` entity, this type maps to the
 entity. For more information on the type mapping of abstract schemas,
 see link:#BNBVY[Return Types].
 
-[[BNBUT]]
+[[BNBUT]][[navigation]]
 
-[[navigation]]
 Navigation
 ^^^^^^^^^^
 
@@ -736,9 +723,8 @@ FROM Player AS p, IN (p.teams) t
 WHERE t.league.sport = 'soccer'
 ----
 
-[[BNBUU]]
+[[BNBUU]][[where-clause]]
 
-[[where-clause]]
 WHERE Clause
 ~~~~~~~~~~~~
 
@@ -772,9 +758,8 @@ The following topics are addressed here:
 * link:#BNBVR[NULL Values]
 * link:#BNBVU[Equality Semantics]
 
-[[BNBUV]]
+[[BNBUV]][[literals]]
 
-[[literals]]
 Literals
 ^^^^^^^^
 
@@ -821,9 +806,8 @@ FROM Employee e
 WHERE e.status = com.example.EmployeeStatus.FULL_TIME
 ----
 
-[[BNBVA]]
+[[BNBVA]][[input-parameters]]
 
-[[input-parameters]]
 Input Parameters
 ^^^^^^^^^^^^^^^^
 
@@ -844,9 +828,8 @@ The following rules apply to input parameters.
 single query.
 * Named parameters are case-sensitive.
 
-[[BNBVB]]
+[[BNBVB]][[conditional-expressions]]
 
-[[conditional-expressions]]
 Conditional Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -854,9 +837,8 @@ A `WHERE` clause consists of a conditional expression, which is
 evaluated from left to right within a precedence level. You can change
 the order of evaluation by using parentheses.
 
-[[BNBVC]]
+[[BNBVC]][[operators-and-their-precedence]]
 
-[[operators-and-their-precedence]]
 Operators and Their Precedence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -913,9 +895,8 @@ decreasing precedence.
 |==================================
 
 
-[[BNBVE]]
+[[BNBVE]][[between-expressions]]
 
-[[between-expressions]]
 BETWEEN Expressions
 ^^^^^^^^^^^^^^^^^^^
 
@@ -941,9 +922,8 @@ p.age < 15 OR p.age > 19
 If an arithmetic expression has a `NULL` value, the value of the
 `BETWEEN` expression is unknown.
 
-[[BNBVF]]
+[[BNBVF]][[in-expressions]]
 
-[[in-expressions]]
 IN Expressions
 ^^^^^^^^^^^^^^
 
@@ -969,9 +949,8 @@ You may also use input parameters:
 o.country IN ('UK', 'US', 'France', :country)
 ----
 
-[[BNBVG]]
+[[BNBVG]][[like-expressions]]
 
-[[like-expressions]]
 LIKE Expressions
 ^^^^^^^^^^^^^^^^
 
@@ -1010,9 +989,8 @@ sample `LIKE` expressions.
 |============================================================
 
 
-[[BNBVI]]
+[[BNBVI]][[null-comparison-expressions]]
 
-[[null-comparison-expressions]]
 NULL Comparison Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1042,9 +1020,8 @@ The comparison with `NULL` using the equals operator (`=`) always
 returns an unknown value, even if the relationship is not set. The
 second query will always return an empty result.
 
-[[BNBVJ]]
+[[BNBVJ]][[empty-collection-comparison-expressions]]
 
-[[empty-collection-comparison-expressions]]
 Empty Collection Comparison Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1065,9 +1042,8 @@ FROM CustomerOrder o
 WHERE o.lineItems IS EMPTY
 ----
 
-[[BNBVK]]
+[[BNBVK]][[collection-member-expressions]]
 
-[[collection-member-expressions]]
 Collection Member Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1091,9 +1067,8 @@ FROM CustomerOrder o
 WHERE :lineItem MEMBER OF o.lineItems
 ----
 
-[[BNBVL]]
+[[BNBVL]][[subqueries]]
 
-[[subqueries]]
 Subqueries
 ^^^^^^^^^^
 
@@ -1153,9 +1128,8 @@ WHERE emp.salary > ALL (
     WHERE m.department = emp.department)
 ----
 
-[[BNBVO]]
+[[BNBVO]][[functional-expressions]]
 
-[[functional-expressions]]
 Functional Expressions
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1258,9 +1232,8 @@ time, or timestamp on the database server.
 |=========================================
 
 
-[[GJJND]]
+[[GJJND]][[case-expressions]]
 
-[[case-expressions]]
 Case Expressions
 ^^^^^^^^^^^^^^^^
 
@@ -1306,9 +1279,8 @@ SET c.discount =
     END
 ----
 
-[[BNBVR]]
+[[BNBVR]][[null-values]]
 
-[[null-values]]
 NULL Values
 ^^^^^^^^^^^
 
@@ -1354,9 +1326,8 @@ these tables, T stands for `TRUE`, F for `FALSE`, and U for unknown.)
 |===========
 
 
-[[BNBVU]]
+[[BNBVU]][[equality-semantics]]
 
-[[equality-semantics]]
 Equality Semantics
 ^^^^^^^^^^^^^^^^^^
 
@@ -1407,9 +1378,8 @@ truth values of conditional tests.
 |==============================
 
 
-[[BNBVX]]
+[[BNBVX]][[select-clause]]
 
-[[select-clause]]
 SELECT Clause
 ~~~~~~~~~~~~~
 
@@ -1422,9 +1392,8 @@ The following topics are addressed here:
 * link:#BNBWB[The DISTINCT Keyword]
 * link:#BNBWC[Constructor Expressions]
 
-[[BNBVY]]
+[[BNBVY]][[return-types]]
 
-[[return-types]]
 Return Types
 ^^^^^^^^^^^^
 
@@ -1537,9 +1506,8 @@ FROM CustomerOrder o JOIN o.lineItems l JOIN o.customer c
 WHERE c.lastname = 'Incandenza' AND c.firstname = 'Hal'
 ----
 
-[[BNBWB]]
+[[BNBWB]][[the-distinct-keyword]]
 
-[[the-distinct-keyword]]
 The DISTINCT Keyword
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -1547,9 +1515,8 @@ The `DISTINCT` keyword eliminates duplicate return values. If a query
 returns a `java.util.Collection`, which allows duplicates, you must
 specify the `DISTINCT` keyword to eliminate duplicates.
 
-[[BNBWC]]
+[[BNBWC]][[constructor-expressions]]
 
-[[constructor-expressions]]
 Constructor Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1568,9 +1535,8 @@ FROM customer c
 WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'
 ----
 
-[[BNBWD]]
+[[BNBWD]][[order-by-clause]]
 
-[[order-by-clause]]
 ORDER BY Clause
 ~~~~~~~~~~~~~~~
 
@@ -1608,9 +1574,8 @@ WHERE c.lastname = 'Faehmel' AND c.firstname = 'Robert'
 ORDER BY o.quantity
 ----
 
-[[BNBWE]]
+[[BNBWE]][[group-by-and-having-clauses]]
 
-[[group-by-and-having-clauses]]
 GROUP BY and HAVING Clauses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=cdi-basic010.html
 = Using a Managed Bean in a Facelets Page
 
 
-[[GJBBU]]
+[[GJBBU]][[using-a-managed-bean-in-a-facelets-page]]
 
-[[using-a-managed-bean-in-a-facelets-page]]
 Using a Managed Bean in a Facelets Page
 ---------------------------------------
 

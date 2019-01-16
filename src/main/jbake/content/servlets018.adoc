@@ -7,9 +7,8 @@ prev=servlets017.html
 = Further Information about Java Servlet Technology
 
 
-[[BNAGW]]
+[[BNAGW]][[further-information-about-java-servlet-technology]]
 
-[[further-information-about-java-servlet-technology]]
 Further Information about Java Servlet Technology
 -------------------------------------------------
 

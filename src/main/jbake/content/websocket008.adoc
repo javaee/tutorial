@@ -7,9 +7,8 @@ prev=websocket007.html
 Path Parameters
 ===============
 
-[[BABEJIJI]]
+[[BABEJIJI]][[path-parameters]]
 
-[[path-parameters]]
 Path Parameters
 ---------------
 

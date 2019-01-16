@@ -7,9 +7,8 @@ prev=websocket006.html
 Using Encoders and Decoders
 ===========================
 
-[[BABGADFG]]
+[[BABGADFG]][[using-encoders-and-decoders]]
 
-[[using-encoders-and-decoders]]
 Using Encoders and Decoders
 ---------------------------
 
@@ -32,9 +31,8 @@ WebSocket Messages]
 * link:#CIHGDJFG[Implementing Decoders to Convert WebSocket Messages
 into Java Objects]
 
-[[CIHBIGBI]]
+[[CIHBIGBI]][[implementing-encoders-to-convert-java-objects-into-websocket-messages]]
 
-[[implementing-encoders-to-convert-java-objects-into-websocket-messages]]
 Implementing Encoders to Convert Java Objects into WebSocket Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -102,9 +100,8 @@ instances are associated with one and only one WebSocket connection and
 peer, so there is only one thread executing the code of an encoder
 instance at any given time.
 
-[[CIHGDJFG]]
+[[CIHGDJFG]][[implementing-decoders-to-convert-websocket-messages-into-java-objects]]
 
-[[implementing-decoders-to-convert-websocket-messages-into-java-objects]]
 Implementing Decoders to Convert WebSocket Messages into Java Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

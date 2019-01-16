@@ -7,9 +7,8 @@ prev=jsf-facelets001.html
 The Lifecycle of a Facelets Application
 =======================================
 
-[[GIPRR]]
+[[GIPRR]][[the-lifecycle-of-a-facelets-application]]
 
-[[the-lifecycle-of-a-facelets-application]]
 The Lifecycle of a Facelets Application
 ---------------------------------------
 

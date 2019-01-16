@@ -7,9 +7,8 @@ prev=persistence-querylanguage006.html
 Using the Criteria API to Create Queries
 ========================================
 
-[[GJITV]]
+[[GJITV]][[using-the-criteria-api-to-create-queries]]
 
-[[using-the-criteria-api-to-create-queries]]
 43 Using the Criteria API to Create Queries
 -------------------------------------------
 

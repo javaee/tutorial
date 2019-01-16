@@ -7,9 +7,8 @@ prev=bean-validation005.html
 Bean Validation: Advanced Topics
 ================================
 
-[[GKAHP]]
+[[GKAHP]][[bean-validation-advanced-topics]]
 
-[[bean-validation-advanced-topics]]
 24 Bean Validation: Advanced Topics
 -----------------------------------
 

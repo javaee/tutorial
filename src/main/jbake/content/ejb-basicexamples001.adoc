@@ -7,9 +7,8 @@ prev=ejb-basicexamples.html
 Overview of the EJB Examples
 ============================
 
-[[A1250776]]
+[[A1250776]][[overview-of-the-ejb-examples]]
 
-[[overview-of-the-ejb-examples]]
 Overview of the EJB Examples
 ----------------------------
 

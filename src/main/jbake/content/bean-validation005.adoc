@@ -7,9 +7,8 @@ prev=bean-validation004.html
 Further Information about Bean Validation
 =========================================
 
-[[CACDECFE]]
+[[CACDECFE]][[further-information-about-bean-validation]]
 
-[[further-information-about-bean-validation]]
 Further Information about Bean Validation
 -----------------------------------------
 

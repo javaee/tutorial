@@ -7,9 +7,8 @@ prev=persistence-basicexamples004.html
 The Java Persistence Query Language
 ===================================
 
-[[BNBTG]]
+[[BNBTG]][[the-java-persistence-query-language]]
 
-[[the-java-persistence-query-language]]
 42 The Java Persistence Query Language
 --------------------------------------
 

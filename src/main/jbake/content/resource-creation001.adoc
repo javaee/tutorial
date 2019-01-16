@@ -7,9 +7,8 @@ prev=resource-creation.html
 Resources and JNDI Naming
 =========================
 
-[[BNCJI]]
+[[BNCJI]][[resources-and-jndi-naming]]
 
-[[resources-and-jndi-naming]]
 Resources and JNDI Naming
 -------------------------
 

@@ -7,9 +7,8 @@ prev=partentbeans.html
 Enterprise Beans
 ================
 
-[[GIJSZ]]
+[[GIJSZ]][[enterprise-beans]]
 
-[[enterprise-beans]]
 35 Enterprise Beans
 -------------------
 

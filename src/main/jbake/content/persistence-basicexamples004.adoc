@@ -7,9 +7,8 @@ prev=persistence-basicexamples003.html
 The address-book Application
 ============================
 
-[[GKANQ]]
+[[GKANQ]][[the-address-book-application]]
 
-[[the-address-book-application]]
 The address-book Application
 ----------------------------
 
@@ -28,9 +27,8 @@ The following topics are addressed here:
 Application]
 * link:#GKAOP[Running the address-book Example]
 
-[[GKAOJ]]
+[[GKAOJ]][[bean-validation-constraints-in-address-book]]
 
-[[bean-validation-constraints-in-address-book]]
 Bean Validation Constraints in address-book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,9 +90,8 @@ public class Contact implements Serializable {
 }
 ----
 
-[[GKANL]]
+[[GKANL]][[specifying-error-messages-for-constraints-in-address-book]]
 
-[[specifying-error-messages-for-constraints-in-address-book]]
 Specifying Error Messages for Constraints in address-book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -130,9 +127,8 @@ resource bundles taking the form
 `ValidationMessages_es.properties` is the resource bundle used in
 Spanish-speaking locales.
 
-[[GKAON]]
+[[GKAON]][[validating-contact-input-from-a-javaserver-faces-application]]
 
-[[validating-contact-input-from-a-javaserver-faces-application]]
 Validating Contact Input from a JavaServer Faces Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -180,9 +176,8 @@ an associated `<h:message>` tag that will display validation error
 messages. The form doesn't require any JavaServer Faces validation tags,
 however.
 
-[[GKAOP]]
+[[GKAOP]][[running-the-address-book-example]]
 
-[[running-the-address-book-example]]
 Running the address-book Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -194,9 +189,8 @@ The following topics are addressed here:
 * link:#GKAOD[To Run the address-book Example Using NetBeans IDE]
 * link:#GKANZ[To Run the address-book Example Using Maven]
 
-[[GKAOD]]
+[[GKAOD]][[to-run-the-address-book-example-using-netbeans-ide]]
 
-[[to-run-the-address-book-example-using-netbeans-ide]]
 To Run the address-book Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -232,9 +226,8 @@ If any of the values entered violate the constraints in `Contact`, an
 error message will appear in red beside the field with the incorrect
 values.
 
-[[GKANZ]]
+[[GKANZ]][[to-run-the-address-book-example-using-maven]]
 
-[[to-run-the-address-book-example-using-maven]]
 To Run the address-book Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

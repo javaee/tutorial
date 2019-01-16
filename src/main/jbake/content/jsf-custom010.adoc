@@ -7,9 +7,8 @@ prev=jsf-custom009.html
 Using a Custom Component
 ========================
 
-[[BNATT]]
+[[BNATT]][[using-a-custom-component]]
 
-[[using-a-custom-component]]
 Using a Custom Component
 ------------------------
 

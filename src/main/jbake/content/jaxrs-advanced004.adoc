@@ -7,9 +7,8 @@ prev=jaxrs-advanced003.html
 Integrating JAX-RS with EJB Technology and CDI
 ==============================================
 
-[[GKNCY]]
+[[GKNCY]][[integrating-jax-rs-with-ejb-technology-and-cdi]]
 
-[[integrating-jax-rs-with-ejb-technology-and-cdi]]
 Integrating JAX-RS with EJB Technology and CDI
 ----------------------------------------------
 

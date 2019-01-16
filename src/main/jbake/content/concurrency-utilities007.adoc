@@ -7,9 +7,8 @@ prev=concurrency-utilities006.html
 = Further Information about the Concurrency Utilities
 
 
-[[CHDBIHAA]]
+[[CHDBIHAA]][[further-information-about-the-concurrency-utilities]]
 
-[[further-information-about-the-concurrency-utilities]]
 Further Information about the Concurrency Utilities
 ---------------------------------------------------
 

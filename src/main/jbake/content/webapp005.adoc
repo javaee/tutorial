@@ -7,9 +7,8 @@ prev=webapp004.html
 = Configuring Web Applications
 
 
-[[CHDHGJIA]]
+[[CHDHGJIA]][[configuring-web-applications]]
 
-[[configuring-web-applications]]
 Configuring Web Applications
 ----------------------------
 
@@ -21,9 +20,8 @@ applications:
 * Mapping errors to error screens
 * Declaring resource references
 
-[[BNAES]]
+[[BNAES]][[setting-context-parameters]]
 
-[[setting-context-parameters]]
 Setting Context Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -34,9 +32,8 @@ are available to the entire application. For information on
 initialization parameters, see link:servlets004.html#BNAFU[Creating and
 Initializing a Servlet].
 
-[[GJSFJ]]
+[[GJSFJ]][[to-add-a-context-parameter-using-netbeans-ide]]
 
-[[to-add-a-context-parameter-using-netbeans-ide]]
 To Add a Context Parameter Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -61,9 +58,8 @@ field, enter the name that specifies the context object.
 context object.
 10. Click OK.
 
-[[GKIHH]]
+[[GKIHH]][[to-create-a-web.xml-file-using-netbeans-ide]]
 
-[[to-create-a-web.xml-file-using-netbeans-ide]]
 To Create a web.xml File Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -77,9 +73,8 @@ Standard Deployment Descriptor under File Types.
 +
 A basic `web.xml` file appears in `web/WEB-INF/`.
 
-[[BNAER]]
+[[BNAER]][[declaring-welcome-files]]
 
-[[declaring-welcome-files]]
 Declaring Welcome Files
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -121,9 +116,8 @@ The `hello2` example does not specify a welcome file, because the URL
 request is mapped to the `GreetingServlet` web component through the URL
 pattern `/greeting`.
 
-[[GKBKW]]
+[[GKBKW]][[mapping-errors-to-error-screens]]
 
-[[mapping-errors-to-error-screens]]
 Mapping Errors to Error Screens
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -138,9 +132,8 @@ descriptor. Each element identifies a different error that causes an
 error page to open. This error page can be the same for any number of
 `error-page` elements.
 
-[[BNAET]]
+[[BNAET]][[to-set-up-error-mapping-using-netbeans-ide]]
 
-[[to-set-up-error-mapping-using-netbeans-ide]]
 To Set Up Error Mapping Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -170,9 +163,8 @@ exception that will cause the error page to load. To specify all
 throwable errors and exceptions, enter `java.lang.Throwable`.
 10. Click OK.
 
-[[BNAEU]]
+[[BNAEU]][[declaring-resource-references]]
 
-[[declaring-resource-references]]
 Declaring Resource References
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -233,9 +225,8 @@ for more information on resources.
 |================================================
 
 
-[[BNAEW]]
+[[BNAEW]][[declaring-a-reference-to-a-resource]]
 
-[[declaring-a-reference-to-a-resource]]
 Declaring a Reference to a Resource
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -290,9 +281,8 @@ link:persistence-basicexamples.html#GIJST[Chapter 41, "Running the
 Persistence Examples"] describes these annotations and the use of the
 Java Persistence API in web applications.
 
-[[BNAEX]]
+[[BNAEX]][[declaring-a-reference-to-a-web-service]]
 
-[[declaring-a-reference-to-a-web-service]]
 Declaring a Reference to a Web Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

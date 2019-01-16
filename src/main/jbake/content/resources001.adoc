@@ -7,9 +7,8 @@ prev=resources.html
 What Is a Resource Adapter?
 ===========================
 
-[[GIPGL]]
+[[GIPGL]][[what-is-a-resource-adapter]]
 
-[[what-is-a-resource-adapter]]
 What Is a Resource Adapter?
 ---------------------------
 
@@ -49,18 +48,16 @@ services that are managed by the Java EE server. The resource adapter
 itself and its system contracts are transparent to the Java EE
 component.
 
-[[GIPGY]]
+[[GIPGY]][[management-contracts]]
 
-[[management-contracts]]
 Management Contracts
 ~~~~~~~~~~~~~~~~~~~~
 
 The Java EE Connector Architecture defines system contracts that enable
 resource adapter lifecycle and thread management.
 
-[[GIPHT]]
+[[GIPHT]][[lifecycle-management]]
 
-[[lifecycle-management]]
 Lifecycle Management
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -73,9 +70,8 @@ application server to notify the resource adapter instance when it is
 undeployed or when an orderly shutdown of the application server takes
 place.
 
-[[GIPIG]]
+[[GIPIG]][[work-management-contract]]
 
-[[work-management-contract]]
 Work Management Contract
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -124,9 +120,8 @@ resource adapter can also specify the execution context for the thread,
 and the work management contract controls the context in which the
 thread executes.
 
-[[GIPMK]]
+[[GIPMK]][[generic-work-context-contract]]
 
-[[generic-work-context-contract]]
 Generic Work Context Contract
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -146,9 +141,8 @@ control over concurrent behavior in a managed environment.
 The generic work context contract standardizes the transaction context
 and the security context.
 
-[[GKCKI]]
+[[GKCKI]][[outbound-and-inbound-contracts]]
 
-[[outbound-and-inbound-contracts]]
 Outbound and Inbound Contracts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

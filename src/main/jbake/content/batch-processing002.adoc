@@ -7,9 +7,8 @@ prev=batch-processing001.html
 = Batch Processing in Java EE
 
 
-[[BCGGIBHA]]
+[[BCGGIBHA]][[batch-processing-in-java-ee]]
 
-[[batch-processing-in-java-ee]]
 Batch Processing in Java EE
 ---------------------------
 
@@ -26,9 +25,8 @@ The following topics are addressed here:
 * link:#BABHJGDH[Job Instances and Job Executions]
 * link:#BABBFGEF[Batch and Exit Status]
 
-[[BABEAFJI]]
+[[BABEAFJI]][[the-batch-processing-framework]]
 
-[[the-batch-processing-framework]]
 The Batch Processing Framework
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -50,9 +48,8 @@ the application logic of the batch artifacts defined in the XML files.
 The batch runtime parses the XML files and loads the batch artifacts as
 Java classes to run the jobs in a batch application.
 
-[[BABCGDHJ]]
+[[BABCGDHJ]][[creating-batch-applications]]
 
-[[creating-batch-applications]]
 Creating Batch Applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -86,9 +83,8 @@ application.
 The following sections describe in detail how to use the components of
 the batch processing framework in Java EE to create batch applications.
 
-[[BABDGDJB]]
+[[BABDGDJB]][[elements-of-a-batch-job]]
 
-[[elements-of-a-batch-job]]
 Elements of a Batch Job
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -118,9 +114,8 @@ flows complete.
 Decision elements use the exit status of the previous step to determine
 the next step or to terminate the batch job.
 
-[[BABHJEJC]]
+[[BABHJEJC]][[properties-and-parameters]]
 
-[[properties-and-parameters]]
 Properties and Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -149,9 +144,8 @@ in batch artifacts is demonstrated in
 link:batch-processing009.html#BCGFCACD[The phonebilling Example
 Application].
 
-[[BABHJGDH]]
+[[BABHJGDH]][[job-instances-and-job-executions]]
 
-[[job-instances-and-job-executions]]
 Job Instances and Job Executions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -161,9 +155,8 @@ batch runtime maintains information about job instances and job
 executions, as described in
 link:batch-processing006.html#BCGIBGFC[Checking the Status of a Job].
 
-[[BABBFGEF]]
+[[BABBFGEF]][[batch-and-exit-status]]
 
-[[batch-and-exit-status]]
 Batch and Exit Status
 ~~~~~~~~~~~~~~~~~~~~~
 

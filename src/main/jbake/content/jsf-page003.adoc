@@ -7,9 +7,8 @@ prev=jsf-page002.html
 = Using Core Tags
 
 
-[[BNARC]]
+[[BNARC]][[using-core-tags]]
 
-[[using-core-tags]]
 Using Core Tags
 ---------------
 

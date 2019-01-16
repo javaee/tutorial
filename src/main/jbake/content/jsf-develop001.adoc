@@ -7,9 +7,8 @@ prev=jsf-develop.html
 = Managed Beans in JavaServer Faces Technology
 
 
-[[BNAQM]]
+[[BNAQM]][[managed-beans-in-javaserver-faces-technology]]
 
-[[managed-beans-in-javaserver-faces-technology]]
 Managed Beans in JavaServer Faces Technology
 --------------------------------------------
 
@@ -42,9 +41,8 @@ The following topics are addressed here:
 * link:#BNAQN[Creating a Managed Bean]
 * link:#BNAQP[Using the EL to Reference Managed Beans]
 
-[[BNAQN]]
+[[BNAQN]][[creating-a-managed-bean]]
 
-[[creating-a-managed-bean]]
 Creating a Managed Bean
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -101,9 +99,8 @@ validator, or listener type.
 For more information on writing beans and their properties, see
 link:jsf-develop002.html#BNATY[Writing Bean Properties].
 
-[[BNAQP]]
+[[BNAQP]][[using-the-el-to-reference-managed-beans]]
 
-[[using-the-el-to-reference-managed-beans]]
 Using the EL to Reference Managed Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

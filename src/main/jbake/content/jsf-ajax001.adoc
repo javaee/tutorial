@@ -7,9 +7,8 @@ prev=jsf-ajax.html
 Overview of Ajax
 ================
 
-[[GKIGR]]
+[[GKIGR]][[overview-of-ajax]]
 
-[[overview-of-ajax]]
 Overview of Ajax
 ----------------
 

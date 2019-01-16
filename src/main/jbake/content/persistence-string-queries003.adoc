@@ -7,9 +7,8 @@ prev=persistence-string-queries002.html
 Executing String-Based Queries
 ==============================
 
-[[GKJDB]]
+[[GKJDB]][[executing-string-based-queries]]
 
-[[executing-string-based-queries]]
 Executing String-Based Queries
 ------------------------------
 

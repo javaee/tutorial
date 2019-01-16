@@ -7,9 +7,8 @@ prev=jsf-page-core002.html
 = Using the Standard Validators
 
 
-[[BNATC]]
+[[BNATC]][[using-the-standard-validators]]
 
-[[using-the-standard-validators]]
 Using the Standard Validators
 -----------------------------
 
@@ -94,9 +93,8 @@ You can also create and register custom validators, although Bean
 Validation has made this feature less useful. For details, see
 link:jsf-custom012.html#BNAUW[Creating and Using a Custom Validator].
 
-[[BNATE]]
+[[BNATE]][[validating-a-components-value]]
 
-[[validating-a-components-value]]
 Validating a Component's Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -125,9 +123,8 @@ Keep in mind that validation can be performed only on components that
 implement `EditableValueHolder`, because these components accept values
 that can be validated.
 
-[[BNATF]]
+[[BNATF]][[using-validator-tags]]
 
-[[using-validator-tags]]
 Using Validator Tags
 ~~~~~~~~~~~~~~~~~~~~
 

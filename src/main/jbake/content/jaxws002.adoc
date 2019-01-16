@@ -7,9 +7,8 @@ prev=jaxws001.html
 = Creating a Simple Web Service and Clients with JAX-WS
 
 
-[[BNAYN]]
+[[BNAYN]][[creating-a-simple-web-service-and-clients-with-jax-ws]]
 
-[[creating-a-simple-web-service-and-clients-with-jax-ws]]
 Creating a Simple Web Service and Clients with JAX-WS
 -----------------------------------------------------
 
@@ -45,9 +44,8 @@ element to the `@WebService` annotation in the implementation class. You
 must then provide an interface that defines the public methods made
 available in the endpoint implementation class.
 
-[[sthref133]]
+[[sthref133]][[basic-steps-for-creating-a-web-service-and-client]]
 
-[[basic-steps-for-creating-a-web-service-and-client]]
 Basic Steps for Creating a Web Service and Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,9 +68,8 @@ the `wsimport` task for you.
 
 The sections that follow cover these steps in greater detail.
 
-[[BNAYP]]
+[[BNAYP]][[requirements-of-a-jax-ws-endpoint]]
 
-[[requirements-of-a-jax-ws-endpoint]]
 Requirements of a JAX-WS Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -106,9 +103,8 @@ implementing class begins responding to web service clients.
 The `@PreDestroy` method is called by the container before the endpoint
 is removed from operation.
 
-[[BNAYQ]]
+[[BNAYQ]][[coding-the-service-endpoint-implementation-class]]
 
-[[coding-the-service-endpoint-implementation-class]]
 Coding the Service Endpoint Implementation Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -141,9 +137,8 @@ public class Hello {
 }
 ----
 
-[[BNAYR]]
+[[BNAYR]][[building-packaging-and-deploying-the-service]]
 
-[[building-packaging-and-deploying-the-service]]
 Building, Packaging, and Deploying the Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -156,9 +151,8 @@ The following topics are addressed here:
 IDE]
 * link:#BNAYT[To Build, Package, and Deploy the Service Using Maven]
 
-[[BNAYS]]
+[[BNAYS]][[to-build-package-and-deploy-the-service-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-service-using-netbeans-ide]]
 To Build, Package, and Deploy the Service Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -192,9 +186,8 @@ You can view the WSDL file of the deployed service by requesting the URL
 browser. Now you are ready to create a client that accesses this
 service.
 
-[[BNAYT]]
+[[BNAYT]][[to-build-package-and-deploy-the-service-using-maven]]
 
-[[to-build-package-and-deploy-the-service-using-maven]]
 To Build, Package, and Deploy the Service Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -226,9 +219,8 @@ You can view the WSDL file of the deployed service by requesting the URL
 browser. Now you are ready to create a client that accesses this
 service.
 
-[[GKAJL]]
+[[GKAJL]][[testing-the-methods-of-a-web-service-endpoint]]
 
-[[testing-the-methods-of-a-web-service-endpoint]]
 Testing the Methods of a Web Service Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -239,9 +231,8 @@ The following topics are addressed here:
 
 * link:#BNAYW[To Test the Service without a Client]
 
-[[BNAYW]]
+[[BNAYW]][[to-test-the-service-without-a-client]]
 
-[[to-test-the-service-without-a-client]]
 To Test the Service without a Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -262,9 +253,8 @@ This takes you to the `sayHello` Method invocation page.
 +
 Under Method returned, you'll see the response from the endpoint.
 
-[[BNAYX]]
+[[BNAYX]][[a-simple-jax-ws-application-client]]
 
-[[a-simple-jax-ws-application-client]]
 A Simple JAX-WS Application Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -279,9 +269,8 @@ The following topics are addressed here:
 * link:#BNAYY[Coding the Application Client]
 * link:#BNAYZ[Running the Application Client]
 
-[[BNAYY]]
+[[BNAYY]][[coding-the-application-client]]
 
-[[coding-the-application-client]]
 Coding the Application Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -351,9 +340,8 @@ public class HelloAppClient {
 }
 ----
 
-[[BNAYZ]]
+[[BNAYZ]][[running-the-application-client]]
 
-[[running-the-application-client]]
 Running the Application Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -366,9 +354,8 @@ The following topics are addressed here:
 
 * link:#CIHBGFGA[To Run the Application Client Using NetBeans IDE]
 
-[[CIHBGFGA]]
+[[CIHBGFGA]][[to-run-the-application-client-using-netbeans-ide]]
 
-[[to-run-the-application-client-using-netbeans-ide]]
 To Run the Application Client Using NetBeans IDE
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -394,9 +381,8 @@ hello-appclient output tab:
 Hello, world.
 ----
 
-[[sthref134]]
+[[sthref134]][[to-run-the-application-client-using-maven]]
 
-[[to-run-the-application-client-using-maven]]
 To Run the Application Client Using Maven
 +++++++++++++++++++++++++++++++++++++++++
 
@@ -422,9 +408,8 @@ the client. The application client output looks like this:
 Hello, world.
 ----
 
-[[GJYGB]]
+[[GJYGB]][[a-simple-jax-ws-web-client]]
 
-[[a-simple-jax-ws-web-client]]
 A Simple JAX-WS Web Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -437,9 +422,8 @@ The following topics are addressed here:
 * link:#GJYFL[Coding the Servlet]
 * link:#GJYGE[Running the Web Client]
 
-[[GJYFL]]
+[[GJYFL]][[coding-the-servlet]]
 
-[[coding-the-servlet]]
 Coding the Servlet
 ^^^^^^^^^^^^^^^^^^
 
@@ -545,9 +529,8 @@ public class HelloServlet extends HttpServlet {
 }
 ----
 
-[[GJYGE]]
+[[GJYGE]][[running-the-web-client]]
 
-[[running-the-web-client]]
 Running the Web Client
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -561,9 +544,8 @@ The following topics are addressed here:
 * link:#CIHHFFEC[To Run the Web Client Using NetBeans IDE]
 * link:#CIHHDCEH[To Run the Web Client Using Maven]
 
-[[CIHHFFEC]]
+[[CIHHFFEC]][[to-run-the-web-client-using-netbeans-ide]]
 
-[[to-run-the-web-client-using-netbeans-ide]]
 To Run the Web Client Using NetBeans IDE
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -591,9 +573,8 @@ http://localhost:8080/hello-webclient/HelloServlet
 +
 The output of the `sayHello` method appears in the window.
 
-[[CIHHDCEH]]
+[[CIHHDCEH]][[to-run-the-web-client-using-maven]]
 
-[[to-run-the-web-client-using-maven]]
 To Run the Web Client Using Maven
 +++++++++++++++++++++++++++++++++
 

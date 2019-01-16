@@ -7,9 +7,8 @@ prev=security-advanced.html
 Working with Digital Certificates
 =================================
 
-[[BNBYB]]
+[[BNBYB]][[working-with-digital-certificates]]
 
-[[working-with-digital-certificates]]
 Working with Digital Certificates
 ---------------------------------
 
@@ -77,9 +76,8 @@ For a better understanding of `keytool` and public-key cryptography, see
 link:security-advanced008.html#BABBGBBF[Further Information about
 Advanced Security Topics] for a link to the `keytool` documentation.
 
-[[BNBYC]]
+[[BNBYC]][[creating-a-server-certificate]]
 
-[[creating-a-server-certificate]]
 Creating a Server Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -112,9 +110,8 @@ contains more than one certificate.
 The next section provides specific information on using the `keytool`
 utility to perform these steps.
 
-[[GJRGY]]
+[[GJRGY]][[to-use-keytool-to-create-a-server-certificate]]
 
-[[to-use-keytool-to-create-a-server-certificate]]
 To Use keytool to Create a Server Certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -209,9 +206,8 @@ Certificate was added to keystore
 [Storing cacerts.jks]
 ----
 
-[[GLIFW]]
+[[GLIFW]][[adding-users-to-the-certificate-realm]]
 
-[[adding-users-to-the-certificate-realm]]
 Adding Users to the Certificate Realm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -221,9 +217,8 @@ cryptographically verified client certificates. For step-by-step
 instructions for creating this type of certificate, see
 link:#BNBYB[Working with Digital Certificates].
 
-[[BNBYF]]
+[[BNBYF]][[using-a-different-server-certificate-with-glassfish-server]]
 
-[[using-a-different-server-certificate-with-glassfish-server]]
 Using a Different Server Certificate with GlassFish Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -240,9 +235,8 @@ name of your server. For testing purposes, this can be `localhost`.
 change your keystore's password to the default password (`changeit`) or
 change the default password to your keystore's password.
 
-[[sthref230]]
+[[sthref230]][[to-specify-a-different-server-certificate]]
 
-[[to-specify-a-different-server-certificate]]
 To Specify a Different Server Certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

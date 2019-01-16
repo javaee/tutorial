@@ -7,9 +7,8 @@ prev=jsf-configure008.html
 Registering a Custom Converter
 ==============================
 
-[[BNAXE]]
+[[BNAXE]][[registering-a-custom-converter]]
 
-[[registering-a-custom-converter]]
 Registering a Custom Converter
 ------------------------------
 

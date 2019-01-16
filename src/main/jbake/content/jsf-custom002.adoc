@@ -7,9 +7,8 @@ prev=jsf-custom001.html
 = Determining Whether You Need a Custom Component or Renderer
 
 
-[[BNAVH]]
+[[BNAVH]][[determining-whether-you-need-a-custom-component-or-renderer]]
 
-[[determining-whether-you-need-a-custom-component-or-renderer]]
 Determining Whether You Need a Custom Component or Renderer
 -----------------------------------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#BNAVJ[When to Use a Custom Renderer]
 * link:#BNAVK[Component, Renderer, and Tag Combinations]
 
-[[BNAVI]]
+[[BNAVI]][[when-to-use-a-custom-component]]
 
-[[when-to-use-a-custom-component]]
 When to Use a Custom Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -96,9 +94,8 @@ link:jsf-custom007.html#BNAUT[Implementing an Event Listener] and
 link:jsf-develop003.html#BNAVB[Writing Managed Bean Methods] for more
 information.
 
-[[BNAVJ]]
+[[BNAVJ]][[when-to-use-a-custom-renderer]]
 
-[[when-to-use-a-custom-renderer]]
 When to Use a Custom Renderer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -142,9 +139,8 @@ approach, you can actually use both models. Your component class can
 include some default rendering code, but it can delegate rendering to a
 renderer if there is one.
 
-[[BNAVK]]
+[[BNAVK]][[component-renderer-and-tag-combinations]]
 
-[[component-renderer-and-tag-combinations]]
 Component, Renderer, and Tag Combinations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

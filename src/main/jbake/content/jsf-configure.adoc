@@ -7,9 +7,8 @@ prev=jsf-custom014.html
 Configuring JavaServer Faces Applications
 =========================================
 
-[[BNAWO]]
+[[BNAWO]][[configuring-javaserver-faces-applications]]
 
-[[configuring-javaserver-faces-applications]]
 16 Configuring JavaServer Faces Applications
 --------------------------------------------
 

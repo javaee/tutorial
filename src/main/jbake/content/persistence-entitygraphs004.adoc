@@ -7,9 +7,8 @@ prev=persistence-entitygraphs003.html
 Using Entity Graphs in Query Operations
 =======================================
 
-[[BABGJDAJ]]
+[[BABGJDAJ]][[using-entity-graphs-in-query-operations]]
 
-[[using-entity-graphs-in-query-operations]]
 Using Entity Graphs in Query Operations
 ---------------------------------------
 

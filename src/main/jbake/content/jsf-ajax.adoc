@@ -7,9 +7,8 @@ prev=jsf-develop003.html
 Using Ajax with JavaServer Faces Technology
 ===========================================
 
-[[GKIOW]]
+[[GKIOW]][[using-ajax-with-javaserver-faces-technology]]
 
-[[using-ajax-with-javaserver-faces-technology]]
 13 Using Ajax with JavaServer Faces Technology
 ----------------------------------------------
 

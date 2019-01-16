@@ -7,9 +7,8 @@ prev=jms-concepts005.html
 Further Information about JMS
 =============================
 
-[[BNCGU]]
+[[BNCGU]][[further-information-about-jms]]
 
-[[further-information-about-jms]]
 Further Information about JMS
 -----------------------------
 

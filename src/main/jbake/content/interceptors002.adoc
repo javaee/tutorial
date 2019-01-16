@@ -7,9 +7,8 @@ prev=interceptors001.html
 = Using Interceptors
 
 
-[[GKEDM]]
+[[GKEDM]][[using-interceptors]]
 
-[[using-interceptors]]
 Using Interceptors
 ------------------
 
@@ -57,9 +56,8 @@ public class OrderBean {
 }
 ----
 
-[[GKECY]]
+[[GKECY]][[intercepting-method-invocations]]
 
-[[intercepting-method-invocations]]
 Intercepting Method Invocations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -95,9 +93,8 @@ exception allowed by the `throws` clause of the target method. They may
 catch and suppress exceptions, and then recover by calling the
 `InvocationContext.proceed` method.
 
-[[GKHMH]]
+[[GKHMH]][[using-multiple-method-interceptors]]
 
-[[using-multiple-method-interceptors]]
 Using Multiple Method Interceptors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -148,9 +145,8 @@ target class method invocations. That is, a different
 `InvocationContext` object is created for each invocation of the method
 in the target class.
 
-[[GKHOV]]
+[[GKHOV]][[accessing-target-method-parameters-from-an-interceptor-class]]
 
-[[accessing-target-method-parameters-from-an-interceptor-class]]
 Accessing Target Method Parameters from an Interceptor Class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -174,9 +170,8 @@ You can access and modify the parameters by using the
 `InvocationContext.getParameters` and `InvocationContext.setParameters`
 methods, respectively.
 
-[[GKECR]]
+[[GKECR]][[intercepting-lifecycle-callback-events]]
 
-[[intercepting-lifecycle-callback-events]]
 Intercepting Lifecycle Callback Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -233,9 +228,8 @@ assume the lifecycle event interceptor method has access to a security
 or transaction context. Only one interceptor method for each lifecycle
 event (post-create and pre-destroy) is allowed per class.
 
-[[sthref254]]
+[[sthref254]][[using-aroundconstruct-interceptor-methods]]
 
-[[using-aroundconstruct-interceptor-methods]]
 Using AroundConstruct Interceptor Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -274,9 +268,8 @@ target instance.
 create the target instance. If an `@AroundConstruct` method does not
 call `Invocation.proceed`, the target instance will not be created.
 
-[[GKHNI]]
+[[GKHNI]][[using-multiple-lifecycle-callback-interceptors]]
 
-[[using-multiple-lifecycle-callback-interceptors]]
 Using Multiple Lifecycle Callback Interceptors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -294,9 +287,8 @@ public class OrderBean { ... }
 Data stored in the `contextData` property of `InvocationContext` is not
 sharable across different lifecycle events.
 
-[[GKEDU]]
+[[GKEDU]][[intercepting-timeout-events]]
 
-[[intercepting-timeout-events]]
 Intercepting Timeout Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -331,9 +323,8 @@ Timeout interceptors may access the timer object associated with the
 target timeout method through the `InvocationContext` instance's
 `getTimer` method.
 
-[[GKHLA]]
+[[GKHLA]][[using-multiple-timeout-interceptors]]
 
-[[using-multiple-timeout-interceptors]]
 Using Multiple Timeout Interceptors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -365,9 +356,8 @@ The timeout interceptor in `PrimaryInterceptor` will be called first,
 followed by the timeout interceptor in `SecondaryInterceptor`, and
 finally the `last` method defined in the target class.
 
-[[sthref255]]
+[[sthref255]][[binding-interceptors-to-components]]
 
-[[binding-interceptors-to-components]]
 Binding Interceptors to Components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -402,9 +392,8 @@ binding types:
 public @interface Secured { ... }
 ----
 
-[[sthref256]]
+[[sthref256]][[declaring-the-interceptor-bindings-on-an-interceptor-class]]
 
-[[declaring-the-interceptor-bindings-on-an-interceptor-class]]
 Declaring the Interceptor Bindings on an Interceptor Class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -430,9 +419,8 @@ If the interceptor class intercepts lifecycle callbacks, it can only
 declare interceptor binding types with `Target(TYPE)`, or in the case of
 `@AroundConstruct` lifecycle callbacks, `Target(CONSTRUCTOR)`.
 
-[[sthref257]]
+[[sthref257]][[binding-a-component-to-an-interceptor]]
 
-[[binding-a-component-to-an-interceptor]]
 Binding a Component to an Interceptor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -456,9 +444,8 @@ If the component has a class-level interceptor binding, it must not be
 non-`static`, non-`private` method has an interceptor binding applied to
 it, it must not be `final`, and the component class cannot be `final`.
 
-[[sthref258]]
+[[sthref258]][[ordering-interceptors]]
 
-[[ordering-interceptors]]
 Ordering Interceptors
 ~~~~~~~~~~~~~~~~~~~~~
 

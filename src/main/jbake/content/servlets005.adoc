@@ -7,9 +7,8 @@ prev=servlets004.html
 Writing Service Methods
 =======================
 
-[[BNAFV]]
+[[BNAFV]][[writing-service-methods]]
 
-[[writing-service-methods]]
 Writing Service Methods
 -----------------------
 
@@ -35,9 +34,8 @@ committed. The web container will ignore any attempt to set or add
 headers after the response has been committed. The next two sections
 describe how to get information from requests and generate responses.
 
-[[BNAFW]]
+[[BNAFW]][[getting-information-from-requests]]
 
-[[getting-information-from-requests]]
 Getting Information from Requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,9 +90,8 @@ method. There are two ways to generate query strings.
 * A query string is appended to a URL when a form with a `GET` HTTP
 method is submitted.
 
-[[BNAFZ]]
+[[BNAFZ]][[constructing-responses]]
 
-[[constructing-responses]]
 Constructing Responses
 ~~~~~~~~~~~~~~~~~~~~~~
 

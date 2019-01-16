@@ -7,9 +7,8 @@ prev=transactions003.html
 = Container-Managed Transactions
 
 
-[[BNCIJ]]
+[[BNCIJ]][[container-managed-transactions]]
 
-[[container-managed-transactions]]
 Container-Managed Transactions
 ------------------------------
 
@@ -45,9 +44,8 @@ demarcation, you must use application-managed transaction demarcation.
 Enterprise beans that use container-managed transaction demarcation also
 must not use the `javax.transaction.UserTransaction` interface.
 
-[[BNCIK]]
+[[BNCIK]][[transaction-attributes]]
 
-[[transaction-attributes]]
 Transaction Attributes
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -74,9 +72,8 @@ A transaction attribute can have one of the following values:
 * `Supports`
 * `Never`
 
-[[BNCIM]]
+[[BNCIM]][[required-attribute]]
 
-[[required-attribute]]
 Required Attribute
 ^^^^^^^^^^^^^^^^^^
 
@@ -91,9 +88,8 @@ demarcation. You typically do not set the `Required` attribute unless
 you need to override another transaction attribute. Because transaction
 attributes are declarative, you can easily change them later.
 
-[[BNCIN]]
+[[BNCIN]][[requiresnew-attribute]]
 
-[[requiresnew-attribute]]
 RequiresNew Attribute
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -111,9 +107,8 @@ a new transaction before running the method.
 You should use the `RequiresNew` attribute when you want to ensure that
 the method always runs within a new transaction.
 
-[[BNCIO]]
+[[BNCIO]][[mandatory-attribute]]
 
-[[mandatory-attribute]]
 Mandatory Attribute
 ^^^^^^^^^^^^^^^^^^^
 
@@ -125,9 +120,8 @@ the client is not associated with a transaction, the container throws a
 Use the `Mandatory` attribute if the enterprise bean's method must use
 the transaction of the client.
 
-[[BNCIP]]
+[[BNCIP]][[notsupported-attribute]]
 
-[[notsupported-attribute]]
 NotSupported Attribute
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -143,9 +137,8 @@ Use the `NotSupported` attribute for methods that don't need
 transactions. Because transactions involve overhead, this attribute may
 improve performance.
 
-[[BNCIQ]]
+[[BNCIQ]][[supports-attribute]]
 
-[[supports-attribute]]
 Supports Attribute
 ^^^^^^^^^^^^^^^^^^
 
@@ -157,9 +150,8 @@ start a new transaction before running the method.
 Because the transactional behavior of the method may vary, you should
 use the `Supports` attribute with caution.
 
-[[BNCIR]]
+[[BNCIR]][[never-attribute]]
 
-[[never-attribute]]
 Never Attribute
 ^^^^^^^^^^^^^^^
 
@@ -168,9 +160,8 @@ bean's method, the container throws a `RemoteException`. If the client
 is not associated with a transaction, the container does not start a new
 transaction before running the method.
 
-[[BNCIS]]
+[[BNCIS]][[summary-of-transaction-attributes]]
 
-[[summary-of-transaction-attributes]]
 Summary of Transaction Attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -223,9 +214,8 @@ Transaction
 |=======================================================================
 
 
-[[BNCIU]]
+[[BNCIU]][[setting-transaction-attributes]]
 
-[[setting-transaction-attributes]]
 Setting Transaction Attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -291,9 +281,8 @@ transaction, and calls to `secondMethod` will either run in the current
 transaction or start a new transaction. Calls to `thirdMethod` or
 `fourthMethod` do not take place within a transaction.
 
-[[BNCIV]]
+[[BNCIV]][[rolling-back-a-container-managed-transaction]]
 
-[[rolling-back-a-container-managed-transaction]]
 Rolling Back a Container-Managed Transaction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -305,9 +294,8 @@ to roll back the transaction. If the bean throws an application
 exception, the rollback is not automatic but can be initiated by a call
 to `setRollbackOnly`.
 
-[[BNCIW]]
+[[BNCIW]][[synchronizing-a-session-beans-instance-variables]]
 
-[[synchronizing-a-session-beans-instance-variables]]
 Synchronizing a Session Bean's Instance Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -333,9 +321,8 @@ completed. This method has a single `boolean` parameter whose value is
 `true` if the transaction was committed and `false` if it was rolled
 back.
 
-[[BNCIX]]
+[[BNCIX]][[methods-not-allowed-in-container-managed-transactions]]
 
-[[methods-not-allowed-in-container-managed-transactions]]
 Methods Not Allowed in Container-Managed Transactions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

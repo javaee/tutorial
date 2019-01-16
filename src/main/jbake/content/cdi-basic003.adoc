@@ -6,9 +6,8 @@ prev=cdi-basic002.html
 ~~~~~~
 = About Beans
 
-[[GJEBJ]]
+[[GJEBJ]][[about-beans]]
 
-[[about-beans]]
 About Beans
 -----------
 

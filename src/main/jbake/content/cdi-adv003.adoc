@@ -7,9 +7,8 @@ prev=cdi-adv002.html
 = Using Producer Methods, Producer Fields, and Disposer Methods in CDI Applications
 
 
-[[GKGKV]]
+[[GKGKV]][[using-producer-methods-producer-fields-and-disposer-methods-in-cdi-applications]]
 
-[[using-producer-methods-producer-fields-and-disposer-methods-in-cdi-applications]]
 Using Producer Methods, Producer Fields, and Disposer Methods in CDI Applications
 ---------------------------------------------------------------------------------
 
@@ -35,9 +34,8 @@ service references.
 A producer method or field is annotated with the
 `javax.enterprise.inject.Produces` annotation.
 
-[[sthref127]]
+[[sthref127]][[using-producer-methods]]
 
-[[using-producer-methods]]
 Using Producer Methods
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -83,9 +81,8 @@ between `CoderImpl`, `TestCoderImpl`, and the one returned by `getCoder`
 and would cancel deployment, informing the user of the ambiguous
 dependency.
 
-[[sthref128]]
+[[sthref128]][[using-producer-fields-to-generate-resources]]
 
-[[using-producer-fields-to-generate-resources]]
 Using Producer Fields to Generate Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -125,9 +122,8 @@ To minimize the reliance on resource injection, specify the producer
 field for the resource in one place in the application, and then inject
 the object wherever in the application you need it.
 
-[[sthref129]]
+[[sthref129]][[using-a-disposer-method]]
 
-[[using-a-disposer-method]]
 Using a Disposer Method
 ~~~~~~~~~~~~~~~~~~~~~~~
 

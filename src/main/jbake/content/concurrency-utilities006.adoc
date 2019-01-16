@@ -7,9 +7,8 @@ prev=concurrency-utilities005.html
 = The taskcreator Concurrency Example
 
 
-[[CIHBFEAE]]
+[[CIHBFEAE]][[the-taskcreator-concurrency-example]]
 
-[[the-taskcreator-concurrency-example]]
 The taskcreator Concurrency Example
 -----------------------------------
 
@@ -95,9 +94,8 @@ public void submitTask(Task task, String type) {
 For periodic tasks, `TaskEJB` keeps a reference to the `ScheduledFuture`
 object, so that the user can cancel the task at any time.
 
-[[sthref296]]
+[[sthref296]][[running-the-taskcreator-example]]
 
-[[running-the-taskcreator-example]]
 Running the taskcreator Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -112,9 +110,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#CHDBJGID[To Run the taskcreator Example]
 
-[[CHDCCJHB]]
+[[CHDCCJHB]][[to-build-package-and-deploy-the-taskcreator-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-taskcreator-example-using-netbeans-ide]]
 To Build, Package, and Deploy the taskcreator Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -135,9 +132,8 @@ select Build.
 +
 This command builds and deploys the application.
 
-[[CHDHJBDD]]
+[[CHDHJBDD]][[to-build-package-and-deploy-the-taskcreator-example-using-maven]]
 
-[[to-build-package-and-deploy-the-taskcreator-example-using-maven]]
 To Build, Package, and Deploy the taskcreator Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -157,9 +153,8 @@ tut-install/examples/concurrency/taskcreator
 mvn install
 ----
 
-[[CHDBJGID]]
+[[CHDBJGID]][[to-run-the-taskcreator-example]]
 
-[[to-run-the-taskcreator-example]]
 To Run the taskcreator Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

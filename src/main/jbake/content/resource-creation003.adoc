@@ -7,9 +7,8 @@ prev=resource-creation002.html
 Creating Resources Administratively
 ===================================
 
-[[CACFBGBE]]
+[[CACFBGBE]][[creating-resources-administratively]]
 
-[[creating-resources-administratively]]
 Creating Resources Administratively
 -----------------------------------
 

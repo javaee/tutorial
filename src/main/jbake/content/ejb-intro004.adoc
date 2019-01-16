@@ -7,9 +7,8 @@ prev=ejb-intro003.html
 Accessing Enterprise Beans
 ==========================
 
-[[GIPJF]]
+[[GIPJF]][[accessing-enterprise-beans]]
 
-[[accessing-enterprise-beans]]
 Accessing Enterprise Beans
 --------------------------
 
@@ -59,9 +58,8 @@ Session beans can have more than one business interface. Session beans
 should, but are not required to, implement their business interface or
 interfaces.
 
-[[GIRFL]]
+[[GIRFL]][[using-enterprise-beans-in-clients]]
 
-[[using-enterprise-beans-in-clients]]
 Using Enterprise Beans in Clients
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -81,9 +79,8 @@ as Java SE applications, must perform an explicit lookup. JNDI supports
 a global syntax for identifying Java EE components to simplify this
 explicit lookup.
 
-[[GIRGN]]
+[[GIRGN]][[portable-jndi-syntax]]
 
-[[portable-jndi-syntax]]
 Portable JNDI Syntax
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -133,9 +130,8 @@ application archive `myApp.war`, the module name is `myApp`. The
 portable JNDI name is `java:module/MyBean`. An equivalent JNDI name
 using the `java:global` namespace is `java:global/myApp/MyBean`.
 
-[[GIPIZ]]
+[[GIPIZ]][[deciding-on-remote-or-local-access]]
 
-[[deciding-on-remote-or-local-access]]
 Deciding on Remote or Local Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -186,9 +182,8 @@ or the bean class must explicitly designate the business interfaces by
 using the `@Remote` and `@Local` annotations. The same business
 interface cannot be both a local and a remote business interface.
 
-[[GIPMZ]]
+[[GIPMZ]][[local-clients]]
 
-[[local-clients]]
 Local Clients
 ~~~~~~~~~~~~~
 
@@ -241,9 +236,8 @@ specify the interface name. For example:
 public class BeanName implements InterfaceName  { ... }
 ----
 
-[[GIPSC]]
+[[GIPSC]][[accessing-local-enterprise-beans-using-the-no-interface-view]]
 
-[[accessing-local-enterprise-beans-using-the-no-interface-view]]
 Accessing Local Enterprise Beans Using the No-Interface View
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -272,9 +266,8 @@ ExampleBean exampleBean = (ExampleBean)
 Clients do not use the `new` operator to obtain a new instance of an
 enterprise bean that uses a no-interface view.
 
-[[GIPSE]]
+[[GIPSE]][[accessing-local-enterprise-beans-that-implement-business-interfaces]]
 
-[[accessing-local-enterprise-beans-that-implement-business-interfaces]]
 Accessing Local Enterprise Beans That Implement Business Interfaces
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -301,9 +294,8 @@ ExampleLocal example = (ExampleLocal)
          InitialContext.lookup("java:module/ExampleLocal");
 ----
 
-[[GIPIU]]
+[[GIPIU]][[remote-clients]]
 
-[[remote-clients]]
 Remote Clients
 ~~~~~~~~~~~~~~
 
@@ -376,9 +368,8 @@ ExampleRemote example = (ExampleRemote)
         InitialContext.lookup("java:global/myApp/ExampleRemote");
 ----
 
-[[GIPKD]]
+[[GIPKD]][[web-service-clients]]
 
-[[web-service-clients]]
 Web Service Clients
 ~~~~~~~~~~~~~~~~~~~
 
@@ -408,9 +399,8 @@ exposed to web service clients.
 For a code sample, see link:ejb-basicexamples004.html#BNBOR[A Web Service
 Example: helloservice].
 
-[[GIPLY]]
+[[GIPLY]][[method-parameters-and-access]]
 
-[[method-parameters-and-access]]
 Method Parameters and Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -418,9 +408,8 @@ The type of access affects the parameters of the bean methods that are
 called by clients. The following sections apply not only to method
 parameters but also to method return values.
 
-[[GIPLX]]
+[[GIPLX]][[isolation]]
 
-[[isolation]]
 Isolation
 ^^^^^^^^^
 
@@ -439,9 +428,8 @@ components, replacing the local calls with remote ones.
 As with remote clients, web service clients operate on different copies
 of parameters than does the bean that implements the web service.
 
-[[GIPKV]]
+[[GIPKV]][[granularity-of-accessed-data]]
 
-[[granularity-of-accessed-data]]
 Granularity of Accessed Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

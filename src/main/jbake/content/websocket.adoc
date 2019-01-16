@@ -7,9 +7,8 @@ prev=servlets018.html
 = Java API for WebSocket
 
 
-[[GKJIQ5]]
+[[GKJIQ5]][[java-api-for-websocket]]
 
-[[java-api-for-websocket]]
 19 Java API for WebSocket
 -------------------------
 

@@ -7,9 +7,8 @@ prev=jsf-el003.html
 Operations on Collection Objects
 ================================
 
-[[CIHGABHD]]
+[[CIHGABHD]][[operations-on-collection-objects]]
 
-[[operations-on-collection-objects]]
 Operations on Collection Objects
 --------------------------------
 

@@ -7,9 +7,8 @@ prev=jaxrs-advanced001.html
 = Validating Resource Data with Bean Validation
 
 
-[[BABCJEDF]]
+[[BABCJEDF]][[validating-resource-data-with-bean-validation]]
 
-[[validating-resource-data-with-bean-validation]]
 Validating Resource Data with Bean Validation
 ---------------------------------------------
 
@@ -26,9 +25,8 @@ The following topics are addressed here:
 * link:#CIHFDCBI[Validating Entity Data]
 * link:#CIHCHEFH[Validation Exception Handling and Response Codes]
 
-[[CIHJAFGI]]
+[[CIHJAFGI]][[using-constraint-annotations-on-resource-methods]]
 
-[[using-constraint-annotations-on-resource-methods]]
 Using Constraint Annotations on Resource Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -125,9 +123,8 @@ public class CreateUserResource {
 }
 ----
 
-[[CIHFDCBI]]
+[[CIHFDCBI]][[validating-entity-data]]
 
-[[validating-entity-data]]
 Validating Entity Data
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -215,9 +212,8 @@ As in the previous example, the `@ActiveUser` constraint is applied to
 the returned entity class as well as the `@PhoneRequired` and `@NotNull`
 constraints defined within the entity class.
 
-[[CIHCHEFH]]
+[[CIHCHEFH]][[validation-exception-handling-and-response-codes]]
 
-[[validation-exception-handling-and-response-codes]]
 Validation Exception Handling and Response Codes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

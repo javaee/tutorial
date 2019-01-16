@@ -7,9 +7,8 @@ prev=resource-creation001.html
 = DataSource Objects and Connection Pools
 
 
-[[BNCJJ]]
+[[BNCJJ]][[datasource-objects-and-connection-pools]]
 
-[[datasource-objects-and-connection-pools]]
 DataSource Objects and Connection Pools
 ---------------------------------------
 

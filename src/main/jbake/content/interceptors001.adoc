@@ -7,9 +7,8 @@ prev=interceptors.html
 = Overview of Interceptors
 
 
-[[GKIGQ]]
+[[GKIGQ]][[overview-of-interceptors]]
 
-[[overview-of-interceptors]]
 Overview of Interceptors
 ------------------------
 
@@ -80,9 +79,8 @@ method for pre-destroy lifecycle events
 |=======================================================================
 
 
-[[GKECK]]
+[[GKECK]][[interceptor-classes]]
 
-[[interceptor-classes]]
 Interceptor Classes
 ~~~~~~~~~~~~~~~~~~~
 
@@ -102,9 +100,8 @@ injection occurs when the interceptor class instance is created, using
 the naming context of the associated target class, and before any
 `@PostConstruct` callbacks are invoked.
 
-[[GKEDY]]
+[[GKEDY]][[interceptor-lifecycle]]
 
-[[interceptor-lifecycle]]
 Interceptor Lifecycle
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -118,9 +115,8 @@ instances are fully instantiated before any `@PostConstruct` callbacks
 are invoked, and any `@PreDestroy` callbacks are invoked before the
 target class and interceptor class instances are destroyed.
 
-[[GKHSN]]
+[[GKHSN]][[interceptors-and-cdi]]
 
-[[interceptors-and-cdi]]
 Interceptors and CDI
 ~~~~~~~~~~~~~~~~~~~~
 

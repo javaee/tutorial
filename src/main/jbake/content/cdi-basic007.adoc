@@ -7,9 +7,8 @@ prev=cdi-basic006.html
 = Injecting Beans
 
 
-[[GJBAN]]
+[[GJBAN]][[injecting-beans]]
 
-[[injecting-beans]]
 Injecting Beans
 ---------------
 

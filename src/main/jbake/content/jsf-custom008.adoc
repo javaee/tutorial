@@ -7,9 +7,8 @@ prev=jsf-custom007.html
 Handling Events for Custom Components
 =====================================
 
-[[BNAWD]]
+[[BNAWD]][[handling-events-for-custom-components]]
 
-[[handling-events-for-custom-components]]
 Handling Events for Custom Components
 -------------------------------------
 

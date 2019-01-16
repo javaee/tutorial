@@ -7,9 +7,8 @@ prev=overview010.html
 = Using the Tutorial Examples
 
 
-[[GFIUD]]
+[[GFIUD]][[using-the-tutorial-examples]]
 
-[[using-the-tutorial-examples]]
 2 Using the Tutorial Examples
 -----------------------------
 

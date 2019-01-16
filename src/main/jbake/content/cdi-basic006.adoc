@@ -7,9 +7,8 @@ prev=cdi-basic005.html
 = Using Qualifiers
 
 
-[[GJBCK]]
+[[GJBCK]][[using-qualifiers]]
 
-[[using-qualifiers]]
 Using Qualifiers
 ----------------
 

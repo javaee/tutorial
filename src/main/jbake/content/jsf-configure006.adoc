@@ -7,9 +7,8 @@ prev=jsf-configure005.html
 Registering Application Messages
 ================================
 
-[[BNAXB]]
+[[BNAXB]][[registering-application-messages]]
 
-[[registering-application-messages]]
 Registering Application Messages
 --------------------------------
 
@@ -83,9 +82,8 @@ The `alt` attribute can accept value expressions. In this case, the
 `alt` attribute refers to localized text that will be included in the
 alternative text of the image rendered by this tag.
 
-[[GKUHG]]
+[[GKUHG]][[using-facesmessage-to-create-a-message]]
 
-[[using-facesmessage-to-create-a-message]]
 Using FacesMessage to Create a Message
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -124,9 +122,8 @@ public static String loadErrorMessage(FacesContext context,
 }
 ----
 
-[[BNASS]]
+[[BNASS]][[referencing-error-messages]]
 
-[[referencing-error-messages]]
 Referencing Error Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

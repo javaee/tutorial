@@ -7,9 +7,8 @@ prev=batch-processing008.html
 The phonebilling Example Application
 ====================================
 
-[[BCGFCACD]]
+[[BCGFCACD]][[the-phonebilling-example-application]]
 
-[[the-phonebilling-example-application]]
 The phonebilling Example Application
 ------------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#BABDEIFG[Architecture of the phonebilling Example Application]
 * link:#BABBGDAA[Running the phonebilling Example Application]
 
-[[BABDEIFG]]
+[[BABDEIFG]][[architecture-of-the-phonebilling-example-application]]
 
-[[architecture-of-the-phonebilling-example-application]]
 Architecture of the phonebilling Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -61,9 +59,8 @@ resulting bill for each customer.
 The bean submits the job to the batch runtime, checks on the status of
 the job, and reads the text files for each bill.
 
-[[sthref288]]
+[[sthref288]][[the-job-definition-file]]
 
-[[the-job-definition-file]]
 The Job Definition File
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -126,9 +123,8 @@ This step is a partitioned chunk step. The partition plan is specified
 through the `BillPartitionMapper` artifact instead of using the `plan`
 element.
 
-[[sthref289]]
+[[sthref289]][[the-callrecord-and-phonebill-entities]]
 
-[[the-callrecord-and-phonebill-entities]]
 The CallRecord and PhoneBill Entities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -221,9 +217,8 @@ link:persistence-intro.html#BNBPZ[Chapter 40, "Introduction to the Java
 Persistence API"]. For more information on the JSON Processing API, see
 link:jsonp.html#GLRBB[Chapter 20, "JSON Processing"].
 
-[[sthref290]]
+[[sthref290]][[the-call-records-chunk-step]]
 
-[[the-call-records-chunk-step]]
 The Call Records Chunk Step
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -310,9 +305,8 @@ public void writeItems(List<Object> callList) throws Exception {
 }
 ----
 
-[[BCGGGAHB]]
+[[BCGGGAHB]][[the-phone-billing-chunk-step]]
 
-[[the-phone-billing-chunk-step]]
 The Phone Billing Chunk Step
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -412,9 +406,8 @@ bill and calculates the tax and total amount due for each bill.
 
 The `BillWriter` artifact writes each bill to a plain text file.
 
-[[sthref291]]
+[[sthref291]][[the-javaserver-faces-pages]]
 
-[[the-javaserver-faces-pages]]
 The JavaServer Faces Pages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -459,9 +452,8 @@ status of the batch job and displays the bills when the job finishes:
 </h:form>
 ----
 
-[[sthref292]]
+[[sthref292]][[the-managed-bean]]
 
-[[the-managed-bean]]
 The Managed Bean
 ^^^^^^^^^^^^^^^^
 
@@ -495,9 +487,8 @@ public String getJobStatus() {
 The `getRowList` method of the bean creates a list of bills to be
 displayed on the `jobstarted.xhtml` JSF page using a table.
 
-[[BABBGDAA]]
+[[BABBGDAA]][[running-the-phonebilling-example-application]]
 
-[[running-the-phonebilling-example-application]]
 Running the phonebilling Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -511,9 +502,8 @@ NetBeans IDE]
 * link:#BABFHIIB[To Run the phonebilling Example Application Using
 Maven]
 
-[[BABIBBBG]]
+[[BABIBBBG]][[to-run-the-phonebilling-example-application-using-netbeans-ide]]
 
-[[to-run-the-phonebilling-example-application-using-netbeans-ide]]
 To Run the phonebilling Example Application Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -541,9 +531,8 @@ the server; and launches a web browser window at the following URL:
 http://localhost:8080/phonebilling/
 ----
 
-[[BABFHIIB]]
+[[BABFHIIB]][[to-run-the-phonebilling-example-application-using-maven]]
 
-[[to-run-the-phonebilling-example-application-using-maven]]
 To Run the phonebilling Example Application Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=bean-validation003.html
 # Validating Constructors and Methods
 
 
-[[CACJIBEJ]]
+[[CACJIBEJ]][[validating-constructors-and-methods]]
 
-[[validating-constructors-and-methods]]
 Validating Constructors and Methods
 -----------------------------------
 
@@ -48,9 +47,8 @@ care must be taken to avoid unintended behavior by subtypes. See
 link:bean-validation-advanced004.html#CIHGJBGI[Using Method Constraints
 in Type Hierarchies] for more information.
 
-[[sthref122]]
+[[sthref122]][[cross-parameter-constraints]]
 
-[[cross-parameter-constraints]]
 Cross-Parameter Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -107,9 +105,9 @@ public Map<@NotNull String, @USPhoneNumber String> getAddressesByType() { }
 In this sample, `@Email` is an in-built constraint supported by Bean Validation, and `@USPhoneNumber` is a user-defined constraint. See link:bean-validation-advanced001.html#GKAIA[Using the Built-In Constraints to Make a New Constraint].
 
 `@USPhoneNumber` has `ElementType.TYPE_USE` as one of its `@Target`, and therefore it is possible to use `@USPhoneNumber` constraint for validating type arguments of parameterized types.
-[[sthref123]]
 
-[[identifying-parameter-constraint-violations]]
+[[sthref123]][[identifying-parameter-constraint-violations]]
+
 Identifying Parameter Constraint Violations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,9 +117,8 @@ parameter caused the constraint violation. The parameter index is in the
 form `arg`PARAMETER_INDEX, where PARAMETER_INDEX is an integer that
 starts at 0 for the first parameter of the method or constructor.
 
-[[sthref124]]
+[[sthref124]][[adding-constraints-to-method-return-values]]
 
-[[adding-constraints-to-method-return-values]]
 Adding Constraints to Method Return Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

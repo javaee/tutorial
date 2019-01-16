@@ -7,9 +7,8 @@ prev=servlets012.html
 = Nonblocking I/O
 
 
-[[BEIHICDH]]
+[[BEIHICDH]][[nonblocking-io]]
 
-[[nonblocking-io]]
 Nonblocking I/O
 ---------------
 
@@ -116,9 +115,8 @@ error.
 |=======================================================================
 
 
-[[sthref109]]
+[[sthref109]][[reading-a-large-http-post-request-using-nonblocking-io]]
 
-[[reading-a-large-http-post-request-using-nonblocking-io]]
 Reading a Large HTTP POST Request Using Nonblocking I/O
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

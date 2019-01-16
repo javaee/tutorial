@@ -7,9 +7,8 @@ prev=jsf-intro006.html
 = The Lifecycle of a JavaServer Faces Application
 
 
-[[BNAQQ]]
+[[BNAQQ]][[the-lifecycle-of-a-javaserver-faces-application]]
 
-[[the-lifecycle-of-a-javaserver-faces-application]]
 The Lifecycle of a JavaServer Faces Application
 -----------------------------------------------
 
@@ -39,9 +38,8 @@ two main phases of a JavaServer Faces web application, is introduced in
 link:jsf-intro004.html#GJAAM[A Simple JavaServer Faces Application]. This
 section examines the JavaServer Faces lifecycle in more detail.
 
-[[GLPRC]]
+[[GLPRC]][[overview-of-the-javaserver-faces-lifecycle]]
 
-[[overview-of-the-javaserver-faces-lifecycle]]
 Overview of the JavaServer Faces Lifecycle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -134,9 +132,8 @@ following subphases:
 * link:#BNAQW[Invoke Application Phase]
 * link:#BNAQX[Render Response Phase]
 
-[[BNAQS]]
+[[BNAQS]][[restore-view-phase]]
 
-[[restore-view-phase]]
 Restore View Phase
 ~~~~~~~~~~~~~~~~~~
 
@@ -161,9 +158,8 @@ page already exists in the `FacesContext` instance. During this phase,
 the JavaServer Faces implementation restores the view by using the state
 information saved on the client or the server.
 
-[[BNAQT]]
+[[BNAQT]][[apply-request-values-phase]]
 
-[[apply-request-values-phase]]
 Apply Request Values Phase
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -200,9 +196,8 @@ If the current request is identified as a partial request, the partial
 context is retrieved from the `FacesContext`, and the partial processing
 method is applied.
 
-[[GJSBP]]
+[[GJSBP]][[process-validations-phase]]
 
-[[process-validations-phase]]
 Process Validations Phase
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -237,9 +232,8 @@ If the current request is identified as a partial request, the partial
 context is retrieved from the `FacesContext`, and the partial processing
 method is applied.
 
-[[BNAQV]]
+[[BNAQV]][[update-model-values-phase]]
 
-[[update-model-values-phase]]
 Update Model Values Phase
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -269,9 +263,8 @@ If the current request is identified as a partial request, the partial
 context is retrieved from the `FacesContext`, and the partial processing
 method is applied.
 
-[[BNAQW]]
+[[BNAQW]][[invoke-application-phase]]
 
-[[invoke-application-phase]]
 Invoke Application Phase
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -291,9 +284,8 @@ events are broadcast to interested listeners.
 Finally, the JavaServer Faces implementation transfers control to the
 Render Response phase.
 
-[[BNAQX]]
+[[BNAQX]][[render-response-phase]]
 
-[[render-response-phase]]
 Render Response Phase
 ~~~~~~~~~~~~~~~~~~~~~
 

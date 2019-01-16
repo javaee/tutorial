@@ -7,9 +7,8 @@ prev=persistence-cache001.html
 Specifying the Cache Mode Settings to Improve Performance
 =========================================================
 
-[[GKJJJ]]
+[[GKJJJ]][[specifying-the-cache-mode-settings-to-improve-performance]]
 
-[[specifying-the-cache-mode-settings-to-improve-performance]]
 Specifying the Cache Mode Settings to Improve Performance
 ---------------------------------------------------------
 
@@ -52,9 +51,8 @@ EntityManagerFactory emf =
             "javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE"));
 ----
 
-[[GKJDK]]
+[[GKJDK]][[setting-the-cache-retrieval-and-store-modes]]
 
-[[setting-the-cache-retrieval-and-store-modes]]
 Setting the Cache Retrieval and Store Modes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -68,9 +66,8 @@ and value to the `EntityManager.setProperty` method, or you can set them
 on a per-`EntityManager` operation (`EntityManager.find` or
 `EntityManager.refresh`) or on a per-query level.
 
-[[GKJDR]]
+[[GKJDR]][[cache-retrieval-mode]]
 
-[[cache-retrieval-mode]]
 Cache Retrieval Mode
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -89,9 +86,8 @@ persistence provider will read it from the database.
 When the property is set to `BYPASS`, the second-level cache is bypassed
 and a call to the database is made to retrieve the data.
 
-[[GKJDD]]
+[[GKJDD]][[cache-store-mode]]
 
-[[cache-store-mode]]
 Cache Store Mode
 ^^^^^^^^^^^^^^^^
 
@@ -115,9 +111,8 @@ When the property is set to `REFRESH`, the cache data is created or
 updated when data is read from or committed to the database, and a
 refresh is forced on data in the cache upon database reads.
 
-[[GKJDS]]
+[[GKJDS]][[setting-the-cache-retrieval-or-store-mode]]
 
-[[setting-the-cache-retrieval-or-store-mode]]
 Setting the Cache Retrieval or Store Mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -174,9 +169,8 @@ Setting the store or retrieve mode in a query or when calling the
 `EntityManager.find` or `EntityManager.refresh` method overrides the
 setting of the entity manager.
 
-[[GKJEB]]
+[[GKJEB]][[controlling-the-second-level-cache-programmatically]]
 
-[[controlling-the-second-level-cache-programmatically]]
 Controlling the Second-Level Cache Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -190,9 +184,8 @@ The following topics are addressed here:
 * link:#GKJDQ[Removing an Entity from the Cache]
 * link:#GKJDA[Removing All Data from the Cache]
 
-[[CHDEECCF]]
+[[CHDEECCF]][[overview-of-the-javax.persistence.cache-interface]]
 
-[[overview-of-the-javax.persistence.cache-interface]]
 Overview of the javax.persistence.Cache Interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -217,9 +210,8 @@ always return `false`.
 |=======================================================================
 
 
-[[GKJDZ]]
+[[GKJDZ]][[checking-whether-an-entitys-data-is-cached]]
 
-[[checking-whether-an-entitys-data-is-cached]]
 Checking whether an Entity's Data Is Cached
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -242,9 +234,8 @@ if (cache.contains(Person.class, personPK)) {
 }
 ----
 
-[[GKJDQ]]
+[[GKJDQ]][[removing-an-entity-from-the-cache]]
 
-[[removing-an-entity-from-the-cache]]
 Removing an Entity from the Cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -277,9 +268,8 @@ cache. If the `Person` entity has a subclass, `Student`, calls to the
 above method will remove all instances of `Student` from the cache as
 well.
 
-[[GKJDA]]
+[[GKJDA]][[removing-all-data-from-the-cache]]
 
-[[removing-all-data-from-the-cache]]
 Removing All Data from the Cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

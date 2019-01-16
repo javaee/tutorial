@@ -7,9 +7,8 @@ prev=jsonb004.html
 = Internationalizing and Localizing Web Applications
 
 
-[[BNAXU]]
+[[BNAXU]][[internationalizing-and-localizing-web-applications]]
 
-[[internationalizing-and-localizing-web-applications]]
 22 Internationalizing and Localizing Web Applications
 -----------------------------------------------------
 

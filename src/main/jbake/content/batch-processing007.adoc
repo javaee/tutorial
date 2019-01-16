@@ -7,9 +7,8 @@ prev=batch-processing006.html
 Packaging Batch Applications
 ============================
 
-[[BCGBBGJI]]
+[[BCGBBGJI]][[packaging-batch-applications]]
 
-[[packaging-batch-applications]]
 Packaging Batch Applications
 ----------------------------
 

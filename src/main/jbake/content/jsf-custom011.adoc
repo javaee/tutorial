@@ -7,9 +7,8 @@ prev=jsf-custom010.html
 Creating and Using a Custom Converter
 =====================================
 
-[[BNAUS]]
+[[BNAUS]][[creating-and-using-a-custom-converter]]
 
-[[creating-and-using-a-custom-converter]]
 Creating and Using a Custom Converter
 -------------------------------------
 
@@ -43,9 +42,8 @@ nonstandard object type. In the Duke's Tutoring case study, the
 `Student` and `Guardian` entities require a custom converter so that
 they can be converted to and from a `UISelectItems` input component.
 
-[[GLPHB]]
+[[GLPHB]][[creating-a-custom-converter]]
 
-[[creating-a-custom-converter]]
 Creating a Custom Converter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -195,9 +193,8 @@ bean, as in the `address-book` persistence example, in which the
 converters use an enterprise bean that is injected into the managed bean
 class.
 
-[[BNATU]]
+[[BNATU]][[using-a-custom-converter]]
 
-[[using-a-custom-converter]]
 Using a Custom Converter
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=jms-examples009.html
 Using NetBeans IDE to Create JMS Resources
 ==========================================
 
-[[BABDFDJC]]
+[[BABDFDJC]][[using-netbeans-ide-to-create-jms-resources]]
 
-[[using-netbeans-ide-to-create-jms-resources]]
 Using NetBeans IDE to Create JMS Resources
 ------------------------------------------
 
@@ -30,9 +29,8 @@ The following topics are addressed here:
 * link:#CHDFIJBJ[To Create JMS Resources Using NetBeans IDE]
 * link:#CHDCFADI[To Delete JMS Resources Using NetBeans IDE]
 
-[[CHDFIJBJ]]
+[[CHDFIJBJ]][[to-create-jms-resources-using-netbeans-ide]]
 
-[[to-create-jms-resources-using-netbeans-ide]]
 To Create JMS Resources Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -67,9 +65,8 @@ find it under the Other Sources node. You will need to run the
 `asadmin add-resources` command to create the resources in GlassFish
 Server.
 
-[[CHDCFADI]]
+[[CHDCFADI]][[to-delete-jms-resources-using-netbeans-ide]]
 
-[[to-delete-jms-resources-using-netbeans-ide]]
 To Delete JMS Resources Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

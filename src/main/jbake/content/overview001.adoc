@@ -7,9 +7,8 @@ prev=overview.html
 Introduction to Java EE
 =======================
 
-[[A1046550]]
+[[A1046550]][[introduction-to-java-ee]]
 
-[[introduction-to-java-ee]]
 Introduction to Java EE
 -----------------------
 

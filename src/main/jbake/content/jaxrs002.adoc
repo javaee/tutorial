@@ -7,9 +7,8 @@ prev=jaxrs001.html
 = Creating a RESTful Root Resource Class
 
 
-[[GILIK]]
+[[GILIK]][[creating-a-restful-root-resource-class]]
 
-[[creating-a-restful-root-resource-class]]
 Creating a RESTful Root Resource Class
 --------------------------------------
 
@@ -31,9 +30,8 @@ Responses]
 * link:#GIPYW[Extracting Request Parameters]
 * link:#CIHEGAGI[Configuring JAX-RS Applications]
 
-[[GILRU]]
+[[GILRU]][[developing-restful-web-services-with-jax-rs]]
 
-[[developing-restful-web-services-with-jax-rs]]
 Developing RESTful Web Services with JAX-RS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -148,9 +146,8 @@ the URL mapping for the application. The path specified by
 |=======================================================================
 
 
-[[GILQB]]
+[[GILQB]][[overview-of-a-jax-rs-application]]
 
-[[overview-of-a-jax-rs-application]]
 Overview of a JAX-RS Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -225,9 +222,8 @@ public void postHtml(String message) {
 }
 ----
 
-[[GINPW]]
+[[GINPW]][[the-path-annotation-and-uri-path-templates]]
 
-[[the-path-annotation-and-uri-path-templates]]
 The @Path Annotation and URI Path Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -380,9 +376,8 @@ The value of the `name3` variable is an empty string.
 |=======================================================================
 
 
-[[GIPYS]]
+[[GIPYS]][[responding-to-http-methods-and-requests]]
 
-[[responding-to-http-methods-and-requests]]
 Responding to HTTP Methods and Requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -395,9 +390,8 @@ The following topics are addressed here:
 * link:#GIPZE[Using Entity Providers to Map HTTP Response and Request
 Entity Bodies]
 
-[[GIPXS]]
+[[GIPXS]][[the-request-method-designator-annotations]]
 
-[[the-request-method-designator-annotations]]
 The Request Method Designator Annotations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -471,9 +465,8 @@ create a resource and return a `201` response with a location header
 whose value is the URI to the newly created resource. In this pattern,
 the web service declares the URI for the newly created resource.
 
-[[GIPZE]]
+[[GIPZE]][[using-entity-providers-to-map-http-response-and-request-entity-bodies]]
 
-[[using-entity-providers-to-map-http-response-and-request-entity-bodies]]
 Using Entity Providers to Map HTTP Response and Request Entity Bodies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -568,9 +561,8 @@ public Response getItem() {
 }
 ----
 
-[[GIPZH]]
+[[GIPZH]][[using-consumes-and-produces-to-customize-requests-and-responses]]
 
-[[using-consumes-and-produces-to-customize-requests-and-responses]]
 Using @Consumes and @Produces to Customize Requests and Responses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -591,9 +583,8 @@ The following topics are addressed here:
 * link:#GIPXF[The @Produces Annotation]
 * link:#GIPYT[The @Consumes Annotation]
 
-[[GIPXF]]
+[[GIPXF]][[the-produces-annotation]]
 
-[[the-produces-annotation]]
 The @Produces Annotation
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -683,9 +674,8 @@ It is possible to refer to constant values, which may reduce
 typographical errors. For more information, see the API documentation
 for the constant field values of `javax.ws.rs.core.MediaType`.
 
-[[GIPYT]]
+[[GIPYT]][[the-consumes-annotation]]
 
-[[the-consumes-annotation]]
 The @Consumes Annotation
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -762,9 +752,8 @@ by the MIME media type `text/plain`. Note that the resource method
 returns `void`. This means that no representation is returned and that a
 response with a status code of HTTP 204 ("No Content") will be returned.
 
-[[GIPYW]]
+[[GIPYW]][[extracting-request-parameters]]
 
-[[extracting-request-parameters]]
 Extracting Request Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -967,9 +956,8 @@ public void post(MultivaluedMap<String, String> formParams) {
 }
 ----
 
-[[CIHEGAGI]]
+[[CIHEGAGI]][[configuring-jax-rs-applications]]
 
-[[configuring-jax-rs-applications]]
 Configuring JAX-RS Applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -988,9 +976,8 @@ The following topics are addressed here:
 Application]
 * link:#CIHDHAIJ[Configuring the Base URI in web.xml]
 
-[[CIHFEBJF]]
+[[CIHFEBJF]][[configuring-a-jax-rs-application-using-a-subclass-of-application]]
 
-[[configuring-a-jax-rs-application-using-a-subclass-of-application]]
 Configuring a JAX-RS Application Using a Subclass of Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1024,9 +1011,8 @@ public Set<Class<?>> getClasses() {
 }
 ----
 
-[[CIHDHAIJ]]
+[[CIHDHAIJ]][[configuring-the-base-uri-in-web.xml]]
 
-[[configuring-the-base-uri-in-web.xml]]
 Configuring the Base URI in web.xml
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

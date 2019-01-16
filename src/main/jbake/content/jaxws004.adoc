@@ -7,9 +7,8 @@ prev=jaxws003.html
 Web Services Interoperability and JAX-WS
 ========================================
 
-[[BNAZD]]
+[[BNAZD]][[web-services-interoperability-and-jax-ws]]
 
-[[web-services-interoperability-and-jax-ws]]
 Web Services Interoperability and JAX-WS
 ----------------------------------------
 

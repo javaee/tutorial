@@ -7,9 +7,8 @@ prev=jsf-custom003.html
 Steps for Creating a Custom Component
 =====================================
 
-[[BNAVT]]
+[[BNAVT]][[steps-for-creating-a-custom-component]]
 
-[[steps-for-creating-a-custom-component]]
 Steps for Creating a Custom Component
 -------------------------------------
 

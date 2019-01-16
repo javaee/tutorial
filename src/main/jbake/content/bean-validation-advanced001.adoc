@@ -7,9 +7,8 @@ prev=bean-validation-advanced.html
 # Creating Custom Constraints
 
 
-[[GKFGX]]
+[[GKFGX]][[creating-custom-constraints]]
 
-[[creating-custom-constraints]]
 Creating Custom Constraints
 ---------------------------
 
@@ -23,9 +22,8 @@ The following topics are addressed here:
 * link:#implementing-temporal-constraints-using-clockprovider[Implementing Temporal Constraints Using ClockProvider]
 * link:#custom-constraints[Custom Constraints]
 
-[[GKAIA]]
+[[GKAIA]][[using-the-built-in-constraints-to-make-a-new-constraint]]
 
-[[using-the-built-in-constraints-to-make-a-new-constraint]]
 Using the Built-In Constraints to Make a New Constraint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -86,9 +84,8 @@ You can also implement a `Constraint Validator` to validate the constraint `@USP
 protected String phone;
 ----
 
-[[CIHCICAI]]
+[[CIHCICAI]][[removing-ambiguity-in-constraint-targets]]
 
-[[removing-ambiguity-in-constraint-targets]]
 Removing Ambiguity in Constraint Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

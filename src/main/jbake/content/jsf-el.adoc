@@ -7,9 +7,8 @@ prev=jsf-facelets009.html
 Expression Language
 ===================
 
-[[GJDDD]]
+[[GJDDD]][[expression-language]]
 
-[[expression-language]]
 9 Expression Language
 ---------------------
 

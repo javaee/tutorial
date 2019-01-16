@@ -7,9 +7,8 @@ prev=webi18n002.html
 Date and Number Formatting
 ==========================
 
-[[BNAYA]]
+[[BNAYA]][[date-and-number-formatting]]
 
-[[date-and-number-formatting]]
 Date and Number Formatting
 --------------------------
 

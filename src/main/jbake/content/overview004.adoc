@@ -7,9 +7,8 @@ prev=overview003.html
 Distributed Multitiered Applications
 ====================================
 
-[[BNAAY]]
+[[BNAAY]][[distributed-multitiered-applications]]
 
-[[distributed-multitiered-applications]]
 Distributed Multitiered Applications
 ------------------------------------
 
@@ -47,9 +46,8 @@ image:img/javaeett_dt_001.png[
 "Diagram of multitiered application structure, including client tier, web
 tier, business tier, and EIS tier."]
 
-[[BNABA]]
+[[BNABA]][[security]]
 
-[[security]]
 Security
 ~~~~~~~~
 
@@ -67,9 +65,8 @@ mechanisms so that application developers do not have to implement these
 mechanisms in their applications. The same application works in a
 variety of security environments without changing the source code.
 
-[[BNABB]]
+[[BNABB]][[java-ee-components]]
 
-[[java-ee-components]]
 Java EE Components
 ~~~~~~~~~~~~~~~~~~
 
@@ -94,18 +91,16 @@ to be well formed and in compliance with the Java EE specification, and
 they are deployed to production, where they are run and managed by the
 Java EE server.
 
-[[BNABC]]
+[[BNABC]][[java-ee-clients]]
 
-[[java-ee-clients]]
 Java EE Clients
 ~~~~~~~~~~~~~~~
 
 A Java EE client is usually either a web client or an application
 client.
 
-[[BNABD]]
+[[BNABD]][[web-clients]]
 
-[[web-clients]]
 Web Clients
 ^^^^^^^^^^^
 
@@ -123,9 +118,8 @@ operations are off-loaded to enterprise beans executing on the Java EE
 server, where they can leverage the security, speed, services, and
 reliability of Java EE server-side technologies.
 
-[[BNABF]]
+[[BNABF]][[application-clients]]
 
-[[application-clients]]
 Application Clients
 ^^^^^^^^^^^^^^^^^^^
 
@@ -144,9 +138,8 @@ clients written in languages other than Java can interact with Java EE
 servers, enabling the Java EE platform to interoperate with legacy
 systems, clients, and non-Java languages.
 
-[[BNABE]]
+[[BNABE]][[applets]]
 
-[[applets]]
 Applets
 ^^^^^^^
 
@@ -165,9 +158,8 @@ programming from web page design. Personnel involved in web page design
 thus do not need to understand Java programming language syntax to do
 their jobs.
 
-[[BNABG]]
+[[BNABG]][[the-javabeans-component-architecture]]
 
-[[the-javabeans-component-architecture]]
 The JavaBeans Component Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -188,9 +180,8 @@ are typically simple in design and implementation but should conform to
 the naming and design conventions outlined in the JavaBeans component
 architecture.
 
-[[BNABH]]
+[[BNABH]][[java-ee-server-communications]]
 
-[[java-ee-server-communications]]
 Java EE Server Communications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -208,9 +199,8 @@ image:img/javaeett_dt_002.png[
 business tier directly. Browsers, web pages, and applets access the web
 tier."]
 
-[[BNABJ]]
+[[BNABJ]][[web-components]]
 
-[[web-components]]
 Web Components
 ~~~~~~~~~~~~~~
 
@@ -240,9 +230,8 @@ image:img/javaeett_dt_003.png[
 "Diagram of client-server communication showing detail of JavaBeans
 components and web pages in the web tier."]
 
-[[BNABK]]
+[[BNABK]][[business-components]]
 
-[[business-components]]
 Business Components
 ~~~~~~~~~~~~~~~~~~~
 
@@ -262,9 +251,8 @@ image:img/javaeett_dt_004.png[
 "Diagram of client-server communication showing detail of entities,
 session beans, and message-driven beans in the business tier."]
 
-[[BNABL]]
+[[BNABL]][[enterprise-information-system-tier]]
 
-[[enterprise-information-system-tier]]
 Enterprise Information System Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

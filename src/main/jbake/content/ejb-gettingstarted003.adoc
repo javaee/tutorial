@@ -7,18 +7,16 @@ prev=ejb-gettingstarted002.html
 Modifying the Java EE Application
 =================================
 
-[[GIPTI]]
+[[GIPTI]][[modifying-the-java-ee-application]]
 
-[[modifying-the-java-ee-application]]
 Modifying the Java EE Application
 ---------------------------------
 
 GlassFish Server supports iterative development. Whenever you make a
 change to a Java EE application, you must redeploy the application.
 
-[[GIPUK]]
+[[GIPUK]][[to-modify-a-class-file]]
 
-[[to-modify-a-class-file]]
 To Modify a Class File
 ~~~~~~~~~~~~~~~~~~~~~~
 

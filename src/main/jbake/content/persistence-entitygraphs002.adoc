@@ -7,9 +7,8 @@ prev=persistence-entitygraphs001.html
 Entity Graph Basics
 ===================
 
-[[BABCJBCG]]
+[[BABCJBCG]][[entity-graph-basics]]
 
-[[entity-graph-basics]]
 Entity Graph Basics
 -------------------
 
@@ -25,9 +24,8 @@ eagerly fetched during a `find` or query operation. The primary key and
 version fields of the entity class are always fetched and do not need to
 be explicitly added to an entity graph.
 
-[[sthref184]]
+[[sthref184]][[the-default-entity-graph]]
 
-[[the-default-entity-graph]]
 The Default Entity Graph
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -61,9 +59,8 @@ The default entity graph for this entity would contain the `messageId`,
 `subject`, and `sender` fields, but not the `body` or `attachments`
 fields.
 
-[[sthref185]]
+[[sthref185]][[using-entity-graphs-in-persistence-operations]]
 
-[[using-entity-graphs-in-persistence-operations]]
 Using Entity Graphs in Persistence Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -86,9 +83,8 @@ The following topics are addressed here:
 * link:#BABGEFCG[Fetch Graphs]
 * link:#BABHJBHG[Load Graphs]
 
-[[BABGEFCG]]
+[[BABGEFCG]][[fetch-graphs]]
 
-[[fetch-graphs]]
 Fetch Graphs
 ^^^^^^^^^^^^
 
@@ -110,9 +106,8 @@ props.put("javax.persistence.fetchgraph", eg);
 EmailMessage message = em.find(EmailMessage.class, id, props);
 ----
 
-[[BABHJBHG]]
+[[BABHJBHG]][[load-graphs]]
 
-[[load-graphs]]
 Load Graphs
 ^^^^^^^^^^^
 

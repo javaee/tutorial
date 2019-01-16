@@ -7,9 +7,8 @@ prev=injection.html
 Resource Injection
 ==================
 
-[[BABHDCAI]]
+[[BABHDCAI]][[resource-injection]]
 
-[[resource-injection]]
 Resource Injection
 ------------------
 

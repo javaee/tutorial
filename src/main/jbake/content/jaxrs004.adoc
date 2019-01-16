@@ -7,9 +7,8 @@ prev=jaxrs003.html
 Further Information about JAX-RS
 ================================
 
-[[GILIZ]]
+[[GILIZ]][[further-information-about-jax-rs]]
 
-[[further-information-about-jax-rs]]
 Further Information about JAX-RS
 --------------------------------
 

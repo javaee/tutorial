@@ -7,9 +7,9 @@ prev=jsf-advanced-cc002.html
 = Validating Composite Component Values
 
 
-[[GKHWO]]
+[[GKHWO]][[validating-composite-component-values]]
 
-[[validating-composite-component-values]]
+
 Validating Composite Component Values
 -------------------------------------
 

@@ -7,9 +7,8 @@ prev=ejb-embedded001.html
 = Developing Embeddable Enterprise Bean Applications
 
 
-[[GKCRR]]
+[[GKCRR]][[developing-embeddable-enterprise-bean-applications]]
 
-[[developing-embeddable-enterprise-bean-applications]]
 Developing Embeddable Enterprise Bean Applications
 --------------------------------------------------
 
@@ -46,9 +45,8 @@ not be portable if they use enterprise bean features not listed in
 link:#GKCQC[Table 38-1], such as the timer service, session beans as web
 service endpoints, or remote business interfaces.
 
-[[GKCQI]]
+[[GKCQI]][[running-embedded-applications]]
 
-[[running-embedded-applications]]
 Running Embedded Applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,9 +71,8 @@ the session bean through the embedded container.
 In GlassFish Server, the runtime JAR that includes the classes for the
 embedded container is `glassfish-embedded-all.jar`.
 
-[[GKCOV]]
+[[GKCOV]][[creating-the-enterprise-bean-container]]
 
-[[creating-the-enterprise-bean-container]]
 Creating the Enterprise Bean Container
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -117,9 +114,8 @@ props.setProperty(...);
 EJBContainer ec = EJBContainer.createEJBContainer(props);
 ----
 
-[[GKCRP]]
+[[GKCRP]][[explicitly-specifying-enterprise-bean-modules-to-be-initialized]]
 
-[[explicitly-specifying-enterprise-bean-modules-to-be-initialized]]
 Explicitly Specifying Enterprise Bean Modules to Be Initialized
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -158,9 +154,8 @@ props.setProperty(EJBContainer.MODULES, ejbJarFile);
 EJBContainer ec = EJBContainer.createEJBContainer(props);
 ----
 
-[[GLHUR]]
+[[GLHUR]][[looking-up-session-bean-references]]
 
-[[looking-up-session-bean-references]]
 Looking Up Session Bean References
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -190,9 +185,8 @@ MySessionBean msb = (MySessionBean)
             ctx.lookup("java:global/mySessionBean/MySessionBean");
 ----
 
-[[GKCRE]]
+[[GKCRE]][[shutting-down-the-enterprise-bean-container]]
 
-[[shutting-down-the-enterprise-bean-container]]
 Shutting Down the Enterprise Bean Container
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=bean-validation001.html
 # Using Bean Validation Constraints
 
 
-[[GIRCZ]]
+[[GIRCZ]][[using-bean-validation-constraints]]
 
-[[using-bean-validation-constraints]]
 Using Bean Validation Constraints
 ---------------------------------
 

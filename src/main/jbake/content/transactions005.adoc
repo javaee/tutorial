@@ -7,9 +7,8 @@ prev=transactions004.html
 Bean-Managed Transactions
 =========================
 
-[[BNCIY]]
+[[BNCIY]][[bean-managed-transactions]]
 
-[[bean-managed-transactions]]
 Bean-Managed Transactions
 -------------------------
 
@@ -49,9 +48,8 @@ message-driven beans, you must decide whether to use Java Database
 Connectivity or JTA transactions. The sections that follow discuss both
 types of transactions.
 
-[[BNCIZ]]
+[[BNCIZ]][[jta-transactions]]
 
-[[jta-transactions]]
 JTA Transactions
 ~~~~~~~~~~~~~~~~
 
@@ -73,9 +71,8 @@ transaction for an instance until the preceding transaction has ended.
 To demarcate a JTA transaction, you invoke the `begin`, `commit`, and
 `rollback` methods of the `javax.transaction.UserTransaction` interface.
 
-[[BNCJA]]
+[[BNCJA]][[returning-without-committing]]
 
-[[returning-without-committing]]
 Returning without Committing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -94,9 +91,8 @@ retains the association between the bean instance and the transaction
 across multiple calls. If the connection is closed, the association is
 not retained.
 
-[[BNCJB]]
+[[BNCJB]][[methods-not-allowed-in-bean-managed-transactions]]
 
-[[methods-not-allowed-in-bean-managed-transactions]]
 Methods Not Allowed in Bean-Managed Transactions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

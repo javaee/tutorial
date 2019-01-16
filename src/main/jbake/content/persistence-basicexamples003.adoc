@@ -7,9 +7,8 @@ prev=persistence-basicexamples002.html
 The roster Application
 ======================
 
-[[GIQSQ]]
+[[GIQSQ]][[the-roster-application]]
 
-[[the-roster-application]]
 The roster Application
 ----------------------
 
@@ -45,9 +44,8 @@ omitted from the table names.
 |=======================================================================
 
 
-[[GIQSO]]
+[[GIQSO]][[relationships-in-the-roster-application]]
 
-[[relationships-in-the-roster-application]]
 Relationships in the roster Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -64,9 +62,8 @@ between the `Player`, `Team`, and `League` entities.
 * There is a many-to-many relationship between `Player` and `Team`.
 * There is a many-to-one relationship between `Team` and `League`.
 
-[[GIQQK]]
+[[GIQQK]][[the-many-to-many-relationship-in-roster]]
 
-[[the-many-to-many-relationship-in-roster]]
 The Many-To-Many Relationship in roster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -114,9 +111,8 @@ public Collection<Team> getTeams() {
 }
 ----
 
-[[GIQRF]]
+[[GIQRF]][[entity-inheritance-in-the-roster-application]]
 
-[[entity-inheritance-in-the-roster-application]]
 Entity Inheritance in the roster Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -197,9 +193,8 @@ different name for the discriminator column, decorate `League` with
 public abstract class League implements Serializable { ... }
 ----
 
-[[GJJFL]]
+[[GJJFL]][[criteria-queries-in-the-roster-application]]
 
-[[criteria-queries-in-the-roster-application]]
 Criteria Queries in the roster Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -215,9 +210,8 @@ The following topics are addressed here:
 * link:#GJJFF[Creating Criteria Queries in RequestBean's Business
 Methods]
 
-[[GJJEX]]
+[[GJJEX]][[metamodel-classes-in-the-roster-application]]
 
-[[metamodel-classes-in-the-roster-application]]
 Metamodel Classes in the roster Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -244,9 +238,8 @@ public class Player_ {
 }
 ----
 
-[[GJJFN]]
+[[GJJFN]][[obtaining-a-criteriabuilder-instance-in-requestbean]]
 
-[[obtaining-a-criteriabuilder-instance-in-requestbean]]
 Obtaining a CriteriaBuilder Instance in RequestBean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -273,9 +266,8 @@ by calling `getCriteriaBuilder`. The `CriteriaBuilder` instance is
 created in a `@PostConstruct` method to ensure that the `EntityManager`
 instance has been injected by the enterprise bean container.
 
-[[GJJFF]]
+[[GJJFF]][[creating-criteria-queries-in-requestbeans-business-methods]]
 
-[[creating-criteria-queries-in-requestbeans-business-methods]]
 Creating Criteria Queries in RequestBean's Business Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -334,9 +326,8 @@ the type of the query, in this case `Player`. This typed query object is
 used to execute the query, which occurs when the `getResultList` method
 is called, and a `List<Player>` collection is returned.
 
-[[GIQRX]]
+[[GIQRX]][[automatic-table-generation-in-the-roster-application]]
 
-[[automatic-table-generation-in-the-roster-application]]
 Automatic Table Generation in the roster Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -363,9 +354,8 @@ the database tables used by `roster`. This is done by setting the
 </persistence>
 ----
 
-[[GIQUZ]]
+[[GIQUZ]][[running-the-roster-example]]
 
-[[running-the-roster-example]]
 Running the roster Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -377,9 +367,8 @@ The following topics are addressed here:
 * link:#GIQUG[To Run the roster Example Using NetBeans IDE]
 * link:#GIQSJ[To Run the roster Example Using Maven]
 
-[[GIQUG]]
+[[GIQUG]][[to-run-the-roster-example-using-netbeans-ide]]
 
-[[to-run-the-roster-example-using-netbeans-ide]]
 To Run the roster Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -429,9 +418,8 @@ P22 Janice Walker defender 857.0
 P25 Frank Fletcher defender 399.0
 ----
 
-[[GIQSJ]]
+[[GIQSJ]][[to-run-the-roster-example-using-maven]]
 
-[[to-run-the-roster-example-using-maven]]
 To Run the roster Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

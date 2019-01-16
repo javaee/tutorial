@@ -7,18 +7,16 @@ prev=usingexamples007.html
 = Debugging Java EE Applications
 
 
-[[BNADL]]
+[[BNADL]][[debugging-java-ee-applications]]
 
-[[debugging-java-ee-applications]]
 Debugging Java EE Applications
 ------------------------------
 
 This section explains how to determine what is causing an error in your
 application deployment or execution.
 
-[[BNADM]]
+[[BNADM]][[using-the-server-log]]
 
-[[using-the-server-log]]
 Using the Server Log
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -40,9 +38,8 @@ debugging information is available only in the log. You can view the
 server log with a text editor or with the Administration Console log
 viewer.
 
-[[GJSGH]]
+[[GJSGH]][[to-use-the-administration-console-log-viewer]]
 
-[[to-use-the-administration-console-log-viewer]]
 To Use the Administration Console Log Viewer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -55,9 +52,8 @@ a.  Click *Modify Search*.
 b.  Specify any constraints on the entries you want to see.
 c.  Click Search at the top of the log viewer.
 
-[[BNADN]]
+[[BNADN]][[using-a-debugger]]
 
-[[using-a-debugger]]
 Using a Debugger
 ~~~~~~~~~~~~~~~~
 
@@ -65,9 +61,8 @@ GlassFish Server supports the Java Platform Debugger Architecture
 (JPDA). With JPDA, you can configure GlassFish Server to communicate
 debugging information using a socket.
 
-[[GJQWL]]
+[[GJQWL]][[to-debug-an-application-using-a-debugger]]
 
-[[to-debug-an-application-using-a-debugger]]
 To Debug an Application Using a Debugger
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

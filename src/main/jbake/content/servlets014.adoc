@@ -7,9 +7,8 @@ prev=servlets013.html
 = Protocol Upgrade Processing
 
 
-[[BEIJHCDJ]]
+[[BEIJHCDJ]][[protocol-upgrade-processing]]
 
-[[protocol-upgrade-processing]]
 Protocol Upgrade Processing
 ---------------------------
 

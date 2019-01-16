@@ -7,9 +7,8 @@ prev=transactions001.html
 Transactions in Java EE Applications
 ====================================
 
-[[GIJRG]]
+[[GIJRG]][[transactions-in-java-ee-applications]]
 
-[[transactions-in-java-ee-applications]]
 Transactions in Java EE Applications
 ------------------------------------
 

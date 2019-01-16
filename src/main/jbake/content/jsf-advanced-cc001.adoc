@@ -7,9 +7,8 @@ prev=jsf-advanced-cc.html
 = Attributes of a Composite Component
 
 
-[[GKHWV]]
+[[GKHWV]][[attributes-of-a-composite-component]]
 
-[[attributes-of-a-composite-component]]
 Attributes of a Composite Component
 -----------------------------------
 

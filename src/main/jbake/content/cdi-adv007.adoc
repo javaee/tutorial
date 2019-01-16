@@ -7,9 +7,8 @@ prev=cdi-adv006.html
 = Using Decorators in CDI Applications
 
 
-[[GKHQF]]
+[[GKHQF]][[using-decorators-in-cdi-applications]]
 
-[[using-decorators-in-cdi-applications]]
 Using Decorators in CDI Applications
 ------------------------------------
 

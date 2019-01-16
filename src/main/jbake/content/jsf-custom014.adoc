@@ -7,9 +7,8 @@ prev=jsf-custom013.html
 Binding Converters, Listeners, and Validators to Managed Bean Properties
 ========================================================================
 
-[[BNATM]]
+[[BNATM]][[binding-converters-listeners-and-validators-to-managed-bean-properties]]
 
-[[binding-converters-listeners-and-validators-to-managed-bean-properties]]
 Binding Converters, Listeners, and Validators to Managed Bean Properties
 ------------------------------------------------------------------------
 

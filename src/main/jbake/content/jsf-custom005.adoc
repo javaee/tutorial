@@ -7,9 +7,8 @@ prev=jsf-custom004.html
 Creating Custom Component Classes
 =================================
 
-[[BNAVU]]
+[[BNAVU]][[creating-custom-component-classes]]
 
-[[creating-custom-component-classes]]
 Creating Custom Component Classes
 ---------------------------------
 
@@ -164,9 +163,8 @@ performs as well as the encoding and decoding that it delegates to
 `MapRenderer`. link:jsf-custom008.html#BNAWD[Handling Events for Custom
 Components] details how `MapComponent` handles events.
 
-[[BNAVV]]
+[[BNAVV]][[specifying-the-component-family]]
 
-[[specifying-the-component-family]]
 Specifying the Component Family
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -193,9 +191,8 @@ configuration. link:jsf-configure012.html#BNAXI[Registering a Custom
 Component] explains how to define the component family in the component
 configuration.
 
-[[BNAVW]]
+[[BNAVW]][[performing-encoding]]
 
-[[performing-encoding]]
 Performing Encoding
 ~~~~~~~~~~~~~~~~~~~
 
@@ -311,9 +308,8 @@ might need to implement other methods in addition to `encodeEnd`. For
 example, if you need to retrieve the component's value from the request
 parameters, you must also implement the `decode` method.
 
-[[BNAVX]]
+[[BNAVX]][[performing-decoding]]
 
-[[performing-decoding]]
 Performing Decoding
 ~~~~~~~~~~~~~~~~~~~
 
@@ -354,9 +350,8 @@ the `input` field. This value represents the currently selected area.
 Finally, it sets the value of the `MapComponent` class's `current`
 attribute to the value of the `input` field.
 
-[[BNAVY]]
+[[BNAVY]][[enabling-component-properties-to-accept-expressions]]
 
-[[enabling-component-properties-to-accept-expressions]]
 Enabling Component Properties to Accept Expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -435,9 +430,8 @@ public void setAction(MethodExpression action) {
 }
 ----
 
-[[BNAVZ]]
+[[BNAVZ]][[saving-and-restoring-state]]
 
-[[saving-and-restoring-state]]
 Saving and Restoring State
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

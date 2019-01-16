@@ -7,9 +7,8 @@ prev=bean-validation-advanced003.html
 Using Method Constraints in Type Hierarchies
 ============================================
 
-[[CIHGJBGI]]
+[[CIHGJBGI]][[using-method-constraints-in-type-hierarchies]]
 
-[[using-method-constraints-in-type-hierarchies]]
 Using Method Constraints in Type Hierarchies
 --------------------------------------------
 
@@ -111,9 +110,8 @@ that calls `PaymentService.processOrder` doesn't expect these
 constraints. This is another example of strengthening the preconditions
 of a subtype and will result in a `ConstraintDeclarationException`.
 
-[[sthref125]]
+[[sthref125]][[rules-for-using-method-constraints-in-type-hierarchies]]
 
-[[rules-for-using-method-constraints-in-type-hierarchies]]
 Rules for Using Method Constraints in Type Hierarchies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

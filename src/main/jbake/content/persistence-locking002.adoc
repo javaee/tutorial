@@ -7,9 +7,8 @@ prev=persistence-locking001.html
 = Lock Modes
 
 
-[[GKJIU]]
+[[GKJIU]][[lock-modes]]
 
-[[lock-modes]]
 Lock Modes
 ----------
 
@@ -71,9 +70,8 @@ applications.
 |=======================================================================
 
 
-[[GKJIK]]
+[[GKJIK]][[setting-the-lock-mode]]
 
-[[setting-the-lock-mode]]
 Setting the Lock Mode
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -126,9 +124,8 @@ q.setLockMode(LockModeType.PESSIMISTIC_FORCE_INCREMENT);
   lockMode=PESSIMISTIC_READ)
 ----
 
-[[GKJIL]]
+[[GKJIL]][[using-pessimistic-locking]]
 
-[[using-pessimistic-locking]]
 Using Pessimistic Locking
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -158,9 +155,8 @@ Locking a versioned entity with `PESSIMISTIC_WRITE` results in the
 version attribute being incremented if the transaction was successfully
 committed.
 
-[[GKJLQ]]
+[[GKJLQ]][[pessimistic-locking-timeouts]]
 
-[[pessimistic-locking-timeouts]]
 Pessimistic Locking Timeouts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

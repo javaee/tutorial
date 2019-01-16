@@ -7,9 +7,8 @@ prev=jsf-ajax005.html
 = Handling Errors
 
 
-[[GKDCB]]
+[[GKDCB]][[handling-errors]]
 
-[[handling-errors]]
 Handling Errors
 ---------------
 

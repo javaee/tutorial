@@ -7,9 +7,8 @@ prev=dukes-bookstore.html
 Design and Architecture of Duke's Bookstore
 ===========================================
 
-[[GLOAW]]
+[[GLOAW]][[design-and-architecture-of-dukes-bookstore]]
 
-[[design-and-architecture-of-dukes-bookstore]]
 Design and Architecture of Duke's Bookstore
 -------------------------------------------
 

@@ -7,9 +7,8 @@ prev=servlets003.html
 Creating and Initializing a Servlet
 ===================================
 
-[[BNAFU]]
+[[BNAFU]][[creating-and-initializing-a-servlet]]
 
-[[creating-and-initializing-a-servlet]]
 Creating and Initializing a Servlet
 -----------------------------------
 

@@ -7,9 +7,8 @@ prev=webi18n003.html
 Character Sets and Encodings
 ============================
 
-[[BNAYB]]
+[[BNAYB]][[character-sets-and-encodings]]
 
-[[character-sets-and-encodings]]
 Character Sets and Encodings
 ----------------------------
 
@@ -20,9 +19,8 @@ The following topics are addressed here:
 * link:#BNAYC[Character Sets]
 * link:#BNAYD[Character Encoding]
 
-[[BNAYC]]
+[[BNAYC]][[character-sets]]
 
-[[character-sets]]
 Character Sets
 ~~~~~~~~~~~~~~
 
@@ -47,9 +45,8 @@ characters, as follows:
 admin.nav.main=P\u00e1gina principal de administraci\u00f3n
 ----
 
-[[BNAYD]]
+[[BNAYD]][[character-encoding]]
 
-[[character-encoding]]
 Character Encoding
 ~~~~~~~~~~~~~~~~~~
 

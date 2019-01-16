@@ -7,9 +7,8 @@ prev=servlets005.html
 Filtering Requests and Responses
 ================================
 
-[[BNAGB]]
+[[BNAGB]][[filtering-requests-and-responses]]
 
-[[filtering-requests-and-responses]]
 Filtering Requests and Responses
 --------------------------------
 
@@ -40,9 +39,8 @@ or more filters in a specific order. This chain is specified when the
 web application containing the component is deployed and is instantiated
 when a web container loads the component.
 
-[[BNAGC]]
+[[BNAGC]][[programming-filters]]
 
-[[programming-filters]]
 Programming Filters
 ~~~~~~~~~~~~~~~~~~~
 
@@ -109,9 +107,8 @@ instantiated. If you wish to pass initialization parameters to the
 filter, you retrieve them from the `FilterConfig` object passed to
 `init`.
 
-[[BNAGD]]
+[[BNAGD]][[programming-customized-requests-and-responses]]
 
-[[programming-customized-requests-and-responses]]
 Programming Customized Requests and Responses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -136,9 +133,8 @@ extends either `ServletRequestWrapper` or `HttpServletRequestWrapper`.
 To override response methods, you wrap the response in an object that
 extends either `ServletResponseWrapper` or `HttpServletResponseWrapper`.
 
-[[BNAGF]]
+[[BNAGF]][[specifying-filter-mappings]]
 
-[[specifying-filter-mappings]]
 Specifying Filter Mappings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -180,9 +176,8 @@ F1 and F3, F1's call to `chain.doFilter` invokes the `doFilter` method
 of filter F3. When F3's `doFilter` method completes, control returns to
 F1's `doFilter` method.
 
-[[GJSLC]]
+[[GJSLC]][[to-specify-filter-mappings-using-netbeans-ide]]
 
-[[to-specify-filter-mappings-using-netbeans-ide]]
 To Specify Filter Mappings Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

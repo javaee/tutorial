@@ -7,9 +7,8 @@ prev=connectorexample002.html
 + The traffic Example
 
 
-[[CHDJEADB]]
+[[CHDJEADB]][[the-traffic-example]]
 
-[[the-traffic-example]]
 The traffic Example
 -------------------
 
@@ -75,9 +74,8 @@ The `traffic-war` module contains a message-driven bean that receives
 filtered traffic information updates from the JMS topic asynchronously
 and sends them to the clients using a WebSocket endpoint.
 
-[[sthref248]]
+[[sthref248]][[using-the-inbound-resource-adapter]]
 
-[[using-the-inbound-resource-adapter]]
 Using the Inbound Resource Adapter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -136,9 +134,8 @@ This approach enables you to adapt the MDB to support new features in
 the EIS without having to modify the `TrafficListener` interface or the
 resource adapter module.
 
-[[sthref249]]
+[[sthref249]][[implementing-the-inbound-resource-adapter]]
 
-[[implementing-the-inbound-resource-adapter]]
 Implementing the Inbound Resource Adapter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -254,9 +251,8 @@ private String callMdb(MessageEndpoint mdb, Method command,
 For more details, see the code and the comments in the traffic-rar module.
 ----
 
-[[sthref252]]
+[[sthref252]][[running-the-traffic-example]]
 
-[[running-the-traffic-example]]
 Running the traffic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -268,9 +264,8 @@ The following topics are addressed here:
 * link:#BABIJJEH[To Run the traffic Example Using NetBeans IDE]
 * link:#BABBBGBA[To Run the traffic Example Using Maven]
 
-[[BABIJJEH]]
+[[BABIJJEH]][[to-run-the-traffic-example-using-netbeans-ide]]
 
-[[to-run-the-traffic-example-using-netbeans-ide]]
 To Run the traffic Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -315,9 +310,8 @@ seconds.
 11. After undeploying the `traffic-ear` application, close the
 `traffic-eis` application from the status bar.
 
-[[BABBBGBA]]
+[[BABBBGBA]][[to-run-the-traffic-example-using-maven]]
 
-[[to-run-the-traffic-example-using-maven]]
 To Run the traffic Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

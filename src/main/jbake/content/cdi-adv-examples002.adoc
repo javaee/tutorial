@@ -7,9 +7,8 @@ prev=cdi-adv-examples001.html
 = The encoder Example: Using Alternatives
 
 
-[[GKHPU]]
+[[GKHPU]][[the-encoder-example-using-alternatives]]
 
-[[the-encoder-example-using-alternatives]]
 The encoder Example: Using Alternatives
 ---------------------------------------
 
@@ -29,9 +28,8 @@ The following topics are addressed here:
 * link:#GKHPM[The encoder Facelets Page and Managed Bean]
 * link:#GKHQQ[Running the encoder Example]
 
-[[GKHQA]]
+[[GKHQA]][[the-coder-interface-and-implementations]]
 
-[[the-coder-interface-and-implementations]]
 The Coder Interface and Implementations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -88,9 +86,8 @@ This means that by default, the `TestCoderImpl` class, annotated
 `@Alternative`, will not be used. Instead, the `CoderImpl` class will be
 used.
 
-[[GKHPM]]
+[[GKHPM]][[the-encoder-facelets-page-and-managed-bean]]
 
-[[the-encoder-facelets-page-and-managed-bean]]
 The encoder Facelets Page and Managed Bean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -190,18 +187,16 @@ Facelets page:
     }
 ----
 
-[[GKHQQ]]
+[[GKHQQ]][[running-the-encoder-example]]
 
-[[running-the-encoder-example]]
 Running the encoder Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the `encoder` application.
 
-[[GKHOW]]
+[[GKHOW]][[to-build-package-and-deploy-the-encoder-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-encoder-example-using-netbeans-ide]]
 To Build, Package, and Deploy the encoder Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -224,9 +219,8 @@ This command builds and packages the application into a WAR file,
 `encoder.war`, located in the `target` directory, and then deploys it to
 GlassFish Server.
 
-[[GKHQU]]
+[[GKHQU]][[to-run-the-encoder-example-using-netbeans-ide]]
 
-[[to-run-the-encoder-example-using-netbeans-ide]]
 To Run the encoder Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -275,9 +269,8 @@ enter `Java` and `4`, the result is:
 Result: input string is Java, shift value is 4
 ----
 
-[[GKHQL]]
+[[GKHQL]][[to-build-package-and-deploy-the-encoder-example-using-maven]]
 
-[[to-build-package-and-deploy-the-encoder-example-using-maven]]
 To Build, Package, and Deploy the encoder Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -301,9 +294,8 @@ This command builds and packages the application into a WAR file,
 `encoder.war`, located in the `target` directory, and then deploys it to
 GlassFish Server.
 
-[[GKHOL]]
+[[GKHOL]][[to-run-the-encoder-example-using-maven]]
 
-[[to-run-the-encoder-example-using-maven]]
 To Run the encoder Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

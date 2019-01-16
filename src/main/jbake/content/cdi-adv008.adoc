@@ -7,9 +7,8 @@ prev=cdi-adv007.html
 = Using Stereotypes in CDI Applications
 
 
-[[GKHQC]]
+[[GKHQC]][[using-stereotypes-in-cdi-applications]]
 
-[[using-stereotypes-in-cdi-applications]]
 Using Stereotypes in CDI Applications
 -------------------------------------
 

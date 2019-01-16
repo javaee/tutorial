@@ -7,9 +7,8 @@ prev=connectorexample001.html
 = The trading Example
 
 
-[[CHDFHAID]]
+[[CHDFHAID]][[the-trading-example]]
 
-[[the-trading-example]]
 The trading Example
 -------------------
 
@@ -58,9 +57,8 @@ trades to the EIS using the resource adapter provided by the
 interface provided by the resource adapter to obtain connections to the
 EIS.
 
-[[CHDFADJD]]
+[[CHDFADJD]][[using-the-outbound-resource-adapter]]
 
-[[using-the-outbound-resource-adapter]]
 Using the Outbound Resource Adapter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -197,9 +195,8 @@ try {
 } catch (TradeProcessingException ex) { ... }
 ----
 
-[[sthref243]]
+[[sthref243]][[implementing-the-outbound-resource-adapter]]
 
-[[implementing-the-outbound-resource-adapter]]
 Implementing the Outbound Resource Adapter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -264,9 +261,8 @@ resource adapter development.
 For more details, see the code and the comments in the `trading-rar`
 module.
 
-[[sthref246]]
+[[sthref246]][[running-the-trading-example]]
 
-[[running-the-trading-example]]
 Running the trading Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -278,9 +274,8 @@ The following topics are addressed here:
 * link:#BABCHDDC[To Run the trading Example Using NetBeans IDE]
 * link:#BABFJAAG[To Run the trading Example Using Maven]
 
-[[BABCHDDC]]
+[[BABCHDDC]][[to-run-the-trading-example-using-netbeans-ide]]
 
-[[to-run-the-trading-example-using-netbeans-ide]]
 To Run the trading Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -323,9 +318,8 @@ sequence that provides connection handles from the resource adapter.
 11. Before undeploying the `trading-ear` application, close the
 `trading-eis` application from the status bar.
 
-[[BABFJAAG]]
+[[BABFJAAG]][[to-run-the-trading-example-using-maven]]
 
-[[to-run-the-trading-example-using-maven]]
 To Run the trading Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

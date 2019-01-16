@@ -7,9 +7,8 @@ prev=resources005.html
 The Resource Adapter Examples
 =============================
 
-[[GLODB]]
+[[GLODB]][[the-resource-adapter-examples]]
 
-[[the-resource-adapter-examples]]
 57 The Resource Adapter Examples
 --------------------------------
 

@@ -7,9 +7,8 @@ prev=servlets001.html
 = Servlet Lifecycle
 
 
-[[BNAFI]]
+[[BNAFI]][[servlet-lifecycle]]
 
-[[servlet-lifecycle]]
 Servlet Lifecycle
 -----------------
 
@@ -31,9 +30,8 @@ If it needs to remove the servlet, the container finalizes the servlet
 by calling the servlet's `destroy` method. For more information, see
 link:servlets010.html#BNAGS[Finalizing a Servlet].
 
-[[BNAFJ]]
+[[BNAFJ]][[handling-servlet-lifecycle-events]]
 
-[[handling-servlet-lifecycle-events]]
 Handling Servlet Lifecycle Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -42,9 +40,8 @@ listener objects whose methods get invoked when lifecycle events occur.
 To use these listener objects, you must define and specify the listener
 class.
 
-[[BNAFK]]
+[[BNAFK]][[defining-the-listener-class]]
 
-[[defining-the-listener-class]]
 Defining the Listener Class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -119,9 +116,8 @@ public class SimpleServletListener implements ServletContextListener,
     ...
 ----
 
-[[BNAFN]]
+[[BNAFN]][[handling-servlet-errors]]
 
-[[handling-servlet-errors]]
 Handling Servlet Errors
 ~~~~~~~~~~~~~~~~~~~~~~~
 

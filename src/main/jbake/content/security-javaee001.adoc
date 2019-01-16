@@ -6,9 +6,8 @@ prev=security-javaee.html
 ~~~~~~
 = Basic Security Tasks for Enterprise Applications
 
-[[CACGIFHJ]]
+[[CACGIFHJ]][[basic-security-tasks-for-enterprise-applications]]
 
-[[basic-security-tasks-for-enterprise-applications]]
 Basic Security Tasks for Enterprise Applications
 ------------------------------------------------
 

@@ -7,9 +7,8 @@ prev=persistence-intro002.html
 = Entity Inheritance
 
 
-[[BNBQN]]
+[[BNBQN]][[entity-inheritance]]
 
-[[entity-inheritance]]
 Entity Inheritance
 ------------------
 
@@ -29,9 +28,8 @@ The following topics are addressed here:
 * link:#BNBQQ[Non-Entity Superclasses]
 * link:#BNBQR[Entity Inheritance Mapping Strategies]
 
-[[BNBQO]]
+[[BNBQO]][[abstract-entities]]
 
-[[abstract-entities]]
 Abstract Entities
 ~~~~~~~~~~~~~~~~~
 
@@ -62,9 +60,8 @@ public class PartTimeEmployee extends Employee {
 }
 ----
 
-[[BNBQP]]
+[[BNBQP]][[mapped-superclasses]]
 
-[[mapped-superclasses]]
 Mapped Superclasses
 ~~~~~~~~~~~~~~~~~~~
 
@@ -110,9 +107,8 @@ define the table mappings. For instance, in the preceding code sample,
 the underlying tables would be `FULLTIMEEMPLOYEE` and
 `PARTTIMEEMPLOYEE`, but there is no `EMPLOYEE` table.
 
-[[BNBQQ]]
+[[BNBQQ]][[non-entity-superclasses]]
 
-[[non-entity-superclasses]]
 Non-Entity Superclasses
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -123,9 +119,8 @@ an entity class is nonpersistent. Non-entity superclasses may not be
 used in `EntityManager` or `Query` operations. Any mapping or
 relationship annotations in non-entity superclasses are ignored.
 
-[[BNBQR]]
+[[BNBQR]][[entity-inheritance-mapping-strategies]]
 
-[[entity-inheritance-mapping-strategies]]
 Entity Inheritance Mapping Strategies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -158,9 +153,8 @@ The default strategy, `InheritanceType.SINGLE_TABLE`, is used if the
 `@Inheritance` annotation is not specified on the root class of the
 entity hierarchy.
 
-[[BNBQS]]
+[[BNBQS]][[the-single-table-per-class-hierarchy-strategy]]
 
-[[the-single-table-per-class-hierarchy-strategy]]
 The Single Table per Class Hierarchy Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -234,9 +228,8 @@ between entities and queries that cover the entire entity class
 hierarchy. However, this strategy requires the columns that contain the
 state of subclasses to be nullable.
 
-[[BNBQU]]
+[[BNBQU]][[the-table-per-concrete-class-strategy]]
 
-[[the-table-per-concrete-class-strategy]]
 The Table per Concrete Class Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -254,9 +247,8 @@ Support for this strategy is optional and may not be supported by all
 Java Persistence API providers. The default Java Persistence API
 provider in GlassFish Server does not support this strategy.
 
-[[BNBQV]]
+[[BNBQV]][[the-joined-subclass-strategy]]
 
-[[the-joined-subclass-strategy]]
 The Joined Subclass Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

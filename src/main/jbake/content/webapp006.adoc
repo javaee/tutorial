@@ -7,9 +7,8 @@ prev=webapp005.html
 = Further Information about Web Applications
 
 
-[[BNAFC]]
+[[BNAFC]][[further-information-about-web-applications]]
 
-[[further-information-about-web-applications]]
 Further Information about Web Applications
 ------------------------------------------
 

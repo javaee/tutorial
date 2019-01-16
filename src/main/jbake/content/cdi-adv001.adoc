@@ -7,9 +7,8 @@ prev=cdi-adv.html
 = Packaging CDI Applications
 
 
-[[CACDCFDE]]
+[[CACDCFDE]][[packaging-cdi-applications]]
 
-[[packaging-cdi-applications]]
 Packaging CDI Applications
 --------------------------
 

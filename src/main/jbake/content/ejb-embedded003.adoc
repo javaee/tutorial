@@ -7,9 +7,8 @@ prev=ejb-embedded002.html
 The standalone Example Application
 ==================================
 
-[[GKCPV]]
+[[GKCPV]][[the-standalone-example-application]]
 
-[[the-standalone-example-application]]
 The standalone Example Application
 ----------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 IDE]
 * link:#BEIGHEHJ[To Run the standalone Example Application Using Maven]
 
-[[BEIDAJAC]]
+[[BEIDAJAC]][[overview-of-the-standalone-example-application]]
 
-[[overview-of-the-standalone-example-application]]
 Overview of the standalone Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -107,9 +105,8 @@ public void tearDown() {
 }
 ----
 
-[[GKCQP]]
+[[GKCQP]][[to-run-the-standalone-example-application-using-netbeans-ide]]
 
-[[to-run-the-standalone-example-application-using-netbeans-ide]]
 To Run the standalone Example Application Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -129,9 +126,8 @@ tut-install/examples/ejb
 This will execute the JUnit test class `StandaloneBeanTest`. The Output
 tab shows the progress of the test and the output log.
 
-[[BEIGHEHJ]]
+[[BEIGHEHJ]][[to-run-the-standalone-example-application-using-maven]]
 
-[[to-run-the-standalone-example-application-using-maven]]
 To Run the standalone Example Application Using Maven
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

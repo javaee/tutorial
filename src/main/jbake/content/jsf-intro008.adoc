@@ -7,9 +7,8 @@ prev=jsf-intro007.html
 Partial Processing and Partial Rendering
 ========================================
 
-[[GKNOJ]]
+[[GKNOJ]][[partial-processing-and-partial-rendering]]
 
-[[partial-processing-and-partial-rendering]]
 Partial Processing and Partial Rendering
 ----------------------------------------
 

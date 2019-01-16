@@ -7,9 +7,8 @@ prev=jsf-el001.html
 Immediate and Deferred Evaluation Syntax
 ========================================
 
-[[BNAHR]]
+[[BNAHR]][[immediate-and-deferred-evaluation-syntax]]
 
-[[immediate-and-deferred-evaluation-syntax]]
 Immediate and Deferred Evaluation Syntax
 ----------------------------------------
 
@@ -33,9 +32,8 @@ lifecycle.
 Other technologies using the EL might have different reasons for using
 deferred expressions.
 
-[[BNAHS]]
+[[BNAHS]][[immediate-evaluation]]
 
-[[immediate-evaluation]]
 Immediate Evaluation
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -56,9 +54,8 @@ The JavaServer Faces implementation evaluates the expression
 `${catalog.bookQuantity}`, converts it, and passes the returned value to
 the tag handler. The value is updated on the page.
 
-[[BNAHT]]
+[[BNAHT]][[deferred-evaluation]]
 
-[[deferred-evaluation]]
 Deferred Evaluation
 ~~~~~~~~~~~~~~~~~~~
 

@@ -6,9 +6,8 @@ prev=security-webtier004.html
 ~~~~~~
 = Getting Started Securing Enterprise Applications
 
-[[BNBYK]]
+[[BNBYK]][[getting-started-securing-enterprise-applications]]
 
-[[getting-started-securing-enterprise-applications]]
 52 Getting Started Securing Enterprise Applications
 ---------------------------------------------------
 

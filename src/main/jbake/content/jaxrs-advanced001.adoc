@@ -7,9 +7,8 @@ prev=jaxrs-advanced.html
 = Annotations for Field and Bean Properties of Resource Classes
 
 
-[[GKKRB]]
+[[GKKRB]][[annotations-for-field-and-bean-properties-of-resource-classes]]
 
-[[annotations-for-field-and-bean-properties-of-resource-classes]]
 Annotations for Field and Bean Properties of Resource Classes
 -------------------------------------------------------------
 
@@ -44,9 +43,8 @@ content type is `application/x-www-form-urlencoded`
 |=======================================================================
 
 
-[[GKKYA]]
+[[GKKYA]][[extracting-path-parameters]]
 
-[[extracting-path-parameters]]
 Extracting Path Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,9 +90,8 @@ uppercase characters, you can declare the following regular expression:
 If the last name does not match the regular expression, a 404 response
 is returned.
 
-[[GKKXJ]]
+[[GKKXJ]][[extracting-query-parameters]]
 
-[[extracting-query-parameters]]
 Extracting Query Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -129,9 +126,8 @@ JAX-RS assigns a null value for `Object` values and zero for primitive
 data types. You can use the `@DefaultValue` annotation to eliminate null
 or zero values and define your own default values for a parameter.
 
-[[GKKYC]]
+[[GKKYC]][[extracting-form-data]]
 
-[[extracting-form-data]]
 Extracting Form Data
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -177,9 +173,8 @@ public void post(MultivaluedMap<String, String> formParams) {
 }
 ----
 
-[[GKLCQ]]
+[[GKLCQ]][[extracting-the-java-type-of-a-request-or-response]]
 
-[[extracting-the-java-type-of-a-request-or-response]]
 Extracting the Java Type of a Request or Response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

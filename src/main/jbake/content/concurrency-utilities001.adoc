@@ -7,9 +7,8 @@ prev=concurrency-utilities.html
 = Concurrency Basics
 
 
-[[CIHDFGGG]]
+[[CIHDFGGG]][[concurrency-basics]]
 
-[[concurrency-basics]]
 Concurrency Basics
 ------------------
 
@@ -24,9 +23,8 @@ which was the basis for implementing many of the services offered by
 Java EE containers. At Java SE 5, additional high-level API support for
 concurrency was provided by the `java.util.concurrent` package.
 
-[[sthref293]]
+[[sthref293]][[threads-and-processes]]
 
-[[threads-and-processes]]
 Threads and Processes
 ~~~~~~~~~~~~~~~~~~~~~
 

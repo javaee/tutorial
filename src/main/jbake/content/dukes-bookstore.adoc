@@ -7,9 +7,8 @@ prev=partcasestudies.html
 Duke's Bookstore Case Study Example
 ===================================
 
-[[GLNVI]]
+[[GLNVI]][[dukes-bookstore-case-study-example]]
 
-[[dukes-bookstore-case-study-example]]
 61 Duke's Bookstore Case Study Example
 --------------------------------------
 

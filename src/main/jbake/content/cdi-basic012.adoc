@@ -7,9 +7,8 @@ prev=cdi-basic011.html
 = Injecting Objects by Using Producer Methods
 
 
-[[GJDID]]
+[[GJDID]][[injecting-objects-by-using-producer-methods]]
 
-[[injecting-objects-by-using-producer-methods]]
 Injecting Objects by Using Producer Methods
 -------------------------------------------
 

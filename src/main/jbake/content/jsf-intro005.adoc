@@ -7,9 +7,8 @@ prev=jsf-intro004.html
 User Interface Component Model
 ==============================
 
-[[BNAQD]]
+[[BNAQD]][[user-interface-component-model]]
 
-[[user-interface-component-model]]
 User Interface Component Model
 ------------------------------
 
@@ -42,9 +41,8 @@ component
 This section briefly describes each of these pieces of the component
 architecture.
 
-[[BNAQE]]
+[[BNAQE]][[user-interface-component-classes]]
 
-[[user-interface-component-classes]]
 User Interface Component Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -146,9 +144,8 @@ The next section explains how the rendering model works and how page
 authors can choose to render the components by selecting the appropriate
 tags.
 
-[[BNAQF]]
+[[BNAQF]][[component-rendering-model]]
 
-[[component-rendering-model]]
 Component Rendering Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -194,9 +191,8 @@ illustrates how to use the tags in an example.
 The JavaServer Faces implementation provides a custom tag library for
 rendering components in HTML.
 
-[[BNAQI]]
+[[BNAQI]][[conversion-model]]
 
-[[conversion-model]]
 Conversion Model
 ~~~~~~~~~~~~~~~~
 
@@ -240,9 +236,8 @@ Faces implementation or create your own custom converter. Custom
 converter creation is covered in link:jsf-custom.html#BNAVG[Chapter 15,
 "Creating Custom UI Components and Other Custom Objects"].
 
-[[GIREH]]
+[[GIREH]][[event-and-listener-model]]
 
-[[event-and-listener-model]]
 Event and Listener Model
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -327,9 +322,8 @@ addition to implementing an event listener class or a managed bean
 method that handles the event. link:jsf-custom008.html#BNAWD[Handling
 Events for Custom Components] explains how to do this.
 
-[[BNAQK]]
+[[BNAQK]][[validation-model]]
 
-[[validation-model]]
 Validation Model
 ~~~~~~~~~~~~~~~~
 

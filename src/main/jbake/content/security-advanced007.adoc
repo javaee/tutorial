@@ -6,9 +6,8 @@ prev=security-advanced006.html
 ~~~~~~
 = Configuring Security Using Deployment Descriptors
 
-[[GKHRL]]
+[[GKHRL]][[configuring-security-using-deployment-descriptors]]
 
-[[configuring-security-using-deployment-descriptors]]
 Configuring Security Using Deployment Descriptors
 -------------------------------------------------
 
@@ -26,9 +25,8 @@ Deployment Descriptor]
 * link:#specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor[Specifying Non-Default Principal-to-Role Mapping in the
 Deployment Descriptor]
 
-[[BNCCM]]
+[[BNCCM]][[specifying-security-for-basic-authentication-in-the-deployment-descriptor]]
 
-[[specifying-security-for-basic-authentication-in-the-deployment-descriptor]]
 Specifying Security for Basic Authentication in the Deployment Descriptor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,9 +74,8 @@ been verified to be in the role `TutorialUser`. The user name and
 password data will be sent over a protected transport in order to keep
 it from being read in transit.
 
-[[GKAFQ]]
+[[GKAFQ]][[specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor]]
 
-[[specifying-non-default-principal-to-role-mapping-in-the-deployment-descriptor]]
 Specifying Non-Default Principal-to-Role Mapping in the Deployment Descriptor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

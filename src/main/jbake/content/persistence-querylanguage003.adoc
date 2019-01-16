@@ -7,9 +7,8 @@ prev=persistence-querylanguage002.html
 Creating Queries Using the Java Persistence Query Language
 ==========================================================
 
-[[BNBRG]]
+[[BNBRG]][[creating-queries-using-the-java-persistence-query-language]]
 
-[[creating-queries-using-the-java-persistence-query-language]]
 Creating Queries Using the Java Persistence Query Language
 ----------------------------------------------------------
 
@@ -58,9 +57,8 @@ customers = em.createNamedQuery("findAllCustomersWithName")
     .getResultList();
 ----
 
-[[BNBRH]]
+[[BNBRH]][[named-parameters-in-queries]]
 
-[[named-parameters-in-queries]]
 Named Parameters in Queries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -90,9 +88,8 @@ public List findWithName(String name) {
 Named parameters are case-sensitive and may be used by both dynamic and
 static queries.
 
-[[BNBRI]]
+[[BNBRI]][[positional-parameters-in-queries]]
 
-[[positional-parameters-in-queries]]
 Positional Parameters in Queries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

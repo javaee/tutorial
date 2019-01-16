@@ -7,9 +7,8 @@ prev=servlets015.html
 The fileupload Example Application
 ==================================
 
-[[BABDGFJJ]]
+[[BABDGFJJ]][[the-fileupload-example-application]]
 
-[[the-fileupload-example-application]]
 The fileupload Example Application
 ----------------------------------
 
@@ -53,9 +52,8 @@ The following topics are addressed here:
 * link:#CHDFGBGI[Architecture of the fileupload Example Application]
 * link:#CHDIHJCI[Running the fileupload Example]
 
-[[CHDFGBGI]]
+[[CHDFGBGI]][[architecture-of-the-fileupload-example-application]]
 
-[[architecture-of-the-fileupload-example-application]]
 Architecture of the fileupload Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -228,9 +226,8 @@ private String getFileName(final Part part) {
 }
 ----
 
-[[CHDIHJCI]]
+[[CHDIHJCI]][[running-the-fileupload-example]]
 
-[[running-the-fileupload-example]]
 Running the fileupload Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -245,9 +242,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#CHDDDAAJ[To Run the fileupload Example]
 
-[[CHDGDJCI]]
+[[CHDGDJCI]][[to-build-package-and-deploy-the-fileupload-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-fileupload-example-using-netbeans-ide]]
 To Build, Package, and Deploy the fileupload Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -266,9 +262,8 @@ tut-install/examples/web/servlet
 6.  In the Projects tab, right-click the `fileupload` project and select
 Build.
 
-[[CHDCFADG]]
+[[CHDCFADG]][[to-build-package-and-deploy-the-fileupload-example-using-maven]]
 
-[[to-build-package-and-deploy-the-fileupload-example-using-maven]]
 To Build, Package, and Deploy the fileupload Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -288,9 +283,8 @@ tut-install/examples/web/servlet/fileupload/
 mvn install
 ----
 
-[[CHDDDAAJ]]
+[[CHDDDAAJ]][[to-run-the-fileupload-example]]
 
-[[to-run-the-fileupload-example]]
 To Run the fileupload Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

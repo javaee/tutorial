@@ -7,9 +7,8 @@ prev=resources003.html
 Using Resource Adapters with Contexts and Dependency Injection for Java EE (CDI)
 ================================================================================
 
-[[CHDJFIGB]]
+[[CHDJFIGB]][[using-resource-adapters-with-contexts-and-dependency-injection-for-java-ee-cdi]]
 
-[[using-resource-adapters-with-contexts-and-dependency-injection-for-java-ee-cdi]]
 Using Resource Adapters with Contexts and Dependency Injection for Java EE (CDI)
 --------------------------------------------------------------------------------
 

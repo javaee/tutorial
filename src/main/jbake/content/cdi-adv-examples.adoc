@@ -7,9 +7,8 @@ prev=cdi-bootstrap-se8002.html
 = Running the Advanced Contexts and Dependency Injection Examples
 
 
-[[GKHRE]]
+[[GKHRE]][[running-the-advanced-contexts-and-dependency-injection-examples]]
 
-[[running-the-advanced-contexts-and-dependency-injection-examples]]
 29 Running the Advanced Contexts and Dependency Injection Examples
 ------------------------------------------------------------------
 

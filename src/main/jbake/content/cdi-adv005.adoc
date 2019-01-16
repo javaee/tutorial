@@ -7,9 +7,8 @@ prev=cdi-adv004.html
 = Using Events in CDI Applications
 
 
-[[GKHIC]]
+[[GKHIC]][[using-events-in-cdi-applications]]
 
-[[using-events-in-cdi-applications]]
 Using Events in CDI Applications
 --------------------------------
 
@@ -47,9 +46,8 @@ properties, which have setter and getter methods:
 The example also defines qualifiers that distinguish between two kinds
 of `PaymentEvent`. Every event also has the default qualifier `@Any`.
 
-[[GKHNF]]
+[[GKHNF]][[using-observer-methods-to-handle-events]]
 
-[[using-observer-methods-to-handle-events]]
 Using Observer Methods to Handle Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -144,9 +142,8 @@ Note the following:
 * If the `@Priority` annotation is not specified, the default value is `javax.interceptor.Interceptor.Priority.APPLICATION + 500`.
 * If two or more observer methods are assigned the same priority, the order in which they are invoked is undefined and is therefore unpredictable.
 
-[[GKHIH]]
+[[GKHIH]][[firing-events]]
 
-[[firing-events]]
 Firing Events
 ~~~~~~~~~~~~~
 

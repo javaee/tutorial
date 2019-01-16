@@ -7,9 +7,8 @@ prev=partsupporttechs.html
 Transactions
 ============
 
-[[BNCIH]]
+[[BNCIH]][[transactions]]
 
-[[transactions]]
 55 Transactions
 ---------------
 

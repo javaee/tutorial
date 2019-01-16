@@ -7,9 +7,8 @@ prev=webapp003.html
 A Web Module That Uses Java Servlet Technology: The hello2 Example
 ==================================================================
 
-[[BNAEO]]
+[[BNAEO]][[a-web-module-that-uses-java-servlet-technology-the-hello2-example]]
 
-[[a-web-module-that-uses-java-servlet-technology-the-hello2-example]]
 A Web Module That Uses Java Servlet Technology: The hello2 Example
 ------------------------------------------------------------------
 
@@ -26,9 +25,8 @@ The following topics are addressed here:
 * link:#examining-the-hello2-web-module[Examining the hello2 Web Module]
 * link:#running-the-hello2-example[Running the hello2 Example]
 
-[[BNAEP]]
+[[BNAEP]][[mapping-urls-to-web-components]]
 
-[[mapping-urls-to-web-components]]
 Mapping URLs to Web Components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -67,9 +65,8 @@ http://localhost:8080/hello2/greeting
 To access the servlet by using only the context root, specify `"/"` as
 the URL pattern.
 
-[[GJWWG]]
+[[GJWWG]][[examining-the-hello2-web-module]]
 
-[[examining-the-hello2-web-module]]
 Examining the hello2 Web Module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -78,9 +75,8 @@ application, but it is implemented using Java Servlet technology instead
 of JavaServer Faces technology. You can use a text editor to view the
 application files, or you can use NetBeans IDE.
 
-[[GJWWA]]
+[[GJWWA]][[to-view-the-hello2-web-module-using-netbeans-ide]]
 
-[[to-view-the-hello2-web-module-using-netbeans-ide]]
 To View the hello2 Web Module Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -175,9 +171,8 @@ public class ResponseServlet extends HttpServlet {
     ...
 ----
 
-[[GKBLH]]
+[[GKBLH]][[running-the-hello2-example]]
 
-[[running-the-hello2-example]]
 Running the hello2 Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -189,9 +184,8 @@ The following topics are addressed here:
 * link:#GJSED[To Run the hello2 Example Using NetBeans IDE]
 * link:#GJSHX[To Run the hello2 Example Using Maven]
 
-[[GJSED]]
+[[GJSED]][[to-run-the-hello2-example-using-netbeans-ide]]
 
-[[to-run-the-hello2-example-using-netbeans-ide]]
 To Run the hello2 Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -224,9 +218,8 @@ The application looks much like the `hello1` application. The major
 difference is that after you click Submit the response appears below the
 greeting, not on a separate page.
 
-[[GJSHX]]
+[[GJSHX]][[to-run-the-hello2-example-using-maven]]
 
-[[to-run-the-hello2-example-using-maven]]
 To Run the hello2 Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

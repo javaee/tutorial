@@ -7,9 +7,8 @@ prev=ejb-async.html
 Asynchronous Method Invocation
 ==============================
 
-[[GKKQG]]
+[[GKKQG]][[asynchronous-method-invocation]]
 
-[[asynchronous-method-invocation]]
 Asynchronous Method Invocation
 ------------------------------
 
@@ -35,9 +34,8 @@ the client may use to check whether the computation is completed, wait
 for the invocation to complete, retrieve the final result, and cancel
 the invocation.
 
-[[GKIFJ]]
+[[GKIFJ]][[creating-an-asynchronous-business-method]]
 
-[[creating-an-asynchronous-business-method]]
 Creating an Asynchronous Business Method
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -101,7 +99,6 @@ public Future<String> processPayment(Order order) throws PaymentException {
 ----
 
 [[GKIEM]]
-
 [[calling-asynchronous-methods-from-enterprise-bean-clients]]
 Calling Asynchronous Methods from Enterprise Bean Clients
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,7 +112,6 @@ whether any exceptions were thrown during processing, and check whether
 the invocation was cancelled.
 
 [[GKICM]]
-
 [[retrieving-the-final-result-from-an-asynchronous-method-invocation]]
 Retrieving the Final Result from an Asynchronous Method Invocation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -146,7 +142,6 @@ the `TimeUnit` class for the available units of time to specify the
 timeout value.
 
 [[GKIDB]]
-
 [[cancelling-an-asynchronous-method-invocation]]
 Cancelling an Asynchronous Method Invocation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -171,7 +166,6 @@ completed by calling `Future<V>.cancel`. The `isCancelled` method
 returns `true` if the invocation was cancelled.
 
 [[GKIEV]]
-
 [[checking-the-status-of-an-asynchronous-method-invocation]]
 Checking the Status of an Asynchronous Method Invocation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

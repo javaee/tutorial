@@ -7,9 +7,8 @@ prev=jms-examples007.html
 = Sending Messages from a Session Bean to an MDB
 
 
-[[BNCGW]]
+[[BNCGW]][[sending-messages-from-a-session-bean-to-an-mdb]]
 
-[[sending-messages-from-a-session-bean-to-an-mdb]]
 Sending Messages from a Session Bean to an MDB
 ----------------------------------------------
 
@@ -32,9 +31,8 @@ The following topics are addressed here:
 clientsessionmdb Example]
 * link:#CHDDFAHA[Running the clientsessionmdb Example]
 
-[[BNCGX]]
+[[BNCGX]][[writing-the-application-components-for-the-clientsessionmdb-example]]
 
-[[writing-the-application-components-for-the-clientsessionmdb-example]]
 Writing the Application Components for the clientsessionmdb Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -69,9 +67,8 @@ categories and then publishes the message to a topic. The message-driven
 bean uses a message selector for the property to limit which of the
 published messages will be delivered to it.
 
-[[BNCGZ]]
+[[BNCGZ]][[coding-the-application-client-myappclient.java]]
 
-[[coding-the-application-client-myappclient.java]]
 Coding the Application Client: MyAppClient.java
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -90,9 +87,8 @@ private static PublisherRemote publisher;
 
 The client then calls the bean's business method twice.
 
-[[BNCHA]]
+[[BNCHA]][[coding-the-publisher-session-bean]]
 
-[[coding-the-publisher-session-bean]]
 Coding the Publisher Session Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -132,9 +128,8 @@ public class PublisherBean implements PublisherRemote {
 The business method `publishNews` creates a `JMSProducer` and publishes
 the messages.
 
-[[BNCHB]]
+[[BNCHB]][[coding-the-message-driven-bean-messagebean.java]]
 
-[[coding-the-message-driven-bean-messagebean.java]]
 Coding the Message-Driven Bean: MessageBean.java
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -185,9 +180,8 @@ The JMS resource adapter uses these properties to create a connection
 factory for the message-driven bean that allows the bean to use a
 durable subscription.
 
-[[CHDDFAHA]]
+[[CHDDFAHA]][[running-the-clientsessionmdb-example]]
 
-[[running-the-clientsessionmdb-example]]
 Running the clientsessionmdb Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -203,9 +197,8 @@ The following topics are addressed here:
 * link:#CHDGGAIB[To Run clientsessionmdb Using NetBeans IDE]
 * link:#CHDDDHBE[To Run clientsessionmdb Using Maven]
 
-[[CHDGGAIB]]
+[[CHDGGAIB]][[to-run-clientsessionmdb-using-netbeans-ide]]
 
-[[to-run-clientsessionmdb-using-netbeans-ide]]
 To Run clientsessionmdb Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -258,9 +251,8 @@ only the messages whose `NewsType` property is `Sports` or `Opinion`.
 7.  Use the Services tab to undeploy the application after you have
 finished running it.
 
-[[CHDDDHBE]]
+[[CHDDDHBE]][[to-run-clientsessionmdb-using-maven]]
 
-[[to-run-clientsessionmdb-using-maven]]
 To Run clientsessionmdb Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

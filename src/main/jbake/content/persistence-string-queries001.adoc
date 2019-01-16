@@ -7,9 +7,8 @@ prev=persistence-string-queries.html
 Overview of String-Based Criteria API Queries
 =============================================
 
-[[GKJIV]]
+[[GKJIV]][[overview-of-string-based-criteria-api-queries]]
 
-[[overview-of-string-based-criteria-api-queries]]
 Overview of String-Based Criteria API Queries
 ---------------------------------------------
 

@@ -7,9 +7,8 @@ prev=jsf-ajax010.html
 = The ajaxguessnumber Example Application
 
 
-[[GKOKB]]
+[[GKOKB]][[the-ajaxguessnumber-example-application]]
 
-[[the-ajaxguessnumber-example-application]]
 The ajaxguessnumber Example Application
 ---------------------------------------
 
@@ -29,9 +28,8 @@ The following topics are addressed here:
 * link:#GKOIJ[The ajaxguessnumber Source Files]
 * link:#GKOKE[Running the ajaxguessnumber Example]
 
-[[GKOIJ]]
+[[GKOIJ]][[the-ajaxguessnumber-source-files]]
 
-[[the-ajaxguessnumber-source-files]]
 The ajaxguessnumber Source Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -43,9 +41,8 @@ The following topics are addressed here:
 * link:#GKOHN[The UserNumberBean Backing Bean]
 * link:#CHDGAIGJ[The DukesNumberBean CDI Managed Bean]
 
-[[GKOFW]]
+[[GKOFW]][[the-ajaxgreeting.xhtml-facelets-page]]
 
-[[the-ajaxgreeting.xhtml-facelets-page]]
 The ajaxgreeting.xhtml Facelets Page
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -108,9 +105,8 @@ validation error occurs, the managed bean is not executed, and the
 validation error message is displayed in the message pane. Otherwise,
 the result of the guess is rendered in the `result` component.
 
-[[GKOHN]]
+[[GKOHN]][[the-usernumberbean-backing-bean]]
 
-[[the-usernumberbean-backing-bean]]
 The UserNumberBean Backing Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -133,9 +129,8 @@ public String getResponse() {
 }
 ----
 
-[[CHDGAIGJ]]
+[[CHDGAIGJ]][[the-dukesnumberbean-cdi-managed-bean]]
 
-[[the-dukesnumberbean-cdi-managed-bean]]
 The DukesNumberBean CDI Managed Bean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -154,9 +149,8 @@ DukesNumberBean dukesNumberBean;
 You will learn more about CDI in link:cdi-basic.html#GIWHB[Chapter 25,
 "Introduction to Contexts and Dependency Injection for Java EE"].
 
-[[GKOKE]]
+[[GKOKE]][[running-the-ajaxguessnumber-example]]
 
-[[running-the-ajaxguessnumber-example]]
 Running the ajaxguessnumber Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -171,9 +165,8 @@ Using NetBeans IDE]
 Using Maven]
 * link:#GLHWE[To Run the ajaxguessnumber Example]
 
-[[GLHVU]]
+[[GLHVU]][[to-build-package-and-deploy-the-ajaxguessnumber-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-ajaxguessnumber-example-using-netbeans-ide]]
 To Build, Package, and Deploy the ajaxguessnumber Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -194,9 +187,8 @@ select Build.
 +
 This command builds and deploys the project.
 
-[[GLHVQ]]
+[[GLHVQ]][[to-build-package-and-deploy-the-ajaxguessnumber-example-using-maven]]
 
-[[to-build-package-and-deploy-the-ajaxguessnumber-example-using-maven]]
 To Build, Package, and Deploy the ajaxguessnumber Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -220,9 +212,8 @@ This command builds and packages the application into a WAR file,
 `ajaxguessnumber.war`, located in the `target` directory. It then
 deploys the application.
 
-[[GLHWE]]
+[[GLHWE]][[to-run-the-ajaxguessnumber-example]]
 
-[[to-run-the-ajaxguessnumber-example]]
 To Run the ajaxguessnumber Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

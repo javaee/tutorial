@@ -7,9 +7,8 @@ prev=packaging003.html
 Packaging Resource Adapter Archives
 ===================================
 
-[[BCGDHBHJ]]
+[[BCGDHBHJ]][[packaging-resource-adapter-archives]]
 
-[[packaging-resource-adapter-archives]]
 Packaging Resource Adapter Archives
 -----------------------------------
 

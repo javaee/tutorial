@@ -7,9 +7,8 @@ prev=jms-concepts003.html
 Using Advanced JMS Features
 ===========================
 
-[[BNCFU]]
+[[BNCFU]][[using-advanced-jms-features]]
 
-[[using-advanced-jms-features]]
 Using Advanced JMS Features
 ---------------------------
 
@@ -62,9 +61,8 @@ differences are noted here and are explained in detail in
 link:jms-concepts005.html#BNCGL[Using the JMS API in Java EE
 Applications].
 
-[[BNCFW]]
+[[BNCFW]][[controlling-message-acknowledgment]]
 
-[[controlling-message-acknowledgment]]
 Controlling Message Acknowledgment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -153,9 +151,8 @@ The sample program in link:jms-examples003.html#BNCFX[Acknowledging
 Messages] demonstrates two ways to ensure that a message will not be
 acknowledged until processing of the message is complete.
 
-[[BNCFV]]
+[[BNCFV]][[specifying-options-for-sending-messages]]
 
-[[specifying-options-for-sending-messages]]
 Specifying Options for Sending Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -177,9 +174,8 @@ of time has expired.
 allows you to specify more than one of these options when you create a
 producer and call the `send` method.
 
-[[BNCFY]]
+[[BNCFY]][[specifying-message-persistence]]
 
-[[specifying-message-persistence]]
 Specifying Message Persistence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -214,9 +210,8 @@ Using the `NON_PERSISTENT` delivery mode may improve performance and
 reduce storage overhead, but you should use it only if your application
 can afford to miss messages.
 
-[[BNCFZ]]
+[[BNCFZ]][[setting-message-priority-levels]]
 
-[[setting-message-priority-levels]]
 Setting Message Priority Levels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -239,9 +234,8 @@ do not specify a priority level, the default level is 4. A JMS provider
 tries to deliver higher-priority messages before lower-priority ones,
 but does not have to deliver messages in exact order of priority.
 
-[[BNCGA]]
+[[BNCGA]][[allowing-messages-to-expire]]
 
-[[allowing-messages-to-expire]]
 Allowing Messages to Expire
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -270,9 +264,8 @@ current time to give the expiration time. Any message not delivered
 before the specified expiration time is destroyed. The destruction of
 obsolete messages conserves storage and computing resources.
 
-[[BABGEADH]]
+[[BABGEADH]][[specifying-a-delivery-delay]]
 
-[[specifying-a-delivery-delay]]
 Specifying a Delivery Delay
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -290,9 +283,8 @@ delivery delay of 3 seconds for a producer and then sends a message:
 context.createProducer().setDeliveryDelay(3000).send(dest, msg);
 ----
 
-[[BABJFIAD]]
+[[BABJFIAD]][[using-jmsproducer-method-chaining]]
 
-[[using-jmsproducer-method-chaining]]
 Using JMSProducer Method Chaining
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -317,9 +309,8 @@ You can also call the `JMSProducer` methods to set properties on a
 message and then send the message in a separate `send` method call. You
 can also set message properties directly on a message.
 
-[[BNCGB]]
+[[BNCGB]][[creating-temporary-destinations]]
 
-[[creating-temporary-destinations]]
 Creating Temporary Destinations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -367,9 +358,8 @@ context.createProducer().send((Topic) msg.getJMSReplyTo(), replyMsg);
 For an example, see link:jms-examples009.html#BNCHF[Using an Entity to
 Join Messages from Two MDBs].
 
-[[BNCGH]]
+[[BNCGH]][[using-jms-local-transactions]]
 
-[[using-jms-local-transactions]]
 Using JMS Local Transactions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -490,9 +480,8 @@ topic in the same transaction.
 The example in link:jms-examples004.html#BNCGJ[Using Local Transactions]
 shows how to use JMS local transactions.
 
-[[BABFIFAJ]]
+[[BABFIFAJ]][[sending-messages-asynchronously]]
 
-[[sending-messages-asynchronously]]
 Sending Messages Asynchronously
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

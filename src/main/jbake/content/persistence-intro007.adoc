@@ -7,9 +7,8 @@ prev=persistence-intro006.html
 Further Information about Persistence
 =====================================
 
-[[GKCLC]]
+[[GKCLC]][[further-information-about-persistence]]
 
-[[further-information-about-persistence]]
 Further Information about Persistence
 -------------------------------------
 

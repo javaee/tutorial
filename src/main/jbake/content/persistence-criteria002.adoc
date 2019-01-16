@@ -7,9 +7,8 @@ prev=persistence-criteria001.html
 Using the Metamodel API to Model Entity Classes
 ===============================================
 
-[[GJIUP]]
+[[GJIUP]][[using-the-metamodel-api-to-model-entity-classes]]
 
-[[using-the-metamodel-api-to-model-entity-classes]]
 Using the Metamodel API to Model Entity Classes
 -----------------------------------------------
 
@@ -57,9 +56,8 @@ public class Pet_ {
 Criteria queries use the metamodel class and its attributes to refer to
 the managed entity classes and their persistent state and relationships.
 
-[[GJIVL]]
+[[GJIVL]][[using-metamodel-classes]]
 
-[[using-metamodel-classes]]
 Using Metamodel Classes
 ~~~~~~~~~~~~~~~~~~~~~~~
 

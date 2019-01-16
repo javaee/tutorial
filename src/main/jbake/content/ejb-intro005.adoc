@@ -7,9 +7,8 @@ prev=ejb-intro004.html
 The Contents of an Enterprise Bean
 ==================================
 
-[[GIPIO]]
+[[GIPIO]][[the-contents-of-an-enterprise-bean]]
 
-[[the-contents-of-an-enterprise-bean]]
 The Contents of an Enterprise Bean
 ----------------------------------
 

@@ -7,9 +7,8 @@ prev=usingexamples002.html
 Starting the Administration Console
 ===================================
 
-[[BNADJ]]
+[[BNADJ]][[starting-the-administration-console]]
 
-[[starting-the-administration-console]]
 Starting the Administration Console
 -----------------------------------
 
@@ -18,9 +17,8 @@ applications, use the Administration Console tool. GlassFish Server must
 be running before you invoke the Administration Console. To start the
 Administration Console, open a browser at `http://localhost:4848/`.
 
-[[GJKST]]
+[[GJKST]][[to-start-the-administration-console-using-netbeans-ide]]
 
-[[to-start-the-administration-console-using-netbeans-ide]]
 To Start the Administration Console Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

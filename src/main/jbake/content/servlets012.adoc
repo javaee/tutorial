@@ -7,9 +7,8 @@ prev=servlets011.html
 = Asynchronous Processing
 
 
-[[BEIGCFDF]]
+[[BEIGCFDF]][[asynchronous-processing]]
 
-[[asynchronous-processing]]
 Asynchronous Processing
 -----------------------
 
@@ -38,9 +37,8 @@ of web applications. Asynchronous processing refers to assigning these
 blocking operations to a new thread and retuning the thread associated
 with the request immediately to the container.
 
-[[sthref103]]
+[[sthref103]][[asynchronous-processing-in-servlets]]
 
-[[asynchronous-processing-in-servlets]]
 Asynchronous Processing in Servlets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -130,9 +128,8 @@ the blocking operation completes.
 |=======================================================================
 
 
-[[sthref105]]
+[[sthref105]][[waiting-for-a-resource]]
 
-[[waiting-for-a-resource]]
 Waiting for a Resource
 ~~~~~~~~~~~~~~~~~~~~~~
 

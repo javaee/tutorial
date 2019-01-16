@@ -7,9 +7,8 @@ prev=jsf-ajax002.html
 = Using Ajax with Facelets
 
 
-[[GKABR]]
+[[GKABR]][[using-ajax-with-facelets]]
 
-[[using-ajax-with-facelets]]
 Using Ajax with Facelets
 ------------------------
 
@@ -30,9 +29,8 @@ server-side methods from a view. The component generates a JavaScript
 function with a given name that when invoked, in turn invokes, a given
 server-side method via Ajax.
 
-[[GKAFN]]
+[[GKAFN]][[using-the-fajax-tag]]
 
-[[using-the-fajax-tag]]
 Using the f:ajax Tag
 ~~~~~~~~~~~~~~~~~~~~
 

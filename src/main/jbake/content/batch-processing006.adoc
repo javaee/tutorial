@@ -7,9 +7,8 @@ prev=batch-processing005.html
 Submitting Jobs to the Batch Runtime
 ====================================
 
-[[BCGCAHCB]]
+[[BCGCAHCB]][[submitting-jobs-to-the-batch-runtime]]
 
-[[submitting-jobs-to-the-batch-runtime]]
 Submitting Jobs to the Batch Runtime
 ------------------------------------
 
@@ -25,9 +24,8 @@ functionality.
 The `BatchRuntime` class in the `javax.batch.runtime` package provides
 the `getJobOperator` factory method to obtain `JobOperator` objects.
 
-[[sthref282]]
+[[sthref282]][[starting-a-job]]
 
-[[starting-a-job]]
 Starting a Job
 ~~~~~~~~~~~~~~
 
@@ -49,9 +47,8 @@ job as specified in its job definition file. The second parameter is a
 execution. You can use job parameters to pass to a job information that
 is only known at runtime.
 
-[[BCGIBGFC]]
+[[BCGIBGFC]][[checking-the-status-of-a-job]]
 
-[[checking-the-status-of-a-job]]
 Checking the Status of a Job
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,9 +70,8 @@ JobExecution jobExec = jobOperator.getJobExecution(execID);
 String status = jobExec.getBatchStatus().toString();
 ----
 
-[[sthref283]]
+[[sthref283]][[invoking-the-batch-runtime-in-your-application]]
 
-[[invoking-the-batch-runtime-in-your-application]]
 Invoking the Batch Runtime in Your Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

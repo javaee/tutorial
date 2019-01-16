@@ -7,9 +7,8 @@ prev=jms-concepts004.html
 = Using the JMS API in Java EE Applications
 
 
-[[BNCGL]]
+[[BNCGL]][[using-the-jms-api-in-java-ee-applications]]
 
-[[using-the-jms-api-in-java-ee-applications]]
 Using the JMS API in Java EE Applications
 -----------------------------------------
 
@@ -29,9 +28,8 @@ Receive Messages]
 Asynchronously]
 * link:#BNCGS[Managing JTA Transactions]
 
-[[CHDGICJB]]
+[[CHDGICJB]][[overview-of-using-the-jms-api]]
 
-[[overview-of-using-the-jms-api]]
 Overview of Using the JMS API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,9 +44,8 @@ This rule does not apply to application clients. The application client
 container supports the creation of multiple sessions for each
 connection.
 
-[[BABHFBDH]]
+[[BABHFBDH]][[creating-resources-for-java-ee-applications]]
 
-[[creating-resources-for-java-ee-applications]]
 Creating Resources for Java EE Applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -152,9 +149,8 @@ application clients are not deployed in the application server and must
 therefore communicate with each other using administratively created
 resources that exist outside of individual applications.
 
-[[BNCGM]]
+[[BNCGM]][[using-resource-injection-in-enterprise-bean-or-web-components]]
 
-[[using-resource-injection-in-enterprise-bean-or-web-components]]
 Using Resource Injection in Enterprise Bean or Web Components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -166,9 +162,8 @@ The following topics are addressed here:
 * link:#CHDCHDIJ[Injecting a ConnectionFactory, Queue, or Topic]
 * link:#BABCJBEE[Injecting a JMSContext Object]
 
-[[CHDCHDIJ]]
+[[CHDCHDIJ]][[injecting-a-connectionfactory-queue-or-topic]]
 
-[[injecting-a-connectionfactory-queue-or-topic]]
 Injecting a ConnectionFactory, Queue, or Topic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -206,9 +201,8 @@ private Topic topic;
 If you declare the resource static in these components, runtime errors
 will result.
 
-[[BABCJBEE]]
+[[BABCJBEE]][[injecting-a-jmscontext-object]]
 
-[[injecting-a-jmscontext-object]]
 Injecting a JMSContext Object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -233,9 +227,8 @@ To use your own connection factory, use code like the following:
 private JMSContext context2;
 ----
 
-[[BNCGN]]
+[[BNCGN]][[using-java-ee-components-to-produce-and-to-synchronously-receive-messages]]
 
-[[using-java-ee-components-to-produce-and-to-synchronously-receive-messages]]
 Using Java EE Components to Produce and to Synchronously Receive Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -259,9 +252,8 @@ Using the JMS API in a Java EE component is in many ways similar to
 using it in an application client. The main differences are the areas of
 resource management and transactions.
 
-[[BNCGO]]
+[[BNCGO]][[managing-jms-resources-in-web-and-ejb-components]]
 
-[[managing-jms-resources-in-web-and-ejb-components]]
 Managing JMS Resources in Web and EJB Components
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -288,9 +280,8 @@ cached state, you must close the resource in a `@PrePassivate` callback
 method and set its value to `null`, and you must create it again in a
 `@PostActivate` callback method.
 
-[[BNCGP]]
+[[BNCGP]][[managing-transactions-in-session-beans]]
 
-[[managing-transactions-in-session-beans]]
 Managing Transactions in Session Beans
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -309,9 +300,8 @@ container-managed transactions produce the most efficient and correct
 behavior. This tutorial does not provide any examples of bean-managed
 transactions.
 
-[[BNCGQ]]
+[[BNCGQ]][[using-message-driven-beans-to-receive-messages-asynchronously]]
 
-[[using-message-driven-beans-to-receive-messages-asynchronously]]
 Using Message-Driven Beans to Receive Messages Asynchronously
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -501,9 +491,8 @@ message-driven bean.
 For details on the lifecycle of a message-driven bean, see
 link:ejb-intro007.html#GIPKW[The Lifecycle of a Message-Driven Bean].
 
-[[BNCGS]]
+[[BNCGS]][[managing-jta-transactions]]
 
-[[managing-jta-transactions]]
 Managing JTA Transactions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

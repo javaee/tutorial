@@ -6,9 +6,8 @@ prev=security-api005.html
 ~~~~~~
 = Java EE Security: Advanced Topics
 
-[[GJJWX]]
+[[GJJWX]][[java-ee-security-advanced-topics]]
 
-[[java-ee-security-advanced-topics]]
 54 Java EE Security: Advanced Topics
 ------------------------------------
 

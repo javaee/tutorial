@@ -7,9 +7,8 @@ prev=batch-processing002.html
 Simple Use Case
 ===============
 
-[[BCGHBJIG]]
+[[BCGHBJIG]][[simple-use-case]]
 
-[[simple-use-case]]
 Simple Use Case
 ---------------
 
@@ -44,9 +43,8 @@ follows:
 </job>
 ----
 
-[[sthref268]]
+[[sthref268]][[chunk-step]]
 
-[[chunk-step]]
 Chunk Step
 ~~~~~~~~~~
 
@@ -173,9 +171,8 @@ public class MyWriter implements javax.batch.api.chunk.ItemWriter {
 }
 ----
 
-[[sthref269]]
+[[sthref269]][[task-step]]
 
-[[task-step]]
 Task Step
 ~~~~~~~~~
 

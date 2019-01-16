@@ -7,9 +7,8 @@ prev=dukes-forest002.html
 Building and Deploying the Duke's Forest Case Study Application
 ===============================================================
 
-[[GLNQP]]
+[[GLNQP]][[building-and-deploying-the-dukes-forest-case-study-application]]
 
-[[building-and-deploying-the-dukes-forest-case-study-application]]
 Building and Deploying the Duke's Forest Case Study Application
 ---------------------------------------------------------------
 
@@ -22,9 +21,8 @@ NetBeans IDE]
 * link:#CHDEJHBJ[To Build and Deploy the Duke's Forest Application Using
 Maven]
 
-[[CHDJDIFH]]
+[[CHDJDIFH]][[to-build-and-deploy-the-dukes-forest-application-using-netbeans-ide]]
 
-[[to-build-and-deploy-the-dukes-forest-application-using-netbeans-ide]]
 To Build and Deploy the Duke's Forest Application Using NetBeans IDE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -52,9 +50,8 @@ To configure the server, this task creates a JDBC security realm named
 jdbcRealm, enables default principal-to-role mapping, and enables single
 sign-on (SSO) for the HTTP Service.
 
-[[CHDEJHBJ]]
+[[CHDEJHBJ]][[to-build-and-deploy-the-dukes-forest-application-using-maven]]
 
-[[to-build-and-deploy-the-dukes-forest-application-using-maven]]
 To Build and Deploy the Duke's Forest Application Using Maven
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

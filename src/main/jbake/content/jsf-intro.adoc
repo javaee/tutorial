@@ -7,9 +7,8 @@ prev=webapp006.html
 JavaServer Faces Technology
 ===========================
 
-[[BNAPH]]
+[[BNAPH]][[javaserver-faces-technology]]
 
-[[javaserver-faces-technology]]
 7 JavaServer Faces Technology
 -----------------------------
 

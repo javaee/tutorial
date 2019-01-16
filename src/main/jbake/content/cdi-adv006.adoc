@@ -7,9 +7,8 @@ prev=cdi-adv005.html
 = Using Interceptors in CDI Applications
 
 
-[[GKHJX]]
+[[GKHJX]][[using-interceptors-in-cdi-applications]]
 
-[[using-interceptors-in-cdi-applications]]
 Using Interceptors in CDI Applications
 --------------------------------------
 

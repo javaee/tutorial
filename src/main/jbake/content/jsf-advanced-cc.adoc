@@ -7,9 +7,8 @@ prev=jsf-ajax012.html
 Composite Components: Advanced Topics and an Example
 ====================================================
 
-[[GKHXA]]
+[[GKHXA]][[composite-components-advanced-topics-and-an-example]]
 
-[[composite-components-advanced-topics-and-an-example]]
 14 Composite Components: Advanced Topics and an Example
 -------------------------------------------------------
 

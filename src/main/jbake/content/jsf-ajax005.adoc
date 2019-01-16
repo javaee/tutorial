@@ -7,9 +7,8 @@ prev=jsf-ajax004.html
 = Monitoring Events on the Client
 
 
-[[GKDDF]]
+[[GKDDF]][[monitoring-events-on-the-client]]
 
-[[monitoring-events-on-the-client]]
 Monitoring Events on the Client
 -------------------------------
 

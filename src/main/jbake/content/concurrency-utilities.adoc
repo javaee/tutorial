@@ -7,9 +7,8 @@ prev=batch-processing010.html
 = Concurrency Utilities for Java EE
 
 
-[[GKJIQ8]]
+[[GKJIQ8]][[concurrency-utilities-for-java-ee]]
 
-[[concurrency-utilities-for-java-ee]]
 60 Concurrency Utilities for Java EE
 ------------------------------------
 

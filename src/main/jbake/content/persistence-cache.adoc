@@ -7,9 +7,8 @@ prev=persistence-entitygraphs004.html
 Using a Second-Level Cache with Java Persistence API Applications
 =================================================================
 
-[[GKJIA]]
+[[GKJIA]][[using-a-second-level-cache-with-java-persistence-api-applications]]
 
-[[using-a-second-level-cache-with-java-persistence-api-applications]]
 47 Using a Second-Level Cache with Java Persistence API Applications
 --------------------------------------------------------------------
 

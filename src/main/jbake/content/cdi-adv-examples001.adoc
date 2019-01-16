@@ -7,9 +7,8 @@ prev=cdi-adv-examples.html
 = Building and Running the CDI Advanced Examples
 
 
-[[A1251406]]
+[[A1251406]][[building-and-running-the-cdi-advanced-examples]]
 
-[[building-and-running-the-cdi-advanced-examples]]
 Building and Running the CDI Advanced Examples
 ----------------------------------------------
 

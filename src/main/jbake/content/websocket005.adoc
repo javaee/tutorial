@@ -7,9 +7,8 @@ prev=websocket004.html
 Sending and Receiving Messages
 ==============================
 
-[[BABFCGBJ]]
+[[BABFCGBJ]][[sending-and-receiving-messages]]
 
-[[sending-and-receiving-messages]]
 Sending and Receiving Messages
 ------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#CIHEHFCB[Sending Messages]
 * link:#CIHIDFHD[Receiving Messages]
 
-[[CIHEHFCB]]
+[[CIHEHFCB]][[sending-messages]]
 
-[[sending-messages]]
 Sending Messages
 ~~~~~~~~~~~~~~~~
 
@@ -73,9 +71,8 @@ The example in link:websocket004.html#BABFEBGA[Annotated Endpoints]
 demonstrates how to use this procedure to reply to every incoming text
 message.
 
-[[BABIFBCG]]
+[[BABIFBCG]][[sending-messages-to-all-peers-connected-to-an-endpoint]]
 
-[[sending-messages-to-all-peers-connected-to-an-endpoint]]
 Sending Messages to All Peers Connected to an Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -103,9 +100,8 @@ public class EchoAllEndpoint {
 }
 ----
 
-[[CIHIDFHD]]
+[[CIHIDFHD]][[receiving-messages]]
 
-[[receiving-messages]]
 Receiving Messages
 ~~~~~~~~~~~~~~~~~~
 

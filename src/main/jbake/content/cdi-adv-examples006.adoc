@@ -7,9 +7,8 @@ prev=cdi-adv-examples005.html
 The decorators Example: Decorating a Bean
 =========================================
 
-[[GKPAX]]
+[[GKPAX]][[the-decorators-example-decorating-a-bean]]
 
-[[the-decorators-example-decorating-a-bean]]
 The decorators Example: Decorating a Bean
 -----------------------------------------
 
@@ -27,9 +26,8 @@ The following topics are addressed here:
 * link:#GKPAQ[Components of the decorators Example]
 * link:#GKPBK[Running the decorators Example]
 
-[[CHDDDFCI]]
+[[CHDDDFCI]][[overview-of-the-decorators-example]]
 
-[[overview-of-the-decorators-example]]
 Overview of the decorators Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -42,9 +40,8 @@ The example includes an interface, an implementation of it, a decorator,
 an interceptor, a managed bean, a Facelets page, and configuration
 files.
 
-[[GKPAQ]]
+[[GKPAQ]][[components-of-the-decorators-example]]
 
-[[components-of-the-decorators-example]]
 Components of the decorators Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -102,9 +99,8 @@ The `beans.xml` file specifies both the decorator and the interceptor:
     </interceptors>
 ----
 
-[[GKPBK]]
+[[GKPBK]][[running-the-decorators-example]]
 
-[[running-the-decorators-example]]
 Running the decorators Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,9 +115,8 @@ NetBeans IDE]
 Maven]
 * link:#GKPAN[To Run the decorators Example]
 
-[[GKPAG]]
+[[GKPAG]][[to-build-package-and-deploy-the-decorators-example-using-netbeans-ide]]
 
-[[to-build-package-and-deploy-the-decorators-example-using-netbeans-ide]]
 To Build, Package, and Deploy the decorators Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -144,9 +139,8 @@ This command builds and packages the application into a WAR file,
 `decorators.war`, located in the `target` directory, and then deploys it
 to GlassFish Server.
 
-[[GKPAJ]]
+[[GKPAJ]][[to-build-package-and-deploy-the-decorators-example-using-maven]]
 
-[[to-build-package-and-deploy-the-decorators-example-using-maven]]
 To Build, Package, and Deploy the decorators Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -170,9 +164,8 @@ This command builds and packages the application into a WAR file,
 `decorators.war`, located in the `target` directory, and then deploys it
 to GlassFish Server.
 
-[[GKPAN]]
+[[GKPAN]][[to-run-the-decorators-example]]
 
-[[to-run-the-decorators-example]]
 To Run the decorators Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -7,9 +7,8 @@ prev=jsf-custom011.html
 Creating and Using a Custom Validator
 =====================================
 
-[[BNAUW]]
+[[BNAUW]][[creating-and-using-a-custom-validator]]
 
-[[creating-and-using-a-custom-validator]]
 Creating and Using a Custom Validator
 -------------------------------------
 
@@ -79,9 +78,8 @@ situation. However, the rest of this section describes how this
 validator would be implemented and how to specify a custom tag so that
 the page author could register the validator on a component.
 
-[[BNAUX]]
+[[BNAUX]][[implementing-the-validator-interface]]
 
-[[implementing-the-validator-interface]]
 Implementing the Validator Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -201,9 +199,8 @@ four methods: `saveState(FacesContext)`,
 `setTransient(boolean)`. See link:jsf-custom005.html#BNAVZ[Saving and
 Restoring State] for more information.
 
-[[BNAUY]]
+[[BNAUY]][[specifying-a-custom-tag]]
 
-[[specifying-a-custom-tag]]
 Specifying a Custom Tag
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -242,9 +239,8 @@ implementation class.
 link:#BNATV[Using a Custom Validator] explains how to use the custom
 validator tag on the page.
 
-[[BNATV]]
+[[BNATV]][[using-a-custom-validator]]
 
-[[using-a-custom-validator]]
 Using a Custom Validator
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

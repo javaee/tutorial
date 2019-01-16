@@ -7,9 +7,8 @@ prev=transactions.html
 Overview of Transactions
 ========================
 
-[[A1024277]]
+[[A1024277]][[overview-of-transactions]]
 
-[[overview-of-transactions]]
 Overview of Transactions
 ------------------------
 

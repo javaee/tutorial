@@ -7,9 +7,8 @@ prev=resources002.html
 Common Client Interface
 =======================
 
-[[GIPJU]]
+[[GIPJU]][[common-client-interface]]
 
-[[common-client-interface]]
 Common Client Interface
 -----------------------
 

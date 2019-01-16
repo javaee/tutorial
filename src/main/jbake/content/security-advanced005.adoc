@@ -7,9 +7,8 @@ prev=security-advanced004.html
 Securing Application Clients
 ============================
 
-[[GLIGC]]
+[[GLIGC]][[securing-application-clients]]
 
-[[securing-application-clients]]
 Securing Application Clients
 ----------------------------
 
@@ -46,9 +45,8 @@ descriptor. The application's callback handler must fully support
 `Callback` objects specified in the `javax.security.auth.callback`
 package.
 
-[[GLIDW]]
+[[GLIDW]][[using-login-modules]]
 
-[[using-login-modules]]
 Using Login Modules
 ~~~~~~~~~~~~~~~~~~~
 
@@ -87,9 +85,8 @@ refer to the documentation listed in
 link:security-advanced008.html#BABBGBBF[Further Information about
 Advanced Security Topics].
 
-[[GLIHQ]]
+[[GLIHQ]][[using-programmatic-login]]
 
-[[using-programmatic-login]]
 Using Programmatic Login
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

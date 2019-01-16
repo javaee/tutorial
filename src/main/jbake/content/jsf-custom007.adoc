@@ -7,9 +7,8 @@ prev=jsf-custom006.html
 Implementing an Event Listener
 ==============================
 
-[[BNAUT]]
+[[BNAUT]][[implementing-an-event-listener]]
 
-[[implementing-an-event-listener]]
 Implementing an Event Listener
 ------------------------------
 
@@ -54,9 +53,8 @@ information on how to manage page navigation.
 |=======================================================================
 
 
-[[BNAUU]]
+[[BNAUU]][[implementing-value-change-listeners]]
 
-[[implementing-value-change-listeners]]
 Implementing Value-Change Listeners
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,9 +117,8 @@ session map of the `FacesContext` instance.
 link:jsf-page-core002.html#BNATA[Registering a Value-Change Listener on a
 Component] explains how to register this listener onto a component.
 
-[[BNAUV]]
+[[BNAUV]][[implementing-action-listeners]]
 
-[[implementing-action-listeners]]
 Implementing Action Listeners
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

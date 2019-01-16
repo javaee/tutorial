@@ -7,9 +7,8 @@ prev=jsf-configure010.html
 Registering a Custom Renderer with a Render Kit
 ===============================================
 
-[[BNAXH]]
+[[BNAXH]][[registering-a-custom-renderer-with-a-render-kit]]
 
-[[registering-a-custom-renderer-with-a-render-kit]]
 Registering a Custom Renderer with a Render Kit
 -----------------------------------------------
 

@@ -7,9 +7,8 @@ prev=jsf-intro.html
 Introduction to JavaServer Faces Technology
 ===========================================
 
-[[A1073698]]
+[[A1073698]][[introduction-to-javaserver-faces-technology]]
 
-[[introduction-to-javaserver-faces-technology]]
 Introduction to JavaServer Faces Technology
 -------------------------------------------
 

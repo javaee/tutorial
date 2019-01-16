@@ -6,9 +6,8 @@ prev=dukes-forest003.html
 Running the Duke's Forest Application
 =====================================
 
-[[GLNSX]]
+[[GLNSX]][[running-the-dukes-forest-application]]
 
-[[running-the-dukes-forest-application]]
 Running the Duke's Forest Application
 -------------------------------------
 
@@ -27,9 +26,8 @@ The following topics are addressed here:
 * link:#CHDICAIJ[To Approve Shipment of a Product]
 * link:#CHDIFEGC[To Create a New Product]
 
-[[CHDBDEHH]]
+[[CHDBDEHH]][[to-register-as-a-dukes-store-customer]]
 
-[[to-register-as-a-dukes-store-customer]]
 To Register as a Duke's Store Customer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -47,9 +45,8 @@ The Duke's Forest - Store page opens.
 All fields are required, and the Password value must be at least 7
 characters in length.
 
-[[CHDCEJIC]]
+[[CHDCEJIC]][[to-purchase-products]]
 
-[[to-purchase-products]]
 To Purchase Products
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -78,9 +75,8 @@ that limit. Otherwise, the status is "Ready to ship."
 7.  When you have finished placing orders, click Logout at the top of
 the page.
 
-[[CHDICAIJ]]
+[[CHDICAIJ]][[to-approve-shipment-of-a-product]]
 
-[[to-approve-shipment-of-a-product]]
 To Approve Shipment of a Product
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -105,9 +101,8 @@ Duke's Store again as the customer, it will appear in the Orders list as
 To return to Duke's Store from Duke's Shipment, click Return to Duke's
 Store.
 
-[[CHDIFEGC]]
+[[CHDIFEGC]][[to-create-a-new-product]]
 
-[[to-create-a-new-product]]
 To Create a New Product
 ~~~~~~~~~~~~~~~~~~~~~~~
 

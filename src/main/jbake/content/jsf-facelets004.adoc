@@ -7,9 +7,8 @@ prev=jsf-facelets003.html
 = Using Facelets Templates
 
 
-[[GIQXP]]
+[[GIQXP]][[using-facelets-templates]]
 
-[[using-facelets-templates]]
 Using Facelets Templates
 ------------------------
 

@@ -7,9 +7,8 @@ prev=jsf-develop002.html
 Writing Managed Bean Methods
 ============================
 
-[[BNAVB]]
+[[BNAVB]][[writing-managed-bean-methods]]
 
-[[writing-managed-bean-methods]]
 Writing Managed Bean Methods
 ----------------------------
 
@@ -21,9 +20,8 @@ functions for components on the page. These functions include
 * Performing validation on the component's value
 * Handling value-change events
 
-[[sthref68]]
+[[sthref68]][[why-use-managed-beans]]
 
-[[why-use-managed-beans]]
 Why Use Managed Beans
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -43,9 +41,8 @@ perform the validation associated with the component.
 The following sections explain how to write various types of managed
 bean methods.
 
-[[BNAVC]]
+[[BNAVC]][[writing-a-method-to-handle-navigation]]
 
-[[writing-a-method-to-handle-navigation]]
 Writing a Method to Handle Navigation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -129,9 +126,8 @@ method. The section link:jsf-develop002.html#BNAUK[Writing Properties
 Bound to Component Instances] explains how to write the bean properties
 to which the components are bound.
 
-[[BNAVD]]
+[[BNAVD]][[writing-a-method-to-handle-an-action-event]]
 
-[[writing-a-method-to-handle-an-action-event]]
 Writing a Method to Handle an Action Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -164,9 +160,8 @@ the book ID by using the selected value from the `HashMap` object.
 link:jsf-page-core004.html#BNATQ[Referencing a Method That Handles an
 Action Event] explains how a component tag references this method.
 
-[[BNAVE]]
+[[BNAVE]][[writing-a-method-to-perform-validation]]
 
-[[writing-a-method-to-perform-validation]]
 Writing a Method to Perform Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -223,9 +218,8 @@ See link:jsf-page-core004.html#BNATR[Referencing a Method That Performs
 Validation] for information on how a component tag references this
 method.
 
-[[BNAVF]]
+[[BNAVF]][[writing-a-method-to-handle-a-value-change-event]]
 
-[[writing-a-method-to-handle-a-value-change-event]]
 Writing a Method to Handle a Value-Change Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

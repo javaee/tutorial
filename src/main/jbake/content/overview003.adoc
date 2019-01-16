@@ -7,9 +7,8 @@ prev=overview002.html
 Java EE Application Model
 =========================
 
-[[BNAAX]]
+[[BNAAX]][[java-ee-application-model]]
 
-[[java-ee-application-model]]
 Java EE Application Model
 -------------------------
 

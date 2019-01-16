@@ -7,9 +7,8 @@ prev=connectorexample.html
 Overview of the Resource Adapter Examples
 =========================================
 
-[[A1253757]]
+[[A1253757]][[overview-of-the-resource-adapter-examples]]
 
-[[overview-of-the-resource-adapter-examples]]
 Overview of the Resource Adapter Examples
 -----------------------------------------
 

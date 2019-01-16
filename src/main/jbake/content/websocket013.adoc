@@ -7,9 +7,8 @@ prev=websocket012.html
 Further Information about WebSocket
 ===================================
 
-[[BABDFIFD]]
+[[BABDFIFD]][[further-information-about-websocket]]
 
-[[further-information-about-websocket]]
 Further Information about WebSocket
 -----------------------------------
 

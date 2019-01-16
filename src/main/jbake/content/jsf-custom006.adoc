@@ -7,9 +7,8 @@ prev=jsf-custom005.html
 Delegating Rendering to a Renderer
 ==================================
 
-[[BNAWA]]
+[[BNAWA]][[delegating-rendering-to-a-renderer]]
 
-[[delegating-rendering-to-a-renderer]]
 Delegating Rendering to a Renderer
 ----------------------------------
 
@@ -26,9 +25,8 @@ topics:
 * link:#BNAWB[Creating the Renderer Class]
 * link:#BNAWC[Identifying the Renderer Type]
 
-[[BNAWB]]
+[[BNAWB]][[creating-the-renderer-class]]
 
-[[creating-the-renderer-class]]
 Creating the Renderer Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -141,9 +139,8 @@ The `@FacesRenderer` annotation registers the renderer class with the
 JavaServer Faces implementation as a renderer class. The annotation
 identifies the component family as well as the renderer type.
 
-[[BNAWC]]
+[[BNAWC]][[identifying-the-renderer-type]]
 
-[[identifying-the-renderer-type]]
 Identifying the Renderer Type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

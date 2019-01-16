@@ -7,9 +7,8 @@ prev=overview007.html
 = Java EE APIs
 
 
-[[BNACJ]]
+[[BNACJ]][[java-ee-apis]]
 
-[[java-ee-apis]]
 Java EE APIs
 ------------
 
@@ -54,9 +53,8 @@ image:img/javaeett_dt_009.png[
 The following sections give a brief summary of the technologies required
 by the Java EE platform and the APIs used in Java EE applications.
 
-[[BNACL]]
+[[BNACL]][[enterprise-javabeans-technology]]
 
-[[enterprise-javabeans-technology]]
 Enterprise JavaBeans Technology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -78,9 +76,8 @@ The Java EE 8 platform requires Enterprise JavaBeans 3.2 and
 Interceptors 1.2. The Interceptors specification is part of the EJB
 specification.
 
-[[BNACM]]
+[[BNACM]][[java-servlet-technology]]
 
-[[java-servlet-technology]]
 Java Servlet Technology
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -98,9 +95,8 @@ the following:
 
 The Java EE 8 platform requires Servlet 4.0
 
-[[BNACP]]
+[[BNACP]][[javaserver-faces-technology]]
 
-[[javaserver-faces-technology]]
 JavaServer Faces Technology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -141,9 +137,8 @@ Language 3.0.
 For an excellent summary of what's new in JSF 2.3,
 see `https://javaserverfaces.github.io/users.html`.
 
-[[BNACN]]
+[[BNACN]][[javaserver-pages-technology]]
 
-[[javaserver-pages-technology]]
 JavaServer Pages Technology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -162,9 +157,8 @@ The Java EE 8 platform requires JavaServer Pages 2.3 for compatibility
 with earlier releases but recommends the use of Facelets as the display
 technology in new applications.
 
-[[BNACO]]
+[[BNACO]][[javaserver-pages-standard-tag-library]]
 
-[[javaserver-pages-standard-tag-library]]
 JavaServer Pages Standard Tag Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -181,9 +175,8 @@ accessing databases using SQL, and tags for commonly used functions.
 
 The Java EE 8 platform requires JSTL 1.2.
 
-[[BNADB]]
+[[BNADB]][[java-persistence-api]]
 
-[[java-persistence-api]]
 Java Persistence API
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -200,9 +193,8 @@ consists of the following areas:
 
 The Java EE 8 platform requires Java Persistence API 2.2.
 
-[[BNACR]]
+[[BNACR]][[java-transaction-api]]
 
-[[java-transaction-api]]
 Java Transaction API
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -218,9 +210,8 @@ back, and commits.
 
 The Java EE 8 platform requires Java Transaction API 1.2.
 
-[[GIRBT]]
+[[GIRBT]][[java-api-for-restful-web-services]]
 
-[[java-api-for-restful-web-services]]
 Java API for RESTful Web Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -242,9 +233,8 @@ Clients may subscribe to server-issued event notifications using a long-running 
 
 The Java EE 8 platform requires JAX-RS 2.1.
 
-[[GJXSD]]
+[[GJXSD]][[managed-beans]]
 
-[[managed-beans]]
 Managed Beans
 ~~~~~~~~~~~~~
 
@@ -259,9 +249,8 @@ The Managed Beans specification is part of the Java EE 8 platform
 specification (JSR 366). The Java EE 8 platform requires Managed Beans
 1.0.
 
-[[GJXVO]]
+[[GJXVO]][[contexts-and-dependency-injection-for-java-ee]]
 
-[[contexts-and-dependency-injection-for-java-ee]]
 Contexts and Dependency Injection for Java EE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -282,9 +271,8 @@ In the Java EE 8 platform, new CDI features include the following:
 
 The Java EE 8 platform requires CDI 2.0.
 
-[[GJXVG]]
+[[GJXVG]][[dependency-injection-for-java]]
 
-[[dependency-injection-for-java]]
 Dependency Injection for Java
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -297,9 +285,8 @@ application.
 
 The Java EE 8 platform requires Dependency Injection for Java 1.0.
 
-[[GJXTY]]
+[[GJXTY]][[bean-validation]]
 
-[[bean-validation]]
 Bean Validation
 ~~~~~~~~~~~~~~~
 
@@ -317,9 +304,8 @@ In the Java EE 8 platform, new Bean Validation features include the following:
 
 The Java EE 8 platform requires Bean Validation 2.0.
 
-[[BNACQ]]
+[[BNACQ]][[java-message-service-api]]
 
-[[java-message-service-api]]
 Java Message Service API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -330,9 +316,8 @@ reliable, and asynchronous.
 
 The Java EE 8 platform requires JMS 2.0.
 
-[[BNACZ]]
+[[BNACZ]][[java-ee-connector-architecture]]
 
-[[java-ee-connector-architecture]]
 Java EE Connector Architecture
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -357,9 +342,8 @@ and end-to-end business integration.
 
 The Java EE 8 platform requires Java EE Connector Architecture 1.7.
 
-[[BNACS]]
+[[BNACS]][[javamail-api]]
 
-[[javamail-api]]
 JavaMail API
 ~~~~~~~~~~~~
 
@@ -375,9 +359,8 @@ that allows application components to send Internet mail.
 
 The Java EE 8 platform requires JavaMail 1.6.
 
-[[GIRBE]]
+[[GIRBE]][[java-authorization-contract-for-containers]]
 
-[[java-authorization-contract-for-containers]]
 Java Authorization Contract for Containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -396,9 +379,8 @@ of roles.
 
 The Java EE 8 platform requires JACC 1.5.
 
-[[GIRGP]]
+[[GIRGP]][[java-authentication-service-provider-interface-for-containers]]
 
-[[java-authentication-service-provider-interface-for-containers]]
 Java Authentication Service Provider Interface for Containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -445,9 +427,8 @@ for default group-to-role mapping, and defines a principal type called
 
 The Java EE 8 platform requires Java EE Security API 1.0.
 
-[[CJAHDJBJ]]
+[[CJAHDJBJ]][[java-api-for-websocket]]
 
-[[java-api-for-websocket]]
 Java API for WebSocket
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -459,9 +440,8 @@ lifecycle callback methods.
 
 The Java EE 8 platform requires Java API for WebSocket 1.1.
 
-[[CJAGIEEI]]
+[[CJAGIEEI]][[java-api-for-json-processing]]
 
-[[java-api-for-json-processing]]
 Java API for JSON Processing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -495,9 +475,8 @@ The Java API for JSON Binding (JSON-B) provides a binding layer for converting J
 
 JSON-B is new to the Java EE 8 platform. The Java EE 8 platform requires JSON-B 1.0.
 
-[[CJAFGFCJ]]
+[[CJAFGFCJ]][[concurrency-utilities-for-java-ee]]
 
-[[concurrency-utilities-for-java-ee]]
 Concurrency Utilities for Java EE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -508,9 +487,8 @@ executor service, managed thread factory, and context service.
 
 The Java EE 8 platform requires Concurrency Utilities for Java EE 1.0.
 
-[[CJAJHGIH]]
+[[CJAJHGIH]][[batch-applications-for-the-java-platform]]
 
-[[batch-applications-for-the-java-platform]]
 Batch Applications for the Java Platform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

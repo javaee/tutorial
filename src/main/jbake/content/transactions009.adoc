@@ -7,9 +7,8 @@ prev=transactions008.html
 Further Information about Transactions
 ======================================
 
-[[GKCMI]]
+[[GKCMI]][[further-information-about-transactions]]
 
-[[further-information-about-transactions]]
 Further Information about Transactions
 --------------------------------------
 

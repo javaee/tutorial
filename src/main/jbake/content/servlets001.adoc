@@ -7,9 +7,8 @@ prev=servlets.html
 What Is a Servlet?
 ==================
 
-[[BNAFE]]
+[[BNAFE]][[what-is-a-servlet]]
 
-[[what-is-a-servlet]]
 What Is a Servlet?
 ------------------
 

@@ -7,9 +7,8 @@ prev=ejb-intro.html
 = What Is an Enterprise Bean?
 
 
-[[GIPMB]]
+[[GIPMB]][[what-is-an-enterprise-bean]]
 
-[[what-is-an-enterprise-bean]]
 What Is an Enterprise Bean?
 ---------------------------
 
@@ -27,9 +26,8 @@ The following topics are addressed here:
 * link:#GIPKN[When to Use Enterprise Beans]
 * link:#GIPNM[Types of Enterprise Beans]
 
-[[GIPLK]]
+[[GIPLK]][[benefits-of-enterprise-beans]]
 
-[[benefits-of-enterprise-beans]]
 Benefits of Enterprise Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -52,9 +50,8 @@ assembler can build new applications from existing beans. Provided that
 they use the standard APIs, these applications can run on any compliant
 Java EE server.
 
-[[GIPKN]]
+[[GIPKN]][[when-to-use-enterprise-beans]]
 
-[[when-to-use-enterprise-beans]]
 When to Use Enterprise Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,9 +70,8 @@ objects.
 of code, remote clients can easily locate enterprise beans. These
 clients can be thin, various, and numerous.
 
-[[GIPNM]]
+[[GIPNM]][[types-of-enterprise-beans]]
 
-[[types-of-enterprise-beans]]
 Types of Enterprise Beans
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=ejb-gettingstarted001.html
 Creating the Enterprise Bean
 ============================
 
-[[GIPSS]]
+[[GIPSS]][[creating-the-enterprise-bean]]
 
-[[creating-the-enterprise-bean]]
 Creating the Enterprise Bean
 ----------------------------
 
@@ -22,9 +21,8 @@ Creating `ConverterBean` requires these steps:
 1.  Coding the bean's implementation class (the source code is provided)
 2.  Compiling the source code
 
-[[GIPSX]]
+[[GIPSX]][[coding-the-enterprise-bean-class]]
 
-[[coding-the-enterprise-bean-class]]
 Coding the Enterprise Bean Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -64,9 +62,8 @@ Note the `@Stateless` annotation decorating the enterprise bean class.
 This annotation lets the container know that `ConverterBean` is a
 stateless session bean.
 
-[[GIPSI]]
+[[GIPSI]][[creating-the-converter-web-client]]
 
-[[creating-the-converter-web-client]]
 Creating the converter Web Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -124,9 +121,8 @@ try {
 
 The results are displayed to the user.
 
-[[GIPVV]]
+[[GIPVV]][[running-the-converter-example]]
 
-[[running-the-converter-example]]
 Running the converter Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -141,9 +137,8 @@ The following topics are addressed here:
 * link:#GIPUM[To Run the converter Example Using NetBeans IDE]
 * link:#GIPVQ[To Run the converter Example Using Maven]
 
-[[GIPUM]]
+[[GIPUM]][[to-run-the-converter-example-using-netbeans-ide]]
 
-[[to-run-the-converter-example-using-netbeans-ide]]
 To Run the converter Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -172,9 +167,8 @@ click Submit.
 +
 A second page opens, showing the converted values.
 
-[[GIPVQ]]
+[[GIPVQ]][[to-run-the-converter-example-using-maven]]
 
-[[to-run-the-converter-example-using-maven]]
 To Run the converter Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

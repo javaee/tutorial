@@ -7,9 +7,8 @@ prev=persistence-intro007.html
 Running the Persistence Examples
 ================================
 
-[[GIJST]]
+[[GIJST]][[running-the-persistence-examples]]
 
-[[running-the-persistence-examples]]
 41 Running the Persistence Examples
 -----------------------------------
 

@@ -7,9 +7,8 @@ prev=jaxrs.html
 = What Are RESTful Web Services?
 
 
-[[GIJQY]]
+[[GIJQY]][[what-are-restful-web-services]]
 
-[[what-are-restful-web-services]]
 What Are RESTful Web Services?
 ------------------------------
 

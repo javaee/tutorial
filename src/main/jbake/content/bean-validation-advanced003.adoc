@@ -7,9 +7,8 @@ prev=bean-validation-advanced002.html
 Grouping Constraints
 ====================
 
-[[GKAGV]]
+[[GKAGV]][[grouping-constraints]]
 
-[[grouping-constraints]]
 Grouping Constraints
 --------------------
 
@@ -58,9 +57,8 @@ validating all constraints declared as part of the supergroup. For
 example, validating the `Manager` group results in the `workPhone` field
 being validated, because `Employee` is a superinterface of `Manager`.
 
-[[GKAGU]]
+[[GKAGU]][[customizing-group-validation-order]]
 
-[[customizing-group-validation-order]]
 Customizing Group Validation Order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

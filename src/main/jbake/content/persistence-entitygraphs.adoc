@@ -7,9 +7,8 @@ prev=persistence-locking002.html
 Creating Fetch Plans with Entity Graphs
 =======================================
 
-[[BABIJIAC]]
+[[BABIJIAC]][[creating-fetch-plans-with-entity-graphs]]
 
-[[creating-fetch-plans-with-entity-graphs]]
 46 Creating Fetch Plans with Entity Graphs
 ------------------------------------------
 

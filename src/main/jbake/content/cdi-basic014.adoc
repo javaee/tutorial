@@ -7,9 +7,8 @@ prev=cdi-basic013.html
 = Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
 
 
-[[BABJFEAI]]
+[[BABJFEAI]][[using-the-postconstruct-and-predestroy-annotations-with-cdi-managed-bean-classes]]
 
-[[using-the-postconstruct-and-predestroy-annotations-with-cdi-managed-bean-classes]]
 Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes
 ----------------------------------------------------------------------------------
 
@@ -25,9 +24,8 @@ Annotation]
 * link:#CIHBAFAC[To Prepare for the Destruction of a Managed Bean Using
 the @PreDestroy Annotation]
 
-[[CIHEHHCH]]
+[[CIHEHHCH]][[to-initialize-a-managed-bean-using-the-postconstruct-annotation]]
 
-[[to-initialize-a-managed-bean-using-the-postconstruct-annotation]]
 To Initialize a Managed Bean Using the @PostConstruct Annotation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,9 +71,8 @@ public void reset () {
 }
 ----
 
-[[CIHBAFAC]]
+[[CIHBAFAC]][[to-prepare-for-the-destruction-of-a-managed-bean-using-the-predestroy-annotation]]
 
-[[to-prepare-for-the-destruction-of-a-managed-bean-using-the-predestroy-annotation]]
 To Prepare for the Destruction of a Managed Bean Using the @PreDestroy Annotation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

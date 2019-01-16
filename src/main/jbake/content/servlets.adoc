@@ -7,9 +7,8 @@ prev=jsf-ws007.html
 = Java Servlet Technology
 
 
-[[BNAFD]]
+[[BNAFD]][[java-servlet-technology]]
 
-[[java-servlet-technology]]
 18 Java Servlet Technology
 --------------------------
 

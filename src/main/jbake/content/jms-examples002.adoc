@@ -7,9 +7,8 @@ prev=jms-examples001.html
 = Overview of the JMS Examples
 
 
-[[BABEFBHJ]]
+[[BABEFBHJ]][[overview-of-the-jms-examples]]
 
-[[overview-of-the-jms-examples]]
 Overview of the JMS Examples
 ----------------------------
 
@@ -18,8 +17,7 @@ what they do, and link to the section that describes them fully. The
 example directory for each example is relative to the
 `_tut-install_/examples/jms/` directory.
 
-[[sthref200]]
-[[sthref201]]
+[[sthref200]][sthref201]]
 
 *Table 49-1 JMS Examples That Show the Use of Java EE Application Clients*
 

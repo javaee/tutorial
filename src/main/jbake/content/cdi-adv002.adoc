@@ -7,9 +7,8 @@ prev=cdi-adv001.html
 = Using Alternatives in CDI Applications
 
 
-[[GJSDF]]
+[[GJSDF]][[using-alternatives-in-cdi-applications]]
 
-[[using-alternatives-in-cdi-applications]]
 Using Alternatives in CDI Applications
 --------------------------------------
 
@@ -100,9 +99,8 @@ alternative beans that implement the same interface are annotated with
 `@Priority`. You do not need to specify the alternative in the
 `beans.xml` file when you use the `@Priority` annotation.
 
-[[GKHPO]]
+[[GKHPO]][[using-specialization]]
 
-[[using-specialization]]
 Using Specialization
 ~~~~~~~~~~~~~~~~~~~~
 

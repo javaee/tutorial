@@ -7,9 +7,8 @@ prev=ejb-basicexamples001.html
 The cart Example
 ================
 
-[[BNBOD]]
+[[BNBOD]][[the-cart-example]]
 
-[[the-cart-example]]
 The cart Example
 ----------------
 
@@ -32,9 +31,8 @@ section link:#BNBOJ[Helper Classes].
 The source code for this example is in the
 `_tut-install_/examples/ejb/cart/` directory.
 
-[[BNBOE]]
+[[BNBOE]][[the-business-interface]]
 
-[[the-business-interface]]
 The Business Interface
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,9 +74,8 @@ public interface Cart {
 }
 ----
 
-[[BNBOF]]
+[[BNBOF]][[session-bean-class]]
 
-[[session-bean-class]]
 Session Bean Class
 ~~~~~~~~~~~~~~~~~~
 
@@ -174,9 +171,8 @@ public class CartBean implements Cart {
 }
 ----
 
-[[BNBOG]]
+[[BNBOG]][[lifecycle-callback-methods]]
 
-[[lifecycle-callback-methods]]
 Lifecycle Callback Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -200,9 +196,8 @@ environment and saves it to secondary storage.
 
 Lifecycle callback methods must return `void` and have no parameters.
 
-[[BNBOH]]
+[[BNBOH]][[business-methods]]
 
-[[business-methods]]
 Business Methods
 ^^^^^^^^^^^^^^^^
 
@@ -275,9 +270,8 @@ The container will not wrap application exceptions, such as
 `RuntimeException`, you do not need to include it in the `throws` clause
 of the business method.
 
-[[BNBOI]]
+[[BNBOI]][[the-remove-method]]
 
-[[the-remove-method]]
 The @Remove Method
 ~~~~~~~~~~~~~~~~~~
 
@@ -297,9 +291,8 @@ public void remove() {
 }
 ----
 
-[[BNBOJ]]
+[[BNBOJ]][[helper-classes]]
 
-[[helper-classes]]
 Helper Classes
 ~~~~~~~~~~~~~~
 
@@ -312,9 +305,8 @@ within a WAR; or an EAR file that contains an EJB JAR, a WAR file, or a
 separate library JAR file. In `cart`, the helper classes are included in
 a library JAR used by the application client and the EJB JAR.
 
-[[BNBOK]]
+[[BNBOK]][[running-the-cart-example]]
 
-[[running-the-cart-example]]
 Running the cart Example
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -331,9 +323,8 @@ The following topics are addressed here:
 * link:#BNBOL[To Run the cart Example Using NetBeans IDE]
 * link:#BNBON[To Run the cart Example Using Maven]
 
-[[BNBOL]]
+[[BNBOL]][[to-run-the-cart-example-using-netbeans-ide]]
 
-[[to-run-the-cart-example-using-netbeans-ide]]
 To Run the cart Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -370,9 +361,8 @@ Removing "Gravity's Rainbow" from cart.
 Caught a BookException: "Gravity's Rainbow" not in cart.
 ----
 
-[[BNBON]]
+[[BNBON]][[to-run-the-cart-example-using-maven]]
 
-[[to-run-the-cart-example-using-maven]]
 To Run the cart Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

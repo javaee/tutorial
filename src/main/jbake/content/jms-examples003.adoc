@@ -7,9 +7,8 @@ prev=jms-examples002.html
 = Writing Simple JMS Applications
 
 
-[[BNCFA]]
+[[BNCFA]][[writing-simple-jms-applications]]
 
-[[writing-simple-jms-applications]]
 Writing Simple JMS Applications
 -------------------------------
 
@@ -30,9 +29,8 @@ Delivery]
 * link:#BABDDHHC[Running Multiple Consumers on the Same Destination]
 * link:#BNCFX[Acknowledging Messages]
 
-[[CHDCEFGA]]
+[[CHDCEFGA]][[overview-of-writing-simple-jms-application]]
 
-[[overview-of-writing-simple-jms-application]]
 Overview of Writing Simple JMS Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,9 +63,8 @@ subdirectories:
 Before running the examples, you need to start GlassFish Server and
 create administered objects.
 
-[[BNCFD]]
+[[BNCFD]][[starting-the-jms-provider]]
 
-[[starting-the-jms-provider]]
 Starting the JMS Provider
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -75,9 +72,8 @@ When you use GlassFish Server, your JMS provider is GlassFish Server.
 Start the server as described in
 link:usingexamples002.html#BNADI[Starting and Stopping GlassFish Server].
 
-[[GKTJS]]
+[[GKTJS]][[creating-jms-administered-objects]]
 
-[[creating-jms-administered-objects]]
 Creating JMS Administered Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -101,9 +97,8 @@ You can also use the `asadmin create-jms-resource` command to create
 resources, the `asadmin list-jms-resources` command to display their
 names, and the `asadmin delete-jms-resource` command to remove them.
 
-[[BABHEFCB]]
+[[BABHEFCB]][[to-create-resources-for-the-simple-examples]]
 
-[[to-create-resources-for-the-simple-examples]]
 To Create Resources for the Simple Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -148,9 +143,8 @@ In GlassFish Server, the Java EE `java:comp/DefaultJMSConnectionFactory`
 resource is mapped to a connection factory named
 `jms/__defaultConnectionFactory`.
 
-[[BABEEABE]]
+[[BABEEABE]][[building-all-the-simple-examples]]
 
-[[building-all-the-simple-examples]]
 Building All the Simple Examples
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -168,9 +162,8 @@ The following topics are addressed here:
 * link:#CHDJEJCD[To Build All the Simple Examples Using NetBeans IDE]
 * link:#CHDGHJAA[To Build All the Simple Examples Using Maven]
 
-[[CHDJEJCD]]
+[[CHDJEJCD]][[to-build-all-the-simple-examples-using-netbeans-ide]]
 
-[[to-build-all-the-simple-examples-using-netbeans-ide]]
 To Build All the Simple Examples Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -189,9 +182,8 @@ Build to build all the examples.
 This command places the application client JAR files in the `target`
 directories for the examples.
 
-[[CHDGHJAA]]
+[[CHDGHJAA]][[to-build-all-the-simple-examples-using-maven]]
 
-[[to-build-all-the-simple-examples-using-maven]]
 To Build All the Simple Examples Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -211,9 +203,8 @@ mvn install
 This command places the application client JAR files in the `target`
 directories for the examples.
 
-[[BABIHCAE]]
+[[BABIHCAE]][[sending-messages]]
 
-[[sending-messages]]
 Sending Messages
 ~~~~~~~~~~~~~~~~
 
@@ -226,9 +217,8 @@ The following topics are addressed here:
 * link:#CHDFBABB[The Producer.java Client]
 * link:#CHDHIIHE[To Run the Producer Client]
 
-[[CHDGHJHH]]
+[[CHDGHJHH]][[general-steps-performed-in-the-example]]
 
-[[general-steps-performed-in-the-example]]
 General Steps Performed in the Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -246,9 +236,8 @@ link:jms-concepts003.html#BNCEW[Message Bodies].
 should expect no more messages.
 5.  Catch any exceptions.
 
-[[CHDFBABB]]
+[[CHDFBABB]][[the-producer.java-client]]
 
-[[the-producer.java-client]]
 The Producer.java Client
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -347,9 +336,8 @@ closed:
 System.exit(0);
 ----
 
-[[CHDHIIHE]]
+[[CHDHIIHE]][[to-run-the-producer-client]]
 
-[[to-run-the-producer-client]]
 To Run the Producer Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -404,9 +392,8 @@ complete.
 |=======================================================================
 
 
-[[BNCFB]]
+[[BNCFB]][[receiving-messages-synchronously]]
 
-[[receiving-messages-synchronously]]
 Receiving Messages Synchronously
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -419,9 +406,8 @@ The following topics are addressed here:
 * link:#BNCFC[The SynchConsumer.java Client]
 * link:#BNCFG[To Run the SynchConsumer and Producer Clients]
 
-[[BNCFC]]
+[[BNCFC]][[the-synchconsumer.java-client]]
 
-[[the-synchconsumer.java-client]]
 The SynchConsumer.java Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -469,9 +455,8 @@ closed.
 The `SynchConsumer` client uses an indefinite `while` loop to receive
 messages, calling `receive` with a timeout argument.
 
-[[BNCFG]]
+[[BNCFG]][[to-run-the-synchconsumer-and-producer-clients]]
 
-[[to-run-the-synchconsumer-and-producer-clients]]
 To Run the SynchConsumer and Producer Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -582,9 +567,8 @@ Messages received: 3
 Because these messages were sent after the consumer was started, the
 client receives them.
 
-[[BNCFH]]
+[[BNCFH]][[using-a-message-listener-for-asynchronous-message-delivery]]
 
-[[using-a-message-listener-for-asynchronous-message-delivery]]
 Using a Message Listener for Asynchronous Message Delivery
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -612,9 +596,8 @@ The following topics are addressed here:
 Clients]
 * link:#BNCFK[To Run the AsynchConsumer and Producer Clients]
 
-[[BNCFI]]
+[[BNCFI]][[writing-the-asynchconsumer.java-and-textlistener.java-clients]]
 
-[[writing-the-asynchconsumer.java-and-textlistener.java-clients]]
 Writing the AsynchConsumer.java and TextListener.java Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -675,9 +658,8 @@ Simple Examples].
 The steps assume that you have already built and packaged all the
 examples using NetBeans IDE or Maven.
 
-[[BNCFK]]
+[[BNCFK]][[to-run-the-asynchconsumer-and-producer-clients]]
 
-[[to-run-the-asynchconsumer-and-producer-clients]]
 To Run the AsynchConsumer and Producer Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -786,9 +768,8 @@ Message is not a TextMessage
 ----
 7.  Enter `Q` or `q` and press Return to stop the client.
 
-[[BNCFL]]
+[[BNCFL]][[browsing-messages-on-a-queue]]
 
-[[browsing-messages-on-a-queue]]
 Browsing Messages on a Queue
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -803,9 +784,8 @@ The following topics are addressed here:
 * link:#BNCFM[The MessageBrowser.java Client]
 * link:#BNCFN[To Run the QueueBrowser Client]
 
-[[BNCFM]]
+[[BNCFM]][[the-messagebrowser.java-client]]
 
-[[the-messagebrowser.java-client]]
 The MessageBrowser.java Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -879,9 +859,8 @@ For this example, you will use the connection factory and queue you
 created for link:#BNCFB[Receiving Messages Synchronously]. It is assumed
 that you have already built and packaged all the examples.
 
-[[BNCFN]]
+[[BNCFN]][[to-run-the-queuebrowser-client]]
 
-[[to-run-the-queuebrowser-client]]
 To Run the QueueBrowser Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -985,9 +964,8 @@ Reading message: This is message 1 from producer
 Messages received: 1
 ----
 
-[[BABDDHHC]]
+[[BABDDHHC]][[running-multiple-consumers-on-the-same-destination]]
 
-[[running-multiple-consumers-on-the-same-destination]]
 Running Multiple Consumers on the Same Destination
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1044,9 +1022,8 @@ publish/subscribe messaging, a copy of every message is sent to each
 subscription on the topic. Therefore, each of the clients receives all
 20 text messages as well as the non-text control message.
 
-[[BNCFX]]
+[[BNCFX]][[acknowledging-messages]]
 
-[[acknowledging-messages]]
 Acknowledging Messages
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1136,9 +1113,8 @@ Messages Synchronously].
 * `java:comp/DefaultJMSConnectionFactory`, the platform default
 connection factory preconfigured with GlassFish Server
 
-[[GJSCG]]
+[[GJSCG]][[to-run-the-clientackconsumer-client]]
 
-[[to-run-the-clientackconsumer-client]]
 To Run the ClientAckConsumer Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

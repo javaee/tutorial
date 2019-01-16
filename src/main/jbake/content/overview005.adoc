@@ -7,9 +7,8 @@ prev=overview004.html
 Java EE Containers
 ==================
 
-[[BNABO]]
+[[BNABO]][[java-ee-containers]]
 
-[[java-ee-containers]]
 Java EE Containers
 ------------------
 
@@ -24,9 +23,8 @@ component type. Because you do not have to develop these services
 yourself, you are free to concentrate on solving the business problem at
 hand.
 
-[[BNABP]]
+[[BNABP]][[container-services]]
 
-[[container-services]]
 Container Services
 ~~~~~~~~~~~~~~~~~~
 
@@ -68,9 +66,8 @@ bean and servlet lifecycles, database connection resource pooling, data
 persistence, and access to the Java EE platform APIs (see
 link:overview008.html#BNACJ[Java EE 8 APIs]).
 
-[[BNABQ]]
+[[BNABQ]][[container-types]]
 
-[[container-types]]
 Container Types
 ~~~~~~~~~~~~~~~
 

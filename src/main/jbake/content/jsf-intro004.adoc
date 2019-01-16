@@ -7,9 +7,8 @@ prev=jsf-intro003.html
 A Simple JavaServer Faces Application
 =====================================
 
-[[GJAAM]]
+[[GJAAM]][[a-simple-javaserver-faces-application]]
 
-[[a-simple-javaserver-faces-application]]
 A Simple JavaServer Faces Application
 -------------------------------------
 

@@ -7,9 +7,8 @@ prev=ejb-basicexamples006.html
 Using the Embedded Enterprise Bean Container
 ============================================
 
-[[GKCQZ]]
+[[GKCQZ]][[using-the-embedded-enterprise-bean-container]]
 
-[[using-the-embedded-enterprise-bean-container]]
 38 Using the Embedded Enterprise Bean Container
 -----------------------------------------------
 

@@ -7,9 +7,8 @@ prev=jaxws.html
 Overview of Java API for XML Web Services
 =========================================
 
-[[A1250966]]
+[[A1250966]][[overview-of-java-api-for-xml-web-services]]
 
-[[overview-of-java-api-for-xml-web-services]]
 Overview of Java API for XML Web Services
 -----------------------------------------
 

@@ -7,9 +7,8 @@ prev=persistence-intro004.html
 Querying Entities
 =================
 
-[[GJISE]]
+[[GJISE]][[querying-entities]]
 
-[[querying-entities]]
 Querying Entities
 -----------------
 

@@ -7,9 +7,8 @@ prev=jms-examples006.html
 Receiving Messages Asynchronously Using a Message-Driven Bean
 =============================================================
 
-[[BNBPK]]
+[[BNBPK]][[receiving-messages-asynchronously-using-a-message-driven-bean]]
 
-[[receiving-messages-asynchronously-using-a-message-driven-bean]]
 Receiving Messages Asynchronously Using a Message-Driven Bean
 -------------------------------------------------------------
 
@@ -36,9 +35,8 @@ section link:ejb-intro003.html#GIPKO[What Is a Message-Driven Bean?] as
 well as link:jms-concepts005.html#BNCGQ[Using Message-Driven Beans to
 Receive Messages Asynchronously].
 
-[[BNBPL]]
+[[BNBPL]][[overview-of-the-simplemessage-example]]
 
-[[overview-of-the-simplemessage-example]]
 Overview of the simplemessage Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,9 +63,8 @@ to a queue, and the message being delivered to a message-driven bean"]
 The source code for this application is in the
 tut-install`/examples/jms/simplemessage/` directory.
 
-[[BNBPN]]
+[[BNBPN]][[the-simplemessage-application-client]]
 
-[[the-simplemessage-application-client]]
 The simplemessage Application Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -106,9 +103,8 @@ for (int i = 0; i < NUM_MSGS; i++) {
 }
 ----
 
-[[BNBPO]]
+[[BNBPO]][[the-simplemessage-message-driven-bean-class]]
 
-[[the-simplemessage-message-driven-bean-class]]
 The simplemessage Message-Driven Bean Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -138,9 +134,8 @@ See link:jms-examples008.html#BNCGW[Sending Messages from a Session Bean
 to an MDB] for examples of the `subscriptionDurability`, `clientId`,
 `subscriptionName`, and `messageSelector` properties.
 
-[[BNBPP]]
+[[BNBPP]][[the-onmessage-method]]
 
-[[the-onmessage-method]]
 The onMessage Method
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -174,9 +169,8 @@ public void onMessage(Message inMessage) {
 }
 ----
 
-[[BNBPQ]]
+[[BNBPQ]][[running-the-simplemessage-example]]
 
-[[running-the-simplemessage-example]]
 Running the simplemessage Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -189,9 +183,8 @@ The following topics are addressed here:
 * link:#CHDFBDDA[To Run the simplemessage Example Using NetBeans IDE]
 * link:#BNBPT[To Run the simplemessage Example Using Maven]
 
-[[BNBPR]]
+[[BNBPR]][[creating-resources-for-the-simplemessage-example]]
 
-[[creating-resources-for-the-simplemessage-example]]
 Creating Resources for the simplemessage Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -207,9 +200,8 @@ Resources for the Simple Examples] to create it.
 For more information on creating JMS resources, see
 link:jms-examples003.html#GKTJS[Creating JMS Administered Objects].
 
-[[CHDFBDDA]]
+[[CHDFBDDA]][[to-run-the-simplemessage-example-using-netbeans-ide]]
 
-[[to-run-the-simplemessage-example-using-netbeans-ide]]
 To Run the simplemessage Example Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -262,9 +254,8 @@ which they were sent.
 7.  After you have finished running the application, undeploy it using
 the Services tab.
 
-[[BNBPT]]
+[[BNBPT]][[to-run-the-simplemessage-example-using-maven]]
 
-[[to-run-the-simplemessage-example-using-maven]]
 To Run the simplemessage Example Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

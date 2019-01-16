@@ -7,9 +7,8 @@ prev=webapp001.html
 Web Application Lifecycle
 =========================
 
-[[BNADU]]
+[[BNADU]][[web-application-lifecycle]]
 
-[[web-application-lifecycle]]
 Web Application Lifecycle
 -------------------------
 

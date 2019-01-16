@@ -7,9 +7,8 @@ prev=jsf-el008.html
 Using JavaServer Faces Technology in Web Pages
 ==============================================
 
-[[BNAQZ]]
+[[BNAQZ]][[using-javaserver-faces-technology-in-web-pages]]
 
-[[using-javaserver-faces-technology-in-web-pages]]
 10 Using JavaServer Faces Technology in Web Pages
 -------------------------------------------------
 

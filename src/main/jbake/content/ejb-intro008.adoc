@@ -6,9 +6,8 @@ prev=ejb-intro007.html
 ~~~~~~
 =Further Information about Enterprise Beans
 
-[[GIPLG]]
+[[GIPLG]][[further-information-about-enterprise-beans]]
 
-[[further-information-about-enterprise-beans]]
 Further Information about Enterprise Beans
 ------------------------------------------
 

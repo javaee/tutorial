@@ -7,9 +7,8 @@ prev=websocket010.html
 The dukeetf2 Example Application
 ================================
 
-[[BABGCEHE]]
+[[BABGCEHE]][[the-dukeetf2-example-application]]
 
-[[the-dukeetf2-example-application]]
 The dukeetf2 Example Application
 --------------------------------
 
@@ -24,9 +23,8 @@ The following topics are addressed here:
 * link:#CIHJHJCD[Architecture of the dukeetf2 Sample Application]
 * link:#CIHHBAIC[Running the dukeetf2 Example Application]
 
-[[CIHJHJCD]]
+[[CIHJHJCD]][[architecture-of-the-dukeetf2-sample-application]]
 
-[[architecture-of-the-dukeetf2-sample-application]]
 Architecture of the dukeetf2 Sample Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -41,9 +39,8 @@ every second.
 endpoint, parse incoming messages, and update the price and volume
 information without reloading the page.
 
-[[sthref116]]
+[[sthref116]][[the-endpoint]]
 
-[[the-endpoint]]
 The Endpoint
 ^^^^^^^^^^^^
 
@@ -108,9 +105,8 @@ public class ETFEndpoint {
 }
 ----
 
-[[sthref117]]
+[[sthref117]][[the-enterprise-bean]]
 
-[[the-enterprise-bean]]
 The Enterprise Bean
 ^^^^^^^^^^^^^^^^^^^
 
@@ -153,9 +149,8 @@ Timer Service] in link:ejb-basicexamples.html#GIJRB[Chapter 37, "Running
 the Enterprise Bean Examples"] for more information on the timer
 service.
 
-[[CIHHIEFH]]
+[[CIHHIEFH]][[the-html-page]]
 
-[[the-html-page]]
 The HTML Page
 ^^^^^^^^^^^^^
 
@@ -202,9 +197,8 @@ window.addEventListener("load", connect, false);
 The WebSocket API is supported by most modern browsers, and it is widely
 used in HTML5 web client development.
 
-[[CIHHBAIC]]
+[[CIHHBAIC]][[running-the-dukeetf2-example-application]]
 
-[[running-the-dukeetf2-example-application]]
 Running the dukeetf2 Example Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -217,9 +211,8 @@ The following topics are addressed here:
 IDE]
 * link:#CIHDJCGJ[To Run the dukeetf2 Example Application Using Maven]
 
-[[CIHEBIAH]]
+[[CIHEBIAH]][[to-run-the-dukeetf2-example-application-using-netbeans-ide]]
 
-[[to-run-the-dukeetf2-example-application-using-netbeans-ide]]
 To Run the dukeetf2 Example Application Using NetBeans IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -250,9 +243,8 @@ http://localhost:8080/dukeetf2/
 Open the same URL on a different web browser tab or window to see how
 both pages get price and volume updates simultaneously.
 
-[[CIHDJCGJ]]
+[[CIHDJCGJ]][[to-run-the-dukeetf2-example-application-using-maven]]
 
-[[to-run-the-dukeetf2-example-application-using-maven]]
 To Run the dukeetf2 Example Application Using Maven
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

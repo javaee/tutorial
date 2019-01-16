@@ -7,9 +7,8 @@ prev=usingexamples004.html
 Building the Examples
 =====================
 
-[[BNAAN]]
+[[BNAAN]][[building-the-examples]]
 
-[[building-the-examples]]
 Building the Examples
 ---------------------
 

@@ -7,9 +7,8 @@ prev=security-intro007.html
 Getting Started Securing Web Applications
 =========================================
 
-[[BNCAS]]
+[[BNCAS]][[getting-started-securing-web-applications]]
 
-[[getting-started-securing-web-applications]]
 51 Getting Started Securing Web Applications
 --------------------------------------------
 

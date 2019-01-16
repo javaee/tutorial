@@ -7,9 +7,8 @@ prev=jsf-el007.html
 = Further Information about the Expression Language
 
 
-[[CIHGBBHA]]
+[[CIHGBBHA]][[further-information-about-the-expression-language]]
 
-[[further-information-about-the-expression-language]]
 Further Information about the Expression Language
 -------------------------------------------------
 

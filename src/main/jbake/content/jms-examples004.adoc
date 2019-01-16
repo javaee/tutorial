@@ -7,9 +7,8 @@ prev=jms-examples003.html
 Writing More Advanced JMS Applications
 ======================================
 
-[[GIWFH]]
+[[GIWFH]][[writing-more-advanced-jms-applications]]
 
-[[writing-more-advanced-jms-applications]]
 Writing More Advanced JMS Applications
 --------------------------------------
 
@@ -21,9 +20,8 @@ The following topics are addressed here:
 * link:#BNCGG[Using Durable Subscriptions]
 * link:#BNCGJ[Using Local Transactions]
 
-[[BNCGG]]
+[[BNCGG]][[using-durable-subscriptions]]
 
-[[using-durable-subscriptions]]
 Using Durable Subscriptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,9 +78,8 @@ try (JMSContext context = durableConnectionFactory.createContext();) {
 } ...
 ----
 
-[[sthref206]]
+[[sthref206]][[to-create-resources-for-the-durable-subscription-example]]
 
-[[to-create-resources-for-the-durable-subscription-example]]
 To Create Resources for the Durable Subscription Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -123,9 +120,8 @@ jms/DurableConnectionFactory
 Command list-jms-resources executed successfully.
 ----
 
-[[GJSCI]]
+[[GJSCI]][[to-run-the-durable-subscription-example]]
 
-[[to-run-the-durable-subscription-example]]
 To Run the Durable Subscription Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -198,9 +194,8 @@ Message is not a TextMessage
 ----
 9.  Enter `q` or `Q` to exit the program.
 
-[[sthref207]]
+[[sthref207]][[to-run-the-unsubscriber-example]]
 
-[[to-run-the-unsubscriber-example]]
 To Run the unsubscriber Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -223,9 +218,8 @@ appclient -client target/unsubscriber.jar
 The client reports that it is unsubscribing from the durable
 subscription.
 
-[[BNCGJ]]
+[[BNCGJ]][[using-local-transactions]]
 
-[[using-local-transactions]]
 Using Local Transactions
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -360,6 +354,7 @@ link:#BNCGK[Figure 49-1] illustrates these steps.
 [[BNCGK]]
 
 .*Figure 49-1 Transactions: JMS Client Example*
+
 image:img/javaeett_dt_034.png[
 "Diagram of steps in transaction example"]
 
@@ -376,9 +371,8 @@ All clients except `Retailer` use transacted contexts.
 The example uses three queues named `jms/AQueue`, `jms/BQueue`, and
 `jms/CQueue`, and one topic named `jms/OTopic`.
 
-[[sthref209]]
+[[sthref209]][[to-create-resources-for-the-transactedexample-example]]
 
-[[to-create-resources-for-the-transactedexample-example]]
 To Create Resources for the transactedexample Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -421,9 +415,8 @@ jms/DurableConnectionFactory
 Command list-jms-resources executed successfully.
 ----
 
-[[GJSHA]]
+[[GJSHA]][[to-run-the-transactedexample-clients]]
 
-[[to-run-the-transactedexample-clients]]
 To Run the transactedexample Clients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

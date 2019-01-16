@@ -7,9 +7,8 @@ prev=jsf-advanced-cc004.html
 Creating Custom UI Components and Other Custom Objects
 ======================================================
 
-[[BNAVG]]
+[[BNAVG]][[creating-custom-ui-components-and-other-custom-objects]]
 
-[[creating-custom-ui-components-and-other-custom-objects]]
 15 Creating Custom UI Components and Other Custom Objects
 ---------------------------------------------------------
 

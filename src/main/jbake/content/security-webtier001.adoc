@@ -6,9 +6,8 @@ prev=security-webtier.html
 ~~~~~~
 = Overview of Web Application Security
 
-[[BNCAT]]
+[[BNCAT]][[overview-of-web-application-security]]
 
-[[overview-of-web-application-security]]
 Overview of Web Application Security
 ------------------------------------
 

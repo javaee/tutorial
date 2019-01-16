@@ -7,9 +7,8 @@ prev=websocket005.html
 Maintaining Client State
 ========================
 
-[[BABGJCAD]]
+[[BABGJCAD]][[maintaining-client-state]]
 
-[[maintaining-client-state]]
 Maintaining Client State
 ------------------------
 

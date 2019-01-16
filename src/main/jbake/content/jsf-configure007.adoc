@@ -7,9 +7,8 @@ prev=jsf-configure006.html
 Using Default Validators
 ========================
 
-[[GIREB]]
+[[GIREB]][[using-default-validators]]
 
-[[using-default-validators]]
 Using Default Validators
 ------------------------
 

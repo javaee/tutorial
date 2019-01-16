@@ -7,9 +7,8 @@ prev=packaging.html
 Packaging Applications
 ======================
 
-[[BCGDJDFB]]
+[[BCGDJDFB]][[packaging-applications]]
 
-[[packaging-applications]]
 Packaging Applications
 ----------------------
 

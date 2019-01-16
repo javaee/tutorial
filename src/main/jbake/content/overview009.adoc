@@ -9,9 +9,8 @@ prev=overview008.html
 
 
 
-[[GIRDR]]
+[[GIRDR]][[java-ee-8-apis-in-the-java-platform-standard-edition-8]]
 
-[[java-ee-8-apis-in-the-java-platform-standard-edition-8]]
 Java EE 8 APIs in the Java Platform, Standard Edition 8
 -------------------------------------------------------
 
@@ -19,9 +18,8 @@ Several APIs that are required by the Java EE 8 platform are included in
 the Java Platform, Standard Edition 8 (Java SE 8) and are thus available
 to Java EE applications.
 
-[[BNADA]]
+[[BNADA]][[java-database-connectivity-api]]
 
-[[java-database-connectivity-api]]
 Java Database Connectivity API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -40,9 +38,8 @@ platform
 
 The Java EE 8 platform requires JDBC 4.1.
 
-[[BNADC]]
+[[BNADC]][[java-naming-and-directory-interface-api]]
 
-[[java-naming-and-directory-interface-api]]
 Java Naming and Directory Interface API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,9 +77,8 @@ context in `InitialContext` under the name `java:comp/env`. A
 component's naming environment is stored directly in the environment
 naming context or in any of its direct or indirect subcontexts.
 
-[[BNACT]]
+[[BNACT]][[javabeans-activation-framework]]
 
-[[javabeans-activation-framework]]
 JavaBeans Activation Framework
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,9 +88,8 @@ piece of data, encapsulate access to it, discover the operations
 available on it, and create the appropriate JavaBeans component to
 perform those operations.
 
-[[BNACU]]
+[[BNACU]][[java-api-for-xml-processing]]
 
-[[java-api-for-xml-processing]]
 Java API for XML Processing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -112,9 +107,8 @@ your application and supports the Worldwide Web Consortium (W3C) schema.
 You can find information on the W3C schema at
 `http://www.w3.org/XML/Schema`.
 
-[[BNACW]]
+[[BNACW]][[java-architecture-for-xml-binding]]
 
-[[java-architecture-for-xml-binding]]
 Java Architecture for XML Binding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -127,9 +121,8 @@ containers support the JAXB API.
 
 The Java EE 8 platform requires JAXB 2.2.
 
-[[BNACV]]
+[[BNACV]][[java-api-for-xml-web-services]]
 
-[[java-api-for-xml-web-services]]
 Java API for XML Web Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -154,9 +147,8 @@ handlers.
 
 The Java EE 8 platform requires JAX-WS 2.2.
 
-[[BNACX]]
+[[BNACX]][[soap-with-attachments-api-for-java]]
 
-[[soap-with-attachments-api-for-java]]
 SOAP with Attachments API for Java
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -166,9 +158,8 @@ messages that conform to the SOAP 1.1 and 1.2 specifications and the
 SOAP with Attachments note. Most developers do not use the SAAJ API,
 instead using the higher-level JAX-WS API.
 
-[[BNADD]]
+[[BNADD]][[java-authentication-and-authorization-service]]
 
-[[java-authentication-and-authorization-service]]
 Java Authentication and Authorization Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -180,9 +171,8 @@ JAAS is a Java programming language version of the standard Pluggable
 Authentication Module (PAM) framework, which extends the Java platform
 security architecture to support user-based authorization.
 
-[[sthref12]]
+[[sthref12]][[common-annotations-for-the-java-platform]]
 
-[[common-annotations-for-the-java-platform]]
 Common Annotations for the Java Platform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,9 +7,8 @@ prev=overview009.html
 = GlassFish Server Tools
 
 
-[[BNADF]]
+[[BNADF]][[glassfish-server-tools]]
 
-[[glassfish-server-tools]]
 GlassFish Server Tools
 ----------------------
 

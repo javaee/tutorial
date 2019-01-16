@@ -7,9 +7,8 @@ prev=connectorexample003.html
 Using Java EE Interceptors
 ==========================
 
-[[GKEED]]
+[[GKEED]][[using-java-ee-interceptors]]
 
-[[using-java-ee-interceptors]]
 58 Using Java EE Interceptors
 -----------------------------
 

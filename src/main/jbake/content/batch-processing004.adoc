@@ -7,9 +7,8 @@ prev=batch-processing003.html
 = Using the Job Specification Language
 
 
-[[BCGDDBBG]]
+[[BCGDDBBG]][[using-the-job-specification-language]]
 
-[[using-the-job-specification-language]]
 Using the Job Specification Language
 ------------------------------------
 
@@ -65,9 +64,8 @@ The following sections describe the elements of the Job Specification
 Language (JSL) in more detail and show the most common attributes and
 child elements.
 
-[[sthref270]]
+[[sthref270]][[the-job-element]]
 
-[[the-job-element]]
 The job Element
 ~~~~~~~~~~~~~~~
 
@@ -104,9 +102,8 @@ Artifacts] for an example of a job listener implementation.
 The first `step`, `flow`, or `split` element inside the `job` element
 executes first.
 
-[[sthref271]]
+[[sthref271]][[the-step-element]]
 
-[[the-step-element]]
 The step Element
 ~~~~~~~~~~~~~~~~
 
@@ -185,9 +182,8 @@ The following is an example of a task step:
 </step>
 ----
 
-[[sthref272]]
+[[sthref272]][[the-chunk-element]]
 
-[[the-chunk-element]]
 The chunk Element
 ^^^^^^^^^^^^^^^^^
 
@@ -313,9 +309,8 @@ up to a maximum of ten skipped exceptions. The step retries a chunk when
 a `MyResourceTempUnavailable` exception occurs, up to a maximum of three
 attempts.
 
-[[sthref274]]
+[[sthref274]][[the-batchlet-element]]
 
-[[the-batchlet-element]]
 The batchlet Element
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -339,9 +334,8 @@ The following is an example of a task-oriented step:
 
 This example defines a batch step and specifies its batch artifact.
 
-[[sthref275]]
+[[sthref275]][[the-partition-element]]
 
-[[the-partition-element]]
 The partition Element
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -481,9 +475,8 @@ Refer to link:batch-processing009.html#BCGFCACD[The phonebilling Example
 Application] for an example implementation of the `PartitionMapper`
 interface.
 
-[[sthref276]]
+[[sthref276]][[the-flow-element]]
 
-[[the-flow-element]]
 The flow Element
 ~~~~~~~~~~~~~~~~
 
@@ -518,9 +511,8 @@ This example flow contains three steps, one flow, and one split. The
 last step does not have the `next` attribute. The flow transitions to
 `stepE` when its last step completes.
 
-[[sthref277]]
+[[sthref277]][[the-split-element]]
 
-[[the-split-element]]
 The split Element
 ~~~~~~~~~~~~~~~~~
 
@@ -542,9 +534,8 @@ concurrently:
 </split>
 ----
 
-[[sthref278]]
+[[sthref278]][[the-decision-element]]
 
-[[the-decision-element]]
 The decision Element
 ~~~~~~~~~~~~~~~~~~~~
 

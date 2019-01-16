@@ -7,9 +7,8 @@ prev=jsf-page.html
 Setting Up a Page
 =================
 
-[[BNARB]]
+[[BNARB]][[setting-up-a-page]]
 
-[[setting-up-a-page]]
 Setting Up a Page
 -----------------
 
