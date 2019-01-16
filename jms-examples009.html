@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCHF"></a><a id="using-an-entity-to-join-messages-from-two-mdbs"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-an-entity-to-join-messages-from-two-mdbs">Using an Entity to Join Messages from Two MDBs</h2>
+<h2 id="_using_an_entity_to_join_messages_from_two_mdbs">Using an Entity to Join Messages from Two MDBs</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section explains how to write, compile, package, deploy, and run an
@@ -94,8 +101,11 @@ Example</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCHG"></a><a id="overview-of-the-clientmdbentity-example-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-the-clientmdbentity-example-application">Overview of the clientmdbentity Example Application</h3>
+<h3 id="_overview_of_the_clientmdbentity_example_application">Overview of the clientmdbentity Example Application</h3>
 <div class="paragraph">
 <p>This application simulates, in a simplified way, the work flow of a
 company&#8217;s human resources (HR) department when it processes a new hire.
@@ -176,9 +186,12 @@ entity.</p>
 <div class="title"><strong>Figure 49-5 An Enterprise Bean Application: Client to Message-Driven Beans to Entity</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_038.png" alt="Diagram of application showing an application client, two message-driven beans, and an entity, as well as the associated topic and queue"></span></p>
 </div>
+<div class="paragraph">
+<p><a id="BNCHI"></a><a id="writing-the-application-components-for-the-clientmdbentity-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="writing-the-application-components-for-the-clientmdbentity-example">Writing the Application Components for the clientmdbentity Example</h3>
+<h3 id="_writing_the_application_components_for_the_clientmdbentity_example">Writing the Application Components for the clientmdbentity Example</h3>
 <div class="paragraph">
 <p>Writing the components of the application involves coding the
 application client, the message-driven beans, and the entity class.</p>
@@ -200,8 +213,11 @@ Example</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCHJ"></a><a id="coding-the-application-client-humanresourceclient.java"></a></p>
+</div>
 <div class="sect3">
-<h4 id="coding-the-application-client-humanresourceclient.java">Coding the Application Client: HumanResourceClient.java</h4>
+<h4 id="_coding_the_application_client_humanresourceclient_java">Coding the Application Client: HumanResourceClient.java</h4>
 <div class="paragraph">
 <p>The application client, <code>HumanResourceClient.java</code>, found under
 <code>clientmdbentity-app-client</code>, performs the following steps:</p>
@@ -241,9 +257,12 @@ the message listener displays the information received and determines
 whether all five messages have arrived. When they have, the message
 listener notifies the <code>main</code> method, which then exits.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCHK"></a><a id="coding-the-message-driven-beans-for-the-clientmdbentity-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="coding-the-message-driven-beans-for-the-clientmdbentity-example">Coding the Message-Driven Beans for the clientmdbentity Example</h4>
+<h4 id="_coding_the_message_driven_beans_for_the_clientmdbentity_example">Coding the Message-Driven Beans for the clientmdbentity Example</h4>
 <div class="paragraph">
 <p>This example uses two message-driven beans, both under
 <code>clientmdbentity-ejb</code>:</p>
@@ -300,9 +319,12 @@ message that contains the information stored in the entity.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCHL"></a><a id="coding-the-entity-class-for-the-clientmdbentity-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="coding-the-entity-class-for-the-clientmdbentity-example">Coding the Entity Class for the clientmdbentity Example</h4>
+<h4 id="_coding_the_entity_class_for_the_clientmdbentity_example">Coding the Entity Class for the clientmdbentity Example</h4>
 <div class="paragraph">
 <p>The <code>SetupOffice.java</code> class, also under <code>clientmdbentity-ejb</code>, is an
 entity class. The entity and the message-driven beans are packaged
@@ -360,10 +382,13 @@ settings:</p>
 &lt;/persistence&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CHDEEDJH"></a><a id="running-the-clientmdbentity-example"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-clientmdbentity-example">Running the clientmdbentity Example</h3>
+<h3 id="_running_the_clientmdbentity_example">Running the clientmdbentity Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, deploy, and run the
 <code>clientmdbentity</code> example.</p>
@@ -391,8 +416,11 @@ resources for it.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDIJDEE"></a><a id="to-run-clientmdbentity-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-clientmdbentity-using-netbeans-ide">To Run clientmdbentity Using NetBeans IDE</h4>
+<h4 id="_to_run_clientmdbentity_using_netbeans_ide">To Run clientmdbentity Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -452,9 +480,12 @@ runs the application client.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDICHGH"></a><a id="to-run-clientmdbentity-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-clientmdbentity-using-maven">To Run clientmdbentity Using Maven</h4>
+<h4 id="_to_run_clientmdbentity_using_maven">To Run clientmdbentity Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -506,9 +537,12 @@ and runs the application client.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDCDEEF"></a><a id="viewing-the-application-output"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="viewing-the-application-output">Viewing the Application Output</h4>
+<h4 id="_viewing_the_application_output">Viewing the Application Output</h4>
 <div class="paragraph">
 <p>The output in the NetBeans IDE output window or in the terminal window
 looks something like this (preceded by application client container

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAVB"></a><a id="writing-managed-bean-methods"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="writing-managed-bean-methods">Writing Managed Bean Methods</h2>
+<h2 id="_writing_managed_bean_methods">Writing Managed Bean Methods</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Methods of a managed bean can perform several application-specific
@@ -74,8 +81,11 @@ functions for components on the page. These functions include</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref68"></a><a id="why-use-managed-beans"></a></p>
+</div>
 <div class="sect2">
-<h3 id="why-use-managed-beans">Why Use Managed Beans</h3>
+<h3 id="_why_use_managed_beans">Why Use Managed Beans</h3>
 <div class="paragraph">
 <p>By using a managed bean to perform these functions, you eliminate the
 need to implement the <code>javax.faces.validator.Validator</code> interface to
@@ -95,9 +105,12 @@ perform the validation associated with the component.</p>
 <p>The following sections explain how to write various types of managed
 bean methods.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVC"></a><a id="writing-a-method-to-handle-navigation"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="writing-a-method-to-handle-navigation">Writing a Method to Handle Navigation</h3>
+<h3 id="_writing_a_method_to_handle_navigation">Writing a Method to Handle Navigation</h3>
 <div class="paragraph">
 <p>An action method, a managed bean method that handles navigation
 processing, must be a public method that takes no parameters and returns
@@ -186,9 +199,12 @@ method. The section <a href="jsf-develop002.html#BNAUK">Writing Properties
 Bound to Component Instances</a> explains how to write the bean properties
 to which the components are bound.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVD"></a><a id="writing-a-method-to-handle-an-action-event"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="writing-a-method-to-handle-an-action-event">Writing a Method to Handle an Action Event</h3>
+<h3 id="_writing_a_method_to_handle_an_action_event">Writing a Method to Handle an Action Event</h3>
 <div class="paragraph">
 <p>A managed bean method that handles an action event must be a public
 method that accepts an action event and returns <code>void</code>. This method is
@@ -222,9 +238,12 @@ the book ID by using the selected value from the <code>HashMap</code> object.</p
 <p><a href="jsf-page-core004.html#BNATQ">Referencing a Method That Handles an
 Action Event</a> explains how a component tag references this method.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVE"></a><a id="writing-a-method-to-perform-validation"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="writing-a-method-to-perform-validation">Writing a Method to Perform Validation</h3>
+<h3 id="_writing_a_method_to_perform_validation">Writing a Method to Perform Validation</h3>
 <div class="paragraph">
 <p>Instead of implementing the <code>javax.faces.validator.Validator</code> interface
 to perform validation for a component, you can include a method in a
@@ -289,9 +308,12 @@ allowable range, the method again sets the <code>valid</code> property of the
 Validation</a> for information on how a component tag references this
 method.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVF"></a><a id="writing-a-method-to-handle-a-value-change-event"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="writing-a-method-to-handle-a-value-change-event">Writing a Method to Handle a Value-Change Event</h3>
+<h3 id="_writing_a_method_to_handle_a_value_change_event">Writing a Method to Handle a Value-Change Event</h3>
 <div class="paragraph">
 <p>A managed bean that handles a value-change event must use a public
 method that accepts a value-change event and returns <code>void</code>. This method

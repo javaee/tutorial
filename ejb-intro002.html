@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIPJG"></a><a id="what-is-a-session-bean"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="what-is-a-session-bean">What Is a Session Bean?</h2>
+<h2 id="_what_is_a_session_bean">What Is a Session Bean?</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A session bean encapsulates business logic that can be invoked
@@ -83,8 +90,11 @@ database.)</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPKR"></a><a id="types-of-session-beans"></a></p>
+</div>
 <div class="sect2">
-<h3 id="types-of-session-beans">Types of Session Beans</h3>
+<h3 id="_types_of_session_beans">Types of Session Beans</h3>
 <div class="paragraph">
 <p>Session beans are of three types: stateful, stateless, and singleton.</p>
 </div>
@@ -104,8 +114,11 @@ database.)</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPNL"></a><a id="stateful-session-beans"></a></p>
+</div>
 <div class="sect3">
-<h4 id="stateful-session-beans">Stateful Session Beans</h4>
+<h4 id="_stateful_session_beans">Stateful Session Beans</h4>
 <div class="paragraph">
 <p>The state of an object consists of the values of its instance variables.
 In a stateful session bean, the instance variables represent the state
@@ -126,9 +139,12 @@ This transient nature of the state is not a problem, however, because
 when the conversation between the client and the bean ends, there is no
 need to retain the state.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPIN"></a><a id="stateless-session-beans"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="stateless-session-beans">Stateless Session Beans</h4>
+<h4 id="_stateless_session_beans">Stateless Session Beans</h4>
 <div class="paragraph">
 <p>A stateless session bean does not maintain a conversational state with
 the client. When a client invokes the methods of a stateless bean, the
@@ -152,9 +168,12 @@ beans than stateful session beans to support the same number of clients.</p>
 <p>A stateless session bean can implement a web service, but a stateful
 session bean cannot.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPIM"></a><a id="singleton-session-beans"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="singleton-session-beans">Singleton Session Beans</h4>
+<h4 id="_singleton_session_beans">Singleton Session Beans</h4>
 <div class="paragraph">
 <p>A singleton session bean is instantiated once per application and exists
 for the lifecycle of the application. Singleton session beans are
@@ -181,10 +200,13 @@ singleton may perform cleanup tasks on application shutdown as well,
 because the singleton will operate throughout the lifecycle of the
 application.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPMT"></a><a id="when-to-use-session-beans"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="when-to-use-session-beans">When to Use Session Beans</h3>
+<h3 id="_when_to_use_session_beans">When to Use Session Beans</h3>
 <div class="paragraph">
 <p>Stateful session beans are appropriate if any of the following
 conditions are true.</p>

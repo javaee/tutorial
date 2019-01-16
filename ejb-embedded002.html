@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKCRR"></a><a id="developing-embeddable-enterprise-bean-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="developing-embeddable-enterprise-bean-applications">Developing Embeddable Enterprise Bean Applications</h2>
+<h2 id="_developing_embeddable_enterprise_bean_applications">Developing Embeddable Enterprise Bean Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>All embeddable enterprise bean containers support the features listed in
@@ -108,8 +115,11 @@ not be portable if they use enterprise bean features not listed in
 <a href="#GKCQC">Table 38-1</a>, such as the timer service, session beans as web
 service endpoints, or remote business interfaces.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKCQI"></a><a id="running-embedded-applications"></a></p>
+</div>
 <div class="sect2">
-<h3 id="running-embedded-applications">Running Embedded Applications</h3>
+<h3 id="_running_embedded_applications">Running Embedded Applications</h3>
 <div class="paragraph">
 <p>The embedded container, the enterprise bean components, and the client
 all are executed in the same virtual machine using the same classpath.
@@ -134,9 +144,12 @@ the session bean through the embedded container.</p>
 <p>In GlassFish Server, the runtime JAR that includes the classes for the
 embedded container is <code>glassfish-embedded-all.jar</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKCOV"></a><a id="creating-the-enterprise-bean-container"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="creating-the-enterprise-bean-container">Creating the Enterprise Bean Container</h3>
+<h3 id="_creating_the_enterprise_bean_container">Creating the Enterprise Bean Container</h3>
 <div class="paragraph">
 <p>The <code>javax.ejb.embedded.EJBContainer</code> abstract class represents an
 instance of the enterprise bean container and includes factory methods
@@ -179,8 +192,11 @@ props.setProperty(...);
 EJBContainer ec = EJBContainer.createEJBContainer(props);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKCRP"></a><a id="explicitly-specifying-enterprise-bean-modules-to-be-initialized"></a></p>
+</div>
 <div class="sect3">
-<h4 id="explicitly-specifying-enterprise-bean-modules-to-be-initialized">Explicitly Specifying Enterprise Bean Modules to Be Initialized</h4>
+<h4 id="_explicitly_specifying_enterprise_bean_modules_to_be_initialized">Explicitly Specifying Enterprise Bean Modules to Be Initialized</h4>
 <div class="paragraph">
 <p>Developers can specify exactly which enterprise bean modules the
 embedded container will initialize. To explicitly specify the enterprise
@@ -220,10 +236,13 @@ props.setProperty(EJBContainer.MODULES, ejbJarFile);
 EJBContainer ec = EJBContainer.createEJBContainer(props);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GLHUR"></a><a id="looking-up-session-bean-references"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="looking-up-session-bean-references">Looking Up Session Bean References</h3>
+<h3 id="_looking_up_session_bean_references">Looking Up Session Bean References</h3>
 <div class="paragraph">
 <p>To look up session bean references in an application using the embedded
 container:</p>
@@ -258,9 +277,12 @@ bean with a no-interface view, use the following code:</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GKCRE"></a><a id="shutting-down-the-enterprise-bean-container"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="shutting-down-the-enterprise-bean-container">Shutting Down the Enterprise Bean Container</h3>
+<h3 id="_shutting_down_the_enterprise_bean_container">Shutting Down the Enterprise Bean Container</h3>
 <div class="paragraph">
 <p>To shut down the embedded container:</p>
 </div>

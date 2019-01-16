@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBQW"></a><a id="managing-entities"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="managing-entities">Managing Entities</h2>
+<h2 id="_managing_entities">Managing Entities</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Entities are managed by the entity manager, which is represented by
@@ -76,8 +83,11 @@ the methods that are used to interact with the persistence context.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBQY"></a><a id="the-entitymanager-interface"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-entitymanager-interface">The EntityManager Interface</h3>
+<h3 id="_the_entitymanager_interface">The EntityManager Interface</h3>
 <div class="paragraph">
 <p>The <code>EntityManager</code> API creates and removes persistent entity instances,
 finds entities by the entity&#8217;s primary key, and allows queries to be run
@@ -111,8 +121,11 @@ on entities.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBQZ"></a><a id="container-managed-entity-managers"></a></p>
+</div>
 <div class="sect3">
-<h4 id="container-managed-entity-managers">Container-Managed Entity Managers</h4>
+<h4 id="_container_managed_entity_managers">Container-Managed Entity Managers</h4>
 <div class="paragraph">
 <p>With a container-managed entity manager, an <code>EntityManager</code> instance&#8217;s
 persistence context is automatically propagated by the container to all
@@ -144,9 +157,12 @@ the application component:</p>
 EntityManager em;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBRA"></a><a id="application-managed-entity-managers"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="application-managed-entity-managers">Application-Managed Entity Managers</h4>
+<h4 id="_application_managed_entity_managers">Application-Managed Entity Managers</h4>
 <div class="paragraph">
 <p>With an application-managed entity manager, on the other hand, the
 persistence context is not propagated to application components, and the
@@ -235,9 +251,12 @@ try {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBRB"></a><a id="finding-entities-using-the-entitymanager"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="finding-entities-using-the-entitymanager">Finding Entities Using the EntityManager</h4>
+<h4 id="_finding_entities_using_the_entitymanager">Finding Entities Using the EntityManager</h4>
 <div class="paragraph">
 <p>The <code>EntityManager.find</code> method is used to look up entities in the data
 store by the entity&#8217;s primary key:</p>
@@ -253,9 +272,12 @@ public void enterOrder(int custID, CustomerOrder newOrder) {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBRC"></a><a id="managing-an-entity-instances-lifecycle"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="managing-an-entity-instances-lifecycle">Managing an Entity Instance&#8217;s Lifecycle</h4>
+<h4 id="_managing_an_entity_instance_s_lifecycle">Managing an Entity Instance&#8217;s Lifecycle</h4>
 <div class="paragraph">
 <p>You manage entity instances by invoking operations on the entity by
 means of an <code>EntityManager</code> instance. Entity instances are in one of
@@ -282,9 +304,12 @@ store.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBRD"></a><a id="persisting-entity-instances"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="persisting-entity-instances">Persisting Entity Instances</h4>
+<h4 id="_persisting_entity_instances">Persisting Entity Instances</h4>
 <div class="paragraph">
 <p>New entity instances become managed and persistent either by invoking
 the <code>persist</code> method or by a cascading <code>persist</code> operation invoked from
@@ -327,9 +352,12 @@ public Collection&lt;LineItem&gt; getLineItems() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBRE"></a><a id="removing-entity-instances"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="removing-entity-instances">Removing Entity Instances</h4>
+<h4 id="_removing_entity_instances">Removing Entity Instances</h4>
 <div class="paragraph">
 <p>Managed entity instances are removed by invoking the <code>remove</code> method or
 by a cascading <code>remove</code> operation invoked from related entities that
@@ -358,9 +386,12 @@ order are also removed, as <code>CustomerOrder.getLineItems</code> has
     }...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBRF"></a><a id="synchronizing-entity-data-to-the-database"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="synchronizing-entity-data-to-the-database">Synchronizing Entity Data to the Database</h4>
+<h4 id="_synchronizing_entity_data_to_the_database">Synchronizing Entity Data to the Database</h4>
 <div class="paragraph">
 <p>The state of persistent entities is synchronized to the database when
 the transaction with which the entity is associated commits. If a
@@ -379,10 +410,13 @@ will be synchronized with the data store when <code>flush</code> is called.</p>
 <p>If the entity is removed, calling <code>flush</code> will remove the entity data
 from the data store.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBRJ"></a><a id="persistence-units"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="persistence-units">Persistence Units</h3>
+<h3 id="_persistence_units">Persistence Units</h3>
 <div class="paragraph">
 <p>A persistence unit defines a set of all entity classes that are managed
 by <code>EntityManager</code> instances in an application. This set of entity

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBOR"></a><a id="a-web-service-example-helloservice"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="a-web-service-example-helloservice">A Web Service Example: helloservice</h2>
+<h2 id="_a_web_service_example_helloservice">A Web Service Example: helloservice</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This example demonstrates a simple web service that generates a response
@@ -77,8 +84,11 @@ method matches the <code>sayHello</code> method invoked by the client described 
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBOS"></a><a id="the-web-service-endpoint-implementation-class"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-web-service-endpoint-implementation-class">The Web Service Endpoint Implementation Class</h3>
+<h3 id="_the_web_service_endpoint_implementation_class">The Web Service Endpoint Implementation Class</h3>
 <div class="paragraph">
 <p><code>HelloServiceBean</code> is the endpoint implementation class, typically the
 primary programming artifact for enterprise bean web service endpoints.
@@ -139,9 +149,12 @@ is removed from operation.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBOT"></a><a id="stateless-session-bean-implementation-class"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="stateless-session-bean-implementation-class">Stateless Session Bean Implementation Class</h3>
+<h3 id="_stateless_session_bean_implementation_class">Stateless Session Bean Implementation Class</h3>
 <div class="paragraph">
 <p>The <code>HelloServiceBean</code> class implements the <code>sayHello</code> method, which is
 annotated <code>@WebMethod</code>. The source code for the <code>HelloServiceBean</code> class
@@ -169,9 +182,12 @@ public class HelloServiceBean {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBOU"></a><a id="running-the-helloservice-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-helloservice-example">Running the helloservice Example</h3>
+<h3 id="_running_the_helloservice_example">Running the helloservice Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, and deploy
 the <code>helloservice</code> example. You can then use the Administration Console
@@ -195,8 +211,11 @@ Using Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBOV"></a><a id="to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-helloservice-example-using-netbeans-ide">To Build, Package, and Deploy the helloservice Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_helloservice_example_using_netbeans_ide">To Build, Package, and Deploy the helloservice Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -232,9 +251,12 @@ this EAR file to GlassFish Server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNBOW"></a><a id="to-build-package-and-deploy-the-helloservice-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-helloservice-example-using-maven">To Build, Package, and Deploy the helloservice Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_helloservice_example_using_maven">To Build, Package, and Deploy the helloservice Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -270,9 +292,12 @@ required for web service invocation, including the WSDL file.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNBOX"></a><a id="to-test-the-service-without-a-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-test-the-service-without-a-client">To Test the Service without a Client</h4>
+<h4 id="_to_test_the_service_without_a_client">To Test the Service without a Client</h4>
 <div class="paragraph">
 <p>The GlassFish Server Administration Console allows you to test the
 methods of a web service endpoint. To test the <code>sayHello</code> method of

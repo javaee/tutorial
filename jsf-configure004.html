@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="CHDGFCJF"></a><a id="using-faces-flows"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-faces-flows">Using Faces Flows</h2>
+<h2 id="_using_faces_flows">Using Faces Flows</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Faces Flows feature of JavaServer Faces technology allows you to
@@ -128,8 +135,11 @@ parameters that it can accept from Flow B. Flow B is identical to Flow A
 except for the names of the flow and files. Each flow also has an
 associated managed bean; the beans are <code>Flow_a_Bean</code> and <code>Flow_b_Bean</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref81"></a><a id="packaging-flows-in-an-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="packaging-flows-in-an-application">Packaging Flows in an Application</h3>
+<h3 id="_packaging_flows_in_an_application">Packaging Flows in an Application</h3>
 <div class="paragraph">
 <p>Typically, you package flows in a web application using a directory
 structure that modularizes the flows. In the <code>src/main/webapp</code> directory
@@ -165,9 +175,12 @@ src/main/java/javaeetutorial/flowexample
 <p>In this example, <code>flow-a</code> is defined programmatically in <code>FlowA.java</code>,
 while <code>flow-b</code> is defined by the configuration file <code>flow-b-flow.xml</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref82"></a><a id="the-simplest-possible-flow-the-simple-flow-example-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-simplest-possible-flow-the-simple-flow-example-application">The Simplest Possible Flow: The simple-flow Example Application</h3>
+<h3 id="_the_simplest_possible_flow_the_simple_flow_example_application">The Simplest Possible Flow: The simple-flow Example Application</h3>
 <div class="paragraph">
 <p>The <code>simple-flow</code> example application demonstrates the most basic
 building blocks of a Faces Flows application and illustrates some of the
@@ -283,8 +296,11 @@ no value outside of the flow, and provides a link that navigates to the
 <p>The Facelets pages use only flow-scoped data, so the example does not
 need a managed bean.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref83"></a><a id="to-build-package-and-deploy-the-simple-flow-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-simple-flow-example-using-netbeans-ide">To Build, Package, and Deploy the simple-flow Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_simple_flow_example_using_netbeans_ide">To Build, Package, and Deploy the simple-flow Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -320,9 +336,12 @@ deploys the application to the server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref84"></a><a id="to-build-package-and-deploy-the-simple-flow-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-simple-flow-example-using-maven">To Build, Package, and Deploy the simple-flow Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_simple_flow_example_using_maven">To Build, Package, and Deploy the simple-flow Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -353,9 +372,12 @@ deploys the application to the server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref85"></a><a id="to-run-the-simple-flow-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-simple-flow-example">To Run the simple-flow Example</h4>
+<h4 id="_to_run_the_simple_flow_example">To Run the simple-flow Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -384,10 +406,13 @@ page.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref86"></a><a id="the-checkout-module-example-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="the-checkout-module-example-application">The checkout-module Example Application</h3>
+<h3 id="_the_checkout_module_example_application">The checkout-module Example Application</h3>
 <div class="paragraph">
 <p>The <code>checkout-module</code> example application is considerably more complex
 than <code>simple-flow</code>. It shows how you might use the Faces Flows feature
@@ -451,8 +476,11 @@ contains two.</p>
 <code>JoinFlowBean.java</code>, whereas <code>CheckoutBean.java</code> is the backing bean for
 the <code>index.html</code> page.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref87"></a><a id="the-facelets-pages-for-the-checkout-module-example"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-facelets-pages-for-the-checkout-module-example">The Facelets Pages for the checkout-module Example</h4>
+<h4 id="_the_facelets_pages_for_the_checkout_module_example">The Facelets Pages for the checkout-module Example</h4>
 <div class="paragraph">
 <p>The starting page for the example, <code>index.xhtml</code>, summarizes the
 contents of a hypothetical shopping cart. It allows the user to click
@@ -535,9 +563,12 @@ to call the checkout flow as well as one to return from the join flow:</p>
 <p>For this flow, the actions <code>callcheckoutFlow</code> and <code>returnFromJoinFlow</code>
 are defined in the configuration file <code>joinFlow-flow.xml</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref88"></a><a id="using-a-configuration-file-to-configure-a-flow"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-a-configuration-file-to-configure-a-flow">Using a Configuration File to Configure a Flow</h4>
+<h4 id="_using_a_configuration_file_to_configure_a_flow">Using a Configuration File to Configure a Flow</h4>
 <div class="paragraph">
 <p>If you use an application configuration resource file to configure a
 flow, it must be named flowName`-flow.xml`. In this example, the join
@@ -614,9 +645,12 @@ action of calling the flow. Within the <code>flow-call</code> element, the
 to be passed when <code>checkoutFlow</code> is called. Here they are just arbitrary
 strings.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref89"></a><a id="using-a-java-class-to-configure-a-flow"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-a-java-class-to-configure-a-flow">Using a Java Class to Configure a Flow</h4>
+<h4 id="_using_a_java_class_to_configure_a_flow">Using a Java Class to Configure a Flow</h4>
 <div class="paragraph">
 <p>If you use a Java class to configure a flow, it must have the name of
 the flow. The class for the checkout flow is called <code>CheckoutFlow.java</code>.</p>
@@ -702,9 +736,12 @@ are values from the <code>CheckoutFlowBean</code> managed bean.</p>
 <p>Finally, the <code>defineFlow</code> method calls the <code>getFlow</code> method and returns
 the result.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref90"></a><a id="the-flow-scoped-managed-beans"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-flow-scoped-managed-beans">The Flow-Scoped Managed Beans</h4>
+<h4 id="_the_flow_scoped_managed_beans">The Flow-Scoped Managed Beans</h4>
 <div class="paragraph">
 <p>Each of the two flows has a managed bean that defines properties for the
 pages within the flow. For example, the <code>CheckoutFlowBean</code> defines
@@ -726,9 +763,12 @@ the return node. For the <code>CheckoutFlowBean</code>, the return node is the
 <div class="paragraph">
 <p>For the <code>JoinFlowBean</code>, the return node is the <code>exithome.xhtml</code> page.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref91"></a><a id="to-build-package-and-deploy-the-checkout-module-example-using-netbeans-ide"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-checkout-module-example-using-netbeans-ide">To Build, Package, and Deploy the checkout-module Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_checkout_module_example_using_netbeans_ide">To Build, Package, and Deploy the checkout-module Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -764,9 +804,12 @@ then deploys the application to the server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref92"></a><a id="to-build-package-and-deploy-the-checkout-module-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-checkout-module-example-using-maven">To Build, Package, and Deploy the checkout-module Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_checkout_module_example_using_maven">To Build, Package, and Deploy the checkout-module Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -797,9 +840,12 @@ then deploys the application to the server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref93"></a><a id="to-run-the-checkout-module-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-checkout-module-example">To Run the checkout-module Example</h4>
+<h4 id="_to_run_the_checkout_module_example">To Run the checkout-module Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

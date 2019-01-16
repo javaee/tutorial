@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAVU"></a><a id="creating-custom-component-classes"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="creating-custom-component-classes">Creating Custom Component Classes</h2>
+<h2 id="_creating_custom_component_classes">Creating Custom Component Classes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>As explained in <a href="jsf-custom002.html#BNAVI">When to Use a Custom
@@ -275,8 +282,11 @@ performs as well as the encoding and decoding that it delegates to
 <code>MapRenderer</code>. <a href="jsf-custom008.html#BNAWD">Handling Events for Custom
 Components</a> details how <code>MapComponent</code> handles events.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVV"></a><a id="specifying-the-component-family"></a></p>
+</div>
 <div class="sect2">
-<h3 id="specifying-the-component-family">Specifying the Component Family</h3>
+<h3 id="_specifying_the_component_family">Specifying the Component Family</h3>
 <div class="paragraph">
 <p>If your custom component class delegates rendering, it needs to override
 the <code>getFamily</code> method of <code>UIComponent</code> to return the identifier of a
@@ -302,9 +312,12 @@ configuration. <a href="jsf-configure012.html#BNAXI">Registering a Custom
 Component</a> explains how to define the component family in the component
 configuration.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVW"></a><a id="performing-encoding"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="performing-encoding">Performing Encoding</h3>
+<h3 id="_performing_encoding">Performing Encoding</h3>
 <div class="paragraph">
 <p>During the Render Response phase, the JavaServer Faces implementation
 processes the encoding methods of all components and their associated
@@ -431,9 +444,12 @@ might need to implement other methods in addition to <code>encodeEnd</code>. For
 example, if you need to retrieve the component&#8217;s value from the request
 parameters, you must also implement the <code>decode</code> method.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVX"></a><a id="performing-decoding"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="performing-decoding">Performing Decoding</h3>
+<h3 id="_performing_decoding">Performing Decoding</h3>
 <div class="paragraph">
 <p>During the Apply Request Values phase, the JavaServer Faces
 implementation processes the <code>decode</code> methods of all components in the
@@ -475,9 +491,12 @@ the <code>input</code> field. This value represents the currently selected area.
 Finally, it sets the value of the <code>MapComponent</code> class&#8217;s <code>current</code>
 attribute to the value of the <code>input</code> field.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAVY"></a><a id="enabling-component-properties-to-accept-expressions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="enabling-component-properties-to-accept-expressions">Enabling Component Properties to Accept Expressions</h3>
+<h3 id="_enabling_component_properties_to_accept_expressions">Enabling Component Properties to Accept Expressions</h3>
 <div class="paragraph">
 <p>Nearly all the attributes of the standard JavaServer Faces tags can
 accept expressions, whether they are value expressions or method
@@ -558,9 +577,12 @@ public void setAction(MethodExpression action) {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNAVZ"></a><a id="saving-and-restoring-state"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="saving-and-restoring-state">Saving and Restoring State</h3>
+<h3 id="_saving_and_restoring_state">Saving and Restoring State</h3>
 <div class="paragraph">
 <p>As described in <a href="#BNAVY">Enabling Component Properties to Accept
 Expressions</a>, use of the <code>StateHelper</code> interface facilities allows you

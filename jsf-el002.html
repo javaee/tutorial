@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAHR"></a><a id="immediate-and-deferred-evaluation-syntax"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="immediate-and-deferred-evaluation-syntax">Immediate and Deferred Evaluation Syntax</h2>
+<h2 id="_immediate_and_deferred_evaluation_syntax">Immediate and Deferred Evaluation Syntax</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The EL supports both immediate and deferred evaluation of expressions.
@@ -78,8 +85,11 @@ lifecycle.</p>
 <p>Other technologies using the EL might have different reasons for using
 deferred expressions.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAHS"></a><a id="immediate-evaluation"></a></p>
+</div>
 <div class="sect2">
-<h3 id="immediate-evaluation">Immediate Evaluation</h3>
+<h3 id="_immediate_evaluation">Immediate Evaluation</h3>
 <div class="paragraph">
 <p>All expressions using the <code>${}</code> syntax are evaluated immediately. These
 expressions can appear as part of a template (static) text or as the
@@ -100,9 +110,12 @@ retrieved from the backing bean named <code>catalog</code>:</p>
 <code>${catalog.bookQuantity}</code>, converts it, and passes the returned value to
 the tag handler. The value is updated on the page.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAHT"></a><a id="deferred-evaluation"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="deferred-evaluation">Deferred Evaluation</h3>
+<h3 id="_deferred_evaluation">Deferred Evaluation</h3>
 <div class="paragraph">
 <p>Deferred evaluation expressions take the form <code>#{expr}</code> and can be
 evaluated at other phases of a page lifecycle as defined by whatever

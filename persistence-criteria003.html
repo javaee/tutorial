@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GJIVM"></a><a id="using-the-criteria-api-and-metamodel-api-to-create-basic-typesafe-queries"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-the-criteria-api-and-metamodel-api-to-create-basic-typesafe-queries">Using the Criteria API and Metamodel API to Create Basic Typesafe Queries</h2>
+<h2 id="_using_the_criteria_api_and_metamodel_api_to_create_basic_typesafe_queries">Using the Criteria API and Metamodel API to Create Basic Typesafe Queries</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The basic semantics of a Criteria query consists of a <code>SELECT</code> clause, a
@@ -88,8 +95,11 @@ objects, so the query can be created in a typesafe manner.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJIVS"></a><a id="creating-a-criteria-query"></a></p>
+</div>
 <div class="sect2">
-<h3 id="creating-a-criteria-query">Creating a Criteria Query</h3>
+<h3 id="_creating_a_criteria_query">Creating a Criteria Query</h3>
 <div class="paragraph">
 <p>The <code>javax.persistence.criteria.CriteriaBuilder</code> interface is used to
 construct</p>
@@ -163,9 +173,12 @@ that returns a <code>String</code>:</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">CriteriaQuery&lt;String&gt; cq = cb.createQuery(String.class);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIVQ"></a><a id="query-roots"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="query-roots">Query Roots</h3>
+<h3 id="_query_roots">Query Roots</h3>
 <div class="paragraph">
 <p>For a particular <code>CriteriaQuery</code> object, the root entity of the query,
 from which all navigation originates, is called the query root. It is
@@ -211,9 +224,12 @@ Root&lt;Pet&gt; pet1 = cq.from(Pet.class);
 Root&lt;Pet&gt; pet2 = cq.from(Pet.class);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIUV"></a><a id="querying-relationships-using-joins"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="querying-relationships-using-joins">Querying Relationships Using Joins</h3>
+<h3 id="_querying_relationships_using_joins">Querying Relationships Using Joins</h3>
 <div class="paragraph">
 <p>For queries that navigate to related entity classes, the query must
 define a join to the related entity by calling one of the <code>From.join</code>
@@ -251,9 +267,12 @@ Root&lt;Pet&gt; pet = cq.from(Pet.class);
 Join&lt;Owner, Address&gt; address = pet.join(Pet_.owners).join(Owner_.addresses);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIVE"></a><a id="path-navigation-in-criteria-queries"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="path-navigation-in-criteria-queries">Path Navigation in Criteria Queries</h3>
+<h3 id="_path_navigation_in_criteria_queries">Path Navigation in Criteria Queries</h3>
 <div class="paragraph">
 <p><code>Path</code> objects, which are used in the <code>SELECT</code> and <code>WHERE</code> clauses of a
 Criteria query, can be query root entities, join entities, or other
@@ -282,9 +301,12 @@ Root&lt;Pet&gt; pet = cq.from(Pet.class);
 cq.select(pet.get(Pet_.name));</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIVI"></a><a id="restricting-criteria-query-results"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="restricting-criteria-query-results">Restricting Criteria Query Results</h3>
+<h3 id="_restricting_criteria_query_results">Restricting Criteria Query Results</h3>
 <div class="paragraph">
 <p>Conditions that are set by calling the <code>CriteriaQuery.where</code> method can
 restrict the results of a query on the <code>CriteriaQuery</code> object. Calling
@@ -297,8 +319,11 @@ restrict the results according to the conditions of the expressions. To
 create <code>Expression</code> instances, use methods defined in the <code>Expression</code>
 and <code>CriteriaBuilder</code> interfaces.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJIWN"></a><a id="the-expression-interface-methods"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-expression-interface-methods">The Expression Interface Methods</h4>
+<h4 id="_the_expression_interface_methods">The Expression Interface Methods</h4>
 <div class="paragraph">
 <p>An <code>Expression</code> object is used in a query&#8217;s <code>SELECT</code>, <code>WHERE</code>, or
 <code>HAVING</code> clause. <a href="#GJIWW">Table 43-1</a> shows conditional methods you
@@ -360,9 +385,12 @@ cq.where(pet.get(Pet_.color).in("brown", "black"));</code></pre>
 <p>The <code>in</code> method can also check whether an attribute is a member of a
 collection.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJIXA"></a><a id="expression-methods-in-the-criteriabuilder-interface"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="expression-methods-in-the-criteriabuilder-interface">Expression Methods in the CriteriaBuilder Interface</h4>
+<h4 id="_expression_methods_in_the_criteriabuilder_interface">Expression Methods in the CriteriaBuilder Interface</h4>
 <div class="paragraph">
 <p>The <code>CriteriaBuilder</code> interface defines additional methods for creating
 expressions. These methods correspond to the arithmetic, string, date,
@@ -513,10 +541,13 @@ cq.where(cb.equal(pet.get(Pet_.name), "Fido")
         .and(cb.equal(pet.get(Pet_.color), "brown")));</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIXE"></a><a id="managing-criteria-query-results"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-criteria-query-results">Managing Criteria Query Results</h3>
+<h3 id="_managing_criteria_query_results">Managing Criteria Query Results</h3>
 <div class="paragraph">
 <p>For queries that return more than one result, it is often helpful to
 organize those results. The <code>CriteriaQuery</code> interface defines the
@@ -548,8 +579,11 @@ groups according to a condition</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJIWO"></a><a id="ordering-results"></a></p>
+</div>
 <div class="sect3">
-<h4 id="ordering-results">Ordering Results</h4>
+<h4 id="_ordering_results">Ordering Results</h4>
 <div class="paragraph">
 <p>To order the results of a query, call the <code>CriteriaQuery.orderBy</code>
 method, passing in an <code>Order</code> object. To create an <code>Order</code> object, call
@@ -611,9 +645,12 @@ cq.orderBy(cb.asc(owner.get(Owner_.lastName)), owner.get(Owner_.firstName)));</c
 <p>The results of this query will be ordered alphabetically by the pet
 owner&#8217;s last name, then first name.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJIXG"></a><a id="grouping-results"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="grouping-results">Grouping Results</h4>
+<h4 id="_grouping_results">Grouping Results</h4>
 <div class="paragraph">
 <p>The <code>CriteriaQuery.groupBy</code> method partitions the query results into
 groups. To set these groups, pass an expression to <code>groupBy</code>:</p>
@@ -649,10 +686,13 @@ as in the preceding example. However, the only returned groups will be
 <code>Pet</code> entities where the <code>color</code> attribute is set to <code>brown</code> or
 <code>blonde</code>. That is, no gray-colored pets will be returned in this query.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJIVY"></a><a id="executing-queries"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="executing-queries">Executing Queries</h3>
+<h3 id="_executing_queries">Executing Queries</h3>
 <div class="paragraph">
 <p>To prepare a query for execution, create a <code>TypedQuery&lt;T&gt;</code> object with
 the type of the query result, passing the <code>CriteriaQuery</code> object to
@@ -662,8 +702,11 @@ the type of the query result, passing the <code>CriteriaQuery</code> object to
 <p>To execute a query, call either <code>getSingleResult</code> or <code>getResultList</code> on
 the <code>TypedQuery&lt;T&gt;</code> object.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJIUR"></a><a id="single-valued-query-results"></a></p>
+</div>
 <div class="sect3">
-<h4 id="single-valued-query-results">Single-Valued Query Results</h4>
+<h4 id="_single_valued_query_results">Single-Valued Query Results</h4>
 <div class="paragraph">
 <p>Use the <code>TypedQuery&lt;T&gt;.getSingleResult</code> method to execute queries that
 return a single result:</p>
@@ -676,9 +719,12 @@ TypedQuery&lt;Pet&gt; q = em.createQuery(cq);
 Pet result = q.getSingleResult();</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIVP"></a><a id="collection-valued-query-results"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="collection-valued-query-results">Collection-Valued Query Results</h4>
+<h4 id="_collection_valued_query_results">Collection-Valued Query Results</h4>
 <div class="paragraph">
 <p>Use the <code>TypedQuery&lt;T&gt;.getResultList</code> method to execute queries that
 return a collection of objects:</p>

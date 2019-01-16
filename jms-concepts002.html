@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCDX"></a><a id="basic-jms-api-concepts"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="basic-jms-api-concepts">Basic JMS API Concepts</h2>
+<h2 id="_basic_jms_api_concepts">Basic JMS API Concepts</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section introduces the most basic JMS API concepts, the ones you
@@ -80,8 +87,11 @@ order to write applications that use message-driven beans.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCDY"></a><a id="jms-api-architecture"></a></p>
+</div>
 <div class="sect2">
-<h3 id="jms-api-architecture">JMS API Architecture</h3>
+<h3 id="_jms_api_architecture">JMS API Architecture</h3>
 <div class="paragraph">
 <p>A JMS application is composed of the following parts.</p>
 </div>
@@ -126,13 +136,18 @@ resource injection to access the administered objects in the namespace
 and then establish a logical connection to the same objects through the
 JMS provider.</p>
 </div>
-<div id="BNCDZ" class="paragraph">
-<div class="title"><strong>Figure 48-2 JMS API Architecture</strong></div>
+<div class="paragraph">
+<p><a id="BNCDZ"></a>.<strong>Figure 48-2 JMS API Architecture</strong></p>
+</div>
+<div class="paragraph">
 <p><span class="image"><img src="img/javaeett_dt_027.png" alt="Diagram of JMS API architecture, showing administrative tool, JMS client, JNDI namespace, and JMS provider"></span></p>
+</div>
+<div class="paragraph">
+<p><a id="BNCEA"></a><a id="messaging-styles"></a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="messaging-styles">Messaging Styles</h3>
+<h3 id="_messaging_styles">Messaging Styles</h3>
 <div class="paragraph">
 <p>Before the JMS API existed, most messaging products supported either the
 point-to-point or the publish/subscribe style of messaging. The JMS
@@ -151,8 +166,11 @@ code itself can be common to both styles, making your applications
 flexible and reusable. This tutorial describes and illustrates this
 coding approach, using the greatly simplified API provided by JMS 2.0.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEB"></a><a id="point-to-point-messaging-style"></a></p>
+</div>
 <div class="sect3">
-<h4 id="point-to-point-messaging-style">Point-to-Point Messaging Style</h4>
+<h4 id="_point_to_point_messaging_style">Point-to-Point Messaging Style</h4>
 <div class="paragraph">
 <p>A point-to-point (PTP) product or application is built on the concept of
 message queues, senders, and receivers. Each message is addressed to a
@@ -183,9 +201,12 @@ the client sent the message.</p>
 <p>Use PTP messaging when every message you send must be processed
 successfully by one consumer.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCED"></a><a id="publishsubscribe-messaging-style"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="publishsubscribe-messaging-style">Publish/Subscribe Messaging Style</h4>
+<h4 id="_publish_subscribe_messaging_style">Publish/Subscribe Messaging Style</h4>
 <div class="paragraph">
 <p>In a publish/subscribe (pub/sub) product or application, clients address
 messages to a topic, which functions somewhat like a bulletin board.
@@ -239,10 +260,13 @@ messaging.</p>
 <div class="title"><strong>Figure 48-4 Publish/Subscribe Messaging</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_029.png" alt="Diagram of pub/sub messaging, showing Client 1 sending a message to a topic, and the message being delivered to two consumers to the topic"></span></p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEG"></a><a id="message-consumption"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="message-consumption">Message Consumption</h3>
+<h3 id="_message_consumption">Message Consumption</h3>
 <div class="paragraph">
 <p>Messaging products are inherently asynchronous: There is no fundamental
 timing dependency between the production and the consumption of a

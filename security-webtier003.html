@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GJIIE"></a><a id="using-programmatic-security-with-web-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-programmatic-security-with-web-applications">Using Programmatic Security with Web Applications</h2>
+<h2 id="_using_programmatic_security_with_web_applications">Using Programmatic Security with Web Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Programmatic security is used by security-aware applications when
@@ -81,8 +88,11 @@ model of the application.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIRCJ"></a><a id="authenticating-users-programmatically"></a></p>
+</div>
 <div class="sect2">
-<h3 id="authenticating-users-programmatically">Authenticating Users Programmatically</h3>
+<h3 id="_authenticating_users_programmatically">Authenticating Users Programmatically</h3>
 <div class="paragraph">
 <p>You can use the <code>SecurityContext</code> and <code>HttpServletRequest</code> interfaces to
 authenticate users for a web application programmatically.</p>
@@ -224,10 +234,13 @@ public class TestServlet extends HttpServlet {
     }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCBA"></a><a id="checking-caller-identity-programmatically"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="checking-caller-identity-programmatically">Checking Caller Identity Programmatically</h3>
+<h3 id="_checking_caller_identity_programmatically">Checking Caller Identity Programmatically</h3>
 <div class="paragraph">
 <p>In general, the container enforces security management in a
 manner that is transparent to the web component. Use the security APIs
@@ -359,9 +372,12 @@ public class ProtectedServlet extends HttpServlet { ... }</code></pre>
 <p>The above <code>hasAccessToWebResource()</code> call returns true if, and only if,
 the caller is in role "foo".</p>
 </div>
+<div class="paragraph">
+<p><a id="GJJLQ"></a><a id="example-code-for-programmatic-security"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="example-code-for-programmatic-security">Example Code for Programmatic Security</h3>
+<h3 id="_example_code_for_programmatic_security">Example Code for Programmatic Security</h3>
 <div class="paragraph">
 <p>The following code demonstrates the use of programmatic security for the
 purposes of programmatic login. This servlet does the following.</p>
@@ -453,9 +469,12 @@ public class LoginServlet extends HttpServlet {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCBB"></a><a id="declaring-and-linking-role-references"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="declaring-and-linking-role-references">Declaring and Linking Role References</h3>
+<h3 id="_declaring_and_linking_role_references">Declaring and Linking Role References</h3>
 <div class="paragraph">
 <p>A security role reference is a mapping between the name of a role that
 is called from a web component using <code>isUserInRole(String role)</code> and the

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABFIGEI"></a><a id="using-named-entity-graphs"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-named-entity-graphs">Using Named Entity Graphs</h2>
+<h2 id="_using_named_entity_graphs">Using Named Entity Graphs</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Named entity graphs are created using annotations applied to entity
@@ -62,8 +69,11 @@ for all named entity graphs, defined in both annotations and in XML,
 within an application. A named entity graph set using an annotation may
 be overridden using <code>named-entity-graph</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref186"></a><a id="applying-named-entity-graph-annotations-to-entity-classes"></a></p>
+</div>
 <div class="sect2">
-<h3 id="applying-named-entity-graph-annotations-to-entity-classes">Applying Named Entity Graph Annotations to Entity Classes</h3>
+<h3 id="_applying_named_entity_graph_annotations_to_entity_classes">Applying Named Entity Graph Annotations to Entity Classes</h3>
 <div class="paragraph">
 <p>The <code>javax.persistence.NamedEntityGraph</code> annotation defines a single
 named entity graph and is applied at the class level. Multiple
@@ -150,9 +160,12 @@ of the message, including any message attachments:</p>
 public class EmailMessage { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref187"></a><a id="obtaining-entitygraph-instances-from-named-entity-graphs"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="obtaining-entitygraph-instances-from-named-entity-graphs">Obtaining EntityGraph Instances from Named Entity Graphs</h3>
+<h3 id="_obtaining_entitygraph_instances_from_named_entity_graphs">Obtaining EntityGraph Instances from Named Entity Graphs</h3>
 <div class="paragraph">
 <p>Use the <code>EntityManager.getEntityGraph</code> method, passing in the named
 entity graph name, to obtain <code>EntityGraph</code> instances for a named entity

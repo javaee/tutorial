@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKBAA"></a><a id="securing-web-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="securing-web-applications">Securing Web Applications</h2>
+<h2 id="_securing_web_applications">Securing Web Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Web applications are created by application developers who give, sell,
@@ -82,8 +89,11 @@ Descriptor</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDBIBHI"></a><a id="overview-of-securing-web-applications"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-securing-web-applications">Overview of Securing Web Applications</h3>
+<h3 id="_overview_of_securing_web_applications">Overview of Securing Web Applications</h3>
 <div class="paragraph">
 <p>Application developers communicate how to set up security for the
 deployed application by using annotations or deployment descriptors.
@@ -100,9 +110,12 @@ explains how to secure web applications using annotations wherever
 possible. It explains how to use deployment descriptors where
 annotations cannot be used.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCBK"></a><a id="specifying-security-constraints"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="specifying-security-constraints">Specifying Security Constraints</h3>
+<h3 id="_specifying_security_constraints">Specifying Security Constraints</h3>
 <div class="paragraph">
 <p>A security constraint is used to define the access privileges to a
 collection of resources using their URL mapping.</p>
@@ -148,8 +161,11 @@ Connection</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJJCD"></a><a id="specifying-a-web-resource-collection"></a></p>
+</div>
 <div class="sect3">
-<h4 id="specifying-a-web-resource-collection">Specifying a Web Resource Collection</h4>
+<h4 id="_specifying_a_web_resource_collection">Specifying a Web Resource Collection</h4>
 <div class="paragraph">
 <p>A web resource collection consists of the following subelements.</p>
 </div>
@@ -212,9 +228,12 @@ elements, none of which names the HTTP method</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJJCG"></a><a id="specifying-an-authorization-constraint"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="specifying-an-authorization-constraint">Specifying an Authorization Constraint</h4>
+<h4 id="_specifying_an_authorization_constraint">Specifying an Authorization Constraint</h4>
 <div class="paragraph">
 <p>An authorization constraint (<code>auth-constraint</code>) contains the <code>role-name</code>
 element. You can use as many <code>role-name</code> elements as needed here.</p>
@@ -244,9 +263,12 @@ Security Roles</a>. For information on mapping security roles, see
 annotations accept a <code>rolesAllowed</code> element that specifies the
 authorized roles.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCBM"></a><a id="specifying-a-secure-connection"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="specifying-a-secure-connection">Specifying a Secure Connection</h4>
+<h4 id="_specifying_a_secure_connection">Specifying a Secure Connection</h4>
 <div class="paragraph">
 <p>A user data constraint (<code>user-data-constraint</code> in the deployment
 descriptor) contains the <code>transport-guarantee</code> subelement. A user data
@@ -338,9 +360,12 @@ easily implemented by using a filter.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNCBL"></a><a id="specifying-security-constraints-for-resources"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="specifying-security-constraints-for-resources">Specifying Security Constraints for Resources</h4>
+<h4 id="_specifying_security_constraints_for_resources">Specifying Security Constraints for Resources</h4>
 <div class="paragraph">
 <p>You can create security constraints for resources within your
 application. For example, you could allow users with the role of
@@ -383,10 +408,13 @@ following:</p>
 &lt;/security-constraint&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKBSA"></a><a id="specifying-authentication-mechanisms"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="specifying-authentication-mechanisms">Specifying Authentication Mechanisms</h3>
+<h3 id="_specifying_authentication_mechanisms">Specifying Authentication Mechanisms</h3>
 <div class="paragraph">
 <p>This section describes built-in authentication mechanisms defined by
 the Servlet specification.</p>
@@ -486,8 +514,11 @@ conjunction with basic or form-based authentication, some of these
 concerns can be alleviated. To specify a secure transport mechanism, use
 the elements described in <a href="#BNCBM">Specifying a Secure Connection</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCBO"></a><a id="http-basic-authentication"></a></p>
+</div>
 <div class="sect3">
-<h4 id="http-basic-authentication">HTTP Basic Authentication</h4>
+<h4 id="_http_basic_authentication">HTTP Basic Authentication</h4>
 <div class="paragraph">
 <p>Specifying HTTP basic authentication requires that the server request a
 user name and password from the web client and verify that the user name
@@ -527,9 +558,12 @@ authentication.</p>
 <div class="title"><strong>Figure 51-1 HTTP Basic Authentication</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_045.png" alt="Diagram of four steps in HTTP basic authentication between client and server"></span></p>
 </div>
+<div class="paragraph">
+<p><a id="BNCBQ"></a><a id="form-based-authentication"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="form-based-authentication">Form-Based Authentication</h4>
+<h4 id="_form_based_authentication">Form-Based Authentication</h4>
 <div class="paragraph">
 <p>Form-based authentication allows the developer to control the look and
 feel of the login authentication screens by customizing the login screen
@@ -600,9 +634,12 @@ HTML page:</p>
 &lt;/form&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCBW"></a><a id="digest-authentication"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="digest-authentication">Digest Authentication</h4>
+<h4 id="_digest_authentication">Digest Authentication</h4>
 <div class="paragraph">
 <p>Like basic authentication, digest authentication authenticates a user
 based on a user name and a password. However, unlike basic
@@ -613,10 +650,13 @@ wire, digest authentication requires that clear-text password
 equivalents be available to the authenticating container so that it can
 validate received authenticators by calculating the expected digest.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCBN"></a><a id="specifying-an-authentication-mechanism-in-the-deployment-descriptor"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="specifying-an-authentication-mechanism-in-the-deployment-descriptor">Specifying an Authentication Mechanism in the Deployment Descriptor</h3>
+<h3 id="_specifying_an_authentication_mechanism_in_the_deployment_descriptor">Specifying an Authentication Mechanism in the Deployment Descriptor</h3>
 <div class="paragraph">
 <p>To specify an authentication mechanism, use the <code>login-config</code> element.
 It can contain the following subelements.</p>
@@ -699,9 +739,12 @@ deployment descriptor:</p>
 &lt;/login-config&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCAV"></a><a id="declaring-security-roles"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="declaring-security-roles">Declaring Security Roles</h3>
+<h3 id="_declaring_security_roles">Declaring Security Roles</h3>
 <div class="paragraph">
 <p>You can declare security role names used in web applications by using
 the <code>security-role</code> element of the deployment descriptor. Use this

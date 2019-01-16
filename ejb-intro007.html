@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIPLJ"></a><a id="the-lifecycles-of-enterprise-beans"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-lifecycles-of-enterprise-beans">The Lifecycles of Enterprise Beans</h2>
+<h2 id="_the_lifecycles_of_enterprise_beans">The Lifecycles of Enterprise Beans</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>An enterprise bean goes through various stages during its lifetime, or
@@ -85,8 +92,11 @@ first.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPLN"></a><a id="the-lifecycle-of-a-stateful-session-bean"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-lifecycle-of-a-stateful-session-bean">The Lifecycle of a Stateful Session Bean</h3>
+<h3 id="_the_lifecycle_of_a_stateful_session_bean">The Lifecycle of a Stateful Session Bean</h3>
 <div class="paragraph">
 <p><a href="#GIPMI">Figure 35-2</a> illustrates the stages that a stateful session
 bean passes through during its lifetime. The client initiates the
@@ -122,9 +132,12 @@ method annotated <code>@Remove</code>. All other methods in <a href="#GIPMI">Fig
 <a href="resources.html#BNCJH">Chapter 55, "Resource Adapters and Contracts"</a>
 for more information.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPLM"></a><a id="the-lifecycle-of-a-stateless-session-bean"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-lifecycle-of-a-stateless-session-bean">The Lifecycle of a Stateless Session Bean</h3>
+<h3 id="_the_lifecycle_of_a_stateless_session_bean">The Lifecycle of a Stateless Session Bean</h3>
 <div class="paragraph">
 <p>Because a stateless session bean is never passivated, its lifecycle has
 only two stages: nonexistent and ready for the invocation of business
@@ -147,9 +160,12 @@ its business methods invoked by a client.</p>
 annotated <code>@PreDestroy</code>, if it exists. The bean&#8217;s instance is then ready
 for garbage collection.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPRX"></a><a id="the-lifecycle-of-a-singleton-session-bean"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-lifecycle-of-a-singleton-session-bean">The Lifecycle of a Singleton Session Bean</h3>
+<h3 id="_the_lifecycle_of_a_singleton_session_bean">The Lifecycle of a Singleton Session Bean</h3>
 <div class="paragraph">
 <p>Like a stateless session bean, a singleton session bean is never
 passivated and has only two stages, nonexistent and ready for the
@@ -168,9 +184,12 @@ now ready to have its business methods invoked by the client.</p>
 annotated <code>@PreDestroy</code>, if it exists. The singleton session bean is now
 ready for garbage collection.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPKW"></a><a id="the-lifecycle-of-a-message-driven-bean"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-lifecycle-of-a-message-driven-bean">The Lifecycle of a Message-Driven Bean</h3>
+<h3 id="_the_lifecycle_of_a_message_driven_bean">The Lifecycle of a Message-Driven Bean</h3>
 <div class="paragraph">
 <p><a href="#GIPLR">Figure 35-4</a> illustrates the stages in the lifecycle of a
 message-driven bean.</p>

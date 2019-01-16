@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIPVI"></a><a id="a-singleton-session-bean-example-counter"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="a-singleton-session-bean-example-counter">A Singleton Session Bean Example: counter</h2>
+<h2 id="_a_singleton_session_bean_example_counter">A Singleton Session Bean Example: counter</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>counter</code> example demonstrates how to create a singleton session
@@ -74,8 +81,11 @@ bean.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPVC"></a><a id="creating-a-singleton-session-bean"></a></p>
+</div>
 <div class="sect2">
-<h3 id="creating-a-singleton-session-bean">Creating a Singleton Session Bean</h3>
+<h3 id="_creating_a_singleton_session_bean">Creating a Singleton Session Bean</h3>
 <div class="paragraph">
 <p>The <code>javax.ejb.Singleton</code> annotation is used to specify that the
 enterprise bean implementation class is a singleton session bean:</p>
@@ -86,8 +96,11 @@ enterprise bean implementation class is a singleton session bean:</p>
 public class SingletonBean { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIPPQ"></a><a id="initializing-singleton-session-beans"></a></p>
+</div>
 <div class="sect3">
-<h4 id="initializing-singleton-session-beans">Initializing Singleton Session Beans</h4>
+<h4 id="_initializing_singleton_session_beans">Initializing Singleton Session Beans</h4>
 <div class="paragraph">
 <p>The EJB container is responsible for determining when to initialize a
 singleton session bean instance unless the singleton session bean
@@ -176,9 +189,12 @@ the EJB container may initialize either <code>PrimaryBean</code> or <code>Second
 first. That is, the EJB container could initialize the singletons in the
 following order: <code>SecondaryBean</code>, <code>PrimaryBean</code>, <code>TertiaryBean</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPSZ"></a><a id="managing-concurrent-access-in-a-singleton-session-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="managing-concurrent-access-in-a-singleton-session-bean">Managing Concurrent Access in a Singleton Session Bean</h4>
+<h4 id="_managing_concurrent_access_in_a_singleton_session_bean">Managing Concurrent Access in a Singleton Session Bean</h4>
 <div class="paragraph">
 <p>Singleton session beans are designed for concurrent access, situations
 in which many clients need to access a single instance of a session bean
@@ -377,9 +393,12 @@ specify bean-managed concurrency:</p>
 public class AnotherSingletonBean { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIPVD"></a><a id="handling-errors-in-a-singleton-session-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="handling-errors-in-a-singleton-session-bean">Handling Errors in a Singleton Session Bean</h4>
+<h4 id="_handling_errors_in_a_singleton_session_bean">Handling Errors in a Singleton Session Bean</h4>
 <div class="paragraph">
 <p>If a singleton session bean encounters an error when initialized by the
 EJB container, that singleton instance will be destroyed.</p>
@@ -390,10 +409,13 @@ initialized, it is not destroyed if the singleton&#8217;s business or
 lifecycle methods cause system exceptions. This ensures that the same
 singleton instance is used throughout the application lifecycle.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPXL"></a><a id="the-architecture-of-the-counter-example"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="the-architecture-of-the-counter-example">The Architecture of the counter Example</h3>
+<h3 id="_the_architecture_of_the_counter_example">The Architecture of the counter Example</h3>
 <div class="paragraph">
 <p>The <code>counter</code> example consists of a singleton session bean,
 <code>CounterBean</code>, and a JavaServer Faces Facelets web front end.</p>
@@ -528,9 +550,12 @@ managed bean. Here is the content of <code>index.xhtml</code>:</p>
 &lt;/html&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIPVL"></a><a id="running-the-counter-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-counter-example">Running the counter Example</h3>
+<h3 id="_running_the_counter_example">Running the counter Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>counter</code> example.</p>
@@ -551,8 +576,11 @@ run the <code>counter</code> example.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPXT"></a><a id="to-run-the-counter-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-counter-example-using-netbeans-ide">To Run the counter Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_counter_example_using_netbeans_ide">To Run the counter Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -590,9 +618,12 @@ displays the number of hits.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GIPZW"></a><a id="to-run-the-counter-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-counter-example-using-maven">To Run the counter Example Using Maven</h4>
+<h4 id="_to_run_the_counter_example_using_maven">To Run the counter Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BCGGIBHA"></a><a id="batch-processing-in-java-ee"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="batch-processing-in-java-ee">Batch Processing in Java EE</h2>
+<h2 id="_batch_processing_in_java_ee">Batch Processing in Java EE</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section lists the components of the batch processing framework in
@@ -84,8 +91,11 @@ create a batch application.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABEAFJI"></a><a id="the-batch-processing-framework"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-batch-processing-framework">The Batch Processing Framework</h3>
+<h3 id="_the_batch_processing_framework">The Batch Processing Framework</h3>
 <div class="paragraph">
 <p>Java EE includes a batch processing framework that consists of the
 following elements:</p>
@@ -117,9 +127,12 @@ the application logic of the batch artifacts defined in the XML files.
 The batch runtime parses the XML files and loads the batch artifacts as
 Java classes to run the jobs in a batch application.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABCGDHJ"></a><a id="creating-batch-applications"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="creating-batch-applications">Creating Batch Applications</h3>
+<h3 id="_creating_batch_applications">Creating Batch Applications</h3>
 <div class="paragraph">
 <p>The process for creating a batch application in Java EE is the
 following.</p>
@@ -171,9 +184,12 @@ application.</p>
 <p>The following sections describe in detail how to use the components of
 the batch processing framework in Java EE to create batch applications.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABDGDJB"></a><a id="elements-of-a-batch-job"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="elements-of-a-batch-job">Elements of a Batch Job</h3>
+<h3 id="_elements_of_a_batch_job">Elements of a Batch Job</h3>
 <div class="paragraph">
 <p>A batch job can contain one or more of the following elements:</p>
 </div>
@@ -216,9 +232,12 @@ flows complete.</p>
 <p>Decision elements use the exit status of the previous step to determine
 the next step or to terminate the batch job.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABHJEJC"></a><a id="properties-and-parameters"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="properties-and-parameters">Properties and Parameters</h3>
+<h3 id="_properties_and_parameters">Properties and Parameters</h3>
 <div class="paragraph">
 <p>Jobs and steps can have a number of properties associated with them. You
 define properties in the job definition file, and batch artifacts access
@@ -248,9 +267,12 @@ in batch artifacts is demonstrated in
 <a href="batch-processing009.html#BCGFCACD">The phonebilling Example
 Application</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABHJGDH"></a><a id="job-instances-and-job-executions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="job-instances-and-job-executions">Job Instances and Job Executions</h3>
+<h3 id="_job_instances_and_job_executions">Job Instances and Job Executions</h3>
 <div class="paragraph">
 <p>A job definition can have multiple instances, each with different
 parameters. A job execution is an attempt to run a job instance. The
@@ -258,9 +280,12 @@ batch runtime maintains information about job instances and job
 executions, as described in
 <a href="batch-processing006.html#BCGIBGFC">Checking the Status of a Job</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABBFGEF"></a><a id="batch-and-exit-status"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="batch-and-exit-status">Batch and Exit Status</h3>
+<h3 id="_batch_and_exit_status">Batch and Exit Status</h3>
 <div class="paragraph">
 <p>The state of jobs, steps, splits, and flows is represented in the batch
 runtime as a batch status value. Batch status values are listed

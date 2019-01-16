@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBTL"></a><a id="example-queries"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="example-queries">Example Queries</h2>
+<h2 id="_example_queries">Example Queries</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following queries are from the <code>Player</code> entity of the <code>roster</code>
@@ -78,8 +85,11 @@ application, which is documented in
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTM"></a><a id="simple-queries"></a></p>
+</div>
 <div class="sect2">
-<h3 id="simple-queries">Simple Queries</h3>
+<h3 id="_simple_queries">Simple Queries</h3>
 <div class="paragraph">
 <p>If you are unfamiliar with the query language, these simple queries are
 a good place to start.</p>
@@ -100,8 +110,11 @@ a good place to start.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTN"></a><a id="a-basic-select-query"></a></p>
+</div>
 <div class="sect3">
-<h4 id="a-basic-select-query">A Basic Select Query</h4>
+<h4 id="_a_basic_select_query">A Basic Select Query</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
@@ -132,9 +145,12 @@ Variables</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTO"></a><a id="eliminating-duplicate-values"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="eliminating-duplicate-values">Eliminating Duplicate Values</h4>
+<h4 id="_eliminating_duplicate_values">Eliminating Duplicate Values</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -163,9 +179,12 @@ Keyword</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTP"></a><a id="using-named-parameters"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-named-parameters">Using Named Parameters</h4>
+<h4 id="_using_named_parameters">Using Named Parameters</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -188,10 +207,13 @@ input parameter is <code>:position</code>, the second is <code>:name</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTQ"></a><a id="queries-that-navigate-to-related-entities"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="queries-that-navigate-to-related-entities">Queries That Navigate to Related Entities</h3>
+<h3 id="_queries_that_navigate_to_related_entities">Queries That Navigate to Related Entities</h3>
 <div class="paragraph">
 <p>In the query language, an expression can traverse, or navigate, to
 related entities. These expressions are the primary difference between
@@ -220,8 +242,11 @@ related entities, whereas SQL joins tables.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTR"></a><a id="a-simple-query-with-relationships"></a></p>
+</div>
 <div class="sect3">
-<h4 id="a-simple-query-with-relationships">A Simple Query with Relationships</h4>
+<h4 id="_a_simple_query_with_relationships">A Simple Query with Relationships</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -263,9 +288,12 @@ WHERE p.team IS NOT EMPTY</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTS"></a><a id="navigating-to-single-valued-relationship-fields"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="navigating-to-single-valued-relationship-fields">Navigating to Single-Valued Relationship Fields</h4>
+<h4 id="_navigating_to_single_valued_relationship_fields">Navigating to Single-Valued Relationship Fields</h4>
 <div class="paragraph">
 <p>Use the <code>JOIN</code> clause statement to navigate to a single-valued
 relationship field:</p>
@@ -281,9 +309,12 @@ WHERE l.sport = 'soccer' OR l.sport ='football'</code></pre>
 <p>In this example, the query will return all teams that are in either
 soccer or football leagues.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBTT"></a><a id="traversing-relationships-with-an-input-parameter"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="traversing-relationships-with-an-input-parameter">Traversing Relationships with an Input Parameter</h4>
+<h4 id="_traversing_relationships_with_an_input_parameter">Traversing Relationships with an Input Parameter</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -318,9 +349,12 @@ Expressions</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTU"></a><a id="traversing-multiple-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="traversing-multiple-relationships">Traversing Multiple Relationships</h4>
+<h4 id="_traversing_multiple_relationships">Traversing Multiple Relationships</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -347,9 +381,12 @@ this example, the parameter is an object whose type is a <code>League</code>. Th
 type matches the <code>league</code> relationship field in the comparison
 expression of the <code>WHERE</code> clause.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBTV"></a><a id="navigating-according-to-related-fields"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="navigating-according-to-related-fields">Navigating According to Related Fields</h4>
+<h4 id="_navigating_according_to_related_fields">Navigating According to Related Fields</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -372,10 +409,13 @@ field.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTW"></a><a id="queries-with-other-conditional-expressions"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="queries-with-other-conditional-expressions">Queries with Other Conditional Expressions</h3>
+<h3 id="_queries_with_other_conditional_expressions">Queries with Other Conditional Expressions</h3>
 <div class="paragraph">
 <p>Every <code>WHERE</code> clause must specify a conditional expression, of which
 there are several kinds. In the previous examples, the conditional
@@ -406,8 +446,11 @@ expressions. For descriptions of all conditional expressions, see
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTX"></a><a id="the-like-expression"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-like-expression">The LIKE Expression</h4>
+<h4 id="_the_like_expression">The LIKE Expression</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
@@ -433,9 +476,12 @@ Expressions</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTY"></a><a id="the-is-null-expression"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-is-null-expression">The IS NULL Expression</h4>
+<h4 id="_the_is_null_expression">The IS NULL Expression</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT t
@@ -461,9 +507,12 @@ Values</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBTZ"></a><a id="the-is-empty-expression"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-is-empty-expression">The IS EMPTY Expression</h4>
+<h4 id="_the_is_empty_expression">The IS EMPTY Expression</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT p
@@ -487,9 +536,12 @@ Comparison Expressions</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUA"></a><a id="the-between-expression"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-between-expression">The BETWEEN Expression</h4>
+<h4 id="_the_between_expression">The BETWEEN Expression</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p
@@ -520,9 +572,12 @@ Expressions</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUB"></a><a id="comparison-operators"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="comparison-operators">Comparison Operators</h4>
+<h4 id="_comparison_operators">Comparison Operators</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">SELECT DISTINCT p1
@@ -548,10 +603,13 @@ Variables</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUC"></a><a id="bulk-updates-and-deletes"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="bulk-updates-and-deletes">Bulk Updates and Deletes</h3>
+<h3 id="_bulk_updates_and_deletes">Bulk Updates and Deletes</h3>
 <div class="paragraph">
 <p>The following examples show how to use the <code>UPDATE</code> and <code>DELETE</code>
 expressions in queries. <code>UPDATE</code> and <code>DELETE</code> operate on multiple
@@ -572,8 +630,11 @@ same rules as <code>SELECT</code> queries.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUD"></a><a id="update-queries"></a></p>
+</div>
 <div class="sect3">
-<h4 id="update-queries">Update Queries</h4>
+<h4 id="_update_queries">Update Queries</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">UPDATE Player p
@@ -590,9 +651,12 @@ specified in <code>inactiveThresholdDate</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUE"></a><a id="delete-queries"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="delete-queries">Delete Queries</h4>
+<h4 id="_delete_queries">Delete Queries</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">DELETE

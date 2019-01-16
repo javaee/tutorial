@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBRG"></a><a id="creating-queries-using-the-java-persistence-query-language"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="creating-queries-using-the-java-persistence-query-language">Creating Queries Using the Java Persistence Query Language</h2>
+<h2 id="_creating_queries_using_the_java_persistence_query_language">Creating Queries Using the Java Persistence Query Language</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>EntityManager.createQuery</code> and <code>EntityManager.createNamedQuery</code>
@@ -103,8 +110,11 @@ customers = em.createNamedQuery("findAllCustomersWithName")
     .getResultList();</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBRH"></a><a id="named-parameters-in-queries"></a></p>
+</div>
 <div class="sect2">
-<h3 id="named-parameters-in-queries">Named Parameters in Queries</h3>
+<h3 id="_named_parameters_in_queries">Named Parameters in Queries</h3>
 <div class="paragraph">
 <p>Named parameters are query parameters that are prefixed with a colon
 (<code>:</code>). Named parameters in a query are bound to an argument by the
@@ -134,9 +144,12 @@ by calling <code>Query.setParameter</code>:</p>
 <p>Named parameters are case-sensitive and may be used by both dynamic and
 static queries.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBRI"></a><a id="positional-parameters-in-queries"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="positional-parameters-in-queries">Positional Parameters in Queries</h3>
+<h3 id="_positional_parameters_in_queries">Positional Parameters in Queries</h3>
 <div class="paragraph">
 <p>You may use positional parameters instead of named parameters in
 queries. Positional parameters are prefixed with a question mark (<code>?</code>)

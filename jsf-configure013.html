@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAXJ"></a><a id="basic-requirements-of-a-javaserver-faces-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="basic-requirements-of-a-javaserver-faces-application">Basic Requirements of a JavaServer Faces Application</h2>
+<h2 id="_basic_requirements_of_a_javaserver_faces_application">Basic Requirements of a JavaServer Faces Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In addition to configuring your application, you must satisfy other
@@ -120,8 +127,11 @@ typically has the following directory structure:</p>
 and the set of application files must be contained in the <code>WEB-INF</code>
 directory of the WAR file.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAXK"></a><a id="configuring-an-application-with-a-web-deployment-descriptor"></a></p>
+</div>
 <div class="sect2">
-<h3 id="configuring-an-application-with-a-web-deployment-descriptor">Configuring an Application with a Web Deployment Descriptor</h3>
+<h3 id="_configuring_an_application_with_a_web_deployment_descriptor">Configuring an Application with a Web Deployment Descriptor</h3>
 <div class="paragraph">
 <p>Web applications are commonly configured using elements contained in the
 web application deployment descriptor, <code>web.xml</code>. The deployment
@@ -176,8 +186,11 @@ configurations, such as those that</p>
 appropriate, it also describes how you can make these configurations
 using NetBeans IDE.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLPOO"></a><a id="identifying-the-servlet-for-lifecycle-processing"></a></p>
+</div>
 <div class="sect3">
-<h4 id="identifying-the-servlet-for-lifecycle-processing">Identifying the Servlet for Lifecycle Processing</h4>
+<h4 id="_identifying_the_servlet_for_lifecycle_processing">Identifying the Servlet for Lifecycle Processing</h4>
 <div class="paragraph">
 <p>A requirement of a JavaServer Faces application is that all requests to
 the application that reference previously saved JavaServer Faces
@@ -271,9 +284,12 @@ deployment descriptor is automatically created for you with default
 configurations. If you created your application without an IDE, you can
 create a web deployment descriptor.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAXM"></a><a id="to-specify-a-path-to-an-application-configuration-resource-file"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-specify-a-path-to-an-application-configuration-resource-file">To Specify a Path to an Application Configuration Resource File</h4>
+<h4 id="_to_specify_a_path_to_an_application_configuration_resource_file">To Specify a Path to an Application Configuration Resource File</h4>
 <div class="paragraph">
 <p>As explained in <a href="jsf-configure003.html#BNAWP">Application
 Configuration Resource File</a>, an application can have multiple
@@ -325,9 +341,12 @@ field.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAXN"></a><a id="to-specify-where-state-is-saved"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-specify-where-state-is-saved">To Specify Where State Is Saved</h4>
+<h4 id="_to_specify_where_state_is_saved">To Specify Where State Is Saved</h4>
 <div class="paragraph">
 <p>For all the components in a web application, you can specify in your
 deployment descriptor where you want the state to be saved, on either
@@ -381,10 +400,13 @@ rendered to a hidden field on the page. The JavaServer Faces
 implementation saves the state on the server by default. Duke&#8217;s Forest
 saves its state on the client.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQXL"></a><a id="configuring-project-stage"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuring-project-stage">Configuring Project Stage</h3>
+<h3 id="_configuring_project_stage">Configuring Project Stage</h3>
 <div class="paragraph">
 <p>Project Stage is a context parameter identifying the status of a
 JavaServer Faces application in the software lifecycle. The stage of an
@@ -427,9 +449,12 @@ deployment descriptor file. Here is an example:</p>
 <p>If no Project Stage is defined, the default stage is <code>Production</code>. You
 can also add custom stages according to your requirements.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAXT"></a><a id="including-the-classes-pages-and-other-resources"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="including-the-classes-pages-and-other-resources">Including the Classes, Pages, and Other Resources</h3>
+<h3 id="_including_the_classes_pages_and_other_resources">Including the Classes, Pages, and Other Resources</h3>
 <div class="paragraph">
 <p>When packaging web applications using the included build scripts, you&#8217;ll
 notice that the scripts package resources in the following ways.</p>

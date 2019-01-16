@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABJFEAI"></a><a id="using-the-postconstruct-and-predestroy-annotations-with-cdi-managed-bean-classes"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-the-postconstruct-and-predestroy-annotations-with-cdi-managed-bean-classes">Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes</h2>
+<h2 id="_using_the_postconstruct_and_predestroy_annotations_with_cdi_managed_bean_classes">Using the @PostConstruct and @PreDestroy Annotations with CDI Managed Bean Classes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>CDI managed bean classes and their superclasses support the annotations
@@ -75,8 +82,11 @@ the @PreDestroy Annotation</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHEHHCH"></a><a id="to-initialize-a-managed-bean-using-the-postconstruct-annotation"></a></p>
+</div>
 <div class="sect2">
-<h3 id="to-initialize-a-managed-bean-using-the-postconstruct-annotation">To Initialize a Managed Bean Using the @PostConstruct Annotation</h3>
+<h3 id="_to_initialize_a_managed_bean_using_the_postconstruct_annotation">To Initialize a Managed Bean Using the @PostConstruct Annotation</h3>
 <div class="paragraph">
 <p>Initializing a managed bean specifies the lifecycle callback method that
 the CDI framework should call after dependency injection but before the
@@ -133,9 +143,12 @@ public void reset () {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHBAFAC"></a><a id="to-prepare-for-the-destruction-of-a-managed-bean-using-the-predestroy-annotation"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="to-prepare-for-the-destruction-of-a-managed-bean-using-the-predestroy-annotation">To Prepare for the Destruction of a Managed Bean Using the @PreDestroy Annotation</h3>
+<h3 id="_to_prepare_for_the_destruction_of_a_managed_bean_using_the_predestroy_annotation">To Prepare for the Destruction of a Managed Bean Using the @PreDestroy Annotation</h3>
 <div class="paragraph">
 <p>Preparing for the destruction of a managed bean specifies the lifecycle
 call back method that signals that an application component is about to

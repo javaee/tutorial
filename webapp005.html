@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="CHDHGJIA"></a><a id="configuring-web-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="configuring-web-applications">Configuring Web Applications</h2>
+<h2 id="_configuring_web_applications">Configuring Web Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes the following tasks involved with configuring web
@@ -74,8 +81,11 @@ applications:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAES"></a><a id="setting-context-parameters"></a></p>
+</div>
 <div class="sect2">
-<h3 id="setting-context-parameters">Setting Context Parameters</h3>
+<h3 id="_setting_context_parameters">Setting Context Parameters</h3>
 <div class="paragraph">
 <p>The web components in a web module share an object that represents their
 application context. You can pass context parameters to the context, or
@@ -84,8 +94,11 @@ are available to the entire application. For information on
 initialization parameters, see <a href="servlets004.html#BNAFU">Creating and
 Initializing a Servlet</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJSFJ"></a><a id="to-add-a-context-parameter-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-add-a-context-parameter-using-netbeans-ide">To Add a Context Parameter Using NetBeans IDE</h4>
+<h4 id="_to_add_a_context_parameter_using_netbeans_ide">To Add a Context Parameter Using NetBeans IDE</h4>
 <div class="paragraph">
 <p>These steps apply generally to web applications but do not apply
 specifically to the examples in this chapter.</p>
@@ -133,9 +146,12 @@ context object.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GKIHH"></a><a id="to-create-a-web.xml-file-using-netbeans-ide"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-create-a-web.xml-file-using-netbeans-ide">To Create a web.xml File Using NetBeans IDE</h4>
+<h4 id="_to_create_a_web_xml_file_using_netbeans_ide">To Create a web.xml File Using NetBeans IDE</h4>
 <div class="paragraph">
 <p>To create a <code>web.xml</code> file using NetBeans IDE:</p>
 </div>
@@ -159,10 +175,13 @@ Standard Deployment Descriptor under File Types.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAER"></a><a id="declaring-welcome-files"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="declaring-welcome-files">Declaring Welcome Files</h3>
+<h3 id="_declaring_welcome_files">Declaring Welcome Files</h3>
 <div class="paragraph">
 <p>The welcome files mechanism allows you to specify a list of files that
 the web container can append to a request for a URL (called a valid
@@ -207,9 +226,12 @@ specification for the <code>hello1</code> example looks like this:</p>
 request is mapped to the <code>GreetingServlet</code> web component through the URL
 pattern <code>/greeting</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKBKW"></a><a id="mapping-errors-to-error-screens"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="mapping-errors-to-error-screens">Mapping Errors to Error Screens</h3>
+<h3 id="_mapping_errors_to_error_screens">Mapping Errors to Error Screens</h3>
 <div class="paragraph">
 <p>When an error occurs during execution of a web application, you can have
 the application display a specific error screen according to the type of
@@ -223,8 +245,11 @@ descriptor. Each element identifies a different error that causes an
 error page to open. This error page can be the same for any number of
 <code>error-page</code> elements.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAET"></a><a id="to-set-up-error-mapping-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-set-up-error-mapping-using-netbeans-ide">To Set Up Error Mapping Using NetBeans IDE</h4>
+<h4 id="_to_set_up_error_mapping_using_netbeans_ide">To Set Up Error Mapping Using NetBeans IDE</h4>
 <div class="paragraph">
 <p>These steps apply generally to web applications but do not apply
 specifically to the examples in this chapter.</p>
@@ -285,10 +310,13 @@ throwable errors and exceptions, enter <code>java.lang.Throwable</code>.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAEU"></a><a id="declaring-resource-references"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="declaring-resource-references">Declaring Resource References</h3>
+<h3 id="_declaring_resource_references">Declaring Resource References</h3>
 <div class="paragraph">
 <p>If your web component uses such objects as enterprise beans, data
 sources, or web services, you use Java EE annotations to inject these
@@ -376,8 +404,11 @@ for more information on resources.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNAEW"></a><a id="declaring-a-reference-to-a-resource"></a></p>
+</div>
 <div class="sect3">
-<h4 id="declaring-a-reference-to-a-resource">Declaring a Reference to a Resource</h4>
+<h4 id="_declaring_a_reference_to_a_resource">Declaring a Reference to a Resource</h4>
 <div class="paragraph">
 <p>The <code>@Resource</code> annotation is used to declare a reference to a resource,
 such as a data source, an enterprise bean, or an environment entry.</p>
@@ -435,9 +466,12 @@ instances, respectively.
 Persistence Examples"</a> describes these annotations and the use of the
 Java Persistence API in web applications.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAEX"></a><a id="declaring-a-reference-to-a-web-service"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="declaring-a-reference-to-a-web-service">Declaring a Reference to a Web Service</h4>
+<h4 id="_declaring_a_reference_to_a_web_service">Declaring a Reference to a Web Service</h4>
 <div class="paragraph">
 <p>The <code>@WebServiceRef</code> annotation provides a reference to a web service.
 The following example shows uses the <code>@WebServiceRef</code> annotation to

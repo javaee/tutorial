@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABBIHEJ"></a><a id="overview-of-the-client-api"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="overview-of-the-client-api">Overview of the Client API</h2>
+<h2 id="_overview_of_the_client_api">Overview of the Client API</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The JAX-RS Client API provides a high-level API for accessing any REST
@@ -81,8 +88,11 @@ resources, not just JAX-RS services. The Client API is defined in the
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDFCABB"></a><a id="creating-a-basic-client-request-using-the-client-api"></a></p>
+</div>
 <div class="sect2">
-<h3 id="creating-a-basic-client-request-using-the-client-api">Creating a Basic Client Request Using the Client API</h3>
+<h3 id="_creating_a_basic_client_request_using_the_client_api">Creating a Basic Client Request Using the Client API</h3>
 <div class="paragraph">
 <p>The following steps are needed to access a REST resource using the
 Client API.</p>
@@ -126,9 +136,12 @@ the returned entity. The <code>javax.ws.rs.client.Invocation.Builder.get</code>
 method invokes the service using an HTTP <code>GET</code> request, setting the type
 of the returned entity to <code>String</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="CHDHBFHJ"></a><a id="obtaining-the-client-instance"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="obtaining-the-client-instance">Obtaining the Client Instance</h3>
+<h3 id="_obtaining_the_client_instance">Obtaining the Client Instance</h3>
 <div class="paragraph">
 <p>The <code>Client</code> interface defines the actions and infrastructure a REST
 client requires to consume a RESTful web service. Instances of <code>Client</code>
@@ -156,9 +169,12 @@ limit the number of <code>Client</code> instances in your application, as the
 initialization and destruction of these instances may be expensive in
 your runtime environment.</p>
 </div>
+<div class="paragraph">
+<p><a id="CHDDCICC"></a><a id="setting-the-client-target"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="setting-the-client-target">Setting the Client Target</h3>
+<h3 id="_setting_the_client_target">Setting the Client Target</h3>
 <div class="paragraph">
 <p>The target of a client, the REST resource at a particular URI, is
 represented by an instance of the <code>javax.ws.rs.client.WebTarget</code>
@@ -192,9 +208,12 @@ WebTarget write = base.path("write");</code></pre>
 <p>The <code>WebTarget.path</code> method creates a new <code>WebTarget</code> instance by
 appending the current target URI with the path that was passed in.</p>
 </div>
+<div class="paragraph">
+<p><a id="CHDDBFCG"></a><a id="setting-path-parameters-in-targets"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="setting-path-parameters-in-targets">Setting Path Parameters in Targets</h3>
+<h3 id="_setting_path_parameters_in_targets">Setting Path Parameters in Targets</h3>
 <div class="paragraph">
 <p>Path parameters in client requests can be specified as URI template
 parameters, similar to the template parameters used when defining a
@@ -210,9 +229,12 @@ the <code>queryParam</code> method to add another variable to pass.</p>
         .resolveTemplate("userName", "janedoe")        .queryParam("chapter", "1");// http://example.com/webapi/read/janedoe?chapter=1Response response = myResource.request(...)        .get();</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CHDEFCDB"></a><a id="invoking-the-request"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="invoking-the-request">Invoking the Request</h3>
+<h3 id="_invoking_the_request">Invoking the Request</h3>
 <div class="paragraph">
 <p>After setting and applying any configuration options to the target, call
 one of the <code>WebTarget.request</code> methods to begin creating the request.

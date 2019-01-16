@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBYB"></a><a id="working-with-digital-certificates"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="working-with-digital-certificates">Working with Digital Certificates</h2>
+<h2 id="_working_with_digital_certificates">Working with Digital Certificates</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Digital certificates for GlassFish Server have already been generated
@@ -126,8 +133,11 @@ certificates, of their communicating peers.</p>
 <a href="security-advanced008.html#BABBGBBF">Further Information about
 Advanced Security Topics</a> for a link to the <code>keytool</code> documentation.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBYC"></a><a id="creating-a-server-certificate"></a></p>
+</div>
 <div class="sect2">
-<h3 id="creating-a-server-certificate">Creating a Server Certificate</h3>
+<h3 id="_creating_a_server_certificate">Creating a Server Certificate</h3>
 <div class="paragraph">
 <p>A server certificate has already been created for GlassFish Server and
 can be found in the domain-dir`/config/` directory. The server
@@ -173,8 +183,11 @@ contains more than one certificate.</p>
 <p>The next section provides specific information on using the <code>keytool</code>
 utility to perform these steps.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJRGY"></a><a id="to-use-keytool-to-create-a-server-certificate"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-use-keytool-to-create-a-server-certificate">To Use keytool to Create a Server Certificate</h4>
+<h4 id="_to_use_keytool_to_create_a_server_certificate">To Use keytool to Create a Server Certificate</h4>
 <div class="paragraph">
 <p>Run <code>keytool</code> to generate a new key pair in the default development
 keystore file, <code>keystore.jks</code>. This example uses the alias
@@ -292,10 +305,13 @@ Trust this certificate? [no]:</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GLIFW"></a><a id="adding-users-to-the-certificate-realm"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-users-to-the-certificate-realm">Adding Users to the Certificate Realm</h3>
+<h3 id="_adding_users_to_the_certificate_realm">Adding Users to the Certificate Realm</h3>
 <div class="paragraph">
 <p>In the <code>certificate</code> realm, user identity is set up in the GlassFish
 Server security context and populated with user data obtained from
@@ -303,9 +319,12 @@ cryptographically verified client certificates. For step-by-step
 instructions for creating this type of certificate, see
 <a href="#BNBYB">Working with Digital Certificates</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBYF"></a><a id="using-a-different-server-certificate-with-glassfish-server"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-a-different-server-certificate-with-glassfish-server">Using a Different Server Certificate with GlassFish Server</h3>
+<h3 id="_using_a_different_server_certificate_with_glassfish_server">Using a Different Server Certificate with GlassFish Server</h3>
 <div class="paragraph">
 <p>Follow the steps in <a href="#BNBYC">Creating a Server Certificate</a> to create
 your own server certificate, have it signed by a CA, and import the
@@ -328,8 +347,11 @@ change the default password to your keystore&#8217;s password.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref230"></a><a id="to-specify-a-different-server-certificate"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-specify-a-different-server-certificate">To Specify a Different Server Certificate</h4>
+<h4 id="_to_specify_a_different_server_certificate">To Specify a Different Server Certificate</h4>
 <div class="paragraph">
 <p>To specify that GlassFish Server should use the new keystore for
 authentication and authorization decisions, you must set the JVM options

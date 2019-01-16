@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCIJ"></a><a id="container-managed-transactions"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="container-managed-transactions">Container-Managed Transactions</h2>
+<h2 id="_container_managed_transactions">Container-Managed Transactions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In an enterprise bean with container-managed transaction demarcation,
@@ -91,8 +98,11 @@ demarcation, you must use application-managed transaction demarcation.</p>
 <p>Enterprise beans that use container-managed transaction demarcation also
 must not use the <code>javax.transaction.UserTransaction</code> interface.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIK"></a><a id="transaction-attributes"></a></p>
+</div>
 <div class="sect2">
-<h3 id="transaction-attributes">Transaction Attributes</h3>
+<h3 id="_transaction_attributes">Transaction Attributes</h3>
 <div class="paragraph">
 <p>A transaction attribute controls the scope of a transaction.
 <a href="#BNCIL">Figure 54-1</a> illustrates why controlling the scope is
@@ -131,8 +141,11 @@ attribute of <code>method-B</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCIM"></a><a id="required-attribute"></a></p>
+</div>
 <div class="sect3">
-<h4 id="required-attribute">Required Attribute</h4>
+<h4 id="_required_attribute">Required Attribute</h4>
 <div class="paragraph">
 <p>If the client is running within a transaction and invokes the enterprise
 bean&#8217;s method, the method executes within the client&#8217;s transaction. If
@@ -146,9 +159,12 @@ demarcation. You typically do not set the <code>Required</code> attribute unless
 you need to override another transaction attribute. Because transaction
 attributes are declarative, you can easily change them later.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIN"></a><a id="requiresnew-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="requiresnew-attribute">RequiresNew Attribute</h4>
+<h4 id="_requiresnew_attribute">RequiresNew Attribute</h4>
 <div class="paragraph">
 <p>If the client is running within a transaction and invokes the enterprise
 bean&#8217;s method, the container takes the following steps:</p>
@@ -177,9 +193,12 @@ a new transaction before running the method.</p>
 <p>You should use the <code>RequiresNew</code> attribute when you want to ensure that
 the method always runs within a new transaction.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIO"></a><a id="mandatory-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="mandatory-attribute">Mandatory Attribute</h4>
+<h4 id="_mandatory_attribute">Mandatory Attribute</h4>
 <div class="paragraph">
 <p>If the client is running within a transaction and invokes the enterprise
 bean&#8217;s method, the method executes within the client&#8217;s transaction. If
@@ -190,9 +209,12 @@ the client is not associated with a transaction, the container throws a
 <p>Use the <code>Mandatory</code> attribute if the enterprise bean&#8217;s method must use
 the transaction of the client.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIP"></a><a id="notsupported-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="notsupported-attribute">NotSupported Attribute</h4>
+<h4 id="_notsupported_attribute">NotSupported Attribute</h4>
 <div class="paragraph">
 <p>If the client is running within a transaction and invokes the enterprise
 bean&#8217;s method, the container suspends the client&#8217;s transaction before
@@ -208,9 +230,12 @@ not start a new transaction before running the method.</p>
 transactions. Because transactions involve overhead, this attribute may
 improve performance.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIQ"></a><a id="supports-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="supports-attribute">Supports Attribute</h4>
+<h4 id="_supports_attribute">Supports Attribute</h4>
 <div class="paragraph">
 <p>If the client is running within a transaction and invokes the enterprise
 bean&#8217;s method, the method executes within the client&#8217;s transaction. If
@@ -221,18 +246,24 @@ start a new transaction before running the method.</p>
 <p>Because the transactional behavior of the method may vary, you should
 use the <code>Supports</code> attribute with caution.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIR"></a><a id="never-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="never-attribute">Never Attribute</h4>
+<h4 id="_never_attribute">Never Attribute</h4>
 <div class="paragraph">
 <p>If the client is running within a transaction and invokes the enterprise
 bean&#8217;s method, the container throws a <code>RemoteException</code>. If the client
 is not associated with a transaction, the container does not start a new
 transaction before running the method.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIS"></a><a id="summary-of-transaction-attributes"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="summary-of-transaction-attributes">Summary of Transaction Attributes</h4>
+<h4 id="_summary_of_transaction_attributes">Summary of Transaction Attributes</h4>
 <div class="paragraph">
 <p><a href="#BNCIT">Table 54-1</a> summarizes the effects of the transaction
 attributes. Both the <code>T1</code> and the <code>T2</code> transactions are controlled by
@@ -329,9 +360,12 @@ Transaction</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNCIU"></a><a id="setting-transaction-attributes"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="setting-transaction-attributes">Setting Transaction Attributes</h4>
+<h4 id="_setting_transaction_attributes">Setting Transaction Attributes</h4>
 <div class="paragraph">
 <p>Transaction attributes are specified by decorating the enterprise bean
 class or method with a <code>javax.ejb.TransactionAttribute</code> annotation and
@@ -427,10 +461,13 @@ transaction, and calls to <code>secondMethod</code> will either run in the curre
 transaction or start a new transaction. Calls to <code>thirdMethod</code> or
 <code>fourthMethod</code> do not take place within a transaction.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIV"></a><a id="rolling-back-a-container-managed-transaction"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="rolling-back-a-container-managed-transaction">Rolling Back a Container-Managed Transaction</h3>
+<h3 id="_rolling_back_a_container_managed_transaction">Rolling Back a Container-Managed Transaction</h3>
 <div class="paragraph">
 <p>There are two ways to roll back a container-managed transaction. First,
 if a system exception is thrown, the container will automatically roll
@@ -440,9 +477,12 @@ to roll back the transaction. If the bean throws an application
 exception, the rollback is not automatic but can be initiated by a call
 to <code>setRollbackOnly</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIW"></a><a id="synchronizing-a-session-beans-instance-variables"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="synchronizing-a-session-beans-instance-variables">Synchronizing a Session Bean&#8217;s Instance Variables</h3>
+<h3 id="_synchronizing_a_session_bean_s_instance_variables">Synchronizing a Session Bean&#8217;s Instance Variables</h3>
 <div class="paragraph">
 <p>The <code>SessionSynchronization</code> interface, which is optional, allows
 stateful session bean instances to receive transaction synchronization
@@ -469,9 +509,12 @@ completed. This method has a single <code>boolean</code> parameter whose value i
 <code>true</code> if the transaction was committed and <code>false</code> if it was rolled
 back.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCIX"></a><a id="methods-not-allowed-in-container-managed-transactions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="methods-not-allowed-in-container-managed-transactions">Methods Not Allowed in Container-Managed Transactions</h3>
+<h3 id="_methods_not_allowed_in_container_managed_transactions">Methods Not Allowed in Container-Managed Transactions</h3>
 <div class="paragraph">
 <p>You should not invoke any method that might interfere with the
 transaction boundaries set by the container. The following methods are

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAWQ"></a><a id="configuring-managed-beans"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="configuring-managed-beans">Configuring Managed Beans</h2>
+<h2 id="_configuring_managed_beans">Configuring Managed Beans</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When a page references a managed bean for the first time, the JavaServer
@@ -106,8 +113,11 @@ creation facility. See <a href="jsf-develop002.html#BNATY">Writing Bean
 Properties</a> and <a href="jsf-develop003.html#BNAVB">Writing Managed Bean
 Methods</a> for information on programming managed beans.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWR"></a><a id="using-the-managed-bean-element"></a></p>
+</div>
 <div class="sect2">
-<h3 id="using-the-managed-bean-element">Using the managed-bean Element</h3>
+<h3 id="_using_the_managed_bean_element">Using the managed-bean Element</h3>
 <div class="paragraph">
 <p>A managed bean is initiated in the application configuration resource
 file using a <code>managed-bean</code> element, which represents an instance of a
@@ -223,9 +233,12 @@ managed-property Element</a>, explains in more detail how to use the
 <code>managed-property</code> element. See <a href="#BNAWY">Initializing Managed Bean
 Properties</a> for an example of initializing a managed bean property.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWS"></a><a id="initializing-properties-using-the-managed-property-element"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="initializing-properties-using-the-managed-property-element">Initializing Properties Using the managed-property Element</h3>
+<h3 id="_initializing_properties_using_the_managed_property_element">Initializing Properties Using the managed-property Element</h3>
 <div class="paragraph">
 <p>A <code>managed-property</code> element must contain a <code>property-name</code> element,
 which must match the name of the corresponding property in the bean. A
@@ -281,8 +294,11 @@ the <code>value</code> subelement and other subelements to initialize properties
 Java <code>Enum</code> types, <code>Map</code>, <code>array</code>, and <code>Collection</code>, as well as
 initialization parameters.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWU"></a><a id="referencing-a-java-enum-type"></a></p>
+</div>
 <div class="sect3">
-<h4 id="referencing-a-java-enum-type">Referencing a Java Enum Type</h4>
+<h4 id="_referencing_a_java_enum_type">Referencing a Java Enum Type</h4>
 <div class="paragraph">
 <p>A managed bean property can also be a Java <code>Enum</code> type (see
 <code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html" class="bare">http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html</a></code>). In this
@@ -319,9 +335,12 @@ element looks like this:</p>
 members of the <code>enum</code> and calls <code>toString()</code> on each member until it
 finds one that is exactly equal to the value from the <code>value</code> element.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWV"></a><a id="referencing-a-context-initialization-parameter"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="referencing-a-context-initialization-parameter">Referencing a Context Initialization Parameter</h4>
+<h4 id="_referencing_a_context_initialization_parameter">Referencing a Context Initialization Parameter</h4>
 <div class="paragraph">
 <p>Another powerful feature of the managed bean creation facility is the
 ability to reference implicit objects from a managed bean property.</p>
@@ -371,9 +390,12 @@ property from the <code>area</code> component tag&#8217;s <code>value</code> att
 <div class="paragraph">
 <p>Values are retrieved from other implicit objects in a similar way.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWW"></a><a id="initializing-map-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="initializing-map-properties">Initializing Map Properties</h4>
+<h4 id="_initializing_map_properties">Initializing Map Properties</h4>
 <div class="paragraph">
 <p>The <code>map-entries</code> element is used to initialize the values of a bean
 property with a type of <code>Map</code> if the <code>map-entries</code> element is used
@@ -452,9 +474,12 @@ to the type specified in the bean.</p>
 the entire map using a <code>value</code> element that specifies a map-typed
 expression.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWX"></a><a id="initializing-array-and-list-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="initializing-array-and-list-properties">Initializing Array and List Properties</h4>
+<h4 id="_initializing_array_and_list_properties">Initializing Array and List Properties</h4>
 <div class="paragraph">
 <p>The <code>list-entries</code> element is used to initialize the values of an array
 or <code>List</code> property. Each individual value of the array or <code>List</code> is
@@ -487,9 +512,12 @@ an argument of <code>null</code>. A <code>null</code> property cannot be specifi
 property whose data type is a Java primitive, such as <code>int</code> or
 <code>boolean</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAWY"></a><a id="initializing-managed-bean-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="initializing-managed-bean-properties">Initializing Managed Bean Properties</h4>
+<h4 id="_initializing_managed_bean_properties">Initializing Managed Bean Properties</h4>
 <div class="paragraph">
 <p>Sometimes you might want to create a bean that also references other
 managed beans so that you can construct a graph or a tree of beans. For
@@ -605,10 +633,13 @@ neither of the <code>AddressBean</code> objects in the preceding example should
 point back to the <code>CustomerBean</code> object, because <code>CustomerBean</code> already
 points to the <code>AddressBean</code> objects.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAXA"></a><a id="initializing-maps-and-lists"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="initializing-maps-and-lists">Initializing Maps and Lists</h3>
+<h3 id="_initializing_maps_and_lists">Initializing Maps and Lists</h3>
 <div class="paragraph">
 <p>In addition to configuring <code>Map</code> and <code>List</code> properties, you can also
 configure a <code>Map</code> and a <code>List</code> directly so that you can reference them

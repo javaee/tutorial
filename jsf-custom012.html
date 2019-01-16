@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAUW"></a><a id="creating-and-using-a-custom-validator"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="creating-and-using-a-custom-validator">Creating and Using a Custom Validator</h2>
+<h2 id="_creating_and_using_a_custom_validator">Creating and Using a Custom Validator</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If the standard validators or Bean Validation don&#8217;t perform the
@@ -146,8 +153,11 @@ situation. However, the rest of this section describes how this
 validator would be implemented and how to specify a custom tag so that
 the page author could register the validator on a component.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAUX"></a><a id="implementing-the-validator-interface"></a></p>
+</div>
 <div class="sect2">
-<h3 id="implementing-the-validator-interface">Implementing the Validator Interface</h3>
+<h3 id="_implementing_the_validator_interface">Implementing the Validator Interface</h3>
 <div class="paragraph">
 <p>A <code>Validator</code> implementation must contain a constructor, a set of
 accessor methods for any attributes on the tag, and a <code>validate</code> method,
@@ -274,9 +284,12 @@ four methods: <code>saveState(FacesContext)</code>,
 <code>setTransient(boolean)</code>. See <a href="jsf-custom005.html#BNAVZ">Saving and
 Restoring State</a> for more information.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAUY"></a><a id="specifying-a-custom-tag"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="specifying-a-custom-tag">Specifying a Custom Tag</h3>
+<h3 id="_specifying_a_custom_tag">Specifying a Custom Tag</h3>
 <div class="paragraph">
 <p>If you implemented a <code>Validator</code> interface rather than implementing a
 managed bean method that performs the validation, you need to do one of
@@ -323,9 +336,12 @@ implementation class.</p>
 <p><a href="#BNATV">Using a Custom Validator</a> explains how to use the custom
 validator tag on the page.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNATV"></a><a id="using-a-custom-validator"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-a-custom-validator">Using a Custom Validator</h3>
+<h3 id="_using_a_custom_validator">Using a Custom Validator</h3>
 <div class="paragraph">
 <p>To register a custom validator on a component, you must do one of the
 following.</p>

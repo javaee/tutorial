@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKNAV"></a><a id="subresources-and-runtime-resource-resolution"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="subresources-and-runtime-resource-resolution">Subresources and Runtime Resource Resolution</h2>
+<h2 id="_subresources_and_runtime_resource_resolution">Subresources and Runtime Resource Resolution</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You can use a resource class to process only a part of the URI request.
@@ -88,8 +95,11 @@ corresponding resource.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GKLAG"></a><a id="subresource-methods"></a></p>
+</div>
 <div class="sect2">
-<h3 id="subresource-methods">Subresource Methods</h3>
+<h3 id="_subresource_methods">Subresource Methods</h3>
 <div class="paragraph">
 <p>A subresource method handles an HTTP request directly. The method must
 be annotated with a request method designator, such as <code>@GET</code> or
@@ -127,9 +137,12 @@ request:</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">GET /employeeinfo/employees/john.doe@example.com</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKRHR"></a><a id="subresource-locators"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="subresource-locators">Subresource Locators</h3>
+<h3 id="_subresource_locators">Subresource Locators</h3>
 <div class="paragraph">
 <p>A subresource locator returns an object that will handle an HTTP
 request. The method must not be annotated with a request method

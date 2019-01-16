@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAGB"></a><a id="filtering-requests-and-responses"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="filtering-requests-and-responses">Filtering Requests and Responses</h2>
+<h2 id="_filtering_requests_and_responses">Filtering Requests and Responses</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A filter is an object that can transform the header and content (or
@@ -98,8 +105,11 @@ or more filters in a specific order. This chain is specified when the
 web application containing the component is deployed and is instantiated
 when a web container loads the component.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAGC"></a><a id="programming-filters"></a></p>
+</div>
 <div class="sect2">
-<h3 id="programming-filters">Programming Filters</h3>
+<h3 id="_programming_filters">Programming Filters</h3>
 <div class="paragraph">
 <p>The filtering API is defined by the <code>Filter</code>, <code>FilterChain</code>, and
 <code>FilterConfig</code> interfaces in the <code>javax.servlet</code> package. You define a
@@ -184,9 +194,12 @@ instantiated. If you wish to pass initialization parameters to the
 filter, you retrieve them from the <code>FilterConfig</code> object passed to
 <code>init</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAGD"></a><a id="programming-customized-requests-and-responses"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="programming-customized-requests-and-responses">Programming Customized Requests and Responses</h3>
+<h3 id="_programming_customized_requests_and_responses">Programming Customized Requests and Responses</h3>
 <div class="paragraph">
 <p>There are many ways for a filter to modify a request or a response. For
 example, a filter can add an attribute to the request or can insert data
@@ -212,9 +225,12 @@ extends either <code>ServletRequestWrapper</code> or <code>HttpServletRequestWra
 To override response methods, you wrap the response in an object that
 extends either <code>ServletResponseWrapper</code> or <code>HttpServletResponseWrapper</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAGF"></a><a id="specifying-filter-mappings"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="specifying-filter-mappings">Specifying Filter Mappings</h3>
+<h3 id="_specifying_filter_mappings">Specifying Filter Mappings</h3>
 <div class="paragraph">
 <p>A web container uses filter mappings to decide how to apply filters to
 web resources. A filter mapping matches a filter to a web component by
@@ -255,8 +271,11 @@ F1 and F3, F1&#8217;s call to <code>chain.doFilter</code> invokes the <code>doFi
 of filter F3. When F3&#8217;s <code>doFilter</code> method completes, control returns to
 F1&#8217;s <code>doFilter</code> method.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJSLC"></a><a id="to-specify-filter-mappings-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-specify-filter-mappings-using-netbeans-ide">To Specify Filter Mappings Using NetBeans IDE</h4>
+<h4 id="_to_specify_filter_mappings_using_netbeans_ide">To Specify Filter Mappings Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

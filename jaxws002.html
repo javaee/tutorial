@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAYN"></a><a id="creating-a-simple-web-service-and-clients-with-jax-ws"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="creating-a-simple-web-service-and-clients-with-jax-ws">Creating a Simple Web Service and Clients with JAX-WS</h2>
+<h2 id="_creating_a_simple_web_service_and_clients_with_jax_ws">Creating a Simple Web Service and Clients with JAX-WS</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section shows how to build and deploy a simple web service and two
@@ -88,8 +95,11 @@ element to the <code>@WebService</code> annotation in the implementation class. 
 must then provide an interface that defines the public methods made
 available in the endpoint implementation class.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref133"></a><a id="basic-steps-for-creating-a-web-service-and-client"></a></p>
+</div>
 <div class="sect2">
-<h3 id="basic-steps-for-creating-a-web-service-and-client">Basic Steps for Creating a Web Service and Client</h3>
+<h3 id="_basic_steps_for_creating_a_web_service_and_client">Basic Steps for Creating a Web Service and Client</h3>
 <div class="paragraph">
 <p>The basic steps for creating a web service and client are as follows.</p>
 </div>
@@ -131,9 +141,12 @@ the <code>wsimport</code> task for you.</p>
 <div class="paragraph">
 <p>The sections that follow cover these steps in greater detail.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAYP"></a><a id="requirements-of-a-jax-ws-endpoint"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="requirements-of-a-jax-ws-endpoint">Requirements of a JAX-WS Endpoint</h3>
+<h3 id="_requirements_of_a_jax_ws_endpoint">Requirements of a JAX-WS Endpoint</h3>
 <div class="paragraph">
 <p>JAX-WS endpoints must follow these requirements.</p>
 </div>
@@ -188,9 +201,12 @@ is removed from operation.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAYQ"></a><a id="coding-the-service-endpoint-implementation-class"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="coding-the-service-endpoint-implementation-class">Coding the Service Endpoint Implementation Class</h3>
+<h3 id="_coding_the_service_endpoint_implementation_class">Coding the Service Endpoint Implementation Class</h3>
 <div class="paragraph">
 <p>In this example, the implementation class, <code>Hello</code>, is annotated as a
 web service endpoint using the <code>@WebService</code> annotation. <code>Hello</code>
@@ -221,9 +237,12 @@ public class Hello {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNAYR"></a><a id="building-packaging-and-deploying-the-service"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="building-packaging-and-deploying-the-service">Building, Packaging, and Deploying the Service</h3>
+<h3 id="_building_packaging_and_deploying_the_service">Building, Packaging, and Deploying the Service</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, and deploy
 the <code>helloservice-war</code> application.</p>
@@ -242,8 +261,11 @@ IDE</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAYS"></a><a id="to-build-package-and-deploy-the-service-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-service-using-netbeans-ide">To Build, Package, and Deploy the Service Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_service_using_netbeans_ide">To Build, Package, and Deploy the Service Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -291,9 +313,12 @@ Service without a Client</a>.</p>
 browser. Now you are ready to create a client that accesses this
 service.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAYT"></a><a id="to-build-package-and-deploy-the-service-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-service-using-maven">To Build, Package, and Deploy the Service Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_service_using_maven">To Build, Package, and Deploy the Service Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -333,10 +358,13 @@ deploys the WAR to GlassFish Server.</p>
 browser. Now you are ready to create a client that accesses this
 service.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKAJL"></a><a id="testing-the-methods-of-a-web-service-endpoint"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="testing-the-methods-of-a-web-service-endpoint">Testing the Methods of a Web Service Endpoint</h3>
+<h3 id="_testing_the_methods_of_a_web_service_endpoint">Testing the Methods of a Web Service Endpoint</h3>
 <div class="paragraph">
 <p>GlassFish Server allows you to test the methods of a web service
 endpoint.</p>
@@ -351,8 +379,11 @@ endpoint.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAYW"></a><a id="to-test-the-service-without-a-client"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-test-the-service-without-a-client">To Test the Service without a Client</h4>
+<h4 id="_to_test_the_service_without_a_client">To Test the Service without a Client</h4>
 <div class="paragraph">
 <p>To test the <code>sayHello</code> method of <code>HelloService</code>, follow these steps.</p>
 </div>
@@ -382,10 +413,13 @@ method.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAYX"></a><a id="a-simple-jax-ws-application-client"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="a-simple-jax-ws-application-client">A Simple JAX-WS Application Client</h3>
+<h3 id="_a_simple_jax_ws_application_client">A Simple JAX-WS Application Client</h3>
 <div class="paragraph">
 <p>The <code>HelloAppClient</code> class is a stand-alone application client that
 accesses the <code>sayHello</code> method of <code>HelloService</code>. This call is made
@@ -406,8 +440,11 @@ goal, which generates JAX-WS portable artifacts based on a WSDL file.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAYY"></a><a id="coding-the-application-client"></a></p>
+</div>
 <div class="sect3">
-<h4 id="coding-the-application-client">Coding the Application Client</h4>
+<h4 id="_coding_the_application_client">Coding the Application Client</h4>
 <div class="paragraph">
 <p>When invoking the remote methods on the port, the client performs these
 steps.</p>
@@ -486,9 +523,12 @@ public class HelloAppClient {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNAYZ"></a><a id="running-the-application-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="running-the-application-client">Running the Application Client</h4>
+<h4 id="_running_the_application_client">Running the Application Client</h4>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>hello-appclient</code> application. To build the client, you must
@@ -505,8 +545,11 @@ first have deployed <code>helloservice-war</code>, as described in
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHBGFGA"></a><a id="to-run-the-application-client-using-netbeans-ide"></a></p>
+</div>
 <div class="sect4">
-<h5 id="to-run-the-application-client-using-netbeans-ide">To Run the Application Client Using NetBeans IDE</h5>
+<h5 id="_to_run_the_application_client_using_netbeans_ide">To Run the Application Client Using NetBeans IDE</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -543,9 +586,12 @@ Hello, world.</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref134"></a><a id="to-run-the-application-client-using-maven"></a></p>
+</div>
 </div>
 <div class="sect4">
-<h5 id="to-run-the-application-client-using-maven">To Run the Application Client Using Maven</h5>
+<h5 id="_to_run_the_application_client_using_maven">To Run the Application Client Using Maven</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -576,11 +622,14 @@ Hello, world.</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJYGB"></a><a id="a-simple-jax-ws-web-client"></a></p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="a-simple-jax-ws-web-client">A Simple JAX-WS Web Client</h3>
+<h3 id="_a_simple_jax_ws_web_client">A Simple JAX-WS Web Client</h3>
 <div class="paragraph">
 <p><code>HelloServlet</code> is a servlet that, like the Java client, calls the
 <code>sayHello</code> method of the web service. Like the application client, it
@@ -599,8 +648,11 @@ makes this call through a port.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJYFL"></a><a id="coding-the-servlet"></a></p>
+</div>
 <div class="sect3">
-<h4 id="coding-the-servlet">Coding the Servlet</h4>
+<h4 id="_coding_the_servlet">Coding the Servlet</h4>
 <div class="paragraph">
 <p>To invoke the method on the port, the client performs these steps.</p>
 </div>
@@ -716,9 +768,12 @@ public class HelloServlet extends HttpServlet {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJYGE"></a><a id="running-the-web-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="running-the-web-client">Running the Web Client</h4>
+<h4 id="_running_the_web_client">Running the Web Client</h4>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>hello-webclient</code> application. To build the client, you must
@@ -738,8 +793,11 @@ first have deployed <code>helloservice-war</code>, as described in
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHHFFEC"></a><a id="to-run-the-web-client-using-netbeans-ide"></a></p>
+</div>
 <div class="sect4">
-<h5 id="to-run-the-web-client-using-netbeans-ide">To Run the Web Client Using NetBeans IDE</h5>
+<h5 id="_to_run_the_web_client_using_netbeans_ide">To Run the Web Client Using NetBeans IDE</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -781,9 +839,12 @@ directory, and deploys it to GlassFish Server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CIHHDCEH"></a><a id="to-run-the-web-client-using-maven"></a></p>
+</div>
 </div>
 <div class="sect4">
-<h5 id="to-run-the-web-client-using-maven">To Run the Web Client Using Maven</h5>
+<h5 id="_to_run_the_web_client_using_maven">To Run the Web Client Using Maven</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

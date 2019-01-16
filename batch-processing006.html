@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BCGCAHCB"></a><a id="submitting-jobs-to-the-batch-runtime"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="submitting-jobs-to-the-batch-runtime">Submitting Jobs to the Batch Runtime</h2>
+<h2 id="_submitting_jobs_to_the_batch_runtime">Submitting Jobs to the Batch Runtime</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>JobOperator</code> interface in the <code>javax.batch.operations</code> package
@@ -77,8 +84,11 @@ functionality.</p>
 <p>The <code>BatchRuntime</code> class in the <code>javax.batch.runtime</code> package provides
 the <code>getJobOperator</code> factory method to obtain <code>JobOperator</code> objects.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref282"></a><a id="starting-a-job"></a></p>
+</div>
 <div class="sect2">
-<h3 id="starting-a-job">Starting a Job</h3>
+<h3 id="_starting_a_job">Starting a Job</h3>
 <div class="paragraph">
 <p>The following example code demonstrates how to obtain a <code>JobOperator</code>
 object and submit a batch job:</p>
@@ -99,9 +109,12 @@ job as specified in its job definition file. The second parameter is a
 execution. You can use job parameters to pass to a job information that
 is only known at runtime.</p>
 </div>
+<div class="paragraph">
+<p><a id="BCGIBGFC"></a><a id="checking-the-status-of-a-job"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="checking-the-status-of-a-job">Checking the Status of a Job</h3>
+<h3 id="_checking_the_status_of_a_job">Checking the Status of a Job</h3>
 <div class="paragraph">
 <p>The <code>JobExecution</code> interface in the <code>javax.batch.runtime</code> package
 provides methods to obtain information about submitted jobs. This
@@ -133,9 +146,12 @@ of a job using its execution ID:</p>
 String status = jobExec.getBatchStatus().toString();</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref283"></a><a id="invoking-the-batch-runtime-in-your-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="invoking-the-batch-runtime-in-your-application">Invoking the Batch Runtime in Your Application</h3>
+<h3 id="_invoking_the_batch_runtime_in_your_application">Invoking the Batch Runtime in Your Application</h3>
 <div class="paragraph">
 <p>The component from which you invoke the batch runtime depends on the
 architecture of your particular application. For example, you can invoke

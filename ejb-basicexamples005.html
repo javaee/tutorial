@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBOY"></a><a id="using-the-timer-service"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-the-timer-service">Using the Timer Service</h2>
+<h2 id="_using_the_timer_service">Using the Timer Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Applications that model business work flows often rely on timed
@@ -72,8 +79,11 @@ are created upon the successful deployment of an enterprise bean that
 contains a method annotated with the <code>javax.ejb.Schedule</code> or
 <code>javax.ejb.Schedules</code> annotations.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQLK"></a><a id="creating-calendar-based-timer-expressions"></a></p>
+</div>
 <div class="sect2">
-<h3 id="creating-calendar-based-timer-expressions">Creating Calendar-Based Timer Expressions</h3>
+<h3 id="_creating_calendar_based_timer_expressions">Creating Calendar-Based Timer Expressions</h3>
 <div class="paragraph">
 <p>Timers can be set according to a calendar-based schedule, expressed
 using a syntax similar to the UNIX <code>cron</code> utility. Both programmatic and
@@ -180,8 +190,11 @@ of the month). For example: <code>dayOfMonth="–3"</code>.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GIQMX"></a><a id="specifying-multiple-values-in-calendar-expressions"></a></p>
+</div>
 <div class="sect3">
-<h4 id="specifying-multiple-values-in-calendar-expressions">Specifying Multiple Values in Calendar Expressions</h4>
+<h4 id="_specifying_multiple_values_in_calendar_expressions">Specifying Multiple Values in Calendar Expressions</h4>
 <div class="paragraph">
 <p>You can specify multiple values in calendar expressions, as described in
 the following sections.</p>
@@ -322,18 +335,24 @@ equivalent to setting <code>x</code> to <code>0</code>.</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">hour="12/2"</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQLT"></a><a id="programmatic-timers"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="programmatic-timers">Programmatic Timers</h3>
+<h3 id="_programmatic_timers">Programmatic Timers</h3>
 <div class="paragraph">
 <p>When a programmatic timer expires (goes off), the container calls the
 method annotated <code>@Timeout</code> in the bean&#8217;s implementation class. The
 <code>@Timeout</code> method contains the business logic that handles the timed
 event.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBOZ"></a><a id="the-timeout-method"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-timeout-method">The @Timeout Method</h4>
+<h4 id="_the_timeout_method">The @Timeout Method</h4>
 <div class="paragraph">
 <p>Methods annotated <code>@Timeout</code> in the enterprise bean class must return
 <code>void</code> and optionally take a <code>javax.ejb.Timer</code> object as the only
@@ -347,9 +366,12 @@ public void timeout(Timer timer) {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBPA"></a><a id="creating-programmatic-timers"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="creating-programmatic-timers">Creating Programmatic Timers</h4>
+<h4 id="_creating_programmatic_timers">Creating Programmatic Timers</h4>
 <div class="paragraph">
 <p>To create a timer, the bean invokes one of the <code>create</code> methods of the
 <code>TimerService</code> interface. These methods allow single-action, interval,
@@ -445,10 +467,13 @@ service is not intended for real-time applications, a callback to the
 service is for business applications, which typically measure time in
 hours, days, or longer durations.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQMB"></a><a id="automatic-timers"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="automatic-timers">Automatic Timers</h3>
+<h3 id="_automatic_timers">Automatic Timers</h3>
 <div class="paragraph">
 <p>Automatic timers are created by the EJB container when an enterprise
 bean that contains methods annotated with the <code>@Schedule</code> or
@@ -518,9 +543,12 @@ sets a timer to expire every Friday at 11:00 p.m.:</p>
 public void doPeriodicCleanup() { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBPB"></a><a id="canceling-and-saving-timers"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="canceling-and-saving-timers">Canceling and Saving Timers</h3>
+<h3 id="_canceling_and_saving_timers">Canceling and Saving Timers</h3>
 <div class="paragraph">
 <p>Timers can be cancelled by the following events.</p>
 </div>
@@ -551,9 +579,12 @@ remote clients and web service clients cannot access a bean&#8217;s
 <code>TimerHandle</code> object. Local clients, however, do not have this
 restriction.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBPC"></a><a id="getting-timer-information"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="getting-timer-information">Getting Timer Information</h3>
+<h3 id="_getting_timer_information">Getting Timer Information</h3>
 <div class="paragraph">
 <p>In addition to defining the <code>cancel</code> and <code>getHandle</code> methods, the
 <code>Timer</code> interface defines methods for obtaining information about
@@ -577,9 +608,12 @@ snippet of the preceding section, this information parameter is a
 of the <code>TimerService</code> interface. The <code>getTimers</code> method returns a
 collection of <code>Timer</code> objects.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBPD"></a><a id="transactions-and-timers"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="transactions-and-timers">Transactions and Timers</h3>
+<h3 id="_transactions_and_timers">Transactions and Timers</h3>
 <div class="paragraph">
 <p>An enterprise bean usually creates a timer within a transaction. If this
 transaction is rolled back, the timer creation also is rolled back.
@@ -595,9 +629,12 @@ begins the new transaction before calling the <code>@Timeout</code> method. If t
 transaction is rolled back, the container will call the <code>@Timeout</code>
 method at least one more time.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBPE"></a><a id="the-timersession-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-timersession-example">The timersession Example</h3>
+<h3 id="_the_timersession_example">The timersession Example</h3>
 <div class="paragraph">
 <p>The source code for this example is in the
 <code><em>tut-install</em>/examples/ejb/timersession/src/main/java/</code> directory.</p>
@@ -759,9 +796,12 @@ to virtual machine constraints.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBPF"></a><a id="running-the-timersession-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-timersession-example">Running the timersession Example</h3>
+<h3 id="_running_the_timersession_example">Running the timersession Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>timersession</code> example.</p>
@@ -783,8 +823,11 @@ Using Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQNI"></a><a id="to-run-the-timersession-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-timersession-example-using-netbeans-ide">To Run the timersession Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_timersession_example_using_netbeans_ide">To Run the timersession Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -820,9 +863,12 @@ client.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GIQNQ"></a><a id="to-build-package-and-deploy-the-timersession-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-timersession-example-using-maven">To Build, Package, and Deploy the timersession Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_timersession_example_using_maven">To Build, Package, and Deploy the timersession Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -853,9 +899,12 @@ deploys this WAR file to your GlassFish Server instance.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GIQOP"></a><a id="to-run-the-web-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-web-client">To Run the Web Client</h4>
+<h4 id="_to_run_the_web_client">To Run the Web Client</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAHU"></a><a id="value-and-method-expressions"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="value-and-method-expressions">Value and Method Expressions</h2>
+<h2 id="_value_and_method_expressions">Value and Method Expressions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The EL defines two kinds of expressions: value expressions and method
@@ -75,8 +82,11 @@ method expressions are used to reference a method.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAHV"></a><a id="value-expressions"></a></p>
+</div>
 <div class="sect2">
-<h3 id="value-expressions">Value Expressions</h3>
+<h3 id="_value_expressions">Value Expressions</h3>
 <div class="paragraph">
 <p>Value expressions can be further categorized into rvalue and lvalue
 expressions. An lvalue expression can specify a target, such as an
@@ -112,8 +122,11 @@ is evaluated immediately during an initial request for the page. During
 a postback request, this expression can be used to set the value of the
 <code>name</code> property with user input.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAHW"></a><a id="referencing-objects"></a></p>
+</div>
 <div class="sect3">
-<h4 id="referencing-objects">Referencing Objects</h4>
+<h4 id="_referencing_objects">Referencing Objects</h4>
 <div class="paragraph">
 <p>A top-level identifier (such as <code>customer</code> in the expression
 <code>customer.name</code>) can refer to the following objects:</p>
@@ -173,9 +186,12 @@ you can compare <code>suit.hearts</code> to the instance:</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">${mySuit == suit.hearts}</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNAHX"></a><a id="referencing-object-properties-or-collection-elements"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="referencing-object-properties-or-collection-elements">Referencing Object Properties or Collection Elements</h4>
+<h4 id="_referencing_object_properties_or_collection_elements">Referencing Object Properties or Collection Elements</h4>
 <div class="paragraph">
 <p>To refer to properties of a bean, static fields or methods of a class,
 or items of a collection, you use the <code>.</code> or <code>[]</code> notation. The same
@@ -238,9 +254,12 @@ the following examples reference the item with the key <code>"socks"</code>:</p>
 ${customer.orders.socks}</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref38"></a><a id="referencing-literals"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="referencing-literals">Referencing Literals</h4>
+<h4 id="_referencing_literals">Referencing Literals</h4>
 <div class="paragraph">
 <p>The EL defines the following literals:</p>
 </div>
@@ -280,9 +299,12 @@ escaped as <code>\'</code>, and <code>\</code> is escaped as <code>\\</code></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJHBZ"></a><a id="parameterized-method-calls"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="parameterized-method-calls">Parameterized Method Calls</h4>
+<h4 id="_parameterized_method_calls">Parameterized Method Calls</h4>
 <div class="paragraph">
 <p>The EL offers support for parameterized method calls.</p>
 </div>
@@ -347,9 +369,12 @@ in which a parameter is passed:</p>
 <p>In the preceding example, you are passing the string <code>'SOMESTOCK'</code> (a
 stock symbol) as a parameter to the <code>buy</code> method.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAHY"></a><a id="where-value-expressions-can-be-used"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="where-value-expressions-can-be-used">Where Value Expressions Can Be Used</h4>
+<h4 id="_where_value_expressions_can_be_used">Where Value Expressions Can Be Used</h4>
 <div class="paragraph">
 <p>Value expressions using the <code>${}</code> delimiters can be used</p>
 </div>
@@ -455,10 +480,13 @@ of an attribute of type <code>float</code> will result in the following conversi
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Float.valueOf("1.2E4").floatValue()</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNAHZ"></a><a id="method-expressions"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="method-expressions">Method Expressions</h3>
+<h3 id="_method_expressions">Method Expressions</h3>
 <div class="paragraph">
 <p>Another feature of the EL is its support of deferred method expressions.
 A method expression is used to refer to a public method of a bean and
@@ -535,9 +563,12 @@ in the tag&#8217;s tag library descriptor.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BEIHCBAH"></a><a id="lambda-expressions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="lambda-expressions">Lambda Expressions</h3>
+<h3 id="_lambda_expressions">Lambda Expressions</h3>
 <div class="paragraph">
 <p>A lambda expression is a value expression with parameters. The syntax is
 similar to that of the lambda expression in the Java programming

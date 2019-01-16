@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GLNRJ"></a><a id="design-and-architecture-of-dukes-forest"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="design-and-architecture-of-dukes-forest">Design and Architecture of Duke&#8217;s Forest</h2>
+<h2 id="_design_and_architecture_of_duke_s_forest">Design and Architecture of Duke&#8217;s Forest</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Duke&#8217;s Forest is a complex application consisting of three main projects
@@ -226,8 +233,11 @@ queue.</p>
 and Entities projects, which are bundled into Duke&#8217;s Store and Duke&#8217;s
 Shipment along with the Duke&#8217;s Resources project.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHHJEGA"></a><a id="the-events-project"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-events-project">The events Project</h3>
+<h3 id="_the_events_project">The events Project</h3>
 <div class="paragraph">
 <p>Events are one of the core components of Duke&#8217;s Forest. The <code>events</code>
 project, included in all three of the main projects, is the most simple
@@ -282,9 +292,12 @@ public void onNewOrder(@Observes @New OrderEvent event) {
 event class with more fields for a new client, this component is a
 separate project within the application.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHFCIAC"></a><a id="the-entities-project"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-entities-project">The entities Project</h3>
+<h3 id="_the_entities_project">The entities Project</h3>
 <div class="paragraph">
 <p>The <code>entities</code> project is a Java Persistence API (JPA) project used by
 both Duke&#8217;s Store and Duke&#8217;s Shipment. It is generated from the database
@@ -385,9 +398,12 @@ customer.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref301"></a><a id="the-dukes-payment-project"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-dukes-payment-project">The dukes-payment Project</h3>
+<h3 id="_the_dukes_payment_project">The dukes-payment Project</h3>
 <div class="paragraph">
 <p>The <code>dukes-payment</code> project is a web project that holds a simple Payment
 web service. Since this is an example application, it does not obtain
@@ -405,9 +421,12 @@ service. The implementation itself exposes a simple method,
 or deny the order payment. The method is called from the checkout
 process of Duke&#8217;s Store.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref302"></a><a id="the-dukes-resources-project"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-dukes-resources-project">The dukes-resources Project</h3>
+<h3 id="_the_dukes_resources_project">The dukes-resources Project</h3>
 <div class="paragraph">
 <p>The <code>dukes-resources</code> project contains a number of files used by both
 Duke&#8217;s Store and Duke&#8217;s Shipment, bundled into a JAR file placed in the
@@ -443,9 +462,12 @@ Spanish</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref303"></a><a id="the-dukes-store-project"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-dukes-store-project">The Duke&#8217;s Store Project</h3>
+<h3 id="_the_duke_s_store_project">The Duke&#8217;s Store Project</h3>
 <div class="paragraph">
 <p>Duke&#8217;s Store, a web application, is the core application of Duke&#8217;s
 Forest. It is responsible for the main store interface for customers as
@@ -543,8 +565,11 @@ public class ProductBean extends AbstractFacade&lt;Product&gt; {
     ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref304"></a><a id="enterprise-beans-used-in-dukes-store"></a></p>
+</div>
 <div class="sect3">
-<h4 id="enterprise-beans-used-in-dukes-store">Enterprise Beans Used in Duke&#8217;s Store</h4>
+<h4 id="_enterprise_beans_used_in_duke_s_store">Enterprise Beans Used in Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>The enterprise beans used in Duke&#8217;s Store provide the business logic for
 the application and are located in the <code>com.forest.ejb</code> package. All are
@@ -604,9 +629,12 @@ invokes the RESTful web service in <code>dukes-payment</code> and publishes an
 order to the JMS queue for shipping approval if the payment is
 successful.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref305"></a><a id="facelets-files-used-in-the-main-interface-of-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="facelets-files-used-in-the-main-interface-of-dukes-store">Facelets Files Used in the Main Interface of Duke&#8217;s Store</h4>
+<h4 id="_facelets_files_used_in_the_main_interface_of_duke_s_store">Facelets Files Used in the Main Interface of Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>Like the other case study examples, Duke&#8217;s Store uses Facelets to
 display the user interface. The main interface uses a large number of
@@ -662,9 +690,12 @@ an order (<code>View_popup.xhtml</code>).</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHHDHIH"></a><a id="facelets-files-used-in-the-administration-interface-of-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="facelets-files-used-in-the-administration-interface-of-dukes-store">Facelets Files Used in the Administration Interface of Duke&#8217;s Store</h4>
+<h4 id="_facelets_files_used_in_the_administration_interface_of_duke_s_store">Facelets Files Used in the Administration Interface of Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>The Facelets pages for the administration interface of Duke&#8217;s Store are
 found in the <code>web/admin</code> directory:</p>
@@ -703,9 +734,12 @@ details of an order (<code>View_popup.xhtml</code>)</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref306"></a><a id="managed-beans-used-in-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="managed-beans-used-in-dukes-store">Managed Beans Used in Duke&#8217;s Store</h4>
+<h4 id="_managed_beans_used_in_duke_s_store">Managed Beans Used in Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Store uses the following CDI managed beans, which correspond to
 the enterprise beans. The beans are in the <code>com.forest.web</code> package:</p>
@@ -741,9 +775,12 @@ the enterprise beans. The beans are in the <code>com.forest.web</code> package:<
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref307"></a><a id="helper-classes-used-in-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="helper-classes-used-in-dukes-store">Helper Classes Used in Duke&#8217;s Store</h4>
+<h4 id="_helper_classes_used_in_duke_s_store">Helper Classes Used in Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>The CDI managed beans in the main interface of Duke&#8217;s Store use the
 following helper classes, found in the <code>com.forest.web.util</code> package:</p>
@@ -768,9 +805,12 @@ generate an encrypted password for a user</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHEBAFD"></a><a id="qualifiers-used-in-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="qualifiers-used-in-dukes-store">Qualifiers Used in Duke&#8217;s Store</h4>
+<h4 id="_qualifiers_used_in_duke_s_store">Qualifiers Used in Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Store defines the following qualifiers in the
 <code>com.forest.qualifiers</code> package:</p>
@@ -788,9 +828,12 @@ generate an encrypted password for a user</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref308"></a><a id="event-handlers-used-in-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="event-handlers-used-in-dukes-store">Event Handlers Used in Duke&#8217;s Store</h4>
+<h4 id="_event_handlers_used_in_duke_s_store">Event Handlers Used in Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Store defines event handlers related to the <code>OrderEvent</code> class
 packaged in the <code>events</code> project (see <a href="#CIHHJEGA">The events
@@ -820,9 +863,12 @@ that are ready for delivery.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref309"></a><a id="deployment-descriptors-used-in-dukes-store"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="deployment-descriptors-used-in-dukes-store">Deployment Descriptors Used in Duke&#8217;s Store</h4>
+<h4 id="_deployment_descriptors_used_in_duke_s_store">Deployment Descriptors Used in Duke&#8217;s Store</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Store uses the following deployment descriptors, located in the
 <code>web/WEB-INF</code> directory:</p>
@@ -841,10 +887,13 @@ Server</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref310"></a><a id="the-dukes-shipment-project"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="the-dukes-shipment-project">The Duke&#8217;s Shipment Project</h3>
+<h3 id="_the_duke_s_shipment_project">The Duke&#8217;s Shipment Project</h3>
 <div class="paragraph">
 <p>Duke&#8217;s Shipment is a web application with a login page, a main Facelets
 page, and some other objects. This application, which is accessible only
@@ -870,8 +919,11 @@ code looks like this:</p>
 &lt;/h:commandLink&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref311"></a><a id="enterprise-beans-used-in-dukes-shipment"></a></p>
+</div>
 <div class="sect3">
-<h4 id="enterprise-beans-used-in-dukes-shipment">Enterprise Beans Used in Duke&#8217;s Shipment</h4>
+<h4 id="_enterprise_beans_used_in_duke_s_shipment">Enterprise Beans Used in Duke&#8217;s Shipment</h4>
 <div class="paragraph">
 <p>The <code>UserBean</code> stateless session bean used in Duke&#8217;s Shipment provides
 the business logic for the application and is located in the
@@ -888,9 +940,12 @@ common operations for <code>Type&lt;T&gt;</code>, where <code>&lt;T&gt;</code> i
 order queue and another that consumes an order message after the
 administrator approves or denies the order for shipment.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref312"></a><a id="facelets-files-used-in-dukes-shipment"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="facelets-files-used-in-dukes-shipment">Facelets Files Used in Duke&#8217;s Shipment</h4>
+<h4 id="_facelets_files_used_in_duke_s_shipment">Facelets Files Used in Duke&#8217;s Shipment</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Shipment has only one page, so it has many fewer Facelets files
 than Duke&#8217;s Store.</p>
@@ -923,9 +978,12 @@ authentication.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref313"></a><a id="managed-beans-used-in-dukes-shipment"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="managed-beans-used-in-dukes-shipment">Managed Beans Used in Duke&#8217;s Shipment</h4>
+<h4 id="_managed_beans_used_in_duke_s_shipment">Managed Beans Used in Duke&#8217;s Shipment</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Shipment uses the following CDI managed beans, in the
 <code>com.forest.shipment</code> package:</p>
@@ -942,9 +1000,12 @@ session bean</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref314"></a><a id="helper-class-used-in-dukes-shipment"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="helper-class-used-in-dukes-shipment">Helper Class Used in Duke&#8217;s Shipment</h4>
+<h4 id="_helper_class_used_in_duke_s_shipment">Helper Class Used in Duke&#8217;s Shipment</h4>
 <div class="paragraph">
 <p>The Duke&#8217;s Shipment managed beans use only one helper class, found in
 the <code>com.forest.shipment.web.util</code> package:</p>
@@ -957,16 +1018,22 @@ messages on a <code>FacesContext</code> instance</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref315"></a><a id="qualifier-used-in-dukes-shipment"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="qualifier-used-in-dukes-shipment">Qualifier Used in Duke&#8217;s Shipment</h4>
+<h4 id="_qualifier_used_in_duke_s_shipment">Qualifier Used in Duke&#8217;s Shipment</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Shipment includes the <code>@LoggedIn</code> qualifier described in
 <a href="#CIHEBAFD">Qualifiers Used in Duke&#8217;s Store</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref316"></a><a id="deployment-descriptors-used-in-dukes-shipment"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="deployment-descriptors-used-in-dukes-shipment">Deployment Descriptors Used in Duke&#8217;s Shipment</h4>
+<h4 id="_deployment_descriptors_used_in_duke_s_shipment">Deployment Descriptors Used in Duke&#8217;s Shipment</h4>
 <div class="paragraph">
 <p>Duke&#8217;s Shipment uses the following deployment descriptors:</p>
 </div>

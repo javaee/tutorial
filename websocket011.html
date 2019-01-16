@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABGCEHE"></a><a id="the-dukeetf2-example-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-dukeetf2-example-application">The dukeetf2 Example Application</h2>
+<h2 id="_the_dukeetf2_example_application">The dukeetf2 Example Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>dukeetf2</code> example application, located in the
@@ -74,8 +81,11 @@ price and trading volume of an electronically traded fund (ETF).</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHJHJCD"></a><a id="architecture-of-the-dukeetf2-sample-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="architecture-of-the-dukeetf2-sample-application">Architecture of the dukeetf2 Sample Application</h3>
+<h3 id="_architecture_of_the_dukeetf2_sample_application">Architecture of the dukeetf2 Sample Application</h3>
 <div class="paragraph">
 <p>The <code>dukeetf2</code> example application consists of a WebSocket endpoint, an
 enterprise bean, and an HTML page.</p>
@@ -97,8 +107,11 @@ information without reloading the page.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref116"></a><a id="the-endpoint"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-endpoint">The Endpoint</h4>
+<h4 id="_the_endpoint">The Endpoint</h4>
 <div class="paragraph">
 <p>The WebSocket endpoint is implemented in the <code>ETFEndpoint</code> class, which
 stores all connected sessions in a queue and provides a method that the
@@ -162,9 +175,12 @@ public class ETFEndpoint {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref117"></a><a id="the-enterprise-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-enterprise-bean">The Enterprise Bean</h4>
+<h4 id="_the_enterprise_bean">The Enterprise Bean</h4>
 <div class="paragraph">
 <p>The enterprise bean uses the timer service to generate new price and
 volume information every second:</p>
@@ -206,9 +222,12 @@ Timer Service</a> in <a href="ejb-basicexamples.html#GIJRB">Chapter 37, "Running
 the Enterprise Bean Examples"</a> for more information on the timer
 service.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHHIEFH"></a><a id="the-html-page"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-html-page">The HTML Page</h4>
+<h4 id="_the_html_page">The HTML Page</h4>
 <div class="paragraph">
 <p>The HTML page consists of a table and some JavaScript code. The table
 contains two fields referenced from JavaScript code:</p>
@@ -255,10 +274,13 @@ window.addEventListener("load", connect, false);</code></pre>
 <p>The WebSocket API is supported by most modern browsers, and it is widely
 used in HTML5 web client development.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHHBAIC"></a><a id="running-the-dukeetf2-example-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-dukeetf2-example-application">Running the dukeetf2 Example Application</h3>
+<h3 id="_running_the_dukeetf2_example_application">Running the dukeetf2 Example Application</h3>
 <div class="paragraph">
 <p>This section describes how to run the <code>dukeetf2</code> example application
 using NetBeans IDE and from the command line.</p>
@@ -277,8 +299,11 @@ IDE</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHEBIAH"></a><a id="to-run-the-dukeetf2-example-application-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-dukeetf2-example-application-using-netbeans-ide">To Run the dukeetf2 Example Application Using NetBeans IDE</h4>
+<h4 id="_to_run_the_dukeetf2_example_application_using_netbeans_ide">To Run the dukeetf2 Example Application Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -323,9 +348,12 @@ both pages get price and volume updates simultaneously.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CIHDJCGJ"></a><a id="to-run-the-dukeetf2-example-application-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-dukeetf2-example-application-using-maven">To Run the dukeetf2 Example Application Using Maven</h4>
+<h4 id="_to_run_the_dukeetf2_example_application_using_maven">To Run the dukeetf2 Example Application Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKHIC"></a><a id="using-events-in-cdi-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-events-in-cdi-applications">Using Events in CDI Applications</h2>
+<h2 id="_using_events_in_cdi_applications">Using Events in CDI Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Events allow beans to communicate without any compile-time dependency.
@@ -95,9 +102,12 @@ properties, which have setter and getter methods:</p>
 <p>The example also defines qualifiers that distinguish between two kinds
 of <code>PaymentEvent</code>. Every event also has the default qualifier <code>@Any</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHNF"></a><a id="using-observer-methods-to-handle-events"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-observer-methods-to-handle-events">Using Observer Methods to Handle Events</h3>
+<h3 id="_using_observer_methods_to_handle_events">Using Observer Methods to Handle Events</h3>
 <div class="paragraph">
 <p>An event handler uses an observer method to consume events.</p>
 </div>
@@ -211,10 +221,13 @@ called.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GKHIH"></a><a id="firing-events"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="firing-events">Firing Events</h3>
+<h3 id="_firing_events">Firing Events</h3>
 <div class="paragraph">
 <p>Beans fire events by implementing an instance of the <code>javax.enterprise.event.Event</code> interface. Events can be fired synchronously or asynchronously.</p>
 </div>

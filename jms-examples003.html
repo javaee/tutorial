@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCFA"></a><a id="writing-simple-jms-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="writing-simple-jms-applications">Writing Simple JMS Applications</h2>
+<h2 id="_writing_simple_jms_applications">Writing Simple JMS Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section shows how to create, package, and run simple JMS clients
@@ -96,8 +103,11 @@ Delivery</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDCEFGA"></a><a id="overview-of-writing-simple-jms-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-writing-simple-jms-application">Overview of Writing Simple JMS Application</h3>
+<h3 id="_overview_of_writing_simple_jms_application">Overview of Writing Simple JMS Application</h3>
 <div class="paragraph">
 <p>The clients demonstrate the basic tasks a JMS application must perform:</p>
 </div>
@@ -142,17 +152,23 @@ subdirectories:</p>
 <p>Before running the examples, you need to start GlassFish Server and
 create administered objects.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFD"></a><a id="starting-the-jms-provider"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="starting-the-jms-provider">Starting the JMS Provider</h3>
+<h3 id="_starting_the_jms_provider">Starting the JMS Provider</h3>
 <div class="paragraph">
 <p>When you use GlassFish Server, your JMS provider is GlassFish Server.
 Start the server as described in
 <a href="usingexamples002.html#BNADI">Starting and Stopping GlassFish Server</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKTJS"></a><a id="creating-jms-administered-objects"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="creating-jms-administered-objects">Creating JMS Administered Objects</h3>
+<h3 id="_creating_jms_administered_objects">Creating JMS Administered Objects</h3>
 <div class="paragraph">
 <p>This example uses the following JMS administered objects:</p>
 </div>
@@ -184,8 +200,11 @@ GlassFish Server.</p>
 resources, the <code>asadmin list-jms-resources</code> command to display their
 names, and the <code>asadmin delete-jms-resource</code> command to remove them.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABHEFCB"></a><a id="to-create-resources-for-the-simple-examples"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-create-resources-for-the-simple-examples">To Create Resources for the Simple Examples</h4>
+<h4 id="_to_create_resources_for_the_simple_examples">To Create Resources for the Simple Examples</h4>
 <div class="paragraph">
 <p>A <code>glassfish-resources.xml</code> file in one of the Maven projects can create
 all the resources needed for the simple examples.</p>
@@ -241,10 +260,13 @@ resource is mapped to a connection factory named
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BABEEABE"></a><a id="building-all-the-simple-examples"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="building-all-the-simple-examples">Building All the Simple Examples</h3>
+<h3 id="_building_all_the_simple_examples">Building All the Simple Examples</h3>
 <div class="paragraph">
 <p>To run the simple examples using GlassFish Server, package each example
 in an application client JAR file. The application client JAR file
@@ -269,8 +291,11 @@ NetBeans IDE or Maven.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDJEJCD"></a><a id="to-build-all-the-simple-examples-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-all-the-simple-examples-using-netbeans-ide">To Build All the Simple Examples Using NetBeans IDE</h4>
+<h4 id="_to_build_all_the_simple_examples_using_netbeans_ide">To Build All the Simple Examples Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -300,9 +325,12 @@ directories for the examples.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDGHJAA"></a><a id="to-build-all-the-simple-examples-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-all-the-simple-examples-using-maven">To Build All the Simple Examples Using Maven</h4>
+<h4 id="_to_build_all_the_simple_examples_using_maven">To Build All the Simple Examples Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -327,10 +355,13 @@ directories for the examples.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BABIHCAE"></a><a id="sending-messages"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sending-messages">Sending Messages</h3>
+<h3 id="_sending_messages">Sending Messages</h3>
 <div class="paragraph">
 <p>This section describes how to use a client to send messages. The
 <code>Producer.java</code> client will send messages in all of these examples.</p>
@@ -351,8 +382,11 @@ directories for the examples.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDGHJHH"></a><a id="general-steps-performed-in-the-example"></a></p>
+</div>
 <div class="sect3">
-<h4 id="general-steps-performed-in-the-example">General Steps Performed in the Example</h4>
+<h4 id="_general_steps_performed_in_the_example">General Steps Performed in the Example</h4>
 <div class="paragraph">
 <p>General steps this example performs are as follows.</p>
 </div>
@@ -381,9 +415,12 @@ should expect no more messages.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDFBABB"></a><a id="the-producer.java-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-producer.java-client">The Producer.java Client</h4>
+<h4 id="_the_producer_java_client">The Producer.java Client</h4>
 <div class="paragraph">
 <p>The sending client, <code>Producer.java</code>, performs the following steps.</p>
 </div>
@@ -498,9 +535,12 @@ System.exit(0);</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDHIIHE"></a><a id="to-run-the-producer-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-producer-client">To Run the Producer Client</h4>
+<h4 id="_to_run_the_producer_client">To Run the Producer Client</h4>
 <div class="paragraph">
 <p>You can run the client using the <code>appclient</code> command. The <code>Producer</code>
 client takes one or two command-line arguments: a destination type and,
@@ -569,10 +609,13 @@ complete.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCFB"></a><a id="receiving-messages-synchronously"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="receiving-messages-synchronously">Receiving Messages Synchronously</h3>
+<h3 id="_receiving_messages_synchronously">Receiving Messages Synchronously</h3>
 <div class="paragraph">
 <p>This section describes the receiving client, which uses the <code>receive</code>
 method to consume messages synchronously. This section then explains how
@@ -591,8 +634,11 @@ to run the clients using GlassFish Server.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCFC"></a><a id="the-synchconsumer.java-client"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-synchconsumer.java-client">The SynchConsumer.java Client</h4>
+<h4 id="_the_synchconsumer_java_client">The SynchConsumer.java Client</h4>
 <div class="paragraph">
 <p>The receiving client, <code>SynchConsumer.java</code>, performs the following
 steps.</p>
@@ -655,9 +701,12 @@ closed.</p>
 <p>The <code>SynchConsumer</code> client uses an indefinite <code>while</code> loop to receive
 messages, calling <code>receive</code> with a timeout argument.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFG"></a><a id="to-run-the-synchconsumer-and-producer-clients"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-synchconsumer-and-producer-clients">To Run the SynchConsumer and Producer Clients</h4>
+<h4 id="_to_run_the_synchconsumer_and_producer_clients">To Run the SynchConsumer and Producer Clients</h4>
 <div class="paragraph">
 <p>You can run the client using the <code>appclient</code> command. The
 <code>SynchConsumer</code> client takes one command-line argument, the destination
@@ -791,10 +840,13 @@ client receives them.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCFH"></a><a id="using-a-message-listener-for-asynchronous-message-delivery"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-a-message-listener-for-asynchronous-message-delivery">Using a Message Listener for Asynchronous Message Delivery</h3>
+<h3 id="_using_a_message_listener_for_asynchronous_message_delivery">Using a Message Listener for Asynchronous Message Delivery</h3>
 <div class="paragraph">
 <p>This section describes the receiving clients in an example that uses a
 message listener for asynchronous message delivery. This section then
@@ -832,8 +884,11 @@ Clients</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCFI"></a><a id="writing-the-asynchconsumer.java-and-textlistener.java-clients"></a></p>
+</div>
 <div class="sect3">
-<h4 id="writing-the-asynchconsumer.java-and-textlistener.java-clients">Writing the AsynchConsumer.java and TextListener.java Clients</h4>
+<h4 id="_writing_the_asynchconsumer_java_and_textlistener_java_clients">Writing the AsynchConsumer.java and TextListener.java Clients</h4>
 <div class="paragraph">
 <p>The sending client is <code>Producer.java</code>, the same client used in
 <a href="#BABIHCAE">Sending Messages</a> and <a href="#BNCFB">Receiving Messages
@@ -920,9 +975,12 @@ Simple Examples</a>.</p>
 <p>The steps assume that you have already built and packaged all the
 examples using NetBeans IDE or Maven.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFK"></a><a id="to-run-the-asynchconsumer-and-producer-clients"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-asynchconsumer-and-producer-clients">To Run the AsynchConsumer and Producer Clients</h4>
+<h4 id="_to_run_the_asynchconsumer_and_producer_clients">To Run the AsynchConsumer and Producer Clients</h4>
 <div class="paragraph">
 <p>You will need two terminal windows, as you did in <a href="#BNCFB">Receiving
 Messages Synchronously</a>.</p>
@@ -1053,10 +1111,13 @@ Message is not a TextMessage</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCFL"></a><a id="browsing-messages-on-a-queue"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="browsing-messages-on-a-queue">Browsing Messages on a Queue</h3>
+<h3 id="_browsing_messages_on_a_queue">Browsing Messages on a Queue</h3>
 <div class="paragraph">
 <p>This section describes an example that creates a <code>QueueBrowser</code> object
 to examine messages on a queue, as described in
@@ -1077,8 +1138,11 @@ Server.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCFM"></a><a id="the-messagebrowser.java-client"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-messagebrowser.java-client">The MessageBrowser.java Client</h4>
+<h4 id="_the_messagebrowser_java_client">The MessageBrowser.java Client</h4>
 <div class="paragraph">
 <p>To create a <code>QueueBrowser</code> for a queue, you call the
 <code>JMSContext.createBrowser</code> method with the queue as the argument. You
@@ -1169,9 +1233,12 @@ message you want to see.</p>
 created for <a href="#BNCFB">Receiving Messages Synchronously</a>. It is assumed
 that you have already built and packaged all the examples.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFN"></a><a id="to-run-the-queuebrowser-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-queuebrowser-client">To Run the QueueBrowser Client</h4>
+<h4 id="_to_run_the_queuebrowser_client">To Run the QueueBrowser Client</h4>
 <div class="paragraph">
 <p>To run the <code>MessageBrowser</code> example using the <code>appclient</code> command,
 follow these steps.</p>
@@ -1294,10 +1361,13 @@ Messages received: 1</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BABDDHHC"></a><a id="running-multiple-consumers-on-the-same-destination"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-multiple-consumers-on-the-same-destination">Running Multiple Consumers on the Same Destination</h3>
+<h3 id="_running_multiple_consumers_on_the_same_destination">Running Multiple Consumers on the Same Destination</h3>
 <div class="paragraph">
 <p>To illustrate further the way point-to-point and publish/subscribe
 messaging works, you can use the <code>Producer</code> and <code>SynchConsumer</code> examples
@@ -1373,9 +1443,12 @@ subscription on the topic. Therefore, each of the clients receives all
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCFX"></a><a id="acknowledging-messages"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="acknowledging-messages">Acknowledging Messages</h3>
+<h3 id="_acknowledging_messages">Acknowledging Messages</h3>
 <div class="paragraph">
 <p>JMS provides two alternative ways for a consuming client to ensure that
 a message is not acknowledged until the application has finished
@@ -1511,8 +1584,11 @@ connection factory preconfigured with GlassFish Server</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJSCG"></a><a id="to-run-the-clientackconsumer-client"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-clientackconsumer-client">To Run the ClientAckConsumer Client</h4>
+<h4 id="_to_run_the_clientackconsumer_client">To Run the ClientAckConsumer Client</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

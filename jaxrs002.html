@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GILIK"></a><a id="creating-a-restful-root-resource-class"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="creating-a-restful-root-resource-class">Creating a RESTful Root Resource Class</h2>
+<h2 id="_creating_a_restful_root_resource_class">Creating a RESTful Root Resource Class</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Root resource classes are "plain old Java objects" (POJOs) that are
@@ -91,8 +98,11 @@ Responses</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GILRU"></a><a id="developing-restful-web-services-with-jax-rs"></a></p>
+</div>
 <div class="sect2">
-<h3 id="developing-restful-web-services-with-jax-rs">Developing RESTful Web Services with JAX-RS</h3>
+<h3 id="_developing_restful_web_services_with_jax_rs">Developing RESTful Web Services with JAX-RS</h3>
 <div class="paragraph">
 <p>JAX-RS is a Java programming language API designed to make it easy to
 develop applications that use the REST architecture.</p>
@@ -244,9 +254,12 @@ the URL mapping for the application. The path specified by
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GILQB"></a><a id="overview-of-a-jax-rs-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="overview-of-a-jax-rs-application">Overview of a JAX-RS Application</h3>
+<h3 id="_overview_of_a_jax_rs_application">Overview of a JAX-RS Application</h3>
 <div class="paragraph">
 <p>The following code sample is a very simple example of a root resource
 class that uses JAX-RS annotations:</p>
@@ -331,9 +344,12 @@ public void postHtml(String message) {
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GINPW"></a><a id="the-path-annotation-and-uri-path-templates"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-path-annotation-and-uri-path-templates">The @Path Annotation and URI Path Templates</h3>
+<h3 id="_the_path_annotation_and_uri_path_templates">The @Path Annotation and URI Path Templates</h3>
 <div class="paragraph">
 <p>The <code>@Path</code> annotation identifies the URI path template to which the
 resource responds and is specified at the class or method level of a
@@ -529,9 +545,12 @@ following variable names and values are used in the examples:</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GIPYS"></a><a id="responding-to-http-methods-and-requests"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="responding-to-http-methods-and-requests">Responding to HTTP Methods and Requests</h3>
+<h3 id="_responding_to_http_methods_and_requests">Responding to HTTP Methods and Requests</h3>
 <div class="paragraph">
 <p>The behavior of a resource is determined by the HTTP methods (typically,
 GET, POST, PUT, or DELETE) to which the resource is responding.</p>
@@ -550,8 +569,11 @@ Entity Bodies</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPXS"></a><a id="the-request-method-designator-annotations"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-request-method-designator-annotations">The Request Method Designator Annotations</h4>
+<h4 id="_the_request_method_designator_annotations">The Request Method Designator Annotations</h4>
 <div class="paragraph">
 <p>Request method designator annotations are runtime annotations, defined
 by JAX-RS, that correspond to the similarly named HTTP methods. Within a
@@ -628,9 +650,12 @@ create a resource and return a <code>201</code> response with a location header
 whose value is the URI to the newly created resource. In this pattern,
 the web service declares the URI for the newly created resource.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPZE"></a><a id="using-entity-providers-to-map-http-response-and-request-entity-bodies"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-entity-providers-to-map-http-response-and-request-entity-bodies">Using Entity Providers to Map HTTP Response and Request Entity Bodies</h4>
+<h4 id="_using_entity_providers_to_map_http_response_and_request_entity_bodies">Using Entity Providers to Map HTTP Response and Request Entity Bodies</h4>
 <div class="paragraph">
 <p>Entity providers supply mapping services between representations and
 their associated Java types. The two types of entity providers are
@@ -758,10 +783,13 @@ public Response getItem() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIPZH"></a><a id="using-consumes-and-produces-to-customize-requests-and-responses"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-consumes-and-produces-to-customize-requests-and-responses">Using @Consumes and @Produces to Customize Requests and Responses</h3>
+<h3 id="_using_consumes_and_produces_to_customize_requests_and_responses">Using @Consumes and @Produces to Customize Requests and Responses</h3>
 <div class="paragraph">
 <p>The information sent to a resource and then passed back to the client is
 specified as a MIME media type in the headers of an HTTP request or
@@ -796,8 +824,11 @@ headers.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPXF"></a><a id="the-produces-annotation"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-produces-annotation">The @Produces Annotation</h4>
+<h4 id="_the_produces_annotation">The @Produces Annotation</h4>
 <div class="paragraph">
 <p>The <code>@Produces</code> annotation is used to specify the MIME media types or
 representations a resource can produce and send back to the client. If
@@ -893,9 +924,12 @@ It is possible to refer to constant values, which may reduce
 typographical errors. For more information, see the API documentation
 for the constant field values of <code>javax.ws.rs.core.MediaType</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPYT"></a><a id="the-consumes-annotation"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-consumes-annotation">The @Consumes Annotation</h4>
+<h4 id="_the_consumes_annotation">The @Consumes Annotation</h4>
 <div class="paragraph">
 <p>The <code>@Consumes</code> annotation is used to specify which MIME media types of
 representations a resource can accept, or consume, from the client. If
@@ -978,10 +1012,13 @@ by the MIME media type <code>text/plain</code>. Note that the resource method
 returns <code>void</code>. This means that no representation is returned and that a
 response with a status code of HTTP 204 ("No Content") will be returned.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPYW"></a><a id="extracting-request-parameters"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="extracting-request-parameters">Extracting Request Parameters</h3>
+<h3 id="_extracting_request_parameters">Extracting Request Parameters</h3>
 <div class="paragraph">
 <p>Parameters of a resource method may be annotated with parameter-based
 annotations to extract information from a request. A previous example
@@ -1228,9 +1265,12 @@ public void post(MultivaluedMap&lt;String, String&gt; formParams) {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHEGAGI"></a><a id="configuring-jax-rs-applications"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="configuring-jax-rs-applications">Configuring JAX-RS Applications</h3>
+<h3 id="_configuring_jax_rs_applications">Configuring JAX-RS Applications</h3>
 <div class="paragraph">
 <p>A JAX-RS application consists of at least one resource class packaged
 within a WAR file. The base URI from which an application&#8217;s resources
@@ -1262,8 +1302,11 @@ Application</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHFEBJF"></a><a id="configuring-a-jax-rs-application-using-a-subclass-of-application"></a></p>
+</div>
 <div class="sect3">
-<h4 id="configuring-a-jax-rs-application-using-a-subclass-of-application">Configuring a JAX-RS Application Using a Subclass of Application</h4>
+<h4 id="_configuring_a_jax_rs_application_using_a_subclass_of_application">Configuring a JAX-RS Application Using a Subclass of Application</h4>
 <div class="paragraph">
 <p>Create a subclass of <code>javax.ws.rs.core.Application</code> to manually
 configure the environment in which the REST resources defined in your
@@ -1297,9 +1340,12 @@ public Set&lt;Class&lt;?&gt;&gt; getClasses() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHDHAIJ"></a><a id="configuring-the-base-uri-in-web.xml"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="configuring-the-base-uri-in-web.xml">Configuring the Base URI in web.xml</h4>
+<h4 id="_configuring_the_base_uri_in_web_xml">Configuring the Base URI in web.xml</h4>
 <div class="paragraph">
 <p>The base URI for a JAX-RS application can be set using a
 <code>servlet-mapping</code> tag in the <code>web.xml</code> deployment descriptor, using the

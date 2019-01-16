@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKKRB"></a><a id="annotations-for-field-and-bean-properties-of-resource-classes"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="annotations-for-field-and-bean-properties-of-resource-classes">Annotations for Field and Bean Properties of Resource Classes</h2>
+<h2 id="_annotations_for_field_and_bean_properties_of_resource_classes">Annotations for Field and Bean Properties of Resource Classes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>JAX-RS annotations for resource classes let you extract specific parts
@@ -110,8 +117,11 @@ content type is <code>application/x-www-form-urlencoded</code></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GKKYA"></a><a id="extracting-path-parameters"></a></p>
+</div>
 <div class="sect2">
-<h3 id="extracting-path-parameters">Extracting Path Parameters</h3>
+<h3 id="_extracting_path_parameters">Extracting Path Parameters</h3>
 <div class="paragraph">
 <p>URI path templates are URIs with variables embedded within the URI
 syntax. The <code>@PathParam</code> annotation lets you use variable URI path
@@ -161,9 +171,12 @@ uppercase characters, you can declare the following regular expression:</p>
 <p>If the last name does not match the regular expression, a 404 response
 is returned.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKKXJ"></a><a id="extracting-query-parameters"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="extracting-query-parameters">Extracting Query Parameters</h3>
+<h3 id="_extracting_query_parameters">Extracting Query Parameters</h3>
 <div class="paragraph">
 <p>Use the <code>@QueryParam</code> annotation to extract query parameters from the
 query component of the request URI.</p>
@@ -199,9 +212,12 @@ JAX-RS assigns a null value for <code>Object</code> values and zero for primitiv
 data types. You can use the <code>@DefaultValue</code> annotation to eliminate null
 or zero values and define your own default values for a parameter.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKKYC"></a><a id="extracting-form-data"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="extracting-form-data">Extracting Form Data</h3>
+<h3 id="_extracting_form_data">Extracting Form Data</h3>
 <div class="paragraph">
 <p>Use the <code>@FormParam</code> annotation to extract form parameters from HTML
 forms. For example, the following form accepts the name, address, and
@@ -247,9 +263,12 @@ public void post(MultivaluedMap&lt;String, String&gt; formParams) {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKLCQ"></a><a id="extracting-the-java-type-of-a-request-or-response"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="extracting-the-java-type-of-a-request-or-response">Extracting the Java Type of a Request or Response</h3>
+<h3 id="_extracting_the_java_type_of_a_request_or_response">Extracting the Java Type of a Request or Response</h3>
 <div class="paragraph">
 <p>The <code>javax.ws.rs.core.Context</code> annotation retrieves the Java types
 related to a request or response.</p>

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCEH"></a><a id="the-jms-api-programming-model"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-jms-api-programming-model">The JMS API Programming Model</h2>
+<h2 id="_the_jms_api_programming_model">The JMS API Programming Model</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The basic building blocks of a JMS application are</p>
@@ -107,8 +114,11 @@ Examples,"</a> beginning with <a href="jms-examples003.html#BNCFA">Writing Simpl
 JMS Applications</a>. For more detail, see the JMS API documentation, part
 of the Java EE API documentation.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEJ"></a><a id="jms-administered-objects"></a></p>
+</div>
 <div class="sect2">
-<h3 id="jms-administered-objects">JMS Administered Objects</h3>
+<h3 id="_jms_administered_objects">JMS Administered Objects</h3>
 <div class="paragraph">
 <p>Two parts of a JMS application, destinations and connection factories,
 are commonly maintained administratively rather than programmatically.
@@ -145,8 +155,11 @@ for which they are created. See
 Applications</a> for details. Definitions in a deployment descriptor
 override those specified by annotations.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEK"></a><a id="jms-connection-factories"></a></p>
+</div>
 <div class="sect3">
-<h4 id="jms-connection-factories">JMS Connection Factories</h4>
+<h4 id="_jms_connection_factories">JMS Connection Factories</h4>
 <div class="paragraph">
 <p>A connection factory is the object a client uses to create a connection
 to a provider. A connection factory encapsulates a set of connection
@@ -173,9 +186,12 @@ connection factory and assigns it to a <code>ConnectionFactory</code> object:</p
 private static ConnectionFactory connectionFactory;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCEL"></a><a id="jms-destinations"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="jms-destinations">JMS Destinations</h4>
+<h4 id="_jms_destinations">JMS Destinations</h4>
 <div class="paragraph">
 <p>A destination is the object a client uses to specify the target of
 messages it produces and the source of messages it consumes. In the PTP
@@ -230,10 +246,13 @@ and use it with a <code>Queue</code>. The behavior of the application will depen
 on the kind of destination you use and not on the kind of connection
 factory you use.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEM"></a><a id="connections"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="connections">Connections</h3>
+<h3 id="_connections">Connections</h3>
 <div class="paragraph">
 <p>A connection encapsulates a virtual connection with a JMS provider. For
 example, a connection could represent an open TCP/IP socket between a
@@ -262,9 +281,12 @@ session.</p>
 <p>You normally create a connection by creating a <code>JMSContext</code> object. See
 <a href="#BABGDFEA">JMSContext Objects</a> for details.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEN"></a><a id="sessions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="sessions">Sessions</h3>
+<h3 id="_sessions">Sessions</h3>
 <div class="paragraph">
 <p>A session is a single-threaded context for producing and consuming
 messages.</p>
@@ -284,9 +306,12 @@ messages, queue browsers, and temporary destinations.</p>
 sends and receives into an atomic unit of work. For details, see
 <a href="jms-concepts004.html#BNCGH">Using JMS Local Transactions</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABGDFEA"></a><a id="jmscontext-objects"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="jmscontext-objects">JMSContext Objects</h3>
+<h3 id="_jmscontext_objects">JMSContext Objects</h3>
 <div class="paragraph">
 <p>A <code>JMSContext</code> object combines a connection and a session in a single
 object. That is, it provides both an active connection to a JMS provider
@@ -374,9 +399,12 @@ activity within the <code>try</code>-with-resources block. If you do not use a
 <code>JMSContext</code> to close the connection when the application has finished
 its work.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEO"></a><a id="jms-message-producers"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="jms-message-producers">JMS Message Producers</h3>
+<h3 id="_jms_message_producers">JMS Message Producers</h3>
 <div class="paragraph">
 <p>A message producer is an object that is created by a <code>JMSContext</code> or a
 session and used for sending messages to a destination. A message
@@ -407,9 +435,12 @@ a message. You send messages to a specific destination by using the
 here, or you can create it within the <code>send</code> call. See <a href="#BNCES">JMS
 Messages</a> for more information.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEP"></a><a id="jms-message-consumers"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="jms-message-consumers">JMS Message Consumers</h3>
+<h3 id="_jms_message_consumers">JMS Message Consumers</h3>
 <div class="paragraph">
 <p>A message consumer is an object that is created by a <code>JMSContext</code> or a
 session and used for receiving messages sent to a destination. A message
@@ -476,8 +507,11 @@ topic. For details, see <a href="#BNCGD">Creating Durable Subscriptions</a>. For
 topics, you can also create shared consumers; see
 <a href="#BABJCIGJ">Creating Shared Subscriptions</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEQ"></a><a id="jms-message-listeners"></a></p>
+</div>
 <div class="sect3">
-<h4 id="jms-message-listeners">JMS Message Listeners</h4>
+<h4 id="_jms_message_listeners">JMS Message Listeners</h4>
 <div class="paragraph">
 <p>A message listener is an object that acts as an asynchronous event
 handler for messages. This object implements the <code>MessageListener</code>
@@ -522,9 +556,12 @@ Message Delivery</a>. <a href="jms-examples.html#BNCGV">Chapter 49, "Java Messag
 Service Examples,"</a> contains several more examples of message listeners
 and message-driven beans.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCER"></a><a id="jms-message-selectors"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="jms-message-selectors">JMS Message Selectors</h4>
+<h4 id="_jms_message_selectors">JMS Message Selectors</h4>
 <div class="paragraph">
 <p>If your messaging application needs to filter the messages it receives,
 you can use a JMS message selector, which allows a message consumer for
@@ -557,9 +594,12 @@ properties match the selector. (See <a href="#BNCET">Message Headers</a> and
 <a href="#BNCEV">Message Properties</a>.) A message selector cannot select
 messages on the basis of the content of the message body.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABEEJJJ"></a><a id="consuming-messages-from-topics"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="consuming-messages-from-topics">Consuming Messages from Topics</h4>
+<h4 id="_consuming_messages_from_topics">Consuming Messages from Topics</h4>
 <div class="paragraph">
 <p>The semantics of consuming messages from topics are more complex than
 the semantics of consuming messages from queues.</p>
@@ -629,9 +669,12 @@ explicitly deleted, even if there are no consumer objects consuming
 messages from it. See <a href="#BNCGD">Creating Durable Subscriptions</a> for
 details.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGD"></a><a id="creating-durable-subscriptions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="creating-durable-subscriptions">Creating Durable Subscriptions</h4>
+<h4 id="_creating_durable_subscriptions">Creating Durable Subscriptions</h4>
 <div class="paragraph">
 <p>To ensure that a pub/sub application receives all sent messages, use
 durable subscriptions for the consumers on the topic.</p>
@@ -789,9 +832,12 @@ and <a href="jms-examples008.html#BNCGW">Sending Messages from a Session Bean
 to an MDB</a> for examples of Java EE applications that use durable
 subscriptions.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABJCIGJ"></a><a id="creating-shared-subscriptions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="creating-shared-subscriptions">Creating Shared Subscriptions</h4>
+<h4 id="_creating_shared_subscriptions">Creating Shared Subscriptions</h4>
 <div class="paragraph">
 <p>A topic subscription created by the <code>createConsumer</code> or
 <code>createDurableConsumer</code> method can have only one consumer (although a
@@ -834,10 +880,13 @@ consumers.</p>
 <code>JMSContext.createSharedDurableConsumer</code> method. For details, see
 <a href="#BNCGD">Creating Durable Subscriptions</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCES"></a><a id="jms-messages"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="jms-messages">JMS Messages</h3>
+<h3 id="_jms_messages">JMS Messages</h3>
 <div class="paragraph">
 <p>The ultimate purpose of a JMS application is to produce and consume
 messages that can then be used by other software applications. JMS
@@ -872,8 +921,11 @@ documentation. For a list of possible message types, see
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCET"></a><a id="message-headers"></a></p>
+</div>
 <div class="sect3">
-<h4 id="message-headers">Message Headers</h4>
+<h4 id="_message_headers">Message Headers</h4>
 <div class="paragraph">
 <p>A JMS message header contains a number of predefined fields that contain
 values used by both clients and providers to identify and route
@@ -980,9 +1032,12 @@ provider prior to delivery</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNCEV"></a><a id="message-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="message-properties">Message Properties</h4>
+<h4 id="_message_properties">Message Properties</h4>
 <div class="paragraph">
 <p>You can create and set properties for messages if you need values in
 addition to those provided by the header fields. You can use properties
@@ -999,9 +1054,12 @@ from a Session Bean to an MDB</a>.</p>
 been delivered); the rest are optional. The use of these predefined
 properties or of user-defined properties in applications is optional.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEW"></a><a id="message-bodies"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="message-bodies">Message Bodies</h4>
+<h4 id="_message_bodies">Message Bodies</h4>
 <div class="paragraph">
 <p>The JMS API defines six different types of messages. Each message type
 corresponds to a different message body. These message types allow you
@@ -1143,10 +1201,13 @@ all the messages sent have now been received.</p>
 Service Examples,"</a> use messages of type <code>TextMessage</code>, <code>MapMessage</code>,
 and <code>Message</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEY"></a><a id="jms-queue-browsers"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="jms-queue-browsers">JMS Queue Browsers</h3>
+<h3 id="_jms_queue_browsers">JMS Queue Browsers</h3>
 <div class="paragraph">
 <p>Messages sent to a queue remain in the queue until the message consumer
 for that queue consumes them. The JMS API provides a <code>QueueBrowser</code>
@@ -1176,9 +1237,12 @@ durable subscriptions allow messages to remain on a topic while the
 message consumer is not active, JMS does not define any facility for
 examining them.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCEZ"></a><a id="jms-exception-handling"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="jms-exception-handling">JMS Exception Handling</h3>
+<h3 id="_jms_exception_handling">JMS Exception Handling</h3>
 <div class="paragraph">
 <p>The root class for all checked exceptions in the JMS API is
 <code>JMSException</code>. The root cause for all unchecked exceptions in the JMS

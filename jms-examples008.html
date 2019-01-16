@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCGW"></a><a id="sending-messages-from-a-session-bean-to-an-mdb"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="sending-messages-from-a-session-bean-to-an-mdb">Sending Messages from a Session Bean to an MDB</h2>
+<h2 id="_sending_messages_from_a_session_bean_to_an_mdb">Sending Messages from a Session Bean to an MDB</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section explains how to write, compile, package, deploy, and run an
@@ -92,8 +99,11 @@ clientsessionmdb Example</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCGX"></a><a id="writing-the-application-components-for-the-clientsessionmdb-example"></a></p>
+</div>
 <div class="sect2">
-<h3 id="writing-the-application-components-for-the-clientsessionmdb-example">Writing the Application Components for the clientsessionmdb Example</h3>
+<h3 id="_writing_the_application_components_for_the_clientsessionmdb_example">Writing the Application Components for the clientsessionmdb Example</h3>
 <div class="paragraph">
 <p>This application demonstrates how to send messages from an enterprise
 bean (in this case, a session bean) rather than from an application
@@ -125,8 +135,11 @@ categories and then publishes the message to a topic. The message-driven
 bean uses a message selector for the property to limit which of the
 published messages will be delivered to it.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGZ"></a><a id="coding-the-application-client-myappclient.java"></a></p>
+</div>
 <div class="sect3">
-<h4 id="coding-the-application-client-myappclient.java">Coding the Application Client: MyAppClient.java</h4>
+<h4 id="_coding_the_application_client_myappclient_java">Coding the Application Client: MyAppClient.java</h4>
 <div class="paragraph">
 <p>The application client, <code>MyAppClient.java</code>, found under
 <code>clientsessionmdb-app-client</code>, performs no JMS API operations and so is
@@ -144,9 +157,12 @@ private static PublisherRemote publisher;</code></pre>
 <div class="paragraph">
 <p>The client then calls the bean&#8217;s business method twice.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCHA"></a><a id="coding-the-publisher-session-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="coding-the-publisher-session-bean">Coding the Publisher Session Bean</h4>
+<h4 id="_coding_the_publisher_session_bean">Coding the Publisher Session Bean</h4>
 <div class="paragraph">
 <p>The Publisher bean is a stateless session bean that has one business
 method. The Publisher bean uses a remote interface rather than a local
@@ -187,9 +203,12 @@ public class PublisherBean implements PublisherRemote {
 <p>The business method <code>publishNews</code> creates a <code>JMSProducer</code> and publishes
 the messages.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCHB"></a><a id="coding-the-message-driven-bean-messagebean.java"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="coding-the-message-driven-bean-messagebean.java">Coding the Message-Driven Bean: MessageBean.java</h4>
+<h4 id="_coding_the_message_driven_bean_messagebean_java">Coding the Message-Driven Bean: MessageBean.java</h4>
 <div class="paragraph">
 <p>The message-driven bean class, <code>MessageBean.java</code>, found under
 <code>clientsessionmdb-ejb</code>, is almost identical to the one in
@@ -240,10 +259,13 @@ to demonstrate the syntax of message selectors.</p>
 factory for the message-driven bean that allows the bean to use a
 durable subscription.</p>
 </div>
+<div class="paragraph">
+<p><a id="CHDDFAHA"></a><a id="running-the-clientsessionmdb-example"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-clientsessionmdb-example">Running the clientsessionmdb Example</h3>
+<h3 id="_running_the_clientsessionmdb_example">Running the clientsessionmdb Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, deploy, and run the
 <code>simplemessage</code> example.</p>
@@ -266,8 +288,11 @@ you do not have to create resources for it.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDGGAIB"></a><a id="to-run-clientsessionmdb-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-clientsessionmdb-using-netbeans-ide">To Run clientsessionmdb Using NetBeans IDE</h4>
+<h4 id="_to_run_clientsessionmdb_using_netbeans_ide">To Run clientsessionmdb Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -348,9 +373,12 @@ finished running it.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDDDHBE"></a><a id="to-run-clientsessionmdb-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-clientsessionmdb-using-maven">To Run clientsessionmdb Using Maven</h4>
+<h4 id="_to_run_clientsessionmdb_using_maven">To Run clientsessionmdb Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

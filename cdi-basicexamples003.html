@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GJCXV"></a><a id="the-guessnumber-cdi-cdi-example"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-guessnumber-cdi-cdi-example">The guessnumber-cdi CDI Example</h2>
+<h2 id="_the_guessnumber_cdi_cdi_example">The guessnumber-cdi CDI Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>guessnumber-cdi</code> example, somewhat more complex than the
@@ -85,8 +92,11 @@ the same as those used for the <code>simplegreeting</code> example.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJDJU"></a><a id="the-guessnumber-cdi-source-files"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-guessnumber-cdi-source-files">The guessnumber-cdi Source Files</h3>
+<h3 id="_the_guessnumber_cdi_source_files">The guessnumber-cdi Source Files</h3>
 <div class="paragraph">
 <p>The four source files for the <code>guessnumber-cdi</code> example are:</p>
 </div>
@@ -111,8 +121,11 @@ the same as those used for the <code>simplegreeting</code> example.</p>
 <code><em>tut-install</em>/examples/cdi/guessnumber-cdi/src/main/java/javaeetutorial/guessnumber</code>
 directory.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJDJP"></a><a id="the-maxnumber-and-random-qualifier-interfaces"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-maxnumber-and-random-qualifier-interfaces">The @MaxNumber and @Random Qualifier Interfaces</h4>
+<h4 id="_the_maxnumber_and_random_qualifier_interfaces">The @MaxNumber and @Random Qualifier Interfaces</h4>
 <div class="paragraph">
 <p>The <code>@MaxNumber</code> qualifier interface is defined as follows:</p>
 </div>
@@ -163,9 +176,12 @@ public @interface Random {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJDJN"></a><a id="the-generator-managed-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-generator-managed-bean">The Generator Managed Bean</h4>
+<h4 id="_the_generator_managed_bean">The Generator Managed Bean</h4>
 <div class="paragraph">
 <p>The <code>Generator</code> managed bean contains the two producer methods for the
 application. The bean has the <code>@ApplicationScoped</code> annotation to specify
@@ -205,9 +221,12 @@ public class Generator implements Serializable {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJDHY"></a><a id="the-usernumberbean-managed-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-usernumberbean-managed-bean">The UserNumberBean Managed Bean</h4>
+<h4 id="_the_usernumberbean_managed_bean">The UserNumberBean Managed Bean</h4>
 <div class="paragraph">
 <p>The <code>UserNumberBean</code> managed bean, the managed bean for the JavaServer
 Faces application, provides the basic logic for the game. This bean does
@@ -348,10 +367,13 @@ public class UserNumberBean implements Serializable {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJDON"></a><a id="the-facelets-page"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="the-facelets-page">The Facelets Page</h3>
+<h3 id="_the_facelets_page">The Facelets Page</h3>
 <div class="paragraph">
 <p>This example uses the same template that the <code>simplegreeting</code> example
 uses. The <code>index.xhtml</code> file, however, is more complex.</p>
@@ -424,9 +446,12 @@ maximum or minimum value or, if the guess is correct, to generate a
 <code>FacesMessage</code> to that effect. The method that determines whether each
 guess is valid is <code>userNumberBean.validateNumberRange</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJDPW"></a><a id="running-the-guessnumber-cdi-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-guessnumber-cdi-example">Running the guessnumber-cdi Example</h3>
+<h3 id="_running_the_guessnumber_cdi_example">Running the guessnumber-cdi Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>guessnumber-cdi</code> application.</p>
@@ -449,8 +474,11 @@ Using Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJDPS"></a><a id="to-build-package-and-deploy-the-guessnumber-cdi-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-guessnumber-cdi-example-using-netbeans-ide">To Build, Package, and Deploy the guessnumber-cdi Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_guessnumber_cdi_example_using_netbeans_ide">To Build, Package, and Deploy the guessnumber-cdi Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -486,9 +514,12 @@ deploys it to GlassFish Server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJDPR"></a><a id="to-build-package-and-deploy-the-guessnumber-cdi-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-guessnumber-cdi-example-using-maven">To Build, Package, and Deploy the guessnumber-cdi Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_guessnumber_cdi_example_using_maven">To Build, Package, and Deploy the guessnumber-cdi Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -519,9 +550,12 @@ deploys it to GlassFish Server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJDQB"></a><a id="to-run-the-guessnumber-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-guessnumber-example">To Run the guessnumber Example</h4>
+<h4 id="_to_run_the_guessnumber_example">To Run the guessnumber Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBUF"></a><a id="full-query-language-syntax"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="full-query-language-syntax">Full Query Language Syntax</h2>
+<h2 id="_full_query_language_syntax">Full Query Language Syntax</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section discusses the query language syntax, as defined in the Java
@@ -91,8 +98,11 @@ paraphrases or directly quotes the specification.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUG"></a><a id="bnf-symbols"></a></p>
+</div>
 <div class="sect2">
-<h3 id="bnf-symbols">BNF Symbols</h3>
+<h3 id="_bnf_symbols">BNF Symbols</h3>
 <div class="paragraph">
 <p><a href="#BNBUH">Table 42-1</a> describes the BNF symbols used in this chapter.</p>
 </div>
@@ -148,9 +158,12 @@ keywords are not case-sensitive.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBUI"></a><a id="bnf-grammar-of-the-java-persistence-query-language"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="bnf-grammar-of-the-java-persistence-query-language">BNF Grammar of the Java Persistence Query Language</h3>
+<h3 id="_bnf_grammar_of_the_java_persistence_query_language">BNF Grammar of the Java Persistence Query Language</h3>
 <div class="paragraph">
 <p>Here is the entire BNF diagram for the query language:</p>
 </div>
@@ -375,9 +388,12 @@ functions_returning_strings ::=
 trim_specification ::= LEADING | TRAILING | BOTH</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBUJ"></a><a id="from-clause"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="from-clause">FROM Clause</h3>
+<h3 id="_from_clause">FROM Clause</h3>
 <div class="paragraph">
 <p>The <code>FROM</code> clause defines the domain of the query by declaring
 identification variables.</p>
@@ -404,8 +420,11 @@ identification variables.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUK"></a><a id="identifiers"></a></p>
+</div>
 <div class="sect3">
-<h4 id="identifiers">Identifiers</h4>
+<h4 id="_identifiers">Identifiers</h4>
 <div class="paragraph">
 <p>An identifier is a sequence of one or more characters. The first
 character must be a valid first character (letter, <code>$</code>, <code><em></code>) in an
@@ -519,9 +538,12 @@ list of query language keywords:</p>
 because the list of keywords may expand to include other reserved SQL
 words in the future.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBUM"></a><a id="identification-variables"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="identification-variables">Identification Variables</h4>
+<h4 id="_identification_variables">Identification Variables</h4>
 <div class="paragraph">
 <p>An identification variable is an identifier declared in the <code>FROM</code>
 clause. Although they can reference identification variables, the
@@ -588,9 +610,12 @@ value whose type is that of the expression used in the declaration.
 There are two kinds of declarations: range variable and collection
 member.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBUN"></a><a id="range-variable-declarations"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="range-variable-declarations">Range Variable Declarations</h4>
+<h4 id="_range_variable_declarations">Range Variable Declarations</h4>
 <div class="paragraph">
 <p>To declare an identification variable as an abstract schema type, you
 specify a range variable declaration. In other words, an identification
@@ -631,9 +656,12 @@ abstract schema:</p>
 <p>For an example of such a query, see
 <a href="persistence-querylanguage005.html#BNBUB">Comparison Operators</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBUO"></a><a id="collection-member-declarations"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="collection-member-declarations">Collection Member Declarations</h4>
+<h4 id="_collection_member_declarations">Collection Member Declarations</h4>
 <div class="paragraph">
 <p>In a one-to-many relationship, the multiple side consists of a
 collection of entities. An identification variable can represent a
@@ -661,9 +689,12 @@ identification variable called <code>t</code> represents a single member of the
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">FROM Player p, IN (p.teams) t</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBUP"></a><a id="joins"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="joins">Joins</h4>
+<h4 id="_joins">Joins</h4>
 <div class="paragraph">
 <p>The <code>JOIN</code> operator is used to traverse over relationships between
 entities and is functionally similar to the <code>IN</code> operator.</p>
@@ -735,10 +766,13 @@ FROM Department d LEFT JOIN FETCH d.employees
 WHERE d.deptno = 1</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBUQ"></a><a id="path-expressions"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="path-expressions">Path Expressions</h3>
+<h3 id="_path_expressions">Path Expressions</h3>
 <div class="paragraph">
 <p>Path expressions are important constructs in the syntax of the query
 language for several reasons. First, path expressions define navigation
@@ -765,8 +799,11 @@ SQL, path expressions are extensions not found in SQL.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUR"></a><a id="examples-of-path-expressions"></a></p>
+</div>
 <div class="sect3">
-<h4 id="examples-of-path-expressions">Examples of Path Expressions</h4>
+<h4 id="_examples_of_path_expressions">Examples of Path Expressions</h4>
 <div class="paragraph">
 <p>Here, the <code>WHERE</code> clause contains a <code>single_valued_path_expression</code>; the
 <code>p</code> is an identification variable, and <code>salary</code> is a persistent field of
@@ -804,9 +841,12 @@ FROM Player p
 WHERE p.teams IS EMPTY</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBUS"></a><a id="expression-types"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="expression-types">Expression Types</h4>
+<h4 id="_expression_types">Expression Types</h4>
 <div class="paragraph">
 <p>The type of a path expression is the type of the object represented by
 the ending element, which can be one of the following:</p>
@@ -836,9 +876,12 @@ is the abstract schema name for the <code>Team</code> entity, this type maps to 
 entity. For more information on the type mapping of abstract schemas,
 see <a href="#BNBVY">Return Types</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBUT"></a><a id="navigation"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="navigation">Navigation</h4>
+<h4 id="_navigation">Navigation</h4>
 <div class="paragraph">
 <p>A path expression enables the query to navigate to related entities. The
 terminating elements of an expression determine whether navigation is
@@ -856,10 +899,13 @@ define an identification variable named <code>t</code> for the <code>teams</code
 WHERE t.league.sport = 'soccer'</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBUU"></a><a id="where-clause"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="where-clause">WHERE Clause</h3>
+<h3 id="_where_clause">WHERE Clause</h3>
 <div class="paragraph">
 <p>The <code>WHERE</code> clause specifies a conditional expression that limits the
 values returned by the query. The query returns all corresponding values
@@ -925,8 +971,11 @@ syntax for the <code>WHERE</code> clause is as follows:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBUV"></a><a id="literals"></a></p>
+</div>
 <div class="sect3">
-<h4 id="literals">Literals</h4>
+<h4 id="_literals">Literals</h4>
 <div class="paragraph">
 <p>There are four kinds of literals: string, numeric, Boolean, and enum.</p>
 </div>
@@ -990,9 +1039,12 @@ WHERE e.status = com.example.EmployeeStatus.FULL_TIME</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBVA"></a><a id="input-parameters"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="input-parameters">Input Parameters</h4>
+<h4 id="_input_parameters">Input Parameters</h4>
 <div class="paragraph">
 <p>An input parameter can be either a named parameter or a positional
 parameter.</p>
@@ -1030,17 +1082,23 @@ single query.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBVB"></a><a id="conditional-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="conditional-expressions">Conditional Expressions</h4>
+<h4 id="_conditional_expressions">Conditional Expressions</h4>
 <div class="paragraph">
 <p>A <code>WHERE</code> clause consists of a conditional expression, which is
 evaluated from left to right within a precedence level. You can change
 the order of evaluation by using parentheses.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBVC"></a><a id="operators-and-their-precedence"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="operators-and-their-precedence">Operators and Their Precedence</h4>
+<h4 id="_operators_and_their_precedence">Operators and Their Precedence</h4>
 <div class="paragraph">
 <p><a href="#BNBVD">Table 42-2</a> lists the query language operators in order of
 decreasing precedence.</p>
@@ -1130,9 +1188,12 @@ decreasing precedence.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBVE"></a><a id="between-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="between-expressions">BETWEEN Expressions</h4>
+<h4 id="_between_expressions">BETWEEN Expressions</h4>
 <div class="paragraph">
 <p>A <code>BETWEEN</code> expression determines whether an arithmetic expression falls
 within a range of values.</p>
@@ -1159,9 +1220,12 @@ p.age &lt; 15 OR p.age &gt; 19</code></pre>
 <p>If an arithmetic expression has a <code>NULL</code> value, the value of the
 <code>BETWEEN</code> expression is unknown.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBVF"></a><a id="in-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="in-expressions">IN Expressions</h4>
+<h4 id="_in_expressions">IN Expressions</h4>
 <div class="paragraph">
 <p>An <code>IN</code> expression determines whether a string belongs to a set of
 string literals or whether a number belongs to a set of number values.</p>
@@ -1188,9 +1252,12 @@ unknown.</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">o.country IN ('UK', 'US', 'France', :country)</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBVG"></a><a id="like-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="like-expressions">LIKE Expressions</h4>
+<h4 id="_like_expressions">LIKE Expressions</h4>
 <div class="paragraph">
 <p>A <code>LIKE</code> expression determines whether a wildcard pattern matches a
 string.</p>
@@ -1255,9 +1322,12 @@ sample <code>LIKE</code> expressions.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBVI"></a><a id="null-comparison-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="null-comparison-expressions">NULL Comparison Expressions</h4>
+<h4 id="_null_comparison_expressions">NULL Comparison Expressions</h4>
 <div class="paragraph">
 <p>A <code>NULL</code> comparison expression tests whether a single-valued path
 expression or an input parameter has a <code>NULL</code> value. Usually, the <code>NULL</code>
@@ -1287,9 +1357,12 @@ WHERE t.league = NULL</code></pre>
 returns an unknown value, even if the relationship is not set. The
 second query will always return an empty result.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBVJ"></a><a id="empty-collection-comparison-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="empty-collection-comparison-expressions">Empty Collection Comparison Expressions</h4>
+<h4 id="_empty_collection_comparison_expressions">Empty Collection Comparison Expressions</h4>
 <div class="paragraph">
 <p>The <code>IS [NOT] EMPTY</code> comparison expression tests whether a
 collection-valued path expression has no elements. In other words, it
@@ -1310,9 +1383,12 @@ FROM CustomerOrder o
 WHERE o.lineItems IS EMPTY</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBVK"></a><a id="collection-member-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="collection-member-expressions">Collection Member Expressions</h4>
+<h4 id="_collection_member_expressions">Collection Member Expressions</h4>
 <div class="paragraph">
 <p>The <code>[NOT]</code> <code>MEMBER [OF]</code> collection member expression determines
 whether a value is a member of a collection. The value and the
@@ -1337,9 +1413,12 @@ FROM CustomerOrder o
 WHERE :lineItem MEMBER OF o.lineItems</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBVL"></a><a id="subqueries"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="subqueries">Subqueries</h4>
+<h4 id="_subqueries">Subqueries</h4>
 <div class="paragraph">
 <p>Subqueries may be used in the <code>WHERE</code> or <code>HAVING</code> clause of a query.
 Subqueries must be surrounded by parentheses.</p>
@@ -1410,9 +1489,12 @@ WHERE emp.salary &gt; ALL (
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBVO"></a><a id="functional-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="functional-expressions">Functional Expressions</h4>
+<h4 id="_functional_expressions">Functional Expressions</h4>
 <div class="paragraph">
 <p>The query language includes several string, arithmetic, and date/time
 functions that may be used in the <code>SELECT</code>, <code>WHERE</code>, or <code>HAVING</code> clause
@@ -1596,9 +1678,12 @@ time, or timestamp on the database server.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GJJND"></a><a id="case-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="case-expressions">Case Expressions</h4>
+<h4 id="_case_expressions">Case Expressions</h4>
 <div class="paragraph">
 <p>Case expressions change based on a condition, similar to the <code>case</code>
 keyword of the Java programming language. The <code>CASE</code> keyword indicates
@@ -1644,9 +1729,12 @@ SET c.discount =
     END</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBVR"></a><a id="null-values"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="null-values">NULL Values</h4>
+<h4 id="_null_values">NULL Values</h4>
 <div class="paragraph">
 <p>If the target of a reference is not in the persistent store, the target
 is <code>NULL</code>. For conditional expressions containing <code>NULL</code>, the query
@@ -1755,9 +1843,12 @@ these tables, T stands for <code>TRUE</code>, F for <code>FALSE</code>, and U fo
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBVU"></a><a id="equality-semantics"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="equality-semantics">Equality Semantics</h4>
+<h4 id="_equality_semantics">Equality Semantics</h4>
 <div class="paragraph">
 <p>In the query language, only values of the same type can be compared.
 However, this rule has one exception: Exact and approximate numeric
@@ -1853,10 +1944,13 @@ truth values of conditional tests.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBVX"></a><a id="select-clause"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="select-clause">SELECT Clause</h3>
+<h3 id="_select_clause">SELECT Clause</h3>
 <div class="paragraph">
 <p>The <code>SELECT</code> clause defines the types of the objects or values returned
 by the query.</p>
@@ -1877,8 +1971,11 @@ by the query.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBVY"></a><a id="return-types"></a></p>
+</div>
 <div class="sect3">
-<h4 id="return-types">Return Types</h4>
+<h4 id="_return_types">Return Types</h4>
 <div class="paragraph">
 <p>The return type of the <code>SELECT</code> clause is defined by the result types of
 the select expressions contained within it. If multiple expressions are
@@ -2033,17 +2130,23 @@ FROM CustomerOrder o JOIN o.lineItems l JOIN o.customer c
 WHERE c.lastname = 'Incandenza' AND c.firstname = 'Hal'</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBWB"></a><a id="the-distinct-keyword"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-distinct-keyword">The DISTINCT Keyword</h4>
+<h4 id="_the_distinct_keyword">The DISTINCT Keyword</h4>
 <div class="paragraph">
 <p>The <code>DISTINCT</code> keyword eliminates duplicate return values. If a query
 returns a <code>java.util.Collection</code>, which allows duplicates, you must
 specify the <code>DISTINCT</code> keyword to eliminate duplicates.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWC"></a><a id="constructor-expressions"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="constructor-expressions">Constructor Expressions</h4>
+<h4 id="_constructor_expressions">Constructor Expressions</h4>
 <div class="paragraph">
 <p>Constructor expressions allow you to return Java instances that store a
 query result element instead of an <code>Object[]</code>.</p>
@@ -2061,10 +2164,13 @@ FROM customer c
 WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBWD"></a><a id="order-by-clause"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="order-by-clause">ORDER BY Clause</h3>
+<h3 id="_order_by_clause">ORDER BY Clause</h3>
 <div class="paragraph">
 <p>As its name suggests, the <code>ORDER BY</code> clause orders the values or objects
 returned by the query.</p>
@@ -2104,9 +2210,12 @@ WHERE c.lastname = 'Faehmel' AND c.firstname = 'Robert'
 ORDER BY o.quantity</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBWE"></a><a id="group-by-and-having-clauses"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="group-by-and-having-clauses">GROUP BY and HAVING Clauses</h3>
+<h3 id="_group_by_and_having_clauses">GROUP BY and HAVING Clauses</h3>
 <div class="paragraph">
 <p>The <code>GROUP BY</code> clause allows you to group values according to a set of
 properties.</p>

@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAFI"></a><a id="servlet-lifecycle"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="servlet-lifecycle">Servlet Lifecycle</h2>
+<h2 id="_servlet_lifecycle">Servlet Lifecycle</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The lifecycle of a servlet is controlled by the container in which the
@@ -87,16 +94,22 @@ response objects. Service methods are discussed in
 by calling the servlet&#8217;s <code>destroy</code> method. For more information, see
 <a href="servlets010.html#BNAGS">Finalizing a Servlet</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAFJ"></a><a id="handling-servlet-lifecycle-events"></a></p>
+</div>
 <div class="sect2">
-<h3 id="handling-servlet-lifecycle-events">Handling Servlet Lifecycle Events</h3>
+<h3 id="_handling_servlet_lifecycle_events">Handling Servlet Lifecycle Events</h3>
 <div class="paragraph">
 <p>You can monitor and react to events in a servlet&#8217;s lifecycle by defining
 listener objects whose methods get invoked when lifecycle events occur.
 To use these listener objects, you must define and specify the listener
 class.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAFK"></a><a id="defining-the-listener-class"></a></p>
+</div>
 <div class="sect3">
-<h4 id="defining-the-listener-class">Defining the Listener Class</h4>
+<h4 id="_defining_the_listener_class">Defining the Listener Class</h4>
 <div class="paragraph">
 <p>You define a listener class as an implementation of a listener
 interface. <a href="#BNAFL">Table 18-1</a> lists the events that can be
@@ -195,10 +208,13 @@ public class SimpleServletListener implements ServletContextListener,
     ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNAFN"></a><a id="handling-servlet-errors"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="handling-servlet-errors">Handling Servlet Errors</h3>
+<h3 id="_handling_servlet_errors">Handling Servlet Errors</h3>
 <div class="paragraph">
 <p>Any number of exceptions can occur when a servlet executes. When an
 exception occurs, the web container generates a default page containing

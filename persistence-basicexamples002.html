@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIQST"></a><a id="the-order-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-order-application">The order Application</h2>
+<h2 id="_the_order_application">The order Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>order</code> application is a simple inventory and ordering application
@@ -101,8 +108,11 @@ omitted from the table names.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GIQRH"></a><a id="entity-relationships-in-the-order-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="entity-relationships-in-the-order-application">Entity Relationships in the order Application</h3>
+<h3 id="_entity_relationships_in_the_order_application">Entity Relationships in the order Application</h3>
 <div class="paragraph">
 <p>The <code>order</code> application demonstrates several types of entity
 relationships: self-referential, one-to-one, one-to-many, many-to-one,
@@ -128,8 +138,11 @@ Foreign Keys</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQQR"></a><a id="self-referential-relationships"></a></p>
+</div>
 <div class="sect3">
-<h4 id="self-referential-relationships">Self-Referential Relationships</h4>
+<h4 id="_self_referential_relationships">Self-Referential Relationships</h4>
 <div class="paragraph">
 <p>A self-referential relationship occurs between relationship fields in
 the same entity. <code>Part</code> has a field, <code>bomPart</code>, which has a one-to-many
@@ -162,9 +175,12 @@ public Collection&lt;Part&gt; getParts() {
 ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQSR"></a><a id="one-to-one-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="one-to-one-relationships">One-to-One Relationships</h4>
+<h4 id="_one_to_one_relationships">One-to-One Relationships</h4>
 <div class="paragraph">
 <p><code>Part</code> has a field, <code>vendorPart</code>, that has a one-to-one relationship
 with <code>VendorPart</code>'s <code>part</code> field. That is, each part has exactly one
@@ -204,9 +220,12 @@ public Part getPart() {
 <code>PARTREVISION</code> column refers to <code>PERSISTENCE_ORDER_PART</code>'s <code>REVISION</code>
 column.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQTJ"></a><a id="one-to-many-relationship-mapped-to-overlapping-primary-and-foreign-keys"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="one-to-many-relationship-mapped-to-overlapping-primary-and-foreign-keys">One-to-Many Relationship Mapped to Overlapping Primary and Foreign Keys</h4>
+<h4 id="_one_to_many_relationship_mapped_to_overlapping_primary_and_foreign_keys">One-to-Many Relationship Mapped to Overlapping Primary and Foreign Keys</h4>
 <div class="paragraph">
 <p><code>CustomerOrder</code> has a field, <code>lineItems</code>, that has a one-to-many
 relationship with <code>LineItem</code>'s field <code>customerOrder</code>. That is, each
@@ -245,9 +264,12 @@ public CustomerOrder getCustomerOrder() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQUD"></a><a id="unidirectional-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="unidirectional-relationships">Unidirectional Relationships</h4>
+<h4 id="_unidirectional_relationships">Unidirectional Relationships</h4>
 <div class="paragraph">
 <p><code>LineItem</code> has a field, <code>vendorPart</code>, that has a unidirectional
 many-to-one relationship with <code>VendorPart</code>. That is, there is no field
@@ -262,10 +284,13 @@ public VendorPart getVendorPart() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQQY"></a><a id="primary-keys-in-the-order-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="primary-keys-in-the-order-application">Primary Keys in the order Application</h3>
+<h3 id="_primary_keys_in_the_order_application">Primary Keys in the order Application</h3>
 <div class="paragraph">
 <p>The <code>order</code> application uses several types of primary keys:
 single-valued primary keys, generated primary keys, and compound primary
@@ -284,8 +309,11 @@ keys.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQUV"></a><a id="generated-primary-keys"></a></p>
+</div>
 <div class="sect3">
-<h4 id="generated-primary-keys">Generated Primary Keys</h4>
+<h4 id="_generated_primary_keys">Generated Primary Keys</h4>
 <div class="paragraph">
 <p><code>VendorPart</code> uses a generated primary key value. That is, the
 application does not assign primary key values for the entities but
@@ -335,9 +363,12 @@ increment when allocating primary key values. In this case, each
 <p>The primary key field <code>vendorPartNumber</code> is of type <code>Long</code>, as the
 generated primary key&#8217;s field must be an integral type.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQUF"></a><a id="compound-primary-keys"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="compound-primary-keys">Compound Primary Keys</h4>
+<h4 id="_compound_primary_keys">Compound Primary Keys</h4>
 <div class="paragraph">
 <p>A compound primary key is made up of multiple fields and follows the
 requirements described in <a href="persistence-intro002.html#BNBQF">Primary
@@ -523,10 +554,13 @@ public class Part implements Serializable {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQTL"></a><a id="entity-mapped-to-more-than-one-database-table"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="entity-mapped-to-more-than-one-database-table">Entity Mapped to More Than One Database Table</h3>
+<h3 id="_entity_mapped_to_more_than_one_database_table">Entity Mapped to More Than One Database Table</h3>
 <div class="paragraph">
 <p><code>Part</code>'s fields map to more than one database table:
 <code>PERSISTENCE_ORDER_PART</code> and <code>PERSISTENCE_ORDER_PART_DETAIL</code>. The
@@ -561,9 +595,12 @@ table the column refers to. In this case, the primary key column names
 for both <code>PERSISTENCE_ORDER_PART_DETAIL</code> and <code>PERSISTENCE_ORDER_PART</code>
 are the same: <code>PARTNUMBER</code> and <code>REVISION</code>, respectively.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQUE"></a><a id="cascade-operations-in-the-order-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="cascade-operations-in-the-order-application">Cascade Operations in the order Application</h3>
+<h3 id="_cascade_operations_in_the_order_application">Cascade Operations in the order Application</h3>
 <div class="paragraph">
 <p>Entities that have relationships to other entities often have
 dependencies on the existence of the other entity in the relationship.
@@ -609,9 +646,12 @@ public CustomerOrder getCustomerOrder() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQSC"></a><a id="blob-and-clob-database-types-in-the-order-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="blob-and-clob-database-types-in-the-order-application">BLOB and CLOB Database Types in the order Application</h3>
+<h3 id="_blob_and_clob_database_types_in_the_order_application">BLOB and CLOB Database Types in the order Application</h3>
 <div class="paragraph">
 <p>The <code>PARTDETAIL</code> table in the database has a column, <code>DRAWING</code>, of type
 <code>BLOB</code>. <code>BLOB</code> stands for binary large objects, which are used for
@@ -649,9 +689,12 @@ public String getSpecification() {
 <p>Both of these fields use the <code>@Column</code> annotation and set the <code>table</code>
 element to the secondary table.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQUM"></a><a id="temporal-types-in-the-order-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="temporal-types-in-the-order-application">Temporal Types in the order Application</h3>
+<h3 id="_temporal_types_in_the_order_application">Temporal Types in the order Application</h3>
 <div class="paragraph">
 <p>The <code>CustomerOrder.lastUpdate</code> persistent property, which is of type
 <code>java.util.Date</code>, is mapped to the
@@ -685,9 +728,12 @@ public Date getLastUpdate() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQQV"></a><a id="managing-the-order-applications-entities"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="managing-the-order-applications-entities">Managing the order Application&#8217;s Entities</h3>
+<h3 id="_managing_the_order_application_s_entities">Managing the order Application&#8217;s Entities</h3>
 <div class="paragraph">
 <p>The <code>RequestBean</code> stateful session bean contains the business logic and
 manages the entities of <code>order</code>. <code>RequestBean</code> uses the
@@ -706,8 +752,11 @@ private EntityManager em;</code></pre>
 the container takes care of all the transactions involved in managing
 <code>order</code>'s entities.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQRR"></a><a id="creating-entities"></a></p>
+</div>
 <div class="sect3">
-<h4 id="creating-entities">Creating Entities</h4>
+<h4 id="_creating_entities">Creating Entities</h4>
 <div class="paragraph">
 <p>The <code>RequestBean.createPart</code> business method creates a new <code>Part</code>
 entity. The <code>EntityManager.persist</code> method is used to persist the newly
@@ -732,9 +781,12 @@ deployed. The <code>createData</code> method is annotated with <code>@PostConstr
 creates the initial entities used by <code>order</code> by calling <code>RequestBean</code>'s
 business methods.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQQC"></a><a id="finding-entities"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="finding-entities">Finding Entities</h4>
+<h4 id="_finding_entities">Finding Entities</h4>
 <div class="paragraph">
 <p>The <code>RequestBean.getOrderPrice</code> business method returns the price of a
 given order based on the <code>orderId</code>. The <code>EntityManager.find</code> method is
@@ -749,9 +801,12 @@ used to retrieve the entity from the database:</p>
 <p>The first argument of <code>EntityManager.find</code> is the entity class, and the
 second is the primary key.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQUK"></a><a id="setting-entity-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="setting-entity-relationships">Setting Entity Relationships</h4>
+<h4 id="_setting_entity_relationships">Setting Entity Relationships</h4>
 <div class="paragraph">
 <p>The <code>RequestBean.createVendorPart</code> business method creates a
 <code>VendorPart</code> associated with a particular <code>Vendor</code>. The
@@ -776,9 +831,12 @@ vendor.addVendorPart(vendorPart);
 vendorPart.setVendor(vendor);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQSV"></a><a id="using-queries"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-queries">Using Queries</h4>
+<h4 id="_using_queries">Using Queries</h4>
 <div class="paragraph">
 <p>The <code>RequestBean.adjustOrderDiscount</code> business method updates the
 discount applied to all orders. This method uses the <code>findAllOrders</code>
@@ -838,9 +896,12 @@ the named parameter <code>id</code> to the value of <code>vendorId</code>, the p
 <p>The <code>Query.getSingleResult</code> method is used for this query because the
 query returns a single value.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQTW"></a><a id="removing-entities"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="removing-entities">Removing Entities</h4>
+<h4 id="_removing_entities">Removing Entities</h4>
 <div class="paragraph">
 <p>The <code>RequestBean.removeOrder</code> business method deletes a given order from
 the database. This method uses the <code>EntityManager.remove</code> method to
@@ -852,10 +913,13 @@ delete the entity from the database:</p>
 em.remove(order);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQUP"></a><a id="running-the-order-example"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-order-example">Running the order Example</h3>
+<h3 id="_running_the_order_example">Running the order Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>order</code> application. First, you will create the database tables
@@ -874,8 +938,11 @@ in Apache Derby.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQSG"></a><a id="to-run-the-order-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-order-example-using-netbeans-ide">To Run the order Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_order_example_using_netbeans_ide">To Run the order Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -918,9 +985,12 @@ Stopping Apache Derby</a>.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GIQTY"></a><a id="to-run-the-order-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-order-example-using-maven">To Run the order Example Using Maven</h4>
+<h4 id="_to_run_the_order_example_using_maven">To Run the order Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

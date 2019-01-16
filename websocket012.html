@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABCDBBC"></a><a id="the-websocketbot-example-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-websocketbot-example-application">The websocketbot Example Application</h2>
+<h2 id="_the_websocketbot_example_application">The websocketbot Example Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>websocketbot</code> example application, located in the
@@ -75,8 +82,11 @@ always available in the chat room.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHICIDE"></a><a id="architecture-of-the-websocketbot-example-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="architecture-of-the-websocketbot-example-application">Architecture of the websocketbot Example Application</h3>
+<h3 id="_architecture_of_the_websocketbot_example_application">Architecture of the websocketbot Example Application</h3>
 <div class="paragraph">
 <p>The <code>websocketbot</code> example application consists of the following
 elements:</p>
@@ -114,8 +124,11 @@ chat room</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHDAEHF"></a><a id="the-cdi-bean"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-cdi-bean">The CDI Bean</h4>
+<h4 id="_the_cdi_bean">The CDI Bean</h4>
 <div class="paragraph">
 <p>The CDI bean (<code>BotBean</code>) is a Java class that contains the <code>respond</code>
 method. This method compares the incoming chat message with a set of
@@ -129,9 +142,12 @@ public class BotBean {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHJJJHG"></a><a id="the-websocket-endpoint"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-websocket-endpoint">The WebSocket Endpoint</h4>
+<h4 id="_the_websocket_endpoint">The WebSocket Endpoint</h4>
 <div class="paragraph">
 <p>The WebSocket endpoint (<code>BotEndpoint</code>) is an annotated endpoint that
 performs the following functions:</p>
@@ -268,9 +284,12 @@ has been declared <code>synchronized</code>.</p>
 Utilities for Java EE"</a> for more information on the managed executor
 service and Concurrency Utilities for Java EE.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHFDGHG"></a><a id="the-application-messages"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-application-messages">The Application Messages</h4>
+<h4 id="_the_application_messages">The Application Messages</h4>
 <div class="paragraph">
 <p>The classes that represent application messages (<code>Message</code>,
 <code>ChatMessage</code>, <code>InfoMessage</code>, <code>JoinMessage</code>, and <code>UsersMessage</code>) contain
@@ -287,9 +306,12 @@ only properties and getter and setter methods. For example, the
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHGHHBD"></a><a id="the-encoder-classes"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-encoder-classes">The Encoder Classes</h4>
+<h4 id="_the_encoder_classes">The Encoder Classes</h4>
 <div class="paragraph">
 <p>The encoder classes convert application message objects into JSON text
 using the Java API for JSON Processing. For example, the
@@ -318,9 +340,12 @@ public class ChatMessageEncoder implements Encoder.Text&lt;ChatMessage&gt; {
 <p>See <a href="jsonp.html#GLRBB">Chapter 20</a>, <a href="jsonp.html#GLRBB">JSON
 Processing</a> for more information on the Java API for JSON Processing.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHHFICG"></a><a id="the-message-decoder"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-message-decoder">The Message Decoder</h4>
+<h4 id="_the_message_decoder">The Message Decoder</h4>
 <div class="paragraph">
 <p>The message decoder (<code>MessageDecoder</code>) class converts WebSocket text
 messages into application messages by parsing JSON text. It is
@@ -372,9 +397,12 @@ public class MessageDecoder implements Decoder.Text&lt;Message&gt; {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHGDBGF"></a><a id="the-html-page"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-html-page">The HTML Page</h4>
+<h4 id="_the_html_page">The HTML Page</h4>
 <div class="paragraph">
 <p>The HTML page (<code>index.html</code>) contains a field for the user name. After
 the user types a name and clicks Join, three text areas are available:
@@ -388,10 +416,13 @@ endpoint, send messages, and designate callback methods. The WebSocket
 API is supported by most modern browsers and is widely used for web
 client development with HTML5.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHHJHDB"></a><a id="running-the-websocketbot-example-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-websocketbot-example-application">Running the websocketbot Example Application</h3>
+<h3 id="_running_the_websocketbot_example_application">Running the websocketbot Example Application</h3>
 <div class="paragraph">
 <p>This section describes how to run the <code>websocketbot</code> example application
 using NetBeans IDE and from the command line.</p>
@@ -414,8 +445,11 @@ Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHFDDGE"></a><a id="to-run-the-websocketbot-example-application-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-websocketbot-example-application-using-netbeans-ide">To Run the websocketbot Example Application Using NetBeans IDE</h4>
+<h4 id="_to_run_the_websocketbot_example_application_using_netbeans_ide">To Run the websocketbot Example Application Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -460,9 +494,12 @@ more information.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CIHEDEHB"></a><a id="to-run-the-websocketbot-example-application-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-websocketbot-example-application-using-maven">To Run the websocketbot Example Application Using Maven</h4>
+<h4 id="_to_run_the_websocketbot_example_application_using_maven">To Run the websocketbot Example Application Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -500,9 +537,12 @@ more information.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BABDDAAG"></a><a id="to-test-the-websocketbot-example-application"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-test-the-websocketbot-example-application">To Test the websocketbot Example Application</h4>
+<h4 id="_to_test_the_websocketbot_example_application">To Test the websocketbot Example Application</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

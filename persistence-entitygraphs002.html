@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABCJBCG"></a><a id="entity-graph-basics"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="entity-graph-basics">Entity Graph Basics</h2>
+<h2 id="_entity_graph_basics">Entity Graph Basics</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You can create entity graphs statically by using annotations or a
@@ -69,8 +76,11 @@ eagerly fetched during a <code>find</code> or query operation. The primary key a
 version fields of the entity class are always fetched and do not need to
 be explicitly added to an entity graph.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref184"></a><a id="the-default-entity-graph"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-default-entity-graph">The Default Entity Graph</h3>
+<h3 id="_the_default_entity_graph">The Default Entity Graph</h3>
 <div class="paragraph">
 <p>By default, all fields in an entity are fetched lazily unless the
 <code>fetch</code> attribute of the entity metadata is set to
@@ -104,9 +114,12 @@ public class EmailMessage implements Serializable {
 <code>subject</code>, and <code>sender</code> fields, but not the <code>body</code> or <code>attachments</code>
 fields.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref185"></a><a id="using-entity-graphs-in-persistence-operations"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-entity-graphs-in-persistence-operations">Using Entity Graphs in Persistence Operations</h3>
+<h3 id="_using_entity_graphs_in_persistence_operations">Using Entity Graphs in Persistence Operations</h3>
 <div class="paragraph">
 <p>Entity graphs are used by creating an instance of the
 <code>javax.persistence.EntityGraph</code> interface by calling either
@@ -137,8 +150,11 @@ name.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABGEFCG"></a><a id="fetch-graphs"></a></p>
+</div>
 <div class="sect3">
-<h4 id="fetch-graphs">Fetch Graphs</h4>
+<h4 id="_fetch_graphs">Fetch Graphs</h4>
 <div class="paragraph">
 <p>To specify a fetch graph, set the <code>javax.persistence.fetchgraph</code>
 property when you execute an <code>EntityManager.find</code> or query operation. A
@@ -159,9 +175,12 @@ props.put("javax.persistence.fetchgraph", eg);
 EmailMessage message = em.find(EmailMessage.class, id, props);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BABHJBHG"></a><a id="load-graphs"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="load-graphs">Load Graphs</h4>
+<h4 id="_load_graphs">Load Graphs</h4>
 <div class="paragraph">
 <p>To specify a load graph, set the <code>javax.persistence.loadgraph</code> property
 when you execute an <code>EntityManager.find</code> or query operation. A load

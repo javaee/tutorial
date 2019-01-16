@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBXJ"></a><a id="working-with-realms-users-groups-and-roles"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="working-with-realms-users-groups-and-roles">Working with Realms, Users, Groups, and Roles</h2>
+<h2 id="_working_with_realms_users_groups_and_roles">Working with Realms, Users, Groups, and Roles</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You often need to protect resources to ensure that only authorized users
@@ -107,8 +114,11 @@ discussed in <a href="#BNBXV">Mapping Roles to Users and Groups</a>.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNBXK"></a><a id="what-are-realms-users-groups-and-roles"></a></p>
+</div>
 <div class="sect2">
-<h3 id="what-are-realms-users-groups-and-roles">What Are Realms, Users, Groups, and Roles?</h3>
+<h3 id="_what_are_realms_users_groups_and_roles">What Are Realms, Users, Groups, and Roles?</h3>
 <div class="paragraph">
 <p>A realm is a security policy domain defined for a web or application
 server. A realm contains a collection of users, who may or may not be
@@ -141,8 +151,11 @@ Roles</a>.</p>
 <p>The following sections provide more information on realms, users,
 groups, and roles.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBXM"></a><a id="what-is-a-realm"></a></p>
+</div>
 <div class="sect3">
-<h4 id="what-is-a-realm">What Is a Realm?</h4>
+<h4 id="_what_is_a_realm">What Is a Realm?</h4>
 <div class="paragraph">
 <p>The protected resources on a server can be partitioned into a set of
 protection spaces, each with its own authentication scheme and/or
@@ -182,9 +195,12 @@ Administration Console to manage users in this realm in the same way you
 manage users in the <code>file</code> realm. For more information, see
 <a href="#BNBXR">Managing Users and Groups in GlassFish Server</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBXN"></a><a id="what-is-a-user"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="what-is-a-user">What Is a User?</h4>
+<h4 id="_what_is_a_user">What Is a User?</h4>
 <div class="paragraph">
 <p>A user is an individual or application program identity that has been
 defined in GlassFish Server. In a web application, a user can have
@@ -201,9 +217,12 @@ operating system. The Java EE server authentication service is not
 connected to the security mechanism of the operating system. The two
 security services manage users that belong to different realms.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBXO"></a><a id="what-is-a-group"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="what-is-a-group">What Is a Group?</h4>
+<h4 id="_what_is_a_group">What Is a Group?</h4>
 <div class="paragraph">
 <p>A group is a set of authenticated users, classified by common traits,
 defined in GlassFish Server. A Java EE user of the <code>file</code> realm can
@@ -220,18 +239,24 @@ access of large numbers of users.</p>
 is designated for the entire GlassFish Server, whereas a role is
 associated only with a specific application in GlassFish Server.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBXP"></a><a id="what-is-a-role"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="what-is-a-role">What Is a Role?</h4>
+<h4 id="_what_is_a_role">What Is a Role?</h4>
 <div class="paragraph">
 <p>A role is an abstract name for the permission to access a particular set
 of resources in an application. A role can be compared to a key that can
 open a lock. Many people might have a copy of the key. The lock doesn&#8217;t
 care who you are, only that you have the right key.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBXQ"></a><a id="some-other-terminology"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="some-other-terminology">Some Other Terminology</h4>
+<h4 id="_some_other_terminology">Some Other Terminology</h4>
 <div class="paragraph">
 <p>The following terminology is also used to describe the security
 requirements of the Java EE platform.</p>
@@ -263,10 +288,13 @@ principal that allows its credential to be used.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBXR"></a><a id="managing-users-and-groups-in-glassfish-server"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-users-and-groups-in-glassfish-server">Managing Users and Groups in GlassFish Server</h3>
+<h3 id="_managing_users_and_groups_in_glassfish_server">Managing Users and Groups in GlassFish Server</h3>
 <div class="paragraph">
 <p>Follow these steps for managing users before you run the tutorial
 examples.</p>
@@ -281,8 +309,11 @@ examples.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBXS"></a><a id="to-add-users-to-glassfish-server"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-add-users-to-glassfish-server">To Add Users to GlassFish Server</h4>
+<h4 id="_to_add_users_to_glassfish_server">To Add Users to GlassFish Server</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -368,10 +399,13 @@ without saving.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNBXU"></a><a id="setting-up-security-roles"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-up-security-roles">Setting Up Security Roles</h3>
+<h3 id="_setting_up_security_roles">Setting Up Security Roles</h3>
 <div class="paragraph">
 <p>When you design an enterprise bean or web component, you should always
 think about the kinds of users who will access the component. For
@@ -456,9 +490,12 @@ has declared what roles are authorized to access protected parts of an
 application, the next step is to map the security role to the name of a
 user, or principal.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBXV"></a><a id="mapping-roles-to-users-and-groups"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="mapping-roles-to-users-and-groups">Mapping Roles to Users and Groups</h3>
+<h3 id="_mapping_roles_to_users_and_groups">Mapping Roles to Users and Groups</h3>
 <div class="paragraph">
 <p>When you are developing a Java EE application, you don&#8217;t need to know
 what categories of users have been defined for the realm in which the

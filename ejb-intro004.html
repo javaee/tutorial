@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIPJF"></a><a id="accessing-enterprise-beans"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="accessing-enterprise-beans">Accessing Enterprise Beans</h2>
+<h2 id="_accessing_enterprise_beans">Accessing Enterprise Beans</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -108,8 +115,11 @@ changes in the enterprise beans.</p>
 should, but are not required to, implement their business interface or
 interfaces.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIRFL"></a><a id="using-enterprise-beans-in-clients"></a></p>
+</div>
 <div class="sect2">
-<h3 id="using-enterprise-beans-in-clients">Using Enterprise Beans in Clients</h3>
+<h3 id="_using_enterprise_beans_in_clients">Using Enterprise Beans in Clients</h3>
 <div class="paragraph">
 <p>The client of an enterprise bean obtains a reference to an instance of
 an enterprise bean through either dependency injection, using Java
@@ -129,8 +139,11 @@ as Java SE applications, must perform an explicit lookup. JNDI supports
 a global syntax for identifying Java EE components to simplify this
 explicit lookup.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIRGN"></a><a id="portable-jndi-syntax"></a></p>
+</div>
 <div class="sect3">
-<h4 id="portable-jndi-syntax">Portable JNDI Syntax</h4>
+<h4 id="_portable_jndi_syntax">Portable JNDI Syntax</h4>
 <div class="paragraph">
 <p>Three JNDI namespaces are used for portable JNDI lookups: <code>java:global</code>,
 <code>java:module</code>, and <code>java:app</code>.</p>
@@ -191,10 +204,13 @@ application archive <code>myApp.war</code>, the module name is <code>myApp</code
 portable JNDI name is <code>java:module/MyBean</code>. An equivalent JNDI name
 using the <code>java:global</code> namespace is <code>java:global/myApp/MyBean</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPIZ"></a><a id="deciding-on-remote-or-local-access"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deciding-on-remote-or-local-access">Deciding on Remote or Local Access</h3>
+<h3 id="_deciding_on_remote_or_local_access">Deciding on Remote or Local Access</h3>
 <div class="paragraph">
 <p>When you design a Java EE application, one of the first decisions you
 make is the type of client access allowed by the enterprise beans:
@@ -257,9 +273,12 @@ or the bean class must explicitly designate the business interfaces by
 using the <code>@Remote</code> and <code>@Local</code> annotations. The same business
 interface cannot be both a local and a remote business interface.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPMZ"></a><a id="local-clients"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="local-clients">Local Clients</h3>
+<h3 id="_local_clients">Local Clients</h3>
 <div class="paragraph">
 <p>A local client has these characteristics.</p>
 </div>
@@ -331,8 +350,11 @@ public class BeanName implements InterfaceName  { ... }</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPSC"></a><a id="accessing-local-enterprise-beans-using-the-no-interface-view"></a></p>
+</div>
 <div class="sect3">
-<h4 id="accessing-local-enterprise-beans-using-the-no-interface-view">Accessing Local Enterprise Beans Using the No-Interface View</h4>
+<h4 id="_accessing_local_enterprise_beans_using_the_no_interface_view">Accessing Local Enterprise Beans Using the No-Interface View</h4>
 <div class="paragraph">
 <p>Client access to an enterprise bean that exposes a local, no-interface
 view is accomplished through either dependency injection or JNDI lookup.</p>
@@ -367,9 +389,12 @@ through JNDI lookup, use the <code>javax.naming.InitialContext</code> interface&
 <p>Clients do not use the <code>new</code> operator to obtain a new instance of an
 enterprise bean that uses a no-interface view.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPSE"></a><a id="accessing-local-enterprise-beans-that-implement-business-interfaces"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="accessing-local-enterprise-beans-that-implement-business-interfaces">Accessing Local Enterprise Beans That Implement Business Interfaces</h4>
+<h4 id="_accessing_local_enterprise_beans_that_implement_business_interfaces">Accessing Local Enterprise Beans That Implement Business Interfaces</h4>
 <div class="paragraph">
 <p>Client access to enterprise beans that implement local business
 interfaces is accomplished through either dependency injection or JNDI
@@ -401,10 +426,13 @@ interface&#8217;s <code>lookup</code> method:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPIU"></a><a id="remote-clients"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="remote-clients">Remote Clients</h3>
+<h3 id="_remote_clients">Remote Clients</h3>
 <div class="paragraph">
 <p>A remote client of an enterprise bean has the following traits.</p>
 </div>
@@ -500,9 +528,12 @@ interface&#8217;s <code>lookup</code> method:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIPKD"></a><a id="web-service-clients"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="web-service-clients">Web Service Clients</h3>
+<h3 id="_web_service_clients">Web Service Clients</h3>
 <div class="paragraph">
 <p>A web service client can access a Java EE application in two ways.
 First, the client can access a web service created with JAX-WS. (For
@@ -533,16 +564,22 @@ exposed to web service clients.</p>
 <p>For a code sample, see <a href="ejb-basicexamples004.html#BNBOR">A Web Service
 Example: helloservice</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPLY"></a><a id="method-parameters-and-access"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="method-parameters-and-access">Method Parameters and Access</h3>
+<h3 id="_method_parameters_and_access">Method Parameters and Access</h3>
 <div class="paragraph">
 <p>The type of access affects the parameters of the bean methods that are
 called by clients. The following sections apply not only to method
 parameters but also to method return values.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPLX"></a><a id="isolation"></a></p>
+</div>
 <div class="sect3">
-<h4 id="isolation">Isolation</h4>
+<h4 id="_isolation">Isolation</h4>
 <div class="paragraph">
 <p>The parameters of remote calls are more isolated than those of local
 calls. With remote calls, the client and the bean operate on different
@@ -561,9 +598,12 @@ components, replacing the local calls with remote ones.</p>
 <p>As with remote clients, web service clients operate on different copies
 of parameters than does the bean that implements the web service.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPKV"></a><a id="granularity-of-accessed-data"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="granularity-of-accessed-data">Granularity of Accessed Data</h4>
+<h4 id="_granularity_of_accessed_data">Granularity of Accessed Data</h4>
 <div class="paragraph">
 <p>Because remote calls are likely to be slower than local calls, the
 parameters in remote methods should be relatively coarse-grained. A

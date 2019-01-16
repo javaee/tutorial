@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBWK"></a><a id="overview-of-java-ee-security"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="overview-of-java-ee-security">Overview of Java EE Security</h2>
+<h2 id="_overview_of_java_ee_security">Overview of Java EE Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Every enterprise that has either sensitive resources that can be
@@ -137,8 +144,11 @@ the Java EE security API, and provides examples.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBWL"></a><a id="a-simple-application-security-walkthrough"></a></p>
+</div>
 <div class="sect2">
-<h3 id="a-simple-application-security-walkthrough">A Simple Application Security Walkthrough</h3>
+<h3 id="_a_simple_application_security_walkthrough">A Simple Application Security Walkthrough</h3>
 <div class="paragraph">
 <p>The security behavior of a Java EE environment may be better understood
 by examining what happens in a simple application with a web client, a
@@ -150,8 +160,11 @@ Specification, the web client relies on the web server to act as its
 authentication proxy by collecting user authentication data from the
 client and using it to establish an authenticated session.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWM"></a><a id="step-1-initial-request"></a></p>
+</div>
 <div class="sect3">
-<h4 id="step-1-initial-request">Step 1: Initial Request</h4>
+<h4 id="_step_1_initial_request">Step 1: Initial Request</h4>
 <div class="paragraph">
 <p>In the first step of this example, the web client requests the main
 application URL. This action is shown in <a href="#BNBWN">Figure 50-1</a>.</p>
@@ -168,9 +181,12 @@ and invokes the appropriate authentication mechanism for this resource.
 For more information on these mechanisms, see
 <a href="security-intro002.html#BNBWY">Security Mechanisms</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWO"></a><a id="step-2-initial-authentication"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="step-2-initial-authentication">Step 2: Initial Authentication</h4>
+<h4 id="_step_2_initial_authentication">Step 2: Initial Authentication</h4>
 <div class="paragraph">
 <p>The web server returns a form that the web client uses to collect
 authentication data, such as user name and password, from the user. The
@@ -184,9 +200,12 @@ server sets a credential for the user.</p>
 <div class="title"><strong>Figure 50-2 Initial Authentication</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_040.png" alt="Diagram of initial authentication: server sends form to client, which sends authentication data to server for validation"></span></p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWQ"></a><a id="step-3-url-authorization"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="step-3-url-authorization">Step 3: URL Authorization</h4>
+<h4 id="_step_3_url_authorization">Step 3: URL Authorization</h4>
 <div class="paragraph">
 <p>The credential is used for future determinations of whether the user is
 authorized to access restricted resources it may request. The web server
@@ -207,9 +226,12 @@ the web server is able to map the user to a role. A "not authorized"
 outcome is reached if the web server is unable to map the user to any of
 the permitted roles.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWS"></a><a id="step-4-fulfilling-the-original-request"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="step-4-fulfilling-the-original-request">Step 4: Fulfilling the Original Request</h4>
+<h4 id="_step_4_fulfilling_the_original_request">Step 4: Fulfilling the Original Request</h4>
 <div class="paragraph">
 <p>If the user is authorized, the web server returns the result of the
 original URL request, as shown in <a href="#BNBWT">Figure 50-4</a>.</p>
@@ -225,9 +247,12 @@ component of the application. See
 <a href="security-webtier.html#BNCAS">Chapter 51, "Getting Started Securing
 Web Applications"</a> for more information on protecting web applications.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWU"></a><a id="step-5-invoking-enterprise-bean-business-methods"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="step-5-invoking-enterprise-bean-business-methods">Step 5: Invoking Enterprise Bean Business Methods</h4>
+<h4 id="_step_5_invoking_enterprise_bean_business_methods">Step 5: Invoking Enterprise Bean Business Methods</h4>
 <div class="paragraph">
 <p>The web page performs the remote method call to the enterprise bean,
 using the user&#8217;s credential to establish a secure association between
@@ -262,10 +287,13 @@ enterprise bean method. The result of the bean&#8217;s execution of the call
 is returned to the web page and ultimately to the user by the web server
 and the web client.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBWW"></a><a id="features-of-a-security-mechanism"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="features-of-a-security-mechanism">Features of a Security Mechanism</h3>
+<h3 id="_features_of_a_security_mechanism">Features of a Security Mechanism</h3>
 <div class="paragraph">
 <p>A properly implemented security mechanism will provide the following
 functionality:</p>
@@ -302,9 +330,12 @@ affect quality of service</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBWX"></a><a id="characteristics-of-application-security"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="characteristics-of-application-security">Characteristics of Application Security</h3>
+<h3 id="_characteristics_of_application_security">Characteristics of Application Security</h3>
 <div class="paragraph">
 <p>Java EE applications consist of components that can contain both
 protected and unprotected resources. Often, you need to protect

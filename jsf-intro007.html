@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAQQ"></a><a id="the-lifecycle-of-a-javaserver-faces-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-lifecycle-of-a-javaserver-faces-application">The Lifecycle of a JavaServer Faces Application</h2>
+<h2 id="_the_lifecycle_of_a_javaserver_faces_application">The Lifecycle of a JavaServer Faces Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The lifecycle of an application refers to the various stages of
@@ -95,8 +102,11 @@ two main phases of a JavaServer Faces web application, is introduced in
 <a href="jsf-intro004.html#GJAAM">A Simple JavaServer Faces Application</a>. This
 section examines the JavaServer Faces lifecycle in more detail.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLPRC"></a><a id="overview-of-the-javaserver-faces-lifecycle"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-the-javaserver-faces-lifecycle">Overview of the JavaServer Faces Lifecycle</h3>
+<h3 id="_overview_of_the_javaserver_faces_lifecycle">Overview of the JavaServer Faces Lifecycle</h3>
 <div class="paragraph">
 <p>The lifecycle of a JavaServer Faces application begins when the client
 makes an HTTP request for a page and ends when the server responds with
@@ -209,9 +219,12 @@ following subphases:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAQS"></a><a id="restore-view-phase"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="restore-view-phase">Restore View Phase</h3>
+<h3 id="_restore_view_phase">Restore View Phase</h3>
 <div class="paragraph">
 <p>When a request for a JavaServer Faces page is made, usually by an
 action, such as when a link or a button component is clicked, the
@@ -237,9 +250,12 @@ page already exists in the <code>FacesContext</code> instance. During this phase
 the JavaServer Faces implementation restores the view by using the state
 information saved on the client or the server.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAQT"></a><a id="apply-request-values-phase"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="apply-request-values-phase">Apply Request Values Phase</h3>
+<h3 id="_apply_request_values_phase">Apply Request Values Phase</h3>
 <div class="paragraph">
 <p>After the component tree is restored during a postback request, each
 component in the tree extracts its new value from the request parameters
@@ -280,9 +296,12 @@ and messages and events have been queued.</p>
 context is retrieved from the <code>FacesContext</code>, and the partial processing
 method is applied.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJSBP"></a><a id="process-validations-phase"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="process-validations-phase">Process Validations Phase</h3>
+<h3 id="_process_validations_phase">Process Validations Phase</h3>
 <div class="paragraph">
 <p>During this phase, the JavaServer Faces implementation processes all
 validators registered on the components in the tree by using its
@@ -320,9 +339,12 @@ implementation broadcasts them to interested listeners.</p>
 context is retrieved from the <code>FacesContext</code>, and the partial processing
 method is applied.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAQV"></a><a id="update-model-values-phase"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="update-model-values-phase">Update Model Values Phase</h3>
+<h3 id="_update_model_values_phase">Update Model Values Phase</h3>
 <div class="paragraph">
 <p>After the JavaServer Faces implementation determines that the data is
 valid, it traverses the component tree and sets the corresponding
@@ -354,9 +376,12 @@ implementation broadcasts them to interested listeners.</p>
 context is retrieved from the <code>FacesContext</code>, and the partial processing
 method is applied.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAQW"></a><a id="invoke-application-phase"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="invoke-application-phase">Invoke Application Phase</h3>
+<h3 id="_invoke_application_phase">Invoke Application Phase</h3>
 <div class="paragraph">
 <p>During this phase, the JavaServer Faces implementation handles any
 application-level events, such as submitting a form or linking to
@@ -377,9 +402,12 @@ events are broadcast to interested listeners.</p>
 <p>Finally, the JavaServer Faces implementation transfers control to the
 Render Response phase.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAQX"></a><a id="render-response-phase"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="render-response-phase">Render Response Phase</h3>
+<h3 id="_render_response_phase">Render Response Phase</h3>
 <div class="paragraph">
 <p>During this phase, JavaServer Faces builds the view and delegates
 authority to the appropriate resource for rendering the pages.</p>

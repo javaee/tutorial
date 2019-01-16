@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="CHDBEGIC"></a><a id="database-schema-creation"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="database-schema-creation">Database Schema Creation</h2>
+<h2 id="_database_schema_creation">Database Schema Creation</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The persistence provider can be configured to automatically create the
@@ -94,8 +101,11 @@ and load data from a provided script when the application is deployed:</p>
 &lt;/persistence&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref161"></a><a id="configuring-an-application-to-create-or-drop-database-tables"></a></p>
+</div>
 <div class="sect2">
-<h3 id="configuring-an-application-to-create-or-drop-database-tables">Configuring an Application to Create or Drop Database Tables</h3>
+<h3 id="_configuring_an_application_to_create_or_drop_database_tables">Configuring an Application to Create or Drop Database Tables</h3>
 <div class="paragraph">
 <p>The <code>javax.persistence.schema-generation.database.action</code> property is
 used to specify the action taken by the persistence provider when an
@@ -227,9 +237,12 @@ location of the script is relative to the root of the persistence unit:</p>
 called <code>create.sql</code> in the <code>META-INF/sql</code> directory relative to root of
 the persistence unit.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref166"></a><a id="loading-data-using-sql-scripts"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="loading-data-using-sql-scripts">Loading Data Using SQL Scripts</h3>
+<h3 id="_loading_data_using_sql_scripts">Loading Data Using SQL Scripts</h3>
 <div class="paragraph">
 <p>If you want to populate the database tables with data before the
 application loads, specify the location of a load script in the

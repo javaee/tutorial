@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAGM"></a><a id="maintaining-client-state"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="maintaining-client-state">Maintaining Client State</h2>
+<h2 id="_maintaining_client_state">Maintaining Client State</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Many applications require that a series of requests from a client be
@@ -63,17 +70,23 @@ HTTP is stateless. To support applications that need to maintain state,
 Java Servlet technology provides an API for managing sessions and allows
 several mechanisms for implementing sessions.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAGN"></a><a id="accessing-a-session"></a></p>
+</div>
 <div class="sect2">
-<h3 id="accessing-a-session">Accessing a Session</h3>
+<h3 id="_accessing_a_session">Accessing a Session</h3>
 <div class="paragraph">
 <p>Sessions are represented by an <code>HttpSession</code> object. You access a
 session by calling the <code>getSession</code> method of a request object. This
 method returns the current session associated with this request; or, if
 the request does not have a session, this method creates one.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNAGO"></a><a id="associating-objects-with-a-session"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="associating-objects-with-a-session">Associating Objects with a Session</h3>
+<h3 id="_associating_objects_with_a_session">Associating Objects with a Session</h3>
 <div class="paragraph">
 <p>You can associate object-valued attributes with a session by name. Such
 attributes are accessible by any web component that belongs to the same
@@ -102,9 +115,12 @@ storage. To receive this notification, your object must implement the
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAGQ"></a><a id="session-management"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="session-management">Session Management</h3>
+<h3 id="_session_management">Session Management</h3>
 <div class="paragraph">
 <p>Because an HTTP client has no way to signal that it no longer needs a
 session, each session has an associated timeout so that its resources
@@ -125,8 +141,11 @@ and remove any session data.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref100"></a><a id="to-set-the-timeout-period-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-set-the-timeout-period-using-netbeans-ide">To Set the Timeout Period Using NetBeans IDE</h4>
+<h4 id="_to_set_the_timeout_period_using_netbeans_ide">To Set the Timeout Period Using NetBeans IDE</h4>
 <div class="paragraph">
 <p>To set the timeout period in the deployment descriptor using NetBeans
 IDE, follow these steps.</p>
@@ -158,10 +177,13 @@ must pass before the session times out.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAGR"></a><a id="session-tracking"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="session-tracking">Session Tracking</h3>
+<h3 id="_session_tracking">Session Tracking</h3>
 <div class="paragraph">
 <p>To associate a session with a user, a web container can use several
 methods, all of which involve passing an identifier between the client

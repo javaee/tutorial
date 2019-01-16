@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBYL"></a><a id="securing-enterprise-beans"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="securing-enterprise-beans">Securing Enterprise Beans</h2>
+<h2 id="_securing_enterprise_beans">Securing Enterprise Beans</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Enterprise beans are Java EE components that implement EJB technology.
@@ -183,8 +190,11 @@ specification. This document can be downloaded from
 "Security Management," discusses security management for enterprise
 beans.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJGDI"></a><a id="securing-an-enterprise-bean-using-declarative-security"></a></p>
+</div>
 <div class="sect2">
-<h3 id="securing-an-enterprise-bean-using-declarative-security">Securing an Enterprise Bean Using Declarative Security</h3>
+<h3 id="_securing_an_enterprise_bean_using_declarative_security">Securing an Enterprise Bean Using Declarative Security</h3>
 <div class="paragraph">
 <p>Declarative security enables the application developer to specify which
 users are authorized to access which methods of the enterprise beans and
@@ -230,8 +240,11 @@ Roles to Users and Groups</a>.</p>
 declarative security to either secure an application or to create a
 security view to pass along to the deployer.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJGCQ"></a><a id="specifying-authorized-users-by-declaring-security-roles"></a></p>
+</div>
 <div class="sect3">
-<h4 id="specifying-authorized-users-by-declaring-security-roles">Specifying Authorized Users by Declaring Security Roles</h4>
+<h4 id="_specifying_authorized_users_by_declaring_security_roles">Specifying Authorized Users by Declaring Security Roles</h4>
 <div class="paragraph">
 <p>This section discusses how to use annotations to specify the method
 permissions for the methods of a bean class. For more information on
@@ -442,9 +455,12 @@ method <code>cMethod</code> have not been specified.</p>
 Instead, the annotations apply to methods of the superclass that are
 inherited by the subclass.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBYU"></a><a id="specifying-an-authentication-mechanism-and-secure-connection"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="specifying-an-authentication-mechanism-and-secure-connection">Specifying an Authentication Mechanism and Secure Connection</h4>
+<h4 id="_specifying_an_authentication_mechanism_and_secure_connection">Specifying an Authentication Mechanism and Secure Connection</h4>
 <div class="paragraph">
 <p>When method permissions are specified, basic user name/password
 authentication will be invoked by GlassFish Server.</p>
@@ -454,10 +470,13 @@ authentication will be invoked by GlassFish Server.</p>
 connection using SSL, specify this information in an application
 deployment descriptor.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJGCS"></a><a id="securing-an-enterprise-bean-programmatically"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="securing-an-enterprise-bean-programmatically">Securing an Enterprise Bean Programmatically</h3>
+<h3 id="_securing_an_enterprise_bean_programmatically">Securing an Enterprise Bean Programmatically</h3>
 <div class="paragraph">
 <p>Programmatic security, code that is embedded in a business method, is
 used to access a caller&#8217;s identity programmatically and uses this
@@ -612,9 +631,12 @@ during a particular time of day. An example application that uses the
 <a href="security-javaee003.html#BNCAA">The converter-secure Example: Securing
 an Enterprise Bean with Programmatic Security</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBYR"></a><a id="propagating-a-security-identity-run-as"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="propagating-a-security-identity-run-as">Propagating a Security Identity (Run-As)</h3>
+<h3 id="_propagating_a_security_identity_run_as">Propagating a Security Identity (Run-As)</h3>
 <div class="paragraph">
 <p>You can specify whether a caller&#8217;s security identity should be used for
 the execution of specified methods of an enterprise bean or whether a
@@ -665,8 +687,11 @@ interfaces, the message listener methods of a message-driven bean, the
 timeout method of an enterprise bean, and all internal methods of the
 bean that might be called in turn.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBZB"></a><a id="configuring-a-components-propagated-security-identity"></a></p>
+</div>
 <div class="sect3">
-<h4 id="configuring-a-components-propagated-security-identity">Configuring a Component&#8217;s Propagated Security Identity</h4>
+<h4 id="_configuring_a_component_s_propagated_security_identity">Configuring a Component&#8217;s Propagated Security Identity</h4>
 <div class="paragraph">
 <p>You can configure an enterprise bean&#8217;s run-as, or propagated, security
 identity by using the <code>@RunAs</code> annotation, which defines the role of the
@@ -692,9 +717,12 @@ public class Calculator {
 in GlassFish Server if the given roles are associated with more than one
 user principal.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBZC"></a><a id="trust-between-containers"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="trust-between-containers">Trust between Containers</h4>
+<h4 id="_trust_between_containers">Trust between Containers</h4>
 <div class="paragraph">
 <p>When an enterprise bean is designed so that either the original caller
 identity or a designated identity is used to call a target bean, the
@@ -715,10 +743,13 @@ calling container has propagated an authenticated security identity.</p>
 propagated from different containers. Therefore, you do not need to take
 any special steps to set up a trust relationship.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBZG"></a><a id="deploying-secure-enterprise-beans"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deploying-secure-enterprise-beans">Deploying Secure Enterprise Beans</h3>
+<h3 id="_deploying_secure_enterprise_beans">Deploying Secure Enterprise Beans</h3>
 <div class="paragraph">
 <p>The deployer is responsible for ensuring that an assembled application
 is secure after it has been deployed in the target operational

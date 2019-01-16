@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIQSQ"></a><a id="the-roster-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-roster-application">The roster Application</h2>
+<h2 id="_the_roster_application">The roster Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>roster</code> application maintains the team rosters for players in
@@ -91,8 +98,11 @@ omitted from the table names.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GIQSO"></a><a id="relationships-in-the-roster-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="relationships-in-the-roster-application">Relationships in the roster Application</h3>
+<h3 id="_relationships_in_the_roster_application">Relationships in the roster Application</h3>
 <div class="paragraph">
 <p>A recreational sports system has the following relationships.</p>
 </div>
@@ -126,8 +136,11 @@ between the <code>Player</code>, <code>Team</code>, and <code>League</code> enti
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQQK"></a><a id="the-many-to-many-relationship-in-roster"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-many-to-many-relationship-in-roster">The Many-To-Many Relationship in roster</h4>
+<h4 id="_the_many_to_many_relationship_in_roster">The Many-To-Many Relationship in roster</h4>
 <div class="paragraph">
 <p>The many-to-many relationship between <code>Player</code> and <code>Team</code> is specified
 by using the <code>@ManyToMany</code> annotation. In <code>Team.java</code>, the <code>@ManyToMany</code>
@@ -176,10 +189,13 @@ public Collection&lt;Team&gt; getTeams() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQRF"></a><a id="entity-inheritance-in-the-roster-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="entity-inheritance-in-the-roster-application">Entity Inheritance in the roster Application</h3>
+<h3 id="_entity_inheritance_in_the_roster_application">Entity Inheritance in the roster Application</h3>
 <div class="paragraph">
 <p>The <code>roster</code> application shows how to use entity inheritance, as
 described in <a href="persistence-intro003.html#BNBQN">Entity Inheritance</a>.</p>
@@ -262,9 +278,12 @@ different name for the discriminator column, decorate <code>League</code> with
 public abstract class League implements Serializable { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJJFL"></a><a id="criteria-queries-in-the-roster-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="criteria-queries-in-the-roster-application">Criteria Queries in the roster Application</h3>
+<h3 id="_criteria_queries_in_the_roster_application">Criteria Queries in the roster Application</h3>
 <div class="paragraph">
 <p>The <code>roster</code> application uses Criteria API queries, as opposed to the
 JPQL queries used in <code>order</code>. Criteria queries are Java programming
@@ -288,8 +307,11 @@ Methods</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJJEX"></a><a id="metamodel-classes-in-the-roster-application"></a></p>
+</div>
 <div class="sect3">
-<h4 id="metamodel-classes-in-the-roster-application">Metamodel Classes in the roster Application</h4>
+<h4 id="_metamodel_classes_in_the_roster_application">Metamodel Classes in the roster Application</h4>
 <div class="paragraph">
 <p>Metamodel classes model an entity&#8217;s attributes and are used by Criteria
 queries to navigate to an entity&#8217;s attributes. Each entity class in
@@ -315,9 +337,12 @@ public class Player_ {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJJFN"></a><a id="obtaining-a-criteriabuilder-instance-in-requestbean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="obtaining-a-criteriabuilder-instance-in-requestbean">Obtaining a CriteriaBuilder Instance in RequestBean</h4>
+<h4 id="_obtaining_a_criteriabuilder_instance_in_requestbean">Obtaining a CriteriaBuilder Instance in RequestBean</h4>
 <div class="paragraph">
 <p>The <code>CriteriaBuilder</code> interface defines methods to create criteria query
 objects and create expressions for modifying those query objects.
@@ -343,9 +368,12 @@ by calling <code>getCriteriaBuilder</code>. The <code>CriteriaBuilder</code> ins
 created in a <code>@PostConstruct</code> method to ensure that the <code>EntityManager</code>
 instance has been injected by the enterprise bean container.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJJFF"></a><a id="creating-criteria-queries-in-requestbeans-business-methods"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="creating-criteria-queries-in-requestbeans-business-methods">Creating Criteria Queries in RequestBean&#8217;s Business Methods</h4>
+<h4 id="_creating_criteria_queries_in_requestbean_s_business_methods">Creating Criteria Queries in RequestBean&#8217;s Business Methods</h4>
 <div class="paragraph">
 <p>Many of the business methods in <code>RequestBean</code> define Criteria queries.
 One business method, <code>getPlayersByPosition</code>, returns a list of players
@@ -407,10 +435,13 @@ the type of the query, in this case <code>Player</code>. This typed query object
 used to execute the query, which occurs when the <code>getResultList</code> method
 is called, and a <code>List&lt;Player&gt;</code> collection is returned.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQRX"></a><a id="automatic-table-generation-in-the-roster-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="automatic-table-generation-in-the-roster-application">Automatic Table Generation in the roster Application</h3>
+<h3 id="_automatic_table_generation_in_the_roster_application">Automatic Table Generation in the roster Application</h3>
 <div class="paragraph">
 <p>At deployment time, GlassFish Server will automatically drop and create
 the database tables used by <code>roster</code>. This is done by setting the
@@ -435,9 +466,12 @@ the database tables used by <code>roster</code>. This is done by setting the
 &lt;/persistence&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQUZ"></a><a id="running-the-roster-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-roster-example">Running the roster Example</h3>
+<h3 id="_running_the_roster_example">Running the roster Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>roster</code> application.</p>
@@ -455,8 +489,11 @@ run the <code>roster</code> application.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQUG"></a><a id="to-run-the-roster-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-roster-example-using-netbeans-ide">To Run the roster Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_roster_example_using_netbeans_ide">To Run the roster Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -524,9 +561,12 @@ P25 Frank Fletcher defender 399.0</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GIQSJ"></a><a id="to-run-the-roster-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-roster-example-using-maven">To Run the roster Example Using Maven</h4>
+<h4 id="_to_run_the_roster_example_using_maven">To Run the roster Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

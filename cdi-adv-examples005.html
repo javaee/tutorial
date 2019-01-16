@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKHPA"></a><a id="the-billpayment-example-using-events-and-interceptors"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-billpayment-example-using-events-and-interceptors">The billpayment Example: Using Events and Interceptors</h2>
+<h2 id="_the_billpayment_example_using_events_and_interceptors">The billpayment Example: Using Events and Interceptors</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>billpayment</code> example shows how to use both events and interceptors.</p>
@@ -87,8 +94,11 @@ directory.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDIBGDF"></a><a id="overview-of-the-billpayment-example"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-the-billpayment-example">Overview of the billpayment Example</h3>
+<h3 id="_overview_of_the_billpayment_example">Overview of the billpayment Example</h3>
 <div class="paragraph">
 <p>The example simulates paying an amount using a debit card or credit
 card. When the user chooses a payment method, the managed bean creates
@@ -99,9 +109,12 @@ listener handles the event using observer methods.</p>
 <p>The example also defines an interceptor that is set on a class and on
 two methods of another class.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHOK"></a><a id="the-paymentevent-event-class"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-paymentevent-event-class">The PaymentEvent Event Class</h3>
+<h3 id="_the_paymentevent_event_class">The PaymentEvent Event Class</h3>
 <div class="paragraph">
 <p>The event class, <code>event.PaymentEvent</code>, is a simple bean class that
 contains a no-argument constructor. It also has a <code>toString</code> method and
@@ -136,9 +149,12 @@ bean using <code>new</code> and then populated. For this reason, the CDI contain
 cannot intercept the creation of the bean, and hence it cannot allow
 interception of its getter and setter methods.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHRB"></a><a id="the-paymenthandler-event-listener"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-paymenthandler-event-listener">The PaymentHandler Event Listener</h3>
+<h3 id="_the_paymenthandler_event_listener">The PaymentHandler Event Listener</h3>
 <div class="paragraph">
 <p>The event listener, <code>listener.PaymentHandler</code>, contains two observer
 methods, one for each of the two event types:</p>
@@ -180,9 +196,12 @@ another component that would perform business logic on the payment.</p>
 <p>The <code>PaymentHandler</code> bean is annotated <code>@Logged</code> so that all its methods
 can be intercepted.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHRJ"></a><a id="the-billpayment-facelets-pages-and-managed-bean"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-billpayment-facelets-pages-and-managed-bean">The billpayment Facelets Pages and Managed Bean</h3>
+<h3 id="_the_billpayment_facelets_pages_and_managed_bean">The billpayment Facelets Pages and Managed Bean</h3>
 <div class="paragraph">
 <p>The <code>billpayment</code> example contains two Facelets pages, <code>index.xhtml</code> and
 the very simple <code>response.xhtml</code>. The body of <code>index.xhtml</code> looks like
@@ -350,9 +369,12 @@ expression to display the payment method:</p>
     &lt;/h:body&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKHRQ"></a><a id="the-loggedinterceptor-interceptor-class"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-loggedinterceptor-interceptor-class">The LoggedInterceptor Interceptor Class</h3>
+<h3 id="_the_loggedinterceptor_interceptor_class">The LoggedInterceptor Interceptor Class</h3>
 <div class="paragraph">
 <p>The interceptor class, <code>LoggedInterceptor</code>, and its interceptor binding,
 <code>Logged</code>, are both defined in the <code>interceptor</code> package. The <code>Logged</code>
@@ -417,9 +439,12 @@ annotated <code>@Logged</code>, so all their methods are intercepted. In
 <code>PaymentBean</code>, only the <code>pay</code> and <code>reset</code> methods are annotated
 <code>@Logged</code>, so only those methods are intercepted.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHPK"></a><a id="running-the-billpayment-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-billpayment-example">Running the billpayment Example</h3>
+<h3 id="_running_the_billpayment_example">Running the billpayment Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>billpayment</code> application.</p>
@@ -442,8 +467,11 @@ Using Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GKHQS"></a><a id="to-build-package-and-deploy-the-billpayment-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-billpayment-example-using-netbeans-ide">To Build, Package, and Deploy the billpayment Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_billpayment_example_using_netbeans_ide">To Build, Package, and Deploy the billpayment Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -479,9 +507,12 @@ it to GlassFish Server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GKHPX"></a><a id="to-build-package-and-deploy-the-billpayment-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-billpayment-example-using-maven">To Build, Package, and Deploy the billpayment Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_billpayment_example_using_maven">To Build, Package, and Deploy the billpayment Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -512,9 +543,12 @@ it to GlassFish Server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GKHPT"></a><a id="to-run-the-billpayment-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-billpayment-example">To Run the billpayment Example</h4>
+<h4 id="_to_run_the_billpayment_example">To Run the billpayment Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

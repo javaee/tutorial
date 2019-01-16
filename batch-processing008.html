@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BCGJHEHJ"></a><a id="the-webserverlog-example-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-webserverlog-example-application">The webserverlog Example Application</h2>
+<h2 id="_the_webserverlog_example_application">The webserverlog Example Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>webserverlog</code> example application, located in the
@@ -74,8 +81,11 @@ percentage of page views from tablet devices are product sales.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABCHDFB"></a><a id="architecture-of-the-webserverlog-example-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="architecture-of-the-webserverlog-example-application">Architecture of the webserverlog Example Application</h3>
+<h3 id="_architecture_of_the_webserverlog_example_application">Architecture of the webserverlog Example Application</h3>
 <div class="paragraph">
 <p>The <code>webserverlog</code> example application consists of the following
 elements:</p>
@@ -124,8 +134,11 @@ the job, and reads the results from a text file.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABFGCEC"></a><a id="the-job-definition-file"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-job-definition-file">The Job Definition File</h4>
+<h4 id="_the_job_definition_file">The Job Definition File</h4>
 <div class="paragraph">
 <p>The <code>webserverlog.xml</code> job definition file is located in the
 <code>WEB-INF/classes/META-INF/batch-jobs/</code> directory. The file specifies
@@ -191,9 +204,12 @@ with <code>@Named</code>.</p>
 <p>This step is a task step that specifies the batch artifact that
 implements it. This is the last step of the job.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABIHBFF"></a><a id="the-logline-and-logfilteredline-items"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-logline-and-logfilteredline-items">The LogLine and LogFilteredLine Items</h4>
+<h4 id="_the_logline_and_logfilteredline_items">The LogLine and LogFilteredLine Items</h4>
 <div class="paragraph">
 <p>The <code>LogLine</code> class represents entries in the web server log file and it
 is defined as follows:</p>
@@ -214,9 +230,12 @@ is defined as follows:</p>
 <p>The <code>LogFileteredLine</code> class is similar to this class but only has two
 fields: the IP address of the client and the URL.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref284"></a><a id="the-chunk-step-batch-artifacts"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-chunk-step-batch-artifacts">The Chunk Step Batch Artifacts</h4>
+<h4 id="_the_chunk_step_batch_artifacts">The Chunk Step Batch Artifacts</h4>
 <div class="paragraph">
 <p>The first step is composed of the <code>LogLineReader</code>, <code>LogLineProcessor</code>,
 and <code>LogFilteredLineWriter</code> batch artifacts.</p>
@@ -328,9 +347,12 @@ public void writeItems(List&lt;Object&gt; items) throws Exception {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BCGCCFAC"></a><a id="the-listener-batch-artifacts"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-listener-batch-artifacts">The Listener Batch Artifacts</h4>
+<h4 id="_the_listener_batch_artifacts">The Listener Batch Artifacts</h4>
 <div class="paragraph">
 <p>The <code>InfoJobListener</code> batch artifact implements a simple listener that
 writes log messages when the job starts and when it ends:</p>
@@ -370,9 +392,12 @@ public class InfoItemProcessListener implements ItemProcessListener {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref285"></a><a id="the-task-step-batch-artifact"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-task-step-batch-artifact">The Task Step Batch Artifact</h4>
+<h4 id="_the_task_step_batch_artifact">The Task Step Batch Artifact</h4>
 <div class="paragraph">
 <p>The task step is implemented by the <code>MobileBatchlet</code> artifact, which
 computes what percentage of the filtered log entries are purchases:</p>
@@ -399,9 +424,12 @@ public String process() throws Exception {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref286"></a><a id="the-javaserver-faces-pages"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-javaserver-faces-pages">The JavaServer Faces Pages</h4>
+<h4 id="_the_javaserver_faces_pages">The JavaServer Faces Pages</h4>
 <div class="paragraph">
 <p>The <code>index.xhtml</code> page contains a text area that shows the web server
 log. The page provides a button for the user to submit the batch job and
@@ -440,9 +468,12 @@ status of the batch job and displays the results when the job finishes:</p>
 &lt;/h:form&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref287"></a><a id="the-managed-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-managed-bean">The Managed Bean</h4>
+<h4 id="_the_managed_bean">The Managed Bean</h4>
 <div class="paragraph">
 <p>The <code>JsfBean</code> managed bean submits the job to the batch runtime, checks
 on the status of the job, and reads the results from a text file.</p>
@@ -475,10 +506,13 @@ public String getJobStatus() {
 <div class="paragraph">
 <p>The <code>showResults</code> method reads the results from a text file.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABFIHJA"></a><a id="running-the-webserverlog-example-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-webserverlog-example-application">Running the webserverlog Example Application</h3>
+<h3 id="_running_the_webserverlog_example_application">Running the webserverlog Example Application</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>webserverlog</code> example application.</p>
@@ -498,8 +532,11 @@ Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABHIJBE"></a><a id="to-run-the-webserverlog-example-application-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-webserverlog-example-application-using-netbeans-ide">To Run the webserverlog Example Application Using NetBeans IDE</h4>
+<h4 id="_to_run_the_webserverlog_example_application_using_netbeans_ide">To Run the webserverlog Example Application Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -540,9 +577,12 @@ the server; and launches a web browser window at the following URL:</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BABGACCD"></a><a id="to-run-the-webserverlog-example-application-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-webserverlog-example-application-using-maven">To Run the webserverlog Example Application Using Maven</h4>
+<h4 id="_to_run_the_webserverlog_example_application_using_maven">To Run the webserverlog Example Application Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

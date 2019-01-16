@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCFU"></a><a id="using-advanced-jms-features"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-advanced-jms-features">Using Advanced JMS Features</h2>
+<h2 id="_using_advanced_jms_features">Using Advanced JMS Features</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section explains how to use features of the JMS API to achieve the
@@ -112,8 +119,11 @@ differences are noted here and are explained in detail in
 <a href="jms-concepts005.html#BNCGL">Using the JMS API in Java EE
 Applications</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFW"></a><a id="controlling-message-acknowledgment"></a></p>
+</div>
 <div class="sect2">
-<h3 id="controlling-message-acknowledgment">Controlling Message Acknowledgment</h3>
+<h3 id="_controlling_message_acknowledgment">Controlling Message Acknowledgment</h3>
 <div class="paragraph">
 <p>Until a JMS message has been acknowledged, it is not considered to be
 successfully consumed. The successful consumption of a message
@@ -229,9 +239,12 @@ when the <code>JMSContext.recover</code> method is called.</p>
 Messages</a> demonstrates two ways to ensure that a message will not be
 acknowledged until processing of the message is complete.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFV"></a><a id="specifying-options-for-sending-messages"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="specifying-options-for-sending-messages">Specifying Options for Sending Messages</h3>
+<h3 id="_specifying_options_for_sending_messages">Specifying Options for Sending Messages</h3>
 <div class="paragraph">
 <p>You can set a number of options when you send a message. These options
 enable you to perform the tasks described in the following topics:</p>
@@ -264,8 +277,11 @@ producer and call the <code>send</code> method.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCFY"></a><a id="specifying-message-persistence"></a></p>
+</div>
 <div class="sect3">
-<h4 id="specifying-message-persistence">Specifying Message Persistence</h4>
+<h4 id="_specifying_message_persistence">Specifying Message Persistence</h4>
 <div class="paragraph">
 <p>The JMS API supports two delivery modes specifying whether messages are
 lost if the JMS provider fails. These delivery modes are fields of the
@@ -308,9 +324,12 @@ Using the <code>NON_PERSISTENT</code> delivery mode may improve performance and
 reduce storage overhead, but you should use it only if your application
 can afford to miss messages.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCFZ"></a><a id="setting-message-priority-levels"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="setting-message-priority-levels">Setting Message Priority Levels</h4>
+<h4 id="_setting_message_priority_levels">Setting Message Priority Levels</h4>
 <div class="paragraph">
 <p>You can use message priority levels to instruct the JMS provider to
 deliver urgent messages first. Use the <code>setPriority</code> method of the
@@ -333,9 +352,12 @@ do not specify a priority level, the default level is 4. A JMS provider
 tries to deliver higher-priority messages before lower-priority ones,
 but does not have to deliver messages in exact order of priority.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGA"></a><a id="allowing-messages-to-expire"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="allowing-messages-to-expire">Allowing Messages to Expire</h4>
+<h4 id="_allowing_messages_to_expire">Allowing Messages to Expire</h4>
 <div class="paragraph">
 <p>By default, a message never expires. If a message will become obsolete
 after a certain period, however, you may want to set an expiration time.
@@ -366,9 +388,12 @@ current time to give the expiration time. Any message not delivered
 before the specified expiration time is destroyed. The destruction of
 obsolete messages conserves storage and computing resources.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABGEADH"></a><a id="specifying-a-delivery-delay"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="specifying-a-delivery-delay">Specifying a Delivery Delay</h4>
+<h4 id="_specifying_a_delivery_delay">Specifying a Delivery Delay</h4>
 <div class="paragraph">
 <p>You can specify a length of time that must elapse after a message is
 sent before the JMS provider delivers the message. Use the
@@ -385,9 +410,12 @@ delivery delay of 3 seconds for a producer and then sends a message:</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">context.createProducer().setDeliveryDelay(3000).send(dest, msg);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BABJFIAD"></a><a id="using-jmsproducer-method-chaining"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-jmsproducer-method-chaining">Using JMSProducer Method Chaining</h4>
+<h4 id="_using_jmsproducer_method_chaining">Using JMSProducer Method Chaining</h4>
 <div class="paragraph">
 <p>The setter methods on the <code>JMSProducer</code> interface return <code>JMSProducer</code>
 objects, so you can use method chaining to create a producer, set
@@ -411,10 +439,13 @@ send a message to a queue:</p>
 message and then send the message in a separate <code>send</code> method call. You
 can also set message properties directly on a message.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGB"></a><a id="creating-temporary-destinations"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-temporary-destinations">Creating Temporary Destinations</h3>
+<h3 id="_creating_temporary_destinations">Creating Temporary Destinations</h3>
 <div class="paragraph">
 <p>Normally, you create JMS destinations (queues and topics)
 administratively rather than programmatically. Your JMS provider
@@ -464,9 +495,12 @@ context.createProducer().send((Topic) msg.getJMSReplyTo(), replyMsg);</code></pr
 <p>For an example, see <a href="jms-examples009.html#BNCHF">Using an Entity to
 Join Messages from Two MDBs</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGH"></a><a id="using-jms-local-transactions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-jms-local-transactions">Using JMS Local Transactions</h3>
+<h3 id="_using_jms_local_transactions">Using JMS Local Transactions</h3>
 <div class="paragraph">
 <p>A transaction groups a series of operations into an atomic unit of work.
 If any one of the operations fails, the transaction can be rolled back,
@@ -597,9 +631,12 @@ topic in the same transaction.</p>
 <p>The example in <a href="jms-examples004.html#BNCGJ">Using Local Transactions</a>
 shows how to use JMS local transactions.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABFIFAJ"></a><a id="sending-messages-asynchronously"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="sending-messages-asynchronously">Sending Messages Asynchronously</h3>
+<h3 id="_sending_messages_asynchronously">Sending Messages Asynchronously</h3>
 <div class="paragraph">
 <p>Normally, when you send a persistent message, the <code>send</code> method blocks
 until the JMS provider confirms that the message was sent successfully.

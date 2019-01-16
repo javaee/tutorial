@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNARF"></a><a id="adding-components-to-a-page-using-html-tag-library-tags"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="adding-components-to-a-page-using-html-tag-library-tags">Adding Components to a Page Using HTML Tag Library Tags</h2>
+<h2 id="_adding_components_to_a_page_using_html_tag_library_tags">Adding Components to a Page Using HTML Tag Library Tags</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The tags defined by the JavaServer Faces standard HTML tag library
@@ -288,8 +295,11 @@ particular component or its value.</p>
 <p>For reference information about the tags and their attributes, see the
 o<a href="JSFTL">JavaServer Faces Facelets Tag Library documentation</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARG"></a><a id="common-component-tag-attributes"></a></p>
+</div>
 <div class="sect2">
-<h3 id="common-component-tag-attributes">Common Component Tag Attributes</h3>
+<h3 id="_common_component_tag_attributes">Common Component Tag Attributes</h3>
 <div class="paragraph">
 <p>Most of the component tags support the attributes shown in
 <a href="#GKCKS">Table 10-2</a>.</p>
@@ -355,8 +365,11 @@ the EL, described in <a href="jsf-el.html#GJDDD">Expression Language</a>.</p>
 <p>An attribute such as <code>rendered</code> or <code>value</code> can be set on the page and
 then modified in the backing bean for the page.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARH"></a><a id="the-id-attribute"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-id-attribute">The id Attribute</h4>
+<h4 id="_the_id_attribute">The id Attribute</h4>
 <div class="paragraph">
 <p>The <code>id</code> attribute is not usually required for a component tag but is
 used when another component or a server-side class must refer to the
@@ -368,9 +381,12 @@ using only the evaluation syntax described in
 delimiters. For more information on expression syntax, see
 <a href="jsf-el003.html#BNAHV">Value Expressions</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARI"></a><a id="the-immediate-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-immediate-attribute">The immediate Attribute</h4>
+<h4 id="_the_immediate_attribute">The immediate Attribute</h4>
 <div class="paragraph">
 <p>Input components and command components (those that implement the
 <code>ActionSource</code> interface, such as buttons and links) can set the
@@ -444,9 +460,12 @@ entered into the <code>quantity</code> input fields will be processed. If you cl
 the Update Quantities hyperlink, the values in the <code>quantity</code> fields
 will be updated in the shopping cart.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARJ"></a><a id="the-rendered-attribute"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-rendered-attribute">The rendered Attribute</h4>
+<h4 id="_the_rendered_attribute">The rendered Attribute</h4>
 <div class="paragraph">
 <p>A component tag uses a Boolean EL expression along with the <code>rendered</code>
 attribute to determine whether the component will be rendered. For
@@ -492,9 +511,12 @@ Web Applications"</a>.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNARK"></a><a id="the-style-and-styleclass-attributes"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-style-and-styleclass-attributes">The style and styleClass Attributes</h4>
+<h4 id="_the_style_and_styleclass_attributes">The style and styleClass Attributes</h4>
 <div class="paragraph">
 <p>The <code>style</code> and <code>styleClass</code> attributes allow you to specify CSS styles
 for the rendered output of your tags. <a href="#BNASO">Displaying Error
@@ -521,9 +543,12 @@ be included in the application. For more information on defining styles,
 see the Cascading Style Sheets specifications and drafts at
 <code><a href="http://www.w3.org/Style/CSS/" class="bare">http://www.w3.org/Style/CSS/</a></code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARL"></a><a id="the-value-and-binding-attributes"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-value-and-binding-attributes">The value and binding Attributes</h4>
+<h4 id="_the_value_and_binding_attributes">The value and binding Attributes</h4>
 <div class="paragraph">
 <p>A tag representing an output component uses the <code>value</code> and <code>binding</code>
 attributes to bind its component&#8217;s value or instance, respectively, to a
@@ -535,10 +560,13 @@ more information on these attributes, see
 Values</a>, and <a href="jsf-develop002.html#BNAUK">Writing Properties Bound to
 Component Instances</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJDGQ"></a><a id="adding-html-head-and-body-tags"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-html-head-and-body-tags">Adding HTML Head and Body Tags</h3>
+<h3 id="_adding_html_head_and_body_tags">Adding HTML Head and Body Tags</h3>
 <div class="paragraph">
 <p>The HTML head (<code>h:head</code>) and body (<code>h:body</code>) tags add HTML page
 structure to JavaServer Faces web pages.</p>
@@ -597,9 +625,12 @@ relocation. For more information on resource relocation, see
 <a href="#GJGEP">Resource Relocation Using h:outputScript and
 h:outputStylesheet Tags</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARM"></a><a id="adding-a-form-component"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-form-component">Adding a Form Component</h3>
+<h3 id="_adding_a_form_component">Adding a Form Component</h3>
 <div class="paragraph">
 <p>An <code>h:form</code> tag represents an input form, which includes child
 components that can contain data that is either presented to the user or
@@ -635,9 +666,12 @@ can be used by other components in the form.</p>
 <p>A page can include multiple <code>h:form</code> tags, but only the values from the
 form submitted by the user will be included in the postback request.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARO"></a><a id="using-text-components"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-text-components">Using Text Components</h3>
+<h3 id="_using_text_components">Using Text Components</h3>
 <div class="paragraph">
 <p>Text components allow users to view and edit text in web applications.
 The basic types of text components are as follows:</p>
@@ -849,8 +883,11 @@ those listed in <a href="#BNARG">Common Component Tag Attributes</a>.</p>
 <a href="#BNARQ">Table 10-3</a> and <a href="#GJFWE">Output Tags</a>. The other tags are
 written in a similar way.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARR"></a><a id="rendering-a-field-with-the-hinputtext-tag"></a></p>
+</div>
 <div class="sect3">
-<h4 id="rendering-a-field-with-the-hinputtext-tag">Rendering a Field with the h:inputText Tag</h4>
+<h4 id="_rendering_a_field_with_the_h_inputtext_tag">Rendering a Field with the h:inputText Tag</h4>
 <div class="paragraph">
 <p>The <code>h:inputText</code> tag is used to display a field. A similar tag, the
 <code>h:outputText</code> tag, displays a read-only, single-line string. This
@@ -903,9 +940,12 @@ validators must handle the possibility of a null or zero-length string.
 See <a href="bean-validation003.html#GKCRG">Validating Null and Empty Strings</a>
 for more information.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARV"></a><a id="rendering-a-password-field-with-the-hinputsecret-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="rendering-a-password-field-with-the-hinputsecret-tag">Rendering a Password Field with the h:inputSecret Tag</h4>
+<h4 id="_rendering_a_password_field_with_the_h_inputsecret_tag">Rendering a Password Field with the h:inputSecret Tag</h4>
 <div class="paragraph">
 <p>The <code>h:inputSecret</code> tag renders an <code>&lt;input type="password"&gt;</code> HTML tag.
 When the user types a string into this field, a row of asterisks is
@@ -922,9 +962,12 @@ displayed instead of the text entered by the user. Here is an example:</p>
 prevent the password from being displayed in a query string or in the
 source file of the resulting HTML page.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARS"></a><a id="rendering-a-label-with-the-houtputlabel-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="rendering-a-label-with-the-houtputlabel-tag">Rendering a Label with the h:outputLabel Tag</h4>
+<h4 id="_rendering_a_label_with_the_h_outputlabel_tag">Rendering a Label with the h:outputLabel Tag</h4>
 <div class="paragraph">
 <p>The <code>h:outputLabel</code> tag is used to attach a label to a specified input
 field for the purpose of making it accessible. The following page uses
@@ -974,9 +1017,12 @@ specify the text of the label:</p>
 ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNART"></a><a id="rendering-a-link-with-the-houtputlink-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="rendering-a-link-with-the-houtputlink-tag">Rendering a Link with the h:outputLink Tag</h4>
+<h4 id="_rendering_a_link_with_the_h_outputlink_tag">Rendering a Link with the h:outputLink Tag</h4>
 <div class="paragraph">
 <p>The <code>h:outputLink</code> tag is used to render a link that, when clicked,
 loads another page but does not generate an action event. You should use
@@ -996,9 +1042,12 @@ Here is an example:</p>
 <p>The text in the body of the <code>h:outputLink</code> tag identifies the text that
 the user clicks to get to the next page.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARU"></a><a id="displaying-a-formatted-message-with-the-houtputformat-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="displaying-a-formatted-message-with-the-houtputformat-tag">Displaying a Formatted Message with the h:outputFormat Tag</h4>
+<h4 id="_displaying_a_formatted_message_with_the_h_outputformat_tag">Displaying a Formatted Message with the h:outputFormat Tag</h4>
 <div class="paragraph">
 <p>The <code>h:outputFormat</code> tag allows display of concatenated messages as a
 <code>MessageFormat</code> pattern, as described in the API documentation for
@@ -1052,10 +1101,13 @@ expression. The message displayed in the page is now as follows:</p>
 <pre class="prettyprint highlight"><code class="language-oac_no_warn" data-lang="oac_no_warn">Hello, Bill! You are visitor number 10 to the page.</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNARW"></a><a id="using-command-component-tags-for-performing-actions-and-navigation"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-command-component-tags-for-performing-actions-and-navigation">Using Command Component Tags for Performing Actions and Navigation</h3>
+<h3 id="_using_command_component_tags_for_performing_actions_and_navigation">Using Command Component Tags for Performing Actions and Navigation</h3>
 <div class="paragraph">
 <p>In JavaServer Faces applications, the button and link component tags are
 used to perform actions, such as submitting a form, and for navigating
@@ -1093,8 +1145,11 @@ Navigation</a> for more information on using the <code>action</code> attribute. 
 <a href="jsf-page-core004.html#BNATQ">Referencing a Method That Handles an
 Action Event</a> for details on using the <code>actionListener</code> attribute.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARX"></a><a id="rendering-a-button-with-the-hcommandbutton-tag"></a></p>
+</div>
 <div class="sect3">
-<h4 id="rendering-a-button-with-the-hcommandbutton-tag">Rendering a Button with the h:commandButton Tag</h4>
+<h4 id="_rendering_a_button_with_the_h_commandbutton_tag">Rendering a Button with the h:commandButton Tag</h4>
 <div class="paragraph">
 <p>If you are using an <code>h:commandButton</code> component tag, the data from the
 current page is processed when a user clicks the button, and the next
@@ -1117,9 +1172,12 @@ the button&#8217;s label. For information on how to use the <code>action</code>
 attribute, see <a href="jsf-page-core004.html#BNATP">Referencing a Method That
 Performs Navigation</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKBUJ"></a><a id="rendering-a-link-with-the-hcommandlink-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="rendering-a-link-with-the-hcommandlink-tag">Rendering a Link with the h:commandLink Tag</h4>
+<h4 id="_rendering_a_link_with_the_h_commandlink_tag">Rendering a Link with the h:commandLink Tag</h4>
 <div class="paragraph">
 <p>The <code>h:commandLink</code> tag represents an HTML link and is rendered as an
 HTML <code>&lt;a&gt;</code> element.</p>
@@ -1166,10 +1224,13 @@ technology.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="BNASB"></a><a id="adding-graphics-and-images-with-the-hgraphicimage-tag"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-graphics-and-images-with-the-hgraphicimage-tag">Adding Graphics and Images with the h:graphicImage Tag</h3>
+<h3 id="_adding_graphics_and_images_with_the_h_graphicimage_tag">Adding Graphics and Images with the h:graphicImage Tag</h3>
 <div class="paragraph">
 <p>In a JavaServer Faces application, use the <code>h:graphicImage</code> tag to
 render an image on a page:</p>
@@ -1215,9 +1276,12 @@ found at <code>resources/img/top-background.jpg</code>:</p>
     ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNASC"></a><a id="laying-out-components-with-the-hpanelgrid-and-hpanelgroup-tags"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="laying-out-components-with-the-hpanelgrid-and-hpanelgroup-tags">Laying Out Components with the h:panelGrid and h:panelGroup Tags</h3>
+<h3 id="_laying_out_components_with_the_h_panelgrid_and_h_panelgroup_tags">Laying Out Components with the h:panelGrid and h:panelGroup Tags</h3>
 <div class="paragraph">
 <p>In a JavaServer Faces application, you use a panel as a layout container
 for a set of other components. A panel is rendered as an HTML table.
@@ -1367,9 +1431,12 @@ the page modulo 2. So, if a component is the fifth one in the list of
 components, that component will be in the 5 modulo 2 column, or column
 1.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASE"></a><a id="displaying-components-for-selecting-one-value"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="displaying-components-for-selecting-one-value">Displaying Components for Selecting One Value</h3>
+<h3 id="_displaying_components_for_selecting_one_value">Displaying Components for Selecting One Value</h3>
 <div class="paragraph">
 <p>Another commonly used component is one that allows a user to select one
 value, whether it is the only value available or one of a set of
@@ -1399,8 +1466,11 @@ represents a Boolean state</p>
 <div class="title"><strong>Figure 10-3 Example Components for Selecting One Item</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_067_slctn.png" alt="Options, check box, and lists."></span></p>
 </div>
+<div class="paragraph">
+<p><a id="BNASG"></a><a id="displaying-a-check-box-using-the-hselectbooleancheckbox-tag"></a></p>
+</div>
 <div class="sect3">
-<h4 id="displaying-a-check-box-using-the-hselectbooleancheckbox-tag">Displaying a Check Box Using the h:selectBooleanCheckbox Tag</h4>
+<h4 id="_displaying_a_check_box_using_the_h_selectbooleancheckbox_tag">Displaying a Check Box Using the h:selectBooleanCheckbox Tag</h4>
 <div class="paragraph">
 <p>The <code>h:selectBooleanCheckbox</code> tag is the only tag that JavaServer Faces
 technology provides for representing a Boolean state.</p>
@@ -1429,9 +1499,12 @@ allow users to indicate whether they want to join the Duke Fan Club.
 When the <code>h:outputLabel</code> tag is rendered, it displays the label for the
 check box. The label text is represented by the <code>value</code> attribute.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASH"></a><a id="displaying-a-menu-using-the-hselectonemenu-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="displaying-a-menu-using-the-hselectonemenu-tag">Displaying a Menu Using the h:selectOneMenu Tag</h4>
+<h4 id="_displaying_a_menu_using_the_h_selectonemenu_tag">Displaying a Menu Using the h:selectOneMenu Tag</h4>
 <div class="paragraph">
 <p>A component that allows the user to select one value from a set of
 values can be rendered as a box or a set of options. This section
@@ -1475,10 +1548,13 @@ either an <code>f:selectItems</code> tag or a set of <code>f:selectItem</code> t
 representing the items in the list. <a href="#BNASK">Using the f:selectItem
 and f:selectItems Tags</a> describes these tags.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASI"></a><a id="displaying-components-for-selecting-multiple-values"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="displaying-components-for-selecting-multiple-values">Displaying Components for Selecting Multiple Values</h3>
+<h3 id="_displaying_components_for_selecting_multiple_values">Displaying Components for Selecting Multiple Values</h3>
 <div class="paragraph">
 <p>In some cases, you need to allow your users to select multiple values
 rather than just one value from a list of choices. You can do this using
@@ -1552,9 +1628,12 @@ use the <code>f:selectItems</code> tag. To represent each item individually, you
 use the <code>f:selectItem</code> tag. The following section explains these tags in
 more detail.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASK"></a><a id="using-the-fselectitem-and-fselectitems-tags"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-the-fselectitem-and-fselectitems-tags">Using the f:selectItem and f:selectItems Tags</h3>
+<h3 id="_using_the_f_selectitem_and_f_selectitems_tags">Using the f:selectItem and f:selectItems Tags</h3>
 <div class="paragraph">
 <p>The <code>f:selectItem</code> and <code>f:selectItems</code> tags represent components that
 can be nested inside a component that allows you to select one or
@@ -1603,8 +1682,11 @@ properties.</p>
 <p>The rest of this section shows you how to use the <code>f:selectItems</code> and
 <code>f:selectItem</code> tags.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASM"></a><a id="using-the-fselectitems-tag"></a></p>
+</div>
 <div class="sect3">
-<h4 id="using-the-fselectitems-tag">Using the f:selectItems Tag</h4>
+<h4 id="_using_the_f_selectitems_tag">Using the f:selectItems Tag</h4>
 <div class="paragraph">
 <p>The following example from <a href="#BNASI">Displaying Components for
 Selecting Multiple Values</a> shows how to use the <code>h:selectManyCheckbox</code>
@@ -1629,9 +1711,12 @@ objects are created programmatically in the managed bean.</p>
 information on how to write a managed bean property for one of these
 tags.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASN"></a><a id="using-the-fselectitem-tag"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-the-fselectitem-tag">Using the f:selectItem Tag</h4>
+<h4 id="_using_the_f_selectitem_tag">Using the f:selectItem Tag</h4>
 <div class="paragraph">
 <p>The <code>f:selectItem</code> tag represents a single item in a list of items. Here
 is the example from <a href="#BNASH">Displaying a Menu Using the
@@ -1662,10 +1747,13 @@ meaning that they can use value-binding expressions to refer to values
 in external objects. These attributes can also define literal values, as
 shown in the example <code>h:selectOneMenu</code> tag.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref50"></a><a id="displaying-the-results-from-selection-components"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="displaying-the-results-from-selection-components">Displaying the Results from Selection Components</h3>
+<h3 id="_displaying_the_results_from_selection_components">Displaying the Results from Selection Components</h3>
 <div class="paragraph">
 <p>If you display components that allow a user to select values, you may
 also want to display the result of the selection.</p>
@@ -1708,9 +1796,12 @@ array is not empty. Then a <code>ui:repeat</code> tag, a simple way to show valu
 in a loop, displays the contents of the selected items in an itemized
 list. (This tag is listed in <a href="jsf-facelets004.html#GJBFP">Table 8-2</a>.)</p>
 </div>
+<div class="paragraph">
+<p><a id="BNARZ"></a><a id="using-data-bound-table-components"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-data-bound-table-components">Using Data-Bound Table Components</h3>
+<h3 id="_using_data_bound_table_components">Using Data-Bound Table Components</h3>
 <div class="paragraph">
 <p>Data-bound table components display relational data in a tabular format.
 In a JavaServer Faces application, the <code>h:dataTable</code> component tag
@@ -1946,9 +2037,12 @@ from the first column or row. Similarly, if the style attribute
 specifies fewer styles than there are columns or rows, the remaining
 columns or rows will be assigned styles starting from the first style.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNASO"></a><a id="displaying-error-messages-with-the-hmessage-and-hmessages-tags"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="displaying-error-messages-with-the-hmessage-and-hmessages-tags">Displaying Error Messages with the h:message and h:messages Tags</h3>
+<h3 id="_displaying_error_messages_with_the_h_message_and_h_messages_tags">Displaying Error Messages with the h:message and h:messages Tags</h3>
 <div class="paragraph">
 <p>The <code>h:message</code> and <code>h:messages</code> tags are used to display error messages
 when conversion or validation fails. The <code>h:message</code> tag displays error
@@ -2019,9 +2113,12 @@ standard validators. An application architect can override these
 standard messages and supply error messages for custom converters and
 validators by registering custom error messages with the application.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQZD"></a><a id="creating-bookmarkable-urls-with-the-hbutton-and-hlink-tags"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="creating-bookmarkable-urls-with-the-hbutton-and-hlink-tags">Creating Bookmarkable URLs with the h:button and h:link Tags</h3>
+<h3 id="_creating_bookmarkable_urls_with_the_h_button_and_h_link_tags">Creating Bookmarkable URLs with the h:button and h:link Tags</h3>
 <div class="paragraph">
 <p>The ability to create bookmarkable URLs refers to the ability to
 generate links based on a specified navigation outcome and on component
@@ -2066,9 +2163,12 @@ generated from the preceding tag, assuming that the application name is
 page. To create more complex GET requests and utilize the complete
 functionality of the <code>h:link</code> tag, use view parameters.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQWQ"></a><a id="using-view-parameters-to-configure-bookmarkable-urls"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-view-parameters-to-configure-bookmarkable-urls">Using View Parameters to Configure Bookmarkable URLs</h3>
+<h3 id="_using_view_parameters_to_configure_bookmarkable_urls">Using View Parameters to Configure Bookmarkable URLs</h3>
 <div class="paragraph">
 <p>To pass a parameter from one page to another, use the
 <code>includeViewParams</code> attribute in your <code>h:link</code> tag and, in addition, use
@@ -2147,9 +2247,12 @@ parameter values are read is as follows:</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="sthref52"></a><a id="the-bookmarks-example-application"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="the-bookmarks-example-application">The bookmarks Example Application</h3>
+<h3 id="_the_bookmarks_example_application">The bookmarks Example Application</h3>
 <div class="paragraph">
 <p>The <code>bookmarks</code> example application modifies the <code>hello1</code> application
 described in <a href="webapp003.html#BNADX">A Web Module That Uses JavaServer
@@ -2186,8 +2289,11 @@ Using Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDIEHEB"></a><a id="to-build-package-and-deploy-the-bookmarks-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-bookmarks-example-using-netbeans-ide">To Build, Package, and Deploy the bookmarks Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_bookmarks_example_using_netbeans_ide">To Build, Package, and Deploy the bookmarks Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2222,9 +2328,12 @@ GlassFish Server instance.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDEFJEF"></a><a id="to-build-package-and-deploy-the-bookmarks-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-bookmarks-example-using-maven">To Build, Package, and Deploy the bookmarks Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_bookmarks_example_using_maven">To Build, Package, and Deploy the bookmarks Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2255,9 +2364,12 @@ deploys the WAR file to your GlassFish Server instance.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDGEBCB"></a><a id="to-run-the-bookmarks-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-bookmarks-example">To Run the bookmarks Example</h4>
+<h4 id="_to_run_the_bookmarks_example">To Run the bookmarks Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2288,10 +2400,13 @@ Return.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJGEP"></a><a id="resource-relocation-using-houtputscript-and-houtputstylesheet-tags"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="resource-relocation-using-houtputscript-and-houtputstylesheet-tags">Resource Relocation Using h:outputScript and h:outputStylesheet Tags</h3>
+<h3 id="_resource_relocation_using_h_outputscript_and_h_outputstylesheet_tags">Resource Relocation Using h:outputScript and h:outputStylesheet Tags</h3>
 <div class="paragraph">
 <p>Resource relocation refers to the ability of a JavaServer Faces
 application to specify the location where a resource can be rendered.

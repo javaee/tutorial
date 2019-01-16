@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BEIFAIFF"></a><a id="the-dukeetf-example-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-dukeetf-example-application">The dukeetf Example Application</h2>
+<h2 id="_the_dukeetf_example_application">The dukeetf Example Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>dukeetf</code> example application, located in the
@@ -74,8 +81,11 @@ on the price and trading volume of an electronically traded fund (ETF).</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDBBEDA"></a><a id="architecture-of-the-dukeetf-example-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="architecture-of-the-dukeetf-example-application">Architecture of the dukeetf Example Application</h3>
+<h3 id="_architecture_of_the_dukeetf_example_application">Architecture of the dukeetf Example Application</h3>
 <div class="paragraph">
 <p>The <code>dukeetf</code> example application consists of a servlet, an enterprise
 bean, and an HTML page.</p>
@@ -110,8 +120,11 @@ uses JavaScript to make new connections. In this model, clients make a
 new request immediately after receiving new data, and the server keeps
 the connection open until new data becomes available.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref111"></a><a id="the-servlet"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-servlet">The Servlet</h4>
+<h4 id="_the_servlet">The Servlet</h4>
 <div class="paragraph">
 <p>The <code>DukeETFServlet</code> class uses asynchronous processing:</p>
 </div>
@@ -193,9 +206,12 @@ public void doGet(HttpServletRequest request,
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref112"></a><a id="the-enterprise-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-enterprise-bean">The Enterprise Bean</h4>
+<h4 id="_the_enterprise_bean">The Enterprise Bean</h4>
 <div class="paragraph">
 <p>The <code>PriceVolumeBean</code> class is an enterprise bean that uses the timer
 service from the container to update the price and volume information
@@ -240,9 +256,12 @@ public class PriceVolumeBean {
 <a href="ejb-basicexamples.html#GIJRB">Chapter 37, "Running the Enterprise
 Bean Examples"</a> for more information on the timer service.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref113"></a><a id="the-html-page"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-html-page">The HTML Page</h4>
+<h4 id="_the_html_page">The HTML Page</h4>
 <div class="paragraph">
 <p>The HTML page consists of a table and some JavaScript code. The table
 contains two fields referenced from JavaScript code:</p>
@@ -303,10 +322,13 @@ XML).</p>
 equivalent version of this example implemented using a WebSocket
 endpoint.</p>
 </div>
+<div class="paragraph">
+<p><a id="CHDHBBBI"></a><a id="running-the-dukeetf-example-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-dukeetf-example-application">Running the dukeetf Example Application</h3>
+<h3 id="_running_the_dukeetf_example_application">Running the dukeetf Example Application</h3>
 <div class="paragraph">
 <p>This section describes how to run the <code>dukeetf</code> example application
 using NetBeans IDE and from the command line.</p>
@@ -325,8 +347,11 @@ IDE</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDCGCJD"></a><a id="to-run-the-dukeetf-example-application-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-dukeetf-example-application-using-netbeans-ide">To Run the dukeetf Example Application Using NetBeans IDE</h4>
+<h4 id="_to_run_the_dukeetf_example_application_using_netbeans_ide">To Run the dukeetf Example Application Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -371,9 +396,12 @@ price and volume updates simultaneously.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="CHDHHAFG"></a><a id="to-run-the-dukeetf-example-application-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-dukeetf-example-application-using-maven">To Run the dukeetf Example Application Using Maven</h4>
+<h4 id="_to_run_the_dukeetf_example_application_using_maven">To Run the dukeetf Example Application Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

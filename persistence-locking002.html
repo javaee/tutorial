@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKJIU"></a><a id="lock-modes"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="lock-modes">Lock Modes</h2>
+<h2 id="_lock_modes">Lock Modes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The application may increase the level of locking for an entity by
@@ -143,8 +150,11 @@ applications.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="GKJIK"></a><a id="setting-the-lock-mode"></a></p>
+</div>
 <div class="sect2">
-<h3 id="setting-the-lock-mode">Setting the Lock Mode</h3>
+<h3 id="_setting_the_lock_mode">Setting the Lock Mode</h3>
 <div class="paragraph">
 <p>To specify the lock mode, use one of the following techniques:</p>
 </div>
@@ -208,9 +218,12 @@ q.setLockMode(LockModeType.PESSIMISTIC_FORCE_INCREMENT);</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GKJIL"></a><a id="using-pessimistic-locking"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-pessimistic-locking">Using Pessimistic Locking</h3>
+<h3 id="_using_pessimistic_locking">Using Pessimistic Locking</h3>
 <div class="paragraph">
 <p>Versioned entities, as well as entities that do not have version
 attributes, can be locked pessimistically.</p>
@@ -241,8 +254,11 @@ Locking a versioned entity with <code>PESSIMISTIC_WRITE</code> results in the
 version attribute being incremented if the transaction was successfully
 committed.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKJLQ"></a><a id="pessimistic-locking-timeouts"></a></p>
+</div>
 <div class="sect3">
-<h4 id="pessimistic-locking-timeouts">Pessimistic Locking Timeouts</h4>
+<h4 id="_pessimistic_locking_timeouts">Pessimistic Locking Timeouts</h4>
 <div class="paragraph">
 <p>Use the <code>javax.persistence.lock.timeout</code> property to specify the length
 of time in milliseconds the persistence provider should wait to obtain a

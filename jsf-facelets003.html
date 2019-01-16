@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIPOB"></a><a id="developing-a-simple-facelets-application-the-guessnumber-jsf-example-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="developing-a-simple-facelets-application-the-guessnumber-jsf-example-application">Developing a Simple Facelets Application: The guessnumber-jsf Example Application</h2>
+<h2 id="_developing_a_simple_facelets_application_the_guessnumber_jsf_example_application">Developing a Simple Facelets Application: The guessnumber-jsf Example Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes the general steps involved in developing a
@@ -93,8 +100,11 @@ JavaServer Faces application. The following tasks are usually required:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GIQTE"></a><a id="creating-a-facelets-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="creating-a-facelets-application">Creating a Facelets Application</h3>
+<h3 id="_creating_a_facelets_application">Creating a Facelets Application</h3>
 <div class="paragraph">
 <p>The example used in this tutorial is the <code>guessnumber-jsf</code> application.
 The application presents you with a page that asks you to guess a number
@@ -106,8 +116,11 @@ correctly or incorrectly.</p>
 <p>The source code for this application is in the
 tut-install`/examples/web/jsf/guessnumber-jsf/` directory.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQQZ"></a><a id="developing-a-managed-bean"></a></p>
+</div>
 <div class="sect3">
-<h4 id="developing-a-managed-bean">Developing a Managed Bean</h4>
+<h4 id="_developing_a_managed_bean">Developing a Managed Bean</h4>
 <div class="paragraph">
 <p>In a typical JavaServer Faces application, each page of the application
 connects to a managed bean that serves as a backing bean. The backing
@@ -185,9 +198,12 @@ accessible through the EL. The <code>@SessionScoped</code> annotation registers 
 bean scope as <code>session</code> to enable you to make multiple guesses as you
 run the application.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJZPV"></a><a id="creating-facelets-views"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="creating-facelets-views">Creating Facelets Views</h4>
+<h4 id="_creating_facelets_views">Creating Facelets Views</h4>
 <div class="paragraph">
 <p>To create a page or view, you add components to the pages, wire the
 components to backing bean values and properties, and register
@@ -327,10 +343,13 @@ content:</p>
 <p>This page also uses implicit navigation, setting the <code>action</code> attribute
 for the Back button to send the user to the <code>greeting.xhtml</code> page.</p>
 </div>
+<div class="paragraph">
+<p><a id="GJJKC"></a><a id="configuring-the-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuring-the-application">Configuring the Application</h3>
+<h3 id="_configuring_the_application">Configuring the Application</h3>
 <div class="paragraph">
 <p>Configuring a JavaServer Faces application involves mapping the Faces
 Servlet in the web deployment descriptor file, such as a <code>web.xml</code> file,
@@ -387,9 +406,12 @@ For example, if the project stage is defined as <code>Development</code>, debugg
 information is automatically generated for the user. If not defined by
 the user, the default project stage is <code>Production</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIRGF"></a><a id="running-the-guessnumber-jsf-facelets-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-guessnumber-jsf-facelets-example">Running the guessnumber-jsf Facelets Example</h3>
+<h3 id="_running_the_guessnumber_jsf_facelets_example">Running the guessnumber-jsf Facelets Example</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>guessnumber-jsf</code> example.</p>
@@ -412,8 +434,11 @@ Using Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GJQZL"></a><a id="to-build-package-and-deploy-the-guessnumber-jsf-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-guessnumber-jsf-example-using-netbeans-ide">To Build, Package, and Deploy the guessnumber-jsf Example Using NetBeans IDE</h4>
+<h4 id="_to_build_package_and_deploy_the_guessnumber_jsf_example_using_netbeans_ide">To Build, Package, and Deploy the guessnumber-jsf Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -448,9 +473,12 @@ GlassFish Server instance.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJQYU"></a><a id="to-build-package-and-deploy-the-guessnumber-jsf-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-build-package-and-deploy-the-guessnumber-jsf-example-using-maven">To Build, Package, and Deploy the guessnumber-jsf Example Using Maven</h4>
+<h4 id="_to_build_package_and_deploy_the_guessnumber_jsf_example_using_maven">To Build, Package, and Deploy the guessnumber-jsf Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -481,9 +509,12 @@ then deploys it to the server.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJQYX"></a><a id="to-run-the-guessnumber-jsf-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-guessnumber-jsf-example">To Run the guessnumber-jsf Example</h4>
+<h4 id="_to_run_the_guessnumber_jsf_example">To Run the guessnumber-jsf Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

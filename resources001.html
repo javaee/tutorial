@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GIPGL"></a><a id="what-is-a-resource-adapter"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="what-is-a-resource-adapter">What Is a Resource Adapter?</h2>
+<h2 id="_what_is_a_resource_adapter">What Is a Resource Adapter?</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A resource adapter is a Java EE component that implements the Java EE
@@ -92,14 +99,20 @@ services that are managed by the Java EE server. The resource adapter
 itself and its system contracts are transparent to the Java EE
 component.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPGY"></a><a id="management-contracts"></a></p>
+</div>
 <div class="sect2">
-<h3 id="management-contracts">Management Contracts</h3>
+<h3 id="_management_contracts">Management Contracts</h3>
 <div class="paragraph">
 <p>The Java EE Connector Architecture defines system contracts that enable
 resource adapter lifecycle and thread management.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPHT"></a><a id="lifecycle-management"></a></p>
+</div>
 <div class="sect3">
-<h4 id="lifecycle-management">Lifecycle Management</h4>
+<h4 id="_lifecycle_management">Lifecycle Management</h4>
 <div class="paragraph">
 <p>The Connector Architecture specifies a lifecycle management contract
 that allows an application server to manage the lifecycle of a resource
@@ -110,9 +123,12 @@ application server to notify the resource adapter instance when it is
 undeployed or when an orderly shutdown of the application server takes
 place.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPIG"></a><a id="work-management-contract"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="work-management-contract">Work Management Contract</h4>
+<h4 id="_work_management_contract">Work Management Contract</h4>
 <div class="paragraph">
 <p>The Connector Architecture work management contract ensures that
 resource adapters use threads in the proper, recommended manner. This
@@ -172,10 +188,13 @@ resource adapter can also specify the execution context for the thread,
 and the work management contract controls the context in which the
 thread executes.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIPMK"></a><a id="generic-work-context-contract"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="generic-work-context-contract">Generic Work Context Contract</h3>
+<h3 id="_generic_work_context_contract">Generic Work Context Contract</h3>
 <div class="paragraph">
 <p>The work management contract between the application server and a
 resource adapter enables a resource adapter to do a task, such as
@@ -195,9 +214,12 @@ control over concurrent behavior in a managed environment.</p>
 <p>The generic work context contract standardizes the transaction context
 and the security context.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKCKI"></a><a id="outbound-and-inbound-contracts"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="outbound-and-inbound-contracts">Outbound and Inbound Contracts</h3>
+<h3 id="_outbound_and_inbound_contracts">Outbound and Inbound Contracts</h3>
 <div class="paragraph">
 <p>The Connector Architecture defines the following outbound contracts,
 system-level contracts between an application server and an EIS that

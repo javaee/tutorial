@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BEIGCFDF"></a><a id="asynchronous-processing"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="asynchronous-processing">Asynchronous Processing</h2>
+<h2 id="_asynchronous_processing">Asynchronous Processing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Web containers in application servers normally use a server thread per
@@ -89,8 +96,11 @@ of web applications. Asynchronous processing refers to assigning these
 blocking operations to a new thread and retuning the thread associated
 with the request immediately to the container.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref103"></a><a id="asynchronous-processing-in-servlets"></a></p>
+</div>
 <div class="sect2">
-<h3 id="asynchronous-processing-in-servlets">Asynchronous Processing in Servlets</h3>
+<h3 id="_asynchronous_processing_in_servlets">Asynchronous Processing in Servlets</h3>
 <div class="paragraph">
 <p>Java EE provides asynchronous processing support for servlets and
 filters. If a servlet or a filter reaches a potentially blocking
@@ -210,9 +220,12 @@ the blocking operation completes.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a id="sthref105"></a><a id="waiting-for-a-resource"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="waiting-for-a-resource">Waiting for a Resource</h3>
+<h3 id="_waiting_for_a_resource">Waiting for a Resource</h3>
 <div class="paragraph">
 <p>This section demonstrates how to use the functionality provided by the
 <code>AsyncContext</code> class for the following use case:</p>

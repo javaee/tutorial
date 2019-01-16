@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKEDM"></a><a id="using-interceptors"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-interceptors">Using Interceptors</h2>
+<h2 id="_using_interceptors">Using Interceptors</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To define an interceptor, use one of the interceptor metadata
@@ -101,8 +108,11 @@ public class OrderBean {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKECY"></a><a id="intercepting-method-invocations"></a></p>
+</div>
 <div class="sect2">
-<h3 id="intercepting-method-invocations">Intercepting Method Invocations</h3>
+<h3 id="_intercepting_method_invocations">Intercepting Method Invocations</h3>
 <div class="paragraph">
 <p>Use the <code>@AroundInvoke</code> annotation to designate interceptor methods for
 managed object methods. Only one around-invoke interceptor method per
@@ -140,8 +150,11 @@ exception allowed by the <code>throws</code> clause of the target method. They m
 catch and suppress exceptions, and then recover by calling the
 <code>InvocationContext.proceed</code> method.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHMH"></a><a id="using-multiple-method-interceptors"></a></p>
+</div>
 <div class="sect3">
-<h4 id="using-multiple-method-interceptors">Using Multiple Method Interceptors</h4>
+<h4 id="_using_multiple_method_interceptors">Using Multiple Method Interceptors</h4>
 <div class="paragraph">
 <p>Use the <code>@Interceptors</code> annotation to declare multiple interceptors for
 a target method or class:</p>
@@ -201,9 +214,12 @@ in the target class.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GKHOV"></a><a id="accessing-target-method-parameters-from-an-interceptor-class"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="accessing-target-method-parameters-from-an-interceptor-class">Accessing Target Method Parameters from an Interceptor Class</h4>
+<h4 id="_accessing_target_method_parameters_from_an_interceptor_class">Accessing Target Method Parameters from an Interceptor Class</h4>
 <div class="paragraph">
 <p>You can use the <code>InvocationContext</code> instance passed to each
 around-invoke method to access and modify the parameters of the target
@@ -226,10 +242,13 @@ public void updateInfo(String firstName, String lastName, Date date) { ... }</co
 <code>InvocationContext.getParameters</code> and <code>InvocationContext.setParameters</code>
 methods, respectively.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKECR"></a><a id="intercepting-lifecycle-callback-events"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="intercepting-lifecycle-callback-events">Intercepting Lifecycle Callback Events</h3>
+<h3 id="_intercepting_lifecycle_callback_events">Intercepting Lifecycle Callback Events</h3>
 <div class="paragraph">
 <p>Interceptors for lifecycle callback events (around-construct,
 post-construct, and pre-destroy) may be defined in the target class or
@@ -290,8 +309,11 @@ assume the lifecycle event interceptor method has access to a security
 or transaction context. Only one interceptor method for each lifecycle
 event (post-create and pre-destroy) is allowed per class.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref254"></a><a id="using-aroundconstruct-interceptor-methods"></a></p>
+</div>
 <div class="sect3">
-<h4 id="using-aroundconstruct-interceptor-methods">Using AroundConstruct Interceptor Methods</h4>
+<h4 id="_using_aroundconstruct_interceptor_methods">Using AroundConstruct Interceptor Methods</h4>
 <div class="paragraph">
 <p><code>@AroundConstruct</code> methods are interposed on the invocation of the
 target class&#8217;s constructor. Methods decorated with <code>@AroundConstruct</code>
@@ -335,9 +357,12 @@ target instance.</p>
 create the target instance. If an <code>@AroundConstruct</code> method does not
 call <code>Invocation.proceed</code>, the target instance will not be created.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHNI"></a><a id="using-multiple-lifecycle-callback-interceptors"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-multiple-lifecycle-callback-interceptors">Using Multiple Lifecycle Callback Interceptors</h4>
+<h4 id="_using_multiple_lifecycle_callback_interceptors">Using Multiple Lifecycle Callback Interceptors</h4>
 <div class="paragraph">
 <p>You can define multiple lifecycle interceptors for a target class by
 specifying the interceptor classes in the <code>@Interceptors</code> annotation:</p>
@@ -354,10 +379,13 @@ public class OrderBean { ... }</code></pre>
 <p>Data stored in the <code>contextData</code> property of <code>InvocationContext</code> is not
 sharable across different lifecycle events.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKEDU"></a><a id="intercepting-timeout-events"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="intercepting-timeout-events">Intercepting Timeout Events</h3>
+<h3 id="_intercepting_timeout_events">Intercepting Timeout Events</h3>
 <div class="paragraph">
 <p>You can define interceptors for EJB timer service timeout methods by
 using the <code>@AroundTimeout</code> annotation on methods in the target class or
@@ -395,8 +423,11 @@ security context as the target method.</p>
 target timeout method through the <code>InvocationContext</code> instance&#8217;s
 <code>getTimer</code> method.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKHLA"></a><a id="using-multiple-timeout-interceptors"></a></p>
+</div>
 <div class="sect3">
-<h4 id="using-multiple-timeout-interceptors">Using Multiple Timeout Interceptors</h4>
+<h4 id="_using_multiple_timeout_interceptors">Using Multiple Timeout Interceptors</h4>
 <div class="paragraph">
 <p>You can define multiple timeout interceptors for a given target class by
 specifying the interceptor classes containing <code>@AroundTimeout</code>
@@ -428,10 +459,13 @@ public class OrderBean {
 followed by the timeout interceptor in <code>SecondaryInterceptor</code>, and
 finally the <code>last</code> method defined in the target class.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref255"></a><a id="binding-interceptors-to-components"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="binding-interceptors-to-components">Binding Interceptors to Components</h3>
+<h3 id="_binding_interceptors_to_components">Binding Interceptors to Components</h3>
 <div class="paragraph">
 <p>Interceptor binding types are annotations that may be applied to
 components to associate them with a particular interceptor. Interceptor
@@ -465,8 +499,11 @@ binding types:</p>
 public @interface Secured { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref256"></a><a id="declaring-the-interceptor-bindings-on-an-interceptor-class"></a></p>
+</div>
 <div class="sect3">
-<h4 id="declaring-the-interceptor-bindings-on-an-interceptor-class">Declaring the Interceptor Bindings on an Interceptor Class</h4>
+<h4 id="_declaring_the_interceptor_bindings_on_an_interceptor_class">Declaring the Interceptor Bindings on an Interceptor Class</h4>
 <div class="paragraph">
 <p>Annotate the interceptor class with the interceptor binding type and
 <code>@Interceptor</code> to associate the interceptor binding with the interceptor
@@ -492,9 +529,12 @@ more than one interceptor class may declare an interceptor binding type.</p>
 declare interceptor binding types with <code>Target(TYPE)</code>, or in the case of
 <code>@AroundConstruct</code> lifecycle callbacks, <code>Target(CONSTRUCTOR)</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref257"></a><a id="binding-a-component-to-an-interceptor"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="binding-a-component-to-an-interceptor">Binding a Component to an Interceptor</h4>
+<h4 id="_binding_a_component_to_an_interceptor">Binding a Component to an Interceptor</h4>
 <div class="paragraph">
 <p>Add the interceptor binding type annotation to the target component&#8217;s
 class, method, or constructor. Interceptor binding types are applied
@@ -517,10 +557,13 @@ public class Message {
 non-<code>static</code>, non-<code>private</code> method has an interceptor binding applied to
 it, it must not be <code>final</code>, and the component class cannot be <code>final</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref258"></a><a id="ordering-interceptors"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="ordering-interceptors">Ordering Interceptors</h3>
+<h3 id="_ordering_interceptors">Ordering Interceptors</h3>
 <div class="paragraph">
 <p>The order in which multiple interceptors are invoked is determined by
 the following rules.</p>

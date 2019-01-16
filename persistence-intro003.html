@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBQN"></a><a id="entity-inheritance"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="entity-inheritance">Entity Inheritance</h2>
+<h2 id="_entity_inheritance">Entity Inheritance</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Entities support class inheritance, polymorphic associations, and
@@ -84,8 +91,11 @@ Inheritance in the roster Application</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBQO"></a><a id="abstract-entities"></a></p>
+</div>
 <div class="sect2">
-<h3 id="abstract-entities">Abstract Entities</h3>
+<h3 id="_abstract_entities">Abstract Entities</h3>
 <div class="paragraph">
 <p>An abstract class may be declared an entity by decorating the class with
 <code>@Entity</code>. Abstract entities are like concrete entities but cannot be
@@ -115,9 +125,12 @@ public class PartTimeEmployee extends Employee {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBQP"></a><a id="mapped-superclasses"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="mapped-superclasses">Mapped Superclasses</h3>
+<h3 id="_mapped_superclasses">Mapped Superclasses</h3>
 <div class="paragraph">
 <p>Entities may inherit from superclasses that contain persistent state and
 mapping information but are not entities. That is, the superclass is not
@@ -164,9 +177,12 @@ define the table mappings. For instance, in the preceding code sample,
 the underlying tables would be <code>FULLTIMEEMPLOYEE</code> and
 <code>PARTTIMEEMPLOYEE</code>, but there is no <code>EMPLOYEE</code> table.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQQ"></a><a id="non-entity-superclasses"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="non-entity-superclasses">Non-Entity Superclasses</h3>
+<h3 id="_non_entity_superclasses">Non-Entity Superclasses</h3>
 <div class="paragraph">
 <p>Entities may have non-entity superclasses, and these superclasses can be
 either abstract or concrete. The state of non-entity superclasses is
@@ -175,9 +191,12 @@ an entity class is nonpersistent. Non-entity superclasses may not be
 used in <code>EntityManager</code> or <code>Query</code> operations. Any mapping or
 relationship annotations in non-entity superclasses are ignored.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQR"></a><a id="entity-inheritance-mapping-strategies"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="entity-inheritance-mapping-strategies">Entity Inheritance Mapping Strategies</h3>
+<h3 id="_entity_inheritance_mapping_strategies">Entity Inheritance Mapping Strategies</h3>
 <div class="paragraph">
 <p>You can configure how the Java Persistence provider maps inherited
 entities to the underlying datastore by decorating the root class of the
@@ -219,8 +238,11 @@ that are common to the parent class</p>
 <code>@Inheritance</code> annotation is not specified on the root class of the
 entity hierarchy.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQS"></a><a id="the-single-table-per-class-hierarchy-strategy"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-single-table-per-class-hierarchy-strategy">The Single Table per Class Hierarchy Strategy</h4>
+<h4 id="_the_single_table_per_class_hierarchy_strategy">The Single Table per Class Hierarchy Strategy</h4>
 <div class="paragraph">
 <p>With this strategy, which corresponds to the default
 <code>InheritanceType.SINGLE_TABLE</code>, all classes in the hierarchy are mapped
@@ -321,9 +343,12 @@ between entities and queries that cover the entire entity class
 hierarchy. However, this strategy requires the columns that contain the
 state of subclasses to be nullable.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQU"></a><a id="the-table-per-concrete-class-strategy"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-table-per-concrete-class-strategy">The Table per Concrete Class Strategy</h4>
+<h4 id="_the_table_per_concrete_class_strategy">The Table per Concrete Class Strategy</h4>
 <div class="paragraph">
 <p>In this strategy, which corresponds to
 <code>InheritanceType.TABLE_PER_CLASS</code>, each concrete class is mapped to a
@@ -341,9 +366,12 @@ each subclass for queries that cover the entire entity class hierarchy.</p>
 Java Persistence API providers. The default Java Persistence API
 provider in GlassFish Server does not support this strategy.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQV"></a><a id="the-joined-subclass-strategy"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-joined-subclass-strategy">The Joined Subclass Strategy</h4>
+<h4 id="_the_joined_subclass_strategy">The Joined Subclass Strategy</h4>
 <div class="paragraph">
 <p>In this strategy, which corresponds to <code>InheritanceType.JOINED</code>, the
 root of the class hierarchy is represented by a single table, and each

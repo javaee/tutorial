@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GKBSZ"></a><a id="examples-securing-enterprise-beans"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="examples-securing-enterprise-beans">Examples: Securing Enterprise Beans</h2>
+<h2 id="_examples_securing_enterprise_beans">Examples: Securing Enterprise Beans</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following examples show how to secure enterprise beans using
@@ -73,8 +80,11 @@ with Programmatic Security</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBZK"></a><a id="the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-cart-secure-example-securing-an-enterprise-bean-with-declarative-security">The cart-secure Example: Securing an Enterprise Bean with Declarative Security</h3>
+<h3 id="_the_cart_secure_example_securing_an_enterprise_bean_with_declarative_security">The cart-secure Example: Securing an Enterprise Bean with Declarative Security</h3>
 <div class="paragraph">
 <p>This section discusses how to configure an enterprise bean for basic
 user name/password authentication. When a bean that is constrained in
@@ -130,8 +140,11 @@ cart-secure Example Using Maven</a>.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNBZL"></a><a id="annotating-the-bean"></a></p>
+</div>
 <div class="sect3">
-<h4 id="annotating-the-bean">Annotating the Bean</h4>
+<h4 id="_annotating_the_bean">Annotating the Bean</h4>
 <div class="paragraph">
 <p>The source code for the original <code>cart</code> application was modified as
 shown in the following code snippet (modifications in bold). The
@@ -236,9 +249,12 @@ authentication will be required for a user to access these methods. If
 no authentication method is specified in the deployment descriptor, the
 type of authentication will be user name/password authentication.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBZN"></a><a id="to-run-the-cart-secure-example-using-netbeans-ide"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-cart-secure-example-using-netbeans-ide">To Run the cart-secure Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_cart_secure_example_using_netbeans_ide">To Run the cart-secure Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -302,9 +318,12 @@ reappears until you enter correct values.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNBZO"></a><a id="to-run-the-cart-secure-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-cart-secure-example-using-maven">To Run the cart-secure Example Using Maven</h4>
+<h4 id="_to_run_the_cart_secure_example_using_maven">To Run the cart-secure Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -356,10 +375,13 @@ reappears until you enter correct values.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCAA"></a><a id="the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="the-converter-secure-example-securing-an-enterprise-bean-with-programmatic-security">The converter-secure Example: Securing an Enterprise Bean with Programmatic Security</h3>
+<h3 id="_the_converter_secure_example_securing_an_enterprise_bean_with_programmatic_security">The converter-secure Example: Securing an Enterprise Bean with Programmatic Security</h3>
 <div class="paragraph">
 <p>This example demonstrates how to use the <code>getCallerPrincipal</code> and
 <code>isCallerInRole</code> methods with an enterprise bean. This example starts
@@ -415,8 +437,11 @@ Authentication Using Annotations</a>.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCAB"></a><a id="modifying-converterbean"></a></p>
+</div>
 <div class="sect3">
-<h4 id="modifying-converterbean">Modifying ConverterBean</h4>
+<h4 id="_modifying_converterbean">Modifying ConverterBean</h4>
 <div class="paragraph">
 <p>The source code for the original <code>ConverterBean</code> class was modified to
 add the <code>if..else</code> clause that tests whether the caller is in the role
@@ -475,9 +500,12 @@ public class ConverterBean{
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GKBSI"></a><a id="modifying-converterservlet"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="modifying-converterservlet">Modifying ConverterServlet</h4>
+<h4 id="_modifying_converterservlet">Modifying ConverterServlet</h4>
 <div class="paragraph">
 <p>The following annotations specify security for the <code>converter</code> web
 client, <code>ConverterServlet</code>:</p>
@@ -490,9 +518,12 @@ client, <code>ConverterServlet</code>:</p>
     rolesAllowed = {"TutorialUser"}))</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCAD"></a><a id="to-run-the-converter-secure-example-using-netbeans-ide"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-converter-secure-example-using-netbeans-ide">To Run the converter-secure Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_converter_secure_example_using_netbeans_ide">To Run the converter-secure Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -525,9 +556,12 @@ GlassFish Server instance.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNCAE"></a><a id="to-run-the-converter-secure-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-converter-secure-example-using-maven">To Run the converter-secure Example Using Maven</h4>
+<h4 id="_to_run_the_converter_secure_example_using_maven">To Run the converter-secure Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -557,9 +591,12 @@ deploys the WAR file.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="GJTDP"></a><a id="to-run-the-converter-secure-example"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-converter-secure-example">To Run the converter-secure Example</h4>
+<h4 id="_to_run_the_converter_secure_example">To Run the converter-secure Example</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

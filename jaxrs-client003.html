@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABCDDGH"></a><a id="advanced-features-of-the-client-api"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="advanced-features-of-the-client-api">Advanced Features of the Client API</h2>
+<h2 id="_advanced_features_of_the_client_api">Advanced Features of the Client API</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes some of the advanced features of the JAX-RS
@@ -71,8 +78,11 @@ Client API.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDGBBCC"></a><a id="configuring-the-client-request"></a></p>
+</div>
 <div class="sect2">
-<h3 id="configuring-the-client-request">Configuring the Client Request</h3>
+<h3 id="_configuring_the_client_request">Configuring the Client Request</h3>
 <div class="paragraph">
 <p>Additional configuration options may be added to the client request
 after it is created but before it is invoked.</p>
@@ -93,8 +103,11 @@ after it is created but before it is invoked.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDHAFBG"></a><a id="setting-message-headers-in-the-client-request"></a></p>
+</div>
 <div class="sect3">
-<h4 id="setting-message-headers-in-the-client-request">Setting Message Headers in the Client Request</h4>
+<h4 id="_setting_message_headers_in_the_client_request">Setting Message Headers in the Client Request</h4>
 <div class="paragraph">
 <p>You can set HTTP headers on the request by calling the
 <code>Invocation.Builder.header</code> method.</p>
@@ -140,9 +153,12 @@ values.add(...)
 myHeaders.add("myHeader", values</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CHDHFFDJ"></a><a id="setting-cookies-in-the-client-request"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="setting-cookies-in-the-client-request">Setting Cookies in the Client Request</h4>
+<h4 id="_setting_cookies_in_the_client_request">Setting Cookies in the Client Request</h4>
 <div class="paragraph">
 <p>You can add HTTP cookies to the request by calling the
 <code>Invocation.Builder.cookie</code> method, which takes a name-value pair as
@@ -175,9 +191,12 @@ String response = myResource.request(MediaType.TEXT_PLAIN)
         .get(String.class);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CHDJEFID"></a><a id="adding-filters-to-the-client"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="adding-filters-to-the-client">Adding Filters to the Client</h4>
+<h4 id="_adding_filters_to_the_client">Adding Filters to the Client</h4>
 <div class="paragraph">
 <p>You can register custom filters with the client request or the response
 received from the target resource. To register filter classes when the
@@ -259,10 +278,13 @@ public void filter(ClientRequestContext requestContext) throws IOException {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CHDEBIGG"></a><a id="asynchronous-invocations-in-the-client-api"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="asynchronous-invocations-in-the-client-api">Asynchronous Invocations in the Client API</h3>
+<h3 id="_asynchronous_invocations_in_the_client_api">Asynchronous Invocations in the Client API</h3>
 <div class="paragraph">
 <p>In networked applications, network issues can affect the perceived
 performance of the application, particularly in long-running or
@@ -294,8 +316,11 @@ Future&lt;String&gt; response = myResource.request(MediaType.TEXT_PLAIN)
         .get(String.class);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref140"></a><a id="using-custom-callbacks-in-asynchronous-invocations"></a></p>
+</div>
 <div class="sect3">
-<h4 id="using-custom-callbacks-in-asynchronous-invocations">Using Custom Callbacks in Asynchronous Invocations</h4>
+<h4 id="_using_custom_callbacks_in_asynchronous_invocations">Using Custom Callbacks in Asynchronous Invocations</h4>
 <div class="paragraph">
 <p>The <code>InvocationCallback</code> interface defines two methods, <code>completed</code> and
 <code>failed</code>, that are called when an asynchronous invocation either
@@ -325,9 +350,12 @@ Future&lt;Customer&gt; fCustomer = myResource.request(MediaType.TEXT_PLAIN)
     });</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref141"></a><a id="using-reactive-approach-in-asynchronous-invocations"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-reactive-approach-in-asynchronous-invocations">Using Reactive Approach in Asynchronous Invocations</h4>
+<h4 id="_using_reactive_approach_in_asynchronous_invocations">Using Reactive Approach in Asynchronous Invocations</h4>
 <div class="paragraph">
 <p>Using custom callbacks in asynchronous invocations is easy in simple
 cases and when there are many independent calls to make. In nested
@@ -350,10 +378,13 @@ csf.thenAccept(System.out::println);</code></pre>
 <code>CompletionStage&lt;String&gt;</code> is created and waits till it is completed and
 the result is displayed. The <code>CompletionStage</code> that is returned can then be used only to retrieve the result as shown in the above example or can be combined with other completion stages to ease and improve the processing of asynchronous tasks.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref142"></a><a id="using-server-sent-events"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-server-sent-events">Using Server-Sent Events</h3>
+<h3 id="_using_server_sent_events">Using Server-Sent Events</h3>
 <div class="paragraph">
 <p>Server-sent Events (SSE) technology is used to asynchronously push
 notifications to the client over standard HTTP or HTTPS protocol.
@@ -369,9 +400,12 @@ whenever new data is available.</p>
 client closes the connection and it is also re-used by the server to
 send multiple events from the server.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref143"></a><a id="overview-of-the-sse-api"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="overview-of-the-sse-api">Overview of the SSE API</h3>
+<h3 id="_overview_of_the_sse_api">Overview of the SSE API</h3>
 <div class="paragraph">
 <p>The SSE API is defined in the <code>javax.ws.rs.sse</code> package that includes
 the interfaces <code>SseEventSink</code>, <code>SseEvent</code>, <code>Sse</code>, and <code>SseEventSource</code>.
@@ -412,9 +446,12 @@ enabled.</p>
 <p>The events that are streamed to the clients can be defined with the
 details such as <code>event</code>, <code>data</code>, <code>id</code>, <code>retry</code>, and <code>comment</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref144"></a><a id="broadcasting-using-sse"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="broadcasting-using-sse">Broadcasting Using SSE</h3>
+<h3 id="_broadcasting_using_sse">Broadcasting Using SSE</h3>
 <div class="paragraph">
 <p>Broadcasting is the action of sending events to multiple clients
 simultaneously. JAX-RS SSE API provides <code>SseBroadcaster</code> to register all
@@ -459,9 +496,12 @@ the creation of multiple instances of the class. The <code>register</code> metho
 on a broadcaster is used to add a new <code>SseEventSink</code>; the <code>broadcast</code>
 method is used to send an SSE event to all registered clients.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref145"></a><a id="listening-and-receiving-events"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="listening-and-receiving-events">Listening and Receiving Events</h3>
+<h3 id="_listening_and_receiving_events">Listening and Receiving Events</h3>
 <div class="paragraph">
 <p>JAX-RS SSE provides the <code>SseEventSource</code> interface for the client to
 subscribe to notifications. The client can get asynchronously notified

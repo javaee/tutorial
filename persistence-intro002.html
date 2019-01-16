@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBQA"></a><a id="entities"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="entities">Entities</h2>
+<h2 id="_entities">Entities</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>An entity is a lightweight persistence domain object. Typically, an
@@ -67,8 +74,11 @@ persistent fields or persistent properties. These fields or properties
 use object/relational mapping annotations to map the entities and entity
 relationships to the relational data in the underlying data store.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQB"></a><a id="requirements-for-entity-classes"></a></p>
+</div>
 <div class="sect2">
-<h3 id="requirements-for-entity-classes">Requirements for Entity Classes</h3>
+<h3 id="_requirements_for_entity_classes">Requirements for Entity Classes</h3>
 <div class="paragraph">
 <p>An entity class must follow these requirements.</p>
 </div>
@@ -103,9 +113,12 @@ business methods.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBQC"></a><a id="persistent-fields-and-properties-in-entity-classes"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="persistent-fields-and-properties-in-entity-classes">Persistent Fields and Properties in Entity Classes</h3>
+<h3 id="_persistent_fields_and_properties_in_entity_classes">Persistent Fields and Properties in Entity Classes</h3>
 <div class="paragraph">
 <p>The persistent state of an entity can be accessed through either the
 entity&#8217;s instance variables or properties. The fields or properties must
@@ -183,8 +196,11 @@ entity&#8217;s instance variables, the entity uses persistent fields. If the
 mapping annotations are applied to the entity&#8217;s getter methods for
 JavaBeans-style properties, the entity uses persistent properties.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQD"></a><a id="persistent-fields"></a></p>
+</div>
 <div class="sect3">
-<h4 id="persistent-fields">Persistent Fields</h4>
+<h4 id="_persistent_fields">Persistent Fields</h4>
 <div class="paragraph">
 <p>If the entity class uses persistent fields, the Persistence runtime
 accesses entity-class instance variables directly. All fields not
@@ -192,9 +208,12 @@ annotated <code>javax.persistence.Transient</code> or not marked as Java
 <code>transient</code> will be persisted to the data store. The object/relational
 mapping annotations must be applied to the instance variables.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQE"></a><a id="persistent-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="persistent-properties">Persistent Properties</h4>
+<h4 id="_persistent_properties">Persistent Properties</h4>
 <div class="paragraph">
 <p>If the entity uses persistent properties, the entity must follow the
 method conventions of JavaBeans components. JavaBeans-style properties
@@ -223,9 +242,12 @@ void setProperty(Type type)</code></pre>
 be applied to the getter methods. Mapping annotations cannot be applied
 to fields or properties annotated <code>@Transient</code> or marked <code>transient</code>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GIQVN"></a><a id="using-collections-in-entity-fields-and-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="using-collections-in-entity-fields-and-properties">Using Collections in Entity Fields and Properties</h4>
+<h4 id="_using_collections_in_entity_fields_and_properties">Using Collections in Entity Fields and Properties</h4>
 <div class="paragraph">
 <p>Collection-valued persistent fields and properties must use the
 supported Java collection interfaces regardless of whether the entity
@@ -371,9 +393,12 @@ represents the value of the <code>Map</code>. If generic types are not used, the
 <code>targetEntity</code> attribute of the <code>@OneToMany</code> and <code>@ManyToMany</code>
 annotations must be set to the type of the <code>Map</code> value.</p>
 </div>
+<div class="paragraph">
+<p><a id="GKAHQ"></a><a id="validating-persistent-fields-and-properties"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="validating-persistent-fields-and-properties">Validating Persistent Fields and Properties</h4>
+<h4 id="_validating_persistent_fields_and_properties">Validating Persistent Fields and Properties</h4>
 <div class="paragraph">
 <p>The Java API for JavaBeans Validation (Bean Validation) provides a
 mechanism for validating application data. Bean Validation is integrated
@@ -484,10 +509,13 @@ in the United States and Canada of the form <code>(`xxx</code>)` xxx`-`xxxx.</p>
 <p>The <code>birthday</code> field is annotated with the <code>@Past</code> constraint, which
 ensures that the value of <code>birthday</code> must be in the past.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQF"></a><a id="primary-keys-in-entities"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="primary-keys-in-entities">Primary Keys in Entities</h3>
+<h3 id="_primary_keys_in_entities">Primary Keys in Entities</h3>
 <div class="paragraph">
 <p>Each entity has a unique object identifier. A customer entity, for
 example, might be identified by a customer number. The unique
@@ -622,9 +650,12 @@ entity:</p>
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBQH"></a><a id="multiplicity-in-entity-relationships"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="multiplicity-in-entity-relationships">Multiplicity in Entity Relationships</h3>
+<h3 id="_multiplicity_in_entity_relationships">Multiplicity in Entity Relationships</h3>
 <div class="paragraph">
 <p>Multiplicities are of the following types.</p>
 </div>
@@ -666,9 +697,12 @@ persistent property or field.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBQI"></a><a id="direction-in-entity-relationships"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="direction-in-entity-relationships">Direction in Entity Relationships</h3>
+<h3 id="_direction_in_entity_relationships">Direction in Entity Relationships</h3>
 <div class="paragraph">
 <p>The direction of a relationship can be either bidirectional or
 unidirectional. A bidirectional relationship has both an owning side and
@@ -676,8 +710,11 @@ an inverse side. A unidirectional relationship has only an owning side.
 The owning side of a relationship determines how the Persistence runtime
 makes updates to the relationship in the database.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQJ"></a><a id="bidirectional-relationships"></a></p>
+</div>
 <div class="sect3">
-<h4 id="bidirectional-relationships">Bidirectional Relationships</h4>
+<h4 id="_bidirectional_relationships">Bidirectional Relationships</h4>
 <div class="paragraph">
 <p>In a bidirectional relationship, each entity has a relationship field or
 property that refers to the other entity. Through the relationship field
@@ -714,9 +751,12 @@ owning side.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBQK"></a><a id="unidirectional-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="unidirectional-relationships">Unidirectional Relationships</h4>
+<h4 id="_unidirectional_relationships">Unidirectional Relationships</h4>
 <div class="paragraph">
 <p>In a unidirectional relationship, only one entity has a relationship
 field or property that refers to the other. For example, <code>LineItem</code>
@@ -725,9 +765,12 @@ would not have a relationship field or property for <code>LineItem</code>. In ot
 words, <code>LineItem</code> knows about <code>Product</code>, but <code>Product</code> doesn&#8217;t know
 which <code>LineItem</code> instances refer to it.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQL"></a><a id="queries-and-relationship-direction"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="queries-and-relationship-direction">Queries and Relationship Direction</h4>
+<h4 id="_queries_and_relationship_direction">Queries and Relationship Direction</h4>
 <div class="paragraph">
 <p>Java Persistence query language and Criteria API queries often navigate
 across relationships. The direction of a relationship determines whether
@@ -737,9 +780,12 @@ opposite direction. For <code>CustomerOrder</code> and <code>LineItem</code>, a 
 navigate in both directions because these two entities have a
 bidirectional relationship.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBQM"></a><a id="cascade-operations-and-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="cascade-operations-and-relationships">Cascade Operations and Relationships</h4>
+<h4 id="_cascade_operations_and_relationships">Cascade Operations and Relationships</h4>
 <div class="paragraph">
 <p>Entities that use relationships often have dependencies on the existence
 of the other entity in the relationship. For example, a line item is
@@ -812,9 +858,12 @@ For example:</p>
 public Set&lt;CustomerOrder&gt; getOrders() { return orders; }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GIQXY"></a><a id="orphan-removal-in-relationships"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="orphan-removal-in-relationships">Orphan Removal in Relationships</h4>
+<h4 id="_orphan_removal_in_relationships">Orphan Removal in Relationships</h4>
 <div class="paragraph">
 <p>When a target entity in a one-to-one or one-to-many relationship is
 removed from the relationship, it is often desirable to cascade the
@@ -840,10 +889,13 @@ Boolean value and is by default false.</p>
 public List&lt;CustomerOrder&gt; getOrders() { ... }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GJIWZ"></a><a id="embeddable-classes-in-entities"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="embeddable-classes-in-entities">Embeddable Classes in Entities</h3>
+<h3 id="_embeddable_classes_in_entities">Embeddable Classes in Entities</h3>
 <div class="paragraph">
 <p>Embeddable classes are used to represent the state of an entity but
 don&#8217;t have a persistent identity of their own, unlike entity classes.

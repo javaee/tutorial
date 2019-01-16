@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GLIFD"></a><a id="securing-enterprise-information-systems-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="securing-enterprise-information-systems-applications">Securing Enterprise Information Systems Applications</h2>
+<h2 id="_securing_enterprise_information_systems_applications">Securing Enterprise Information Systems Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In Enterprise Information Systems (EIS) applications, components request
@@ -81,8 +88,11 @@ Applications</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABBJHIC"></a><a id="overview-of-securing-enterprise-information-systems-applications"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-securing-enterprise-information-systems-applications">Overview of Securing Enterprise Information Systems Applications</h3>
+<h3 id="_overview_of_securing_enterprise_information_systems_applications">Overview of Securing Enterprise Information Systems Applications</h3>
 <div class="paragraph">
 <p>As part of this connection, the EIS can require a sign-on for the
 requester to access the resource. The application component provider has
@@ -106,9 +116,12 @@ sign-on by including code that performs the sign-on process to an EIS.</p>
 <p>You can also configure security for resource adapters. See
 <a href="#GLIGS">Configuring Resource Adapter Security</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLIHL"></a><a id="container-managed-sign-on"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="container-managed-sign-on">Container-Managed Sign-On</h3>
+<h3 id="_container_managed_sign_on">Container-Managed Sign-On</h3>
 <div class="paragraph">
 <p>In container-managed sign-on, an application component does not have to
 pass any sign-on security information to the <code>getConnection()</code> method.
@@ -129,9 +142,12 @@ javax.resource.cci.Connection cx = cxf.getConnection();
 ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GLIDP"></a><a id="component-managed-sign-on"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="component-managed-sign-on">Component-Managed Sign-On</h3>
+<h3 id="_component_managed_sign_on">Component-Managed Sign-On</h3>
 <div class="paragraph">
 <p>In component-managed sign-on, an application component is responsible
 for passing the needed sign-on security information for the resource to
@@ -160,9 +176,12 @@ javax.resource.cci.Connection cx =
 ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="GLIGS"></a><a id="configuring-resource-adapter-security"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="configuring-resource-adapter-security">Configuring Resource Adapter Security</h3>
+<h3 id="_configuring_resource_adapter_security">Configuring Resource Adapter Security</h3>
 <div class="paragraph">
 <p>A resource adapter is a system-level software component that typically
 implements network connectivity to an external resource manager. A
@@ -270,9 +289,12 @@ principal. The security map is usually used if one or more EIS back-end
 principals are used to execute operations (on the EIS) initiated by
 various principals or user groups in the application.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLIGW"></a><a id="mapping-an-application-principal-to-eis-principals"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="mapping-an-application-principal-to-eis-principals">Mapping an Application Principal to EIS Principals</h3>
+<h3 id="_mapping_an_application_principal_to_eis_principals">Mapping an Application Principal to EIS Principals</h3>
 <div class="paragraph">
 <p>When using GlassFish Server, you can use security maps to map the caller
 identity of the application (principal or user group) to a suitable EIS

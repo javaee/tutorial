@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABCJEDF"></a><a id="validating-resource-data-with-bean-validation"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="validating-resource-data-with-bean-validation">Validating Resource Data with Bean Validation</h2>
+<h2 id="_validating_resource_data_with_bean_validation">Validating Resource Data with Bean Validation</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>JAX-RS supports the Bean Validation to verify JAX-RS resource classes.
@@ -85,8 +92,11 @@ parameter</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHJAFGI"></a><a id="using-constraint-annotations-on-resource-methods"></a></p>
+</div>
 <div class="sect2">
-<h3 id="using-constraint-annotations-on-resource-methods">Using Constraint Annotations on Resource Methods</h3>
+<h3 id="_using_constraint_annotations_on_resource_methods">Using Constraint Annotations on Resource Methods</h3>
 <div class="paragraph">
 <p>Bean Validation constraint annotations may be applied to parameters for
 a resource. The server will validate the parameters and either pass or
@@ -186,9 +196,12 @@ public class CreateUserResource {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHFDCBI"></a><a id="validating-entity-data"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="validating-entity-data">Validating Entity Data</h3>
+<h3 id="_validating_entity_data">Validating Entity Data</h3>
 <div class="paragraph">
 <p>Classes that contain validation constraint annotations may be used in
 method parameters in a resource class. To validate these entity classes,
@@ -279,9 +292,12 @@ public class GetUserResource {
 the returned entity class as well as the <code>@PhoneRequired</code> and <code>@NotNull</code>
 constraints defined within the entity class.</p>
 </div>
+<div class="paragraph">
+<p><a id="CIHCHEFH"></a><a id="validation-exception-handling-and-response-codes"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="validation-exception-handling-and-response-codes">Validation Exception Handling and Response Codes</h3>
+<h3 id="_validation_exception_handling_and_response_codes">Validation Exception Handling and Response Codes</h3>
 <div class="paragraph">
 <p>If a <code>javax.validation.ValidationException</code> or any subclass of
 <code>ValidationException</code> except <code>ConstraintValidationException</code> is thrown,

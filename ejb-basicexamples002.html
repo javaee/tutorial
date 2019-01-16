@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNBOD"></a><a id="the-cart-example"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-cart-example">The cart Example</h2>
+<h2 id="_the_cart_example">The cart Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>cart</code> example represents a shopping cart in an online bookstore and
@@ -83,8 +90,11 @@ section <a href="#BNBOJ">Helper Classes</a>.</p>
 <p>The source code for this example is in the
 <code>_tut-install_/examples/ejb/cart/</code> directory.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBOE"></a><a id="the-business-interface"></a></p>
+</div>
 <div class="sect2">
-<h3 id="the-business-interface">The Business Interface</h3>
+<h3 id="_the_business_interface">The Business Interface</h3>
 <div class="paragraph">
 <p>The <code>Cart</code> business interface is a plain Java interface that defines all
 the business methods implemented in the bean class. If the bean class
@@ -135,9 +145,12 @@ public interface Cart {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBOF"></a><a id="session-bean-class"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="session-bean-class">Session Bean Class</h3>
+<h3 id="_session_bean_class">Session Bean Class</h3>
 <div class="paragraph">
 <p>The session bean class for this example is called <code>CartBean</code>. Like any
 stateful session bean, the <code>CartBean</code> class must meet the following
@@ -249,8 +262,11 @@ public class CartBean implements Cart {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBOG"></a><a id="lifecycle-callback-methods"></a></p>
+</div>
 <div class="sect3">
-<h4 id="lifecycle-callback-methods">Lifecycle Callback Methods</h4>
+<h4 id="_lifecycle_callback_methods">Lifecycle Callback Methods</h4>
 <div class="paragraph">
 <p>A method in the bean class may be declared as a lifecycle callback
 method by annotating the method with the following annotations.</p>
@@ -284,9 +300,12 @@ environment and saves it to secondary storage.</p>
 <div class="paragraph">
 <p>Lifecycle callback methods must return <code>void</code> and have no parameters.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBOH"></a><a id="business-methods"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="business-methods">Business Methods</h4>
+<h4 id="_business_methods">Business Methods</h4>
 <div class="paragraph">
 <p>The primary purpose of a session bean is to run business tasks for the
 client. The client invokes business methods on the object reference it
@@ -376,10 +395,13 @@ The container will not wrap application exceptions, such as
 <code>RuntimeException</code>, you do not need to include it in the <code>throws</code> clause
 of the business method.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBOI"></a><a id="the-remove-method"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="the-remove-method">The @Remove Method</h3>
+<h3 id="_the_remove_method">The @Remove Method</h3>
 <div class="paragraph">
 <p>Business methods annotated with <code>javax.ejb.Remove</code> in the stateful
 session bean class can be invoked by enterprise bean clients to remove
@@ -398,9 +420,12 @@ public void remove() {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNBOJ"></a><a id="helper-classes"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="helper-classes">Helper Classes</h3>
+<h3 id="_helper_classes">Helper Classes</h3>
 <div class="paragraph">
 <p>The <code>CartBean</code> session bean has two helper classes: <code>BookException</code> and
 <code>IdVerifier</code>. The <code>BookException</code> is thrown by the <code>removeBook</code> method,
@@ -411,9 +436,12 @@ within a WAR; or an EAR file that contains an EJB JAR, a WAR file, or a
 separate library JAR file. In <code>cart</code>, the helper classes are included in
 a library JAR used by the application client and the EJB JAR.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBOK"></a><a id="running-the-cart-example"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="running-the-cart-example">Running the cart Example</h3>
+<h3 id="_running_the_cart_example">Running the cart Example</h3>
 <div class="paragraph">
 <p>Now you are ready to compile the remote interface (<code>Cart.java</code>), the
 enterprise bean class (<code>CartBean.java</code>), the client class
@@ -437,8 +465,11 @@ run the <code>cart</code> application.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNBOL"></a><a id="to-run-the-cart-example-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-cart-example-using-netbeans-ide">To Run the cart Example Using NetBeans IDE</h4>
+<h4 id="_to_run_the_cart_example_using_netbeans_ide">To Run the cart Example Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -491,9 +522,12 @@ Caught a BookException: "Gravity's Rainbow" not in cart.</code></pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNBON"></a><a id="to-run-the-cart-example-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-cart-example-using-maven">To Run the cart Example Using Maven</h4>
+<h4 id="_to_run_the_cart_example_using_maven">To Run the cart Example Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

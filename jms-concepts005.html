@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNCGL"></a><a id="using-the-jms-api-in-java-ee-applications"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="using-the-jms-api-in-java-ee-applications">Using the JMS API in Java EE Applications</h2>
+<h2 id="_using_the_jms_api_in_java_ee_applications">Using the JMS API in Java EE Applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes how using the JMS API in enterprise bean
@@ -87,8 +94,11 @@ Asynchronously</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDGICJB"></a><a id="overview-of-using-the-jms-api"></a></p>
+</div>
 <div class="sect2">
-<h3 id="overview-of-using-the-jms-api">Overview of Using the JMS API</h3>
+<h3 id="_overview_of_using_the_jms_api">Overview of Using the JMS API</h3>
 <div class="paragraph">
 <p>A general rule in the Java EE platform specification applies to all Java
 EE components that use the JMS API within EJB or web containers:
@@ -102,9 +112,12 @@ they combine a single connection and a single session.</p>
 container supports the creation of multiple sessions for each
 connection.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABHFBDH"></a><a id="creating-resources-for-java-ee-applications"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="creating-resources-for-java-ee-applications">Creating Resources for Java EE Applications</h3>
+<h3 id="_creating_resources_for_java_ee_applications">Creating Resources for Java EE Applications</h3>
 <div class="paragraph">
 <p>You can use annotations to create application-specific connection
 factories and destinations for Java EE enterprise bean or web
@@ -230,9 +243,12 @@ application clients are not deployed in the application server and must
 therefore communicate with each other using administratively created
 resources that exist outside of individual applications.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGM"></a><a id="using-resource-injection-in-enterprise-bean-or-web-components"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-resource-injection-in-enterprise-bean-or-web-components">Using Resource Injection in Enterprise Bean or Web Components</h3>
+<h3 id="_using_resource_injection_in_enterprise_bean_or_web_components">Using Resource Injection in Enterprise Bean or Web Components</h3>
 <div class="paragraph">
 <p>You may use resource injection to inject both administered objects and
 <code>JMSContext</code> objects in Java EE applications.</p>
@@ -250,8 +266,11 @@ resources that exist outside of individual applications.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CHDCHDIJ"></a><a id="injecting-a-connectionfactory-queue-or-topic"></a></p>
+</div>
 <div class="sect3">
-<h4 id="injecting-a-connectionfactory-queue-or-topic">Injecting a ConnectionFactory, Queue, or Topic</h4>
+<h4 id="_injecting_a_connectionfactory_queue_or_topic">Injecting a ConnectionFactory, Queue, or Topic</h4>
 <div class="paragraph">
 <p>Normally, you use the <code>@Resource</code> annotation to inject a
 <code>ConnectionFactory</code>, <code>Queue</code>, or <code>Topic</code> into your Java EE application.
@@ -290,9 +309,12 @@ private Topic topic;</code></pre>
 <p>If you declare the resource static in these components, runtime errors
 will result.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABCJBEE"></a><a id="injecting-a-jmscontext-object"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="injecting-a-jmscontext-object">Injecting a JMSContext Object</h4>
+<h4 id="_injecting_a_jmscontext_object">Injecting a JMSContext Object</h4>
 <div class="paragraph">
 <p>To access a <code>JMSContext</code> object in an enterprise bean or web component,
 instead of injecting the <code>ConnectionFactory</code> resource and then creating
@@ -316,10 +338,13 @@ private JMSContext context1;</code></pre>
 private JMSContext context2;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BNCGN"></a><a id="using-java-ee-components-to-produce-and-to-synchronously-receive-messages"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-java-ee-components-to-produce-and-to-synchronously-receive-messages">Using Java EE Components to Produce and to Synchronously Receive Messages</h3>
+<h3 id="_using_java_ee_components_to_produce_and_to_synchronously_receive_messages">Using Java EE Components to Produce and to Synchronously Receive Messages</h3>
 <div class="paragraph">
 <p>An application that produces messages or synchronously receives them can
 use a Java EE web or EJB component, such as a managed bean, a servlet,
@@ -343,8 +368,11 @@ messages asynchronously. For details about synchronous receives, see
 using it in an application client. The main differences are the areas of
 resource management and transactions.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGO"></a><a id="managing-jms-resources-in-web-and-ejb-components"></a></p>
+</div>
 <div class="sect3">
-<h4 id="managing-jms-resources-in-web-and-ejb-components">Managing JMS Resources in Web and EJB Components</h4>
+<h4 id="_managing_jms_resources_in_web_and_ejb_components">Managing JMS Resources in Web and EJB Components</h4>
 <div class="paragraph">
 <p>The JMS resources are a connection and a session, usually combined in a
 <code>JMSContext</code> object. In general, it is important to release JMS
@@ -378,9 +406,12 @@ method and set its value to <code>null</code>, and you must create it again in a
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNCGP"></a><a id="managing-transactions-in-session-beans"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="managing-transactions-in-session-beans">Managing Transactions in Session Beans</h4>
+<h4 id="_managing_transactions_in_session_beans">Managing Transactions in Session Beans</h4>
 <div class="paragraph">
 <p>Instead of using local transactions, you use JTA transactions. You can
 use either container-managed transactions or bean-managed transactions.
@@ -398,10 +429,13 @@ container-managed transactions produce the most efficient and correct
 behavior. This tutorial does not provide any examples of bean-managed
 transactions.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGQ"></a><a id="using-message-driven-beans-to-receive-messages-asynchronously"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-message-driven-beans-to-receive-messages-asynchronously">Using Message-Driven Beans to Receive Messages Asynchronously</h3>
+<h3 id="_using_message_driven_beans_to_receive_messages_asynchronously">Using Message-Driven Beans to Receive Messages Asynchronously</h3>
 <div class="paragraph">
 <p>The sections <a href="ejb-intro003.html#GIPKO">What Is a Message-Driven Bean?</a>
 and <a href="jms-concepts001.html#BNCDW">How Does the JMS API Work with the
@@ -647,9 +681,12 @@ message-driven bean.</p>
 <p>For details on the lifecycle of a message-driven bean, see
 <a href="ejb-intro007.html#GIPKW">The Lifecycle of a Message-Driven Bean</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNCGS"></a><a id="managing-jta-transactions"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="managing-jta-transactions">Managing JTA Transactions</h3>
+<h3 id="_managing_jta_transactions">Managing JTA Transactions</h3>
 <div class="paragraph">
 <p>Java EE application clients and Java SE clients use JMS local
 transactions (described in <a href="jms-concepts004.html#BNCGH">Using JMS

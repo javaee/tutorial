@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GLIEN"></a><a id="authentication-mechanisms"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="authentication-mechanisms">Authentication Mechanisms</h2>
+<h2 id="_authentication_mechanisms">Authentication Mechanisms</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section discusses the client authentication and mutual
@@ -71,8 +78,11 @@ authentication mechanisms.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GLIEQ"></a><a id="client-authentication"></a></p>
+</div>
 <div class="sect2">
-<h3 id="client-authentication">Client Authentication</h3>
+<h3 id="_client_authentication">Client Authentication</h3>
 <div class="paragraph">
 <p>With client authentication, the web server authenticates the client by
 using the client&#8217;s public key certificate. Client authentication is a
@@ -110,9 +120,12 @@ authentication mechanisms that can be provided with an application and
 deployed using CDI. See <a href="security-api002.html#overview-of-the-http-authentication-mechanism-interface">Overview of
 the HTTP Authentication Mechanism Interface</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLIEL"></a><a id="mutual-authentication"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="mutual-authentication">Mutual Authentication</h3>
+<h3 id="_mutual_authentication">Mutual Authentication</h3>
 <div class="paragraph">
 <p>With mutual authentication, the server and the client authenticate each
 other. Mutual authentication is of two types:</p>
@@ -198,8 +211,11 @@ name/password-based mutual authentication.</p>
 <div class="title"><strong>Figure 53-2 User Name/Password-Based Mutual Authentication</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_049.png" alt="Diagram of five steps in mutual authentication with user name and password"></span></p>
 </div>
+<div class="paragraph">
+<p><a id="BNBYH"></a><a id="enabling-mutual-authentication-over-ssl"></a></p>
+</div>
 <div class="sect3">
-<h4 id="enabling-mutual-authentication-over-ssl">Enabling Mutual Authentication over SSL</h4>
+<h4 id="_enabling_mutual_authentication_over_ssl">Enabling Mutual Authentication over SSL</h4>
 <div class="paragraph">
 <p>This section discusses setting up client-side authentication. Enabling
 both server-side and client-side authentication is called mutual, or
@@ -239,9 +255,12 @@ all of the time, which can severely degrade performance.</p>
 <p>When client authentication is enabled in both of these ways, client
 authentication will be performed twice.</p>
 </div>
+<div class="paragraph">
+<p><a id="BNBYI"></a><a id="creating-a-client-certificate-for-mutual-authentication"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="creating-a-client-certificate-for-mutual-authentication">Creating a Client Certificate for Mutual Authentication</h4>
+<h4 id="_creating_a_client_certificate_for_mutual_authentication">Creating a Client Certificate for Mutual Authentication</h4>
 <div class="paragraph">
 <p>If you have a certificate signed by a trusted Certificate Authority (CA)
 such as Verisign, and the GlassFish Server <code>cacerts.jks</code> file already

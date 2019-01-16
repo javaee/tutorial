@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BNAGS"></a><a id="finalizing-a-servlet"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="finalizing-a-servlet">Finalizing a Servlet</h2>
+<h2 id="_finalizing_a_servlet">Finalizing a Servlet</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The web container may determine that a servlet should be removed from
@@ -91,8 +98,11 @@ and, if necessary, stop working, clean up, and return.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BNAGT"></a><a id="tracking-service-requests"></a></p>
+</div>
 <div class="sect2">
-<h3 id="tracking-service-requests">Tracking Service Requests</h3>
+<h3 id="_tracking_service_requests">Tracking Service Requests</h3>
 <div class="paragraph">
 <p>To track service requests:</p>
 </div>
@@ -148,9 +158,12 @@ method:</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAGU"></a><a id="notifying-methods-to-shut-down"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="notifying-methods-to-shut-down">Notifying Methods to Shut Down</h3>
+<h3 id="_notifying_methods_to_shut_down">Notifying Methods to Shut Down</h3>
 <div class="paragraph">
 <p>To ensure a clean shutdown, your <code>destroy</code> method should not release any
 shared resources until all the service requests have completed:</p>
@@ -207,9 +220,12 @@ a clean shutdown:</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BNAGV"></a><a id="creating-polite-long-running-methods"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="creating-polite-long-running-methods">Creating Polite Long-Running Methods</h3>
+<h3 id="_creating_polite_long_running_methods">Creating Polite Long-Running Methods</h3>
 <div class="paragraph">
 <p>The final step in providing a clean shutdown is to make any long-running
 methods behave politely. Methods that might run for a long time should

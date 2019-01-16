@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BCGFCACD"></a><a id="the-phonebilling-example-application"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="the-phonebilling-example-application">The phonebilling Example Application</h2>
+<h2 id="_the_phonebilling_example_application">The phonebilling Example Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>phonebilling</code> example application, located in the
@@ -74,8 +81,11 @@ creates a bill for each customer.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABDEIFG"></a><a id="architecture-of-the-phonebilling-example-application"></a></p>
+</div>
 <div class="sect2">
-<h3 id="architecture-of-the-phonebilling-example-application">Architecture of the phonebilling Example Application</h3>
+<h3 id="_architecture_of_the_phonebilling_example_application">Architecture of the phonebilling Example Application</h3>
 <div class="paragraph">
 <p>The <code>phonebilling</code> example application consists of the following
 elements.</p>
@@ -125,8 +135,11 @@ the job, and reads the text files for each bill.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="sthref288"></a><a id="the-job-definition-file"></a></p>
+</div>
 <div class="sect3">
-<h4 id="the-job-definition-file">The Job Definition File</h4>
+<h4 id="_the_job_definition_file">The Job Definition File</h4>
 <div class="paragraph">
 <p>The <code>phonebilling.xml</code> job definition file is located in the
 <code>WEB-INF/classes/META-INF/batch-jobs/</code> directory. The file specifies
@@ -191,9 +204,12 @@ with <code>@Named</code>.</p>
 through the <code>BillPartitionMapper</code> artifact instead of using the <code>plan</code>
 element.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref289"></a><a id="the-callrecord-and-phonebill-entities"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-callrecord-and-phonebill-entities">The CallRecord and PhoneBill Entities</h4>
+<h4 id="_the_callrecord_and_phonebill_entities">The CallRecord and PhoneBill Entities</h4>
 <div class="paragraph">
 <p>The <code>CallRecord</code> entity is defined as follows:</p>
 </div>
@@ -290,9 +306,12 @@ read, process, and write.</p>
 Persistence API"</a>. For more information on the JSON Processing API, see
 <a href="jsonp.html#GLRBB">Chapter 20, "JSON Processing"</a>.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref290"></a><a id="the-call-records-chunk-step"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-call-records-chunk-step">The Call Records Chunk Step</h4>
+<h4 id="_the_call_records_chunk_step">The Call Records Chunk Step</h4>
 <div class="paragraph">
 <p>The first step is composed of the <code>CallRecordReader</code>,
 <code>CallRecordProcessor</code>, and <code>CallRecordWriter</code> batch artifacts.</p>
@@ -383,9 +402,12 @@ public void writeItems(List&lt;Object&gt; callList) throws Exception {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="BCGGGAHB"></a><a id="the-phone-billing-chunk-step"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-phone-billing-chunk-step">The Phone Billing Chunk Step</h4>
+<h4 id="_the_phone_billing_chunk_step">The Phone Billing Chunk Step</h4>
 <div class="paragraph">
 <p>The second step is composed of the <code>BillReader</code>, <code>BillProcessor</code>,
 <code>BillWriter</code>, and <code>BillPartitionMapper</code> batch artifacts. This step gets
@@ -488,9 +510,12 @@ bill and calculates the tax and total amount due for each bill.</p>
 <div class="paragraph">
 <p>The <code>BillWriter</code> artifact writes each bill to a plain text file.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref291"></a><a id="the-javaserver-faces-pages"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-javaserver-faces-pages">The JavaServer Faces Pages</h4>
+<h4 id="_the_javaserver_faces_pages">The JavaServer Faces Pages</h4>
 <div class="paragraph">
 <p>The <code>index.xhtml</code> page contains a text area that shows the log file of
 call records. The page provides a button for the user to submit the
@@ -535,9 +560,12 @@ status of the batch job and displays the bills when the job finishes:</p>
 &lt;/h:form&gt;</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="sthref292"></a><a id="the-managed-bean"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="the-managed-bean">The Managed Bean</h4>
+<h4 id="_the_managed_bean">The Managed Bean</h4>
 <div class="paragraph">
 <p>The <code>JsfBean</code> managed bean submits the job to the batch runtime, checks
 on the status of the job, and reads the text files for each bill.</p>
@@ -572,10 +600,13 @@ public String getJobStatus() {
 <p>The <code>getRowList</code> method of the bean creates a list of bills to be
 displayed on the <code>jobstarted.xhtml</code> JSF page using a table.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABBGDAA"></a><a id="running-the-phonebilling-example-application"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-phonebilling-example-application">Running the phonebilling Example Application</h3>
+<h3 id="_running_the_phonebilling_example_application">Running the phonebilling Example Application</h3>
 <div class="paragraph">
 <p>You can use either NetBeans IDE or Maven to build, package, deploy, and
 run the <code>phonebilling</code> example application.</p>
@@ -595,8 +626,11 @@ Maven</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="BABIBBBG"></a><a id="to-run-the-phonebilling-example-application-using-netbeans-ide"></a></p>
+</div>
 <div class="sect3">
-<h4 id="to-run-the-phonebilling-example-application-using-netbeans-ide">To Run the phonebilling Example Application Using NetBeans IDE</h4>
+<h4 id="_to_run_the_phonebilling_example_application_using_netbeans_ide">To Run the phonebilling Example Application Using NetBeans IDE</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -637,9 +671,12 @@ the server; and launches a web browser window at the following URL:</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><a id="BABFHIIB"></a><a id="to-run-the-phonebilling-example-application-using-maven"></a></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="to-run-the-phonebilling-example-application-using-maven">To Run the phonebilling Example Application Using Maven</h4>
+<h4 id="_to_run_the_phonebilling_example_application_using_maven">To Run the phonebilling Example Application Using Maven</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

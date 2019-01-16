@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BCGJDEEH"></a><a id="introduction-to-batch-processing"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="introduction-to-batch-processing">Introduction to Batch Processing</h2>
+<h2 id="_introduction_to_batch_processing">Introduction to Batch Processing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Some enterprise applications contain tasks that can be executed without
@@ -93,8 +100,11 @@ decision elements or groups of steps that run in parallel. The following
 sections describe steps in more detail and provide information about
 other common characteristics of batch frameworks.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref261"></a><a id="steps-in-batch-jobs"></a></p>
+</div>
 <div class="sect2">
-<h3 id="steps-in-batch-jobs">Steps in Batch Jobs</h3>
+<h3 id="_steps_in_batch_jobs">Steps in Batch Jobs</h3>
 <div class="paragraph">
 <p>A step is an independent and sequential phase of a batch job. Batch jobs
 contain chunk-oriented steps and task-oriented steps.</p>
@@ -170,9 +180,12 @@ database records and generates printable versions of each bill.</p>
 <p>This application could also contain a task step that cleaned up the
 files from the bills generated for the previous month.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref263"></a><a id="parallel-processing"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="parallel-processing">Parallel Processing</h3>
+<h3 id="_parallel_processing">Parallel Processing</h3>
 <div class="paragraph">
 <p>Batch jobs often process large amounts of data or perform
 computationally expensive operations. Batch applications can benefit
@@ -195,9 +208,12 @@ thread.</p>
 independent steps and to split chunk-oriented steps in parts that can
 run in parallel.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref264"></a><a id="status-and-decision-elements"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="status-and-decision-elements">Status and Decision Elements</h3>
+<h3 id="_status_and_decision_elements">Status and Decision Elements</h3>
 <div class="paragraph">
 <p>Batch frameworks keep track of a status for every step in a job. The
 status indicates if a step is running or if it has completed. If the
@@ -231,9 +247,12 @@ chunk steps, task steps and a decision element.</p>
 <div class="title"><strong>Figure 58-2 Steps and Decision Elements in a Job</strong></div>
 <p><span class="image"><img src="img/javaeett_dt_059.png" alt="This figure shows a batch job that contains two chunk steps, a task step and a decision element. The job starts with chunk step A, continues with chunk step B, and then decision element D evaluates condition 1. The condition is based on the status of step B. If condition 1 is true, the job terminates; otherwise the job continues with step C and then the job ends."></span></p>
 </div>
+<div class="paragraph">
+<p><a id="sthref266"></a><a id="batch-framework-functionality"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="batch-framework-functionality">Batch Framework Functionality</h3>
+<h3 id="_batch_framework_functionality">Batch Framework Functionality</h3>
 <div class="paragraph">
 <p>Batch applications have the following common requirements.</p>
 </div>

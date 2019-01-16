@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="CACJIBEJ"></a><a id="validating-constructors-and-methods"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="validating-constructors-and-methods">Validating Constructors and Methods</h2>
+<h2 id="_validating_constructors_and_methods">Validating Constructors and Methods</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Bean Validation constraints may be placed on the parameters of nonstatic
@@ -92,8 +99,11 @@ care must be taken to avoid unintended behavior by subtypes. See
 <a href="bean-validation-advanced004.html#CIHGJBGI">Using Method Constraints
 in Type Hierarchies</a> for more information.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref122"></a><a id="cross-parameter-constraints"></a></p>
+</div>
 <div class="sect2">
-<h3 id="cross-parameter-constraints">Cross-Parameter Constraints</h3>
+<h3 id="_cross_parameter_constraints">Cross-Parameter Constraints</h3>
 <div class="paragraph">
 <p>Constraints that apply to multiple parameters are called cross-parameter
 constraints, and may be applied at the method or constructor level.</p>
@@ -160,10 +170,13 @@ public Map&lt;@NotNull String, @USPhoneNumber String&gt; getAddressesByType() { 
 <div class="paragraph">
 <p><code>@USPhoneNumber</code> has <code>ElementType.TYPE_USE</code> as one of its <code>@Target</code>, and therefore it is possible to use <code>@USPhoneNumber</code> constraint for validating type arguments of parameterized types.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref123"></a><a id="identifying-parameter-constraint-violations"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="identifying-parameter-constraint-violations">Identifying Parameter Constraint Violations</h3>
+<h3 id="_identifying_parameter_constraint_violations">Identifying Parameter Constraint Violations</h3>
 <div class="paragraph">
 <p>If a <code>ConstraintViolationException</code> occurs during a method call, the
 Bean Validation runtime returns a parameter index to identify which
@@ -171,9 +184,12 @@ parameter caused the constraint violation. The parameter index is in the
 form `arg`PARAMETER_INDEX, where PARAMETER_INDEX is an integer that
 starts at 0 for the first parameter of the method or constructor.</p>
 </div>
+<div class="paragraph">
+<p><a id="sthref124"></a><a id="adding-constraints-to-method-return-values"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="adding-constraints-to-method-return-values">Adding Constraints to Method Return Values</h3>
+<h3 id="_adding_constraints_to_method_return_values">Adding Constraints to Method Return Values</h3>
 <div class="paragraph">
 <p>To validate the return value for a method, you can apply constraints
 directly to the method or constructor declaration.</p>

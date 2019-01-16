@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="BABFCGBJ"></a><a id="sending-and-receiving-messages"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="sending-and-receiving-messages">Sending and Receiving Messages</h2>
+<h2 id="_sending_and_receiving_messages">Sending and Receiving Messages</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>WebSocket endpoints can send and receive text and binary messages. In
@@ -74,8 +81,11 @@ interfaces to send messages to the connected peer and how to use the
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="CIHEHFCB"></a><a id="sending-messages"></a></p>
+</div>
 <div class="sect2">
-<h3 id="sending-messages">Sending Messages</h3>
+<h3 id="_sending_messages">Sending Messages</h3>
 <div class="paragraph">
 <p>Follow these steps to send messages in an endpoint.</p>
 </div>
@@ -148,8 +158,11 @@ message has been transmitted.</p>
 demonstrates how to use this procedure to reply to every incoming text
 message.</p>
 </div>
+<div class="paragraph">
+<p><a id="BABIFBCG"></a><a id="sending-messages-to-all-peers-connected-to-an-endpoint"></a></p>
+</div>
 <div class="sect3">
-<h4 id="sending-messages-to-all-peers-connected-to-an-endpoint">Sending Messages to All Peers Connected to an Endpoint</h4>
+<h4 id="_sending_messages_to_all_peers_connected_to_an_endpoint">Sending Messages to All Peers Connected to an Endpoint</h4>
 <div class="paragraph">
 <p>Each instance of an endpoint class is associated with one and only one
 connection and peer; however, there are cases in which an endpoint
@@ -175,10 +188,13 @@ public class EchoAllEndpoint {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a id="CIHIDFHD"></a><a id="receiving-messages"></a></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="receiving-messages">Receiving Messages</h3>
+<h3 id="_receiving_messages">Receiving Messages</h3>
 <div class="paragraph">
 <p>The <code>OnMessage</code> annotation designates methods that handle incoming
 messages. You can have at most three methods annotated with <code>@OnMessage</code>

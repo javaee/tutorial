@@ -51,8 +51,15 @@
 </table>
 
 
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a id="GLPCB"></a><a id="understanding-the-image-map-example"></a></p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="understanding-the-image-map-example">Understanding the Image Map Example</h2>
+<h2 id="_understanding_the_image_map_example">Understanding the Image Map Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Duke&#8217;s Bookstore includes a custom image map component on the
@@ -85,8 +92,11 @@ Map?</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a id="GLPBD"></a><a id="why-use-javaserver-faces-technology-to-implement-an-image-map"></a></p>
+</div>
 <div class="sect2">
-<h3 id="why-use-javaserver-faces-technology-to-implement-an-image-map">Why Use JavaServer Faces Technology to Implement an Image Map?</h3>
+<h3 id="_why_use_javaserver_faces_technology_to_implement_an_image_map">Why Use JavaServer Faces Technology to Implement an Image Map?</h3>
 <div class="paragraph">
 <p>JavaServer Faces technology is an ideal framework to use for
 implementing this kind of image map because it can perform the work that
@@ -109,9 +119,12 @@ it has the best of both styles of image maps: It can handle the parts of
 the application that need to be performed on the server while allowing
 the other parts of the application to be performed on the client side.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLPEM"></a><a id="understanding-the-rendered-html"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="understanding-the-rendered-html">Understanding the Rendered HTML</h3>
+<h3 id="_understanding_the_rendered_html">Understanding the Rendered HTML</h3>
 <div class="paragraph">
 <p>Here is an abbreviated version of the form part of the HTML page that
 the application needs to render:</p>
@@ -168,9 +181,12 @@ server-side component classes can retrieve the value.</p>
 the locale in the <code>javax.faces.context.FacesContext</code> instance according
 to the region that was selected.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLPCD"></a><a id="understanding-the-facelets-page"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="understanding-the-facelets-page">Understanding the Facelets Page</h3>
+<h3 id="_understanding_the_facelets_page">Understanding the Facelets Page</h3>
 <div class="paragraph">
 <p>Here is an abbreviated form of the Facelets page that the image map
 component uses to generate the HTML page shown in the preceding section.
@@ -255,9 +271,12 @@ scope. The value of this attribute is a bean, which stores the <code>coords</cod
 <code>shape</code>, and <code>alt</code> data. How these beans are stored in the application
 scope is explained more in the next section.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLPBO"></a><a id="configuring-model-data"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="configuring-model-data">Configuring Model Data</h3>
+<h3 id="_configuring_model_data">Configuring Model Data</h3>
 <div class="paragraph">
 <p>In a JavaServer Faces application, data such as the coordinates of a
 hotspot of an image map is retrieved from the <code>value</code> attribute through
@@ -343,9 +362,12 @@ and alternative text values by calling the appropriate accessor methods
 of <code>ImageArea</code>. <a href="jsf-custom006.html#BNAWB">Creating the Renderer
 Class</a> explains how to do this in the <code>AreaRenderer</code> class.</p>
 </div>
+<div class="paragraph">
+<p><a id="GLPEL"></a><a id="summary-of-the-image-map-application-classes"></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="summary-of-the-image-map-application-classes">Summary of the Image Map Application Classes</h3>
+<h3 id="_summary_of_the_image_map_application_classes">Summary of the Image Map Application Classes</h3>
 <div class="paragraph">
 <p><a href="#GLPEK">Table 15-2</a> summarizes all the classes needed to implement
 the image map component.</p>
